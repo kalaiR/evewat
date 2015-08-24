@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Post Your Event</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<style type="text/css">
+    .lable{
+        color: #000;
+    }
+</style>
+</head>
+<body>
+    <!--=== Content ===-->
+<div class="container ">
+<h2>Promote Your College Fest by submitting  details Here</h2>
+<div class="col-md-12" >
+<form action="/submit-fest.html"  id="sky-form1" class="sky-form"  method="post">
+<header>Submit your Event  </header>
+<input id="this_title" type="text" name="this_title" value="" />
+<fieldset>
+<div class="row">
+<section class="col col-4">
+<label class="label">Your Name</label>
+<label class="input">
+<i class="icon-append fa fa-asterisk"></i>
+<input type="text" name="txtContactName">
+</label>
+</section>
+<section class="col col-4">
+<label class="label">Your Email Address</label>
+<label class="input">
+<i class="icon-append fa fa-envelope"></i>
+<input type="email" name="txtContactEmail">
+</label>
+</section>
+<section class="col col-4">
+<label class="label">Your Phone number</label>
+<label class="input">
+<i class="icon-append fa fa-asterisk"></i>
+<input type="text" name="txtContactPhone">
+</label>
+</section>
+
+</div>
+<div class="row">
+<section class="col col-4">
+<label class="label">Fest Name</label>
+<label class="input">
+<i class="icon-append fa fa-asterisk"></i>
+<input type="text" name="txtFestName">
+</label>
+</section>
+<section class="col col-4">
+<label class="label">Fest Caption</label>
+<label class="input">
+<i class="icon-append fa fa-asterisk"></i>
+<input type="text" name="txtCaption">
+</label>
+</section>
+<section class="col col-4">
+<label class="label">Fest Theme</label>
+<label class="input">
+<i class="icon-append fa fa-asterisk"></i>
+<input type="text" name="txtTheme">
+</label>
+</section>
+
+</div>
+
+<section>
+<label class="label">Fest Type</label>
+<div class="row Other_festtype">
+<div class="col col-3">
+<label class="checkbox"><input type="checkbox" name="cbFestType[]" value="Technical" ><i></i>Technical</label>
+<label class="checkbox"><input type="checkbox" name="cbFestType[]" value="Cultural"><i></i>Cultural</label>
+<label class="checkbox"><input type="checkbox" name="cbFestType[]" value="Management"><i></i>Management</label>
+<label class="checkbox"><input type="checkbox" name="cbFestType[]" value="Sports"><i></i>Sports</label>
+<label class="checkbox"><input type="checkbox" name="cbFestType[]" value="Literary"><i></i>Literary</label>
+</div>
+<div class="col col-3">
+
+<label class="checkbox"><input type="checkbox" name="cbFestType[]" value="Conference"><i></i>Conferences</label>
+
+<label class="checkbox"><input type="checkbox" name="cbFestType[]" value="Seminar"><i></i>Seminar</label>
+<label class="checkbox"><input type="checkbox" name="cbFestType[]" value="Workshop"><i></i>Workshop</label>
+<label class="checkbox"><input type="checkbox" name="cbFestType[]" value="Symposium"><i></i>Symposium</label>
+<label class="checkbox"><input type="checkbox" name="cbFestType[]" value="Youth Summit"><i></i>Youth Summit</label>
+</div>
+<div class="col col-3">
+
+<label class="checkbox"><input type="checkbox" name="cbFestType[]" value="Model United Nations"><i></i>Model United Nations</label>
+<label class="checkbox"><input type="checkbox" name="cbFestType[]" value="TEDx"><i></i>TEDx</label>
+
+<label class="checkbox"><input type="checkbox" name="cbFestType[]" value="Summit"><i></i>Summit</label>
+<label class="checkbox"><input type="checkbox" name="cbFestType[]" value="Conclave"><i></i>Conclave</label>
+<label class="checkbox"><input type="checkbox" name="cbFestType[]" value="Convention"><i></i>Convention</label>
+</div>
+<div class="col col-3">
+<label class="checkbox"><input type="checkbox" name="cbFestType[]" value="Entrepreneurship Summit"><i></i>Entrepreneurship Summit</label>
+<label class="checkbox"><input type="checkbox" name="cbFestType[]" value="Medical"><i></i>Medical</label>
+<label class="checkbox"><input type="checkbox" name="cbFestType[]" value="Pharma"><i></i>Pharma</label>
+
+<label class="checkbox"><input type="checkbox" name="cbFestType[]" value="Bio Medical"><i></i>Bio Medical</label>
+<label class="checkbox"><input type="checkbox" name="cbFestType[]" value="Online"><i></i>Online Events</label>
+
+</div>
+</div>
+<!--   <label class="checkbox"><input type="checkbox" name="cbFestType[]" value="Other" id="other_in_festtype" ><i></i>Other Fest Type not in list</label> -->
+<label class="Other_festtype_new">
+<label class="input">
+<i class="icon-append fa fa-asterisk"></i>
+<input type="text" placeholder="Enter Fest Type " name="cbfesttype" id="Other_fest_type" />
+</label>
+</label>
+</section>
+<div class="row">
+<section class="col col-6">
+<label class="label">College</label>
+<label class="input">
+<i class="icon-append fa fa-asterisk"></i>
+<input type="text" name="slCollege" id="college">
+</label>
+</section>
+<section class="col col-3">
+<label class="label">City</label>
+<label class="input">
+<i class="icon-append fa fa-asterisk"></i>
+<input type="text" name="txtCity" id="city">
+</label>
+</section>
+<section class="col col-3">
+<label class="label">State</label>
+<label class="select">
+<select name="slState" id="state">
+<option value="">Select State</option>
+<option value="Andhra Pradesh">Andhra Pradesh</option>
+<option value="Arunachal Pradesh">Arunachal Pradesh</option>
+<option value="Assam">Assam</option>
+<option value="Bihar">Bihar</option>
+<option value="Chhattisgarh">Chhattisgarh</option>
+<option value="Goa">Goa</option>
+<option value="Gujarat">Gujarat</option>
+<option value="Haryana">Haryana</option>
+<option value="Himachal Pradesh">Himachal Pradesh</option>
+<option value="Jammu and Kashmir">Jammu and Kashmir</option>
+<option value="Jharkhand">Jharkhand</option>
+<option value="Karnataka">Karnataka</option>
+<option value="Kerala">Kerala</option>
+<option value="Madhya Pradesh">Madhya Pradesh</option>
+<option value="Maharashtra">Maharashtra</option>
+<option value="Manipur">Manipur</option>
+<option value="Meghalaya">Meghalaya</option>
+<option value="Mizoram">Mizoram</option>
+<option value="Nagaland">Nagaland</option>
+<option value="Odisha">Odisha</option>
+<option value="Punjab">Punjab</option>
+<option value="Rajasthan">Rajasthan</option>
+<option value="Sikkim">Sikkim</option>
+<option value="Tamil Nadu">Tamil Nadu</option>
+<option value="Telangana">Telangana</option>
+<option value="Tripura">Tripura</option>
+<option value="Uttar Pradesh">Uttar Pradesh</option>
+<option value="Uttarakhand">Uttarakhand</option>
+<option value="West Bengal">West Bengal</option>
+<option value="Online">Online</option>
+<option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+<option value="Chandigarh">Chandigarh</option>
+<option value="Dadra and Nagar Haveli">Dadra and Nagar Haveli</option>
+<option value="Daman and Diu">Daman and Diu</option>
+<option value="Lakshadweep">Lakshadweep</option>
+<option value="Delhi">Delhi</option>
+<option value="Puducherry">Puducherry</option>
+</select>
+<i></i>
+</label>
+</section>
+
+</div>
+<label class="label">Select Event Dates</label>  
+<div class="row">   
+<section class="col col-6">
+<label class="input">
+<i class="icon-append fa fa-calendar"></i>
+<input type="text" name="start" id="start" placeholder="Start date">
+</label>
+</section>
+<section class="col col-6">
+<label class="input">
+<i class="icon-append fa fa-calendar"></i>
+<input type="text" name="finish" id="finish" placeholder="End date">
+</label>
+</section>
+</div>      
+<div class="row">
+<section class="col col-6" >
+<label class="label">Dealines for Registration</label>
+<label class="textarea">
+<i class="icon-append fa fa-comment"></i>
+<textarea rows="4" name="taLastDate" id="taLastDate"></textarea>
+</label>
+</section>
+<section class="col col-6" >
+<label class="label">Registration Fees</label>
+<label class="textarea">
+<i class="icon-append fa fa-comment"></i>
+<textarea rows="4" name="txtRegistrationFees" id="txtRegistrationFees"></textarea>
+</label>
+</section>
+<section class="col col-6" >
+<label class="label">Fest Description</label>
+<label class="textarea">
+<i class="icon-append fa fa-comment"></i>
+<textarea rows="4" name="taFestDescription" id="taFestDescription"></textarea>
+</label>
+</section>
+<section class="col col-6">
+<label class="label">Fest Events</label>
+<label class="textarea">
+<i class="icon-append fa fa-comment"></i>
+<textarea rows="4" name="taFestEvents" id="taFestEvents"></textarea>
+</label>
+</section>
+
+
+</div>
+
+
+
+</fieldset>
+
+
+<fieldset>
+<section  >
+<label class="label">Fest Department</label>
+<div class="row Other_college" ">
+<div class="col col-3">
+<label class="checkbox"><input type="checkbox" name="cbFestDep[]" value="CSE" ><i></i>CSE</label>
+<label class="checkbox"><input type="checkbox" name="cbFestDep[]" value="IT"><i></i>IT</label>
+<label class="checkbox"><input type="checkbox" name="cbFestDep[]" value="MCA"><i></i>MCA</label>
+<label class="checkbox"><input type="checkbox" name="cbFestDep[]" value="ECE" ><i></i>ECE</label>
+<label class="checkbox"><input type="checkbox" name="cbFestDep[]" value="EEE"><i></i>EEE</label>
+<label class="checkbox"><input type="checkbox" name="cbFestDep[]" value="ECM"><i></i>ECM</label>
+</div>
+<div class="col col-3">
+<label class="checkbox"><input type="checkbox" name="cbFestDep[]" value="Design"><i></i>Design</label>
+<label class="checkbox"><input type="checkbox" name="cbFestDep[]" value="Aeronautical"><i></i>Aeronautical</label>
+<label class="checkbox"><input type="checkbox" name="cbFestDep[]" value="Mechanics"><i></i>Applied Mechanics</label>
+<label class="checkbox"><input type="checkbox" name="cbFestDep[]" value="Aerospace" ><i></i>Aerospace</label>
+<label class="checkbox"><input type="checkbox" name="cbFestDep[]" value="Civil"><i></i>Civil</label>
+<label class="checkbox"><input type="checkbox" name="cbFestDep[]" value="Chemical"><i></i>Chemical</label>
+</div>
+
+<div class="col col-3">
+<label class="checkbox"><input type="checkbox" name="cbFestDep[]" value="BBA"><i></i>BBA</label>
+<label class="checkbox"><input type="checkbox" name="cbFestDep[]" value="MBA"><i></i>MBA</label>
+<label class="checkbox"><input type="checkbox" name="cbFestDep[]" value="Arts"><i></i>Arts</label>
+<label class="checkbox"><input type="checkbox" name="cbFestDep[]" value="Commerce" ><i></i>Commerce</label>
+<label class="checkbox"><input type="checkbox" name="cbFestDep[]" value="Law"><i></i>Law</label>
+<label class="checkbox"><input type="checkbox" name="cbFestDep[]" value="Media"><i></i>Media</label>
+</div>
+<div class="col col-3">
+<label class="checkbox"><input type="checkbox" name="cbFestDep[]" value="Medical" ><i></i>Medical</label>
+<label class="checkbox"><input type="checkbox" name="cbFestDep[]" value="BioMedical"><i></i>BioMedical</label>
+<label class="checkbox"><input type="checkbox" name="cbFestDep[]" value="Pharmacy"><i></i>Pharmacy</label>
+<label class="checkbox"><input type="checkbox" name="cbFestDep[]" value="BioTechnology" ><i></i>BioTechnology</label>
+<label class="checkbox"><input type="checkbox" name="cbFestDep[]" value="Agricultural"><i></i>Agricultural</label>
+<label class="checkbox"><input type="checkbox" name="cbFestDep[]" value="Fashion"><i></i>Fashion</label>
+</div>
+<div class="col col-3">
+<label class="checkbox"><input type="checkbox" name="cbFestDep[]" value="Instrumentation"><i></i>Instrumentation</label>
+<label class="checkbox"><input type="checkbox" name="cbFestDep[]" value="Telecommunication"><i></i>Tele Communication</label>
+<label class="checkbox"><input type="checkbox" name="cbFestDep[]" value="Mechanical"><i></i>Mechanical</label>
+<label class="checkbox"><input type="checkbox" name="cbFestDep[]" value="Energy" ><i></i>Energy</label>
+<label class="checkbox"><input type="checkbox" name="cbFestDep[]" value="Industrial"><i></i>Industrial</label>
+<label class="checkbox"><input type="checkbox" name="cbFestDep[]" value="Automobile"><i></i>Automobile</label>
+</div>
+<div class="col col-3">
+<label class="checkbox"><input type="checkbox" name="cbFestDep[]" value="Ocean" ><i></i>Ocean</label>
+<label class="checkbox"><input type="checkbox" name="cbFestDep[]" value="Metallurgy"><i></i>Metallurgy</label>
+<label class="checkbox"><input type="checkbox" name="cbFestDep[]" value="Marine"><i></i>Marine</label>
+<label class="checkbox"><input type="checkbox" name="cbFestDep[]" value="Mining" ><i></i>Mining</label>
+<label class="checkbox"><input type="checkbox" name="cbFestDep[]" value="Material"><i></i>Material</label>
+<label class="checkbox"><input type="checkbox" name="cbFestDep[]" value="Physics"><i></i>Physics</label>
+</div>
+<div class="col col-3">
+<label class="checkbox"><input type="checkbox" name="cbFestDep[]" value="Food"><i></i>Food Processing</label>
+
+</div>
+</div>
+<!--      <label class="checkbox"><input type="checkbox" name="cbFestDep[]" id="other_in_college"><i></i>Not in list</label> -->
+
+<label class="Other_college_name_row_new">
+<label class="input">
+<i class="icon-append fa fa-asterisk"></i>
+<input type="text" placeholder="enter Department name " name="cbdepname" id="Other_college_name" />
+</label>
+</label>
+
+
+</section>
+<!--             <section>
+<label class="label">File input</label>
+<label for="file" class="input input-file">
+<div class="button"><input type="file" id="file" onchange="this.parentNode.nextSibling.value = this.value">Browse</div><input type="text" readonly name="upimg">
+</label>
+</section> -->
+</fieldset>
+
+<fieldset>
+<section class="col col-4">
+<label class="label">Fest Website</label>
+<label class="input">
+<i class="icon-append fa fa-globe"></i>
+<input type="url" name="txtWebsite">
+</label>
+</section>
+<section class="col col-4">
+<label class="label">Fest  Registration URL</label>
+<label class="input">
+<i class="icon-append fa fa-globe"></i>
+<input type="url" name="txtRegisterLink">
+</label>
+</section>
+<section class="col col-4">
+<label class="label">College Website</label>
+<label class="input">
+<i class="icon-append fa fa-globe"></i>
+<input type="url" name="txtCollegeWebsite">
+</label>
+</section>
+<section class="col col-4">
+<label class="label">Faebook Link</label>
+<label class="input">
+<i class="icon-append fa fa-globe"></i>
+<input type="url" name="txtFbLink">
+</label>
+</section>
+<section class="col col-4">
+<label class="label">Twitter Link</label>
+<label class="input">
+<i class="icon-append fa fa-globe"></i>
+<input type="url" name="txtTwitterLink">
+</label>
+</section>
+<section class="col col-4">
+<label class="label">Youtube Link</label>
+<label class="input">
+<i class="icon-append fa fa-globe"></i>
+<input type="url" name="taYouTubeLink">
+</label>
+</section>
+<section class="col col-4">
+<label class="label">Poster Link</label>
+<label class="input">
+<i class="icon-append fa fa-globe"></i>
+<input type="url" name="txtPosterLink">
+</label>
+</section>
+<section class="col col-4">
+<label class="label">Android App Link</label>
+<label class="input">
+<i class="icon-append fa fa-globe"></i>
+<input type="url" name="txtAndroidLink">
+</label>
+</section>
+<section class="col col-4">
+<label class="label">Brochure Link</label>
+<label class="input">
+<i class="icon-append fa fa-globe"></i>
+<input type="url" name="txtBrochureLink">
+</label>
+</section>
+<div class="row">
+
+<section class="col col-6">
+<label class="label">How to reach College/Venue</label>
+<label class="textarea">
+<i class="icon-append fa fa-comment"></i>
+<textarea rows="4" name="taCollegeAddress" id="taCollegeAddress"></textarea>
+</label>
+</section>
+<section class="col col-6">
+<label class="label">Contact Persons Details for Queries</label>
+<label class="textarea">
+<i class="icon-append fa fa-comment"></i>
+<textarea rows="4" name="taContactDetails" id="taContactDetails"></textarea>
+</label>
+</section>
+<section class="col col-6">
+<label class="label">Fest Guests</label>
+<label class="textarea">
+<i class="icon-append fa fa-comment"></i>
+<textarea rows="4" name="taFestGuests" id="taFestGuests"></textarea>
+</label>
+</section>
+<section class="col col-6">
+<label class="label">Fest ProNites</label>
+<label class="textarea">
+<i class="icon-append fa fa-comment"></i>
+<textarea rows="4" name="taProNites" id="taProNites"></textarea>
+</label>
+</section>
+<section class="col col-6">
+<label class="label">Sponsorships Contact</label>
+<label class="textarea">
+<i class="icon-append fa fa-comment"></i>
+<textarea rows="4" name="taSponsorships" id="taSponsorships"></textarea>
+</label>
+</section>
+<section class="col col-6">
+<label class="label">Stalls Contact</label>
+<label class="textarea">
+<i class="icon-append fa fa-comment"></i>
+<textarea rows="4" name="taStalls" id="taStalls"></textarea>
+</label>
+</section>
+
+<section class="col col-6">
+<label class="label">Fest Sponsors</label>
+<label class="textarea">
+<i class="icon-append fa fa-comment"></i>
+<textarea rows="4" name="taFestSponsors" id="taFestSponsors"></textarea>
+</label>
+</section>
+<section class="col col-6">
+<label class="label">Accommodation Details</label>
+<label class="textarea">
+<i class="icon-append fa fa-comment"></i>
+<textarea rows="4" name="taAccommodation" id="taAccommodation"></textarea>
+</label>
+</section>   
+<section class="col col-6">
+<label class="label">Suggestions/Feedback</label>
+<label class="textarea">
+<i class="icon-append fa fa-comment"></i>
+<textarea rows="4" name="Feedback" id="Feedback"></textarea>
+</label>
+</section>   
+
+<section class="col col-4">
+<label class="label">Number of Attendees Expected</label>
+<label class="input">
+<i class="icon-append fa fa-asterisk"></i>
+<input type="text" name="txtAttendees">
+</label>
+</section>
+<section  >
+</div>
+
+
+<label class="label">Interested to receive Marketing Calls on following Categories</label>
+<div class="row " ">
+<div class="col col-4">
+<label class="checkbox"><input type="checkbox" name="cbMarketing[]" value="Sponsorships" ><i></i>Sponsorships</label>
+<label class="checkbox"><input type="checkbox" name="cbMarketing[]" value="Celebrities" ><i></i>Need Celebrities</label>
+
+</div>
+<div class="col col-4">
+<label class="checkbox"><input type="checkbox" name="cbMarketing[]" value="Workshops"><i></i>Organise Workshops</label>
+
+<label class="checkbox"><input type="checkbox" name="cbMarketing[]" value="Others"><i></i>Others</label>
+</div>
+<div class="col col-4">
+<label class="checkbox"><input type="checkbox" name="cbMarketing[]" value="Merchandise"><i></i>Merchandise</label>
+
+</div>
+</div>
+</section>
+
+</fieldset>
+
+
+
+
+
+<footer>
+<button type="submit" class="btn-u btn-u-default" name="cmdRegister"  value="Register" >Submit</button>
+<button type="button" class="btn-u" onclick="window.history.back();">Back</button>
+</footer>
+</form>
+
+
+</div>
+<!-- End Validation Forms -->	</div>
+                        
+                        	
+                             
+              </div>    <!--=== End Content ===-->
+  
+  
+
+    
+        
+</div><!--/wrapper-->
+<div>
+	<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-10147341-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</div>
+<!-- Analytics Code Ends -->              
+    jQuery(document).ready(function() {
+    $('#college').autocomplete({
+    
+		      	source: function( request, response ) {
+		      		$.ajax({
+		      			url : 'updater/ajax.php',
+		      			dataType: "json",
+						data: {
+						   name_startsWith: request.term,
+						   type: 'college'
+						},
+						 success: function( data ) {
+							 response( $.map( data, function( item ) {
+							 var code = item.split("|");
+								return {
+									label: code[0],
+									value: code[0],
+									data : item
+								}
+							}));
+						}
+		      		});
+		      	},
+		      	autoFocus: true,
+		      	minLength: 0,
+			      	select: function( event, ui ) {
+					var names = ui.item.data.split("|");	
+					$('#city').val(names[1]);
+						$('#state').val(names[2]);
+						
+					}	
+		      });
+    
+      App.init();
+        $('#other_in_college').click(function(event){
+					//alert("i am called..");
+						if($(this).is(':checked')){
+								
+								$('.Other_college_name_row_new').css('display','block');
+								$('.Other_college').css('display','none');
+						}
+						else{
+							$('.Other_college_name_row_new').css('display','none');
+							
+							 $('.Other_college').css('display','block');
+						}
+					
+					});  
+					   $('#other_in_festtype').click(function(event){
+					//alert("i am called..");
+						if($(this).is(':checked')){
+								
+								$('.Other_festtype_new').css('display','block');
+								$('.Other_festtype').css('display','none');
+						}
+						else{
+							$('.Other_festtype_new').css('display','none');
+							
+							 $('.Other_festtype').css('display','block');
+						}
+					
+					});
+				
+					
+		
+					
+        Masking.initMasking();
+        Datepicker.initDatepicker();
+      
+      
+        });
+</script>
+<!--[if lt IE 9]>
+
+    <script src="assets/plugins/sky-forms-pro/skyforms/js/sky-forms-ie8.js"></script>
+<![endif]-->
+<!--[if lt IE 10]>
+    <script src="assets/plugins/sky-forms-pro/skyforms/js/jquery.placeholder.min.js"></script>
+<![endif]-->     
+	
+</body>
+</html>
