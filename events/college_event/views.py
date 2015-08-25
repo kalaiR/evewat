@@ -3,7 +3,7 @@ from django.template import RequestContext
 from banner.models import *
 # Create your views here.
 def home(request):
-	banners=SiteBanner.object.all()
+	banners=SiteBanner.objects.all()
 	print banners
 	return render_to_response("index.html",{'banners':banners},context_instance=RequestContext(request))
 
