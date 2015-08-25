@@ -4934,7 +4934,7 @@ fieldset[disabled] .btn-default-inverse.active {
   .company-sidebar .contact-details li span,
   .company-sidebar .opening-hours li span {
     position: absolute;
-    left: 100px;
+    /*left: 100px;*/
   }
 }
 .company-sidebar .contact-details li span .fa,

@@ -2,175 +2,9 @@
 {% load i18n %}
 {% load static from staticfiles %}
 {% block content %}
-<body>
 
-<div id="main-wrapper">
-  <header id="header">
-    <div class="header-top-bar">
-      <div class="container">
-        <!-- HEADER-LOGIN -->
-        <div class="header-login">
 
-          <a href="#" class=""><i class="fa fa-power-off"></i> Login</a>
 
-          <div>
-            <form action="#">
-              <input type="text" class="form-control" placeholder="Username">
-              <input type="password" class="form-control" placeholder="Password">
-              <input type="submit" class="btn btn-default" value="Login">
-              <a href="#" class="btn btn-link">Forgot Password?</a>
-            </form>
-          </div>
-
-        </div> <!-- END .HEADER-LOGIN -->
-
-        <!-- HEADER REGISTER -->
-        <div class="header-register">
-          <a href="#" class=""><i class="fa fa-plus-square"></i> Register</a>
-
-          <div>
-            <form action="#">
-              <input type="text" class="form-control" placeholder="Username">
-              <input type="email" class="form-control" placeholder="Email">
-              <input type="password" class="form-control" placeholder="Password">
-              <input type="submit" class="btn btn-default" value="Register">
-            </form>
-          </div>
-
-        </div> <!-- END .HEADER-REGISTER -->
-
-        <!-- HEADER-LOG0 -->
-        <div class="header-logo text-center">
-          <h2><a href="index.html">GL<i class="fa fa-globe"></i>BO</a></h2>
-        </div>
-        <!-- END HEADER LOGO -->
-
-        <!-- HEADER-SOCIAL -->
-        <div class="header-social">
-          <a href="#">
-            <span><i class="fa fa-share-alt"></i></span>
-            <i class="fa fa-chevron-down social-arrow"></i>
-          </a>
-
-          <ul class="list-inline">
-            <li class="active"><a href="#"><i class="fa fa-facebook-square"></i></a></li>
-            <li><a href="#"><i class="fa fa-google-plus-square"></i></a></li>
-            <li><a href="#"><i class="fa fa-twitter-square"></i></a></li>
-            <li><a href="#"><i class="fa fa-linkedin-square"></i></a></li>
-          </ul>
-        </div>
-        <!-- END HEADER-SOCIAL -->
-
-        <!-- HEADER-LANGUAGE -->
-        <div class="header-language">
-          <a href="#">
-            <span>EN</span>
-            <i class="fa fa-chevron-down"></i>
-          </a>
-
-          <ul class="list-unstyled">
-            <li class="active"><a href="#">EN</a></li>
-            <li><a href="#">FR</a></li>
-            <li><a href="#">PT</a></li>
-            <li><a href="#">IT</a></li>
-          </ul>
-        </div> <!-- END HEADER-LANGUAGE -->
-
-        <!-- CALL TO ACTION -->
-        <div class="header-call-to-action">
-          <a href="{%url "college_event.views.post_event"%}" class="btn btn-default"><i class="fa fa-plus"></i> Add Listing</a>
-        </div><!-- END .HEADER-CALL-TO-ACTION -->
-
-      </div><!-- END .CONTAINER -->
-    </div>
-    <!-- END .HEADER-TOP-BAR -->
-
-    <!-- HEADER SEARCH SECTION -->
-    <div class="header-search slider-home">
-      <div class="header-search-bar">
-        <form action="#">
-
-          <div class="search-toggle">
-            <div class="container">
-              <div class="distance-range">
-                <p>
-                  <label for="amount-search">Distance:</label>
-                  <input type="text" id="amount-search">
-                </p>
-
-                <div id="slider-range-search"></div>
-              </div>  <!-- end #distance-range -->
-
-              <div class="distance-range">
-                <p>
-                  <label for="amount-search">Days published:</label>
-                  <input type="text" id="amount-search-day">
-                </p>
-
-                <div id="slider-range-search-day"></div>
-              </div>  <!-- end #distance-range -->
-
-              <p>Location:</p>
-              <div class="select-country">
-                <select class="" data-placeholder="-Select Country-">
-                  <option value="option1">option 1</option>
-                  <option value="option2">option 2</option>
-                  <option value="option3">option 3</option>
-                </select>
-              </div>
-
-              <div class="region">
-                <input type="text" placeholder="-Region-">
-              </div>
-
-              <div class="address">
-                <input type="text" placeholder="-Address-">
-              </div>
-
-              <div class="category-search">
-                <select class="" data-placeholder="-Select category-">
-                  <option value="option1">option 1</option>
-                  <option value="option2">option 2</option>
-                  <option value="option3">option 3</option>
-                </select>
-              </div>
-
-              <button class="search-btn" type="submit"><i class="fa fa-search"></i></button>
-
-            </div>
-          </div>  <!-- END .search-toggle -->
-
-          <div class="container">
-            <button class="toggle-btn" type="submit"><i class="fa fa-bars"></i></button>
-
-            <div class="search-value">
-              <div class="keywords">
-                <input type="text" class="form-control" placeholder="Keywords">
-              </div>
-
-              <div class="select-location">
-                <select class="" data-placeholder="-Select location-">
-                  <option value="option1">option 1</option>
-                  <option value="option2">option 2</option>
-                  <option value="option3">option 3</option>
-                  <option value="option4">option 4</option>
-                </select>
-              </div>
-
-              <div class="category-search">
-                <select class="" data-placeholder="-Select category-">
-                  <option value="option1">option 1</option>
-                  <option value="option2">option 2</option>
-                  <option value="option3">option 3</option>
-                  <option value="option4">option 4</option>
-                </select>
-              </div>
-
-              <button class="search-btn" type="submit"><i class="fa fa-search"></i></button>
-            </div>
-          </div> <!-- END .CONTAINER -->
-        </form>
-      </div> <!-- END .header-search-bar -->
 
       <div class="slider-content">
 
@@ -294,22 +128,14 @@
                       <div class="col-md-3 col-sm-4 col-xs-6">
                         <div class="category-item">
 
-                          <a href="search-result.html"><i class="fa fa-university"></i>Antiques</a>
+                          <a href="/event/technical"><i class="fa fa-university"></i>Technical</a>
                         </div>
                       </div>
 
                       <div class="col-md-3 col-sm-4 col-xs-6">
                         <div class="category-item">
 
-                          <a href="search-result.html"><i class="fa fa-book"></i>Book</a>
-                        </div>
-
-                      </div>
-
-                      <div class="col-md-3 col-sm-4 col-xs-6">
-                        <div class="category-item">
-
-                          <a href="search-result.html"><i class="fa fa-car"></i>Cars &amp; Motorcycles</a>
+                          <a href="/event/cultural"><i class="fa fa-book"></i>Cultural</a>
                         </div>
 
                       </div>
@@ -317,7 +143,7 @@
                       <div class="col-md-3 col-sm-4 col-xs-6">
                         <div class="category-item">
 
-                          <a href="search-result.html"><i class="fa fa-laptop"></i>Computers &amp; Tablets</a>
+                          <a href="/event/management"><i class="fa fa-car"></i>Management</a>
                         </div>
 
                       </div>
@@ -325,7 +151,7 @@
                       <div class="col-md-3 col-sm-4 col-xs-6">
                         <div class="category-item">
 
-                          <a href="search-result.html"><i class="fa fa-paint-brush"></i>Creative &amp; Digital</a>
+                          <a href="/event/sports"><i class="fa fa-laptop"></i>Sports</a>
                         </div>
 
                       </div>
@@ -333,7 +159,7 @@
                       <div class="col-md-3 col-sm-4 col-xs-6">
                         <div class="category-item">
 
-                          <a href="search-result.html"><i class="fa fa-female"></i>Fashion</a>
+                          <a href="/event/literary"><i class="fa fa-paint-brush"></i>Literary</a>
                         </div>
 
                       </div>
@@ -341,7 +167,7 @@
                       <div class="col-md-3 col-sm-4 col-xs-6">
                         <div class="category-item">
 
-                          <a href="search-result.html"><i class="fa fa-bicycle"></i>Fashion</a>
+                          <a href="/event/conferences"><i class="fa fa-female"></i>Conferences</a>
                         </div>
 
                       </div>
@@ -349,7 +175,7 @@
                       <div class="col-md-3 col-sm-4 col-xs-6">
                         <div class="category-item">
 
-                          <a href="search-result.html"><i class="fa fa-archive"></i>Furnishing</a>
+                          <a href="/event/seminar"><i class="fa fa-bicycle"></i>Seminar</a>
                         </div>
 
                       </div>
@@ -357,7 +183,7 @@
                       <div class="col-md-3 col-sm-4 col-xs-6">
                         <div class="category-item">
 
-                          <a href="search-result.html"><i class="fa fa-eye"></i>Health &amp; beauty</a>
+                          <a href="/event/workshop"><i class="fa fa-archive"></i>Workshop</a>
                         </div>
 
                       </div>
@@ -365,7 +191,7 @@
                       <div class="col-md-3 col-sm-4 col-xs-6">
                         <div class="category-item">
 
-                          <a href="search-result.html"><i class="fa fa-paper-plane-o"></i>Hobbies</a>
+                          <a href="/event/cultural"><i class="fa fa-eye"></i>Cultural</a>
                         </div>
 
                       </div>
@@ -373,7 +199,7 @@
                       <div class="col-md-3 col-sm-4 col-xs-6">
                         <div class="category-item">
 
-                          <a href="search-result.html"><i class="fa fa-empire"></i>Jewelry</a>
+                          <a href="/event/symposium"><i class="fa fa-paper-plane-o"></i>Symposium</a>
                         </div>
 
                       </div>
@@ -381,7 +207,7 @@
                       <div class="col-md-3 col-sm-4 col-xs-6">
                         <div class="category-item">
 
-                          <a href="search-result.html"><i class="fa fa-cutlery"></i>Kitchen</a>
+                          <a href="/event/youthsummit"><i class="fa fa-empire"></i>Youth Summit</a>
                         </div>
 
                       </div>
@@ -389,7 +215,7 @@
                       <div class="col-md-3 col-sm-4 col-xs-6">
                         <div class="category-item">
 
-                          <a href="search-result.html"><i class="fa fa-sun-o"></i>Leisure</a>
+                          <a href="/event/modelunitednations"><i class="fa fa-cutlery"></i>Model United Nations</a>
                         </div>
 
                       </div>
@@ -397,7 +223,7 @@
                       <div class="col-md-3 col-sm-4 col-xs-6">
                         <div class="category-item">
 
-                          <a href="search-result.html"><i class="fa fa-music"></i>Music</a>
+                          <a href="/event/tedx"><i class="fa fa-sun-o"></i>TEDx</a>
                         </div>
 
                       </div>
@@ -405,7 +231,7 @@
                       <div class="col-md-3 col-sm-4 col-xs-6">
                         <div class="category-item">
 
-                          <a href="search-result.html"><i class="fa fa-money"></i>Tickets</a>
+                          <a href="/event/summit"><i class="fa fa-music"></i>Summit</a>
                         </div>
 
                       </div>
@@ -413,7 +239,50 @@
                       <div class="col-md-3 col-sm-4 col-xs-6">
                         <div class="category-item">
 
-                          <a href="search-result.html"><i class="fa fa-rocket"></i>Video Games &amp; Consoles</a>
+                          <a href="/event/conclave"><i class="fa fa-money"></i>Conclave</a>
+                        </div>
+
+                      </div>
+
+                      <div class="col-md-3 col-sm-4 col-xs-6">
+                        <div class="category-item">
+
+                          <a href="/event/convention"><i class="fa fa-rocket"></i>Convention</a>
+                        </div>
+
+                      </div>
+                      <div class="col-md-3 col-sm-4 col-xs-6">
+                        <div class="category-item">
+
+                          <a href="/event/entrepreneurshipsummit"><i class="fa fa-rocket"></i>Entrepreneurship Summit</a>
+                        </div>
+
+                      </div>
+                      <div class="col-md-3 col-sm-4 col-xs-6">
+                        <div class="category-item">
+
+                          <a href="/event/medical"><i class="fa fa-rocket"></i>Medical</a>
+                        </div>
+
+                      </div>
+                      <div class="col-md-3 col-sm-4 col-xs-6">
+                        <div class="category-item">
+
+                          <a href="/event/pharma"><i class="fa fa-rocket"></i>Pharma</a>
+                        </div>
+
+                      </div>
+                      <div class="col-md-3 col-sm-4 col-xs-6">
+                        <div class="category-item">
+
+                          <a href="/event/biomedical"><i class="fa fa-rocket"></i>Bio Medical</a>
+                        </div>
+
+                      </div>
+                      <div class="col-md-3 col-sm-4 col-xs-6">
+                        <div class="category-item">
+
+                          <a href="/event/onlineevents"><i class="fa fa-rocket"></i>Online Events</a>
                         </div>
 
                       </div>
@@ -426,8 +295,8 @@
                   </div> <!-- end .tabe-pane -->
 
 
-                  <div class="tab-pane" id="advertisemnet">
-                    <h3>Advertisement <span class="comments">59</span></h3>
+                  <div class="tab-pane" id="medical">
+                    <h3>Medical <span class="comments">59</span></h3>
 
                     <div class="row clearfix">
 
@@ -565,8 +434,8 @@
                     </div> <!-- end .row -->
                   </div> <!-- end .tabe-pane -->
 
-                  <div class="tab-pane" id="e-commerce">
-                    <h3>E-Commerce <span class="comments">99</span></h3>
+                  <div class="tab-pane" id="engineering">
+                    <h3>Engineering <span class="comments">99</span></h3>
 
                     <div class="row clearfix">
 
@@ -674,8 +543,8 @@
                     </div> <!-- end .row -->
                   </div> <!-- end .tabe-pane -->
 
-                  <div class="tab-pane" id="education">
-                    <h3>Education <span class="comments">79</span></h3>
+                  <div class="tab-pane" id="law">
+                    <h3>Law <span class="comments">79</span></h3>
 
                     <div class="row clearfix">
                       <div class="col-md-3 col-sm-4 col-xs-6">
@@ -797,8 +666,8 @@
                     </div> <!-- end .row -->
                   </div> <!-- end .tabe-pane -->
 
-                  <div class="tab-pane" id="entertainment">
-                    <h3>Entertainment <span class="comments">45</span></h3>
+                  <div class="tab-pane" id="management">
+                    <h3>Management <span class="comments">45</span></h3>
 
                     <div class="row clearfix">
 
@@ -1631,30 +1500,30 @@
                     </li>
 
                     <li>
-                      <a href="#advertisemnet" role="tab" data-toggle="tab">advertisement
-                        <span>Agencies, Marketing</span>
+                      <a href="#medical" role="tab" data-toggle="tab">Medical
+                        <span>medical,nursing</span>
                       </a>
                     </li>
 
                     <li>
-                      <a href="#e-commerce"  role="tab" data-toggle="tab">E-commerce
-                        <span>Boutiques, Shop</span>
+                      <a href="#engineering"  role="tab" data-toggle="tab">Engineering
+                        <span>Engineering, Polytechnic</span>
                       </a>
                     </li>
 
                     <li>
-                      <a href="#education" role="tab" data-toggle="tab">Education
-                        <span>Private School, Universities</span>
+                      <a href="#law" role="tab" data-toggle="tab">Law 
+                        <span>Private college, GovT college</span>
                       </a>
                     </li>
 
                     <li>
-                      <a href="#entertainment" role="tab" data-toggle="tab">Entertainment
-                        <span>Sport, Toys, Travels</span>
+                      <a href="#management" role="tab" data-toggle="tab">Management
+                        <span>Hotel,Business Administration</span>
                       </a>
                     </li>
 
-                    <li>
+                    <!-- <li>
                       <a href="#home-garder" role="tab" data-toggle="tab">Home &amp; Garden
                         <span>Accessories, Furniture, Plants</span>
                       </a>
@@ -1682,7 +1551,7 @@
                       <a href="#resturants" role="tab" data-toggle="tab">Resturants &amp; Pubs
                         <span>Bars, Fast Food, Resturants</span>
                       </a>
-                    </li>
+                    </li> -->
 
                     <li>
                       <a href="#" role="tab" data-toggle="tab"><i class="fa fa-angle-right"></i>See More</a>
