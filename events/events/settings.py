@@ -36,7 +36,12 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'banner'
+    'banner',
+    'college_event',
+    'events',
+
+    
+
 )
 
 MIDDLEWARE_CLASSES = (
@@ -59,7 +64,7 @@ WSGI_APPLICATION = 'events.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',    # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'events',                        # Or path to database file if using sqlite3.
+        'NAME': 'evewat',                        # Or path to database file if using sqlite3.
         'USER': 'root',                          # Not used with sqlite3.
         'PASSWORD': 'root',                      # Not used with sqlite3.
         'HOST': 'localhost',                     # Set to empty string for localhost. Not used with sqlite3.        
@@ -86,13 +91,15 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = 'static_files'
+STATIC_ROOT = 'static'
 
 STATICFILES_DIRS = (os.path.join(os.path.dirname(__file__), 'static'),)
 
 TEMPLATE_DIRS = os.path.join((os.path.dirname(__file__)), 'templates')
 
-MEDIA_ROOT = '/media/'
+MEDIA_ROOT = os.path.join((os.path.dirname(__file__)), 'media')
+
+MEDIA_URL = '/media/'
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     "django.contrib.auth.context_processors.auth",

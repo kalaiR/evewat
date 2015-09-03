@@ -60,7 +60,7 @@
     });
   });
 
-
+  $('input[type=file]').simpleFilePreview();
 
   // Category toggle
   //-------------------------------------------------
@@ -563,6 +563,7 @@ $("document").ready(function($){
     }
 
   });
+  
 });
 
 
