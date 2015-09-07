@@ -36,13 +36,29 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'banner',
     'college_event',
     'events',
+    'college_event',
+    'haystack',
+    'search',
+    'payu',
+    'transaction',
+    'banner',
 
     
 
 )
+
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
+        'URL': 'http://127.0.0.1:9200/',
+        'INDEX_NAME': 'haystack',
+    },
+}
+
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
+
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -51,6 +67,8 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'events.middleware.Global',
+
 )
 
 ROOT_URLCONF = 'events.urls'
@@ -114,3 +132,10 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'social_auth.context_processors.social_auth_by_type_backends',
     'social_auth.context_processors.social_auth_login_redirect',
 )
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+GEOS_LIBRARY_PATH = '/usr/local/lib/libgeos_c.so'
+
+GEOIP_PATH = os.path.join(os.path.dirname(__file__), 'static/geoip/')
+# GEOIP_PATH = os.path.join(os.path.dirname(__file__), '../static/geoip/')

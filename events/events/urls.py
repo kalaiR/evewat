@@ -5,7 +5,11 @@ from django.contrib import admin
 from college_event.views import *
 from college_event.models import *
 from django.views.generic import RedirectView
-# admin.autodiscover()
+
+#For loading global functions
+from django.template.loader import add_to_builtins
+add_to_builtins('college_event.templatetags.app_filters')
+admin.autodiscover()
 
 urlpatterns = patterns('',
     # Examples:

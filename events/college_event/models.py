@@ -8,6 +8,48 @@ from PIL import Image
 from django.utils import simplejson
 import simplejson as json
 
+class Category(models.Model):
+	name= models.CharField(max_length=150, null=True, blank=True)
+	icon= models.ImageField(upload_to='category_icon',max_length=100)
+	# department=models.ForeignKey(Department,null=True)
+
+class Country(models.Model):
+	code=models.CharField(max_length=50)
+	country=models.CharField(max_length=50)
+	def __unicode__(self):
+		return self.code
+
+class City(models.Model):
+	city=models.CharField(max_length=150, null=True, blank=True)
+	country=models.ForeignKey(Country)
+	def __unicode__(self):
+		return self.city
+
+class Location(models.Model):
+	city=models.ForeignKey(City,null=True, blank=True)
+	locality=models.CharField(max_length=150, null=True, blank=True)
+	def __unicode__(self):
+		return self.locality
+
+class Collegetype(models.Model):
+	college_type=models.CharField(max_length=150, null=True, blank=True)
+	def __unicode__(self):
+		return self.college_type
+
+class College(models.Model):
+	collegetype=models.ForeignKey(Collegetype,null=True)
+	city=models.ForeignKey(City,null=True)
+	location=models.ForeignKey(Location)
+	college_name=models.CharField(max_length=150, null=True, blank=True)
+	def __unicode__(self):
+		return self.college_name
+
+class Department(models.Model):
+	college=models.ForeignKey(College,null=True)
+	department=models.CharField(max_length=150, null=True, blank=True)
+	def __unicode__(self):
+		return self.department
+
 
 # Create your models here.
 class Postevent(models.Model):
