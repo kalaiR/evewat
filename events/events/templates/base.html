@@ -152,11 +152,11 @@
     <!-- END .HEADER-TOP-BAR -->
 
     <!-- HEADER SEARCH SECTION -->
-   <!--  <div class="header-search slider-home">
+    <div class="header-search slider-home">
       <div class="header-search-bar">
         <form action="#">
 
-          <div class="search-toggle">
+         <!--  <div class="search-toggle">
             <div class="container">
               <div class="distance-range">
                 <p>
@@ -204,39 +204,70 @@
               <button class="search-btn" type="submit"><i class="fa fa-search"></i></button>
 
             </div>
-          </div> 
+          </div>  -->
 
           <div class="container">
-            <button class="toggle-btn" type="submit"><i class="fa fa-bars"></i></button>
-
+           <!--  <button class="toggle-btn" type="submit"><i class="fa fa-bars"></i></button>
+ -->
             <div class="search-value">
               <div class="keywords">
-                <input type="text" class="form-control" placeholder="Keywords">
+             <!--    <input type="text" class="form-control" placeholder="Keywords"> -->
+             {% if query or request.REQUEST.q or request.REQUEST.q == '' %}
+              <input type="text" name="q" id="q" class="form-control input-lg" placeholder="" value="{% if query %}{{ query }}{% elif request.REQUEST.q %}{{request.REQUEST.q}}{% elif request.REQUEST.q == '' %}{% else %}{% endif %}" />
+          
+            {% else %}
+              <input type="text" name="q" id="q" class="form-control input-lg" placeholder="" value="{% if recent_viewed_search %}{% for cat in recent_viewed_search|slice:'1' %}{% if cat.activity_view %}{{ cat.activity_view }}{% else %}{% endif %}{% endfor %}{% else %}{% endif %}" />
+            {% endif %}
               </div>
 
               <div class="select-location">
-                <select class="" data-placeholder="-Select location-">
+              <select class="city">
+                                  
+                  <option  id="currentid" value="{{request.COOKIES.global_city_id}}">{{ request.COOKIES.city }}</option>
+                  {% for cities in city|get_city %}
+                  <option value="{{cities.id}}" id="ajax_cityid">{{ cities }} </option>
+                  {% endfor%} 
+              </select>
+              <!--   <select class="" data-placeholder="-Select location-">
                   <option value="option1">option 1</option>
                   <option value="option2">option 2</option>
                   <option value="option3">option 3</option>
                   <option value="option4">option 4</option>
-                </select>
+                </select> -->
               </div>
 
               <div class="category-search">
-                <select class="" data-placeholder="-Select category-">
-                  <option value="option1">option 1</option>
-                  <option value="option2">option 2</option>
-                  <option value="option3">option 3</option>
-                  <option value="option4">option 4</option>
-                </select>
+                <select class="" data-placeholder="-Select category-">                 
+                    <option value="">Fest type</option>
+                    <option value="technical">Technical</option>
+                    <option value="cultural">Cultural</option>
+                    <option value="management">Management</option>
+                    <option value="sports">Sports</option>
+                    <option value="literary">Literary</option>
+                    <option value="conferences">Conferences</option>
+                    <option value="seminar">Seminar</option>
+                    <option value="workshop">Workshop</option>
+                    <option value="symposium">Symposium</option>
+                    <option value="youthsummit">Youth Summit</option>
+                    <option value="modelunitednations">Model United Nations</option>
+                    <option value="tedx">TEDx</option>
+                    <option value="summit">Summit</option>
+                    <option value="culture">Culture</option>
+                    <option value="conclave">Conclave</option>
+                    <option value="convention">Convention</option>
+                    <option value="entrepreneurshipsummit">Entrepreneurship Summit</option>
+                    <option value="medical">Medical</option>
+                    <option value="pharma">Pharma</option>
+                    <option value="biomedical">Bio Medical</option>
+                    <option value="OnlineEvents">Online Events</option>          
+                 </select>
               </div>
 
               <button class="search-btn" type="submit"><i class="fa fa-search"></i></button>
             </div>
           </div> 
         </form>
-      </div>  -->
+      </div> 
 {% block content %}
 {% endblock %}
   <footer id="footer">
