@@ -91,7 +91,7 @@
               <h3>Submit your event</h3>
 
               <div class="contact-form">
-                <form action="{%url "college_event.views.submit_event"%}" name="postevent" method="POST">{% csrf_token %}
+                <form action="/submit_event/" name="postevent" method="POST">{% csrf_token %}
 
 
                   <input type="text" placeholder="Name" name=

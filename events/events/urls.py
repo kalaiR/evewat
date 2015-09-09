@@ -5,7 +5,7 @@ from django.contrib import admin
 from college_event.views import *
 from college_event.models import *
 from django.views.generic import RedirectView
-# admin.autodiscover()
+admin.autodiscover()
 
 urlpatterns = patterns('',
     # Examples:

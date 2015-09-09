@@ -34,7 +34,7 @@ def user_login(request):
 	"""
 	logout(request)
 	username = password = ''	
-	if request.POST["next"] != "http://localhost:8000/register/" :
+	if request.POST["next"] != "http://localhost:8001/register/" :
 		print "request.POST['next']", request.POST['next']		
 		username = request.POST['username']
 		print 'username', username

@@ -10,7 +10,7 @@ class Userprofile(models.Model):
     # The additional attributes we wish to include.
     # website = models.URLField(blank=True)
     # picture = models.ImageField(upload_to='static/img/', blank=True)
-    # city=models.CharField(max_length=50, null=True, blank=True)
+    city=models.CharField(max_length=50, null=True, blank=True)
     # city=models.ForeignKey('college_event.City', null=True, blank=True)
     mobile=models.CharField(max_length=50)
     confirmation_code=models.CharField(max_length=500)
