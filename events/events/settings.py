@@ -11,7 +11,8 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-
+# for img upload
+FOR_IMG=os.path.join(os.path.dirname(__file__), 'static/img/')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
@@ -111,8 +112,9 @@ STATIC_URL = '/static/'
 
 STATIC_ROOT = 'static'
 
-STATICFILES_DIRS = (os.path.join(os.path.dirname(__file__), 'static'),)
-
+STATICFILES_DIRS = (
+    os.path.join(os.path.dirname(__file__), 'static'),
+)
 TEMPLATE_DIRS = os.path.join((os.path.dirname(__file__)), 'templates')
 
 MEDIA_ROOT = os.path.join((os.path.dirname(__file__)), 'media')
@@ -139,3 +141,9 @@ GEOS_LIBRARY_PATH = '/usr/local/lib/libgeos_c.so'
 
 GEOIP_PATH = os.path.join(os.path.dirname(__file__), 'static/geoip/')
 # GEOIP_PATH = os.path.join(os.path.dirname(__file__), '../static/geoip/')
+
+#img upload by pradeepa
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+)

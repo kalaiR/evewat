@@ -5,13 +5,12 @@ from django.contrib import admin
 from college_event.views import *
 from college_event.models import *
 from django.views.generic import RedirectView
-<<<<<<< HEAD
-=======
+
 
 #For loading global functions
 from django.template.loader import add_to_builtins
 add_to_builtins('college_event.templatetags.app_filters')
->>>>>>> 50f3d53cc1ea07be12e6d251736cb67dff4bce57
+
 admin.autodiscover()
 
 urlpatterns = patterns('',
@@ -28,6 +27,7 @@ urlpatterns = patterns('',
     url(r'^start/$', 'college_event.views.start',name='start'),
     url(r'^post_event$', 'college_event.views.post_event', name='post_event'),
     url(r'^submit_event$', 'college_event.views.submit_event', name='submit_event'),
+    url(r'^upload_banner$', 'college_event.views.upload_banner', name='upload_banner'),
     url(r'^(?i)event/(?P<pname>.*)/$', 'college_event.views.event',name='event'),
     url(r'^details/(?P<id>[0-9]+)/$','college_event.views.details',name='details'),
    

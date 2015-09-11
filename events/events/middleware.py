@@ -19,14 +19,14 @@ class Global(object):
         globals.request = request
         globals.user = getattr(request, 'user', None)
         globals.ip = get_client_ip(request)
-        print "globals,ip", globals.ip
+        # print "globals,ip", globals.ip
         if ',' in globals.ip:
             globals.ip = globals.ip.split(',')[0].strip()
-            print "globals.ip1", globals.ip
+            # print "globals.ip1", globals.ip
         globals.sess = request.session.session_key
-        print 'globals.sess', globals.sess
+        # print 'globals.sess', globals.sess
         self.global_country=get_global_country(request)
-        print 'self.global_country', self.global_country
+        # print 'self.global_country', self.global_country
         self.global_city=get_global_city(request)
         self.global_city_id=get_global_city_id(request)
         self.global_ip= globals.ip
@@ -50,7 +50,7 @@ class Global(object):
         #         language, max_age = 365 * 24 * 60 * 60)        
 
         if self.global_country:
-            print "enter self.global_country"
+            # print "enter self.global_country"
             country=self.global_country
             response.set_cookie("country", 
                 country, max_age = 365 * 24 * 60 * 60)
@@ -62,13 +62,13 @@ class Global(object):
                 ip, max_age = 365 * 24 * 60 * 60)
         
         if self.global_city:
-            print "enter self.global_city"
+            # print "enter self.global_city"
             city=self.global_city
             response.set_cookie("city", 
                 city, max_age = 365 * 24 * 60 * 60)
 
         if self.global_city_id:
-            print "enter self.global_city_id"
+            # print "enter self.global_city_id"
             city=self.global_city_id
             response.set_cookie("global_city_id", 
                 city, max_age = 365 * 24 * 60 * 60)

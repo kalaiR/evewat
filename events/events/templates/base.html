@@ -11,6 +11,8 @@
 
   <!-- Stylesheets -->
   <link rel="stylesheet" href="{% static "css/style.css" %}">
+  <!-- <link rel="stylesheet" href="{% static "css/bootstrap.css" %}"> -->
+  <link rel="stylesheet" href="{% static "css/jquery-ui.css" %}">
   <link href="{% static "css/simpleFilePreview.css" %}" rel="stylesheet">
 
   <!-- GOOGLE FONTS -->
@@ -31,6 +33,7 @@
        <!-- HEADER-LOGOUT -->
         <div class="header-logout">
            <a href="/logout/" class=""><i class="fa fa-power-off"></i>Logout</a>
+           <a href="/">{{username}}</a>
         </div> <!-- END .HEADER-LOGOUT -->
 
         {% else %}       
@@ -143,8 +146,8 @@
 
         <!-- CALL TO ACTION -->
         <div class="header-call-to-action">
-          <a href="/post_event" class="btn btn-default"><i class="fa fa-plus"></i> Add post</a>
-          
+          <a href="/post_event" class="btn btn-default"><i class="fa fa-plus"></i> Add Post</a>
+          <a href="/upload_banner" class="btn btn-default"><i class="fa fa-plus"></i> Add Banner</a>
         </div><!-- END .HEADER-CALL-TO-ACTION -->
 
       </div><!-- END .CONTAINER -->
@@ -391,7 +394,8 @@
     <script src="{% static "js/jquery.iframe-transport.js" %}"></script>
     <script src="{% static "js/jquery.fileupload.js" %}"></script>
     <script src="{% static "js/script.js" %}"></script>
-  <script src="{% static "js/scripts.js" %}"></script>
+    <script src="{% static "js/scripts.js" %}"></script>
+    <!-- // <script src="{% static "js/bootstrap-datepicker.js" %}"></script> -->
 
 </body>
 </html>

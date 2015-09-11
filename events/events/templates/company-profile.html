@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load i18n %}
 {% block content %}
+{% load static from staticfiles %}
 <style type="text/css">
             @page {
                 size: {{ pagesize }};
@@ -37,11 +38,11 @@
         <div class="company-slider-content">
 
           <div class="general-view">
-            <span></span> <!-- for dark-overlay on the bg -->
+            <span><img src="{% static "img/paper.jpg" %}"  alt="" class="image_banner"></span> <!-- for dark-overlay on the bg -->
             <div class="container">
 
               <div class="logo-image">
-                <img src="img/content/company-logo.jpg" alt="">
+                <!-- <img src="img/content/company-logo.jpg" alt=""> -->
               </div>
 
               <h1>Company name</h1>
@@ -69,7 +70,7 @@
 
           <button><i class="fa fa-bars"></i></button>
 
-          <ul class="primary-nav list-unstyled">
+       <!--    <ul class="primary-nav list-unstyled">
             <li><a href="#">Home<i class="fa fa-angle-down"></i></a>
               <ul>
                 <li><a href="home-map-grid.html">Home-map(grid)</a></li>
@@ -109,7 +110,7 @@
             <li><a href="price-listing.html">Price Listing</a></li>
             <li><a href="about-us.html">About Us</a></li>
             <li><a href="contact-us.html">Contact Us</a></li>
-          </ul>
+          </ul> -->
         </nav>
       </div> <!-- end .container -->
     </div> <!-- end .header-nav-bar -->
@@ -376,8 +377,8 @@
                     <li>
 
                       <div class="comment">
-                        <img src="img/content/comment-image-1.jpg" alt="" class="avatar">
-
+                        <!-- <img src="img/content/comment-image-1.jpg" alt="" class="avatar">
+ -->
                         <div class="meta">
                           <a href="#"><strong>John Doe</strong></a>
                           -12 sep, 2014 - 9:14 Am -
@@ -394,7 +395,7 @@
                       <ul>
                         <li>
                           <div class="comment">
-                            <img src="img/content/comment-image-2.jpg" alt="" class="avatar">
+                            <!-- <img src="img/content/comment-image-2.jpg" alt="" class="avatar"> -->
 
                             <div class="meta">
                               <a href="#"><strong>John Doe</strong></a>
@@ -458,7 +459,7 @@
                     <div class="col-sm-4 col-xs-6">
                       <div class="single-product">
                         <figure>
-                          <img src="img/content/company-product.jpg" alt="">
+                          <!-- <img src="img/content/company-product.jpg" alt=""> -->
 
                           <figcaption>
                             <div class="bookmark">
@@ -481,7 +482,7 @@
                     <div class="col-sm-4 col-xs-6">
                       <div class="single-product">
                         <figure>
-                          <img src="img/content/company-product.jpg" alt="">
+                          <!-- <img src="img/content/company-product.jpg" alt=""> -->
 
                           <figcaption>
                             <div class="bookmark">
@@ -504,7 +505,7 @@
                     <div class="col-sm-4 col-xs-6">
                       <div class="single-product">
                         <figure>
-                          <img src="img/content/company-product.jpg" alt="">
+                          <!-- <img src="img/content/company-product.jpg" alt=""> -->
 
                           <figcaption>
                             <div class="bookmark">
@@ -527,7 +528,7 @@
                     <div class="col-sm-4 col-xs-6">
                       <div class="single-product">
                         <figure>
-                          <img src="img/content/company-product.jpg" alt="">
+                          <!-- <img src="img/content/company-product.jpg" alt=""> -->
 
                           <figcaption>
                             <div class="bookmark">
@@ -550,7 +551,7 @@
                     <div class="col-sm-4 col-xs-6">
                       <div class="single-product">
                         <figure>
-                          <img src="img/content/company-product.jpg" alt="">
+                          <!-- <img src="img/content/company-product.jpg" alt=""> -->
 
                           <figcaption>
                             <div class="bookmark">
@@ -573,7 +574,7 @@
                     <div class="col-sm-4 col-xs-6">
                       <div class="single-product">
                         <figure>
-                          <img src="img/content/company-product.jpg" alt="">
+                          <!-- <img src="img/content/company-product.jpg" alt=""> -->
 
                           <figcaption>
                             <div class="bookmark">
@@ -596,7 +597,7 @@
                     <div class="col-sm-4 col-xs-6">
                       <div class="single-product">
                         <figure>
-                          <img src="img/content/company-product.jpg" alt="">
+                          <!-- <img src="img/content/company-product.jpg" alt=""> -->
 
                           <figcaption>
                             <div class="bookmark">
@@ -620,7 +621,7 @@
                     <div class="col-sm-4 col-xs-6">
                       <div class="single-product">
                         <figure>
-                          <img src="img/content/company-product.jpg" alt="">
+                          <!-- <img src="img/content/company-product.jpg" alt=""> -->
 
                           <figcaption>
                             <div class="bookmark">
@@ -643,7 +644,7 @@
                     <div class="col-sm-4 col-xs-6">
                       <div class="single-product">
                         <figure>
-                          <img src="img/content/company-product.jpg" alt="">
+                          <!-- <img src="img/content/company-product.jpg" alt=""> -->
 
                           <figcaption>
                             <div class="bookmark">
@@ -666,7 +667,7 @@
                     <div class="col-sm-4 col-xs-6">
                       <div class="single-product">
                         <figure>
-                          <img src="img/content/company-product.jpg" alt="">
+                          <!-- <img src="img/content/company-product.jpg" alt=""> -->
 
                           <figcaption>
                             <div class="bookmark">
@@ -689,7 +690,7 @@
                     <div class="col-sm-4 col-xs-6">
                       <div class="single-product">
                         <figure>
-                          <img src="img/content/company-product.jpg" alt="">
+                          <!-- <img src="img/content/company-product.jpg" alt=""> -->
 
                           <figcaption>
                             <div class="bookmark">
@@ -712,7 +713,7 @@
                     <div class="col-sm-4 col-xs-6">
                       <div class="single-product">
                         <figure>
-                          <img src="img/content/company-product.jpg" alt="">
+                          <!-- <img src="img/content/company-product.jpg" alt=""> -->
 
                           <figcaption>
                             <div class="bookmark">
@@ -756,7 +757,7 @@
                     <div class="col-sm-4 col-xs-6">
                       <div class="single-product">
                         <figure>
-                          <img src="img/content/post-img-9.jpg" alt="">
+                          <!-- <img src="img/content/post-img-9.jpg" alt=""> -->
 
                           <figcaption>
                             <div class="bookmark">
@@ -779,7 +780,7 @@
                     <div class="col-sm-4 col-xs-6">
                       <div class="single-product">
                         <figure>
-                          <img src="img/content/post-img-9.jpg" alt="">
+                          <!-- <img src="img/content/post-img-9.jpg" alt=""> -->
 
                           <figcaption>
                             <div class="bookmark">
@@ -802,7 +803,7 @@
                     <div class="col-sm-4 col-xs-6">
                       <div class="single-product">
                         <figure>
-                          <img src="img/content/post-img-9.jpg" alt="">
+                          <!-- <img src="img/content/post-img-9.jpg" alt=""> -->
 
                           <figcaption>
                             <div class="bookmark">
@@ -825,7 +826,7 @@
                     <div class="col-sm-4 col-xs-6">
                       <div class="single-product">
                         <figure>
-                          <img src="img/content/post-img-9.jpg" alt="">
+                          <!-- <img src="img/content/post-img-9.jpg" alt=""> -->
 
                           <figcaption>
                             <div class="bookmark">
@@ -848,7 +849,7 @@
                     <div class="col-sm-4 col-xs-6">
                       <div class="single-product">
                         <figure>
-                          <img src="img/content/post-img-9.jpg" alt="">
+                          <!-- <img src="img/content/post-img-9.jpg" alt=""> -->
 
                           <figcaption>
                             <div class="bookmark">
@@ -871,7 +872,7 @@
                     <div class="col-sm-4 col-xs-6">
                       <div class="single-product">
                         <figure>
-                          <img src="img/content/post-img-9.jpg" alt="">
+                          <!-- <img src="img/content/post-img-9.jpg" alt=""> -->
 
                           <figcaption>
                             <div class="bookmark">
@@ -894,7 +895,7 @@
                     <div class="col-sm-4 col-xs-6">
                       <div class="single-product">
                         <figure>
-                          <img src="img/content/post-img-9.jpg" alt="">
+                          <!-- <img src="img/content/post-img-9.jpg" alt=""> -->
 
                           <figcaption>
                             <div class="bookmark">
@@ -917,7 +918,7 @@
                     <div class="col-sm-4 col-xs-6">
                       <div class="single-product">
                         <figure>
-                          <img src="img/content/post-img-9.jpg" alt="">
+                          <!-- <img src="img/content/post-img-9.jpg" alt=""> -->
 
                           <figcaption>
                             <div class="bookmark">
@@ -940,7 +941,7 @@
                     <div class="col-sm-4 col-xs-6">
                       <div class="single-product">
                         <figure>
-                          <img src="img/content/post-img-9.jpg" alt="">
+                          <!-- <img src="img/content/post-img-9.jpg" alt=""> -->
 
                           <figcaption>
                             <div class="bookmark">
@@ -963,7 +964,7 @@
                     <div class="col-sm-4 col-xs-6">
                       <div class="single-product">
                         <figure>
-                          <img src="img/content/post-img-9.jpg" alt="">
+                          <!-- <img src="img/content/post-img-9.jpg" alt=""> -->
 
                           <figcaption>
                             <div class="bookmark">
@@ -986,7 +987,7 @@
                     <div class="col-sm-4 col-xs-6">
                       <div class="single-product">
                         <figure>
-                          <img src="img/content/post-img-9.jpg" alt="">
+                          <!-- <img src="img/content/post-img-9.jpg" alt=""> -->
 
                           <figcaption>
                             <div class="bookmark">
@@ -1009,7 +1010,7 @@
                     <div class="col-sm-4 col-xs-6">
                       <div class="single-product">
                         <figure>
-                          <img src="img/content/post-img-9.jpg" alt="">
+                          <!-- <img src="img/content/post-img-9.jpg" alt=""> -->
 
                           <figcaption>
                             <div class="bookmark">
@@ -1048,7 +1049,7 @@
                     </div>
 
                     <div class="post-image">
-                      <img src="img/content/blog-list-image1.jpg" alt="">
+                      <!-- <img src="img/content/blog-list-image1.jpg" alt=""> -->
                     </div>
 
                     <h2 class="title"><a href="blog-post.html">This is Event title</a></h2>
@@ -1086,7 +1087,7 @@
                     </div>
 
                     <div class="post-image">
-                      <img src="img/content/blog-list-image2.jpg" alt="">
+                      <!-- <img src="img/content/blog-list-image2.jpg" alt=""> -->
                     </div>
 
                     <h2 class="title"><a href="#">This is Event title</a></h2>
@@ -1124,7 +1125,7 @@
                     </div>
 
                     <div class="post-image">
-                      <img src="img/content/blog-list-image3.jpg" alt="">
+                      <!-- <img src="img/content/blog-list-image3.jpg" alt=""> -->
                     </div>
 
                     <h2 class="title"><a href="#">This is Event title</a></h2>
@@ -1165,7 +1166,7 @@
                     </div>
 
                     <div class="post-image">
-                      <img src="img/content/blog-list-image2.jpg" alt="">
+                      <!-- <img src="img/content/blog-list-image2.jpg" alt=""> -->
                     </div>
 
                     <h2 class="title"><a href="#">This is Event title</a></h2>
@@ -1204,7 +1205,7 @@
                     </div>
 
                     <div class="post-image">
-                      <img src="img/content/blog-list-image1.jpg" alt="">
+                      <!-- <img src="img/content/blog-list-image1.jpg" alt=""> -->
                     </div>
 
                     <h2 class="title"><a href="#">This is Event title</a></h2>
@@ -1253,7 +1254,7 @@
                       </div>
 
                       <div class="post-image">
-                        <img src="img/content/blog-list-image1.jpg" alt="">
+                        <!-- <img src="img/content/blog-list-image1.jpg" alt=""> -->
                       </div>
 
                       <h2 class="title"><a href="blog-post.html">This is Post Title</a></h2>
@@ -1291,7 +1292,7 @@
                       </div>
 
                       <div class="post-image">
-                        <img src="img/content/blog-list-image2.jpg" alt="">
+                        <!-- <img src="img/content/blog-list-image2.jpg" alt=""> -->
                       </div>
 
                       <h2 class="title"><a href="#">This is Post Title</a></h2>
@@ -1364,7 +1365,7 @@
                       </div>
 
                       <div class="post-image">
-                        <img src="img/content/blog-list-image3.jpg" alt="">
+                        <!-- <img src="img/content/blog-list-image3.jpg" alt=""> -->
                       </div>
 
                       <h2 class="title"><a href="#">This is Post Title</a></h2>
@@ -1675,22 +1676,14 @@
                   <span>{{events.registrationurl}}</span>
                 </li>
 
-                <li>
-                  <strong>College Website</strong>
-                  <span>{{events.collegeurl}}</span>
-                </li>
-
-                <li>
-                  <strong>Event URL</strong>
-                  <span>{{events.festwebsite}}</span>
-                </li>
+                
 
                 <li>
                   <strong>Venue</strong>
                   <span>{{events.venuedescription}}</span>
                 </li>
 
-                <li>
+                <!-- <li>
                   <strong>Guest</strong>
                   <span>{{events.guest}}</span>
                 </li>
@@ -1703,7 +1696,7 @@
                 <li>
                   <strong>Sponsor</strong>
                   <span>{{events.sponsor}}</span>
-                </li>
+                </li> -->
 
               </ul>
             </div>
@@ -1729,12 +1722,12 @@
               </ul>
             </div>
 
-            <div class="square-button">
+            <!-- <div class="square-button">
               <a href="#"><img src="img/content/square-button.png" alt=""></a>
               <a href="#"><img src="img/content/square-button.png" alt=""></a>
               <a href="#"><img src="img/content/square-button.png" alt=""></a>
               <a href="#"><img src="img/content/square-button.png" alt=""></a>
-            </div> <!-- end .sqare-button -->
+            </div> --> <!-- end .sqare-button -->
 
           </div> <!-- end .page-sidebar -->
         </div> <!-- end .main-grid layout -->

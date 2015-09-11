@@ -63,8 +63,8 @@ class DepartmentAdmin(admin.ModelAdmin):
 	
 
 class PosteventAdmin(admin.ModelAdmin):
-	list_display = ('id', 'name','festtype','city', 'collegename','department','festname','registrationfee','sponsor','startdate',)
-	list_filter = ['id','festname','sponsor','city','collegename','department']	
+	list_display = ('id', 'name','festtype','city','festname','registrationfee','startdate',)
+	list_filter = ['id','festname','city']	
 	search_fields = ['id', 'festname']
 	list_per_page = 50
 

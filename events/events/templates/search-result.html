@@ -5,7 +5,7 @@
 
       <div class="map-section">
 
-       <img src="media/static/banners/img/banner.jpg"  alt="">
+       <img src="{% static "img/events.jpg" %}"  alt="" class="image_banner">
        
 
       </div>
@@ -110,7 +110,7 @@
                         <figure>
                           <img src="img/content/post-img-10.jpg" alt="">
 
-                          <div class="rating">
+                          <!-- <div class="rating">
 
                             <ul class="list-inline">
                               <li><a href="#"><i class="fa fa-star"></i></a></li>
@@ -122,7 +122,7 @@
 
                             <p>Featured</p>
 
-                          </div> <!-- end .rating -->
+                          </div>  --><!-- end .rating -->
 
                           <figcaption>
                             <div class="bookmark">
@@ -1198,21 +1198,9 @@
 
                       <div class="single-product">
                         <figure>
-                          <img src="{%static "img/content/post-img-1.jpg"%}" alt="">
+                          <img src="{% static "img/events.jpg" %}" alt="">
 
-                          <div class="rating">
-
-                            <!-- <ul class="list-inline">
-                              <li><a href="#"><i class="fa fa-star"></i></a></li>
-                              <li><a href="#"><i class="fa fa-star"></i></a></li>
-                              <li><a href="#"><i class="fa fa-star"></i></a></li>
-                              <li><a href="#"><i class="fa fa-star-half-o"></i></a></li>
-                              <li><a href="#"><i class="fa fa-star-o"></i></a></li>
-                            </ul> -->
-
-                            <p>Featured</p>
-
-                          </div> <!-- end .rating -->
+                          
 
                           <figcaption>
                             <div class="bookmark">
@@ -1236,7 +1224,7 @@
 
                       </div> <!-- end .single-product -->
                     </div> <!-- end .col-sm-4 grid layout -->
-                    {%endfor%}
+                    {% endfor %}
 
                     <div class="pagination-center">
 
@@ -2344,7 +2332,7 @@
 
               <div class="advertisement">
                 <p>Advertisement</p>
-                <img src="img/add.jpg" alt="">
+                <img src="{% static "img/banner4.jpeg" %}" alt="">
               </div>
 
             </div> <!-- end .product-details -->

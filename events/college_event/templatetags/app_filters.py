@@ -42,3 +42,9 @@ def get_current_city_from_cookie(request):
 def get_categories(initial_load):  
 	category=Category.objects.all()	
 	return category
+
+@register.filter
+def get_photos(photo): 
+    photo=str(photo).split(',')
+    # print "get_photos"
+    return photo[0]

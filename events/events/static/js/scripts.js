@@ -563,7 +563,52 @@ $("document").ready(function($){
     }
 
   });
-  
+
 });
 
 
+$("document").ready(function($){
+$('.events_fields').hide();
+$('.eventdetail_fields').hide();
+$('.user_fields').hide();
+
+$('.events').click(function(){
+  $('.events_fields').toggle();
+});
+
+$('.events_details').click(function(){
+  $('.eventdetail_fields').toggle();
+});
+
+$('.user_details').click(function(){
+  $('.user_fields').toggle();
+});
+
+
+    $( "#datepicker" ).datepicker({
+      changeMonth: true,
+     
+      changeYear: true
+    });
+     $( "#datepicker1" ).datepicker({
+      changeMonth: true,
+      
+      changeYear: true
+    });
+
+            
+      
+
+});
+//multiple upload images by pradeepa//
+// Image upload
+//   $(document).on('change','.poster',function(){
+//           files = this.files;
+//           size = files[0].size;
+//           //max size 50kb => 50*1000
+//           if( size > 50*1000){
+//              alert('Please upload less than 50kb file');
+//              return false;
+//           }
+//           return true;
+// });
