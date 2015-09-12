@@ -1,10 +1,17 @@
 from django.contrib import admin
 from college_event.models import *
-# Register your models here.
+
 # Register your models here.
 class CategoryAdmin(admin.ModelAdmin):
-    fields=['icon','name']
-    list_display = ('id', 'icon','name')
+    fields=['name','category_type']
+    list_display = ('id', 'name','category_type')
+    list_filter = ['name','category_type']
+    search_fields = ['id', 'name']    
+    list_per_page = 50
+
+class SubCategoryAdmin(admin.ModelAdmin):
+    fields=['category','name', 'icon']
+    list_display = ('id', 'category','name','icon')
     list_filter = ['name']
     search_fields = ['id', 'name']
     list_per_page = 50
@@ -68,12 +75,12 @@ class PosteventAdmin(admin.ModelAdmin):
 	search_fields = ['id', 'festname']
 	list_per_page = 50
 
-class EventtypeAdmin(admin.ModelAdmin):
-    fields=['icon','name','college_type']
-    list_display = ('id', 'icon','name','college_type')
-    list_filter = ['name','college_type']
-    search_fields = ['id', 'name']
-    list_per_page = 50
+# class EventtypeAdmin(admin.ModelAdmin):
+#     fields=['icon','name','college_type']
+#     list_display = ('id', 'icon','name','college_type')
+#     list_filter = ['name','college_type']
+#     search_fields = ['id', 'name']
+#     list_per_page = 50
     
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(City, CityAdmin)
@@ -81,6 +88,5 @@ admin.site.register(Location, LocationAdmin)
 admin.site.register(Collegetype, CollegetypeAdmin)
 admin.site.register(College, CollegeAdmin)
 admin.site.register(Department, DepartmentAdmin)
-# admin.site.register(Userprofile, UserprofileAdmin)
+admin.site.register(SubCategory, SubCategoryAdmin)
 admin.site.register(Postevent, PosteventAdmin)    
-admin.site.register(Eventtype, EventtypeAdmin)

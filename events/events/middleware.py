@@ -1,8 +1,8 @@
-from core import helper
+# from core import helper
 from events import globals
 from django.conf import settings
 from django.utils import translation
-from events.util import get_client_ip
+# from events.util import get_client_ip
 from events.util import *
 from college_event.models import *
 
@@ -10,7 +10,7 @@ from college_event.models import *
 class Global(object):
     # global_language = ''
     global_country=''
-    global_ip=''
+    # global_ip=''
     global_city=''
     global_city_id=''
     
@@ -18,18 +18,18 @@ class Global(object):
         # print "enter process_request"
         globals.request = request
         globals.user = getattr(request, 'user', None)
-        globals.ip = get_client_ip(request)
-        print "globals,ip", globals.ip
-        if ',' in globals.ip:
-            globals.ip = globals.ip.split(',')[0].strip()
+        # globals.ip = get_client_ip(request)
+        # print "globals,ip", globals.ip
+        # if ',' in globals.ip:
+        #     globals.ip = globals.ip.split(',')[0].strip()
             print "globals.ip1", globals.ip
         globals.sess = request.session.session_key
         print 'globals.sess', globals.sess
         self.global_country=get_global_country(request)
         print 'self.global_country', self.global_country
-        self.global_city=get_global_city(request)
-        self.global_city_id=get_global_city_id(request)
-        self.global_ip= globals.ip
+        # self.global_city=get_global_city(request)
+        # self.global_city_id=get_global_city_id(request)
+        # self.global_ip= globals.ip
         # if request.user.is_authenticated():
         #     try:
         #         request.user.last_login = helper.get_now()
@@ -55,23 +55,23 @@ class Global(object):
             response.set_cookie("country", 
                 country, max_age = 365 * 24 * 60 * 60)
 
-        if self.global_ip:
-            # print "enter self.global_ip"
-            ip=self.global_ip
-            response.set_cookie("ip", 
-                ip, max_age = 365 * 24 * 60 * 60)
+        # if self.global_ip:
+        #     # print "enter self.global_ip"
+        #     ip=self.global_ip
+        #     response.set_cookie("ip", 
+        #         ip, max_age = 365 * 24 * 60 * 60)
         
-        if self.global_city:
-            print "enter self.global_city"
-            city=self.global_city
-            response.set_cookie("city", 
-                city, max_age = 365 * 24 * 60 * 60)
+        # if self.global_city:
+        #     print "enter self.global_city"
+        #     city=self.global_city
+        #     response.set_cookie("city", 
+        #         city, max_age = 365 * 24 * 60 * 60)
 
-        if self.global_city_id:
-            print "enter self.global_city_id"
-            city=self.global_city_id
-            response.set_cookie("global_city_id", 
-                city, max_age = 365 * 24 * 60 * 60)
+        # if self.global_city_id:
+        #     print "enter self.global_city_id"
+        #     city=self.global_city_id
+        #     response.set_cookie("global_city_id", 
+        #         city, max_age = 365 * 24 * 60 * 60)
             
         return response
 

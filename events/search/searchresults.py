@@ -18,7 +18,9 @@ default_param_mappings = OrderedDict(
   city = 'city',
   department = 'department',
   festname = 'festname',
-  sponsor = 'sponsor'
+  sponsor = 'sponsor',
+  subcategoryid = 'subcategoryid',
+  category = 'category'
 )
 
 default_geo_params = {
@@ -26,19 +28,18 @@ default_geo_params = {
   'radius': 20
 }
 
-default_orderby_mappings = {
-  # 'createddate': '-created',
-  # 'modifieddate': '-modified',
-  'pricelow': 'price',
-  'pricehigh': '-price',
-  'ispremium': '-ispremium'
-}
-
-# default_lead_filters = {
-#   'active': 1,
-#   'status': 'active',
-#   'available__gt': 0
+# default_orderby_mappings = {
+#   # 'createddate': '-created',
+#   # 'modifieddate': '-modified',
+#   'pricelow': 'price',
+#   'pricehigh': '-price',
+#   'ispremium': '-ispremium'
 # }
+
+default_event_filters = {
+  'active': 1,
+  'status': 'active',
+  }
 
 replace_regex = r'[/:]'
 ignore_regex = r'[^\w^,]'
@@ -57,7 +58,7 @@ def tokenize(query, double_check=True):
   # return tokens
 
 def prepare_search_query(query, search_field='searchtext'):
-
+  print "prepare_search_query", search_field
   query = query or ''
   qs = None
 
@@ -81,12 +82,12 @@ def searchresults(q=None, params=None,
   default_search_field='searchtext'):
 
   """Perform search leads using haystack"""
-  print 'Leadsearch as Search'
+  print 'Eventsearch as Search'
   if not model_cls:
-    model_cls = Product
+    model_cls = Postevent
 
   if params is None:
-    params = OrderedDict([('locality', None), ('festtype', None), ('collegename', None), ('city', None), ('department', None), ('festname', None), ('sponsor', None)])   
+    params = OrderedDict([('locality', None),('category', None),('subcategoryid', None), ('festtype', None), ('collegename', None), ('city', None), ('department', None), ('festname', None), ('sponsor', None)])   
   #   params = OrderedDict([('locations', None), ('keywords', None), ('lang', ['en', 'sv', 'de']), ('category', None), ('budget_start', None), ('budget_end', None), ('deal_start', None), ('deal_end', None), ('price_start', None), ('price_end', None), ('created_start', None), ('created_end', None), ('ranking_start', None), ('ranking_end', None), ('rating_start', None), ('rating_end', None)]) 
   
        
@@ -105,8 +106,10 @@ def searchresults(q=None, params=None,
 
   sqs = SearchQuerySet().all()
   if q:
+    print 'q1 in result', q
     qs = prepare_search_query(q, default_search_field)
     if qs:
+      print 'qs in result', qs
       sqs = SearchQuerySet().filter(qs)
      
   sqs = sqs.models(model_cls)
@@ -120,6 +123,7 @@ def searchresults(q=None, params=None,
     
     
   if sq_params:
+    print 'sqs in result', sqs
     sqs = sqs.filter(**sq_params)
     print "sqs with params", sqs
 

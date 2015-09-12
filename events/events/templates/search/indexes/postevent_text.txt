@@ -1,0 +1,5 @@
+{{object.festtype}} 
+{{object.collegename}}   
+{{object.department}}   
+{{object.festname}}   
+{{object.sponsor}}   

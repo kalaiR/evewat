@@ -5,7 +5,7 @@ from college_event.models import *
 from haystack.forms import SearchForm, FacetedSearchForm
 from datetime import datetime
 from django.http import HttpResponse, Http404
-from search.searchresults import searchresults as productsearch
+from search.searchresults import searchresults as eventsearch
 from haystack.query import SearchQuerySet
 from haystack.inputs import Clean, Raw, AutoQuery, Exact
 from haystack.query import SQ
@@ -33,17 +33,15 @@ class Partial(Clean):
 class EventSearchFilter(FacetedSearchForm):
 		model = None
 
-		# def __init__ (self,request=None, using=None):
-		#     from models import Lead
-		#     self.model= Lead#kwargs.pop('models')        
-		#     super(LeadSearchFilter,self).__init__(request, using=using, **kwargs)
-
 		festtype = forms.CharField(required=False)
 		collegename = forms.CharField(required=False)
-		city    = forms.CharField(required=False)
-		department       = forms.CharField(required=False)
-		festname    = forms.CharField(required=False)
-		sponsor   = forms.CharField(required=False)
+		city = forms.CharField(required=False)
+		department = forms.CharField(required=False)
+		festname = forms.CharField(required=False)
+		sponsor = forms.CharField(required=False)
+		subcategoryid = forms.CharField(required=False)
+		# category    = forms.CharField(required=False)
+		
 		# lang = forms.CharField(required=False)
 		# groupby = forms.CharField(required=False)
 		
@@ -57,11 +55,14 @@ class EventSearchFilter(FacetedSearchForm):
 			return data
 
 		def get_default_filters(self):
-			print 'get_default_filters'			
-			return None
-
+			print 'get_default_filters' 
+			sqs = SearchQuerySet().all()
+			sqs = sqs.models(Postevent)
+			print 'sqs',sqs			
+			return sqs
+	
 		def get_default_search_field(self):
-			print 'get_default_search_field'
+			print 'get_default_search_field'			
 			return 'searchtext'
 
 		def get_model_class(self):
@@ -70,11 +71,10 @@ class EventSearchFilter(FacetedSearchForm):
 
 		def search(self):
 			print 'searchv2'
+			
 			if not hasattr(self, 'cleaned_data'):
 				return eventsearch(model_cls=self.get_model_class(), 
-					default_filters=self.get_default_filters())
-					
-					
+					default_filters=self.get_default_filters())						
 				
 			_params = [
 				'locality',      
@@ -83,7 +83,9 @@ class EventSearchFilter(FacetedSearchForm):
 				'city',
 				'department',
 				'festname',
-				'sponsor'
+				'sponsor',
+				'subcategoryid',
+				'category',
 			]
 			params = OrderedDict()
 			print 'params', params
@@ -92,41 +94,16 @@ class EventSearchFilter(FacetedSearchForm):
 					params[p] =  self.cleaned_data[p]
 				else:
 					params[p] =  None
-
 	 
 			if params['festtype']:
 				params['festtype'] = params['festtype']
 				print "params['festtype']", params['festtype']
 
-		#   if params['ispremium']:
-		#     params['ispremium'] = params['ispremium']
-		#     print "params['ispremium']", params['ispremium']
+			if params['subcategoryid']:
+				params['subcategoryid'] = params['subcategoryid']
+				print "params['subcategoryid']", params['subcategoryid']				
 
-		#   q = self.cleaned_data['q'] if 'q' in self.cleaned_data else None
-		#   groupby = None
-		#   orderby = None
 
-		#   orderby_mappings = {
-		#     'createddate': 'created_date',
-		#     'modifieddate': '-modified',
-		#     'pricelow': 'base_price',
-		#     'pricehigh': '-base_price',
-		#     'ispremium': '-ispremium',
-		#     'premium_plan_id': 'premium_plan_id',
-		#   }
-			
-		#   # if self.cleaned_data['groupby']:
-		#   #   groupby = self.cleaned_data['groupby']
-
-		#   if self.cleaned_data['sortdata']:
-		#     orderby = self.cleaned_data['sortdata']
-		#     if orderby in orderby_mappings:
-		#       orderby = orderby_mappings[groupby]
-
-		#   if not orderby:
-		#     print "not orderby"
-		#     orderby = orderby_mappings['premium_plan_id']
-
-			return productsearch(q, params, model_cls=self.get_model_class(), 
-				default_filters=self.get_default_filters(), 
-				default_search_field=self.get_default_search_field())
+			q = self.cleaned_data['q'] if 'q' in self.cleaned_data else None
+			print 'q', q
+			return eventsearch(q, params, model_cls=self.get_model_class(), default_filters=self.get_default_filters(), default_search_field=self.get_default_search_field())
