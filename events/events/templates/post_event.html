@@ -101,7 +101,7 @@
               <div class="events_fields">
                    <input type="text" placeholder="Fest name" name="festname">
                    <input type="text" placeholder="Fest Caption" name="festcaption">
-                      <select name="festtype">
+                    <select name="festtype">
                         <option value="">Fest type</option>
                         <option value="technical">Technical</option>
                         <option value="cultural">Cultural</option>
@@ -151,10 +151,10 @@
               </div>
               <div class="user_details">User Details</div>
               <div class="user_fields">
-                <input type="text" placeholder="Name" name=
-                  "name" required>
+                 <input type="text" placeholder="Name" name=
+                  "name" value="{{ request.user }}"required>
 
-                  <input type="email" placeholder="Email" name="email" required>
+                  <input type="email" placeholder="Email" name="email" value="{{ request.user.email }}" required>
                   
                   <input type="text" placeholder="Phone number" name="mobile">
               </div>

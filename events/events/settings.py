@@ -147,3 +147,13 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
+
+PAYU_INFO = {
+             'merchant_key': "gtKFFx",
+             'merchant_salt': "eCwWELxi",
+             # for production environment use 'https://secure.payu.in/_payment'
+             'payment_url': 'https://test.payu.in/_payment',
+             #success url for hotel
+             'surl':'http://localhost:8000/v2/setprovisionalbooking/',
+             
+            }
