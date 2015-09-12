@@ -586,29 +586,102 @@ $('.user_details').click(function(){
 
 
     $( "#datepicker" ).datepicker({
-      changeMonth: true,
-     
-      changeYear: true
+      changeMonth: false,
+           
     });
      $( "#datepicker1" ).datepicker({
-      changeMonth: true,
+      changeMonth: false,
       
-      changeYear: true
+      
+    });
+     $( "#datepicker_deadline" ).datepicker({
+      changeMonth: false,
+      
+     
     });
 
-            
-      
 
+  $('.bxslider').bxSlider({
+  auto: true,
+  autoControls: true
+});          
+ // validation by pradeepa//
+  // Image upload
+  $(document).on('change','.poster',function(){
+      files = this.files;
+      size = files[0].size;
+      //max size 50kb => 50*1000
+      if( size > 1000*1000){
+       alert('Please upload less than 50kb file');
+       return false;
+      }
+      return true;
+   });
+
+  //login form validation
+
+  var sign_in_required =["emailid_signup", "password_signup"];
+
+  jQuery('#signin').click(function(){     
+      for (i=0;i<sign_in_required.length;i++) {
+      var input = jQuery('#'+sign_in_required[i]);
+      if (input.val() == "")  {   
+        input.addClass("error_input_field");
+        input.next('.labelError').show();         
+      } else {    
+        input.removeClass("error_input_field");
+        input.next('.labelError').hide();        
+      }
+    }
+    
+
+    if ($(":input").hasClass("error_input_field")){
+    return false;
+    }
+    else{
+      $('form[name="sign_in"]').submit();      
+      return true;
+    }
+    });
+
+  //Registration form validation
+
+  var sign_up_required =["emailid_signin", "password_signin", "username_signin" ];
+
+  jQuery('#create_user').click(function(){     
+      for (i=0;i<sign_up_required.length;i++) {
+      var input = jQuery('#'+sign_up_required[i]);
+      if (input.val() == "")  {   
+        input.addClass("error_input_field");
+        input.next('.signup_labelError').show();         
+      } else {    
+        input.removeClass("error_input_field");
+        input.next('.signup_labelError').hide();        
+      }
+    }
+    //Validate the e-mail
+
+    if($('#emailid_signin').val() != ''){
+    if (!/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/.test($('#emailid_signin').val())) {
+      $('#emailid_signin').addClass("error_input_field");
+      $('#emailid_signin').next().next('.error_message').show();
+      // $('.error_message').show();
+    }
+    else
+    {
+      $('#emailid_signin').removeClass("error_input_field");
+      $('#emailid_signin').next().next('.error_message').hide();
+    }
+    }
+
+    if ($(":input").hasClass("error_input_field")){
+    return false;
+    }
+    else{
+      $('form[name="sign_up"]').submit();      
+      return true;
+    }
+    });     
+  //end validation//
 });
-//multiple upload images by pradeepa//
-// Image upload
-//   $(document).on('change','.poster',function(){
-//           files = this.files;
-//           size = files[0].size;
-//           //max size 50kb => 50*1000
-//           if( size > 50*1000){
-//              alert('Please upload less than 50kb file');
-//              return false;
-//           }
-//           return true;
-// });
+

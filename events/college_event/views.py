@@ -164,10 +164,10 @@ def submit_event(request):
 		# print "postevent.poster",postevent.poster
 		def handle_uploaded_file(f):        	
 			# print "settings.STATICFILES_DIRS", settings.STATICFILES_DIRS
-			# print "f", f
-			# print "f.name", f.name
-			postevent.poster = open(settings.FOR_IMG + '%s' % f.name, 'wb+')
-			# print "settings.FOR_IMG",settings.FOR_IMG 
+			print "f", f
+			print "f.name", f.name
+			postevent.poster = open('events/static/img/' + '%s' % f.name, 'wb+')
+			# print "settings.FOR_IMG",settings.STATIC_ROOT 
 			for chunk in f.chunks():
 				postevent.poster.write(chunk)
 			postevent.poster.close()
@@ -178,10 +178,10 @@ def submit_event(request):
 			count=count-1
 			handle_uploaded_file(uploaded_file)
 			if count==0:
-				photosgroup=photosgroup  + settings.FOR_IMG + str(uploaded_file)
+				photosgroup=photosgroup  + 'events/static/img/' + str(uploaded_file)
 			else:
-				photosgroup=photosgroup  + settings.FOR_IMG +str(uploaded_file) + ','
-		# print photosgroup        
+				photosgroup=photosgroup  + 'events/static/img/' +str(uploaded_file) + ','
+		print photosgroup  
 		postevent.poster=photosgroup
 		postevent.contactperson=request.POST['queries']
 		postevent.registrationurl=request.POST['festurl']
@@ -192,7 +192,7 @@ def submit_event(request):
 		postevent.festcaption=request.POST['festcaption']
 		# postevent.festtheme=request.POST['festtheme']
 		postevent.festtype=request.POST['festtype']
-		
+		print "postevent.festtype",postevent.festtype
 		postevent.state=request.POST['state']
 		postevent.startdate=request.POST['startdate']
 		postevent.enddate=request.POST['enddate']
@@ -214,5 +214,21 @@ def details(request,id=None):
 	
 	return render_to_response("company-profile.html",{'events':postevent}, context_instance=RequestContext(request))
 
+def banner(request):
+	return render_to_response("uploadbanner.html",context_instance=RequestContext(request))
+
 def upload_banner(request):
+	print "enter"
+	if request.method=="POST":
+		uploadbanner=SiteBanner()
+		# print uploadbanner
+		uploadbanner.price=request.POST['price']
+		print "uploadbanner.price",uploadbanner.price
+		uploadbanner.position=request.POST['position']
+		print "uploadbanner.position",uploadbanner.position
+		uploadbanner.pageurl=request.POST['pageurl']
+		uploadbanner.banner=request.FILES.get('banner')
+		print "uploadbanner.banner",uploadbanner.banner
+		uploadbanner.save()
+		message="Your data succesfully uploaded"
 	return render_to_response("uploadbanner.html",context_instance=RequestContext(request))

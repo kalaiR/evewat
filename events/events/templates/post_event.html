@@ -24,7 +24,7 @@
     </div> <!-- END .SEARCH and slide-section -->
 
 
-    <div class="header-nav-bar">
+    <!-- <div class="header-nav-bar">
       <div class="container">
         <nav>
 
@@ -72,8 +72,8 @@
             <li class="bg-color"><a href="contact-us.html">Contact Us</a></li>
           </ul>
         </nav>
-      </div> <!-- end .container -->
-    </div> <!-- end .header-nav-bar -->
+      </div> 
+    </div> --> <!-- end .header-nav-bar -->
   </header> <!-- end #header -->
 
   <div id="page-content">
@@ -83,7 +83,7 @@
           <div class="row">
 
             <div class="col-md-12">
-            <!-- {% if message%}
+            {% if message%}
 
             <script type="text/javascript">
            window.onload = function(){ window.location="http://localhost:8000/post_event"; }
@@ -91,7 +91,7 @@
              </window.onload>
                 </script>
             <h4 class="text-center">{{message}}</h4>
-            {%endif%} -->
+            {%endif%}
 
 
               <h3>Submit your event</h3>
@@ -128,7 +128,7 @@
                       <input  type="text" placeholder="startdate"  id="datepicker" name="startdate" />
                       <input  type="text" placeholder="enddate"  id="datepicker1" name="enddate" />
                       
-                      <input placeholder="Dealines for Registration yyyy-mm-dd" name="deadline"></input>
+                      <input placeholder="Dealines for Registration yyyy-mm-dd"  id="datepicker_deadline" name="deadline"></input>
               </div>
               <div class="events_details">Events Details</div>
               <div class="eventdetail_fields">

@@ -73,7 +73,7 @@ class Postevent(models.Model):
 	
 	registrationurl= models.URLField(max_length=250,null=True, blank=True)
 	
-	poster = models.ImageField(upload_to='static/img/',null=True, max_length=500)
+	poster = models.ImageField(upload_to='events/static/img/',null=True, max_length=500)
 
 	
 	venuedescription= models.TextField(null=True, blank=True)
@@ -88,4 +88,5 @@ class Eventtype(models.Model):
 	college_type=models.CharField(max_length=50, null=True, blank=True)
 
 
+		
 
