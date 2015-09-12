@@ -21,7 +21,7 @@ default_param_mappings = OrderedDict(
   sponsor = 'sponsor',
   subcategoryid = 'subcategoryid',
   category = 'category'
-)
+  )
 
 default_geo_params = {
   'method': 'bydistance',
@@ -76,6 +76,7 @@ def prepare_search_query(query, search_field='searchtext'):
 
   return qs
 
+
 def searchresults(q=None, params=None, 
   geo_location=None, geo_params=None, geo_orderby='distance', 
   model_cls=None, default_filters=None, param_mappings=None,
@@ -88,13 +89,15 @@ def searchresults(q=None, params=None,
 
   if params is None:
     params = OrderedDict([('locality', None),('category', None),('subcategoryid', None), ('festtype', None), ('collegename', None), ('city', None), ('department', None), ('festname', None), ('sponsor', None)])   
-  #   params = OrderedDict([('locations', None), ('keywords', None), ('lang', ['en', 'sv', 'de']), ('category', None), ('budget_start', None), ('budget_end', None), ('deal_start', None), ('deal_end', None), ('price_start', None), ('price_end', None), ('created_start', None), ('created_end', None), ('ranking_start', None), ('ranking_end', None), ('rating_start', None), ('rating_end', None)]) 
+
+ 
   
        
   
   # if orderby is None:
   #   # orderby = 'created'  
   #    orderby = '-ispremium'
+
   
   # if geo_params is None:
   #   geo_params = default_geo_params
@@ -113,7 +116,6 @@ def searchresults(q=None, params=None,
       sqs = SearchQuerySet().filter(qs)
      
   sqs = sqs.models(model_cls)
-  sqs = sqs.filter(**default_filters)
   
   if params:
     sq_params = OrderedDict()

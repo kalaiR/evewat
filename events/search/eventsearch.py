@@ -2,7 +2,11 @@
 # -*- coding: utf-8 -*-
 from django.shortcuts import redirect
 from haystack.views import SearchView
+<<<<<<< HEAD
+#from search.searchsites import SearchView
+=======
 # from search.searchsites import SearchView
+>>>>>>> 50f3d53cc1ea07be12e6d251736cb67dff4bce57
 # from fixido.util import get_global_language
 from college_event.models import *
 

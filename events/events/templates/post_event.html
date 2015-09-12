@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 {% load i18n %}
+{% load static from staticfiles %} 
 {% block content %}
 
+      
       <div class="page-heading contact-us-heading">
         <span></span> <!-- for dark-overlay on the bg -->
 
@@ -22,7 +24,7 @@
     </div> <!-- END .SEARCH and slide-section -->
 
 
-    <div class="header-nav-bar">
+    <!-- <div class="header-nav-bar">
       <div class="container">
         <nav>
 
@@ -70,8 +72,8 @@
             <li class="bg-color"><a href="contact-us.html">Contact Us</a></li>
           </ul>
         </nav>
-      </div> <!-- end .container -->
-    </div> <!-- end .header-nav-bar -->
+      </div> 
+    </div> --> <!-- end .header-nav-bar -->
   </header> <!-- end #header -->
 
   <div id="page-content">
@@ -85,13 +87,89 @@
 
             <script type="text/javascript">
            window.onload = function(){ window.location="http://localhost:8000/post_event"; }
-      </script>
+             </script>
+             </window.onload>
+                </script>
             <h4 class="text-center">{{message}}</h4>
             {%endif%}
-              <h3>Submit your event</h3>
 
+
+              <h3>Submit your event</h3>
               <div class="contact-form">
-                <form action="{%url "college_event.views.submit_event"%}" name="postevent" method="POST">{% csrf_token %}
+                <form action="{%url "college_event.views.submit_event"%}" name="postevent" enctype="multipart/form-data" method="POST">{% csrf_token %}
+              <div class="events">Events</div>
+              <div class="events_fields">
+                   <input type="text" placeholder="Fest name" name="festname">
+                   <input type="text" placeholder="Fest Caption" name="festcaption">
+                      <select name="festtype">
+                        <option value="">Fest type</option>
+                        <option value="technical">Technical</option>
+                        <option value="cultural">Cultural</option>
+                        <option value="management">Management</option>
+                        <option value="sports">Sports</option>
+                        <option value="literary">Literary</option>
+                        <option value="conferences">Conferences</option>
+                        <option value="seminar">Seminar</option>
+                        <option value="workshop">Workshop</option>
+                        <option value="symposium">Symposium</option>
+                        <option value="youthsummit">Youth Summit</option>
+                        <option value="modelunitednations">Model United Nations</option>
+                        <option value="tedx">TEDx</option>
+                        <option value="summit">Summit</option>
+                        <option value="culture">Culture</option>
+                        <option value="conclave">Conclave</option>
+                        <option value="convention">Convention</option>
+                        <option value="entrepreneurshipsummit">Entrepreneurship Summit</option>
+                        <option value="medical">Medical</option>
+                        <option value="pharma">Pharma</option>
+                        <option value="biomedical">Bio Medical</option>
+                        <option value="OnlineEvents">Online Events</option>                   
+                      </select>
+                      <input  type="text" placeholder="startdate"  id="datepicker" name="startdate" />
+                      <input  type="text" placeholder="enddate"  id="datepicker1" name="enddate" />
+                      
+                      <input placeholder="Dealines for Registration yyyy-mm-dd"  id="datepicker_deadline" name="deadline"></input>
+              </div>
+              <div class="events_details">Events Details</div>
+              <div class="eventdetail_fields">
+                    <textarea placeholder="Fest Description" name="festdescription"></textarea>
+                    <input placeholder="Registration Fees" name="registrationfees"></input>
+                      <input type="text" placeholder="Fest Registration URL" name="festurl">
+                      <input type='file' id='poster' class="poster" name='poster[]' multiple='multiple'/>
+                      <textarea placeholder="How to reach college/venue" name="reach"></textarea>
+
+                      <textarea placeholder="Contact person details" name="queries"></textarea>
+                      <select class="city" name="city">
+                                  
+                         <option  id="currentid" value="{{request.COOKIES.global_city_id}}">{{ request.COOKIES.city }}</option>
+                         {% for cities in city|get_city %}
+                              <option value="{{cities.id}}" id="ajax_cityid">{{ cities }} </option>
+                          {% endfor%} 
+                      </select>
+                      <!-- <input type="text" placeholder="city" name="city"> -->
+                      <input type="text" placeholder="State" name="state"> 
+              </div>
+              <div class="user_details">User Details</div>
+              <div class="user_fields">
+                <input type="text" placeholder="Name" name=
+                  "name" required>
+
+                  <input type="email" placeholder="Email" name="email" required>
+                  
+                  <input type="text" placeholder="Phone number" name="mobile">
+              </div>
+              <a class="btn btn-default" href="#" onclick="submit_form(); return false;"><i class="fa fa-envelope-o"></i>Submit Event</a>
+            </form>
+            </div>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
+</div>
+
+             <!--  <div class="contact-form">
+                <form action="/submit_event/" name="postevent" method="POST">{% csrf_token %}
 
 
                   <input type="text" placeholder="Name" name=
@@ -99,14 +177,14 @@
 
                   <input type="email" placeholder="Email" name="email" required>
                   
-                  <input type="text" placeholder="Phone number" name="mobile">
+                  <input type="text" placeholder="Phone number" name="mobile"> -->
 
-                  <input type="text" placeholder="Fest name" name="festname">
+                  <!-- <input type="text" placeholder="Fest name" name="festname"> -->
 
-                  <input type="text" placeholder="Fest Caption" name="festcaption">
+                  <!-- <input type="text" placeholder="Fest Caption" name="festcaption">
 
-                  <input type="text" placeholder="Fest Theme" name="festtheme">
-                  <select name="festtype">
+                  <input type="text" placeholder="Fest Theme" name="festtheme"> -->
+                  <!-- <select name="festtype">
                     <option value="">Fest type</option>
                     <option value="technical">Technical</option>
                     <option value="cultural">Cultural</option>
@@ -130,14 +208,14 @@
                     <option value="biomedical">Bio Medical</option>
                     <option value="OnlineEvents">Online Events</option>                   
                   </select>      
-
-                  <input type="text" placeholder="college name" name="collegename">
+ -->
+                  <!-- <input type="text" placeholder="college name" name="collegename">
 
                   <input type="text" placeholder="city" name="city">
 
-                  <input type="text" placeholder="State" name="state">
+                  <input type="text" placeholder="State" name="state"> -->
 
-                  <input type="date" placeholder="startdate yyyy-mm-dd" name="startdate">
+                  <!-- <input type="date" placeholder="startdate yyyy-mm-dd" name="startdate">
 
                   <input type="date" placeholder="enddate yyyy-mm-dd" name="enddate">
 
@@ -145,9 +223,9 @@
 
                   <textarea placeholder="Registration Fees" name="registrationfees"></textarea>
 
-                  <textarea placeholder="Fest Description" name="festdescription"></textarea>
+                  <textarea placeholder="Fest Description" name="festdescription"></textarea> -->
 
-                  <textarea placeholder="Fest Event" name="festevent"></textarea>
+                  <!-- <textarea placeholder="Fest Event" name="festevent"></textarea>
 
                   <input type="text" placeholder="department" name="department">
 
@@ -164,13 +242,13 @@
 
                   <input type="text" placeholder="Youtube" name="youtube">
 
-                  <input type="file" name="image_file">
+                  <input type="file" name="image_file"> -->
                   <!-- <input type='file' id='poster' name='poster' value="upload" /> -->
 
                   <!-- <input type='file' id='brochure' name='brochure[]' multiple='multiple' /> -->
                   <!-- <input type="file" placeholder="Brochure" name="brochure"> -->
 
-                  <input type="text" placeholder="Android app" name="applink">
+                 <!--  <input type="text" placeholder="Android app" name="applink">
 
                   <textarea placeholder="How to reach college/venue" name="reach"></textarea>
 
@@ -194,18 +272,18 @@
 
                   <a class="btn btn-default" href="#" onclick="submit_form(); return false;"><i class="fa fa-envelope-o"></i>Submit Event</a>
 
-                </form>
+                </form> -->
 
-              </div> <!-- end .contact-form -->
+             <!--  </div> --> <!-- end .contact-form -->
 
-            </div> <!-- end main grid layout -->
-          </div> <!-- end .row -->
+            <!-- </div> --> <!-- end main grid layout -->
+          <!-- </div> --> <!-- end .row -->
 
-        </div> <!-- end .about-us -->
-      </div> <!-- end .page-content -->
-    </div> <!-- end .container -->
+        <!-- </div> --> <!-- end .about-us -->
+      <!-- </div> --> <!-- end .page-content -->
+    <!-- </div> --> <!-- end .container -->
 
-  </div> <!-- end #page-content -->
+ <!--  </div> --> <!-- end #page-content -->
 
 <script>
 function submit_form()

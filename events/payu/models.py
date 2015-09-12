@@ -8,7 +8,9 @@ import datetime
 
 class PayuDetails(models.Model):
     mihpayid = models.CharField(max_length=100, null=True, blank=True)
+
     userprofile=models.OneToOneField('events.Userprofile')
+
     mode = models.CharField(max_length=10, null=True, blank=True)
     status = models.CharField(max_length=20, null=True, blank=True)
     unmappedstatus =models.CharField(max_length=20, null=True, blank=True)
