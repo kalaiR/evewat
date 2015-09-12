@@ -45,7 +45,11 @@
           <a href="#" class=""><i class="fa fa-power-off" action="/login/"></i> Login</a>
  
           <div>
+
+            
+
             <form method="post" id="login_val" action="/login/" name="sign_in">
+
             {% csrf_token %}           
               <input type="text" class="form-control"  placeholder="Username" id="emailid_signup" name="username">
               <label for="emailid_signup" id="emailid_required" class="labelError" style="display:none;color:red;">Please enter User name</label>  
@@ -61,7 +65,7 @@
           </div>
 
         </div> <!-- END .HEADER-LOGIN -->
-         {% endif %}  
+         {% endif %}
 
    <!-- HEADER REGISTER -->
         <div class="header-register">
@@ -167,7 +171,7 @@
     <!-- HEADER SEARCH SECTION -->
     <div class="header-search slider-home">
       <div class="header-search-bar">
-        <form action="#">
+        <form action="/search/?q=" method="get">
 
          <!--  <div class="search-toggle">
             <div class="container">
@@ -226,14 +230,15 @@
               <div class="keywords">
              <!--    <input type="text" class="form-control" placeholder="Keywords"> -->
              {% if query or request.REQUEST.q or request.REQUEST.q == '' %}
-              <input type="text" name="q" id="q" class="form-control input-lg" placeholder="" value="{% if query %}{{ query }}{% elif request.REQUEST.q %}{{request.REQUEST.q}}{% elif request.REQUEST.q == '' %}{% else %}{% endif %}" />
+              <input type="text" name="q" id="q" class="form-control input-lg" placeholder="Keywords" value="{% if query %}{{ query }}{% elif request.REQUEST.q %}{{request.REQUEST.q}}{% elif request.REQUEST.q == '' %}{% else %}{% endif %}" />
           
             {% else %}
-              <input type="text" name="q" id="q" class="form-control input-lg" placeholder="" value="{% if recent_viewed_search %}{% for cat in recent_viewed_search|slice:'1' %}{% if cat.activity_view %}{{ cat.activity_view }}{% else %}{% endif %}{% endfor %}{% else %}{% endif %}" />
+              <input type="text" name="q" id="q" class="form-control input-lg" placeholder="Keywords" value="{% if recent_viewed_search %}{% for cat in recent_viewed_search|slice:'1' %}{% if cat.activity_view %}{{ cat.activity_view }}{% else %}{% endif %}{% endfor %}{% else %}{% endif %}" />
             {% endif %}
               </div>
 
               <div class="select-location">
+
               <select class="city">
                                   
                   <option  id="currentid" value="{{request.COOKIES.global_city_id}}">{{ request.COOKIES.city }}</option>
@@ -242,6 +247,7 @@
                   {% endfor%} 
               </select>
               
+
               </div>
 
               <div class="category-search">
@@ -399,8 +405,12 @@
     <script src="{% static "js/jquery.iframe-transport.js" %}"></script>
     <script src="{% static "js/jquery.fileupload.js" %}"></script>
     <script src="{% static "js/script.js" %}"></script>
+
+ 
+   <script src="{% static "js/search.js" %}"></script>
     <script src="{% static "js/scripts.js" %}"></script>
     <script src="{% static "js/jquery.bxslider.js" %}"></script>
+
 
 </body>
 </html>

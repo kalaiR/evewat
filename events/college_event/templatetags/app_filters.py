@@ -44,6 +44,11 @@ def get_categories(initial_load):
 	return category
 
 @register.filter
+
+def get_subcategories(categoryId):  	
+	subcategories = SubCategory.objects.filter(category_id=categoryId)		
+	return subcategories	
+
 def get_photos(photo): 
     photo=str(photo).split(',')
     # print "get_photos"

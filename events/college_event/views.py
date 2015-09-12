@@ -4,9 +4,11 @@ from django.http import HttpResponseRedirect, HttpResponse
 from events.models import *
 from college_event.models import *
 from college_event.views import *
-# from events.forms import *
-# from events.forms import UserForm
-# from college_event.forms import EventSearchForm
+
+from events.forms import *
+from events.forms import UserForm
+from college_event.forms import EventSearchForm
+
 from django.core.files import File
 from django.contrib.auth.models import User
 
@@ -24,10 +26,20 @@ from django.template import Context
 from django.template.response import TemplateResponse
 from events.util import format_redirect_url
 
+
+from django.utils import simplejson
+import simplejson as json
+
+
 from django.contrib.auth.decorators import login_required
 import random
 import string
 import datetime
+
+class JSONResponse(HttpResponse):
+    def __init__(self, data):
+        super(JSONResponse, self).__init__(
+                simplejson.dumps(data), mimetype='application/json')
 # Create your views here.
 def home(request):
 	# banners=SiteBanner.objects.all()
@@ -41,8 +53,10 @@ def user_login(request):
 	"""
 	logout(request)
 	username = password = ''	
+
 	if request.POST["next"] != "http://localhost:8000/register/" :
 		# print "request.POST['next']", request.POST['next']		
+
 		username = request.POST['username']
 		# print 'username', username
 		password = request.POST['password']
@@ -204,6 +218,31 @@ def submit_event(request):
 		message="Your data succesfully submitted"
 	return render_to_response("post_event.html",{'message':message}, context_instance=RequestContext(request))
 
+def subcategory_for_category(request):
+	print "subcategory_for_category"
+	if request.is_ajax() and request.GET and 'category_id' in request.GET:
+	    print request.GET['category_id']         
+	    objs1 = SubCategory.objects.filter(category_id=request.GET['category_id'])
+	    print 'objs', objs1
+	    return JSONResponse([{'name': o1.name, 'id': o1.id}
+	        for o1 in objs1])	    
+	else:
+	    return JSONResponse({'error': 'Not Ajax or no GET'})
+
+def event_for_subcategory(request):
+    # print "brand_for_subcategory"
+    if request.is_ajax() and request.GET and 'sub_category_id' in request.GET:
+        print request.GET['sub_category_id'] 
+        # objs1 = Dropdown.objects.filter(subcat_refid=request.GET['sub_category_id']).exclude(brand_name='')
+        objs1 = Postevent.objects.filter(festtype=sub_category_id)
+        print 'objs1', objs1
+        for obj in objs1:
+            print obj.brand_name        
+        return JSONResponse([{'id': o1.id, 'name': smart_unicode(o1.brand_name)}
+            for o1 in objs1])
+    else:
+        return JSONResponse({'error': 'Not Ajax or no GET'})	    
+
 
 def event(request,pname=None):
 	postevent=Postevent.objects.filter(festtype=pname)
@@ -216,6 +255,7 @@ def details(request,id=None):
 
 def banner(request):
 	return render_to_response("uploadbanner.html",context_instance=RequestContext(request))
+
 
 def upload_banner(request):
 	print "enter"

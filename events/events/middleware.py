@@ -1,4 +1,4 @@
-from core import helper
+# from core import helper
 from events import globals
 from django.conf import settings
 from django.utils import translation
@@ -60,7 +60,7 @@ class Global(object):
             ip=self.global_ip
             response.set_cookie("ip", 
                 ip, max_age = 365 * 24 * 60 * 60)
-        
+      
         if self.global_city:
             # print "enter self.global_city"
             city=self.global_city
@@ -72,6 +72,7 @@ class Global(object):
             city=self.global_city_id
             response.set_cookie("global_city_id", 
                 city, max_age = 365 * 24 * 60 * 60)
+
             
         return response
 

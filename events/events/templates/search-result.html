@@ -4,10 +4,12 @@
 {% block content %}
 
       <div class="map-section">
+        
+        <!-- <div id="map_canvas"></div> -->
+
 
        <img src="{% static "img/events.jpg" %}"  alt="" class="image_banner">
        
-
       </div>
     </div> 
     <div class="header-nav-bar">
@@ -1120,58 +1122,71 @@
                             <p>Featured</p>
 
                           </div> <!-- end .rating -->
+>>>>>>> 524a8c0111933f0e7c8959cabf42d10439becdef
 
-                          <figcaption>
-                            <div class="bookmark">
-                              <a href="#"><i class="fa fa-bookmark-o"></i> Bookmark</a>
-                            </div>
+          <button><i class="fa fa-bars"></i></button>
 
-                            <div class="read-more">
-                              <a href="#"><i class="fa fa-angle-right"></i> Read More</a>
-                            </div>
+          <ul class="primary-nav list-unstyled">
+            <li class="bg-color"><a href="#">Home<i class="fa fa-angle-down"></i></a>
+              <ul>
+                <li><a href="home-map-grid.html">Home-map(grid)</a></li>
+                <li><a href="home-map-list.html">Home-map(list)</a></li>
+                <li><a href="index.html">Home slider(view-1)</a></li>
+                <li><a href="home-category.html">Home slider(view-2)</a></li>
+              </ul>
 
-                          </figcaption>
-                        </figure>
+            </li>
 
-                        <h4><a href="#">Old Bookman's</a></h4>
+            <li class=""><a href="#">Company<i class="fa fa-angle-down"></i></a>
 
-                        <h5><a href="#">Category</a>, <a href="#">Another Category</a></h5>
+              <ul>
+                <li><a href="company-profile.html">Company(Profile)</a></li>
+                <li><a href="company-product.html">Company(Product)</a></li>
+                <li><a href="company-portfolio.html">Company(Portfolio)</a></li>
+                <li><a href="company-blog.html">Company(Blog)</a></li>
+                <li><a href="company-contact.html">Company(contact)</a></li>
+              </ul>
 
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Proin nibh augue, suscipit a,
-                          scelerisque sed, lacinia in, mi. Cras vel lorem.</p>
+            </li>
 
-                        <a class="read-more" href="#"><i class="fa fa-angle-right"></i>Read More</a>
+            <li><a href="sample-page.html">Sample Page</a></li>
+            <li><a href="shortcodes.html">Shortcodes</a></li>
 
-                      </div> <!-- end .single-product -->
-                    </div> <!-- end .grid-layout -->
+            <li class="">
+              <a href="#">Blog<i class="fa fa-angle-down"></i></a>
 
-                    <div class="pagination-center">
+              <ul>
+                <li><a href="blog-list.html">Blog list</a></li>
+                <li><a href="blog-post.html">Blog-post</a></li>
+              </ul>
 
-                      <ul class="pagination">
-                        <li><a href="#"><i class="fa fa-angle-left"></i></a></li>
-                        <li class="active"><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
-                      </ul>
+            </li>
 
-                    </div>
+            <li><a href="price-listing.html">Price Listing</a></li>
+            <li><a href="about-us.html">About Us</a></li>
+            <li><a href="contact-us.html">Contact Us</a></li>
+          </ul>
+        </nav>
+      </div>  -->
+    </div> <!-- end .header-nav-bar -->
+  </header> <!-- end #header -->
 
-                  </div> <!-- end .row -->
-                </div> <!-- end .tabe-pane -->
+  <div id="page-content">
+    <div class="container">
+      <div class="row">
 
-                <div class="tab-pane active" id="category-book">
-                  <h2>Result for {{pname}}<!-- <span class="comments"></span> --></h2>
+        <div class="col-md-9 col-md-push-3">
+          <div class="page-content">
 
-                  <div class="change-view">
+            <div class="product-details-list view-switch">   
 
-                    <div class="filter-input">
-                      <input type="text" placeholder="Filter by Keywords">
-                    </div>
-                    <button class="grid-view"><i class="fa fa-th"></i></button>
-                    <button class="list-view active"><i class="fa fa-bars"></i></button>
+                <div class="tab-pane active">
+                  <h2>Result for {{pname}}</h2>
 
-                    <div class="sort-by">
+                    <div class="change-view">                   
+                     <!--  <button class="grid-view"><i class="fa fa-th"></i></button>
+                      <button class="list-view active"><i class="fa fa-bars"></i></button>     -->            
+                     <div class="sort-by">
 
                       <select class="" data-placeholder="-sort by-">
                         <option value="option1">Name</option>
@@ -1180,15 +1195,7 @@
                         <option value="option4">Type</option>
                       </select>
 
-                     </div>
-
-                      <ul class="pagination">
-                        <li><a href="#"><i class="fa fa-angle-left"></i></a></li>
-                        <li class="active"><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
-                      </ul>
+                     </div>                   
 
                   </div> <!-- end .change-view -->
 
@@ -2332,7 +2339,7 @@
 
               <div class="advertisement">
                 <p>Advertisement</p>
-                <img src="{% static "img/banner4.jpeg" %}" alt="">
+
               </div>
 
             </div> <!-- end .product-details -->
@@ -2380,17 +2387,17 @@
 
             </div> <!-- end .location-details -->
 
-            <div id="distance-range">
+         <!--    <div id="distance-range">
               <p>
                 <label for="amount">Distance</label>
                 <input type="text" id="amount">
               </p>
 
               <div id="slider-range-min"></div>
-            </div>  <!-- end #distance-range -->
+            </div>   --><!-- end #distance-range -->
 
             <!-- Category accordion -->
-            <div id="categories">
+<!--             <div id="categories">
               <div class="accordion">
                 <ul class="nav nav-tabs accordion-tab" role="tablist">
                   <li>
@@ -2502,8 +2509,8 @@
                   </li>
 
                 </ul>
-              </div> <!-- end .accordion -->
-            </div> <!-- end #categories -->
+              </div> 
+            </div> --> <!-- end #categories -->
 
 
           </div> <!-- end .page-sidebar -->

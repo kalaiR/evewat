@@ -6,14 +6,25 @@ from django.views.decorators.csrf import csrf_exempt
 from django.db import models
 from PIL import Image
 from django.utils import simplejson
+from haystack.query import SearchQuerySet
+
+# from college_event.search_indexes import PosteventIndex
 import simplejson as json
 import os
 from django.conf import settings
 
 class Category(models.Model):
-	name= models.CharField(max_length=150, null=True, blank=True)
-	icon= models.ImageField(upload_to='category_icon',max_length=100)
-	# department=models.ForeignKey(Department,null=True)
+	name= models.CharField(max_length=150, null=True, blank=True)	
+	category_type = models.CharField(max_length=250)
+	def __unicode__(self):
+		return self.name
+		
+class SubCategory(models.Model):
+	category = models.ForeignKey(Category)
+	icon= models.ImageField(upload_to='category_icon',max_length=100) 
+	name = models.CharField(max_length=50) 
+	def __unicode__(self):
+		return self.name        
 
 class Country(models.Model):
 	code=models.CharField(max_length=50)
@@ -82,10 +93,7 @@ class Postevent(models.Model):
 	def __unicode__(self):
 		return self.name
 
-class Eventtype(models.Model):
-	name= models.CharField(max_length=50, null=True, blank=True)
-	icon= models.ImageField(upload_to='media/brochure',max_length=100)
-	college_type=models.CharField(max_length=50, null=True, blank=True)
+
 
 
 		

@@ -12,47 +12,34 @@ from haystack.query import SQ
 
 default_param_mappings = OrderedDict(
   #FieldName = Form Variable
-<<<<<<< HEAD
-  locality = 'locality__in',
-  price = 'price',
-  category = 'category__in',
-  brandtype = 'brandtype',
-  subcategoryid = 'subcategoryid',
-  price_start = 'price__gte',
-  price_end = 'price__lte',
-  country= 'country__code',
-  ispremium = 'ispremium',
-  #keywords = 'keywords__in',
-  # lang = 'language__in',  
-=======
   locality = 'locality__in', 
   festtype = 'festtype',        
   collegename = 'collegename',
   city = 'city',
   department = 'department',
   festname = 'festname',
-  sponsor = 'sponsor'
->>>>>>> 50f3d53cc1ea07be12e6d251736cb67dff4bce57
-)
+  sponsor = 'sponsor',
+  subcategoryid = 'subcategoryid',
+  category = 'category'
+  )
 
 default_geo_params = {
   'method': 'bydistance',
   'radius': 20
 }
 
-default_orderby_mappings = {
-  # 'createddate': '-created',
-  # 'modifieddate': '-modified',
-  'pricelow': 'price',
-  'pricehigh': '-price',
-  'ispremium': '-ispremium'
-}
-
-# default_lead_filters = {
-#   'active': 1,
-#   'status': 'active',
-#   'available__gt': 0
+# default_orderby_mappings = {
+#   # 'createddate': '-created',
+#   # 'modifieddate': '-modified',
+#   'pricelow': 'price',
+#   'pricehigh': '-price',
+#   'ispremium': '-ispremium'
 # }
+
+default_event_filters = {
+  'active': 1,
+  'status': 'active',
+  }
 
 replace_regex = r'[/:]'
 ignore_regex = r'[^\w^,]'
@@ -71,7 +58,7 @@ def tokenize(query, double_check=True):
   # return tokens
 
 def prepare_search_query(query, search_field='searchtext'):
-
+  print "prepare_search_query", search_field
   query = query or ''
   qs = None
 
@@ -89,40 +76,28 @@ def prepare_search_query(query, search_field='searchtext'):
 
   return qs
 
-<<<<<<< HEAD
-def searchresults(q=None, params=None, orderby=None, groupby=None, 
-=======
+
 def searchresults(q=None, params=None, 
->>>>>>> 50f3d53cc1ea07be12e6d251736cb67dff4bce57
   geo_location=None, geo_params=None, geo_orderby='distance', 
   model_cls=None, default_filters=None, param_mappings=None,
   default_search_field='searchtext'):
 
   """Perform search leads using haystack"""
-  print 'Leadsearch as Search'
+  print 'Eventsearch as Search'
   if not model_cls:
-    model_cls = Product
+    model_cls = Postevent
 
   if params is None:
-<<<<<<< HEAD
-    params = OrderedDict([('locality', None), ('category', None), ('brandtype', None), ('price', None), ('subcategory', None), ('price_start', None), ('price_end', None),('country', None),('ispremium', None)])   
-  #   params = OrderedDict([('locations', None), ('keywords', None), ('lang', ['en', 'sv', 'de']), ('category', None), ('budget_start', None), ('budget_end', None), ('deal_start', None), ('deal_end', None), ('price_start', None), ('price_end', None), ('created_start', None), ('created_end', None), ('ranking_start', None), ('ranking_end', None), ('rating_start', None), ('rating_end', None)]) 
-  print "params['country']", params['country']
-  print "params['ispremium']", params['ispremium']
-  
-  if orderby is None:
-    # orderby = 'created'  
-     orderby = '-ispremium'
-=======
-    params = OrderedDict([('locality', None), ('festtype', None), ('collegename', None), ('city', None), ('department', None), ('festname', None), ('sponsor', None)])   
-  #   params = OrderedDict([('locations', None), ('keywords', None), ('lang', ['en', 'sv', 'de']), ('category', None), ('budget_start', None), ('budget_end', None), ('deal_start', None), ('deal_end', None), ('price_start', None), ('price_end', None), ('created_start', None), ('created_end', None), ('ranking_start', None), ('ranking_end', None), ('rating_start', None), ('rating_end', None)]) 
+    params = OrderedDict([('locality', None),('category', None),('subcategoryid', None), ('festtype', None), ('collegename', None), ('city', None), ('department', None), ('festname', None), ('sponsor', None)])   
+
+ 
   
        
   
   # if orderby is None:
   #   # orderby = 'created'  
   #    orderby = '-ispremium'
->>>>>>> 50f3d53cc1ea07be12e6d251736cb67dff4bce57
+
   
   # if geo_params is None:
   #   geo_params = default_geo_params
@@ -134,16 +109,13 @@ def searchresults(q=None, params=None,
 
   sqs = SearchQuerySet().all()
   if q:
+    print 'q1 in result', q
     qs = prepare_search_query(q, default_search_field)
     if qs:
+      print 'qs in result', qs
       sqs = SearchQuerySet().filter(qs)
      
   sqs = sqs.models(model_cls)
-<<<<<<< HEAD
-  # sqs = sqs.filter(**default_filters)
-=======
-  sqs = sqs.filter(**default_filters)
->>>>>>> 50f3d53cc1ea07be12e6d251736cb67dff4bce57
   
   if params:
     sq_params = OrderedDict()
@@ -153,6 +125,7 @@ def searchresults(q=None, params=None,
     
     
   if sq_params:
+    print 'sqs in result', sqs
     sqs = sqs.filter(**sq_params)
     print "sqs with params", sqs
 
