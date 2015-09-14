@@ -129,8 +129,8 @@ def searchresults(q=None, params=None,
     sqs = sqs.filter(**sq_params)
     print "sqs with params", sqs
 
-  if orderby:
-    sqs = sqs.order_by(orderby)
+  # if orderby:
+  #   sqs = sqs.order_by(orderby)
 
   # if groupby:
   #   sqs = sqs.facet(groupby)

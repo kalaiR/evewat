@@ -1,10 +1,10 @@
 CREATE DATABASE  IF NOT EXISTS `evewat` /*!40100 DEFAULT CHARACTER SET latin1 */;
 USE `evewat`;
--- MySQL dump 10.13  Distrib 5.5.44, for debian-linux-gnu (x86_64)
+-- MySQL dump 10.13  Distrib 5.5.43, for debian-linux-gnu (x86_64)
 --
 -- Host: 127.0.0.1    Database: evewat
 -- ------------------------------------------------------
--- Server version	5.5.44-0ubuntu0.14.04.1
+-- Server version	5.5.43-0ubuntu0.14.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -120,7 +120,7 @@ CREATE TABLE `auth_user` (
   `date_joined` datetime NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -129,7 +129,7 @@ CREATE TABLE `auth_user` (
 
 LOCK TABLES `auth_user` WRITE;
 /*!40000 ALTER TABLE `auth_user` DISABLE KEYS */;
-INSERT INTO `auth_user` VALUES (1,'pbkdf2_sha256$12000$O4mFrmTcbemB$PX6wp+Qnubjjlws0McXR1810LElzFCLTSCn9k7uLK9g=','2015-09-09 13:14:20',1,'root','','','root@gmail.com',1,1,'2015-09-02 06:10:23'),(6,'pbkdf2_sha256$12000$8TrIfTKF6iWD$WQdOuOEkAbqEw9HqLjwBTkZI2bOR5u+YKx4CL1h2NEE=','2015-09-08 11:55:40',0,'selvi','','','selvi@gmail.com',0,1,'2015-09-02 07:37:52'),(7,'pbkdf2_sha256$12000$H1vxLMKujW6Y$CTKAD6cChPbJCeopKlWZ+lK1J1R3yHFnvCdwURCRFjA=','2015-09-07 06:29:26',0,'neethu','','','neethu@globalensolutions.com',0,1,'2015-09-02 10:28:44'),(8,'pbkdf2_sha256$12000$3tKROpHmJWom$6G1YyK6hqC1FijF0OZnTqGek7XIHYCiLvvWE5PAOWf8=','2015-09-02 11:20:37',0,'nandhini','','','nandhini@gmail.com',0,1,'2015-09-02 11:20:37'),(9,'pbkdf2_sha256$12000$rJL4df4HTRSb$QGaSu/mWDgkETaudcLB8bpJ1lziVFc/MPPjOF91JAE4=','2015-09-03 06:21:03',0,'ramya','','','ramya@globalensolutions.com',0,1,'2015-09-02 11:39:59'),(10,'pbkdf2_sha256$12000$dodz33cWdAba$MKeqXTWDmYWSnOQIvDogeUrmxgffx2nOeHuln77kBXM=','2015-09-03 05:25:01',0,'sara','','','sara@gmail.com',0,1,'2015-09-02 11:52:30'),(11,'pbkdf2_sha256$12000$ozZMkyELnNKk$ata/kjqiQ7hho/yp8iNc8ObQPsnnGfDG7i1vAIOfbgM=','2015-09-02 12:42:45',0,'pradeepa','','','rpradeepa812@gmail.com',0,1,'2015-09-02 12:42:44'),(12,'pbkdf2_sha256$12000$teZUJ2OLxajr$vySWq0gTYmYGUNaKJz3AsBNNkX20V+NhmUkOxNNKZzc=','2015-09-03 04:36:06',0,'sathish','','','sathish@gmail.com',0,1,'2015-09-03 04:18:30'),(13,'pbkdf2_sha256$12000$4tufUrFqyrxk$euiYIJJpZ3SE3RxAHTFwQKOU2bZhYAGqlfCG9I9WPxs=','2015-09-03 05:17:12',0,'guru','','','guru@globalensolutions.com',0,1,'2015-09-03 05:17:12'),(14,'pbkdf2_sha256$12000$wOXr1pumalFS$5qYDOTbYnBOGO/e17gHBuIs29q0IkTHqezQYoGvebwQ=','2015-09-07 13:08:24',0,'spriya','','','shanmugapriya@gmail.com',0,1,'2015-09-07 12:27:32'),(15,'pbkdf2_sha256$12000$lhN1PiOGpeTN$yzCRaG8a9h73traLvMqKLLZ5xc8APODQwSuNxl/rQHk=','2015-09-09 04:13:16',0,'saran','','','saran@gmail.com',0,1,'2015-09-08 11:38:19'),(16,'pbkdf2_sha256$12000$RnPEuIKwuHdQ$KWIimmTX+0Iu0VXGvzYX+1st8HqYY44Pju7T1Tcnuj4=','2015-09-08 11:56:26',0,'devi','','','devi@gmail.com',0,1,'2015-09-08 11:56:25'),(17,'pbkdf2_sha256$12000$z4PAWSQoGjVf$5UYQ2X8yBChNnm674H+rC5E88QlXD4TlVQhVpkAUfl4=','2015-09-08 12:13:33',0,'user','','','user@gmail.com',0,1,'2015-09-08 12:13:33'),(18,'pbkdf2_sha256$12000$gpfIRxwTn3pb$ClSiJopSqs/IKkHg0T326vNlsfOdSo9gqoRIK5/bX2Y=','2015-09-09 06:54:11',0,'sang','','','sang@gmail.com',0,1,'2015-09-09 06:54:11'),(19,'pbkdf2_sha256$12000$XYc7Gjh5P179$4062AtjrcmSlDJqPuDhQj9ryRZe0IO9hui4m+HrklaI=','2015-09-09 07:29:51',0,'nisha','','','nisha@gmail.com',0,1,'2015-09-09 07:29:51'),(20,'pbkdf2_sha256$12000$xMWzidnYZtnj$SOq1We0xA3vx9H6ddzre7rLrA25z959ulPkhmt01tsY=','2015-09-09 10:18:06',0,'geetha','','','geetha@gmail.com',0,1,'2015-09-09 10:18:06');
+INSERT INTO `auth_user` VALUES (1,'pbkdf2_sha256$12000$O4mFrmTcbemB$PX6wp+Qnubjjlws0McXR1810LElzFCLTSCn9k7uLK9g=','2015-09-14 10:59:34',1,'root','','','root@gmail.com',1,1,'2015-09-02 06:10:23'),(6,'pbkdf2_sha256$12000$8TrIfTKF6iWD$WQdOuOEkAbqEw9HqLjwBTkZI2bOR5u+YKx4CL1h2NEE=','2015-09-10 10:28:05',0,'selvi','','','selvi@gmail.com',0,1,'2015-09-02 07:37:52'),(7,'pbkdf2_sha256$12000$H1vxLMKujW6Y$CTKAD6cChPbJCeopKlWZ+lK1J1R3yHFnvCdwURCRFjA=','2015-09-07 06:29:26',0,'neethu','','','neethu@globalensolutions.com',0,1,'2015-09-02 10:28:44'),(8,'pbkdf2_sha256$12000$3tKROpHmJWom$6G1YyK6hqC1FijF0OZnTqGek7XIHYCiLvvWE5PAOWf8=','2015-09-02 11:20:37',0,'nandhini','','','nandhini@gmail.com',0,1,'2015-09-02 11:20:37'),(9,'pbkdf2_sha256$12000$rJL4df4HTRSb$QGaSu/mWDgkETaudcLB8bpJ1lziVFc/MPPjOF91JAE4=','2015-09-10 10:56:30',0,'ramya','','','ramya@globalensolutions.com',0,1,'2015-09-02 11:39:59'),(10,'pbkdf2_sha256$12000$dodz33cWdAba$MKeqXTWDmYWSnOQIvDogeUrmxgffx2nOeHuln77kBXM=','2015-09-03 05:25:01',0,'sara','','','sara@gmail.com',0,1,'2015-09-02 11:52:30'),(11,'pbkdf2_sha256$12000$ozZMkyELnNKk$ata/kjqiQ7hho/yp8iNc8ObQPsnnGfDG7i1vAIOfbgM=','2015-09-02 12:42:45',0,'pradeepa','','','rpradeepa812@gmail.com',0,1,'2015-09-02 12:42:44'),(12,'pbkdf2_sha256$12000$teZUJ2OLxajr$vySWq0gTYmYGUNaKJz3AsBNNkX20V+NhmUkOxNNKZzc=','2015-09-03 04:36:06',0,'sathish','','','sathish@gmail.com',0,1,'2015-09-03 04:18:30'),(13,'pbkdf2_sha256$12000$4tufUrFqyrxk$euiYIJJpZ3SE3RxAHTFwQKOU2bZhYAGqlfCG9I9WPxs=','2015-09-03 05:17:12',0,'guru','','','guru@globalensolutions.com',0,1,'2015-09-03 05:17:12'),(14,'pbkdf2_sha256$12000$wOXr1pumalFS$5qYDOTbYnBOGO/e17gHBuIs29q0IkTHqezQYoGvebwQ=','2015-09-07 13:08:24',0,'spriya','','','shanmugapriya@gmail.com',0,1,'2015-09-07 12:27:32'),(15,'pbkdf2_sha256$12000$lhN1PiOGpeTN$yzCRaG8a9h73traLvMqKLLZ5xc8APODQwSuNxl/rQHk=','2015-09-09 04:13:16',0,'saran','','','saran@gmail.com',0,1,'2015-09-08 11:38:19'),(16,'pbkdf2_sha256$12000$RnPEuIKwuHdQ$KWIimmTX+0Iu0VXGvzYX+1st8HqYY44Pju7T1Tcnuj4=','2015-09-08 11:56:26',0,'devi','','','devi@gmail.com',0,1,'2015-09-08 11:56:25'),(17,'pbkdf2_sha256$12000$z4PAWSQoGjVf$5UYQ2X8yBChNnm674H+rC5E88QlXD4TlVQhVpkAUfl4=','2015-09-08 12:13:33',0,'user','','','user@gmail.com',0,1,'2015-09-08 12:13:33'),(18,'pbkdf2_sha256$12000$gpfIRxwTn3pb$ClSiJopSqs/IKkHg0T326vNlsfOdSo9gqoRIK5/bX2Y=','2015-09-09 06:54:11',0,'sang','','','sang@gmail.com',0,1,'2015-09-09 06:54:11'),(19,'pbkdf2_sha256$12000$XYc7Gjh5P179$4062AtjrcmSlDJqPuDhQj9ryRZe0IO9hui4m+HrklaI=','2015-09-09 07:29:51',0,'nisha','','','nisha@gmail.com',0,1,'2015-09-09 07:29:51'),(20,'pbkdf2_sha256$12000$xMWzidnYZtnj$SOq1We0xA3vx9H6ddzre7rLrA25z959ulPkhmt01tsY=','2015-09-09 10:18:06',0,'geetha','','','geetha@gmail.com',0,1,'2015-09-09 10:18:06'),(21,'pbkdf2_sha256$12000$VMbxP7ItqKGk$IjYHBGeIPxCg9W7NRve6MBCA333AAGNeI3BenZnfsJ8=','2015-09-10 05:00:20',0,'kalai','','','kalai@gmail.com',0,1,'2015-09-10 04:59:48'),(22,'pbkdf2_sha256$12000$rYeCsFd1svtK$ZblA43UnQphV/gJMmTu8soPV58XC9XRAVtbSES/py40=','2015-09-14 08:42:04',0,'Priya','','','avbmail93@gmail.com',0,1,'2015-09-14 04:31:56');
 /*!40000 ALTER TABLE `auth_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -204,9 +204,9 @@ CREATE TABLE `banner_sitebanner` (
   `link` varchar(200) DEFAULT NULL,
   `pageurl` varchar(50) DEFAULT NULL,
   `position` varchar(50) DEFAULT NULL,
-  `price` decimal(10,0) NOT NULL,
+  `price` double DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -215,7 +215,7 @@ CREATE TABLE `banner_sitebanner` (
 
 LOCK TABLES `banner_sitebanner` WRITE;
 /*!40000 ALTER TABLE `banner_sitebanner` DISABLE KEYS */;
-INSERT INTO `banner_sitebanner` VALUES (22,'static/banners/paper.jpg','www.google.com','/','top',10000),(23,'static/banners/web.jpg','www.google.com','/','top',10000),(24,'static/banners/ram.jpeg','www.google.com','/','top',10000),(25,'static/banners/banner1.jpeg','www.google.com','/','bottom',5000),(26,'static/banners/banner2.jpeg','www.google.com','/','bottom',5000),(27,'static/banners/banner6.png','www.google.com','/','bottom',5000),(28,'static/banners/banner3.jpeg','www.google.com','/','bottom',5000),(29,'static/banners/banner4.jpeg','www.google.com','/','bottom',5000),(30,'static/banners/banner5_1.jpeg','www.google.com','/','bottom',5000),(31,'static/banners/post_1.jpg','www.google.com','event/','right',10000),(32,'static/banners/ram_1.jpeg','www.google.com','/','top',10000);
+INSERT INTO `banner_sitebanner` VALUES (1,'static/banners/events_3.jpg','www.google.com','/','top',100000),(2,'static/banners/website_2.jpg','www.google.com','/','top',100000),(3,'static/banners/images_2.jpeg','www.google.com','/','bottom',50000),(4,'static/banners/palm.gif','www.google.com','/','bottom',50000),(5,'static/banners/paper_2.jpg','www.google.com','search/','top',50000),(6,'static/banners/images_3.jpeg','www.google.com','/','bottom',50000),(7,'static/banners/ram_3.jpeg','www.google.com','/','top',100000);
 /*!40000 ALTER TABLE `banner_sitebanner` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -231,7 +231,7 @@ CREATE TABLE `college_event_category` (
   `name` varchar(150) NOT NULL,
   `category_type` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -240,7 +240,7 @@ CREATE TABLE `college_event_category` (
 
 LOCK TABLES `college_event_category` WRITE;
 /*!40000 ALTER TABLE `college_event_category` DISABLE KEYS */;
-INSERT INTO `college_event_category` VALUES (1,'medical','workshop,seminar,conferences'),(2,'engineering','workshop,seminar,conferences,symposium,online'),(3,'law','literary,youth summit'),(4,'management','workshop,seminar,conferences,symposium,online');
+INSERT INTO `college_event_category` VALUES (1,'medical','workshop,seminar,conferences'),(2,'engineering','technical,workshop,seminar,conferences,sympos'),(3,'law','literary,youth summit'),(4,'management','technical,workshop,seminar,conferences,sympos'),(5,'','');
 /*!40000 ALTER TABLE `college_event_category` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -442,9 +442,7 @@ CREATE TABLE `college_event_postevent` (
   `mobile` bigint(20) DEFAULT NULL,
   `festname` varchar(50) DEFAULT NULL,
   `festcaption` varchar(50) DEFAULT NULL,
-  `festtheme` varchar(50) DEFAULT NULL,
   `festtype` varchar(50) DEFAULT NULL,
-  `collegename` varchar(150) DEFAULT NULL,
   `city` varchar(50) DEFAULT NULL,
   `state` varchar(50) DEFAULT NULL,
   `startdate` date DEFAULT NULL,
@@ -452,29 +450,12 @@ CREATE TABLE `college_event_postevent` (
   `deadline` longtext,
   `registrationfee` longtext,
   `festdescription` longtext,
-  `festevent` longtext,
-  `department` varchar(50) DEFAULT NULL,
-  `festwebsite` varchar(50) DEFAULT NULL,
   `registrationurl` varchar(250) DEFAULT NULL,
-  `collegeurl` varchar(250) DEFAULT NULL,
-  `facebook` varchar(250) DEFAULT NULL,
-  `twitter` varchar(250) DEFAULT NULL,
-  `youtube` varchar(250) DEFAULT NULL,
   `poster` varchar(500) DEFAULT NULL,
-  `brochure` varchar(100) NOT NULL,
-  `applink` varchar(250) DEFAULT NULL,
   `venuedescription` longtext,
   `contactperson` longtext,
-  `guest` longtext,
-  `festpronites` longtext,
-  `sponsorship` longtext,
-  `stalls` longtext,
-  `sponsor` longtext,
-  `accommodation` longtext,
-  `attendees` bigint(20) DEFAULT NULL,
-  `feedback` longtext,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -483,7 +464,7 @@ CREATE TABLE `college_event_postevent` (
 
 LOCK TABLES `college_event_postevent` WRITE;
 /*!40000 ALTER TABLE `college_event_postevent` DISABLE KEYS */;
-INSERT INTO `college_event_postevent` VALUES (1,'ramya','ramya@globalensolutions.com',NULL,'innovace',NULL,NULL,'technical','Manakula vinayagar Institue of Technology','Pondicherry','Pondicherry','2015-09-03','2015-09-03','2015-09-03','100','innovace','innovace','CSE','innovace','innovaceinnovace','innovace','innovace','innovace','innovace','','','innovace','innovace','innovace','innovace','innovace','innovace','innovace','innovace','innovace',5,'innovace'),(2,'Neethu','neethu@gmail.com',9874521360,'Zeal','Zeal','Zeal','cultural','Mailam engineering college','Villupuram','Villupuram','2015-09-11','2015-09-11','2015-09-10','100','cultural events','cultural events','ECE','www.zeal.co.in','www.zeal.co.in','www.zeal.co.in','ZEAl\'2K15','ZEAl\'2K15','ZEAl\'2K15','','[]','','Mailam engineering college,Villupuram','Sathish kumar.\r\nMailam engineering college,Villupuram','Sara','Sara','Sara','Sara','Sara','sghfkdjhlnkfgb',10,'jhkdgfresteryrht'),(3,'sara','sara@gmail.com',7895623555,'expo','expo','expo','technical','Mailam engineering college','Villupuram','Villupuram','2015-09-11','2015-09-11','2015-09-10','1000','gfhgfhfh','fhgjh','CSE','dgjjsbgshugquwrh','innovaceinnovace','welcome','welcome','welcome','welcome','','[]','','mailam engg college','fdgfhgfh','gfhgfjh','fryryh','fgfhhhhhhhhhhh','hfhg','gjhkhklj','gfhghg',15,'fsfdgfg');
+INSERT INTO `college_event_postevent` VALUES (1,'Priya','avbmail93@gmail.com',8148635051,'online test','quiz','management','1','Tamilnadu','2015-09-17','2015-09-30','2015-09-24','200','ssce','https://www.ssce.co.in','events/static/img/filter.jpg','ssce','ssce');
 /*!40000 ALTER TABLE `college_event_postevent` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -502,7 +483,7 @@ CREATE TABLE `college_event_subcategory` (
   PRIMARY KEY (`id`),
   KEY `college_event_subcategory_6f33f001` (`category_id`),
   CONSTRAINT `category_id_refs_id_9976adcd` FOREIGN KEY (`category_id`) REFERENCES `college_event_category` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -511,7 +492,7 @@ CREATE TABLE `college_event_subcategory` (
 
 LOCK TABLES `college_event_subcategory` WRITE;
 /*!40000 ALTER TABLE `college_event_subcategory` DISABLE KEYS */;
-INSERT INTO `college_event_subcategory` VALUES (1,1,'workshop','category_icon/index1_7.jpg'),(2,1,'seminar','category_icon/index1_6.jpg'),(3,1,'conferences','category_icon/index1_5.jpg'),(4,2,'workshop','category_icon/index1_7.jpg'),(5,2,'seminar','category_icon/index1_6.jpg'),(6,2,'conferences','category_icon/index1_5.jpg'),(7,2,'symposium','category_icon/index1_8.jpg'),(8,2,'onlineevents','category_icon/index1_19.jpg'),(9,3,'literary','category_icon/index1_4.jpg'),(10,3,'youthsummit','category_icon/index1_9.jpg'),(11,4,'workshop','category_icon/index1_7.jpg'),(12,4,'seminar','category_icon/index1_6.jpg'),(13,4,'conferences','category_icon/index1_5.jpg'),(14,4,'symposium','category_icon/index1_8.jpg'),(15,4,'onlineevents','category_icon/index1_19.jpg');
+INSERT INTO `college_event_subcategory` VALUES (1,1,'workshop','category_icon/index1_7.jpg'),(2,1,'seminar','category_icon/index1_6.jpg'),(3,1,'conferences','category_icon/index1_5.jpg'),(4,2,'workshop','category_icon/index1_7.jpg'),(5,2,'seminar','category_icon/index1_6.jpg'),(6,2,'conferences','category_icon/index1_5.jpg'),(7,2,'symposium','category_icon/index1_8.jpg'),(8,2,'onlineevents','category_icon/index1_19.jpg'),(9,3,'literary','category_icon/index1_4.jpg'),(10,3,'youthsummit','category_icon/index1_9.jpg'),(11,4,'workshop','category_icon/index1_7.jpg'),(12,4,'seminar','category_icon/index1_6.jpg'),(13,4,'conferences','category_icon/index1_5.jpg'),(14,4,'symposium','category_icon/index1_8.jpg'),(15,4,'onlineevents','category_icon/index1_19.jpg'),(16,2,'technical','category_icon/index1.jpg'),(17,4,'technical','category_icon/index1.jpg');
 /*!40000 ALTER TABLE `college_event_subcategory` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -536,7 +517,7 @@ CREATE TABLE `django_admin_log` (
   KEY `django_admin_log_37ef4eb4` (`content_type_id`),
   CONSTRAINT `content_type_id_refs_id_93d2d1f8` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`),
   CONSTRAINT `user_id_refs_id_c0d12874` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -545,7 +526,7 @@ CREATE TABLE `django_admin_log` (
 
 LOCK TABLES `django_admin_log` WRITE;
 /*!40000 ALTER TABLE `django_admin_log` DISABLE KEYS */;
-INSERT INTO `django_admin_log` VALUES (1,'2015-09-03 10:27:22',1,18,'1','www.google.com',1,''),(2,'2015-09-03 10:28:02',1,18,'2','www.google.com',1,''),(3,'2015-09-03 10:28:25',1,18,'3','www.google.com',1,''),(4,'2015-09-03 10:30:53',1,18,'4','www.google.com',1,''),(5,'2015-09-03 10:31:27',1,18,'5','www.google.com',1,''),(6,'2015-09-03 10:31:44',1,18,'6','www.google.com',1,''),(7,'2015-09-03 10:32:11',1,18,'7','www.google.com',1,''),(8,'2015-09-03 10:32:40',1,18,'8','www.google.com',1,''),(9,'2015-09-03 10:50:01',1,18,'9','www.google.com',1,''),(10,'2015-09-03 10:50:30',1,18,'10','www.google.com',1,''),(11,'2015-09-03 10:53:49',1,18,'11','www.google.com',1,''),(12,'2015-09-03 10:54:50',1,18,'12','www.google.com',1,''),(13,'2015-09-07 11:59:36',1,18,'13','www.google.com',1,''),(14,'2015-09-07 12:07:36',1,18,'14','www.google.com',1,''),(15,'2015-09-07 12:08:12',1,18,'15','www.google.com',1,''),(16,'2015-09-07 12:31:26',1,18,'16','www.google.com',1,''),(17,'2015-09-07 12:36:46',1,18,'17','www.google.com',1,''),(18,'2015-09-07 12:38:00',1,18,'18','www.google.com',1,''),(19,'2015-09-07 12:50:16',1,18,'19','www.google.com',1,''),(20,'2015-09-07 12:55:45',1,18,'3','www.google.com',3,''),(21,'2015-09-07 12:55:45',1,18,'2','www.google.com',3,''),(22,'2015-09-07 12:55:45',1,18,'1','www.google.com',3,''),(23,'2015-09-07 12:56:50',1,18,'13','www.google.com',3,''),(24,'2015-09-07 12:59:06',1,18,'18','www.google.com',3,''),(25,'2015-09-07 12:59:06',1,18,'17','www.google.com',3,''),(26,'2015-09-07 12:59:06',1,18,'16','www.google.com',3,''),(27,'2015-09-07 12:59:06',1,18,'15','www.google.com',3,''),(28,'2015-09-07 12:59:06',1,18,'14','www.google.com',3,''),(29,'2015-09-07 13:00:54',1,18,'19','www.google.com',3,''),(30,'2015-09-07 13:00:54',1,18,'12','www.google.com',3,''),(31,'2015-09-07 13:00:54',1,18,'11','www.google.com',3,''),(32,'2015-09-07 13:00:54',1,18,'9','www.google.com',3,''),(33,'2015-09-07 13:00:54',1,18,'8','www.google.com',3,''),(34,'2015-09-07 13:02:50',1,18,'20','www.google.com',1,''),(35,'2015-09-07 13:05:46',1,18,'21','www.google.com',1,''),(36,'2015-09-08 12:01:47',1,18,'21','www.google.com',3,''),(37,'2015-09-08 12:01:47',1,18,'20','www.google.com',3,''),(38,'2015-09-08 12:01:47',1,18,'10','www.google.com',3,''),(39,'2015-09-08 12:01:47',1,18,'7','www.google.com',3,''),(40,'2015-09-08 12:01:47',1,18,'6','www.google.com',3,''),(41,'2015-09-08 12:01:47',1,18,'5','www.google.com',3,''),(42,'2015-09-08 12:01:47',1,18,'4','www.google.com',3,''),(43,'2015-09-08 12:02:28',1,18,'22','www.google.com',1,''),(44,'2015-09-08 12:02:58',1,18,'23','www.google.com',1,''),(45,'2015-09-08 12:03:51',1,18,'24','www.google.com',1,''),(46,'2015-09-08 12:04:23',1,18,'25','www.google.com',1,''),(47,'2015-09-08 12:04:51',1,18,'26','www.google.com',1,''),(48,'2015-09-08 12:05:31',1,18,'27','www.google.com',1,''),(49,'2015-09-08 12:05:57',1,18,'28','www.google.com',1,''),(50,'2015-09-08 12:06:28',1,18,'29','www.google.com',1,''),(51,'2015-09-08 12:07:04',1,18,'30','www.google.com',1,''),(52,'2015-09-08 13:35:36',1,18,'31','www.google.com',1,''),(53,'2015-09-09 13:20:04',1,18,'32','www.google.com',1,'');
+INSERT INTO `django_admin_log` VALUES (1,'2015-09-03 10:27:22',1,18,'1','www.google.com',1,''),(2,'2015-09-03 10:28:02',1,18,'2','www.google.com',1,''),(3,'2015-09-03 10:28:25',1,18,'3','www.google.com',1,''),(4,'2015-09-03 10:30:53',1,18,'4','www.google.com',1,''),(5,'2015-09-03 10:31:27',1,18,'5','www.google.com',1,''),(6,'2015-09-03 10:31:44',1,18,'6','www.google.com',1,''),(7,'2015-09-03 10:32:11',1,18,'7','www.google.com',1,''),(8,'2015-09-03 10:32:40',1,18,'8','www.google.com',1,''),(9,'2015-09-03 10:50:01',1,18,'9','www.google.com',1,''),(10,'2015-09-03 10:50:30',1,18,'10','www.google.com',1,''),(11,'2015-09-03 10:53:49',1,18,'11','www.google.com',1,''),(12,'2015-09-03 10:54:50',1,18,'12','www.google.com',1,''),(13,'2015-09-07 11:59:36',1,18,'13','www.google.com',1,''),(14,'2015-09-07 12:07:36',1,18,'14','www.google.com',1,''),(15,'2015-09-07 12:08:12',1,18,'15','www.google.com',1,''),(16,'2015-09-07 12:31:26',1,18,'16','www.google.com',1,''),(17,'2015-09-07 12:36:46',1,18,'17','www.google.com',1,''),(18,'2015-09-07 12:38:00',1,18,'18','www.google.com',1,''),(19,'2015-09-07 12:50:16',1,18,'19','www.google.com',1,''),(20,'2015-09-07 12:55:45',1,18,'3','www.google.com',3,''),(21,'2015-09-07 12:55:45',1,18,'2','www.google.com',3,''),(22,'2015-09-07 12:55:45',1,18,'1','www.google.com',3,''),(23,'2015-09-07 12:56:50',1,18,'13','www.google.com',3,''),(24,'2015-09-07 12:59:06',1,18,'18','www.google.com',3,''),(25,'2015-09-07 12:59:06',1,18,'17','www.google.com',3,''),(26,'2015-09-07 12:59:06',1,18,'16','www.google.com',3,''),(27,'2015-09-07 12:59:06',1,18,'15','www.google.com',3,''),(28,'2015-09-07 12:59:06',1,18,'14','www.google.com',3,''),(29,'2015-09-07 13:00:54',1,18,'19','www.google.com',3,''),(30,'2015-09-07 13:00:54',1,18,'12','www.google.com',3,''),(31,'2015-09-07 13:00:54',1,18,'11','www.google.com',3,''),(32,'2015-09-07 13:00:54',1,18,'9','www.google.com',3,''),(33,'2015-09-07 13:00:54',1,18,'8','www.google.com',3,''),(34,'2015-09-07 13:02:50',1,18,'20','www.google.com',1,''),(35,'2015-09-07 13:05:46',1,18,'21','www.google.com',1,''),(36,'2015-09-08 12:01:47',1,18,'21','www.google.com',3,''),(37,'2015-09-08 12:01:47',1,18,'20','www.google.com',3,''),(38,'2015-09-08 12:01:47',1,18,'10','www.google.com',3,''),(39,'2015-09-08 12:01:47',1,18,'7','www.google.com',3,''),(40,'2015-09-08 12:01:47',1,18,'6','www.google.com',3,''),(41,'2015-09-08 12:01:47',1,18,'5','www.google.com',3,''),(42,'2015-09-08 12:01:47',1,18,'4','www.google.com',3,''),(43,'2015-09-08 12:02:28',1,18,'22','www.google.com',1,''),(44,'2015-09-08 12:02:58',1,18,'23','www.google.com',1,''),(45,'2015-09-08 12:03:51',1,18,'24','www.google.com',1,''),(46,'2015-09-08 12:04:23',1,18,'25','www.google.com',1,''),(47,'2015-09-08 12:04:51',1,18,'26','www.google.com',1,''),(48,'2015-09-08 12:05:31',1,18,'27','www.google.com',1,''),(49,'2015-09-08 12:05:57',1,18,'28','www.google.com',1,''),(50,'2015-09-08 12:06:28',1,18,'29','www.google.com',1,''),(51,'2015-09-08 12:07:04',1,18,'30','www.google.com',1,''),(52,'2015-09-08 13:35:36',1,18,'31','www.google.com',1,''),(53,'2015-09-09 13:20:04',1,18,'32','www.google.com',1,''),(54,'2015-09-14 11:00:25',1,18,'51','www.google.com',3,'');
 /*!40000 ALTER TABLE `django_admin_log` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -598,7 +579,7 @@ CREATE TABLE `django_session` (
 
 LOCK TABLES `django_session` WRITE;
 /*!40000 ALTER TABLE `django_session` DISABLE KEYS */;
-INSERT INTO `django_session` VALUES ('7aqpvtfvovp866aw3yxowp8v9rgpv1ip','NDI0MmQxYjBkNjE0Nzg5YjlkMzUxNzYwYzI5NGM0NzZiY2M3MjE1MTp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6MTV9','2015-09-23 04:13:16'),('813ca37f188addd914b7b0d092446c4e','OTc5NGFkODc0MjFlZWQ5MTkzOTI3NDZiYTkxZGMxOTY1ZTYzZWFlMzqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQSKAQF1Lg==\n','2015-09-23 13:14:20'),('9p5ijbn3heb43d00wygrdd1zfo4vmuys','MWM2NDY3OTI1YTFlYmE4Zjg4YzE0Y2YwODUyNTNjYTIyZjBkMDE3Yjp7fQ==','2015-09-17 04:08:43'),('ehqrxij4qts12q82p3mc5f0n4hjw0021','MWM2NDY3OTI1YTFlYmE4Zjg4YzE0Y2YwODUyNTNjYTIyZjBkMDE3Yjp7fQ==','2015-09-21 13:27:50'),('g55iv48i6whxxywb8gt6v6hyvwwp8dx5','MWM2NDY3OTI1YTFlYmE4Zjg4YzE0Y2YwODUyNTNjYTIyZjBkMDE3Yjp7fQ==','2015-09-17 04:16:04'),('h9f6ruh2dtznc6bcqxniys5thfy1sx65','MWM2NDY3OTI1YTFlYmE4Zjg4YzE0Y2YwODUyNTNjYTIyZjBkMDE3Yjp7fQ==','2015-09-17 05:24:38'),('hockpo8tf0xrhbnn68y16rvhg7c143z0','NDE3YTY5NTA5N2M0ZTYwMmUwMWIyNmYzZjFhMThiNzAwYTI4Zjc5OTp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6MX0=','2015-09-22 12:55:45'),('nrdjsxae0lx7z62jaeonaj6m1yinzaug','NDI0MmQxYjBkNjE0Nzg5YjlkMzUxNzYwYzI5NGM0NzZiY2M3MjE1MTp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6MTV9','2015-09-22 11:38:47'),('szkjbro2ybcfz8zr452c2a8m1hqfuvib','MWM2NDY3OTI1YTFlYmE4Zjg4YzE0Y2YwODUyNTNjYTIyZjBkMDE3Yjp7fQ==','2015-09-17 05:24:45'),('xi31c124jg6kncqdh0hayasf6lua2npy','YTM0MmE0NWM5OWFlYTllYTRhNWUzNWU4ZGZmYTQ5OGUzNTc1NzI5Mzp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6N30=','2015-09-21 06:29:26'),('z8w56o2344w201b9vl0nbbu8gv2gnsqd','NDE3YTY5NTA5N2M0ZTYwMmUwMWIyNmYzZjFhMThiNzAwYTI4Zjc5OTp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6MX0=','2015-09-17 10:23:53');
+INSERT INTO `django_session` VALUES ('514wvhbi3qtdqiwjyw915nly88k50w1p','MWM2NDY3OTI1YTFlYmE4Zjg4YzE0Y2YwODUyNTNjYTIyZjBkMDE3Yjp7fQ==','2015-09-28 05:00:44'),('6rof606zlq68upsgi5olp1xcaaco01gl','MWJhOGIwMjE0NDYwYmYzYWU3YjRkNmMwNjIwNjdhZWMxMTJjNzFmNzp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6OX0=','2015-09-24 10:56:30'),('7aqpvtfvovp866aw3yxowp8v9rgpv1ip','NDI0MmQxYjBkNjE0Nzg5YjlkMzUxNzYwYzI5NGM0NzZiY2M3MjE1MTp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6MTV9','2015-09-23 04:13:16'),('7xxcav4tks8cnogshj0585me6bf6cs2a','NDE3YTY5NTA5N2M0ZTYwMmUwMWIyNmYzZjFhMThiNzAwYTI4Zjc5OTp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6MX0=','2015-09-28 10:58:33'),('8kcw5p9hrvsdwwuiga8ybv323u0hiakt','ZGMzY2MzOTMzMmNjMmMxN2E4M2M0ZGQ0Y2ZmNjMzYzIzMGI0MTFiNzp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6MjJ9','2015-09-28 04:31:57'),('9p5ijbn3heb43d00wygrdd1zfo4vmuys','MWM2NDY3OTI1YTFlYmE4Zjg4YzE0Y2YwODUyNTNjYTIyZjBkMDE3Yjp7fQ==','2015-09-17 04:08:43'),('dfj184mxjpbssh9924z2na6rcvhae24n','ZGMzY2MzOTMzMmNjMmMxN2E4M2M0ZGQ0Y2ZmNjMzYzIzMGI0MTFiNzp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6MjJ9','2015-09-28 06:24:03'),('ehqrxij4qts12q82p3mc5f0n4hjw0021','MWM2NDY3OTI1YTFlYmE4Zjg4YzE0Y2YwODUyNTNjYTIyZjBkMDE3Yjp7fQ==','2015-09-21 13:27:50'),('g55iv48i6whxxywb8gt6v6hyvwwp8dx5','MWM2NDY3OTI1YTFlYmE4Zjg4YzE0Y2YwODUyNTNjYTIyZjBkMDE3Yjp7fQ==','2015-09-17 04:16:04'),('h9f6ruh2dtznc6bcqxniys5thfy1sx65','MWM2NDY3OTI1YTFlYmE4Zjg4YzE0Y2YwODUyNTNjYTIyZjBkMDE3Yjp7fQ==','2015-09-17 05:24:38'),('hjlctcdd20zz9m6dondandvd7a02izy3','MWM2NDY3OTI1YTFlYmE4Zjg4YzE0Y2YwODUyNTNjYTIyZjBkMDE3Yjp7fQ==','2015-09-24 08:06:25'),('hockpo8tf0xrhbnn68y16rvhg7c143z0','NDE3YTY5NTA5N2M0ZTYwMmUwMWIyNmYzZjFhMThiNzAwYTI4Zjc5OTp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6MX0=','2015-09-22 12:55:45'),('k2dr7zn8l4xepi8r5v43nt02dwla7hgi','MWM2NDY3OTI1YTFlYmE4Zjg4YzE0Y2YwODUyNTNjYTIyZjBkMDE3Yjp7fQ==','2015-09-24 07:43:01'),('nrdjsxae0lx7z62jaeonaj6m1yinzaug','NDI0MmQxYjBkNjE0Nzg5YjlkMzUxNzYwYzI5NGM0NzZiY2M3MjE1MTp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6MTV9','2015-09-22 11:38:47'),('p7sltgr6g6bmbac42dangv4jo17qbi6t','OWVjYTA0MGFlOWFhYjhjNzkyZGRmNmU4M2Q5NjY1MGZjYmY2ZWEzMjp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6MjF9','2015-09-24 05:00:20'),('szkjbro2ybcfz8zr452c2a8m1hqfuvib','MWM2NDY3OTI1YTFlYmE4Zjg4YzE0Y2YwODUyNTNjYTIyZjBkMDE3Yjp7fQ==','2015-09-17 05:24:45'),('tp9jg6u5d22oueg3sox3ejw554svvc6l','MWJhOGIwMjE0NDYwYmYzYWU3YjRkNmMwNjIwNjdhZWMxMTJjNzFmNzp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6OX0=','2015-09-24 06:28:26'),('xi31c124jg6kncqdh0hayasf6lua2npy','YTM0MmE0NWM5OWFlYTllYTRhNWUzNWU4ZGZmYTQ5OGUzNTc1NzI5Mzp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6N30=','2015-09-21 06:29:26'),('z8w56o2344w201b9vl0nbbu8gv2gnsqd','NDE3YTY5NTA5N2M0ZTYwMmUwMWIyNmYzZjFhMThiNzAwYTI4Zjc5OTp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6MX0=','2015-09-17 10:23:53'),('zl54fd4b8do06mufw160rktuw1ei0ssu','NDE3YTY5NTA5N2M0ZTYwMmUwMWIyNmYzZjFhMThiNzAwYTI4Zjc5OTp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6MX0=','2015-09-28 10:59:34');
 /*!40000 ALTER TABLE `django_session` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -626,7 +607,7 @@ CREATE TABLE `events_userprofile` (
   CONSTRAINT `city_id_refs_id_695016a4` FOREIGN KEY (`city_id`) REFERENCES `college_event_city` (`id`),
   CONSTRAINT `country_id_refs_id_2fdf82b1` FOREIGN KEY (`country_id`) REFERENCES `college_event_country` (`id`),
   CONSTRAINT `user_id_refs_id_acf68b2c` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -635,7 +616,7 @@ CREATE TABLE `events_userprofile` (
 
 LOCK TABLES `events_userprofile` WRITE;
 /*!40000 ALTER TABLE `events_userprofile` DISABLE KEYS */;
-INSERT INTO `events_userprofile` VALUES (1,6,NULL,'','QygNP7Ws2hwZCOtveErt0EKfbi6uX9T54',0,NULL,0,NULL),(2,7,NULL,'','mGsDYYMn6vkF7JrilKlQxFqg4JyyTMjw4',0,NULL,0,NULL),(3,8,NULL,'','t5a189W0cTyScbWDBq9cxV1FqZPceQDCN',0,NULL,0,NULL),(4,9,NULL,'','GqfXeewASimSI0pNFeT3UjqRh39kZ32lq',0,NULL,0,NULL),(5,10,NULL,'','9WcLwnb3Kg5G42euryVLbkCJF47O4nVVk',0,NULL,0,NULL),(6,11,NULL,'','RqDOeIklRBHty3gIoydjh1blUdbBpsnIb',0,NULL,0,NULL),(7,12,NULL,'','NyKAMeU0RGGNKXdlYWsbEhCYsaJtPODx5',0,NULL,0,NULL),(8,13,NULL,'','SNBZh8xrr4bIEgVTvqXsESafMfgGi3ne3',0,NULL,0,NULL),(9,14,NULL,'','sFEh3137jF4cUm9kQPfLqRhxlNnja8ZIB',0,NULL,0,NULL),(10,15,NULL,'','Vacy7YcABSJQKlElwG2cUrAx8mFfQp4nM',0,NULL,0,NULL),(11,16,NULL,'','cH9rnvhCI8XSn0giarp3yg11TDFeuklJ6',0,NULL,0,NULL),(12,17,NULL,'','aDhv4RifGWtjVTFxote2Wv6onXrkqa3vw',0,NULL,0,NULL);
+INSERT INTO `events_userprofile` VALUES (1,6,NULL,'','QygNP7Ws2hwZCOtveErt0EKfbi6uX9T54',0,NULL,0,NULL),(2,7,NULL,'','mGsDYYMn6vkF7JrilKlQxFqg4JyyTMjw4',0,NULL,0,NULL),(3,8,NULL,'','t5a189W0cTyScbWDBq9cxV1FqZPceQDCN',0,NULL,0,NULL),(4,9,NULL,'','GqfXeewASimSI0pNFeT3UjqRh39kZ32lq',0,NULL,0,NULL),(5,10,NULL,'','9WcLwnb3Kg5G42euryVLbkCJF47O4nVVk',0,NULL,0,NULL),(6,11,NULL,'','RqDOeIklRBHty3gIoydjh1blUdbBpsnIb',0,NULL,0,NULL),(7,12,NULL,'','NyKAMeU0RGGNKXdlYWsbEhCYsaJtPODx5',0,NULL,0,NULL),(8,13,NULL,'','SNBZh8xrr4bIEgVTvqXsESafMfgGi3ne3',0,NULL,0,NULL),(9,14,NULL,'','sFEh3137jF4cUm9kQPfLqRhxlNnja8ZIB',0,NULL,0,NULL),(10,15,NULL,'','Vacy7YcABSJQKlElwG2cUrAx8mFfQp4nM',0,NULL,0,NULL),(11,16,NULL,'','cH9rnvhCI8XSn0giarp3yg11TDFeuklJ6',0,NULL,0,NULL),(12,17,NULL,'','aDhv4RifGWtjVTFxote2Wv6onXrkqa3vw',0,NULL,0,NULL),(13,21,NULL,'','7wQqXgrpJbon2vAvj0O0SIOTKIqhxDU6T',0,NULL,0,NULL),(14,22,NULL,'','l31X1URbNHK7MIzpsMsGR5edUwIxvDYiO',0,NULL,0,NULL);
 /*!40000 ALTER TABLE `events_userprofile` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -723,4 +704,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-09-10 10:08:19
+-- Dump completed on 2015-09-14 18:38:33

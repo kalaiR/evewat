@@ -34,9 +34,10 @@ urlpatterns = patterns('',
     url(r'^banner$', 'college_event.views.banner', name='banner'),
     url(r'^submit_event$', 'college_event.views.submit_event', name='submit_event'),
     url(r'^upload_banner$', 'college_event.views.upload_banner', name='upload_banner'),
-    url(r'^(?i)event/(?P<pname>.*)/$', 'college_event.views.event',name='event'),
+    url(r'^success$', 'college_event.views.success', name='success'),
+    # url(r'^(?i)event/(?P<pname>.*)/$', 'college_event.views.event',name='event'),
     url(r'^details/(?P<id>[0-9]+)/$','college_event.views.details',name='details'),
-
+    url(r'^payment/', 'payu.views.buy_order', name='payment'),
     #getting subcategory
     url(r'^subcategory_for_category/$', 'college_event.views.subcategory_for_category',name='subcategory'),
 

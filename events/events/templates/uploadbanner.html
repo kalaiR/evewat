@@ -28,7 +28,8 @@
             <h4 class="text-center">{{message}}</h4>
             {%endif%}
 <div class="banner_form">
-       <form action="{%url "college_event.views.upload_banner"%}" name="upload_banner" enctype="multipart/form-data" method="POST">{% csrf_token %}
+       <form action="{%url "college_event.views.upload_banner"%}" name="upload_banner" enctype="multipart/form-data" method="POST">
+       {% csrf_token %}
  
 	<input type='file' id='banner' class="banner" name='banner'/>
 		
@@ -48,8 +49,59 @@
 			<option value="50000">50000</option>
 			<option value="25000">25000</option>
 		</select>
+        <input type="text" placeholder="link" name="link">
 	<input class="btn btn-default" type="submit" value="Upload" />
 
 </form>
+</div>
+<div class="payment">
+	<form method="post" action="{% url "payu.views.buy_order" %}">
+    {% csrf_token %}
+                                <div class="col-md-8">
+                                    <h5><strong>PayU Money</strong></h5>
+                                    <h5>Amount Payable : <i class="fa fa-rupee"></i> {{stpcwt}}</h5>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <select name="initial">
+                                                <option value="mr">Mr</option>
+                                                <option value="mr">Mrs</option>
+                                                <option value="mr">Miss</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>First Name</label>
+                                            <input id="fname" class="form-control fname" type="text" name="fname">
+                                            <span class="errormgs" style="display:none; color:red;">please enter the first name</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Lastname</label>
+                                            <input id="lname" class="form-control lname" type="text" name="lname" />
+                                            <span class="errormgs" style="display:none; color:red;">please enter the last name</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Phone Number</label>
+                                            <input id="mobileno"class="form-control mobileno" type="text" name="pnumber" />
+                                            <span class="errormgs" style="display:none; color:red;">please enter the mobile number</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Email</label>
+                                            <input id="email" class="form-control email" type="text" name="email" />
+                                            <span class="errormgs" style="display:none; color:red;">please enter the email</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="btn btn-default" id ="paynow"type="submit">Make payment</button>
+                                    <p class="margintop5">By Clicking on Make payment, you agree to all the <a href="#">Terms and Conditions</a></p>
+                            </form>
 </div>
 {% endblock %}

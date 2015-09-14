@@ -6,9 +6,13 @@
       <div class="map-section">
         
         <!-- <div id="map_canvas"></div> -->
+        {% for banners in banner|get_banner %}
+               {% if banners.pageurl == 'search/' and banners.position == 'top' %}
+                  <li> <img src="/media/{{banners.banner}}" class="image_banner" alt=""> </li>
+                {% endif %}
+            {% endfor %}
 
-
-       <img src="{% static "img/events.jpg" %}"  alt="" class="image_banner">
+       <!-- <img src="{% static "img/events.jpg" %}"  alt="" class="image_banner"> -->
        
       </div>
     </div> 

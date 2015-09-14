@@ -68,7 +68,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    # 'events.middleware.Global',
+    'events.middleware.Global',
 
 )
 
@@ -154,6 +154,6 @@ PAYU_INFO = {
              # for production environment use 'https://secure.payu.in/_payment'
              'payment_url': 'https://test.payu.in/_payment',
              #success url for hotel
-             'surl':'http://localhost:8000/v2/setprovisionalbooking/',
+             'surl':'http://localhost:8000/success',
              
             }

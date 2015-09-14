@@ -6,8 +6,13 @@
       <div class="slider-content">
 
         <div id="home-slider" class="owl-carousel owl-theme">
-
-          <div class="item"><img src="media/static/banners/img/banner.jpg"  alt="">
+           {% for banners in banner|get_banner %}
+          <div class="item">
+         
+            {% if banners.pageurl == '/' and banners.position == 'top' %}
+             <img src="media/{{banners.banner}}"  alt="">
+            {% endif %}
+            
             <div class="slide-content">
               <!-- <a href="#"><img src="{% static "img/slider-logo.png" %}"alt=""></a>
               <h1>The <span>Right</span> Place</h1>
@@ -17,13 +22,13 @@
 
 
           </div>
-
-          <div class="item"><img src="media/static/banners/img/banner1.jpg"  alt="">
+          {% endfor %}
+          <!-- <div class="item"><img src="media/static/banners/img/banner1.jpg"  alt="">
             <div class="slide-content">
-              <!-- <a href="#"><img src="{% static "img/slider-logo.png" %}"alt=""></a>
+              <a href="#"><img src="{% static "img/slider-logo.png" %}"alt=""></a>
 
               <h1>The <span>Right</span> Place</h1>
-              <h2>For Business</h2> -->
+              <h2>For Business</h2>
 
             </div>
 
@@ -31,13 +36,13 @@
 
           <div class="item"><img src="media/static/banners/img/banner2.jpg"  alt="">
             <div class="slide-content">
-              <!-- <a href="#"><img src="{% static "img/slider-logo.png"%}" alt=""></a>
+              <a href="#"><img src="{% static "img/slider-logo.png"%}" alt=""></a>
 
               <h1>The <span>Right</span> Place</h1>
-              <h2>For Business</h2> -->
+              <h2>For Business</h2>
 
             </div>
-          </div>
+          </div> -->
         </div>
 
         <div class="customNavigation">
@@ -678,9 +683,12 @@
        
         <div class="slider">
           <ul class="bxslider">
-            <li><img src="media/static/banners/img/banner.jpg" /></li>
-            <li><img src="media/static/banners/img/banner.jpg" /></li>
-            <li><img src="media/static/banners/img/banner.jpg" /></li>
+            {% for banners in banner|get_banner %}
+               {% if banners.pageurl == '/' and banners.position == 'bottom' %}
+                  <li> <img src="media/{{banners.banner}}"  alt=""> </li>
+                {% endif %}
+            {% endfor %}
+            
           </ul>
         </div>
       

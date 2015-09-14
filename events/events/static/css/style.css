@@ -7990,7 +7990,7 @@ fieldset[disabled] .btn-default-inverse.active {
     height: 100%;
     width: 100%;
 }
-.banner_form{
+.banner_form,.payment{
   position: relative;
   padding: 30px;
   background: #f8f8f8;

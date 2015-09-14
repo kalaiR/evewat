@@ -256,7 +256,7 @@ def details(request,id=None):
 def banner(request):
 	return render_to_response("uploadbanner.html",context_instance=RequestContext(request))
 
-
+@csrf_protect
 def upload_banner(request):
 	print "enter"
 	if request.method=="POST":
@@ -269,6 +269,28 @@ def upload_banner(request):
 		uploadbanner.pageurl=request.POST['pageurl']
 		uploadbanner.banner=request.FILES.get('banner')
 		print "uploadbanner.banner",uploadbanner.banner
+		uploadbanner.link=request.POST['link']
 		uploadbanner.save()
 		message="Your data succesfully uploaded"
-	return render_to_response("uploadbanner.html",context_instance=RequestContext(request))
+		response = render_to_response("uploadbanner.html",context_instance=RequestContext(request))
+		response.set_cookie( 'uploadbanner.price', uploadbanner.price )
+		response.set_cookie( 'uploadbanner.banner', uploadbanner.banner )
+	
+	return response
+
+@csrf_exempt
+def success(request):
+	return render_to_response("success.html",context_instance=RequestContext(request))
+
+def store_payudetails(request):
+	#Code for storing Payu Details
+	payudetails=PayuDetails()
+	
+	payudetails.status=request.POST.get('status')
+	
+	payudetails.save()
+
+	# response.set_cookie('payudetails',payudetails.id)
+	# response.set_cookie('payustatus',payudetails.status)
+	return payudetails.id,payudetails.status	
+
