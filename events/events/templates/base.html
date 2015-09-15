@@ -70,6 +70,8 @@
    <!-- HEADER REGISTER -->
         <div class="header-register">
           <a href="#" class=""><i class="fa fa-plus-square"></i> Register</a>
+          <span class="signup_error" style="{% if request.REQUEST.st %} display:block;color:red;font-size:17px; {%else%} display: none; {% endif %}">
+          {%for message in messages%}{{message}}{% endfor %}</span>
 
           <div>
             <form id="user_form" method="post" action="/register/" name="sign_up">
@@ -82,6 +84,7 @@
               <label for="username_signin" id="username_required1" class="signup_labelError" style="display:none;color:red;">Please enter User name</label>
 
               <input type="password"  class="form-control" name="password" placeholder="password" id="password_signin">
+              <span id="result"></span>
               <label for="password" id="password_signin1" class="signup_labelError" style="display:none;color:red;">Please enter Password</label>
 
               <input type="button" class="btn btn-default" value="Register" name="Create" id="create_user">
