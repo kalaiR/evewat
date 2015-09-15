@@ -606,6 +606,7 @@ $('.user_details').click(function(){
   autoControls: true
 });          
  // validation by pradeepa//
+
   // Image upload
   $(document).on('change','.poster',function(){
       files = this.files;
@@ -646,7 +647,7 @@ $('.user_details').click(function(){
 
   //Registration form validation
 
-  var sign_up_required =["emailid_signin", "password_signin", "username_signin" ];
+  var sign_up_required =["emailid_signin", "username_signin" ];
 
   jQuery('#create_user').click(function(){     
       for (i=0;i<sign_up_required.length;i++) {
@@ -659,6 +660,18 @@ $('.user_details').click(function(){
         input.next('.signup_labelError').hide();        
       }
     }
+
+    //password
+
+    if($('#password_signin').val() == ''){   
+        $('#password_signin').addClass("error_input_field");
+        $('#password_signin').next().next('.signup_labelError').show();         
+      } else {    
+        $('#password_signin').removeClass("error_input_field");
+        $('#password_signin').next().next('.signup_labelError').hide();       
+      }
+
+
     //Validate the e-mail
 
     if($('#emailid_signin').val() != ''){
@@ -683,5 +696,213 @@ $('.user_details').click(function(){
     }
     });     
   //end validation//
+
+  //postevent form validation
+
+  //events
+
+  var events_required =["festname_required", "festcaption_val"];
+
+  jQuery('#post_event').click(function(){     
+      for (i=0;i<events_required.length;i++) {
+      var input = jQuery('#'+events_required[i]);
+      if (input.val() == "")  {   
+        input.addClass("error_input_field");
+        input.next('.labelError').show();         
+      } else {    
+        input.removeClass("error_input_field");
+        input.next('.labelError').hide();        
+      }
+    }
+
+    if($('.festtype_required').val() == 'Fest type'){
+      $('.drop_labelError').show();
+      return false;
+    }
+    else{
+      $('.drop_labelError').hide();
+    }  
+
+
+      if ($(":input").hasClass("error_input_field")){
+      return false;
+      }
+      else{
+        $('form[name="postevent"]').submit();      
+        return true;
+     }
+ 
+  });
+
+  //Event details
+
+  var events_details_required =["festdes_required", "regfees_required", "festurl_required", "reach_required", "queries_required", "state_required"];
+
+  jQuery('#post_event').click(function(){     
+      for (i=0;i<events_details_required.length;i++) {
+      var input = jQuery('#'+events_details_required[i]);
+      if (input.val() == "")  {   
+        input.addClass("error_input_field");
+        input.next('.labelError').show();         
+      } else {    
+        input.removeClass("error_input_field");
+        input.next('.labelError').hide();        
+      }
+    }
+
+    if($('.city_required').val() == 'Select City'){
+      $('.drop_labelError1').show();
+      return false;
+    }
+    else{
+      $('.drop_labelError1').hide();
+    }  
+
+      if ($(":input").hasClass("error_input_field")){
+      return false;
+      }
+      else{
+        $('form[name="postevent"]').submit();      
+        return true;
+      }
+  });
+
+  //upload banner validation
+
+  jQuery('#banner_upload').click(function(){
+
+    if($('.position_required').val() == 'Select Position'){
+            $(this).addClass("error_input_field");
+            $('.position_labelError').show();
+        }
+        else{
+          $(this).removeClass("error_input_field");
+          $('.position_labelError').hide(); 
+        }
+
+    if($('.pageurl_required').val() == 'Select Page URL'){
+            $(this).addClass("error_input_field");
+            $('.pageurl_labelError').show();
+        }
+        else{
+          $(this).removeClass("error_input_field");
+          $('.pageurl_labelError').hide(); 
+        }
+
+    if($('.price_required').val() == 'Select Price'){
+            $(this).addClass("error_input_field");
+            $('.price_labelError').show();
+        }
+        else{
+          $(this).removeClass("error_input_field");
+          $('.price_labelError').hide(); 
+        }
+
+      if($('.link_required').val() == ''){   
+        $('.link_required').addClass("error_input_field");
+        $('.link_required').next('.link_labelError').show();         
+      } else {    
+        $('.link_required').removeClass("error_input_field");
+        $('.link_required').next('.link_labelError').hide();       
+      }
+
+    if ($(".position_required, .pageurl_required, .price_required, .link_required").hasClass("error_input_field")){
+    return false;
+    } else {
+      $('form[name="upload_banner"]').submit();      
+      return true;
+    }
+
 });
+
+  //Payment
+
+  var payment_details =["fname_required", "lname_required", "mobileno_val", "email_blank"];
+
+  jQuery('#paynow').click(function(){     
+      for (i=0;i<payment_details.length;i++) {
+      var input = jQuery('#'+payment_details[i]);
+      if (input.val() == "")  {   
+        input.addClass("error_input_field");
+        input.next('.pay_labelError').show();         
+      } else {    
+        input.removeClass("error_input_field");
+        input.next('.pay_labelError').hide();        
+      }
+    }
+
+  if($('.prefix_required').val() == 'Select'){
+            $(this).addClass("error_input_field");
+            $('.prefix_labelError').show();
+        }
+        else{
+          $(this).removeClass("error_input_field");
+          $('.prefix_labelError').hide(); 
+        }
+
+  if ($(":input").hasClass("error_input_field")){
+      return false;
+      }
+      else{
+        $('form[name="payment_form"]').submit();      
+        return true;
+     }
+     
+    });
+
+  //password strength
+
+  $('#password_signin').keyup(function(){
+     $('#result').html(checkStrength($('#password_signin').val()));
+    });
+});
+
+    function checkStrength(password){
+   
+    //initial strength
+    var strength = 0
+ 
+    //if the password length is less than 6, return message.
+    if (password.length < 6) {
+        $('#result').removeClass()
+        $('#result').addClass('short')
+        return 'Too short'
+    }
+ 
+    //length is ok, lets continue.
+ 
+    //if length is 8 characters or more, increase strength value
+    if (password.length > 7) strength += 1
+ 
+    //if password contains both lower and uppercase characters, increase strength value
+    if (password.match(/([a-z].*[A-Z])|([A-Z].*[a-z])/))  strength += 1
+ 
+    //if it has numbers and characters, increase strength value
+    if (password.match(/([a-zA-Z])/) && password.match(/([0-9])/))  strength += 1 
+ 
+    //if it has one special character, increase strength value
+    if (password.match(/([!,%,&,@,#,$,^,*,?,_,~])/))  strength += 1
+ 
+    //if it has two special characters, increase strength value
+    if (password.match(/(.*[!,%,&,@,#,$,^,*,?,_,~].*[!,",%,&,@,#,$,^,*,?,_,~])/)) strength += 1
+ 
+    //now we have calculated strength value, we can return messages
+ 
+    //if value is less than 2
+    if (strength < 2 ) {
+        $('#result').removeClass()
+        $('#result').addClass('weak')
+        return 'Weak'
+    } else if (strength == 2 ) {
+        $('#result').removeClass()
+        $('#result').addClass('good')
+        return 'Good'
+    } else {
+        $('#result').removeClass()
+        $('#result').addClass('strong')
+        return 'Strong'
+    }
+}  
+
+
 

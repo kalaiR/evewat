@@ -50,10 +50,21 @@
                 <form action="{%url "college_event.views.submit_event"%}" name="postevent" enctype="multipart/form-data" method="POST">{% csrf_token %}
               <div class="events">Events</div>
               <div class="events_fields">
+<<<<<<< HEAD
                    <input type="text" placeholder="Fest name" name="festname" />
                    <input type="text" placeholder="Fest Caption" name="festcaption" />
                     <select name="festtype">
                         <option value="">Fest type</option>
+=======
+                   <input type="text" placeholder="Fest name" name="festname" id="festname_required">
+                   <label for="festname_required" class="labelError" style="display:none;color:red;">Please enter Fest name</label>
+
+                   <input type="text" placeholder="Fest Caption" name="festcaption" id="festcaption_val">
+                   <label for="festcaption_val" class="labelError" style="display:none;color:red;">Please enter Fest caption</label>
+
+                      <select id="festtype_required" name="festtype" class="festtype_required">
+                        <option selected="selected" value="Fest type">Fest type</option>
+>>>>>>> 1f139c1e5367939143e777fb5b4ddf0d7fd58839
                         <option value="technical">Technical</option>
                         <option value="cultural">Cultural</option>
                         <option value="management">Management</option>
@@ -76,18 +87,31 @@
                         <option value="biomedical">Bio Medical</option>
                         <option value="OnlineEvents">Online Events</option>                   
                       </select>
+                      <label id="festtype_required" class="drop_labelError" style="font-size:15px;color:red;display:none;">Please Choose festtype</label>
+                   
+
                       <input  type="text" placeholder="startdate"  id="datepicker" name="startdate" />
+                      <!-- <label for="start_date" class="labelError" style="display:none;color:red;">Please enter Start Date</label> -->
+
                       <input  type="text" placeholder="enddate"  id="datepicker1" name="enddate" />
-                      
-                      <input placeholder="Dealines for Registration yyyy-mm-dd"  id="datepicker_deadline" name="deadline"></input>
+                      <!-- <label for="end_date" class="labelError" style="display:none;color:red;">Please enter End Date</label> -->
+
+                      <input type="text" placeholder="Dealines for Registration yyyy-mm-dd"  id="datepicker_deadline" name="deadline"></input>
+                      <!-- <label for="date_deadline" class="labelError" style="display:none;color:red;">Please enter Deadline for registration</label> -->
               </div>
               <div class="events_details">Events Details</div>
               <div class="eventdetail_fields">
-                    <textarea placeholder="Fest Description" name="festdescription"></textarea>
-                    <input placeholder="Registration Fees" name="registrationfees"></input>
-                      <input type="text" placeholder="Fest Registration URL" name="festurl">
+                    <textarea placeholder="Fest Description" name="festdescription" id="festdes_required"></textarea>
+                    <label for="festdes_required" class="labelError" style="display:none;color:red;">Please enter Fest Description</label>
+
+                    <input placeholder="Registration Fees" name="registrationfees" id="regfees_required"></input>
+                    <label for="regfees_required" class="labelError" style="display:none;color:red;">Please enter Registration fees</label>
+
+                      <input type="text" placeholder="Fest Registration URL" name="festurl" id="festurl_required">
+                      <label for="festurl_required" class="labelError" style="display:none;color:red;">Please enter Fest URL</label>
+
                       <input type='file' id='poster' class="poster" name='poster[]' multiple='multiple'/>
-                      <textarea placeholder="How to reach college/venue" name="reach"></textarea>
+
 
                       <textarea placeholder="Contact person details" name="queries"></textarea>
                             {% if request.COOKIES.global_city_id %}
@@ -112,16 +136,19 @@
                                {% endif %}
                       <!-- <input type="text" placeholder="city" name="city"> -->
                       <input type="text" placeholder="State" name="state" /> 
+
+                      
               </div>
               <div class="user_details">User Details</div>
               <div class="user_fields">
-                 <input type="text" placeholder="Name" name=
+                <input type="text" placeholder="Name" name=
                   "name" value="{{ request.user }}"required>
 
                   <input type="email" placeholder="Email" name="email" value="{{ request.user.email }}" required>
                   
-                  <input type="text" placeholder="Phone number" name="mobile">
+                  <input type="text" placeholder="Phone number" name="mobile" id="mobile_required">
               </div>
+
               <div class="row">
 
             <div class="col-md-6 col-sm-6 col-lg-3">
@@ -164,6 +191,11 @@
               </div> <!-- end .pricing-table -->
 
             </div> <!-- end grid-layout -->
+=======
+              <a class="btn btn-default" href="#" id="post_event"><i class="fa fa-envelope-o"></i>Submit Event</a>
+            </form>
+            </div>
+>>>>>>> 1f139c1e5367939143e777fb5b4ddf0d7fd58839
             </div>
                
               <!-- <a class="btn btn-default" href="#" onclick="submit_form(); return false;"><i class="fa fa-envelope-o"></i>Submit Event</a> -->

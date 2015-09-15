@@ -2866,7 +2866,7 @@ body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.42857143;
-  color: #333333;
+  color: white;
   background-color: #ffffff;
   width: 100% !important;
   height: auto;
@@ -6398,7 +6398,6 @@ fieldset[disabled] .btn-default-inverse.active {
   border-color: #aaaaaa;
 }
 .contact-us .contact-form input:first-child {
- float: left;
     margin-top: 25px;
     width: 40%;
 }
