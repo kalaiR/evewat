@@ -754,5 +754,88 @@ $('.user_details').click(function(){
       }
   });
 
+  //upload banner validation
+
+  jQuery('#banner_upload').click(function(){
+
+    if($('.position_required').val() == 'Select Position'){
+            $(this).addClass("error_input_field");
+            $('.position_labelError').show();
+        }
+        else{
+          $(this).removeClass("error_input_field");
+          $('.position_labelError').hide(); 
+        }
+
+    if($('.pageurl_required').val() == 'Select Page URL'){
+            $(this).addClass("error_input_field");
+            $('.pageurl_labelError').show();
+        }
+        else{
+          $(this).removeClass("error_input_field");
+          $('.pageurl_labelError').hide(); 
+        }
+
+    if($('.price_required').val() == 'Select Price'){
+            $(this).addClass("error_input_field");
+            $('.price_labelError').show();
+        }
+        else{
+          $(this).removeClass("error_input_field");
+          $('.price_labelError').hide(); 
+        }
+
+      if($('.link_required').val() == ''){   
+        $('.link_required').addClass("error_input_field");
+        $('.link_required').next('.link_labelError').show();         
+      } else {    
+        $('.link_required').removeClass("error_input_field");
+        $('.link_required').next('.link_labelError').hide();       
+      }
+
+    if ($(".position_required, .pageurl_required, .price_required, .link_required").hasClass("error_input_field")){
+    return false;
+    } else {
+      $('form[name="upload_banner"]').submit();      
+      return true;
+    }
+
+});
+
+  //Payment
+
+  var payment_details =["fname_required", "lname_required", "mobileno_val", "email_blank"];
+
+  jQuery('#paynow').click(function(){     
+      for (i=0;i<payment_details.length;i++) {
+      var input = jQuery('#'+payment_details[i]);
+      if (input.val() == "")  {   
+        input.addClass("error_input_field");
+        input.next('.pay_labelError').show();         
+      } else {    
+        input.removeClass("error_input_field");
+        input.next('.pay_labelError').hide();        
+      }
+    }
+
+  if($('.prefix_required').val() == 'Select'){
+            $(this).addClass("error_input_field");
+            $('.prefix_labelError').show();
+        }
+        else{
+          $(this).removeClass("error_input_field");
+          $('.prefix_labelError').hide(); 
+        }
+
+  if ($(":input").hasClass("error_input_field")){
+      return false;
+      }
+      else{
+        $('form[name="payment_form"]').submit();      
+        return true;
+     }
+     
+    });
+
 });
 
