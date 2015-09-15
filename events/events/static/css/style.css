@@ -6395,7 +6395,6 @@ fieldset[disabled] .btn-default-inverse.active {
   border-color: #aaaaaa;
 }
 .contact-us .contact-form input:first-child {
- float: left;
     margin-top: 25px;
     width: 40%;
 }

@@ -683,5 +683,76 @@ $('.user_details').click(function(){
     }
     });     
   //end validation//
+
+  //postevent form validation
+
+  //events
+
+  var events_required =["festname_required", "festcaption_val"];
+
+  jQuery('#post_event').click(function(){     
+      for (i=0;i<events_required.length;i++) {
+      var input = jQuery('#'+events_required[i]);
+      if (input.val() == "")  {   
+        input.addClass("error_input_field");
+        input.next('.labelError').show();         
+      } else {    
+        input.removeClass("error_input_field");
+        input.next('.labelError').hide();        
+      }
+    }
+
+    if($('.festtype_required').val() == 'Fest type'){
+      $('.drop_labelError').show();
+      return false;
+    }
+    else{
+      $('.drop_labelError').hide();
+    }  
+
+
+      if ($(":input").hasClass("error_input_field")){
+      return false;
+      }
+      else{
+        $('form[name="postevent"]').submit();      
+        return true;
+     }
+ 
+  });
+
+  //Event details
+
+  var events_details_required =["festdes_required", "regfees_required", "festurl_required", "reach_required", "queries_required", "state_required"];
+
+  jQuery('#post_event').click(function(){     
+      for (i=0;i<events_details_required.length;i++) {
+      var input = jQuery('#'+events_details_required[i]);
+      if (input.val() == "")  {   
+        input.addClass("error_input_field");
+        input.next('.labelError').show();         
+      } else {    
+        input.removeClass("error_input_field");
+        input.next('.labelError').hide();        
+      }
+    }
+
+    if($('.city_required').val() == 'Select City'){
+      $('.drop_labelError1').show();
+      return false;
+    }
+    else{
+      $('.drop_labelError1').hide();
+    }  
+
+      if ($(":input").hasClass("error_input_field")){
+      return false;
+      }
+      else{
+        $('form[name="postevent"]').submit();      
+        return true;
+      }
+  });
+
 });
 
