@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
-from college_event.models import *
+from events.models import *
 
 
 #Model for storing user personal details

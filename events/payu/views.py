@@ -21,8 +21,8 @@ def buy_order(request):
     email=request.POST.get('email',request.COOKIES.get('email'))
     txnid=my_random_string(8)
     cleaned_data = {'key': settings.PAYU_INFO['merchant_key'], 
-                    'txnid':txnid,'amount': request.COOKIES.get('uploadbanner.price'), 
-                    'productinfo':request.COOKIES.get('uploadbanner.banner'),
+                    'txnid':txnid,'amount': request.COOKIES.get('uploadbanner_price'), 
+                    'productinfo':request.COOKIES.get('uploadbanner_banner'),
                     'firstname':fname,
                     'email': email, 
                     'udf1':'', 'udf2': '', 'udf3': '', 
@@ -57,8 +57,8 @@ def buy_order(request):
                          hash_o,
                          
                          txnid,
-                         request.COOKIES.get('uploadbanner.banner'),
-                         request.COOKIES.get('uploadbanner.price'),
+                         request.COOKIES.get('uploadbanner_banner'),
+                         request.COOKIES.get('uploadbanner_price'),
                          email,
                          ))
     response.set_cookie('initial',initial)

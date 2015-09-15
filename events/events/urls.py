@@ -37,6 +37,7 @@ urlpatterns = patterns('',
     url(r'^success$', 'college_event.views.success', name='success'),
     url(r'^(?i)event/(?P<pname>.*)/$', 'college_event.views.event',name='event'),
     url(r'^details/(?P<id>[0-9]+)/$','college_event.views.details',name='details'),
+    url(r'^payment_postevent$', 'college_event.views.payment_event', name='payment_event'),
     url(r'^payment/', 'payu.views.buy_order', name='payment'),
     #getting subcategory
     url(r'^subcategory_for_category/$', 'college_event.views.subcategory_for_category',name='subcategory'),

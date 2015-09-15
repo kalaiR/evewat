@@ -93,6 +93,13 @@ class Postevent(models.Model):
 	def __unicode__(self):
 		return self.name
 
+class PremiumPriceInfo(models.Model):
+    premium_price = models.FloatField(null=True, default=0.0)
+    currency=models.CharField(max_length=10)
+    purpose=models.CharField(max_length=30)
+    month=models.IntegerField(null=True, blank=True)
+    def __unicode__(self):
+        return self.purpose
 
 
 

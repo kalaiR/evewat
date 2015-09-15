@@ -3,13 +3,15 @@ from uuid import uuid4
 from uuid import UUID
 import uuid
 from django_extensions.db.fields import UUIDField
-from college_event.models import *
+from events.models import *
 import datetime
+from django.contrib.auth.models import User
+
 
 class PayuDetails(models.Model):
     mihpayid = models.CharField(max_length=100, null=True, blank=True)
     
-    user=models.OneToOneField(User,null=True, blank=True)
+    # userprofile=models.ForeignKey(Userprofile)
 
     # mode = models.CharField(max_length=10, null=True, blank=True)
     status = models.CharField(max_length=20, null=True, blank=True)

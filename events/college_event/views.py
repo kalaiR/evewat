@@ -26,7 +26,7 @@ from django.template import Context
 from django.template.response import TemplateResponse
 from events.util import format_redirect_url
 from payu.models import *
-
+from transaction.models import *
 from django.utils import simplejson
 import simplejson as json
 
@@ -285,23 +285,39 @@ def upload_banner(request):
 		uploadbanner.link=request.POST['link']
 		uploadbanner.save()
 		message="Your data succesfully uploaded"
-		response = render_to_response("uploadbanner.html",context_instance=RequestContext(request))
-		response.set_cookie( 'uploadbanner.price', uploadbanner.price )
-		response.set_cookie( 'uploadbanner.banner', uploadbanner.banner )
+		response = render_to_response("uploadbanner.html",{'message':message},context_instance=RequestContext(request))
+		response.set_cookie( 'uploadbanner_price', uploadbanner.price )
+		response.set_cookie( 'uploadbanner_position', uploadbanner.position )
+		response.set_cookie( 'uploadbanner_banner', uploadbanner.banner )
 		
 		
 	return response
 
 @csrf_exempt
 def success(request):
+
+	order=Order()
+	user=User()	
+	# order.user =User.objects.get(username=username)
+	order.price=request.COOKIES.get('uploadbanner.price')
+	order.position=request.COOKIES.get('uploadbanner.position')
+	order.banner=request.COOKIES.get('uploadbanner.banner')
+	order.save()
+	transaction=Transaction()
+	# transaction.order=Order.objects.get(id=request.COOKIES.get('orderdetails'))
+	# transaction.payu_details=PayuDetails.objects.get(id=request.COOKIES.get('payudetails'))
+	transaction.payu_status=request.COOKIES.get('payustatus')
+	transaction.save()
 	payid, paystatus=store_payudetails(request)
 	print "payid", payid
 	print "paystatus", paystatus
 	response = render_to_response("success.html",context_instance=RequestContext(request))
 	response.set_cookie('payudetails',payid)
 	response.set_cookie('payustatus',paystatus)
+	# response.set_cookie('orderdetails',order.id)
 	return response
 	
-
+def payment_event(request):
+	return render_to_response("payment.html",context_instance=RequestContext(request))
 	
 

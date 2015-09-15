@@ -155,5 +155,5 @@ PAYU_INFO = {
              'payment_url': 'https://test.payu.in/_payment',
              #success url for hotel
              'surl':'http://localhost:8000/success',
-             
+             'surl1':'http://localhost:8000/post_event'
             }

@@ -90,6 +90,9 @@ video {
   display: inline-block;
   vertical-align: baseline;
 }
+.fl{float:left;}
+
+.fr{float: right;}
 audio:not([controls]) {
   display: none;
   height: 0;
