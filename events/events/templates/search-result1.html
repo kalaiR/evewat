@@ -1,17 +1,1132 @@
 {% extends 'base.html' %}
-{% load static from staticfiles %}
 {% load i18n %}
+{% load static from staticfiles %}
 {% block content %}
 
       <div class="map-section">
         
         <!-- <div id="map_canvas"></div> -->
+        {% for banners in banner|get_banner %}
+               {% if banners.pageurl == 'search/' and banners.position == 'top' %}
+                  <li> <img src="/media/{{banners.banner}}" class="image_banner" alt=""> </li>
+                {% endif %}
+            {% endfor %}
 
+       <!-- <img src="{% static "img/events.jpg" %}"  alt="" class="image_banner"> -->
+       
       </div>
     </div> 
     <div class="header-nav-bar">
       <!-- <div class="container">
         <nav>
+
+          <button><i class="fa fa-bars"></i></button>
+
+          <ul class="primary-nav list-unstyled">
+            <li class="bg-color"><a href="#">Home<i class="fa fa-angle-down"></i></a>
+              <ul>
+                <li><a href="home-map-grid.html">Home-map(grid)</a></li>
+                <li><a href="home-map-list.html">Home-map(list)</a></li>
+                <li><a href="index.html">Home slider(view-1)</a></li>
+                <li><a href="home-category.html">Home slider(view-2)</a></li>
+              </ul>
+
+            </li>
+
+            <li class=""><a href="#">Company<i class="fa fa-angle-down"></i></a>
+
+              <ul>
+                <li><a href="company-profile.html">Company(Profile)</a></li>
+                <li><a href="company-product.html">Company(Product)</a></li>
+                <li><a href="company-portfolio.html">Company(Portfolio)</a></li>
+                <li><a href="company-blog.html">Company(Blog)</a></li>
+                <li><a href="company-contact.html">Company(contact)</a></li>
+              </ul>
+
+            </li>
+
+            <li><a href="sample-page.html">Sample Page</a></li>
+            <li><a href="shortcodes.html">Shortcodes</a></li>
+
+            <li class="">
+              <a href="#">Blog<i class="fa fa-angle-down"></i></a>
+
+              <ul>
+                <li><a href="blog-list.html">Blog list</a></li>
+                <li><a href="blog-post.html">Blog-post</a></li>
+              </ul>
+
+            </li>
+
+            <li><a href="price-listing.html">Price Listing</a></li>
+            <li><a href="about-us.html">About Us</a></li>
+            <li><a href="contact-us.html">Contact Us</a></li>
+          </ul>
+        </nav>
+      </div>  -->
+    </div> <!-- end .header-nav-bar -->
+  </header> <!-- end #header -->
+
+  <div id="page-content">
+    <div class="container">
+      <div class="row">
+
+        <div class="col-md-9 col-md-push-3">
+          <div class="page-content">
+
+            <div class="product-details-list view-switch">
+              <div class="tab-content">
+
+                <div class="tab-pane" id="antique-all">
+                  <h2>Result for "Antique"<span class="comments">69</span></h2>
+
+                  <div class="change-view">
+
+                    <div class="filter-input">
+                      <input type="text" placeholder="Filter by Keywords">
+                    </div>
+                    <button class="grid-view"><i class="fa fa-th"></i></button>
+                    <button class="list-view active"><i class="fa fa-bars"></i></button>
+
+                    <div class="sort-by">
+
+                      <select class="" data-placeholder="-sort by-">
+                        <option value="option1">Name</option>
+                        <option value="option2">Tupe</option>
+                        <option value="option3">Name</option>
+                        <option value="option4">Type</option>
+                      </select>
+
+                     </div>
+
+                      <ul class="pagination">
+                        <li><a href="#"><i class="fa fa-angle-left"></i></a></li>
+                        <li class="active"><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
+                      </ul>
+
+                  </div> <!-- end .change-view -->
+
+                  <div class="row clearfix">
+                    <div class="col-sm-4 col-xs-6">
+
+                      <div class="single-product">
+                        <figure>
+                          <img src="img/content/post-img-10.jpg" alt="">
+
+                          <!-- <div class="rating">
+
+                            <ul class="list-inline">
+                              <li><a href="#"><i class="fa fa-star"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star-half-o"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star-o"></i></a></li>
+                            </ul>
+
+                            <p>Featured</p>
+
+                          </div>  --><!-- end .rating -->
+
+                          <figcaption>
+                            <div class="bookmark">
+                              <a href="#"><i class="fa fa-bookmark-o"></i> Bookmark</a>
+                            </div>
+
+                            <div class="read-more">
+                              <a href="#"><i class="fa fa-angle-right"></i> Read More</a>
+                            </div>
+
+                          </figcaption>
+                        </figure>
+
+                        <h4><a href="#">Old Bookman's</a></h4>
+
+                        <h5><a href="#">Category</a>, <a href="#">Another Category</a></h5>
+
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Proin nibh augue, suscipit a,
+                          scelerisque sed, lacinia in, mi. Cras vel lorem.</p>
+
+                        <a class="read-more" href="#"><i class="fa fa-angle-right"></i>Read More</a>
+
+                      </div> <!-- end .single-product -->
+                    </div> <!-- end .col-sm-4 grid layout -->
+
+                    <div class="col-sm-4 col-xs-6">
+                      <div class="single-product">
+                        <figure>
+                          <img src="img/content/post-img-6.jpg" alt="">
+                          <div class="rating">
+
+                            <ul class="list-inline">
+                              <li><a href="#"><i class="fa fa-star"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star-half-o"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star-o"></i></a></li>
+                            </ul>
+                            <p>Featured</p>
+
+                          </div> <!-- end .rating -->
+
+                          <figcaption>
+                            <div class="bookmark">
+                              <a href="#"><i class="fa fa-bookmark-o"></i> Bookmark</a>
+                            </div>
+                            <div class="read-more">
+                              <a href="#"><i class="fa fa-angle-right"></i> Read More</a>
+                            </div>
+
+                          </figcaption>
+                        </figure>
+
+                        <h4><a href="#">Old Bookman's</a></h4>
+
+                        <h5><a href="#">Category</a>, <a href="#">Another Category</a></h5>
+
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Proin nibh augue, suscipit a,
+                          scelerisque sed, lacinia in, mi. Cras vel lorem.</p>
+
+                        <a class="read-more" href="#"><i class="fa fa-angle-right"></i>Read More</a>
+                      </div> <!-- end .single-product -->
+                    </div> <!-- end .grid-layout -->
+
+                    <div class="col-sm-4 col-xs-6">
+                      <div class="single-product">
+                        <figure>
+                          <img src="img/content/post-img-2.jpg" alt="">
+                          <div class="rating">
+
+                            <ul class="list-inline">
+                              <li><a href="#"><i class="fa fa-star"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star-half-o"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star-o"></i></a></li>
+                            </ul>
+                            <p>Featured</p>
+
+                          </div> <!-- end .rating -->
+
+                          <figcaption>
+                            <div class="bookmark">
+                              <a href="#"><i class="fa fa-bookmark-o"></i> Bookmark</a>
+                            </div>
+                            <div class="read-more">
+                              <a href="#"><i class="fa fa-angle-right"></i> Read More</a>
+                            </div>
+
+                          </figcaption>
+                        </figure>
+
+                        <h4><a href="#">Old Bookman's</a></h4>
+
+                        <h5><a href="#">Category</a>, <a href="#">Another Category</a></h5>
+
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Proin nibh augue, suscipit a,
+                          scelerisque sed, lacinia in, mi. Cras vel lorem.</p>
+
+                        <a class="read-more" href="#"><i class="fa fa-angle-right"></i>Read More</a>
+
+                      </div> <!-- end .single-product -->
+                    </div> <!-- end .grid-layout -->
+
+                    <div class="col-sm-4 col-xs-6">
+                      <div class="single-product">
+                        <figure>
+                          <img src="img/content/post-img-4.jpg" alt="">
+
+                          <div class="rating">
+                            <ul class="list-inline">
+                              <li><a href="#"><i class="fa fa-star"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star-half-o"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star-o"></i></a></li>
+                            </ul>
+
+                            <p>Featured</p>
+
+                          </div> <!-- end .rating -->
+
+                          <figcaption>
+                            <div class="bookmark">
+                              <a href="#"><i class="fa fa-bookmark-o"></i> Bookmark</a>
+                            </div>
+                            <div class="read-more">
+                              <a href="#"><i class="fa fa-angle-right"></i> Read More</a>
+                            </div>
+
+                          </figcaption>
+                        </figure>
+                        <h4><a href="#">Old Bookman's</a></h4>
+                        <h5><a href="#">Category</a>, <a href="#">Another Category</a></h5>
+
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Proin nibh augue, suscipit a,
+                          scelerisque sed, lacinia in, mi. Cras vel lorem.</p>
+
+                        <a class="read-more" href="#"><i class="fa fa-angle-right"></i>Read More</a>
+
+                      </div> <!-- end .single-product -->
+                    </div> <!-- end .grid-layout -->
+
+                    <div class="col-sm-4 col-xs-6">
+                      <div class="single-product">
+                        <figure>
+                          <img src="img/content/post-img-5.jpg" alt="">
+
+                          <div class="rating">
+                            <ul class="list-inline">
+                              <li><a href="#"><i class="fa fa-star"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star-half-o"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star-o"></i></a></li>
+                            </ul>
+
+                            <p>Featured</p>
+
+                          </div> <!-- end .rating -->
+
+                          <figcaption>
+                            <div class="bookmark">
+                              <a href="#"><i class="fa fa-bookmark-o"></i> Bookmark</a>
+                            </div>
+                            <div class="read-more">
+                              <a href="#"><i class="fa fa-angle-right"></i> Read More</a>
+                            </div>
+
+                          </figcaption>
+                        </figure>
+                        <h4><a href="#">Old Bookman's</a></h4>
+
+                        <h5><a href="#">Category</a>, <a href="#">Another Category</a></h5>
+
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Proin nibh augue, suscipit a,
+                          scelerisque sed, lacinia in, mi. Cras vel lorem.</p>
+
+                        <a class="read-more" href="#"><i class="fa fa-angle-right"></i>Read More</a>
+
+                      </div> <!-- end .single-product -->
+                    </div> <!-- end .grid-layout -->
+
+                    <div class="col-sm-4 col-xs-6">
+                      <div class="single-product">
+                        <figure>
+                          <img src="img/content/post-img-6.jpg" alt="">
+
+                          <div class="rating">
+                            <ul class="list-inline">
+                              <li><a href="#"><i class="fa fa-star"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star-half-o"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star-o"></i></a></li>
+                            </ul>
+
+                            <p>Featured</p>
+
+                          </div> <!-- end .rating -->
+
+                          <figcaption>
+                            <div class="bookmark">
+                              <a href="#"><i class="fa fa-bookmark-o"></i> Bookmark</a>
+                            </div>
+
+                            <div class="read-more">
+                              <a href="#"><i class="fa fa-angle-right"></i> Read More</a>
+                            </div>
+                          </figcaption>
+                        </figure>
+
+                        <h4><a href="#">Old Bookman's</a></h4>
+
+                        <h5><a href="#">Category</a>, <a href="#">Another Category</a></h5>
+
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Proin nibh augue, suscipit a,
+                          scelerisque sed, lacinia in, mi. Cras vel lorem.</p>
+
+                        <a class="read-more" href="#"><i class="fa fa-angle-right"></i>Read More</a>
+
+                      </div> <!-- end .single-product -->
+                    </div> <!-- end .grid-layout -->
+
+                    <div class="col-sm-4 col-xs-6">
+                      <div class="single-product">
+                        <figure>
+                          <img src="img/content/post-img-7.jpg" alt="">
+
+                          <div class="rating">
+                            <ul class="list-inline">
+                              <li><a href="#"><i class="fa fa-star"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star-half-o"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star-o"></i></a></li>
+                            </ul>
+
+                            <p>Featured</p>
+
+                          </div> <!-- end .rating -->
+
+                          <figcaption>
+                            <div class="bookmark">
+                              <a href="#"><i class="fa fa-bookmark-o"></i> Bookmark</a>
+                            </div>
+
+                            <div class="read-more">
+                              <a href="#"><i class="fa fa-angle-right"></i> Read More</a>
+                            </div>
+
+                          </figcaption>
+                        </figure>
+
+                        <h4><a href="#">Old Bookman's</a></h4>
+
+                        <h5><a href="#">Category</a>, <a href="#">Another Category</a></h5>
+
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Proin nibh augue, suscipit a,
+                          scelerisque sed, lacinia in, mi. Cras vel lorem.</p>
+
+                        <a class="read-more" href="#"><i class="fa fa-angle-right"></i>Read More</a>
+
+                      </div> <!-- end .single-product -->
+                    </div> <!-- end .grid-layout -->
+
+                    <div class="col-sm-4 col-xs-6">
+                      <div class="single-product">
+                        <figure>
+                          <img src="img/content/post-img-8.jpg" alt="">
+
+                          <div class="rating">
+                            <ul class="list-inline">
+                              <li><a href="#"><i class="fa fa-star"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star-half-o"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star-o"></i></a></li>
+                            </ul>
+
+                            <p>Featured</p>
+
+                          </div> <!-- end .rating -->
+
+                          <figcaption>
+                            <div class="bookmark">
+                              <a href="#"><i class="fa fa-bookmark-o"></i> Bookmark</a>
+                            </div>
+
+                            <div class="read-more">
+                              <a href="#"><i class="fa fa-angle-right"></i> Read More</a>
+                            </div>
+
+                          </figcaption>
+                        </figure>
+
+                        <h4><a href="#">Old Bookman's</a></h4>
+
+                        <h5><a href="#">Category</a>, <a href="#">Another Category</a></h5>
+
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Proin nibh augue, suscipit a,
+                          scelerisque sed, lacinia in, mi. Cras vel lorem.</p>
+
+                        <a class="read-more" href="#"><i class="fa fa-angle-right"></i>Read More</a>
+
+                      </div> <!-- end .single-product -->
+                    </div> <!-- end .grid-layout -->
+
+
+                    <div class="col-sm-4 col-xs-6">
+                      <div class="single-product">
+                        <figure>
+                          <img src="img/content/post-img-9.jpg" alt="">
+
+                          <div class="rating">
+                            <ul class="list-inline">
+                              <li><a href="#"><i class="fa fa-star"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star-half-o"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star-o"></i></a></li>
+                            </ul>
+
+                            <p>Featured</p>
+
+                          </div> <!-- end .rating -->
+
+                          <figcaption>
+                            <div class="bookmark">
+                              <a href="#"><i class="fa fa-bookmark-o"></i> Bookmark</a>
+                            </div>
+
+                            <div class="read-more">
+                              <a href="#"><i class="fa fa-angle-right"></i> Read More</a>
+                            </div>
+
+                          </figcaption>
+                        </figure>
+
+                        <h4><a href="#">Old Bookman's</a></h4>
+
+                        <h5><a href="#">Category</a>, <a href="#">Another Category</a></h5>
+
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Proin nibh augue, suscipit a,
+                          scelerisque sed, lacinia in, mi. Cras vel lorem.</p>
+
+                        <a class="read-more" href="#"><i class="fa fa-angle-right"></i>Read More</a>
+
+                      </div> <!-- end .single-product -->
+                    </div> <!-- end .grid-layout -->
+
+                    <div class="col-sm-4 col-xs-6">
+                      <div class="single-product">
+                        <figure>
+                          <img src="img/content/post-img-10.jpg" alt="">
+
+                          <div class="rating">
+                            <ul class="list-inline">
+                              <li><a href="#"><i class="fa fa-star"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star-half-o"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star-o"></i></a></li>
+                            </ul>
+
+                            <p>Featured</p>
+
+                          </div> <!-- end .rating -->
+
+                          <figcaption>
+                            <div class="bookmark">
+                              <a href="#"><i class="fa fa-bookmark-o"></i> Bookmark</a>
+                            </div>
+
+                            <div class="read-more">
+                              <a href="#"><i class="fa fa-angle-right"></i> Read More</a>
+                            </div>
+
+                          </figcaption>
+                        </figure>
+
+                        <h4><a href="#">Old Bookman's</a></h4>
+
+                        <h5><a href="#">Category</a>, <a href="#">Another Category</a></h5>
+
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Proin nibh augue, suscipit a,
+                          scelerisque sed, lacinia in, mi. Cras vel lorem.</p>
+
+                        <a class="read-more" href="#"><i class="fa fa-angle-right"></i>Read More</a>
+
+                      </div> <!-- end .single-product -->
+                    </div> <!-- end .grid-layout -->
+
+                    <div class="col-sm-4 col-xs-6">
+                      <div class="single-product">
+                        <figure>
+                          <img src="img/content/post-img-11.jpg" alt="">
+
+                          <div class="rating">
+                            <ul class="list-inline">
+                              <li><a href="#"><i class="fa fa-star"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star-half-o"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star-o"></i></a></li>
+                            </ul>
+
+                            <p>Featured</p>
+
+                          </div> <!-- end .rating -->
+
+                          <figcaption>
+                            <div class="bookmark">
+                              <a href="#"><i class="fa fa-bookmark-o"></i> Bookmark</a>
+                            </div>
+
+                            <div class="read-more">
+                              <a href="#"><i class="fa fa-angle-right"></i> Read More</a>
+                            </div>
+
+                          </figcaption>
+                        </figure>
+
+                        <h4><a href="#">Old Bookman's</a></h4>
+
+                        <h5><a href="#">Category</a>, <a href="#">Another Category</a></h5>
+
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Proin nibh augue, suscipit a,
+                          scelerisque sed, lacinia in, mi. Cras vel lorem.</p>
+
+                        <a class="read-more" href="#"><i class="fa fa-angle-right"></i>Read More</a>
+
+                      </div> <!-- end .single-product -->
+                    </div> <!-- end .grid-layout -->
+
+                    <div class="col-sm-4 col-xs-6">
+                      <div class="single-product">
+                        <figure>
+                          <img src="img/content/post-img-12.jpg" alt="">
+
+                          <div class="rating">
+                            <ul class="list-inline">
+                              <li><a href="#"><i class="fa fa-star"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star-half-o"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star-o"></i></a></li>
+                            </ul>
+
+                            <p>Featured</p>
+
+                          </div> <!-- end .rating -->
+
+                          <figcaption>
+                            <div class="bookmark">
+                              <a href="#"><i class="fa fa-bookmark-o"></i> Bookmark</a>
+                            </div>
+
+                            <div class="read-more">
+                              <a href="#"><i class="fa fa-angle-right"></i> Read More</a>
+                            </div>
+
+                          </figcaption>
+                        </figure>
+
+                        <h4><a href="#">Old Bookman's</a></h4>
+
+                        <h5><a href="#">Category</a>, <a href="#">Another Category</a></h5>
+
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Proin nibh augue, suscipit a,
+                          scelerisque sed, lacinia in, mi. Cras vel lorem.</p>
+
+                        <a class="read-more" href="#"><i class="fa fa-angle-right"></i>Read More</a>
+
+                      </div> <!-- end .single-product -->
+                    </div> <!-- end .grid-layout -->
+
+                    <div class="pagination-center">
+
+                      <ul class="pagination">
+                        <li><a href="#"><i class="fa fa-angle-left"></i></a></li>
+                        <li class="active"><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
+                      </ul>
+
+                    </div>
+
+                  </div> <!-- end .row -->
+                </div> <!-- end .tabe-pane -->
+
+
+                <div class="tab-pane" id="jewelry">
+                  <h2>Result for "jewelry"<span class="comments">69</span></h2>
+
+                  <div class="change-view">
+
+                    <div class="filter-input">
+                      <input type="text" placeholder="Filter by Keywords">
+                    </div>
+                    <button class="grid-view"><i class="fa fa-th"></i></button>
+                    <button class="list-view active"><i class="fa fa-bars"></i></button>
+
+                    <div class="sort-by">
+
+                      <select class="" data-placeholder="-sort by-">
+                        <option value="option1">Name</option>
+                        <option value="option2">Tupe</option>
+                        <option value="option3">Name</option>
+                        <option value="option4">Type</option>
+                      </select>
+
+                     </div>
+
+                      <ul class="pagination">
+                        <li><a href="#"><i class="fa fa-angle-left"></i></a></li>
+                        <li class="active"><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
+                      </ul>
+
+                  </div> <!-- end .change-view -->
+
+                  <div class="row clearfix">
+                    <div class="col-sm-4 col-xs-6">
+
+                      <div class="single-product">
+                        <figure>
+                          <img src="img/content/post-img-5.jpg" alt="">
+
+                          <div class="rating">
+
+                            <ul class="list-inline">
+                              <li><a href="#"><i class="fa fa-star"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star-half-o"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star-o"></i></a></li>
+                            </ul>
+
+                            <p>Featured</p>
+
+                          </div> <!-- end .rating -->
+
+                          <figcaption>
+                            <div class="bookmark">
+                              <a href="#"><i class="fa fa-bookmark-o"></i> Bookmark</a>
+                            </div>
+
+                            <div class="read-more">
+                              <a href="#"><i class="fa fa-angle-right"></i> Read More</a>
+                            </div>
+
+                          </figcaption>
+                        </figure>
+
+                        <h4><a href="#">Old Bookman's</a></h4>
+
+                        <h5><a href="#">Category</a>, <a href="#">Another Category</a></h5>
+
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Proin nibh augue, suscipit a,
+                          scelerisque sed, lacinia in, mi. Cras vel lorem.</p>
+
+                        <a class="read-more" href="#"><i class="fa fa-angle-right"></i>Read More</a>
+
+                      </div> <!-- end .single-product -->
+                    </div> <!-- end .col-sm-4 grid layout -->
+
+                    <div class="col-sm-4 col-xs-6">
+                      <div class="single-product">
+                        <figure>
+                          <img src="img/content/post-img-8.jpg" alt="">
+                          <div class="rating">
+
+                            <ul class="list-inline">
+                              <li><a href="#"><i class="fa fa-star"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star-half-o"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star-o"></i></a></li>
+                            </ul>
+                            <p>Featured</p>
+
+                          </div> <!-- end .rating -->
+
+                          <figcaption>
+                            <div class="bookmark">
+                              <a href="#"><i class="fa fa-bookmark-o"></i> Bookmark</a>
+                            </div>
+                            <div class="read-more">
+                              <a href="#"><i class="fa fa-angle-right"></i> Read More</a>
+                            </div>
+
+                          </figcaption>
+                        </figure>
+
+                        <h4><a href="#">Old Bookman's</a></h4>
+
+                        <h5><a href="#">Category</a>, <a href="#">Another Category</a></h5>
+
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Proin nibh augue, suscipit a,
+                          scelerisque sed, lacinia in, mi. Cras vel lorem.</p>
+
+                        <a class="read-more" href="#"><i class="fa fa-angle-right"></i>Read More</a>
+                      </div> <!-- end .single-product -->
+                    </div> <!-- end .grid-layout -->
+
+                    <div class="col-sm-4 col-xs-6">
+                      <div class="single-product">
+                        <figure>
+                          <img src="img/content/post-img-6.jpg" alt="">
+                          <div class="rating">
+
+                            <ul class="list-inline">
+                              <li><a href="#"><i class="fa fa-star"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star-half-o"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star-o"></i></a></li>
+                            </ul>
+                            <p>Featured</p>
+
+                          </div> <!-- end .rating -->
+
+                          <figcaption>
+                            <div class="bookmark">
+                              <a href="#"><i class="fa fa-bookmark-o"></i> Bookmark</a>
+                            </div>
+                            <div class="read-more">
+                              <a href="#"><i class="fa fa-angle-right"></i> Read More</a>
+                            </div>
+
+                          </figcaption>
+                        </figure>
+
+                        <h4><a href="#">Old Bookman's</a></h4>
+
+                        <h5><a href="#">Category</a>, <a href="#">Another Category</a></h5>
+
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Proin nibh augue, suscipit a,
+                          scelerisque sed, lacinia in, mi. Cras vel lorem.</p>
+
+                        <a class="read-more" href="#"><i class="fa fa-angle-right"></i>Read More</a>
+
+                      </div> <!-- end .single-product -->
+                    </div> <!-- end .grid-layout -->
+
+                    <div class="col-sm-4 col-xs-6">
+                      <div class="single-product">
+                        <figure>
+                          <img src="img/content/post-img-4.jpg" alt="">
+
+                          <div class="rating">
+                            <ul class="list-inline">
+                              <li><a href="#"><i class="fa fa-star"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star-half-o"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star-o"></i></a></li>
+                            </ul>
+
+                            <p>Featured</p>
+
+                          </div> <!-- end .rating -->
+
+                          <figcaption>
+                            <div class="bookmark">
+                              <a href="#"><i class="fa fa-bookmark-o"></i> Bookmark</a>
+                            </div>
+                            <div class="read-more">
+                              <a href="#"><i class="fa fa-angle-right"></i> Read More</a>
+                            </div>
+
+                          </figcaption>
+                        </figure>
+                        <h4><a href="#">Old Bookman's</a></h4>
+                        <h5><a href="#">Category</a>, <a href="#">Another Category</a></h5>
+
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Proin nibh augue, suscipit a,
+                          scelerisque sed, lacinia in, mi. Cras vel lorem.</p>
+
+                        <a class="read-more" href="#"><i class="fa fa-angle-right"></i>Read More</a>
+
+                      </div> <!-- end .single-product -->
+                    </div> <!-- end .grid-layout -->
+
+                    <div class="col-sm-4 col-xs-6">
+                      <div class="single-product">
+                        <figure>
+                          <img src="img/content/post-img-5.jpg" alt="">
+
+                          <div class="rating">
+                            <ul class="list-inline">
+                              <li><a href="#"><i class="fa fa-star"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star-half-o"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star-o"></i></a></li>
+                            </ul>
+
+                            <p>Featured</p>
+
+                          </div> <!-- end .rating -->
+
+                          <figcaption>
+                            <div class="bookmark">
+                              <a href="#"><i class="fa fa-bookmark-o"></i> Bookmark</a>
+                            </div>
+                            <div class="read-more">
+                              <a href="#"><i class="fa fa-angle-right"></i> Read More</a>
+                            </div>
+
+                          </figcaption>
+                        </figure>
+                        <h4><a href="#">Old Bookman's</a></h4>
+
+                        <h5><a href="#">Category</a>, <a href="#">Another Category</a></h5>
+
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Proin nibh augue, suscipit a,
+                          scelerisque sed, lacinia in, mi. Cras vel lorem.</p>
+
+                        <a class="read-more" href="#"><i class="fa fa-angle-right"></i>Read More</a>
+
+                      </div> <!-- end .single-product -->
+                    </div> <!-- end .grid-layout -->
+
+                    <div class="col-sm-4 col-xs-6">
+                      <div class="single-product">
+                        <figure>
+                          <img src="img/content/post-img-6.jpg" alt="">
+
+                          <div class="rating">
+                            <ul class="list-inline">
+                              <li><a href="#"><i class="fa fa-star"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star-half-o"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star-o"></i></a></li>
+                            </ul>
+
+                            <p>Featured</p>
+
+                          </div> <!-- end .rating -->
+
+                          <figcaption>
+                            <div class="bookmark">
+                              <a href="#"><i class="fa fa-bookmark-o"></i> Bookmark</a>
+                            </div>
+
+                            <div class="read-more">
+                              <a href="#"><i class="fa fa-angle-right"></i> Read More</a>
+                            </div>
+                          </figcaption>
+                        </figure>
+
+                        <h4><a href="#">Old Bookman's</a></h4>
+
+                        <h5><a href="#">Category</a>, <a href="#">Another Category</a></h5>
+
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Proin nibh augue, suscipit a,
+                          scelerisque sed, lacinia in, mi. Cras vel lorem.</p>
+
+                        <a class="read-more" href="#"><i class="fa fa-angle-right"></i>Read More</a>
+
+                      </div> <!-- end .single-product -->
+                    </div> <!-- end .grid-layout -->
+
+                    <div class="col-sm-4 col-xs-6">
+                      <div class="single-product">
+                        <figure>
+                          <img src="img/content/post-img-7.jpg" alt="">
+
+                          <div class="rating">
+                            <ul class="list-inline">
+                              <li><a href="#"><i class="fa fa-star"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star-half-o"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star-o"></i></a></li>
+                            </ul>
+
+                            <p>Featured</p>
+
+                          </div> <!-- end .rating -->
+
+                          <figcaption>
+                            <div class="bookmark">
+                              <a href="#"><i class="fa fa-bookmark-o"></i> Bookmark</a>
+                            </div>
+
+                            <div class="read-more">
+                              <a href="#"><i class="fa fa-angle-right"></i> Read More</a>
+                            </div>
+
+                          </figcaption>
+                        </figure>
+
+                        <h4><a href="#">Old Bookman's</a></h4>
+
+                        <h5><a href="#">Category</a>, <a href="#">Another Category</a></h5>
+
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Proin nibh augue, suscipit a,
+                          scelerisque sed, lacinia in, mi. Cras vel lorem.</p>
+
+                        <a class="read-more" href="#"><i class="fa fa-angle-right"></i>Read More</a>
+
+                      </div> <!-- end .single-product -->
+                    </div> <!-- end .grid-layout -->
+
+                    <div class="col-sm-4 col-xs-6">
+                      <div class="single-product">
+                        <figure>
+                          <img src="img/content/post-img-8.jpg" alt="">
+
+                          <div class="rating">
+                            <ul class="list-inline">
+                              <li><a href="#"><i class="fa fa-star"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star-half-o"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star-o"></i></a></li>
+                            </ul>
+
+                            <p>Featured</p>
+
+                          </div> <!-- end .rating -->
+
+                          <figcaption>
+                            <div class="bookmark">
+                              <a href="#"><i class="fa fa-bookmark-o"></i> Bookmark</a>
+                            </div>
+
+                            <div class="read-more">
+                              <a href="#"><i class="fa fa-angle-right"></i> Read More</a>
+                            </div>
+
+                          </figcaption>
+                        </figure>
+
+                        <h4><a href="#">Old Bookman's</a></h4>
+
+                        <h5><a href="#">Category</a>, <a href="#">Another Category</a></h5>
+
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Proin nibh augue, suscipit a,
+                          scelerisque sed, lacinia in, mi. Cras vel lorem.</p>
+
+                        <a class="read-more" href="#"><i class="fa fa-angle-right"></i>Read More</a>
+
+                      </div> <!-- end .single-product -->
+                    </div> <!-- end .grid-layout -->
+
+
+                    <div class="col-sm-4 col-xs-6">
+                      <div class="single-product">
+                        <figure>
+                          <img src="img/content/post-img-9.jpg" alt="">
+
+                          <div class="rating">
+                            <ul class="list-inline">
+                              <li><a href="#"><i class="fa fa-star"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star-half-o"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star-o"></i></a></li>
+                            </ul>
+
+                            <p>Featured</p>
+
+                          </div> <!-- end .rating -->
+
+                          <figcaption>
+                            <div class="bookmark">
+                              <a href="#"><i class="fa fa-bookmark-o"></i> Bookmark</a>
+                            </div>
+
+                            <div class="read-more">
+                              <a href="#"><i class="fa fa-angle-right"></i> Read More</a>
+                            </div>
+
+                          </figcaption>
+                        </figure>
+
+                        <h4><a href="#">Old Bookman's</a></h4>
+
+                        <h5><a href="#">Category</a>, <a href="#">Another Category</a></h5>
+
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Proin nibh augue, suscipit a,
+                          scelerisque sed, lacinia in, mi. Cras vel lorem.</p>
+
+                        <a class="read-more" href="#"><i class="fa fa-angle-right"></i>Read More</a>
+
+                      </div> <!-- end .single-product -->
+                    </div> <!-- end .grid-layout -->
+
+                    <div class="col-sm-4 col-xs-6">
+                      <div class="single-product">
+                        <figure>
+                          <img src="img/content/post-img-10.jpg" alt="">
+
+                          <div class="rating">
+                            <ul class="list-inline">
+                              <li><a href="#"><i class="fa fa-star"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star-half-o"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star-o"></i></a></li>
+                            </ul>
+
+                            <p>Featured</p>
+
+                          </div> <!-- end .rating -->
+
+                          <figcaption>
+                            <div class="bookmark">
+                              <a href="#"><i class="fa fa-bookmark-o"></i> Bookmark</a>
+                            </div>
+
+                            <div class="read-more">
+                              <a href="#"><i class="fa fa-angle-right"></i> Read More</a>
+                            </div>
+
+                          </figcaption>
+                        </figure>
+
+                        <h4><a href="#">Old Bookman's</a></h4>
+
+                        <h5><a href="#">Category</a>, <a href="#">Another Category</a></h5>
+
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Proin nibh augue, suscipit a,
+                          scelerisque sed, lacinia in, mi. Cras vel lorem.</p>
+
+                        <a class="read-more" href="#"><i class="fa fa-angle-right"></i>Read More</a>
+
+                      </div> <!-- end .single-product -->
+                    </div> <!-- end .grid-layout -->
+
+                    <div class="col-sm-4 col-xs-6">
+                      <div class="single-product">
+                        <figure>
+                          <img src="img/content/post-img-11.jpg" alt="">
+
+                          <div class="rating">
+                            <ul class="list-inline">
+                              <li><a href="#"><i class="fa fa-star"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star-half-o"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star-o"></i></a></li>
+                            </ul>
+
+                            <p>Featured</p>
+
+                          </div> <!-- end .rating -->
+
+                          <figcaption>
+                            <div class="bookmark">
+                              <a href="#"><i class="fa fa-bookmark-o"></i> Bookmark</a>
+                            </div>
+
+                            <div class="read-more">
+                              <a href="#"><i class="fa fa-angle-right"></i> Read More</a>
+                            </div>
+
+                          </figcaption>
+                        </figure>
+
+                        <h4><a href="#">Old Bookman's</a></h4>
+
+                        <h5><a href="#">Category</a>, <a href="#">Another Category</a></h5>
+
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Proin nibh augue, suscipit a,
+                          scelerisque sed, lacinia in, mi. Cras vel lorem.</p>
+
+                        <a class="read-more" href="#"><i class="fa fa-angle-right"></i>Read More</a>
+
+                      </div> <!-- end .single-product -->
+                    </div> <!-- end .grid-layout -->
+
+                    <div class="col-sm-4 col-xs-6">
+                      <div class="single-product">
+                        <figure>
+                          <img src="img/content/post-img-12.jpg" alt="">
+
+                          <div class="rating">
+                            <ul class="list-inline">
+                              <li><a href="#"><i class="fa fa-star"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star-half-o"></i></a></li>
+                              <li><a href="#"><i class="fa fa-star-o"></i></a></li>
+                            </ul>
+
+                            <p>Featured</p>
+
+                          </div> <!-- end .rating -->
+>>>>>>> 524a8c0111933f0e7c8959cabf42d10439becdef
 
           <button><i class="fa fa-bars"></i></button>
 
@@ -94,21 +1209,9 @@
 
                       <div class="single-product">
                         <figure>
-                          <img src="{%static "img/content/post-img-1.jpg"%}" alt="">
+                          <img src="{% static "img/events.jpg" %}" alt="">
 
-                          <div class="rating">
-
-                            <!-- <ul class="list-inline">
-                              <li><a href="#"><i class="fa fa-star"></i></a></li>
-                              <li><a href="#"><i class="fa fa-star"></i></a></li>
-                              <li><a href="#"><i class="fa fa-star"></i></a></li>
-                              <li><a href="#"><i class="fa fa-star-half-o"></i></a></li>
-                              <li><a href="#"><i class="fa fa-star-o"></i></a></li>
-                            </ul> -->
-
-                            <p>Featured</p>
-
-                          </div> <!-- end .rating -->
+                          
 
                           <figcaption>
                             <div class="bookmark">
@@ -132,7 +1235,7 @@
 
                       </div> <!-- end .single-product -->
                     </div> <!-- end .col-sm-4 grid layout -->
-                    {%endfor%}
+                    {% endfor %}
 
                     <div class="pagination-center">
 
@@ -1240,21 +2343,7 @@
 
               <div class="advertisement">
                 <p>Advertisement</p>
-                {% for banners in banner|get_banner %}
-                {% if banners.pageurl == '/event' and banners.position == 'right' %}
-                  <div class="item">
-                  
-                      <img src="media/{{banners.banner}}" >
-                    
-                    <div class="slide-content">
-                     
-                    </div>
 
-
-                  </div>
-                {% endif %}
-                {% endfor %}
-               <!--  <img src="img/add.jpg" alt=""> -->
               </div>
 
             </div> <!-- end .product-details -->
