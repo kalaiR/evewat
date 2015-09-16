@@ -3168,8 +3168,9 @@ button {
   border-bottom-left-radius: 3px;
 }
 .uou-custom-select .select-clone > li {
-  display: block;
-  padding: 3px 15px;
+ color: black;
+    display: block;
+    padding: 3px 15px;
 }
 .uou-custom-select .select-clone > li:hover {
   background: #ddd;
@@ -6430,6 +6431,7 @@ fieldset[disabled] .btn-default-inverse.active {
   overflow: auto;
   font-size: 15px;
   margin-top: 20px;
+  color:black;
 }
 .contact-us .contact-form textarea:focus {
   border-color: #aaaaaa;
@@ -8011,4 +8013,10 @@ fieldset[disabled] .btn-default-inverse.active {
 }
 .bx-wrapper, .bx-viewport {
     height: 200px !important; //provide height of slider
+}
+.feature li{
+  color:black;
+}
+.form-group {
+    color: black;
 }
