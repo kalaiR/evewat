@@ -211,12 +211,12 @@ def submit_event(request):
 		postevent.startdate=request.POST['startdate']
 		postevent.enddate=request.POST['enddate']
 		postevent.deadline=request.POST['deadline']
-		
-		
-		
 		postevent.save()
+		premium=PremiumPriceInfo()
+		premium.price=request.GET['premium_price']
+		print "premium.price",premium.price
 		message="Your data succesfully submitted"
-	return render_to_response("post_event.html",{'message':message}, context_instance=RequestContext(request))
+	return render_to_response("post_event.html", context_instance=RequestContext(request))
 
 def subcategory_for_category(request):
 	print "subcategory_for_category"
@@ -274,21 +274,22 @@ def upload_banner(request):
 	print "enter"
 	if request.method=="POST":
 		uploadbanner=SiteBanner()
-		# print uploadbanner
-		uploadbanner.price=request.POST['price']
+		# print uploadbanner   request.POST.get('start',request.COOKIES.get('checkin'))
+		uploadbanner.price=request.POST.get('price',request.COOKIES.get('price'))
 		print "uploadbanner.price",uploadbanner.price
-		uploadbanner.position=request.POST['position']
+		uploadbanner.position=request.POST.get('position',request.COOKIES.get('position'))
 		print "uploadbanner.position",uploadbanner.position
-		uploadbanner.pageurl=request.POST['pageurl']
-		uploadbanner.banner=request.FILES.get('banner')
+		uploadbanner.pageurl=request.POST.get('pageurl',request.COOKIES.get('pageurl'))
+		uploadbanner.banner=request.FILES.get('banner',request.COOKIES.get('banner'))
 		print "uploadbanner.banner",uploadbanner.banner
 		uploadbanner.link=request.POST['link']
 		uploadbanner.save()
 		message="Your data succesfully uploaded"
 		response = render_to_response("uploadbanner.html",{'message':message},context_instance=RequestContext(request))
-		response.set_cookie( 'uploadbanner_price', uploadbanner.price )
-		response.set_cookie( 'uploadbanner_position', uploadbanner.position )
-		response.set_cookie( 'uploadbanner_banner', uploadbanner.banner )
+		response.set_cookie( 'price', uploadbanner.price )
+		response.set_cookie( 'position', uploadbanner.position )
+		response.set_cookie( 'banner', uploadbanner.banner )
+		response.set_cookie( 'pageurl', uploadbanner.pageurl )
 		
 		
 	return response
@@ -299,14 +300,15 @@ def success(request):
 	order=Order()
 	user=User()	
 	# order.user =User.objects.get(username=username)
-	order.price=request.COOKIES.get('uploadbanner.price')
-	order.position=request.COOKIES.get('uploadbanner.position')
-	order.banner=request.COOKIES.get('uploadbanner.banner')
+	order.price=request.COOKIES.get('price')
+	order.position=request.COOKIES.get('position')
+	order.banner=request.COOKIES.get('banner')
 	order.save()
 	transaction=Transaction()
 	# transaction.order=Order.objects.get(id=request.COOKIES.get('orderdetails'))
 	# transaction.payu_details=PayuDetails.objects.get(id=request.COOKIES.get('payudetails'))
 	transaction.payu_status=request.COOKIES.get('payustatus')
+	print "transaction.payu_status",transaction.payu_status
 	transaction.save()
 	payid, paystatus=store_payudetails(request)
 	print "payid", payid

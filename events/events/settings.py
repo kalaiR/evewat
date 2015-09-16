@@ -39,7 +39,6 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'college_event',
     'events',
-    'college_event',
     'haystack',
     'search',
     'payu',
@@ -155,5 +154,5 @@ PAYU_INFO = {
              'payment_url': 'https://test.payu.in/_payment',
              #success url for hotel
              'surl':'http://localhost:8000/success',
-             'surl1':'http://localhost:8000/post_event'
+             'surl1':'http://localhost:8000/submit_event'
             }
