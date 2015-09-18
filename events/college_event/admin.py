@@ -3,9 +3,9 @@ from college_event.models import *
 
 # Register your models here.
 class CategoryAdmin(admin.ModelAdmin):
-    fields=['name','category_type']
-    list_display = ('id', 'name','category_type')
-    list_filter = ['name','category_type']
+    fields=['name']
+    list_display = ('id', 'name')
+    list_filter = ['name']
     search_fields = ['id', 'name']    
     list_per_page = 50
 
@@ -88,5 +88,5 @@ admin.site.register(Location, LocationAdmin)
 admin.site.register(Collegetype, CollegetypeAdmin)
 admin.site.register(College, CollegeAdmin)
 admin.site.register(Department, DepartmentAdmin)
-admin.site.register(SubCategory, SubCategoryAdmin)
+admin.site.register(SubCategory)
 admin.site.register(Postevent, PosteventAdmin)    

@@ -12,17 +12,18 @@ import os
 from django.conf import settings
 
 class Category(models.Model):
-	name= models.CharField(max_length=150, null=True, blank=True)	
-	category_type = models.CharField(max_length=250)
+	name= models.CharField(max_length=150, null=True, blank=True)		
 	def __unicode__(self):
 		return self.name
 		
 class SubCategory(models.Model):
-	category = models.ForeignKey(Category)
+	category = models.ManyToManyField(Category)
 	icon= models.ImageField(upload_to='category_icon',max_length=100) 
 	name = models.CharField(max_length=50) 
 	def __unicode__(self):
-		return self.name        
+		return self.name
+
+    
 
 class Country(models.Model):
 	code=models.CharField(max_length=50)

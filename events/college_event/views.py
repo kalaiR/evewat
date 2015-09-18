@@ -42,9 +42,8 @@ class JSONResponse(HttpResponse):
 				simplejson.dumps(data), mimetype='application/json')
 # Create your views here.
 def home(request):
-	# banners=SiteBanner.objects.all()
-	# print banners
-	return render_to_response("index.html",context_instance=RequestContext(request))
+	subcategory = SubCategory.objects.all()	
+	return render_to_response("index.html",{'subcategory':subcategory}, context_instance=RequestContext(request))
 
 @csrf_protect 
 def user_login(request):
@@ -224,7 +223,7 @@ def subcategory_for_category(request):
 	print "subcategory_for_category"
 	if request.is_ajax() and request.GET and 'category_id' in request.GET:
 		print request.GET['category_id']         
-		objs1 = SubCategory.objects.filter(category_id=request.GET['category_id'])
+		objs1 = SubCategory.objects.filter(category__id=request.GET['category_id'])
 		print 'objs', objs1
 		return JSONResponse([{'name': o1.name, 'id': o1.id}
 			for o1 in objs1])	    
@@ -243,7 +242,11 @@ def event_for_subcategory(request):
 		return JSONResponse([{'id': o1.id, 'name': smart_unicode(o1.brand_name)}
 			for o1 in objs1])
 	else:
-		return JSONResponse({'error': 'Not Ajax or no GET'})	    
+		return JSONResponse({'error': 'Not Ajax or no GET'})
+
+# def subcategory(request):
+# 	subcategory = Subcategory.objects.all()
+# 	return render_to_response()
 
 
 def event(request,pname=None):
@@ -252,7 +255,6 @@ def event(request,pname=None):
 
 def details(request,id=None):
 	postevent=Postevent.objects.get(pk=id)
-	
 	return render_to_response("company-profile.html",{'events':postevent}, context_instance=RequestContext(request))
 
 def banner(request):

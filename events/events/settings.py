@@ -38,9 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'college_event',
-
-    'events',    
-
+    'events',
     'haystack',
     'search',
     'payu',
