@@ -47,7 +47,7 @@
 
               <h3>Submit your event</h3>
               <div class="contact-form">
-                <form action="{%url "college_event.views.submit_event"%}" name="postevent" enctype="multipart/form-data" method="POST">{% csrf_token %}
+                <form action="{%url "college_event.views.submit_event" %}" name="postevent" enctype="multipart/form-data" method="POST">{% csrf_token %}
                   <div class="events">Events</div>
                   <div class="events_fields">
                        <input type="text" placeholder="Fest name" name="festname">
@@ -137,7 +137,7 @@
                 <h3><strong>Paid</strong>User</h3>
 
                 <div class="price">
-                  <span>$9</span>
+                  <span>$10</span>
                 </div>
 
                 <ul class="feature">
@@ -148,7 +148,7 @@
                   <li><i class="fa fa-check-circle-o"></i> Loren ipsum dolor sit amet</li> -->
                 </ul>
 
-                <a class="btn btn-default fl"  href="{% url "college_event.views.payment_event" %}" >Paid User</a>
+                <a class="btn btn-default fl"  href="#" >Paid User</a>
               </div> <!-- end .pricing-table -->
 
             </div> <!-- end grid-layout -->
