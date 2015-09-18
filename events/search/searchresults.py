@@ -14,7 +14,7 @@ default_param_mappings = OrderedDict(
   #FieldName = Form Variable
   # locality = 'locality__in', 
   festtype = 'festtype',
-  city = 'city',  
+  city = 'city__id',  
   festname = 'festname',
   # subcategoryid = 'subcategoryid',
   # category = 'category'
@@ -111,6 +111,7 @@ def searchresults(q=None, params=None,
     if qs:
       print 'qs in result', qs
       sqs = SearchQuerySet().filter(qs)
+      print 'qs in resulted sqs', sqs
      
   sqs = sqs.models(model_cls)
   

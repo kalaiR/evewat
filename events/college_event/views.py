@@ -213,9 +213,7 @@ def submit_event(request):
 		postevent.deadline=request.POST['deadline']
 
 		postevent.save()
-		premium=PremiumPriceInfo()
-		premium.price=request.GET['premium_price']
-		print "premium.price",premium.price
+		
 		message="Your data succesfully submitted"
 	return render_to_response("post_event.html", context_instance=RequestContext(request))
 

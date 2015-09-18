@@ -52,3 +52,4 @@ def get_subcategories(categoryId):
 def get_photos(photo): 
     photo=str(photo).split(',')
     return photo[0]
+

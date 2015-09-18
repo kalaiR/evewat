@@ -9,7 +9,7 @@ class PosteventIndex(SearchIndex, Indexable):
     text = CharField(document=True, use_template=True)
     searchtext = CharField()
     festtype = CharField(model_attr='festtype')    
-    city = CharField(model_attr='city')    
+    city = CharField(model_attr='city__id')    
     festname = CharField(model_attr='festname')    
     
 

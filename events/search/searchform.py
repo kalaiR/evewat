@@ -94,6 +94,10 @@ class EventSearchFilter(FacetedSearchForm):
 				params['festtype'] = params['festtype']
 				print "params['festtype']", params['festtype']
 
+			if params['city']:
+				params['city'] = params['city']
+				print "params['city']", params['city']
+
 			# if params['subcategoryid']:
 			# 	params['subcategoryid'] = params['subcategoryid']
 			# 	print "params['subcategoryid']", params['subcategoryid']				

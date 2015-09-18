@@ -243,7 +243,7 @@
               <div class="select-location">
 
                           {% if request.COOKIES.global_city_id %}
-                              <select name="city">                    
+                              <select class="city" name="city">                    
                                   <option value="Pondicherry">Pondicherry</option>
                                   <option value="Chennai">Chennai</option>
                                   <option value="Villupuram">Villupuram</option>
@@ -263,12 +263,23 @@
                            
                               {% endif %}
 
+
               </div>
 
               <div class="category-search">
-                <select class="" data-placeholder="-Select category-">                 
+                <select class="category_choose" data-placeholder="-Select category-">                 
                     <option value="">Fest type</option>
-                    <option value="technical">Technical</option>
+                    {% for categories in initial_load|get_categories %}
+                       <option id="category_selecetd"value="{{categories.id}}">{{categories.name}} </option>
+
+                    {% endfor %}
+
+                 </select>      
+                      <input type="hidden" class="ajax_catid" value="{{categories.id}}">                                      
+                          
+                      
+                    
+                  <!--   <option value="technical">Technical</option>
                     <option value="cultural">Cultural</option>
                     <option value="management">Management</option>
                     <option value="sports">Sports</option>
@@ -288,8 +299,8 @@
                     <option value="medical">Medical</option>
                     <option value="pharma">Pharma</option>
                     <option value="biomedical">Bio Medical</option>
-                    <option value="OnlineEvents">Online Events</option>          
-                 </select>
+                    <option value="OnlineEvents">Online Events</option>           -->
+                
               </div>
 
               <button class="search-btn" type="submit"><i class="fa fa-search"></i></button>
