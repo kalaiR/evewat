@@ -12,15 +12,12 @@ from haystack.query import SQ
 
 default_param_mappings = OrderedDict(
   #FieldName = Form Variable
-  locality = 'locality__in', 
-  festtype = 'festtype',        
-  collegename = 'collegename',
-  city = 'city',
-  department = 'department',
+  # locality = 'locality__in', 
+  festtype = 'festtype',
+  city = 'city',  
   festname = 'festname',
-  sponsor = 'sponsor',
-  subcategoryid = 'subcategoryid',
-  category = 'category'
+  # subcategoryid = 'subcategoryid',
+  # category = 'category'
   )
 
 default_geo_params = {
@@ -88,7 +85,7 @@ def searchresults(q=None, params=None,
     model_cls = Postevent
 
   if params is None:
-    params = OrderedDict([('locality', None),('category', None),('subcategoryid', None), ('festtype', None), ('collegename', None), ('city', None), ('department', None), ('festname', None), ('sponsor', None)])   
+    params = OrderedDict([('festtype', None), ('city', None), ('festname', None)])   
 
  
   

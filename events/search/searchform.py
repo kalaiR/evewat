@@ -32,14 +32,12 @@ class Partial(Clean):
 		
 class EventSearchFilter(FacetedSearchForm):
 		model = None
-
-		festtype = forms.CharField(required=False)
-		collegename = forms.CharField(required=False)
-		city = forms.CharField(required=False)
-		department = forms.CharField(required=False)
+		print 'EventSearchFilter'
+		fesstype = forms.CharField(required=False)		
+		city = forms.CharField(required=False)		
 		festname = forms.CharField(required=False)
-		sponsor = forms.CharField(required=False)
-		subcategoryid = forms.CharField(required=False)
+		
+		
 		# category    = forms.CharField(required=False)
 		
 		# lang = forms.CharField(required=False)
@@ -77,15 +75,12 @@ class EventSearchFilter(FacetedSearchForm):
 					default_filters=self.get_default_filters())						
 				
 			_params = [
-				'locality',      
-				'festtype',        
-				'collegename',
+				# 'locality',      
+				'festtype',   
 				'city',
-				'department',
-				'festname',
-				'sponsor',
-				'subcategoryid',
-				'category',
+				'festname',			
+				# 'subcategoryid',
+				# 'category',
 			]
 			params = OrderedDict()
 			print 'params', params
@@ -99,9 +94,9 @@ class EventSearchFilter(FacetedSearchForm):
 				params['festtype'] = params['festtype']
 				print "params['festtype']", params['festtype']
 
-			if params['subcategoryid']:
-				params['subcategoryid'] = params['subcategoryid']
-				print "params['subcategoryid']", params['subcategoryid']				
+			# if params['subcategoryid']:
+			# 	params['subcategoryid'] = params['subcategoryid']
+			# 	print "params['subcategoryid']", params['subcategoryid']				
 
 
 

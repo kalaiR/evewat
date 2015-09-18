@@ -8,14 +8,10 @@ from django.template import RequestContext
 class PosteventIndex(SearchIndex, Indexable):  
     text = CharField(document=True, use_template=True)
     searchtext = CharField()
-    festtype = CharField(model_attr='festtype')
-    collegename = CharField(model_attr='collegename')
-    city = CharField(model_attr='city')
-    department = CharField(model_attr='department')
-    festname = CharField(model_attr='festname')
-    sponsor = CharField(model_attr='sponsor')
-    category = CharField(model_attr='category__id')
-    subcategoryid = CharField(model_attr='subcategory__id') 
+    festtype = CharField(model_attr='festtype')    
+    city = CharField(model_attr='city')    
+    festname = CharField(model_attr='festname')    
+    
 
 
     def autoUpdateRebuild_index(self):
@@ -53,7 +49,8 @@ class PosteventIndex(SearchIndex, Indexable):
     def get_model(self):
         return Postevent
     
-    def index_queryset(self, **kwargs):       
+    def index_queryset(self, **kwargs):
+        print 'index_queryset'       
         postevent = Postevent.objects.all()       
         return postevent
 

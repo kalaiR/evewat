@@ -3,12 +3,10 @@ from django.db import models
 from django.forms import ModelForm
 from django.contrib.auth.models import User
 from django.views.decorators.csrf import csrf_exempt
-from django.db import models
 from PIL import Image
 from django.utils import simplejson
 from haystack.query import SearchQuerySet
 
-# from college_event.search_indexes import PosteventIndex
 import simplejson as json
 import os
 from django.conf import settings
@@ -72,26 +70,21 @@ class Postevent(models.Model):
 	mobile= models.BigIntegerField(null=True, blank=True)
 	festname= models.CharField(max_length=50,null=True, blank=True)
 	festcaption= models.CharField(max_length=50,null=True, blank=True)
-	festtype= models.CharField(max_length=50,null=True, blank=True)
-	
+	festtype= models.CharField(max_length=50,null=True, blank=True)	
 	city= models.CharField(max_length=50,null=True, blank=True)
 	state= models.CharField(max_length=50,null=True, blank=True)
 	startdate= models.DateField(max_length=50,null=True, blank=True)
 	enddate= models.DateField(max_length=50,null=True, blank=True)
 	deadline= models.TextField(null=True, blank=True)
 	registrationfee= models.TextField(null=True, blank=True)
-	festdescription= models.TextField(null=True, blank=True)
-	
-	registrationurl= models.URLField(max_length=250,null=True, blank=True)
-	
-	poster = models.ImageField(upload_to='events/static/img/',null=True, max_length=500)
-
-	
+	festdescription= models.TextField(null=True, blank=True)	
+	registrationurl= models.URLField(max_length=250,null=True, blank=True)	
+	poster = models.ImageField(upload_to='events/static/img/',null=True, max_length=500)	
 	venuedescription= models.TextField(null=True, blank=True)
 	contactperson= models.TextField(null=True, blank=True)
 	
 	def __unicode__(self):
-		return self.name
+		return self.festname
 
 class PremiumPriceInfo(models.Model):
     premium_price = models.FloatField(null=True, default=0.0)

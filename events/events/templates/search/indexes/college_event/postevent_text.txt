@@ -1,0 +1,2 @@
+{{object.festtype}}    
+{{object.festname}}   

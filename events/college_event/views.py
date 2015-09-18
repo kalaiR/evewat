@@ -210,10 +210,7 @@ def submit_event(request):
 		postevent.state=request.POST['state']
 		postevent.startdate=request.POST['startdate']
 		postevent.enddate=request.POST['enddate']
-		postevent.deadline=request.POST['deadline']
-		
-		
-		
+		postevent.deadline=request.POST['deadline']		
 		postevent.save()
 		message="Your data succesfully submitted"
 	return render_to_response("post_event.html",{'message':message}, context_instance=RequestContext(request))
