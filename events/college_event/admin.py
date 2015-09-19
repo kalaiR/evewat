@@ -51,24 +51,6 @@ class DepartmentAdmin(admin.ModelAdmin):
 	search_fields = ['id', 'department']
 	list_per_page = 50
 
-	# class UserprofileAdmin(admin.ModelAdmin):
-	# 	fields=['confirmation_code']
-	# 	list_display = ('id', 'confirmation_code')
-	# 	list_filter = ['id']
-	# 	search_fields = ['id']
-	# 	list_per_page = 50
-# class UserprofileAdmin(admin.ModelAdmin):
-#     fields=['user','city','mobile','confirmation_code']
-#     list_display = ('id', 'user','city','mobile','confirmation_code' )
-#     list_filter = ['city']
-#     search_fields = ['id', 'mobile']
-#     list_per_page = 50   
-
-	# fields=['mobile','confirmation_code']
-	# list_display = ('id', 'mobile','confirmation_code','city_id','location_id')
-	# search_fields = ['id', 'mobile']
-	
-
 class PosteventAdmin(admin.ModelAdmin):
 	list_display = ('id', 'name','festtype','city','festname','registrationfee','startdate',)
 	list_filter = ['id','festname','city']	
