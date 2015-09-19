@@ -42,8 +42,11 @@ class JSONResponse(HttpResponse):
 				simplejson.dumps(data), mimetype='application/json')
 # Create your views here.
 def home(request):
-	subcategory = SubCategory.objects.all()	
-	return render_to_response("index.html",{'subcategory':subcategory}, context_instance=RequestContext(request))
+	subcategory = SubCategory.objects.all()
+	print 'subcategory',subcategory
+	recentad = 	Postevent.objects.filter().order_by('-id')[:4]
+	print 'recentad', recentad
+	return render_to_response("index.html",{'subcategory':subcategory, 'recentad':recentad}, context_instance=RequestContext(request))
 
 @csrf_protect 
 def user_login(request):
@@ -160,13 +163,11 @@ def start(request):
 		userprofile=Userprofile.objects.get(user_id=request.user.id)
 	return render_to_response('index.html',{'path':path, 'userprofile':userprofile},context_instance=RequestContext(request))
 def post_event(request):
-	return render_to_response("post_event.html", context_instance=RequestContext(request))
+	subcategory = SubCategory.objects.all()
+	print 'subcategory from postevent',subcategory
+	return render_to_response("post_event.html", {'subcategory':subcategory}, context_instance=RequestContext(request))
 
-def submit_event(request):
-	# banner= SiteBanner()
-	# banner.banner = request.FILES.get('image_file')
-	# print "banner image", banner.banner
-	# banner.save()
+def submit_event(request):	
 	if request.method=="POST":
 		postevent=Postevent()
 		postevent.name=request.POST['name']
@@ -200,20 +201,18 @@ def submit_event(request):
 		postevent.registrationurl=request.POST['festurl']
 		postevent.festdescription=request.POST['festdescription']
 		postevent.venuedescription=request.POST['reach']
-		postevent.city=request.POST['city']
+		postevent.city=City.objects.get(id=request.POST['city'])
 		postevent.festname=request.POST['festname']
 		postevent.festcaption=request.POST['festcaption']
 		# postevent.festtheme=request.POST['festtheme']
-		postevent.festtype=request.POST['festtype']
+		postevent.festtype=SubCategory.objects.get(id=request.POST['festtype'])
 		print "postevent.festtype",postevent.festtype
 		postevent.state=request.POST['state']
 		postevent.startdate=request.POST['startdate']
 		postevent.enddate=request.POST['enddate']
-
 		postevent.deadline=request.POST['deadline']
-
-		postevent.save()
-		
+		print 'postevent.deadline',postevent.deadline
+		postevent.save()		
 		message="Your data succesfully submitted"
 	return render_to_response("post_event.html", context_instance=RequestContext(request))
 
@@ -249,7 +248,8 @@ def event_for_subcategory(request):
 
 def event(request,pname=None):
 	postevent=Postevent.objects.filter(festtype=pname)
-	return render_to_response("search-result.html",{'events':postevent,'pname':pname}, context_instance=RequestContext(request))
+	college=College.objects.all()
+	return render_to_response("search-result.html",{'events':postevent,'pname':pname, 'college':college}, context_instance=RequestContext(request))
 
 def details(request,id=None):
 	postevent=Postevent.objects.get(pk=id)

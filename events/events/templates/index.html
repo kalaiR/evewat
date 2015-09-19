@@ -247,6 +247,7 @@
     <div class="container">
       <div class="row clearfix">
         <h2><strong>Freatured</strong> Listing</h2>
+        {% for recentad in recentad %}
          <div class="col-md-3 col-sm-4 col-xs-6">
           <div class="single-product">
             <figure>
@@ -267,23 +268,24 @@
 
               <figcaption>
                 <div class="bookmark">
-                  <a href="#"><i class="fa fa-bookmark-o"></i> Bookmark</a>
+                  <a href="details/{{recentad.id}}"><i class="fa fa-bookmark-o"></i> Bookmark</a>
                 </div>
                 <div class="read-more">
-                  <a href="#"><i class="fa fa-angle-right"></i> Read More</a>
+                  <a href="details/{{recentad.id}}"><i class="fa fa-angle-right"></i> Read More</a>
                 </div>
 
               </figcaption>
             </figure>
-            <h4><a href="#">Old Bookman's</a></h4>
+            <h4><a href="details/{{recentad.id}}">{{recentad.festname}}</a></h4>
 
-            <h5><a href="#">Category</a>, <a href="#">Another Category</a></h5>
+            <h5><a href="details/{{recentad.id}}">{{recentad.festcaption}}</a></h5>
 
           </div> <!-- end .single-product -->
 
         </div>
+        {% endfor %}
 
-        <div class="col-md-3 col-sm-4 col-xs-6">
+       <!--  <div class="col-md-3 col-sm-4 col-xs-6">
 
           <div class="single-product">
             <figure>
@@ -300,9 +302,9 @@
 
                 <p>Featured</p>
 
-              </div> <!-- end .rating -->
+              </div>  --><!-- end .rating -->
 
-              <figcaption>
+             <!--  <figcaption>
                 <div class="bookmark">
                   <a href="#"><i class="fa fa-bookmark-o"></i> Bookmark</a>
                 </div>
@@ -316,11 +318,11 @@
 
             <h5><a href="#">Category</a>, <a href="#">Another Category</a></h5>
 
-          </div> <!-- end .single-product -->
+          </div> --> <!-- end .single-product -->
 
-        </div>
+     <!--    </div> -->
 
-        <div class="col-md-3 col-sm-4 col-xs-6">
+       <!--  <div class="col-md-3 col-sm-4 col-xs-6">
 
           <div class="single-product">
             <figure>
@@ -337,9 +339,9 @@
 
                 <p>Featured</p>
 
-              </div> <!-- end .rating -->
+              </div> --> <!-- end .rating -->
 
-              <figcaption>
+            <!--   <figcaption>
                 <div class="bookmark">
                   <a href="#"><i class="fa fa-bookmark-o"></i> Bookmark</a>
                 </div>
@@ -353,9 +355,9 @@
 
             <h5><a href="#">Category</a>, <a href="#">Another Category</a></h5>
 
-          </div> <!-- end .single-product -->
+          </div> --> <!-- end .single-product -->
 
-        </div>
+       <!--  </div>
 
         <div class="col-md-3 col-sm-4 col-xs-6">
 
@@ -374,9 +376,9 @@
 
                 <p>Featured</p>
 
-              </div> <!-- end .rating -->
+              </div> --> <!-- end .rating -->
 
-              <figcaption>
+            <!--   <figcaption>
                 <div class="bookmark">
                   <a href="#"><i class="fa fa-bookmark-o"></i> Bookmark</a>
                 </div>
@@ -390,7 +392,7 @@
 
             <h5><a href="#">Category</a>, <a href="#">Another Category</a></h5>
 
-          </div> <!-- end .single-product -->
+          </div>  --><!-- end .single-product -->
 
         </div><!--end photo-->
         

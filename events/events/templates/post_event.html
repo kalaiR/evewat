@@ -47,35 +47,20 @@
 
               <h3>Submit your event</h3>
               <div class="contact-form">
-                <form action="{%url "college_event.views.submit_event" %}" name="postevent" enctype="multipart/form-data" method="POST">{% csrf_token %}
+                <form action="{%url "college_event.views.submit_event" %}" name="postevent" enctype="multipart/form-data" method="POST">
+                {% csrf_token %}
                   <div class="events">Events</div>
                   <div class="events_fields">
                        <input type="text" placeholder="Fest name" name="festname">
                    <input type="text" placeholder="Fest Caption" name="festcaption">
                     <select name="festtype">
                         <option value="">Fest type</option>
-                        <option value="technical">Technical</option>
-                        <option value="cultural">Cultural</option>
-                        <option value="management">Management</option>
-                        <option value="sports">Sports</option>
-                        <option value="literary">Literary</option>
-                        <option value="conferences">Conferences</option>
-                        <option value="seminar">Seminar</option>
-                        <option value="workshop">Workshop</option>
-                        <option value="symposium">Symposium</option>
-                        <option value="youthsummit">Youth Summit</option>
-                        <option value="modelunitednations">Model United Nations</option>
-                        <option value="tedx">TEDx</option>
-                        <option value="summit">Summit</option>
-                        <option value="culture">Culture</option>
-                        <option value="conclave">Conclave</option>
-                        <option value="convention">Convention</option>
-                        <option value="entrepreneurshipsummit">Entrepreneurship Summit</option>
-                        <option value="medical">Medical</option>
-                        <option value="pharma">Pharma</option>
-                        <option value="biomedical">Bio Medical</option>
-                        <option value="OnlineEvents">Online Events</option>                   
-                      </select>
+                         {% for subcategory in subcategory %}
+                              <option value="{{subcategory.id}}">{{ subcategory.name }} </option>
+                          {% endfor%} 
+                                           
+                      </select>                      
+
                       <input  type="text" placeholder="startdate"  id="datepicker" name="startdate" />
                       <input  type="text" placeholder="enddate"  id="datepicker1" name="enddate" />
                       

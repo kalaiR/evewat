@@ -77,7 +77,7 @@
                           </figcaption>
                         </figure>
 
-                        <h4><a href="/details/{{events.object.id}}">{{events.object.festname}},{{events.object.city.city}},{{events.object.state}}</a></h4>
+                        <h4><a href="/details/{{events.object.id}}">{{events.object.festname}},{{ events.object.city.city }},{{events.object.state}}</a></h4>
 
                         <h5><a href="/details/{{events.object.id}}">{{events.object.enddate}}</a> <a href="/details/{{events.object.id}}">{{event.object.collegename}}</a></h5>
 
@@ -144,14 +144,6 @@
                 {% endfor %}
                <!--  <img src="img/add.jpg" alt=""> -->
               </div>
-
-            </div> <!-- row-->
-          </div> <!-- end container-->
-        </div><!-- end .page-content -->
-
-        <!-- 
-          <button><i class="fa fa-briefcase"></i></button> -->
-
           <div class="page-sidebar">
             <div class="col-md-3 category-toggle">
             <div class="location-details">
@@ -200,9 +192,15 @@
             </div> <!-- end .location-details -->     
 
           </div> <!-- end .page-sidebar -->
-        
-      </div> <!-- end .row -->
-    </div> <!-- end .container -->
-  </div>  <!-- end #page-content -->
+            </div> <!-- row-->
+           
+          </div> <!-- end container-->
+        </div><!-- end .page-content -->
+
+        <!-- 
+          <button><i class="fa fa-briefcase"></i></button> -->
+
+          
+     
 
 {% endblock %}
