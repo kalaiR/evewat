@@ -42,17 +42,13 @@ class JSONResponse(HttpResponse):
 				simplejson.dumps(data), mimetype='application/json')
 # Create your views here.
 def home(request):
-<<<<<<< HEAD
-	
-	return render_to_response("index.html",context_instance=RequestContext(request))
 
-=======
 	subcategory = SubCategory.objects.all()
 	print 'subcategory',subcategory
 	recentad = 	Postevent.objects.filter().order_by('-id')[:4]
 	print 'recentad', recentad
 	return render_to_response("index.html",{'subcategory':subcategory, 'recentad':recentad}, context_instance=RequestContext(request))
->>>>>>> 68ca912de12b8fd802b5e7f01575e59877d79668
+
 
 @csrf_protect 
 def user_login(request):
@@ -169,19 +165,14 @@ def start(request):
 		userprofile=Userprofile.objects.get(user_id=request.user.id)
 	return render_to_response('index.html',{'path':path, 'userprofile':userprofile},context_instance=RequestContext(request))
 def post_event(request):
-<<<<<<< HEAD
+
 	premium=PremiumPriceInfo.objects.all()
 	return render_to_response("post_event.html",{'premium':premium}, context_instance=RequestContext(request))
 
-def submit_event(request):
-	
-=======
-	subcategory = SubCategory.objects.all()
-	print 'subcategory from postevent',subcategory
-	return render_to_response("post_event.html", {'subcategory':subcategory}, context_instance=RequestContext(request))
+
 
 def submit_event(request):	
->>>>>>> 68ca912de12b8fd802b5e7f01575e59877d79668
+
 	if request.method=="POST":
 		postevent=Postevent()
 		postevent.name=request.POST['name']
