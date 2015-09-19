@@ -76,16 +76,48 @@
           <div>
             <form id="user_form" method="post" action="/register/" name="sign_up">
             {% csrf_token %}
+
+              <input type="text" class="form-control" name="username" placeholder="Firstname" id="username_signin">
+              <label for="username_signin" id="username_required1" class="signup_labelError" style="display:none;color:red;">Please enter First name</label>
+
+              <input type="text" class="form-control" name="lastname" placeholder="Lastname" id="lastname_signin">
+              <label for="lastname_signin" id="lastname_required1" class="signup_labelError" style="display:none;color:red;">Please enter Last name</label>
+
               <input type="email" class="form-control" name="email_id" placeholder="email_id" id="emailid_signin">
               <label for="emailid_signin" id="emailid_required1" class="signup_labelError" style="display:none;color:red;">Please enter email id</label>
               <span id="valid_signup_email_required" class="error_message" style="display:none;color:red;">Please enter valid Email</span> 
 
-              <input type="text" class="form-control" name="username" placeholder="Username" id="username_signin">
-              <label for="username_signin" id="username_required1" class="signup_labelError" style="display:none;color:red;">Please enter User name</label>
+              <input type="text" class="form-control" name="mobile" placeholder="Mobile" id="mobile_signin">
+              <label for="mobile_signin" id="mobile_required1" class="signup_labelError" style="display:none;color:red;">Please enter Mobile number</label>            
 
               <input type="password"  class="form-control" name="password" placeholder="password" id="password_signin">
               <span id="result"></span>
               <label for="password" id="password_signin1" class="signup_labelError" style="display:none;color:red;">Please enter Password</label>
+
+              <select class="select_option select_city" data-placeholder="-Select City-">                 
+                    <option value="">Select City</option>
+                    {% for cities in city %}
+                       <option id="city_selected" value="{{cities.id}}">{{cities.city}} </option>
+                    {% endfor %}
+              </select>    
+
+              <select class="select_option select_college" data-placeholder="-Select College-">                 
+                    <option value="">Select College</option>
+                    {% for colleges in college %}
+                       <option id="college_selected" value="{{colleges.id}}">{{colleges.college_name}} </option>
+                    {% endfor %}
+              </select>    
+
+              <select class="select_option select_dept" data-placeholder="-Select Department-">                 
+                    <option value="">Select Department</option>
+                    {% for categories in initial_load|get_categories %}
+                       <option id="department_selected" value="{{categories.id}}">{{categories.name}} </option>
+                    {% endfor %}
+              </select>    
+
+
+            
+              <label id="id_city_required" class="labelError" style="font-size:12px;display:none;">Please Choose city</label>
 
               <input type="button" class="btn btn-default" value="Register" name="Create" id="create_user">
               
@@ -243,7 +275,7 @@
               <div class="select-location">
 
                           {% if request.COOKIES.global_city_id %}
-                              <select class="city" name="city">                    
+                              <select class="city select_option" name="city">                    
                                   <option value="Pondicherry">Pondicherry</option>
                                   <option value="Chennai">Chennai</option>
                                   <option value="Villupuram">Villupuram</option>
@@ -252,7 +284,7 @@
                                 </select>
                                 
                             {% else %}
-                               <select class="city" name="city">
+                               <select class="city select_option" name="city">
                                           
                                  <option  id="currentid" value="{{request.COOKIES.global_city_id}}">{{ request.COOKIES.city }}</option>
                                  {% for cities in city|get_city %}
@@ -267,7 +299,7 @@
               </div>
 
               <div class="category-search">
-                <select class="category_choose" data-placeholder="-Select category-">                 
+                <select class="category_choose select_option" data-placeholder="-Select category-">                 
                     <option value="">Fest type</option>
                     {% for categories in initial_load|get_categories %}
                        <option id="category_selecetd"value="{{categories.id}}">{{categories.name}} </option>

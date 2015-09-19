@@ -43,15 +43,15 @@ class Location(models.Model):
 	def __unicode__(self):
 		return self.locality
 
-class Collegetype(models.Model):
-	college_type=models.CharField(max_length=150, null=True, blank=True)
-	def __unicode__(self):
-		return self.college_type
+# class Collegetype(models.Model):
+# 	college_type=models.CharField(max_length=150, null=True, blank=True)
+# 	def __unicode__(self):
+# 		return self.college_type
 
 class College(models.Model):
-	collegetype=models.ForeignKey(Collegetype,null=True)
+	collegetype=models.ForeignKey(Category,null=True)
 	city=models.ForeignKey(City,null=True)
-	location=models.ForeignKey(Location)
+	location=models.ForeignKey(Location, null=True, blank=True)
 	college_name=models.CharField(max_length=150, null=True, blank=True)
 	def __unicode__(self):
 		return self.college_name

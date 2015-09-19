@@ -122,7 +122,7 @@
   });
 
 
-  // Custom Navigation Events
+    // Custom Navigation Events
     $(".next").click(function(){
       homeSlide.trigger('owl.next');
     });
@@ -130,8 +130,18 @@
       homeSlide.trigger('owl.prev');
     });
 
+    // $.fn.find_colleges = function (data) {
+    //   alert("find function");
+    // };
 
-
+    function find_colleges(city_id){
+      $.get('/find_colleges/', { city_id: city_id }, function(data) {
+        $.each(data, function(key,value) {
+            value = $.parseJSON(data);
+            $('.select_college').html($('<option>').text(value).attr('value', key));
+        });
+      });
+    }
 
   // UOU Selects
   // ---------------------------------------------------------
@@ -170,10 +180,10 @@
     // Option Select
     $list.children('li').on('click', function () {
       var $this = $(this);
-
       $valueHolder.val($this.text());
       $valuePlaceholder.html($this.text());
       $select.find('option[value="' + $this.data('value') + '"]').prop('selected', true);
+      find_colleges($this.data('value'));
     });
 
     // Hide
@@ -903,6 +913,3 @@ $('.user_details').click(function(){
         return 'Strong'
     }
 }  
-
-
-

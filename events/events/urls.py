@@ -54,5 +54,7 @@ urlpatterns = patterns('',
 
     # url(r'^blog/', include('blog.urls')),
 
+    url(r'^find_colleges/$', 'college_event.views.find_colleges',name='find_colleges'),
+
     url(r'^admin/', include(admin.site.urls)),
 )+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

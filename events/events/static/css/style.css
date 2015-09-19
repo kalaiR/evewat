@@ -3357,7 +3357,8 @@ fieldset[disabled] .btn-default-inverse.active {
 #header .header-top-bar .header-login,
 #header .header-top-bar .header-register,
 #header .header-top-bar .header-social,
-#header .header-top-bar .header-language {
+#header .header-top-bar .header-language,
+#header .header-top-bar .header-logout {
   position: relative;
   float: left;
   z-index: 9999;
@@ -3397,7 +3398,7 @@ fieldset[disabled] .btn-default-inverse.active {
 }
 #header .header-top-bar .header-logo {
   float: left;
-  width: 66%;
+  width: 50%;
   text-align: center;
   text-transform: uppercase;
 }
@@ -8020,4 +8021,16 @@ fieldset[disabled] .btn-default-inverse.active {
 }
 .form-group {
     color: black;
+}
+
+#user_form .uou-custom-select { 
+  position:relative !important; 
+  padding:0px !important;
+  width:310px !important;
+  top:0px !important;
+  z-index: 9999px;
+  }
+
+#user_form .uou-custom-select .select-clone {
+  position:relative !important;
 }

@@ -29,6 +29,7 @@ from payu.models import *
 from transaction.models import *
 from django.utils import simplejson
 import simplejson as json
+from events.util import get_current_country_cities
 
 
 from django.contrib.auth.decorators import login_required
@@ -43,7 +44,10 @@ class JSONResponse(HttpResponse):
 # Create your views here.
 def home(request):
 	subcategory = SubCategory.objects.all()	
-	return render_to_response("index.html",{'subcategory':subcategory}, context_instance=RequestContext(request))
+	college = College.objects.all()
+	city =get_current_country_cities(request.COOKIES.get("country"))
+	ctx = {'subcategory':subcategory, 'city': city,'college':college}
+	return render_to_response("index.html",ctx, context_instance=RequestContext(request))
 
 @csrf_protect 
 def user_login(request):
@@ -323,5 +327,17 @@ def success(request):
 	
 def payment_event(request):
 	return render_to_response("payment.html",context_instance=RequestContext(request))
+
+
+def find_colleges(request):
+	from django.utils.encoding import smart_unicode, force_unicode
+	if request.is_ajax() and request.GET and 'city_id' in request.GET:
+		print request.GET['city_id']         
+		objs = College.objects.filter(city=request.GET['city_id'])
+		print "objs", objs
+		return JSONResponse([{'id': o.id, 'name': smart_unicode(o.college_name)}
+			for o in objs])
+	else:
+		return JSONResponse({'error': 'Not Ajax or no GET'})
 	
 
