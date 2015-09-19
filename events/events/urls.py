@@ -25,6 +25,7 @@ urlpatterns = patterns('',
     url(r'^login/$', 'college_event.views.user_login', name='user_login'),
     url(r'^logout/$', 'college_event.views.logout_view', name='logout_view'),
 
+
     #registeration
     url(r'^register/$', 'college_event.views.register', name='register'),
     
@@ -34,11 +35,12 @@ urlpatterns = patterns('',
     url(r'^banner$', 'college_event.views.banner', name='banner'),
     url(r'^submit_event$', 'college_event.views.submit_event', name='submit_event'),
     url(r'^upload_banner$', 'college_event.views.upload_banner', name='upload_banner'),
-    url(r'^success$', 'college_event.views.success', name='success'),
+    # url(r'^success$', 'college_event.views.success', name='success'),
     url(r'^(?i)event/(?P<pname>.*)/$', 'college_event.views.event',name='event'),
     url(r'^details/(?P<id>[0-9]+)/$','college_event.views.details',name='details'),
-    url(r'^payment_postevent$', 'college_event.views.payment_event', name='payment_event'),
+    # url(r'^payment_postevent$', 'college_event.views.payment_event', name='payment_event'),
     url(r'^payment/', 'payu.views.buy_order', name='payment'),
+    url(r'^payment_event/', 'payu.views.paid_user', name='payment'),
     #getting subcategory
     url(r'^subcategory_for_category/$', 'college_event.views.subcategory_for_category',name='subcategory'),
 
