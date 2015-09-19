@@ -13,11 +13,11 @@ from haystack.query import SQ
 default_param_mappings = OrderedDict(
   #FieldName = Form Variable
   # locality = 'locality__in', 
-  festtype = 'festtype',
+  festtype = 'festtype__id',
   city = 'city__id',  
   festname = 'festname',
-  # subcategoryid = 'subcategoryid',
-  # category = 'category'
+  # subcategory = 'subcategory__id',
+  # category = 'category__id'
   )
 
 default_geo_params = {
@@ -85,7 +85,7 @@ def searchresults(q=None, params=None,
     model_cls = Postevent
 
   if params is None:
-    params = OrderedDict([('festtype', None), ('city', None), ('festname', None)])   
+    params = OrderedDict([('festtype', None), ('city', None), ('festname', None), ('category', None), ('subcategory', None)])   
 
  
   
@@ -133,24 +133,7 @@ def searchresults(q=None, params=None,
   # if groupby:
   #   sqs = sqs.facet(groupby)
 
-  # if geo_location:
-
-  #   if isinstance(geo_location, (str, unicode)):
-  #     location = geo_location.split(',')
-  #     location = Point(float(location[0]), float(location[1]))
-  #   elif isinstance(geo_location, (list, tuple)):
-  #     location = Point(float(geo_location[0]), float(geo_location[1]))      
-  #   else:
-  #     location = geo_location
-
-  #   if geo_params['method'] == 'bydistance':
-  #     radius = D(km=geo_params['radius'])
-      
-  #     sqs = sqs.dwithin('geolocation', location, radius)\
-  #       .distance('geolocation', location)
-
-  #   if geo_orderby:
-  #     sqs = sqs.order_by('distance')
+ 
 
   if geo_location:
 

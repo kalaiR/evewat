@@ -8,9 +8,11 @@ from django.template import RequestContext
 class PosteventIndex(SearchIndex, Indexable):  
     text = CharField(document=True, use_template=True)
     searchtext = CharField()
-    festtype = CharField(model_attr='festtype')    
+    festtype = CharField(model_attr='festtype__id')    
     city = CharField(model_attr='city__id')    
-    festname = CharField(model_attr='festname')    
+    festname = CharField(model_attr='festname')
+    # category = CharField(model_attr='category__id')
+    # subcategory = CharField(model_attr='subcategory__id')         
     
 
 

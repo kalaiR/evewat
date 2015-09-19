@@ -748,7 +748,15 @@ $('.user_details').click(function(){
 
   var events_details_required =["festdes_required", "regfees_required", "festurl_required", "reach_required", "queries_required", "state_required"];
 
-  jQuery('#post_event').click(function(){     
+  jQuery('form[name="postevent"] .post_event').on( "click", function() {
+      // alert("clicked");
+      // alert($(this).data("user"));
+      var  value = $(this).data("user"); 
+       // alert(value);
+       $("input[name='userstatus']").val($(this).data("user"));
+      // $("#paid").val(value);
+      // alert($("#paid").val(value));
+      
       for (i=0;i<events_details_required.length;i++) {
       var input = jQuery('#'+events_details_required[i]);
       if (input.val() == "")  {   
@@ -776,7 +784,6 @@ $('.user_details').click(function(){
         return true;
       }
   });
-
   //upload banner validation
 
   jQuery('#banner_upload').click(function(){
@@ -825,40 +832,40 @@ $('.user_details').click(function(){
 
 });
 
-  //Payment
+  // //Payment
 
-  var payment_details =["fname_required", "lname_required", "mobileno_val", "email_blank"];
+  // var payment_details =["fname_required", "lname_required", "mobileno_val", "email_blank"];
 
-  jQuery('#paynow').click(function(){     
-      for (i=0;i<payment_details.length;i++) {
-      var input = jQuery('#'+payment_details[i]);
-      if (input.val() == "")  {   
-        input.addClass("error_input_field");
-        input.next('.pay_labelError').show();         
-      } else {    
-        input.removeClass("error_input_field");
-        input.next('.pay_labelError').hide();        
-      }
-    }
+  // jQuery('#paynow').click(function(){     
+  //     for (i=0;i<payment_details.length;i++) {
+  //     var input = jQuery('#'+payment_details[i]);
+  //     if (input.val() == "")  {   
+  //       input.addClass("error_input_field");
+  //       input.next('.pay_labelError').show();         
+  //     } else {    
+  //       input.removeClass("error_input_field");
+  //       input.next('.pay_labelError').hide();        
+  //     }
+  //   }
 
-  if($('.prefix_required').val() == 'Select'){
-            $(this).addClass("error_input_field");
-            $('.prefix_labelError').show();
-        }
-        else{
-          $(this).removeClass("error_input_field");
-          $('.prefix_labelError').hide(); 
-        }
+  // if($('.prefix_required').val() == 'Select'){
+  //           $(this).addClass("error_input_field");
+  //           $('.prefix_labelError').show();
+  //       }
+  //       else{
+  //         $(this).removeClass("error_input_field");
+  //         $('.prefix_labelError').hide(); 
+  //       }
 
-  if ($(":input").hasClass("error_input_field")){
-      return false;
-      }
-      else{
-        $('form[name="payment_form"]').submit();      
-        return true;
-     }
+  // if ($(":input").hasClass("error_input_field")){
+  //     return false;
+  //     }
+  //     else{
+  //       $('form[name="payment_form"]').submit();      
+  //       return true;
+  //    }
      
-    });
+  //   });
 
   //password strength
 
@@ -913,3 +920,8 @@ $('.user_details').click(function(){
         return 'Strong'
     }
 }  
+
+$('.payment').hide();
+$('#paid').click(function(){
+  $('.payment').toggle();
+});

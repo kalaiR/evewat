@@ -76,8 +76,8 @@ def paid_user(request):
     email=request.POST.get('email',request.COOKIES.get('email_user'))
     txnid=my_random_string(8)
     cleaned_data = {'key': settings.PAYU_INFO['merchant_key'], 
-                    'txnid':txnid,'amount': request.COOKIES.get('total_amount'), 
-                    'productinfo':request.COOKIES.get(''),
+                    'txnid':txnid,'amount': request.POST.get("price"), 
+                    'productinfo':request.POST.get("price"),
                     'firstname':fname,
                     'email': email, 
                     'udf1':'', 'udf2': '', 'udf3': '', 
@@ -111,9 +111,8 @@ def paid_user(request):
                          settings.PAYU_INFO['merchant_key'],
                          hash_o,
                          txnid,
-                         request.COOKIES.get(''),
-                         request.COOKIES.get('total_amount'),
-                         email,
+                         
+                         
                          ))
     response.set_cookie('initial_user',initial)
     response.set_cookie('fname_user',fname)
