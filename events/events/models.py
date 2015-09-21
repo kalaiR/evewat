@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
 from events.models import *
+from college_event.models import *
 
 
 #Model for storing user personal details
@@ -22,7 +23,12 @@ class Userprofile(models.Model):
     # address=models.OneToOneField(Address)
     # age_status=models.BooleanField(default=False)
     is_emailverified=models.BooleanField(default=False)
-    ad_count=models.IntegerField(max_length=5, null=True, blank=True)
+    # ad_count=models.IntegerField(max_length=5, null=True, blank=True)
+   
+    lastname=models.CharField(max_length=50, null=True, blank=True)
+    city=models.ForeignKey(City,null=True, blank=True)
+    college=models.ForeignKey(College, null=True, blank=True)
+    department=models.ForeignKey(Department, null=True, blank=True)
 
     # Override the __unicode__() method to return out something meaningful!
     def __unicode__(self):

@@ -20,7 +20,7 @@ class Partial(Clean):
 		super(Partial, self).__init__(query_string, **kwargs)
 
 	def prepare(self, query_obj):
-		query_string = super(Partial, self).prepare(query_obj)
+		# query_string = super(Partial, self).prepare(query_obj)
 		query_string = query_string.lower()
 		query_string = re.sub( '\s+', '* ', query_string).strip()
 
@@ -36,8 +36,8 @@ class EventSearchFilter(FacetedSearchForm):
 		fesstype = forms.CharField(required=False)		
 		city = forms.CharField(required=False)		
 		festname = forms.CharField(required=False)	
-		# category = forms.CharField(required=False)
-		# subcategory = forms.CharField(required=False)
+		category = forms.CharField(required=False)
+		subcategory = forms.CharField(required=False)
 		
 		# lang = forms.CharField(required=False)
 		# groupby = forms.CharField(required=False)
@@ -78,8 +78,8 @@ class EventSearchFilter(FacetedSearchForm):
 				'festtype',   
 				'city',
 				'festname',			
-				# 'subcategory',
-				# 'category',
+				'subcategory',
+				'category',
 			]
 			params = OrderedDict()
 			print 'params', params
@@ -89,9 +89,9 @@ class EventSearchFilter(FacetedSearchForm):
 				else:
 					params[p] =  None
 	 
-			# if params['subcategory']:
-			# 	params['subcategory'] = params['subcategory']
-			# 	print "params['subcategory']", params['subcategory']
+			if params['subcategory']:
+				params['subcategory'] = params['subcategory']
+				print "params['subcategory']", params['subcategory']
 
 			if params['city']:
 				params['city'] = params['city']

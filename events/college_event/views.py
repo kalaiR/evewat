@@ -30,6 +30,7 @@ from payu.models import *
 from transaction.models import *
 from django.utils import simplejson
 import simplejson as json
+from events.util import get_current_country_cities
 
 
 from django.contrib.auth.decorators import login_required
@@ -44,10 +45,12 @@ class JSONResponse(HttpResponse):
 # Create your views here.
 def home(request):
 	subcategory = SubCategory.objects.all()
-	print 'subcategory',subcategory
-	recentad = 	Postevent.objects.filter().order_by('-id')[:4]
-	print 'recentad', recentad
-	return render_to_response("index.html",{'subcategory':subcategory, 'recentad':recentad}, context_instance=RequestContext(request))
+	college = College.objects.all()
+	dept=Department.objects.all()
+	city =get_current_country_cities(request.COOKIES.get("country"))
+	recentad = Postevent.objects.filter().order_by('-id')[:4]
+	ctx = {'subcategory':subcategory, 'city': city,'college':college,'recentad':recentad,'dept':dept}
+	return render_to_response("index.html",ctx, context_instance=RequestContext(request))
 
 @csrf_protect 
 def user_login(request):
@@ -128,12 +131,11 @@ def register(request):
 			# user.first_name=request.POST['user_id']
 			user.save()
 			userprofile.user=user
-			# print 'usr profile', userprofile.user
 			userprofile.user_id=user.id
-			# print 'usr profile user_id', userprofile.user_id	
 			confirmation_code = ''.join(random.choice(string.ascii_uppercase + string.digits + string.ascii_lowercase) for x in range(33))
 			# print confirmation_code
-			p = Userprofile(user_id=userprofile.user_id, confirmation_code=confirmation_code)
+			p = Userprofile(user_id=userprofile.user_id,lastname=request.POST['lastname'],mobile=request.POST['mobile'],
+				 confirmation_code=confirmation_code)
 			# print 'p', p
 			p.save()			
 			# send_registration_confirmation(user)
@@ -214,15 +216,10 @@ def post_event(request):
 def submit_event(request):
 	if request.method=="POST":
 		event_name=request.POST['name']
-		print 'test1'
 		event_email=request.POST['email']
-		print 'test2'
 		event_mobile=request.POST.get('mobile','0')
-		print 'test3'
 		event_reg_fee=request.POST['registrationfees']
-		print 'test4'
 		event_poster=request.FILES.getlist('poster[]')
-		print 'test5'
 		def handle_uploaded_file(f):        	
 			event_poster = open('events/static/img/' + '%s' % f.name, 'wb+')
 			# print "settings.FOR_IMG",settings.STATIC_ROOT 
@@ -240,35 +237,20 @@ def submit_event(request):
 			else:
 				photosgroup=photosgroup  + 'events/static/img/' +str(uploaded_file) + ','
 		event_poster=photosgroup
-		print 'test6'
 		event_contactperson=request.POST['queries']
-		print 'test7'
 		event_registrationurl=request.POST['festurl']
-		print 'test8'
 		event_festdescription=request.POST['festdescription']
-		print 'test9'
 		event_venuedescription=request.POST['reach']
-		print 'test10'
 		event_city=City.objects.get(id=request.POST['city'])
-		print 'test11'
 		event_festname=request.POST['festname']
-		print 'test12'
 		event_festcaption=request.POST['festcaption']
-		print 'test13'
 		event_temp=SubCategory.objects.get(id=request.POST['festtype'])
-		print 'test14'
 		event_festtype_id=event_temp.id
-		print 'test15'
 		event_state=request.POST['state']
-		print 'test16'
 		event_startdate=request.POST['startdate']
-		print 'test17'
 		event_enddate=request.POST['enddate']
-		print 'test18'
 		event_deadline=request.POST['deadline']
-		print 'test19'
 		print request.POST['userstatus']
-		print 'test20'
 		#if request.POST['userstatus']=='free':
 		postevent=Postevent()
 		postevent.name=event_name
@@ -289,34 +271,7 @@ def submit_event(request):
 		postevent.enddate=event_enddate
 		postevent.deadline=event_deadline
 		postevent.save()
-		# elif request.POST['userstatus']=="paid":
-		# 	print'start'
-		# 	tempevent=Tempevent()
-		# 	tempevent.name=event_name
-		# 	tempevent.email=event_email
-		# 	tempevent.mobile=event_mobile
-		# 	tempevent.registrationfee=event_reg_fee
-		# 	tempevent.poster=event_poster
-		# 	tempevent.contactperson=event_contactperson
-		# 	tempevent.registrationurl=event_registrationurl
-		# 	tempevent.festdescription=event_festdescription
-		# 	tempevent.venuedescription=event_venuedescription
-		# 	tempevent.city=event_city
-		# 	tempevent.festname=event_festname
-		# 	tempevent.festcaption=event_festcaption
-		# 	tempevent.festtype_id=event_festtype_id
-		# 	tempevent.state=event_state
-		# 	tempevent.startdate=event_startdate
-		# 	tempevent.enddate=event_enddate
-		# 	tempevent.deadline=event_deadline
-		# 	tempevent.initial=request.POST['initial']
-		# 	tempevent.fname=request.POST['fname']
-		# 	tempevent.lname=request.POST['lname']
-		# 	tempevent.phoneno=request.POST['pnumber']
-		# 	tempevent.payu_email=request.POST['email']
-		# 	tempevent.amount=request.POST['price']
-		# 	tempevent.save()
-		# 	HttpResponseRedirect("/payment_event/")
+	
 
 
 		message="Your data succesfully submitted"
@@ -339,8 +294,8 @@ def event_for_subcategory(request):
 	if request.is_ajax() and request.GET and 'sub_category_id' in request.GET:
 		print request.GET['sub_category_id'] 
 		# objs1 = Dropdown.objects.filter(subcat_refid=request.GET['sub_category_id']).exclude(brand_name='')
-		objs1 = Postevent.objects.filter(festtype=sub_category_id)
-		print 'objs1', objs1
+		objs1 = Postevent.objects.filter(festtype_id=sub_category_id)
+		print 'objs1 in subcategory', objs1
 		for obj in objs1:
 			print obj.brand_name        
 		return JSONResponse([{'id': o1.id, 'name': smart_unicode(o1.brand_name)}
@@ -356,7 +311,6 @@ def event(request,pname=None):
 
 def details(request,id=None):
 	postevent=Postevent.objects.get(pk=id)
-	
 	return render_to_response("company-profile.html",{'events':postevent}, context_instance=RequestContext(request))
 
 def banner(request):
@@ -463,28 +417,29 @@ def success(request):
 	# response.set_cookie('orderdetails',order.id)
 	return response
 	
-def success_event(request):
-	tempevent=Tempevent.objects.all()
-	postevent=Postevent()
-	postevent.name=tempevent.name
-	postevent.email=tempevent.email
-	postevent.mobile=tempevent.mobile
-	postevent.registrationfee=tempevent.registrationfee
-	postevent.poster=tempevent.poster
-	postevent.contactperson=tempevent.contactperson
-	postevent.registrationurl=tempevent.registrationurl
-	postevent.festdescription=tempevent.festdescription
-	postevent.venuedescription=tempevent.venuedescription
-	postevent.city=tempevent.city
-	postevent.festname=tempevent.festname
-	postevent.festcaption=tempevent.festcaption
-	postevent.festtype_id=tempevent.festtype_id
-	postevent.state=tempevent.state
-	postevent.startdate=tempevent.startdate
-	postevent.enddate=tempevent.enddate
-	postevent.deadline=tempevent.deadline
-	postevent.save()
-	Tempevent.objects.all().delete()
-	
+def success_event(request):	
 	return render_to_response("success.html",context_instance=RequestContext(request))
+
+def find_colleges(request):
+	from django.utils.encoding import smart_unicode, force_unicode
+	if request.is_ajax() and request.GET and 'city_id' in request.GET:
+		print request.GET['city_id']
+		objs = College.objects.filter(city=request.GET['city_id'])
+		print "objs", objs
+		return JSONResponse([{'id': o.id, 'name': smart_unicode(o.college_name)}
+		for o in objs])
+	else:
+		return JSONResponse({'error': 'Not Ajax or no GET'})
+
+def find_department(request):
+	from django.utils.encoding import smart_unicode, force_unicode
+	if request.is_ajax() and request.GET and 'college_id' in request.GET:
+		print request.GET['college_id']
+		objs = CollegeDepartment.objects.filter(college__id=request.GET['college_id'])
+		print "objs", objs
+		return JSONResponse([{'id': o.department.id, 'name': smart_unicode(o.department)}
+		for o in objs])
+	else:
+		return JSONResponse({'error': 'Not Ajax or no GET'})
+	
 	
