@@ -249,8 +249,9 @@ def submit_event(request):
 		postevent.festname=request.POST['festname']
 		postevent.festcaption=request.POST['festcaption']
 		# postevent.festtheme=request.POST['festtheme']
-		postevent.festtype_id=SubCategory.objects.get(id=request.POST['festtype'])
-		print "postevent.festtype",postevent.festtype
+		temp=SubCategory.objects.get(id=request.POST['festtype'])
+		postevent.festtype_id=temp.id
+		print "postevent.festtype",postevent.festtype_id
 		postevent.state=request.POST['state']
 		postevent.startdate=request.POST['startdate']
 		postevent.enddate=request.POST['enddate']
@@ -272,7 +273,7 @@ def subcategory_for_category(request):
 	print "subcategory_for_category"
 	if request.is_ajax() and request.GET and 'category_id' in request.GET:
 		print request.GET['category_id']         
-		objs1 = SubCategory.objects.filter(category_id=request.GET['category_id'])
+		objs1 = SubCategory.objects.filter(category__id=request.GET['category_id'])
 		print 'objs', objs1
 		return JSONResponse([{'name': o1.name, 'id': o1.id}
 			for o1 in objs1])	    
@@ -284,8 +285,8 @@ def event_for_subcategory(request):
 	if request.is_ajax() and request.GET and 'sub_category_id' in request.GET:
 		print request.GET['sub_category_id'] 
 		# objs1 = Dropdown.objects.filter(subcat_refid=request.GET['sub_category_id']).exclude(brand_name='')
-		objs1 = Postevent.objects.filter(festtype=sub_category_id)
-		print 'objs1', objs1
+		objs1 = Postevent.objects.filter(festtype_id=sub_category_id)
+		print 'objs1 in subcategory', objs1
 		for obj in objs1:
 			print obj.brand_name        
 		return JSONResponse([{'id': o1.id, 'name': smart_unicode(o1.brand_name)}
@@ -299,9 +300,8 @@ def event(request,pname=None):
 	college=College.objects.all()
 	return render_to_response("search-result.html",{'events':postevent,'pname':pname, 'college':college}, context_instance=RequestContext(request))
 
-def details(request):
-	
-	
+def details(request,id=None):
+	postevent=Postevent.objects.get(pk=id)
 	return render_to_response("company-profile.html",{'events':postevent}, context_instance=RequestContext(request))
 
 def banner(request):
@@ -408,7 +408,6 @@ def upload_banner(request):
 # 	# response.set_cookie('orderdetails',order.id)
 # 	return response
 	
-def success_event(request):
-	
+def success_event(request):	
 	return render_to_response("success.html",context_instance=RequestContext(request))
 	

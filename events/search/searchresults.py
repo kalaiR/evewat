@@ -16,8 +16,8 @@ default_param_mappings = OrderedDict(
   festtype = 'festtype__id',
   city = 'city__id',  
   festname = 'festname',
-  # subcategory = 'subcategory__id',
-  # category = 'category__id'
+  subcategory = 'subcategory__id',
+  category = 'category__id'
   )
 
 default_geo_params = {
