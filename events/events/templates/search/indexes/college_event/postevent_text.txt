@@ -1,2 +1,6 @@
 {{object.festtype}}    
-{{object.festname}}   
+{{object.festname}}
+{{object.city}}
+
+
+   

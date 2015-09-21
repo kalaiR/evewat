@@ -170,10 +170,12 @@
     // Option Select
     $list.children('li').on('click', function () {
       var $this = $(this);
-
-      $valueHolder.val($this.text());
+      var id_value = $this.attr('data-value');
+      alert('id_value'+id_value);      
+      $valueHolder.val(id_value);
       $valuePlaceholder.html($this.text());
-      $select.find('option[value="' + $this.data('value') + '"]').prop('selected', true);
+      // $select.find('option[value="' + $this.attr('data-value') + '"]').prop('selected', true);
+      // $this.parent
     });
 
     // Hide

@@ -77,11 +77,16 @@ def get_global_city(request):
     return city
 
 def get_global_city_id(request):
-    print "request.COOKIES.get('city')", request.COOKIES.get('city')
-    city=City.objects.get(city=request.COOKIES.get('city'))
-    city_id=city.id
-    print "city_id", city_id
-    return city_id
+    if not request.COOKIES.get('city'):
+        return None
+    else:
+        if City.objects.get(city=request.COOKIES.get('city')):
+            city=City.objects.get(city=request.COOKIES.get('city'))
+            city_id=city.id
+            print "city_id", city_id
+            return city_id
+        else:
+            return None
 
 
 def format_redirect_url(redirect_path, query_string):

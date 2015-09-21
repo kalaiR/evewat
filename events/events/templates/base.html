@@ -240,42 +240,26 @@
             {% endif %}
               </div>
 
-              <div class="select-location">
+              <div class="select-location">                         
+                 <select class="city" name="city">
+                 <option value="">select city</option>                            
+                   <option  id="currentid" value="{{request.COOKIES.global_city_id}}">{{ request.COOKIES.city }}</option>
+                   {% for cities in city|get_city %}
+                        <option value="{{cities.id}}" id="ajax_cityid">{{ cities }} </option>
+                    {% endfor%} 
 
-                          {% if request.COOKIES.global_city_id %}
-                              <select class="city" name="city">                    
-                                  <option value="Pondicherry">Pondicherry</option>
-                                  <option value="Chennai">Chennai</option>
-                                  <option value="Villupuram">Villupuram</option>
-                                  <option value="Madurai">Madurai</option>
-                                  <option value="Trichy">Trichy</option>
-                                </select>
-                                
-                            {% else %}
-                               <select class="city" name="city">
-                                          
-                                 <option  id="currentid" value="{{request.COOKIES.global_city_id}}">{{ request.COOKIES.city }}</option>
-                                 {% for cities in city|get_city %}
-                                      <option value="{{cities.id}}" id="ajax_cityid">{{ cities }} </option>
-                                  {% endfor%} 
-              
-                                </select>                            
-                           
-                              {% endif %}
-
-
-              </div>
+                  </select>                            
+                </div>
 
               <div class="category-search">
-                <select class="category_choose" data-placeholder="-Select category-">                 
+                <select class="category_choose">                 
                     <option value="">Fest type</option>
-                    {% for categories in initial_load|get_categories %}
-                       <option id="category_selecetd"value="{{categories.id}}">{{categories.name}} </option>
-
-                    {% endfor %}
-
+                    {% for subcategory in subcategory %}
+                              <option value="{{subcategory.id}}">{{ subcategory.name }} </option>
+                          {% endfor%} 
+                    <!-- <input type="hidden" class="ajax_subcatid" value="{{subcategory.id}}"> -->
                  </select>      
-                      <input type="hidden" class="ajax_catid" value="{{categories.id}}">                                      
+                                  
                           
                       
                     

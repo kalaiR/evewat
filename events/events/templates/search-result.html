@@ -43,13 +43,13 @@
 
                   <div id="search_result" class="row clearfix">
                   {% for events in page.object_list %}
-                    {% if events.object %}
+                    {% if events.object.admin_status == True %}
                     <div class="col-sm-4 col-xs-6">
 
                       <div class="single-product">
                         <figure>
                         
-                          <img src="{{events.object.poster}}" alt="">
+                          <img src="{{STATIC_ROOT }}/{{events.object.poster|get_photos}}" alt="">
 
                           <div class="rating">
 
@@ -77,7 +77,7 @@
                           </figcaption>
                         </figure>
 
-                        <h4><a href="/details/{{events.object.id}}">{{events.object.festname}},{{events.object.city.city}},{{events.object.state}}</a></h4>
+                        <h4><a href="/details/{{events.object.id}}">{{events.object.festname}},{{ events.object.city.city }},{{events.object.state}}</a></h4>
 
                         <h5><a href="/details/{{events.object.id}}">{{events.object.enddate}}</a> <a href="/details/{{events.object.id}}">{{event.object.collegename}}</a></h5>
 
@@ -87,6 +87,8 @@
 
                       </div> <!-- end .single-product -->
                     </div> <!-- end .col-sm-4 grid layout -->
+                   
+                   
                     {% endif %}
                   {%endfor%}
 
@@ -100,7 +102,7 @@
                             {% endif %}
                           </li>
                             {% for p in page.paginator.page_range %}
-                            {% if p|add:5 >= page.number and p|add:-5 <= page.number %}
+                            {% if p|add:3 >= page.number and p|add:-3 <= page.number %}
                           <li {% if p == page.number %} class="active"{% endif %}>
                             <a data-ajaxlink="true" data-ajaxpage="{{ p }}" href="?q={{request.REQUEST.q}}&page={{ p }}">
                             {{ p }}
@@ -144,14 +146,6 @@
                 {% endfor %}
                <!--  <img src="img/add.jpg" alt=""> -->
               </div>
-
-            </div> <!-- row-->
-          </div> <!-- end container-->
-        </div><!-- end .page-content -->
-
-        <!-- 
-          <button><i class="fa fa-briefcase"></i></button> -->
-
           <div class="page-sidebar">
             <div class="col-md-3 category-toggle">
             <div class="location-details">
@@ -200,9 +194,15 @@
             </div> <!-- end .location-details -->     
 
           </div> <!-- end .page-sidebar -->
-        
-      </div> <!-- end .row -->
-    </div> <!-- end .container -->
-  </div>  <!-- end #page-content -->
+            </div> <!-- row-->
+           
+          </div> <!-- end container-->
+        </div><!-- end .page-content -->
+
+        <!-- 
+          <button><i class="fa fa-briefcase"></i></button> -->
+
+          
+     
 
 {% endblock %}

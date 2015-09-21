@@ -68,18 +68,19 @@ $(document).ready(function() {
 
 
     // city based search     
-    $( ".city" ).change(function () {
-      var selected_option = $( ".city option:selected" ).val();
-      alert(selected_option);
-      $('p#cityselected').html($( ".city option:selected" ).text());  
-      var city = $('input[type="hidden"]#city').val($(this).val());
-      perform_search();
-    });  
+    // $( ".city" ).change(function () {
+    //   alert('city');
+    //   var selected_option = $( ".city option:selected" ).val();
+    //   alert(selected_option);
+    //   $('p#cityselected').html($( ".city option:selected" ).text());  
+    //   var city = $('input[type="hidden"]#city').val($(this).val());
+    //   perform_search();
+    // });  
 
-    $(".category_choose").change(function (){
-      var selected_category = $( ".category_choose option:selected" ).val();
-      alert('selected_category');
-    });
+    // $(".category_choose").change(function () {
+    //   // var selected_category = $( ".category_choose option:selected" ).val();
+    //   alert('selected_category');
+    // });
 
 
 

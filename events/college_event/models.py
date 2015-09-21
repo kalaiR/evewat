@@ -71,8 +71,8 @@ class Postevent(models.Model):
 	mobile= models.BigIntegerField(null=True, blank=True)
 	festname= models.CharField(max_length=50,null=True, blank=True)
 	festcaption= models.CharField(max_length=50,null=True, blank=True)
-	festtype= models.CharField(max_length=50,null=True, blank=True)	
-	city= models.CharField(max_length=50,null=True, blank=True)
+	festtype= models.ForeignKey(SubCategory,null=True, blank=True)	
+	city= models.ForeignKey(City,null=True, blank=True)
 	state= models.CharField(max_length=50,null=True, blank=True)
 	startdate= models.DateField(max_length=50,null=True, blank=True)
 	enddate= models.DateField(max_length=50,null=True, blank=True)
@@ -83,6 +83,7 @@ class Postevent(models.Model):
 	poster = models.ImageField(upload_to='events/static/img/',null=True, max_length=500)	
 	venuedescription= models.TextField(null=True, blank=True)
 	contactperson= models.TextField(null=True, blank=True)
+	admin_status = models.BooleanField(default=False)
 	
 	def __unicode__(self):
 		return self.festname
