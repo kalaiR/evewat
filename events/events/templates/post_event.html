@@ -223,14 +223,20 @@
                 <h3><strong>Paid</strong>User</h3>
 
                 <div class="price">
-                   <span>
+                            <span>
+
                                   {% for premiums in premium %}
                                   
                                   {% if premiums.purpose == 'paid' %}
                                   $ {{ premiums.premium_price|floatformat }}
+
+                                  <input type="hidden" name="price" value="{{ premiums.premium_price|floatformat }}" >
+                                  
                                   {% endif %}
+
                                  {% endfor %}
-                                 <input type="hidden" name="price" value="{{ premiums.premium_price|floatformat }}" >
+                                 
+                                 
                               </span>
                 </div>
 
@@ -259,7 +265,17 @@
     {% csrf_token %}
                                 <div class="col-md-8">
                                     <h5><strong>PayU Money</strong></h5>
-                                    <!-- <h5>Amount Payable : <i class="fa fa-rupee"></i> {{request.COOKIES.uploadbanner_price}}</h5> -->
+                                   
+                                    <h5>Amount Payable :  {% for premiums in premium %}
+                                  
+                                  {% if premiums.purpose == 'paid' %}
+                                  $ {{ premiums.premium_price|floatformat }}
+
+                                  <input type="hidden" name="price" value="{{ premiums.premium_price|floatformat }}" >
+                                  
+                                  {% endif %}
+
+                                 {% endfor %}</h5>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-4">
