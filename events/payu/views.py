@@ -69,7 +69,7 @@ def buy_order(request):
 	return response
 
 def paid_user(request):
-	initial = request.POST.get('initial',request.COOKIES.get('initial'))
+	initial = 'mr'
 	fname=request.POST.get('fname',request.COOKIES.get('fname'))
 	lname=request.POST.get('lname',request.COOKIES.get('lname'))
 	pnumber=request.POST.get('pnumber',request.COOKIES.get('pnumber'))
@@ -110,7 +110,10 @@ def paid_user(request):
 						 pnumber,
 						 settings.PAYU_INFO['merchant_key'],
 						 hash_o,
+						 settings.PAYU_INFO['curl'],
+						 settings.PAYU_INFO['furl'],
 						 txnid,
+						 request.POST.get('price'),
 						 request.POST.get('price'),
 						 email,
 						  ))

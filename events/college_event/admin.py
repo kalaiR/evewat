@@ -69,11 +69,11 @@ class PosteventAdmin(admin.ModelAdmin):
 #     search_fields = ['id', 'name']
 #     list_per_page = 50
 	
-# admin.site.register(Category, CategoryAdmin)
-# admin.site.register(City, CityAdmin)
-# admin.site.register(Location, LocationAdmin)
-# admin.site.register(Collegetype, CollegetypeAdmin)
-# admin.site.register(College, CollegeAdmin)
-# admin.site.register(Department, DepartmentAdmin)
-# admin.site.register(SubCategory)
-# admin.site.register(Postevent, PosteventAdmin)    
+admin.site.register(Category, CategoryAdmin)
+admin.site.register(City, CityAdmin)
+admin.site.register(Location, LocationAdmin)
+admin.site.register(Collegetype, CollegetypeAdmin)
+admin.site.register(College, CollegeAdmin)
+admin.site.register(Department, DepartmentAdmin)
+admin.site.register(SubCategory)
+admin.site.register(Postevent, PosteventAdmin)    

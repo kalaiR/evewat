@@ -61,7 +61,10 @@ $(document).ready(function() {
     });
 
     
-        
+    $('#festtype').click(function(){
+        alert($(this).val());
+        $('input[name="festtype"]').val($(this).val());
+      });   
 
          
   

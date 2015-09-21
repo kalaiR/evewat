@@ -39,8 +39,6 @@
             <script type="text/javascript">
            window.onload = function(){ window.location="http://localhost:8000/post_event"; }
              </script>
-             </window.onload>
-                </script>
             <h4 class="text-center">{{message}}</h4>
             {%endif%}
 
@@ -57,15 +55,15 @@
                    <input type="text" placeholder="Fest Caption" name="festcaption" id="festcaption_val">
                    <label for="festcaption_val" class="labelError" style="display:none;color:red;">Please enter Fest caption</label>
 
-                      <select name="festtype">
+                      <select name="festtype" id="festtype">
                         <option value="">Fest type</option>
                          {% for subcategory in subcategory %}
                               <option value="{{subcategory.id}}">{{ subcategory.name }} </option>
                           {% endfor%} 
                                            
                      </select>
-                  
-                   
+                      <input type="hidden" name="festtype" value="">
+                    
                       <input  type="text" placeholder="startdate"  id="datepicker" name="startdate" />
                       <input  type="text" placeholder="enddate"  id="datepicker1" name="enddate" />
                       
@@ -159,7 +157,7 @@
                   <!-- <li><i class="fa fa-check-circle-o"></i> Loren ipsum dolor sit amet</li>
                   <li><i class="fa fa-check-circle-o"></i> Loren ipsum dolor sit amet</li> -->
                 </ul>
-                <a class="btn btn-default post_event" id="paid" href="#" data-user="paiduser"><i class="fa fa-envelope-o"></i>Paid User</a>
+                <a class="btn btn-default" id="paid" data-user="paiduser"><i class="fa fa-envelope-o"></i>Paid User</a>
                 
                 <input type="hidden" name="userstatus" value="" id="paid" >
                 

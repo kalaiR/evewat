@@ -6,7 +6,7 @@ import urllib2
 from django.conf import settings
 from django.contrib.gis.geoip import GeoIP
 from events import globals
-from ipware.ip import get_ip
+# from ipware.ip import get_ip
 from college_event.models import *
 from django.contrib import admin
 
@@ -77,10 +77,8 @@ def get_global_city(request):
     return city
 
 def get_global_city_id(request):
-    if not request.COOKIES.get('city'):
-        return None
-    else:
-        if City.objects.get(city=request.COOKIES.get('city')):
+
+        if request.COOKIES.get('city'):
             city=City.objects.get(city=request.COOKIES.get('city'))
             city_id=city.id
             print "city_id", city_id

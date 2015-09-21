@@ -136,7 +136,7 @@ def register(request):
 			p = Userprofile(user_id=userprofile.user_id, confirmation_code=confirmation_code)
 			# print 'p', p
 			p.save()			
-			send_registration_confirmation(user)
+			# send_registration_confirmation(user)
 			registered = True
 			user = User.objects.get(username=user.username)
 			print "user",user
@@ -152,21 +152,21 @@ def register(request):
 			return render_to_response('index.html', {'user_id':user_id} ,context_instance=RequestContext(request))
 
 
-def send_registration_confirmation(user):
-	p = user.get_profile()
-	title = "Evewat account confirmation"
-	content = "http://localhost:8000/confirm/" + str(p.confirmation_code) + "/" + user.username
-	send_templated_mail(
-				template_name = 'welcome',
-				subject = 'Welcome Evewat',
-				from_email = 'testmail123sample@gmail.com',
-				recipient_list = [user.email],
-				context={
-						 'user': user,
-						 'content':content,
+# def send_registration_confirmation(user):
+# 	p = user.get_profile()
+# 	title = "Evewat account confirmation"
+# 	content = "http://localhost:8000/confirm/" + str(p.confirmation_code) + "/" + user.username
+# 	send_templated_mail(
+# 				template_name = 'welcome',
+# 				subject = 'Welcome Evewat',
+# 				from_email = 'testmail123sample@gmail.com',
+# 				recipient_list = [user.email],
+# 				context={
+# 						 'user': user,
+# 						 'content':content,
 						 
-				},
-			)
+# 				},
+# 			)
 
 def confirm(request, confirmation_code, username):    
 	try:
@@ -213,57 +213,112 @@ def post_event(request):
 
 def submit_event(request):
 	if request.method=="POST":
-		postevent=Postevent()
-		postevent.name=request.POST['name']
-		postevent.email=request.POST['email']
-		postevent.mobile=request.POST['mobile']
-		postevent.registrationfee=request.POST['registrationfees']
-		postevent.poster=request.FILES.getlist('poster[]')
-		# print "postevent.poster",postevent.poster
+		event_name=request.POST['name']
+		print 'test1'
+		event_email=request.POST['email']
+		print 'test2'
+		event_mobile=request.POST.get('mobile','0')
+		print 'test3'
+		event_reg_fee=request.POST['registrationfees']
+		print 'test4'
+		event_poster=request.FILES.getlist('poster[]')
+		print 'test5'
 		def handle_uploaded_file(f):        	
-			# print "settings.STATICFILES_DIRS", settings.STATICFILES_DIRS
-			print "f", f
-			print "f.name", f.name
-			postevent.poster = open('events/static/img/' + '%s' % f.name, 'wb+')
+			event_poster = open('events/static/img/' + '%s' % f.name, 'wb+')
 			# print "settings.FOR_IMG",settings.STATIC_ROOT 
 			for chunk in f.chunks():
-				postevent.poster.write(chunk)
-			postevent.poster.close()
+				event_poster.write(chunk)
+			event_poster.close()
 		photosgroup = ''
 		
-		count=len(postevent.poster)
-		for uploaded_file in postevent.poster:
+		count=len(event_poster)
+		for uploaded_file in event_poster:
 			count=count-1
 			handle_uploaded_file(uploaded_file)
 			if count==0:
 				photosgroup=photosgroup  + 'events/static/img/' + str(uploaded_file)
 			else:
 				photosgroup=photosgroup  + 'events/static/img/' +str(uploaded_file) + ','
-		print photosgroup  
-		postevent.poster=photosgroup
-		postevent.contactperson=request.POST['queries']
-		postevent.registrationurl=request.POST['festurl']
-		postevent.festdescription=request.POST['festdescription']
-		postevent.venuedescription=request.POST['reach']
-		postevent.city=City.objects.get(id=request.POST['city'])
-		postevent.festname=request.POST['festname']
-		postevent.festcaption=request.POST['festcaption']
-		# postevent.festtheme=request.POST['festtheme']
-		postevent.festtype_id=SubCategory.objects.get(id=request.POST['festtype'])
-		print "postevent.festtype",postevent.festtype
-		postevent.state=request.POST['state']
-		postevent.startdate=request.POST['startdate']
-		postevent.enddate=request.POST['enddate']
-		postevent.deadline=request.POST['deadline']
-		print 'postevent.deadline',postevent.deadline
+		event_poster=photosgroup
+		print 'test6'
+		event_contactperson=request.POST['queries']
+		print 'test7'
+		event_registrationurl=request.POST['festurl']
+		print 'test8'
+		event_festdescription=request.POST['festdescription']
+		print 'test9'
+		event_venuedescription=request.POST['reach']
+		print 'test10'
+		event_city=City.objects.get(id=request.POST['city'])
+		print 'test11'
+		event_festname=request.POST['festname']
+		print 'test12'
+		event_festcaption=request.POST['festcaption']
+		print 'test13'
+		event_temp=SubCategory.objects.get(id=request.POST['festtype'])
+		print 'test14'
+		event_festtype_id=event_temp.id
+		print 'test15'
+		event_state=request.POST['state']
+		print 'test16'
+		event_startdate=request.POST['startdate']
+		print 'test17'
+		event_enddate=request.POST['enddate']
+		print 'test18'
+		event_deadline=request.POST['deadline']
+		print 'test19'
+		print request.POST['userstatus']
+		print 'test20'
+		#if request.POST['userstatus']=='free':
+		postevent=Postevent()
+		postevent.name=event_name
+		postevent.email=event_email
+		postevent.mobile=event_mobile
+		postevent.registrationfee=event_reg_fee
+		postevent.poster=event_poster
+		postevent.contactperson=event_contactperson
+		postevent.registrationurl=event_registrationurl
+		postevent.festdescription=event_festdescription
+		postevent.venuedescription=event_venuedescription
+		postevent.city=event_city
+		postevent.festname=event_festname
+		postevent.festcaption=event_festcaption
+		postevent.festtype_id=event_festtype_id
+		postevent.state=event_state
+		postevent.startdate=event_startdate
+		postevent.enddate=event_enddate
+		postevent.deadline=event_deadline
 		postevent.save()
-		send_templated_mail(
-					template_name='postevent',
-					from_email='testmail123sample@gmail.com',
-					recipient_list=[postevent.email],
-					context={
-						'username': postevent.name,
-						})
+		# elif request.POST['userstatus']=="paid":
+		# 	print'start'
+		# 	tempevent=Tempevent()
+		# 	tempevent.name=event_name
+		# 	tempevent.email=event_email
+		# 	tempevent.mobile=event_mobile
+		# 	tempevent.registrationfee=event_reg_fee
+		# 	tempevent.poster=event_poster
+		# 	tempevent.contactperson=event_contactperson
+		# 	tempevent.registrationurl=event_registrationurl
+		# 	tempevent.festdescription=event_festdescription
+		# 	tempevent.venuedescription=event_venuedescription
+		# 	tempevent.city=event_city
+		# 	tempevent.festname=event_festname
+		# 	tempevent.festcaption=event_festcaption
+		# 	tempevent.festtype_id=event_festtype_id
+		# 	tempevent.state=event_state
+		# 	tempevent.startdate=event_startdate
+		# 	tempevent.enddate=event_enddate
+		# 	tempevent.deadline=event_deadline
+		# 	tempevent.initial=request.POST['initial']
+		# 	tempevent.fname=request.POST['fname']
+		# 	tempevent.lname=request.POST['lname']
+		# 	tempevent.phoneno=request.POST['pnumber']
+		# 	tempevent.payu_email=request.POST['email']
+		# 	tempevent.amount=request.POST['price']
+		# 	tempevent.save()
+		# 	HttpResponseRedirect("/payment_event/")
+
+
 		message="Your data succesfully submitted"
 	return render_to_response("post_event.html", context_instance=RequestContext(request))
 
@@ -272,7 +327,7 @@ def subcategory_for_category(request):
 	print "subcategory_for_category"
 	if request.is_ajax() and request.GET and 'category_id' in request.GET:
 		print request.GET['category_id']         
-		objs1 = SubCategory.objects.filter(category_id=request.GET['category_id'])
+		objs1 = SubCategory.objects.filter(category__id=request.GET['category_id'])
 		print 'objs', objs1
 		return JSONResponse([{'name': o1.name, 'id': o1.id}
 			for o1 in objs1])	    
@@ -299,8 +354,8 @@ def event(request,pname=None):
 	college=College.objects.all()
 	return render_to_response("search-result.html",{'events':postevent,'pname':pname, 'college':college}, context_instance=RequestContext(request))
 
-def details(request):
-	
+def details(request,id=None):
+	postevent=Postevent.objects.get(pk=id)
 	
 	return render_to_response("company-profile.html",{'events':postevent}, context_instance=RequestContext(request))
 
@@ -383,32 +438,53 @@ def upload_banner(request):
 		
 	return response
 
-# @csrf_exempt
-# def success(request):
+@csrf_exempt
+def success(request):
 
-# 	order=Order()
-# 	user=User()	
-# 	# order.user =User.objects.get(username=username)
-# 	order.price=request.COOKIES.get('price')
-# 	order.position=request.COOKIES.get('position')
-# 	order.banner=request.COOKIES.get('banner')
-# 	order.save()
-# 	transaction=Transaction()
-# 	# transaction.order=Order.objects.get(id=request.COOKIES.get('orderdetails'))
-# 	# transaction.payu_details=PayuDetails.objects.get(id=request.COOKIES.get('payudetails'))
-# 	transaction.payu_status=request.COOKIES.get('payustatus')
-# 	print "transaction.payu_status",transaction.payu_status
-# 	transaction.save()
-# 	payid, paystatus=store_payudetails(request)
-# 	print "payid", payid
-# 	print "paystatus", paystatus
-# 	response = render_to_response("success.html",context_instance=RequestContext(request))
-# 	response.set_cookie('payudetails',payid)
-# 	response.set_cookie('payustatus',paystatus)
-# 	# response.set_cookie('orderdetails',order.id)
-# 	return response
+	# order=Order()
+	# user=User()	
+	# # order.user =User.objects.get(username=username)
+	# order.price=request.COOKIES.get('price')
+	# order.position=request.COOKIES.get('position')
+	# order.banner=request.COOKIES.get('banner')
+	# order.save()
+	# transaction=Transaction()
+	# # transaction.order=Order.objects.get(id=request.COOKIES.get('orderdetails'))
+	# # transaction.payu_details=PayuDetails.objects.get(id=request.COOKIES.get('payudetails'))
+	# transaction.payu_status=request.COOKIES.get('payustatus')
+	# print "transaction.payu_status",transaction.payu_status
+	# transaction.save()
+	# payid, paystatus=store_payudetails(request)
+	# print "payid", payid
+	# print "paystatus", paystatus
+	response = render_to_response("success.html",context_instance=RequestContext(request))
+	# response.set_cookie('payudetails',payid)
+	# response.set_cookie('payustatus',paystatus)
+	# response.set_cookie('orderdetails',order.id)
+	return response
 	
 def success_event(request):
+	tempevent=Tempevent.objects.all()
+	postevent=Postevent()
+	postevent.name=tempevent.name
+	postevent.email=tempevent.email
+	postevent.mobile=tempevent.mobile
+	postevent.registrationfee=tempevent.registrationfee
+	postevent.poster=tempevent.poster
+	postevent.contactperson=tempevent.contactperson
+	postevent.registrationurl=tempevent.registrationurl
+	postevent.festdescription=tempevent.festdescription
+	postevent.venuedescription=tempevent.venuedescription
+	postevent.city=tempevent.city
+	postevent.festname=tempevent.festname
+	postevent.festcaption=tempevent.festcaption
+	postevent.festtype_id=tempevent.festtype_id
+	postevent.state=tempevent.state
+	postevent.startdate=tempevent.startdate
+	postevent.enddate=tempevent.enddate
+	postevent.deadline=tempevent.deadline
+	postevent.save()
+	Tempevent.objects.all().delete()
 	
 	return render_to_response("success.html",context_instance=RequestContext(request))
 	

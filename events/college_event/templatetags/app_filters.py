@@ -16,6 +16,7 @@ def get_banner(banner):
 def get_city(request):
 	locality =Location.objects.all()
 	city=City.objects.all()
+	print "city", city
 	country=Country.objects.all()
 	user_ip = globals.ip
 	g = GeoIP()
