@@ -130,6 +130,27 @@
       homeSlide.trigger('owl.prev');
     });
 
+   function find_colleges(city_id){
+      $.get('/find_colleges/', { city_id: city_id }, function(data) {
+      $('.select_college').html($('<option>').text("Select College").attr('value', "select_college"));
+      $(".select_college").siblings('.select-clone').html($('<li>').text("Select College").attr('data-value', "select_college"));
+      $.each(data, function(key,value) {
+        $('.select_college').append($('<option>').text(value.name).attr('value', value.id));
+        $(".select_college").siblings('.select-clone').append($('<li>').text(value.name).attr('data-value', value.id));
+      });
+      });
+    }
+
+   function find_department(college_id){
+      $.get('/find_department/', { college_id: college_id }, function(data) {
+      $('.select_dept').html($('<option>').text("Select Department").attr('value', "select_department"));
+      $(".select_dept").siblings('.select-clone').html($('<li>').text("Select Department").attr('data-value', "select_department"));
+      $.each(data, function(key,value) {
+        $('.select_dept').append($('<option>').text(value.name).attr('value', value.id));
+        $(".select_dept").siblings('.select-clone').append($('<li>').text(value.name).attr('data-value', value.id));
+      });
+      });
+    }
 
 
 
@@ -168,13 +189,23 @@
     });
 
     // Option Select
-    $list.children('li').on('click', function () {
+   // $list.children('li').on('click', function () {
+   $list.delegate('li','click', function () {
       var $this = $(this);
-
       $valueHolder.val($this.text());
       $valuePlaceholder.html($this.text());
       $select.find('option[value="' + $this.data('value') + '"]').prop('selected', true);
+      // if ($this.parent('select-clone').siblings('select').hasClass('select_city'))
+      if ($this.parents().children().hasClass('select_city'))
+        find_colleges($this.data('value'));
+      if ($this.parents().children().hasClass('select_college'))
+        find_department($this.data('value'));
     });
+
+  //  $('.select-clone input').click(function(){
+  //   alert("text");
+  //   $(this).css({'display':'block'});
+  // });
 
     // Hide
     $container.on('clickoutside touchendoutside', function () {
@@ -200,6 +231,10 @@
   $('select').each(function () {
     $(this).uouCustomSelect();
   });
+
+  
+
+
 
 
 

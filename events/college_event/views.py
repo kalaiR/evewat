@@ -29,6 +29,7 @@ from payu.models import *
 from transaction.models import *
 from django.utils import simplejson
 import simplejson as json
+from events.util import get_current_country_cities
 
 
 from django.contrib.auth.decorators import login_required
@@ -42,13 +43,13 @@ class JSONResponse(HttpResponse):
 				simplejson.dumps(data), mimetype='application/json')
 # Create your views here.
 def home(request):
-
 	subcategory = SubCategory.objects.all()
-	print 'subcategory',subcategory
-	recentad = 	Postevent.objects.filter().order_by('-id')[:4]
-	print 'recentad', recentad
-	return render_to_response("index.html",{'subcategory':subcategory, 'recentad':recentad}, context_instance=RequestContext(request))
-
+	college = College.objects.all()
+	dept=Department.objects.all()
+	city =get_current_country_cities(request.COOKIES.get("country"))
+	recentad = Postevent.objects.filter().order_by('-id')[:4]
+	ctx = {'subcategory':subcategory, 'city': city,'college':college,'recentad':recentad,'dept':dept}
+	return render_to_response("index.html",ctx, context_instance=RequestContext(request))
 
 @csrf_protect 
 def user_login(request):
@@ -129,12 +130,11 @@ def register(request):
 			# user.first_name=request.POST['user_id']
 			user.save()
 			userprofile.user=user
-			# print 'usr profile', userprofile.user
 			userprofile.user_id=user.id
-			# print 'usr profile user_id', userprofile.user_id	
 			confirmation_code = ''.join(random.choice(string.ascii_uppercase + string.digits + string.ascii_lowercase) for x in range(33))
 			# print confirmation_code
-			p = Userprofile(user_id=userprofile.user_id, confirmation_code=confirmation_code)
+			p = Userprofile(user_id=userprofile.user_id,lastname=request.POST['lastname'],mobile=request.POST['mobile'],
+				 confirmation_code=confirmation_code)
 			# print 'p', p
 			p.save()			
 			# send_registration_confirmation(user)
@@ -366,4 +366,27 @@ def upload_banner(request):
 def success_event(request):
 	
 	return render_to_response("success.html",context_instance=RequestContext(request))
+
+def find_colleges(request):
+	from django.utils.encoding import smart_unicode, force_unicode
+	if request.is_ajax() and request.GET and 'city_id' in request.GET:
+		print request.GET['city_id']
+		objs = College.objects.filter(city=request.GET['city_id'])
+		print "objs", objs
+		return JSONResponse([{'id': o.id, 'name': smart_unicode(o.college_name)}
+		for o in objs])
+	else:
+		return JSONResponse({'error': 'Not Ajax or no GET'})
+
+def find_department(request):
+	from django.utils.encoding import smart_unicode, force_unicode
+	if request.is_ajax() and request.GET and 'college_id' in request.GET:
+		print request.GET['college_id']
+		objs = CollegeDepartment.objects.filter(college__id=request.GET['college_id'])
+		print "objs", objs
+		return JSONResponse([{'id': o.department.id, 'name': smart_unicode(o.department)}
+		for o in objs])
+	else:
+		return JSONResponse({'error': 'Not Ajax or no GET'})
+	
 	

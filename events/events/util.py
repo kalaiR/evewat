@@ -38,6 +38,10 @@ def get_client_ip(request):
     print "IP from ipgetter", IP
     return IP 
 
+def get_current_country_cities(country_code):
+    country_id=Country.objects.get(code=country_code)
+    current_country_cities = City.objects.filter(country=country_id.id)
+    return current_country_cities
 
 def get_global_country(request):
     """ This function get global language based on following assets
