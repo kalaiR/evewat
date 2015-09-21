@@ -192,7 +192,9 @@
    // $list.children('li').on('click', function () {
    $list.delegate('li','click', function () {
       var $this = $(this);
-      $valueHolder.val($this.text());
+      var id_value = $this.attr('data-value');
+      alert('id_value'+id_value);      
+      $valueHolder.val(id_value);
       $valuePlaceholder.html($this.text());
       $select.find('option[value="' + $this.data('value') + '"]').prop('selected', true);
       // if ($this.parent('select-clone').siblings('select').hasClass('select_city'))
@@ -613,10 +615,13 @@ $('.events').click(function(){
 
 $('.events_details').click(function(){
   $('.eventdetail_fields').toggle();
+  $('.events_fields').hide();
 });
 
 $('.user_details').click(function(){
   $('.user_fields').toggle();
+  $('.eventdetail_fields').hide();
+  $('.events_fields').hide();
 });
 
 
@@ -948,4 +953,8 @@ $('.user_details').click(function(){
 $('.payment').hide();
 $('#paid').click(function(){
   $('.payment').toggle();
+});
+
+$('#create_user').click(function(){
+  $('.popup').show();
 });

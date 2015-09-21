@@ -57,103 +57,15 @@
                    <input type="text" placeholder="Fest Caption" name="festcaption" id="festcaption_val">
                    <label for="festcaption_val" class="labelError" style="display:none;color:red;">Please enter Fest caption</label>
 
-                      <select id="festtype_required" name="festtype" class="festtype_required">
-                        <option selected="selected" value="Fest type">Fest type</option>
-                        <option value="technical">Technical</option>
-                        <option value="cultural">Cultural</option>
-                        <option value="management">Management</option>
-                        <option value="sports">Sports</option>
-                        <option value="literary">Literary</option>
-                        <option value="conferences">Conferences</option>
-                        <option value="seminar">Seminar</option>
-                        <option value="workshop">Workshop</option>
-                        <option value="symposium">Symposium</option>
-                        <option value="youthsummit">Youth Summit</option>
-                        <option value="modelunitednations">Model United Nations</option>
-                        <option value="tedx">TEDx</option>
-                        <option value="summit">Summit</option>
-                        <option value="culture">Culture</option>
-                        <option value="conclave">Conclave</option>
-                        <option value="convention">Convention</option>
-                        <option value="entrepreneurshipsummit">Entrepreneurship Summit</option>
-                        <option value="medical">Medical</option>
-                        <option value="pharma">Pharma</option>
-                        <option value="biomedical">Bio Medical</option>
-                        <option value="OnlineEvents">Online Events</option>                   
-                      </select>
-                      <label id="festtype_required" class="drop_labelError" style="font-size:15px;color:red;display:none;">Please Choose festtype</label>
-                   
-
-                      <input  type="text" placeholder="startdate"  id="datepicker" name="startdate" />
-                      <!-- <label for="start_date" class="labelError" style="display:none;color:red;">Please enter Start Date</label> -->
-
-                      <input  type="text" placeholder="enddate"  id="datepicker1" name="enddate" />
-                      <!-- <label for="end_date" class="labelError" style="display:none;color:red;">Please enter End Date</label> -->
-
-                      <input type="text" placeholder="Dealines for Registration yyyy-mm-dd"  id="datepicker_deadline" name="deadline"></input>
-                      <!-- <label for="date_deadline" class="labelError" style="display:none;color:red;">Please enter Deadline for registration</label> -->
-              </div>
-              <div class="events_details">Events Details</div>
-              <div class="eventdetail_fields">
-                    <textarea placeholder="Fest Description" name="festdescription" id="festdes_required"></textarea>
-                    <label for="festdes_required" class="labelError" style="display:none;color:red;">Please enter Fest Description</label>
-
-                    <input placeholder="Registration Fees" name="registrationfees" id="regfees_required"></input>
-                    <label for="regfees_required" class="labelError" style="display:none;color:red;">Please enter Registration fees</label>
-
-                      <input type="text" placeholder="Fest Registration URL" name="festurl" id="festurl_required">
-                      <label for="festurl_required" class="labelError" style="display:none;color:red;">Please enter Fest URL</label>
-
-                      <input type='file' id='poster' class="poster" name='poster[]' multiple='multiple'/>
-
-                      <textarea placeholder="How to reach college/venue" name="reach" id="reach_required"></textarea>
-                      <label for="reach_required" class="labelError" style="display:none;color:red;">Please enter College Venue</label>
-
-                      <textarea placeholder="Contact person details" name="queries" id="queries_required"></textarea>
-                      <label for="queries_required" class="labelError" style="display:none;color:red;">Please enter Contact Person details</label>
-
-                      <select class="city" name="city" id="city_required" class="city_required">
-                         <option selected="selected" value="Select City"> Select City</option>         
-                      
-                         {% for cities in city|get_city %}
-                              <option value="{{cities.id}}" id="ajax_cityid">{{ cities }} </option>
-                          {% endfor%} 
-                      </select>
-                      <label id="city_required" class="drop_labelError1" style="font-size:15px;color:red;display:none;">Please Choose City</label>
-                      
-                      <input type="text" placeholder="State" name="state" id="state_required">
-                      <label for="state_required" class="labelError" style="display:none;color:red;">Please enter State</label> 
-              </div>
-              <div class="user_details">User Details</div>
-              <div class="user_fields">
-                <input type="text" placeholder="Name" name=
-                  "name" value="{{ request.user }}"required>
-
-                  <input type="email" placeholder="Email" name="email" value="{{ request.user.email }}" required>
-                  
-                  <input type="text" placeholder="Phone number" name="mobile" id="mobile_required">
-              </div>
-              <!-- <a class="btn btn-default" href="#" id="post_event"><i class="fa fa-envelope-o"></i>Submit Event</a> -->
-
-
-
-
-
-
-
-
-
-
-                      <!--  <input type="text" placeholder="Fest name" name="festname">
-                   <input type="text" placeholder="Fest Caption" name="festcaption">
-                    <select name="festtype">
+                      <select name="festtype">
                         <option value="">Fest type</option>
                          {% for subcategory in subcategory %}
                               <option value="{{subcategory.id}}">{{ subcategory.name }} </option>
                           {% endfor%} 
                                            
-                      </select>                      
-
+                     </select>
+                  
+                   
                       <input  type="text" placeholder="startdate"  id="datepicker" name="startdate" />
                       <input  type="text" placeholder="enddate"  id="datepicker1" name="enddate" />
                       
@@ -223,14 +135,20 @@
                 <h3><strong>Paid</strong>User</h3>
 
                 <div class="price">
-                   <span>
+                            <span>
+
                                   {% for premiums in premium %}
                                   
                                   {% if premiums.purpose == 'paid' %}
                                   $ {{ premiums.premium_price|floatformat }}
+
+                                  <input type="hidden" name="price" value="{{ premiums.premium_price|floatformat }}" >
+                                  
                                   {% endif %}
+
                                  {% endfor %}
-                                 <input type="hidden" name="price" value="{{ premiums.premium_price|floatformat }}" >
+                                 
+                                 
                               </span>
                 </div>
 
@@ -259,7 +177,17 @@
     {% csrf_token %}
                                 <div class="col-md-8">
                                     <h5><strong>PayU Money</strong></h5>
-                                    <!-- <h5>Amount Payable : <i class="fa fa-rupee"></i> {{request.COOKIES.uploadbanner_price}}</h5> -->
+                                   
+                                    <h5>Amount Payable :  {% for premiums in premium %}
+                                  
+                                  {% if premiums.purpose == 'paid' %}
+                                  $ {{ premiums.premium_price|floatformat }}
+
+                                  <input type="hidden" name="price" value="{{ premiums.premium_price|floatformat }}" >
+                                  
+                                  {% endif %}
+
+                                 {% endfor %}</h5>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-4">

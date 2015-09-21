@@ -93,6 +93,7 @@ class Postevent(models.Model):
 	poster = models.ImageField(upload_to='events/static/img/',null=True, max_length=500)	
 	venuedescription= models.TextField(null=True, blank=True)
 	contactperson= models.TextField(null=True, blank=True)
+	admin_status = models.BooleanField(default=False)
 	
 	def __unicode__(self):
 		return self.festname

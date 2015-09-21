@@ -8033,3 +8033,19 @@ fieldset[disabled] .btn-default-inverse.active {
 #user_form .uou-custom-select .select-clone {
   position:relative !important;
 }
+
+.popup{
+  display: none;
+  position: fixed;
+  top: 25%;
+  left: 25%;
+  width: 400px;
+  height: auto;
+ 
+  background: #fff;
+  padding: 25px;
+  border-radius: 5px;
+  z-index: 10;
+  box-shadow: 0 0 0 9999px rgba(0,0,0,0.5);
+}
+

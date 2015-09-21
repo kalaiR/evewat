@@ -2,4 +2,3 @@
 {{object.festname}}
 {{object.city}}
 
-   

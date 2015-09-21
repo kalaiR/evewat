@@ -69,15 +69,15 @@ def buy_order(request):
 	return response
 
 def paid_user(request):
-	initial = request.POST.get('initial',request.COOKIES.get('initial_user'))
-	fname=request.POST.get('fname',request.COOKIES.get('fname_user'))
-	lname=request.POST.get('lname',request.COOKIES.get('lname_user'))
-	pnumber=request.POST.get('pnumber',request.COOKIES.get('pnumber_user'))
-	email=request.POST.get('email',request.COOKIES.get('email_user'))
+	initial = request.POST.get('initial',request.COOKIES.get('initial'))
+	fname=request.POST.get('fname',request.COOKIES.get('fname'))
+	lname=request.POST.get('lname',request.COOKIES.get('lname'))
+	pnumber=request.POST.get('pnumber',request.COOKIES.get('pnumber'))
+	email=request.POST.get('email',request.COOKIES.get('email'))
 	txnid=my_random_string(8)
 	cleaned_data = {'key': settings.PAYU_INFO['merchant_key'], 
-					'txnid':txnid,'amount': request.POST.get("price"), 
-					'productinfo':request.POST.get("price"),
+					'txnid':txnid,'amount': request.POST.get('price'), 
+					'productinfo':request.POST.get('price'),
 					'firstname':fname,
 					'email': email, 
 					'udf1':'', 'udf2': '', 'udf3': '', 
@@ -111,12 +111,12 @@ def paid_user(request):
 						 settings.PAYU_INFO['merchant_key'],
 						 hash_o,
 						 txnid,
-						 
-						 
-						 ))
-	response.set_cookie('initial_user',initial)
-	response.set_cookie('fname_user',fname)
-	response.set_cookie('lname_user',lname)
-	response.set_cookie('pnumber_user',pnumber)
-	response.set_cookie('email_user',email)
+						 request.POST.get('price'),
+						 email,
+						  ))
+	response.set_cookie('initial',initial)
+	response.set_cookie('fname',fname)
+	response.set_cookie('lname',lname)
+	response.set_cookie('pnumber',pnumber)
+	response.set_cookie('email',email)
 	return response
