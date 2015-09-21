@@ -57,7 +57,14 @@
                    <input type="text" placeholder="Fest Caption" name="festcaption" id="festcaption_val">
                    <label for="festcaption_val" class="labelError" style="display:none;color:red;">Please enter Fest caption</label>
 
-                      <select id="festtype_required" name="festtype" class="festtype_required">
+                      <select name="festtype">
+                        <option value="">Fest type</option>
+                         {% for subcategory in subcategory %}
+                              <option value="{{subcategory.id}}">{{ subcategory.name }} </option>
+                          {% endfor%} 
+                                           
+                      </select>
+                     <!--  <select id="festtype_required" name="festtype" class="festtype_required">
                         <option selected="selected" value="Fest type">Fest type</option>
                         <option value="technical">Technical</option>
                         <option value="cultural">Cultural</option>
@@ -80,7 +87,7 @@
                         <option value="pharma">Pharma</option>
                         <option value="biomedical">Bio Medical</option>
                         <option value="OnlineEvents">Online Events</option>                   
-                      </select>
+                      </select> -->
                       <label id="festtype_required" class="drop_labelError" style="font-size:15px;color:red;display:none;">Please Choose festtype</label>
                    
 

@@ -578,10 +578,13 @@ $('.events').click(function(){
 
 $('.events_details').click(function(){
   $('.eventdetail_fields').toggle();
+  $('.events_fields').hide();
 });
 
 $('.user_details').click(function(){
   $('.user_fields').toggle();
+  $('.eventdetail_fields').hide();
+  $('.events_fields').hide();
 });
 
 
@@ -913,4 +916,8 @@ $('.user_details').click(function(){
 $('.payment').hide();
 $('#paid').click(function(){
   $('.payment').toggle();
+});
+
+$('#create_user').click(function(){
+  $('.popup').show();
 });

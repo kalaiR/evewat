@@ -20,24 +20,24 @@ class PosteventIndex(SearchIndex, Indexable):
         update_index.Command().handle()
         rebuild_index.Command().handle()
 
-    def prepare_searchtext(self, obj):
-        text = []
-        if obj.festname:
-            text.append(obj.festname)
-            print"text title", text
-        if obj.festtype:
-            text.append(obj.festtype)
-            print"text description", text 
-        #text += self.prepare_locations(obj)
-        # text += obj.country
-        print "text", text
-        search = []
-        for t in text:
-            t = re.sub(r'[^\w]', ' ', t, flags=re.UNICODE).split(' ')
-            for q in t:
-                if q and (not re.match(r'[^\w]', q, flags=re.UNICODE)):
-                    search.append(q)
-        return ' '.join(search)
+    # def prepare_searchtext(self, obj):
+    #     text = []
+    #     if obj.festname:
+    #         text.append(obj.festname)
+    #         print"text title", text
+    #     if obj.festtype:
+    #         text.append(obj.festtype)
+    #         print"text description", text 
+    #     #text += self.prepare_locations(obj)
+    #     # text += obj.country
+    #     print "text", text
+    #     search = []
+    #     for t in text:
+    #         t = re.sub(r'[^\w]', ' ', t, flags=re.UNICODE).split(' ')
+    #         for q in t:
+    #             if q and (not re.match(r'[^\w]', q, flags=re.UNICODE)):
+    #                 search.append(q)
+    #     return ' '.join(search)
 
     # def prepare_locations(self,obj):
     #     countrys=[]
