@@ -227,8 +227,7 @@
           </div>  -->
 
           <div class="container">
-           <!--  <button class="toggle-btn" type="submit"><i class="fa fa-bars"></i></button>
- -->
+           
             <div class="search-value">
               <div class="keywords">
              <!--    <input type="text" class="form-control" placeholder="Keywords"> -->
@@ -242,7 +241,7 @@
 
               <div class="select-location">                         
                  <select class="city" name="city">
-                 <option value="">select city</option>                            
+
                    <option  id="currentid" value="{{request.COOKIES.global_city_id}}">{{ request.COOKIES.city }}</option>
                    {% for cities in city|get_city %}
                         <option value="{{cities.id}}" id="ajax_cityid">{{ cities }} </option>
@@ -256,8 +255,8 @@
                     <option value="">Fest type</option>
                     {% for subcategory in subcategory %}
                               <option value="{{subcategory.id}}">{{ subcategory.name }} </option>
-                          {% endfor%} 
-                    <!-- <input type="hidden" class="ajax_subcatid" value="{{subcategory.id}}"> -->
+                     {% endfor%} 
+
                  </select>      
                                   
                           
@@ -292,6 +291,12 @@
           </div> 
         </form>
       </div> 
+    <div class="popup">
+      <div class="popup_text">
+        <span>Thankyou for registration.</span><br/>
+        <span> We have sent a verification code to your email address. Please click an the activation link to activate your account.</span>
+      </div>
+    </div>
 {% block content %}
 {% endblock %}
   <footer id="footer">

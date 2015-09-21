@@ -153,6 +153,7 @@ PAYU_INFO = {
              # for production environment use 'https://secure.payu.in/_payment'
              'payment_url': 'https://test.payu.in/_payment',
              #success url for hotel
-             'surl':'http://localhost:8000/success',
-             'surl1':'http://localhost:8000/submit_event'
+             'surl':'http://localhost:8000/upload_banner',
+             'surl1':'http://localhost:8000/submit_event',
+             'curl':'http://localhost:8000/post_event',
             }

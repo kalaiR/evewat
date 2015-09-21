@@ -11,6 +11,7 @@ from college_event.forms import EventSearchForm
 
 from django.core.files import File
 from django.contrib.auth.models import User
+from templated_email import send_templated_mail
 
 from django.core.context_processors import csrf 
 from django.views.decorators.csrf import csrf_protect, csrf_exempt
@@ -135,18 +136,57 @@ def register(request):
 			p = Userprofile(user_id=userprofile.user_id, confirmation_code=confirmation_code)
 			# print 'p', p
 			p.save()			
-			# send_registration_confirmation(user)
+			send_registration_confirmation(user)
 			registered = True
 			user = User.objects.get(username=user.username)
+			print "user",user
 			# print 'reg user', user
 			user.backend='django.contrib.auth.backends.ModelBackend'
 			login(request, user)
+			
 			return HttpResponseRedirect('/start/?user_id=' + str(user.id))
 
 	else:	 
 			user_id = user.id
 			# print 'else user_id', user_id
 			return render_to_response('index.html', {'user_id':user_id} ,context_instance=RequestContext(request))
+
+
+def send_registration_confirmation(user):
+	p = user.get_profile()
+	title = "Evewat account confirmation"
+	content = "http://localhost:8000/confirm/" + str(p.confirmation_code) + "/" + user.username
+	send_templated_mail(
+				template_name = 'welcome',
+				subject = 'Welcome Evewat',
+				from_email = 'testmail123sample@gmail.com',
+				recipient_list = [user.email],
+				context={
+						 'user': user,
+						 'content':content,
+						 
+				},
+			)
+
+def confirm(request, confirmation_code, username):    
+	try:
+		user = User.objects.get(username=username)        
+		print user.id
+		profile = user.get_profile()
+	   
+		# if profile.confirmation_code == confirmation_code and user.date_joined > (datetime.datetime.now()-datetime.timedelta(days=1)):
+		if profile.confirmation_code == confirmation_code:
+			# user.is_active = True
+			profile.is_emailverified=True
+			print "user.is_emailverified", profile.is_emailverified
+			# user.save()
+			profile.save()
+			user.backend='django.contrib.auth.backends.ModelBackend'
+			login(request, user)
+			print "confirm7"
+		return HttpResponseRedirect('/start/?user_id=' + str(user.id))    
+	except:
+		return HttpResponseRedirect('../../../../../')
 
 def start(request):
 	# print 'start'
@@ -162,12 +202,16 @@ def start(request):
 	if request.user.is_authenticated:
 		userprofile=Userprofile.objects.get(user_id=request.user.id)
 	return render_to_response('index.html',{'path':path, 'userprofile':userprofile},context_instance=RequestContext(request))
+
 def post_event(request):
 	subcategory = SubCategory.objects.all()
 	print 'subcategory from postevent',subcategory
-	return render_to_response("post_event.html", {'subcategory':subcategory}, context_instance=RequestContext(request))
+	premium=PremiumPriceInfo.objects.all()
+	return render_to_response("post_event.html",{'premium':premium,'subcategory':subcategory}, context_instance=RequestContext(request))
 
-def submit_event(request):	
+
+
+def submit_event(request):
 	if request.method=="POST":
 		postevent=Postevent()
 		postevent.name=request.POST['name']
@@ -205,22 +249,30 @@ def submit_event(request):
 		postevent.festname=request.POST['festname']
 		postevent.festcaption=request.POST['festcaption']
 		# postevent.festtheme=request.POST['festtheme']
-		postevent.festtype=SubCategory.objects.get(id=request.POST['festtype'])
+		postevent.festtype_id=SubCategory.objects.get(id=request.POST['festtype'])
 		print "postevent.festtype",postevent.festtype
 		postevent.state=request.POST['state']
 		postevent.startdate=request.POST['startdate']
 		postevent.enddate=request.POST['enddate']
 		postevent.deadline=request.POST['deadline']
 		print 'postevent.deadline',postevent.deadline
-		postevent.save()		
+		postevent.save()
+		send_templated_mail(
+					template_name='postevent',
+					from_email='testmail123sample@gmail.com',
+					recipient_list=[postevent.email],
+					context={
+						'username': postevent.name,
+						})
 		message="Your data succesfully submitted"
 	return render_to_response("post_event.html", context_instance=RequestContext(request))
+
 
 def subcategory_for_category(request):
 	print "subcategory_for_category"
 	if request.is_ajax() and request.GET and 'category_id' in request.GET:
 		print request.GET['category_id']         
-		objs1 = SubCategory.objects.filter(category__id=request.GET['category_id'])
+		objs1 = SubCategory.objects.filter(category_id=request.GET['category_id'])
 		print 'objs', objs1
 		return JSONResponse([{'name': o1.name, 'id': o1.id}
 			for o1 in objs1])	    
@@ -239,11 +291,7 @@ def event_for_subcategory(request):
 		return JSONResponse([{'id': o1.id, 'name': smart_unicode(o1.brand_name)}
 			for o1 in objs1])
 	else:
-		return JSONResponse({'error': 'Not Ajax or no GET'})
-
-# def subcategory(request):
-# 	subcategory = Subcategory.objects.all()
-# 	return render_to_response()
+		return JSONResponse({'error': 'Not Ajax or no GET'})	    
 
 
 def event(request,pname=None):
@@ -251,24 +299,25 @@ def event(request,pname=None):
 	college=College.objects.all()
 	return render_to_response("search-result.html",{'events':postevent,'pname':pname, 'college':college}, context_instance=RequestContext(request))
 
-def details(request,id=None):
-	postevent=Postevent.objects.get(pk=id)
+def details(request):
+	
+	
 	return render_to_response("company-profile.html",{'events':postevent}, context_instance=RequestContext(request))
 
 def banner(request):
 	return render_to_response("uploadbanner.html",context_instance=RequestContext(request))
 
-def store_payudetails(request):
-	#Code for storing Payu Details
-	payudetails=PayuDetails()
+# def store_payudetails(request):
+# 	#Code for storing Payu Details
+# 	payudetails=PayuDetails()
 	
-	payudetails.status=request.POST.get('status')
-	payudetails.amount=request.POST.get('amount')
-	payudetails.save()
+# 	payudetails.status=request.POST.get('status')
+# 	payudetails.amount=request.POST.get('amount')
+# 	payudetails.save()
 
-	# response.set_cookie('payudetails',payudetails.id)
-	# response.set_cookie('payustatus',payudetails.status)
-	return payudetails.id,payudetails.status
+# 	# response.set_cookie('payudetails',payudetails.id)
+# 	# response.set_cookie('payustatus',payudetails.status)
+# 	return payudetails.id,payudetails.status
 
 
 @csrf_protect
@@ -285,6 +334,44 @@ def upload_banner(request):
 		uploadbanner.banner=request.FILES.get('banner',request.COOKIES.get('banner'))
 		print "uploadbanner.banner",uploadbanner.banner
 		uploadbanner.link=request.POST['link']
+		
+		response=HttpResponseRedirect("/payment/")
+		order=Order()
+		user=User()	
+		# order.user =User.objects.get(username=username)
+		order.price=request.COOKIES.get('price')
+		order.position=request.COOKIES.get('position')
+		order.banner=request.COOKIES.get('banner')
+		order.save()
+
+		#Code for storing Payu Details
+		payudetails=PayuDetails()
+		
+		payudetails.status=request.POST.get('status')
+		payudetails.amount=request.POST.get('amount')
+		payudetails.save()
+
+		response.set_cookie('payudetails',payudetails.id)
+		response.set_cookie('payustatus',payudetails.status)
+
+		transaction=Transaction()
+		# transaction.order=Order.objects.get(id=request.COOKIES.get('orderdetails'))
+		# transaction.payu_details=PayuDetails.objects.get(id=request.COOKIES.get('payudetails'))
+		transaction.payu_status=request.COOKIES.get('payustatus')
+		print "transaction.payu_status",transaction.payu_status
+		transaction.save()
+
+		# payid, paystatus=store_payudetails(request)
+		# print "payid", payid
+		# print "paystatus", paystatus
+		# # response = render_to_response("success.html",context_instance=RequestContext(request))
+		# response.set_cookie('payudetails',payid)
+		# response.set_cookie('payustatus',paystatus)
+		# response.set_cookie('orderdetails',order.id)
+		
+		
+		
+
 		uploadbanner.save()
 		message="Your data succesfully uploaded"
 		response = render_to_response("uploadbanner.html",{'message':message},context_instance=RequestContext(request))
@@ -296,32 +383,32 @@ def upload_banner(request):
 		
 	return response
 
-@csrf_exempt
-def success(request):
+# @csrf_exempt
+# def success(request):
 
-	order=Order()
-	user=User()	
-	# order.user =User.objects.get(username=username)
-	order.price=request.COOKIES.get('price')
-	order.position=request.COOKIES.get('position')
-	order.banner=request.COOKIES.get('banner')
-	order.save()
-	transaction=Transaction()
-	# transaction.order=Order.objects.get(id=request.COOKIES.get('orderdetails'))
-	# transaction.payu_details=PayuDetails.objects.get(id=request.COOKIES.get('payudetails'))
-	transaction.payu_status=request.COOKIES.get('payustatus')
-	print "transaction.payu_status",transaction.payu_status
-	transaction.save()
-	payid, paystatus=store_payudetails(request)
-	print "payid", payid
-	print "paystatus", paystatus
-	response = render_to_response("success.html",context_instance=RequestContext(request))
-	response.set_cookie('payudetails',payid)
-	response.set_cookie('payustatus',paystatus)
-	# response.set_cookie('orderdetails',order.id)
-	return response
+# 	order=Order()
+# 	user=User()	
+# 	# order.user =User.objects.get(username=username)
+# 	order.price=request.COOKIES.get('price')
+# 	order.position=request.COOKIES.get('position')
+# 	order.banner=request.COOKIES.get('banner')
+# 	order.save()
+# 	transaction=Transaction()
+# 	# transaction.order=Order.objects.get(id=request.COOKIES.get('orderdetails'))
+# 	# transaction.payu_details=PayuDetails.objects.get(id=request.COOKIES.get('payudetails'))
+# 	transaction.payu_status=request.COOKIES.get('payustatus')
+# 	print "transaction.payu_status",transaction.payu_status
+# 	transaction.save()
+# 	payid, paystatus=store_payudetails(request)
+# 	print "payid", payid
+# 	print "paystatus", paystatus
+# 	response = render_to_response("success.html",context_instance=RequestContext(request))
+# 	response.set_cookie('payudetails',payid)
+# 	response.set_cookie('payustatus',paystatus)
+# 	# response.set_cookie('orderdetails',order.id)
+# 	return response
 	
-def payment_event(request):
-	return render_to_response("payment.html",context_instance=RequestContext(request))
+def success_event(request):
 	
-
+	return render_to_response("success.html",context_instance=RequestContext(request))
+	
