@@ -747,42 +747,42 @@ $('.user_details').click(function(){
     }
     }
 
-    // if($('.select_city').siblings('.select-clone').val() == ''){
-    //   $('.select_city').addClass('.error_input_field');
-    //   $('.select_city').parent().next('.signup_labelError').show();
-    //   $('.select_city').parent().css("cssText", "width: 205px !important;float:left;");
-    //   return false;
-    // }
-    // else{
-    //   $('.select_city').removeClass('.error_input_field');
-    //   $('.select_city').parent().next('.signup_labelError').hide();
-    //   $('.select_city').parent().css("cssText", "width: 410px !important;");
-    // }  
+    if($('.select_city').siblings('.select-clone').val() == ''){
+      $('.select_city').addClass('.error_input_field');
+      $('.select_city').parent().next('.signup_labelError').show();
+      $('.select_city').parent().css("cssText", "width: 205px !important;float:left;");
+      return false;
+    }
+    else{
+      $('.select_city').removeClass('.error_input_field');
+      $('.select_city').parent().next('.signup_labelError').hide();
+      $('.select_city').parent().css("cssText", "width: 410px !important;");
+    }  
 
-    // if($('.select_college').siblings('.select-clone').val() == ''){
-    //   alert("select_college");
-    //   $('.select_college').addClass('.error_input_field');
-    //   $('.select_college').parent().next('.signup_labelError').show();
-    //   $('.select_college').parent().css("cssText", "width: 205px !important;float:left;");
-    //   return false;
-    // }
-    // else{
-    //   $('.select_college').removeClass('.error_input_field');
-    //   $('.select_college').parent().next('.signup_labelError').hide();
-    //   $('.select_college').parent().css("cssText", "width: 410px !important;");
-    // }  
+    if($('.select_college').siblings('.select-clone').val() == ''){
+      alert("select_college");
+      $('.select_college').addClass('.error_input_field');
+      $('.select_college').parent().next('.signup_labelError').show();
+      $('.select_college').parent().css("cssText", "width: 205px !important;float:left;");
+      return false;
+    }
+    else{
+      $('.select_college').removeClass('.error_input_field');
+      $('.select_college').parent().next('.signup_labelError').hide();
+      $('.select_college').parent().css("cssText", "width: 410px !important;");
+    }  
 
-    //  if($('.select_dept').siblings('.select-clone').val() == ''){
-    //   $('.select_dept').addClass('.error_input_field');
-    //   $('.select_dept').parent().next('.signup_labelError').show();
-    //   $('.select_dept').parent().css("cssText", "width: 205px !important;float:left;");
-    //   return false;
-    // }
-    // else{
-    //   $('.select_dept').removeClass('.error_input_field');
-    //   $('.select_dept').parent().next('.signup_labelError').hide();
-    //   $('.select_dept').parent().css("cssText", "width: 410px !important;");
-    // } 
+     if($('.select_dept').siblings('.select-clone').val() == ''){
+      $('.select_dept').addClass('.error_input_field');
+      $('.select_dept').parent().next('.signup_labelError').show();
+      $('.select_dept').parent().css("cssText", "width: 205px !important;float:left;");
+      return false;
+    }
+    else{
+      $('.select_dept').removeClass('.error_input_field');
+      $('.select_dept').parent().next('.signup_labelError').hide();
+      $('.select_dept').parent().css("cssText", "width: 410px !important;");
+    } 
 
     if ($(":input").hasClass("error_input_field") || $(".select_city").hasClass("error_input_field") || $(".select_college").hasClass("error_input_field") || $(".select_dept").hasClass("error_input_field")){
     return false;
