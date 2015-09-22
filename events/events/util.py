@@ -21,22 +21,22 @@ def get_client_ip(request):
     #     print "remote ip", ip
     # return ip
     
-    # x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
-    # print "x_forwarded_for", x_forwarded_for
-    # if x_forwarded_for:
-    #     ip = x_forwarded_for.split(',')[-1].strip()
-    # else:
-    #     ip = request.META.get('REMOTE_ADDR')
-    # return ip
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    print "x_forwarded_for", x_forwarded_for
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[-1].strip()
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    return ip
 
     # ip = get_ip(request)
     # print "iware ip", ip
     # return ip
 
-    import ipgetter
-    IP = ipgetter.myip()
-    print "IP from ipgetter", IP
-    return IP 
+    # import ipgetter
+    # IP = ipgetter.myip()
+    # print "IP from ipgetter", IP
+    # return IP 
 
 def get_current_country_cities(request):
     user_ip = globals.ip
@@ -87,13 +87,23 @@ def get_global_city(request):
     return city
 
 def get_global_city_id(request):
-        if request.COOKIES.get('city'):
-            city=City.objects.get(city=request.COOKIES.get('city'))
-            city_id=city.id
-            print "city_id", city_id
-            return city_id
-        else:
-            return None
+        # if request.COOKIES.get('city'):
+        #     city=City.objects.get(city=request.COOKIES.get('city'))
+        #     city_id=city.id
+        #     print "city_id", city_id
+        #     return city_id
+        # else:
+        #     return None
+    user_ip = globals.ip
+    if user_ip.startswith('127.0.0'):
+        user_ip = '106.51.234.149'
+    g = GeoIP()
+    city=g.city(user_ip)['city']
+    print "city", city
+    city=City.objects.get(city=city)
+    city_id=city.id
+    print "city_id", city_id
+    return city_id    
 
 
 def format_redirect_url(redirect_path, query_string):
