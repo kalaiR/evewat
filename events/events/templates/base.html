@@ -76,46 +76,65 @@
           <div>
             <form id="user_form" method="post" action="/register/" name="sign_up">
             {% csrf_token %}
+
+            <div class="field_control">
             <input type="text" class="form-control" name="username" placeholder="Firstname" id="username_signin">
-            <label for="username_signin" id="username_required1" class="signup_labelError" style="display:none;color:red;">Please enter First name</label>
-            
+            <label for="username_signin" id="username_required1" class="signup_labelError">Please enter First name</label>
+            </div>
+
+            <div class="field_control">
             <input type="text" class="form-control" name="lastname" placeholder="Lastname" id="lastname_signin">
-            <label for="lastname_signin" id="lastname_required1" class="signup_labelError" style="display:none;color:red;">Please enter Last name</label>
-            
+            <label for="lastname_signin" id="lastname_required1" class="signup_labelError">Please enter Last name</label>
+            </div>
+
+            <div class="field_control">
             <input type="email" class="form-control" name="email_id" placeholder="email_id" id="emailid_signin">
-            <label for="emailid_signin" id="emailid_required1" class="signup_labelError" style="display:none;color:red;">Please enter email id</label>
-            <span id="valid_signup_email_required" class="error_message" style="display:none;color:red;">Please enter valid Email</span>
-            
+            <label for="emailid_signin" id="emailid_required1" class="signup_labelError">Please enter email id</label>
+            <span id="valid_signup_email_required" class="error_message">Please enter valid Email</span>
+            </div>
+
+            <div class="field_control">
             <input type="text" class="form-control" name="mobile" placeholder="Mobile" id="mobile_signin">
-            <label for="mobile_signin" id="mobile_required1" class="signup_labelError" style="display:none;color:red;">Please enter Mobile number</label>
-            
+            <label for="mobile_signin" id="mobile_required1" class="signup_labelError">Please enter Mobile number</label>
+            </div>
+
+            <div class="field_control">
             <input type="password" class="form-control" name="password" placeholder="password" id="password_signin">
             <span id="result"></span>
             <label for="password" id="password_signin1" class="signup_labelError" style="display:none;color:red;">Please enter Password</label>
+            </div>
 
+            <div class="field_control">
             <select class="select_option select_city" data-placeholder="-Select City-" name="select_city">
-
               <option value="">Select City</option>
               {% for cities in city %}
               <option id="city_selected" value="{{cities.id}}">{{cities.city}} </option>
               {% endfor %}
             </select>
+            <label id="id_city_required" class="signup_labelError" style="font-size:12px;display:none;">Please Choose city</label>
+            </div>
             
+            <div class="field_control">
             <select class="select_option select_college" data-placeholder="-Select College-" name="select_college">
               <option value="">Select College</option>
               {% for colleges in college %}
               <option id="college_selected" value="{{colleges.id}}">{{colleges.college_name}} </option>
               {% endfor %}
             </select>
-            
+            <label id="id_college_required" class="signup_labelError" style="font-size:12px;display:none;">Please Choose College</label>
+            </div>
+
+            <div class="field_control">
             <select class="select_option select_dept" data-placeholder="-Select Department-" name="select_dept">
               <option value="">Select Department</option>
               {% for depts in dept %}
               <option id="department_selected" value="{{depts.id}}">{{depts.department}} </option>
               {% endfor %}
             </select>
+            <label id="id_department_required" class="signup_labelError" style="font-size:12px;display:none;">Please Choose department</label>
+            </div>
+
             
-            <label id="id_city_required" class="labelError" style="font-size:12px;display:none;">Please Choose city</label>
             
             <input type="button" class="btn btn-default" value="Register" name="Create" id="create_user">
               

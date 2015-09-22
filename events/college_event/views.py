@@ -130,14 +130,26 @@ def register(request):
 			user.set_password(user.password)
 			# user.first_name=request.POST['user_id']
 			user.save()
-			userprofile.user=user
+			userprofile = Userprofile()
 			userprofile.user_id=user.id
-			confirmation_code = ''.join(random.choice(string.ascii_uppercase + string.digits + string.ascii_lowercase) for x in range(33))
+			userprofile.lastname = lastname=request.POST['lastname']
+			userprofile.mobile=request.POST['mobile']
+
+			if request.POST['select_city'] != '':
+				city=City.objects.get(id=request.POST['select_city'])
+				userprofile.city_id = city.id
+			if request.POST['select_college'] != '':
+				college=College.objects.get(id=request.POST['select_college'])
+				userprofile.college_id =college.id
+			if request.POST['select_dept'] != '':
+				department=Department.objects.get(id=request.POST['select_dept'])
+				userprofile.department_id =department.id	
+
+			userprofile.confirmation_code = ''.join(random.choice(string.ascii_uppercase + string.digits + string.ascii_lowercase) for x in range(33))
 			# print confirmation_code
-			p = Userprofile(user_id=userprofile.user_id,lastname=request.POST['lastname'],mobile=request.POST['mobile'],
-				 confirmation_code=confirmation_code)
+			
 			# print 'p', p
-			p.save()			
+			userprofile.save()			
 			# send_registration_confirmation(user)
 			registered = True
 			user = User.objects.get(username=user.username)

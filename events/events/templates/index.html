@@ -595,9 +595,9 @@
   
     <div class="our-partners">
       <div class="container">
-        <h4>Our Partners</h4>
+        <h4>Upcoming Events</h4>
        
-        <div class="slider">
+        <!-- <div class="slider">
           <ul class="bxslider">
             {% for banners in banner|get_banner %}
                {% if banners.pageurl == '/' and banners.position == 'bottom' %}
@@ -606,7 +606,7 @@
             {% endfor %}
             
           </ul>
-        </div>
+        </div> -->
       
         <!-- <div id="partners-slider" class="owl-carousel owl-theme">
        
@@ -623,7 +623,16 @@
           <div class="item"><a href="{{banners.0}}"><img src="static/banners/banner5.jpeg"alt=""></a></div>
           <div class="item"><a href="{{banners.0}}"><img src="static/banners/banner6.png"alt=""></a></div>
         </div> -->
+        <div id="partners-slider" class="owl-carousel owl-theme">
+        {% for banners in banner|get_banner %}
+        {% if banners.pageurl == '/' and banners.position == 'bottom' %}  
+        <div class="item">  
+            <img src="media/{{banners.banner}}"  alt="">   
+        </div>       
+        {% endif %}
+        {% endfor %}
+         </div>
       </div>
-    </div>
+      </div>
     <!-- END OUR PARTNER SLIDER -->
 {% endblock %}
