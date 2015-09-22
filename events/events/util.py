@@ -33,10 +33,15 @@ def get_client_ip(request):
     # print "iware ip", ip
     # return ip
 
-    import ipgetter
-    IP = ipgetter.myip()
-    print "IP from ipgetter", IP
-    return IP 
+    # import ipgetter
+    # IP = ipgetter.myip()
+    # print "IP from ipgetter", IP
+    # return IP 
+
+    ''' This utility gets client's IP address from the request
+    '''
+    print 'value==', request.META.get('HTTP_X_FORWARDED_FOR', request.META.get('REMOTE_ADDR', '127.0.0.1'))
+    return request.META.get('HTTP_X_FORWARDED_FOR', request.META.get('REMOTE_ADDR', '127.0.0.1'))
 
 def get_current_country_cities(request):
     user_ip = globals.ip
@@ -82,6 +87,7 @@ def get_global_city(request):
     if user_ip.startswith('127.0.0'):
         user_ip = '106.51.234.149'
     g = GeoIP()
+    print '123456789', g.city(user_ip)
     city=g.city(user_ip)['city']    
     print "city in util.py", city
     return city
