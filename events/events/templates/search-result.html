@@ -74,7 +74,7 @@
                   <label>City</label>
 
                  <select class="city" name="city">
-                                          
+                      <option value="select_city" id="ajax_cityid">Select City</option>                     
                      <option  id="currentid" value="{{request.COOKIES.global_city_id}}">{{ request.COOKIES.city }}</option>
                      {% for cities in city|get_city %}
                           <option value="{{cities.id}}" id="ajax_cityid">{{ cities }} </option>

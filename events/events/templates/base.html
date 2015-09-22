@@ -32,10 +32,12 @@
       <div class="container">
        {% if user.is_authenticated %}
        <!-- HEADER-LOGOUT -->
+
         <div class="header-logout">
            <a href="/logout/" class=""><i class="fa fa-power-off"></i>Logout</a>
            <a href="/">{{username}}</a>
         </div> <!-- END .HEADER-LOGOUT -->
+
 
         {% else %}       
       
@@ -46,7 +48,7 @@
  
           <div>
 
-            
+           
 
             <form method="post" id="login_val" action="/login/" name="sign_in">
 
@@ -70,10 +72,12 @@
    <!-- HEADER REGISTER -->
         <div class="header-register">
           <a href="#" class=""><i class="fa fa-plus-square"></i> Register</a>
+          &nbsp;&nbsp;&nbsp;<a href="/">{{request.user.email}}</a>
           <span class="signup_error" style="{% if request.REQUEST.st %} display:block;color:red;font-size:17px; {%else%} display: none; {% endif %}">
           {%for message in messages%}{{message}}{% endfor %}</span>
 
           <div>
+
             <form id="user_form" method="post" action="/register/" name="sign_up">
             {% csrf_token %}
 
@@ -178,7 +182,9 @@
           <a href="/"><img src = "{% static "img/logo.png" %}" height="80"></a>
         </div>
         <!-- END HEADER LOGO -->
+        
 
+        
         <!-- HEADER-SOCIAL -->
         <div class="header-social">
           <a href="#">
@@ -289,7 +295,7 @@
 
               <div class="select-location">                         
                  <select class="city" name="city">
-
+                  <option value="select_city" id="ajax_cityid">Select City</option> 
                    <option  id="currentid" value="{{request.COOKIES.global_city_id}}">{{ request.COOKIES.city }}</option>
                    {% for cities in city|get_city %}
                         <option value="{{cities.id}}" id="ajax_cityid">{{ cities }} </option>

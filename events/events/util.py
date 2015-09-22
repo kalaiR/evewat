@@ -87,7 +87,6 @@ def get_global_city(request):
     return city
 
 def get_global_city_id(request):
-
         if request.COOKIES.get('city'):
             city=City.objects.get(city=request.COOKIES.get('city'))
             city_id=city.id
