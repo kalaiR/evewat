@@ -257,6 +257,7 @@ def submit_event(request):
 		event_festname=request.POST['festname']
 		event_festcaption=request.POST['festcaption']
 		event_temp=SubCategory.objects.get(id=request.POST['festtype'])
+		print "event_temp", event_temp
 		event_festtype_id=event_temp.id
 		event_state=request.POST['state']
 		event_startdate=request.POST['startdate']
@@ -341,10 +342,10 @@ def banner(request):
 # 	return payudetails.id,payudetails.status
 
 
-@csrf_protect
+@csrf_exempt
 def upload_banner(request):
 	print "enter"
-	if request.method=="POST":
+	if request.POST.get('link',False):
 		uploadbanner=SiteBanner()
 		# print uploadbanner   request.POST.get('start',request.COOKIES.get('checkin'))
 		uploadbanner.price=request.POST.get('price',request.COOKIES.get('price'))
@@ -355,32 +356,31 @@ def upload_banner(request):
 		uploadbanner.banner=request.FILES.get('banner',request.COOKIES.get('banner'))
 		print "uploadbanner.banner",uploadbanner.banner
 		uploadbanner.link=request.POST['link']
-		
+		uploadbanner.save()
 		response=HttpResponseRedirect("/payment/")
-		order=Order()
-		user=User()	
-		# order.user =User.objects.get(username=username)
-		order.price=request.COOKIES.get('price')
-		order.position=request.COOKIES.get('position')
-		order.banner=request.COOKIES.get('banner')
-		order.save()
-
-		#Code for storing Payu Details
-		payudetails=PayuDetails()
+		response.set_cookie( 'price', uploadbanner.price )
+		response.set_cookie( 'position', uploadbanner.position )
+		response.set_cookie( 'banner', uploadbanner.banner )
+		response.set_cookie( 'pageurl', uploadbanner.pageurl )
 		
-		payudetails.status=request.POST.get('status')
-		payudetails.amount=request.POST.get('amount')
-		payudetails.save()
+		
+	else:
+		#Code for storing Payu Details
+		# payudetails=PayuDetails()
+		
+		# payudetails.status=request.POST.get('status')
+		# payudetails.amount=request.POST.get('amount')
+		# payudetails.save()
 
-		response.set_cookie('payudetails',payudetails.id)
-		response.set_cookie('payustatus',payudetails.status)
+		# response.set_cookie('payudetails',payudetails.id)
+		# response.set_cookie('payustatus',payudetails.status)
 
-		transaction=Transaction()
-		# transaction.order=Order.objects.get(id=request.COOKIES.get('orderdetails'))
-		# transaction.payu_details=PayuDetails.objects.get(id=request.COOKIES.get('payudetails'))
-		transaction.payu_status=request.COOKIES.get('payustatus')
-		print "transaction.payu_status",transaction.payu_status
-		transaction.save()
+		# transaction=Transaction()
+		# # transaction.order=Order.objects.get(id=request.COOKIES.get('orderdetails'))
+		# # transaction.payu_details=PayuDetails.objects.get(id=request.COOKIES.get('payudetails'))
+		# transaction.payu_status=request.COOKIES.get('payustatus')
+		# print "transaction.payu_status",transaction.payu_status
+		# transaction.save()
 
 		# payid, paystatus=store_payudetails(request)
 		# print "payid", payid
@@ -389,17 +389,9 @@ def upload_banner(request):
 		# response.set_cookie('payudetails',payid)
 		# response.set_cookie('payustatus',paystatus)
 		# response.set_cookie('orderdetails',order.id)
-		
-		
-		
-
-		uploadbanner.save()
 		message="Your data succesfully uploaded"
 		response = render_to_response("uploadbanner.html",{'message':message},context_instance=RequestContext(request))
-		response.set_cookie( 'price', uploadbanner.price )
-		response.set_cookie( 'position', uploadbanner.position )
-		response.set_cookie( 'banner', uploadbanner.banner )
-		response.set_cookie( 'pageurl', uploadbanner.pageurl )
+		
 		
 		
 	return response

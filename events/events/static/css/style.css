@@ -2866,7 +2866,7 @@ body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.42857143;
-  color: white;
+  color: #000;
   background-color: #ffffff;
   width: 100% !important;
   height: auto;
@@ -7985,7 +7985,6 @@ fieldset[disabled] .btn-default-inverse.active {
 }
 .events,.events_details,.user_details{
   background-color: #dddddd;
-    border: 1px solid;
     border-radius: 4px;
     height: 24px;
     margin-bottom: 16px;
