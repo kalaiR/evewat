@@ -66,7 +66,6 @@ class PosteventAdmin(admin.ModelAdmin):
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(City, CityAdmin)
 admin.site.register(Location, LocationAdmin)
-admin.site.register(Collegetype, CollegetypeAdmin)
 admin.site.register(College, CollegeAdmin)
 admin.site.register(Department, DepartmentAdmin)
 admin.site.register(Postevent, PosteventAdmin)    

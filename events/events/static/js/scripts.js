@@ -170,6 +170,7 @@
 
     // $('<input class="value-holder" type="text" disabled="disabled" placeholder="' + placeholder + '"><i class="fa fa-chevron-down"></i>').insertBefore($list);
     $('<input class="value-holder" type="hidden" disabled="disabled" placeholder="' + placeholder + '"><span class="placeholder">' + placeholder + '</span><i class="fa fa-chevron-down"></i>').insertBefore($list);
+    $('<input class="value-holder" type="text" placeholder="' + placeholder + '" name="'+placeholder+'"> value=""');
 
     var $valueHolder = $container.children('.value-holder');
     var $valuePlaceholder = $container.children('.placeholder');
@@ -189,7 +190,8 @@
     });
 
     // Option Select
-   // $list.children('li').on('click', function () {
+   
+
    $list.delegate('li','click', function () {
       var $this = $(this);
       var id_value = $this.attr('data-value');
@@ -197,11 +199,16 @@
       $valueHolder.val(id_value);
       $valuePlaceholder.html($this.text());
       $select.find('option[value="' + $this.data('value') + '"]').prop('selected', true);
+      alert('test');
       // if ($this.parent('select-clone').siblings('select').hasClass('select_city'))
       if ($this.parents().children().hasClass('select_city'))
         find_colleges($this.data('value'));
       if ($this.parents().children().hasClass('select_college'))
         find_department($this.data('value'));
+      if ($this.parents().children().hasClass('festtype'))
+        alert($select.find('option[value="' + $this.data('value') + '"]'));
+        $select.find('option[value="' + $this.data('value') + '"]').attr('selected', true);  
+
     });
 
   //  $('.select-clone input').click(function(){

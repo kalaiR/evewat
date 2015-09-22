@@ -34,10 +34,11 @@
           <div class="row">
 
             <div class="col-md-12">
+
             {% if message%}
 
             <script type="text/javascript">
-           window.onload = function(){ window.location="http://localhost:8000/post_event"; }
+           window.onload = function(){ window.location="{{request.META.HTTP_HOST}}/post_event"; }
              </script>
             <h4 class="text-center">{{message}}</h4>
             {%endif%}
@@ -55,14 +56,14 @@
                    <input type="text" placeholder="Fest Caption" name="festcaption" id="festcaption_val">
                    <label for="festcaption_val" class="labelError" style="display:none;color:red;">Please enter Fest caption</label>
 
-                      <select name="festtype" id="festtype">
-                        <option value="">Fest type</option>
+                      <select class="festtype" name="festtype">
+                        <option value="">festtype</option>
                          {% for subcategory in subcategory %}
                               <option value="{{subcategory.id}}">{{ subcategory.name }} </option>
                           {% endfor%} 
                                            
                      </select>
-                      <input type="hidden" name="festtype" value="">
+                      
                     
                       <input  type="text" placeholder="startdate"  id="datepicker" name="startdate" />
                       <input  type="text" placeholder="enddate"  id="datepicker1" name="enddate" />
@@ -96,7 +97,7 @@
                   <input type="email" placeholder="Email" name="email" value="{{ request.user.email }}" required>
                   
                   <input type="text" placeholder="Phone number" name="mobile">
-              </div> -->
+              </div> 
 
               <div class="row">
 
