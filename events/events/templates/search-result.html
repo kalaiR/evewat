@@ -5,7 +5,57 @@
 
       <div class="map-section">
         
-        <!-- <div id="map_canvas"></div> -->
+             <div class="slider-content">
+
+        <div id="home-slider" class="owl-carousel owl-theme">
+        
+           {% for banners in banner|get_banner %}
+           {% if banners.admin_status == True %}
+          <div class="item">
+         
+            
+             <img src="/media/{{banners.banner}}"  alt="">
+            
+            <div class="slide-content">
+              <!-- <a href="#"><img src="{% static "img/slider-logo.png" %}"alt=""></a>
+              <h1>The <span>Right</span> Place</h1>
+              <h2>For Business</h2> -->
+
+            </div>
+
+
+          </div>
+            {% endif %}  
+          {% endfor %}
+     
+          <!-- <div class="item"><img src="media/static/banners/img/banner1.jpg"  alt="">
+            <div class="slide-content">
+              <a href="#"><img src="{% static "img/slider-logo.png" %}"alt=""></a>
+
+              <h1>The <span>Right</span> Place</h1>
+              <h2>For Business</h2>
+
+            </div>
+
+          </div>
+
+          <div class="item"><img src="media/static/banners/img/banner2.jpg"  alt="">
+            <div class="slide-content">
+              <a href="#"><img src="{% static "img/slider-logo.png"%}" alt=""></a>
+
+              <h1>The <span>Right</span> Place</h1>
+              <h2>For Business</h2>
+
+            </div>
+          </div> -->
+        </div>
+
+        <div class="customNavigation">
+          <a class="btn prev"><i class="fa fa-angle-left"></i></a>
+          <a class="btn next"><i class="fa fa-angle-right"></i></a>
+        </div>
+
+      </div> 
 
       </div>
   
@@ -16,15 +66,62 @@
   <div id="page-content">
     <div class="container">
       <div class="row">
+        <div class="page-sidebar">
+            <div class="col-md-3 category-toggle">
+            <div class="location-details">
+              <form action="#">
+                <div class="select-country">
+                  <label>City</label>
 
-        <div class="col-md-9 col-md-push-3">
+                 <select class="city" name="city">
+                                          
+                     <option  id="currentid" value="{{request.COOKIES.global_city_id}}">{{ request.COOKIES.city }}</option>
+                     {% for cities in city|get_city %}
+                          <option value="{{cities.id}}" id="ajax_cityid">{{ cities }} </option>
+                      {% endfor%} 
+  
+                </select>     
+
+                </div> <!-- end .select-country -->
+
+                <div class="select-state">
+                 <label>Category</label>                
+                  <select class="category_choose" data-placeholder="-Select category-">
+                    <option value="">Fest type</option>
+                    {% for categories in initial_load|get_categories %}
+                       <option id="category_selecetd"value="{{categories.id}}">{{categories.name}} </option>
+
+                    {% endfor %}
+                  </select>
+
+                </div> <!-- end .select-state -->
+
+                <div class="select-state">
+                   <label>College</label>
+
+                  <select class="" data-placeholder="-Select-">
+                    <option value="">select_college</option>
+                    <option value="option1">option 1</option>
+                    <option value="option2">option 2</option>
+                    <option value="option3">option 3</option>
+                    <option value="option4">option 4</option>
+                  </select>
+
+
+                </div> <!-- end .zip-code -->
+              </form>
+
+            </div> <!-- end .location-details -->     
+
+          </div> <!-- end .page-sidebar -->
+        <div class="col-md-7 ">
           <div class="page-content">
 
             <div class="product-details-list view-switch">   
 
                 <div class="tab-pane active">
-                  <h2>Result for {{events.object.pname}}</h2>
-
+                  <!-- <h2>Result for {{events.object.pname}}</h2>
+ -->
                     <div class="change-view">                   
                      <!--  <button class="grid-view"><i class="fa fa-th"></i></button>
                       <button class="list-view active"><i class="fa fa-bars"></i></button>     -->            
@@ -128,7 +225,7 @@
             </div> <!-- end .page-content -->
           </div> <!-- end .tabe-content -->
 
-              <div class="advertisement" style="color:black;">
+              <div class="advertisement col-md-2" style="color:black;">
                 <p>Advertisement</p>
                 {% for banners in banner|get_banner %}
                 {% if banners.pageurl == '/search/?q=' and banners.position == 'right' %}
@@ -146,54 +243,7 @@
                 {% endfor %}
                <!--  <img src="img/add.jpg" alt=""> -->
               </div>
-          <div class="page-sidebar">
-            <div class="col-md-3 category-toggle">
-            <div class="location-details">
-              <form action="#">
-                <div class="select-country">
-                  <label>City</label>
-
-                 <select class="city" name="city">
-                                          
-                     <option  id="currentid" value="{{request.COOKIES.global_city_id}}">{{ request.COOKIES.city }}</option>
-                     {% for cities in city|get_city %}
-                          <option value="{{cities.id}}" id="ajax_cityid">{{ cities }} </option>
-                      {% endfor%} 
-  
-                </select>     
-
-                </div> <!-- end .select-country -->
-
-                <div class="select-state">
-                 <label>Category</label>                
-                  <select class="category_choose" data-placeholder="-Select category-">
-                    <option value="">Fest type</option>
-                    {% for categories in initial_load|get_categories %}
-                       <option id="category_selecetd"value="{{categories.id}}">{{categories.name}} </option>
-
-                    {% endfor %}
-                  </select>
-
-                </div> <!-- end .select-state -->
-
-                <div class="select-state">
-                   <label>College</label>
-
-                  <select class="" data-placeholder="-Select-">
-                    <option value="">select_college</option>
-                    <option value="option1">option 1</option>
-                    <option value="option2">option 2</option>
-                    <option value="option3">option 3</option>
-                    <option value="option4">option 4</option>
-                  </select>
-
-
-                </div> <!-- end .zip-code -->
-              </form>
-
-            </div> <!-- end .location-details -->     
-
-          </div> <!-- end .page-sidebar -->
+          
             </div> <!-- row-->
            
           </div> <!-- end container-->

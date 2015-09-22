@@ -5378,7 +5378,7 @@ fieldset[disabled] .btn-default-inverse.active {
 }
 .product-details-list .tab-pane .row {
   position: relative;
-  padding-top: 115px;
+  
 }
 @media (max-width: 480px) {
   .product-details-list .tab-pane .row {
@@ -8052,4 +8052,7 @@ fieldset[disabled] .btn-default-inverse.active {
   position: relative;
   top: 150px;
   margin-bottom: 150px;
+}
+#search_result{
+  padding: 0px;
 }
