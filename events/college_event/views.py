@@ -31,6 +31,7 @@ from transaction.models import *
 from django.utils import simplejson
 import simplejson as json
 from events.util import get_current_country_cities
+from events.context_processors import *
 
 
 from django.contrib.auth.decorators import login_required
@@ -47,7 +48,7 @@ def home(request):
 	subcategory = SubCategory.objects.all()
 	college = College.objects.all()
 	dept=Department.objects.all()
-	city =get_current_country_cities(request.COOKIES.get("country"))
+	city =get_current_country_cities(request)
 	recentad = Postevent.objects.filter().order_by('-id')[:4]
 	ctx = {'subcategory':subcategory, 'city': city,'college':college,'recentad':recentad,'dept':dept}
 	return render_to_response("index.html",ctx, context_instance=RequestContext(request))
