@@ -3374,8 +3374,8 @@ fieldset[disabled] .btn-default-inverse.active {
   top: 44px;
   left: 0;
   z-index: 99;
-  padding: 20px;
-  width: 350px;
+  padding: 10px;
+  width: 450px;
   height: auto;
   background-color: rgba(0, 0, 0, 0.8);
   transition: all .4s ease;
@@ -6146,8 +6146,8 @@ fieldset[disabled] .btn-default-inverse.active {
 .our-partners #partners-slider .item {
   margin: 0 10px;
   padding: 0 20px;
-  height: 170px;
-  width: 170px;
+  height: 289px;
+  width: 400px !important;
   border: 3px solid #eeeeee;
   border-radius: 3px;
   display: table-cell;
@@ -8025,7 +8025,7 @@ fieldset[disabled] .btn-default-inverse.active {
 #user_form .uou-custom-select {
   position:relative !important;
   padding:0px !important;
-  width:310px !important;
+  width:410px !important;
   top:0px !important;
   z-index: 9999px;
 }
@@ -8053,6 +8053,52 @@ fieldset[disabled] .btn-default-inverse.active {
   top: 150px;
   margin-bottom: 150px;
 }
+
 #search_result{
   padding: 0px;
 }
+
+.field_control{
+  top: 0px !important;
+  position: relative !important;
+  padding:0px !important;
+  width: 412px !important;
+}
+/*.form-control, .signup_labelError{
+  position: absolute;
+}
+*/
+.signup_labelError, .error_message{
+  display: none;
+  color: red;
+  padding:0px 0px 0px 8px;
+}
+
+.uou-custom-select .select_city{
+  width:205px !important;
+}
+
+/*.item img{
+  top:50%;
+  left:50%;
+  height: auto !important;
+  width: auto !important;
+  max-height: 100px !important;
+  max-width: :100px !important;
+}*/
+
+.our-partners #partners-slider .owl-item{
+  width: 350px !important;
+}
+
+/*.slider-content .owl-item .item img{
+  max-height: 400px !important;
+  max-width: 800px !important;
+  top:50%;
+  left:50%;
+  height: auto;
+  width:auto;
+  margin-top: 100px;
+  margin-left: 100px;
+
+}*/

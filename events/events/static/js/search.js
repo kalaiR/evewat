@@ -8,7 +8,7 @@ $('.search_btn').click(function() {
 function perform_search(){ 
            
             var q = $('#form_search_filter').serialize();
-            alert('q'  +q);  
+            // alert('q'  +q);  
           
         
                     $.get('/search/?'+ q, function(data){                                                                                             
@@ -33,10 +33,10 @@ function attach_pagination_events(){
 $(document).ready(function() {    
     
     function fill_subcategories(category_id) {     
-    alert("catid"+category_id);
+    // alert("catid"+category_id);
     $.getJSON("/subcategory_for_category/", {category_id: category_id},
       function(ret, textStatus) {
-         alert('category_id1'+ret);
+         // alert('category_id1'+ret);
         var options = '';       
         for (var i in ret) {
           options += "<div class='col-md-3 col-sm-4 col-xs-6 '><div class='category-item' id='search_result'><a  class='event_click' href='/search/?q=&subcategoryid=" + ret[i].id +"'>" + ret[i].name +"</a> </div></div>";
@@ -49,7 +49,7 @@ $(document).ready(function() {
  
     $('.select_category').click(function () {   
         var category = $(this).text();
-        alert('category'+ category);
+        // alert('category'+ category);
         var catid =  $(this).next('.ajax_catid').val();
         // alert('catid'+ catid);
         fill_subcategories(catid);
@@ -62,7 +62,7 @@ $(document).ready(function() {
 
     
     $('#festtype').click(function(){
-        alert($(this).val());
+        // alert($(this).val());
         $('input[name="festtype"]').val($(this).val());
       });   
 

@@ -194,20 +194,18 @@
 
    $list.delegate('li','click', function () {
       var $this = $(this);
-      var id_value = $this.attr('data-value');
-      alert('id_value'+id_value);      
+      var id_value = $this.attr('data-value');     
       $valueHolder.val(id_value);
       $valuePlaceholder.html($this.text());
       // $(input.valueHolder).parent().next('input[type="hidden"]#subcategoryid').val(id_value);
       $select.find('option[value="' + $this.data('value') + '"]').prop('selected', true);
-      alert('test');
       // if ($this.parent('select-clone').siblings('select').hasClass('select_city'))
       if ($this.parents().children().hasClass('select_city'))
         find_colleges($this.data('value'));
       if ($this.parents().children().hasClass('select_college'))
         find_department($this.data('value'));
       if ($this.parents().children().hasClass('festtype'))
-        alert($select.find('option[value="' + $this.data('value') + '"]'));
+        // alert($select.find('option[value="' + $this.data('value') + '"]'));
         $select.find('option[value="' + $this.data('value') + '"]').attr('selected', true);  
 
     });
@@ -467,6 +465,9 @@
     $this.children('a').on('click', function (event) {
       event.preventDefault();
       $this.toggleClass('active');
+      $this.siblings().removeClass('active');
+      $('#header .header-language').removeClass('active');
+      $('#header .header-social').removeClass('active');
     });
 
     $this.on('clickoutside touchendoutside', function () {
@@ -494,12 +495,15 @@
 
 
   // Header Language Toggle
-  // ---------------------------------------------------------
   var $headerLanguageToggle = $('#header .header-language');
 
   $headerLanguageToggle.children('a').on('click', function (event) {
     event.preventDefault();
     $(this).parent('.header-language').toggleClass('active');
+    $('#header .header-login').removeClass('active');
+    $('#header .header-register').removeClass('active');
+    $('#header .header-social').removeClass('active');
+
   });
 
   $headerLanguageToggle.on('clickoutside touchendoutside', function () {
@@ -507,18 +511,20 @@
   });
 
   // Header Social Toggle
-  // ---------------------------------------------------------
+  
   var $headerSocialToggle = $('#header .header-social');
-
+ 
   $headerSocialToggle.children('a').on('click', function (event) {
     event.preventDefault();
     $(this).parent('.header-social').toggleClass('active');
+    $('#header .header-login').removeClass('active');
+    $('#header .header-register').removeClass('active');
+    $('#header .header-language').removeClass('active');
   });
 
   $headerSocialToggle.on('clickoutside touchendoutside', function () {
     if ($headerSocialToggle.hasClass('active')) { $headerSocialToggle.removeClass('active'); }
   });
-
 
 
 
@@ -695,16 +701,18 @@ $('.user_details').click(function(){
 
   //Registration form validation
 
-  var sign_up_required =["emailid_signin", "username_signin" ];
+  var sign_up_required =["emailid_signin", "username_signin", "lastname_signin", "mobile_signin" ];
 
   jQuery('#create_user').click(function(){     
       for (i=0;i<sign_up_required.length;i++) {
       var input = jQuery('#'+sign_up_required[i]);
       if (input.val() == "")  {   
         input.addClass("error_input_field");
+        input.css({"width":"50%"});
         input.next('.signup_labelError').show();         
       } else {    
         input.removeClass("error_input_field");
+        input.css({"width":"100%"});
         input.next('.signup_labelError').hide();        
       }
     }
@@ -713,9 +721,11 @@ $('.user_details').click(function(){
 
     if($('#password_signin').val() == ''){   
         $('#password_signin').addClass("error_input_field");
+        $('#password_signin').css({"width":"50%"});
         $('#password_signin').next().next('.signup_labelError').show();         
       } else {    
         $('#password_signin').removeClass("error_input_field");
+        $('#password_signin').css({"width":"100%"});
         $('#password_signin').next().next('.signup_labelError').hide();       
       }
 
@@ -725,17 +735,56 @@ $('.user_details').click(function(){
     if($('#emailid_signin').val() != ''){
     if (!/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/.test($('#emailid_signin').val())) {
       $('#emailid_signin').addClass("error_input_field");
+      $('#emailid_signin').css({"width":"50%"});
       $('#emailid_signin').next().next('.error_message').show();
       // $('.error_message').show();
     }
     else
     {
       $('#emailid_signin').removeClass("error_input_field");
+      $('#emailid_signin').css({"width":"100%"});
       $('#emailid_signin').next().next('.error_message').hide();
     }
     }
 
-    if ($(":input").hasClass("error_input_field")){
+    // if($('.select_city').siblings('.select-clone').val() == ''){
+    //   $('.select_city').addClass('.error_input_field');
+    //   $('.select_city').parent().next('.signup_labelError').show();
+    //   $('.select_city').parent().css("cssText", "width: 205px !important;float:left;");
+    //   return false;
+    // }
+    // else{
+    //   $('.select_city').removeClass('.error_input_field');
+    //   $('.select_city').parent().next('.signup_labelError').hide();
+    //   $('.select_city').parent().css("cssText", "width: 410px !important;");
+    // }  
+
+    // if($('.select_college').siblings('.select-clone').val() == ''){
+    //   alert("select_college");
+    //   $('.select_college').addClass('.error_input_field');
+    //   $('.select_college').parent().next('.signup_labelError').show();
+    //   $('.select_college').parent().css("cssText", "width: 205px !important;float:left;");
+    //   return false;
+    // }
+    // else{
+    //   $('.select_college').removeClass('.error_input_field');
+    //   $('.select_college').parent().next('.signup_labelError').hide();
+    //   $('.select_college').parent().css("cssText", "width: 410px !important;");
+    // }  
+
+    //  if($('.select_dept').siblings('.select-clone').val() == ''){
+    //   $('.select_dept').addClass('.error_input_field');
+    //   $('.select_dept').parent().next('.signup_labelError').show();
+    //   $('.select_dept').parent().css("cssText", "width: 205px !important;float:left;");
+    //   return false;
+    // }
+    // else{
+    //   $('.select_dept').removeClass('.error_input_field');
+    //   $('.select_dept').parent().next('.signup_labelError').hide();
+    //   $('.select_dept').parent().css("cssText", "width: 410px !important;");
+    // } 
+
+    if ($(":input").hasClass("error_input_field") || $(".select_city").hasClass("error_input_field") || $(".select_college").hasClass("error_input_field") || $(".select_dept").hasClass("error_input_field")){
     return false;
     }
     else{
@@ -908,12 +957,12 @@ $('.user_details').click(function(){
   //password strength
 
   $('#password_signin').keyup(function(){
-     $('#result').html(checkStrength($('#password_signin').val()));
+     $(this).next().next('.signup_labelError').text(checkStrength($('#password_signin').val())).show();
+     $('#password_signin').css({"width":"50%"});
     });
 });
 
     function checkStrength(password){
-   
     //initial strength
     var strength = 0
  
