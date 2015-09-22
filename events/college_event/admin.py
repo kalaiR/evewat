@@ -52,7 +52,7 @@ class DepartmentAdmin(admin.ModelAdmin):
 	list_per_page = 50
 
 class PosteventAdmin(admin.ModelAdmin):
-	filelds=['name','festtype','city','festname','registrationfee','startdate','admin_status','admin_status']
+	filelds=['name','festtype','city','festname','registrationfee','startdate','admin_status']
 	list_display = ('id', 'name','festtype','city','festname','registrationfee','startdate','admin_status')
 	list_filter = ['id','festname','city']	
 	search_fields = ['id', 'festname']
@@ -66,6 +66,7 @@ class PosteventAdmin(admin.ModelAdmin):
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(City, CityAdmin)
 admin.site.register(Location, LocationAdmin)
+# admin.site.register(Collegetype, CollegetypeAdmin)
 admin.site.register(College, CollegeAdmin)
 admin.site.register(Department, DepartmentAdmin)
 admin.site.register(Postevent, PosteventAdmin)    

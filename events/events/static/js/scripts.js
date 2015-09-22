@@ -198,6 +198,7 @@
       alert('id_value'+id_value);      
       $valueHolder.val(id_value);
       $valuePlaceholder.html($this.text());
+      // $(input.valueHolder).parent().next('input[type="hidden"]#subcategoryid').val(id_value);
       $select.find('option[value="' + $this.data('value') + '"]').prop('selected', true);
       alert('test');
       // if ($this.parent('select-clone').siblings('select').hasClass('select_city'))

@@ -36,8 +36,8 @@ class EventSearchFilter(FacetedSearchForm):
 		fesstype = forms.CharField(required=False)		
 		city = forms.CharField(required=False)		
 		festname = forms.CharField(required=False)	
-		category = forms.CharField(required=False)
-		subcategory = forms.CharField(required=False)
+		# category = forms.CharField(required=False)
+		# subcategory = forms.CharField(required=False)
 		
 		# lang = forms.CharField(required=False)
 		# groupby = forms.CharField(required=False)
@@ -73,13 +73,12 @@ class EventSearchFilter(FacetedSearchForm):
 				return eventsearch(model_cls=self.get_model_class(), 
 					default_filters=self.get_default_filters())						
 				
-			_params = [
-				# 'locality',      
+			_params = [			  
 				'festtype',   
 				'city',
 				'festname',			
-				'subcategory',
-				'category',
+				# 'subcategory',
+				# 'category',
 			]
 			params = OrderedDict()
 			print 'params', params
@@ -89,9 +88,9 @@ class EventSearchFilter(FacetedSearchForm):
 				else:
 					params[p] =  None
 	 
-			if params['subcategory']:
-				params['subcategory'] = params['subcategory']
-				print "params['subcategory']", params['subcategory']
+			if params['festtype']:
+				params['festtype'] = params['festtype']
+				print "params['festtype']", params['festtype']
 
 			if params['city']:
 				params['city'] = params['city']
