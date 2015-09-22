@@ -21,22 +21,22 @@ def get_client_ip(request):
     #     print "remote ip", ip
     # return ip
     
-    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
-    print "x_forwarded_for", x_forwarded_for
-    if x_forwarded_for:
-        ip = x_forwarded_for.split(',')[-1].strip()
-    else:
-        ip = request.META.get('REMOTE_ADDR')
-    return ip
+    # x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    # print "x_forwarded_for", x_forwarded_for
+    # if x_forwarded_for:
+    #     ip = x_forwarded_for.split(',')[-1].strip()
+    # else:
+    #     ip = request.META.get('REMOTE_ADDR')
+    # return ip
 
     # ip = get_ip(request)
     # print "iware ip", ip
     # return ip
 
-    # import ipgetter
-    # IP = ipgetter.myip()
-    # print "IP from ipgetter", IP
-    # return IP 
+    import ipgetter
+    IP = ipgetter.myip()
+    print "IP from ipgetter", IP
+    return IP 
 
 def get_current_country_cities(request):
     user_ip = globals.ip
