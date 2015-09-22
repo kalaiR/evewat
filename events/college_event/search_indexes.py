@@ -1,7 +1,7 @@
 import datetime
 from haystack.indexes import *
 from models import Postevent
-from models import SubCategory
+# from models import SubCategory
 from django.contrib.auth.models import User
 from haystack.management.commands import update_index
 from django.template import RequestContext
@@ -9,11 +9,12 @@ from django.template import RequestContext
 class PosteventIndex(SearchIndex, Indexable):  
     text = CharField(document=True, use_template=True)
     searchtext = CharField()
-    festtype = CharField(model_attr='festtype__id')    
+    festtype = CharField(model_attr='festtype__id')
+    # print 'festtype', festtype    
     city = CharField(model_attr='city__id')    
     festname = CharField(model_attr='festname')
     # category = CharField(model_attr='category__id')
-    # subcategory = CharField(model_attr='subcategory__id')         
+    # subcategoryid = CharField(model_attr='subcategory__id')         
     
 
 
@@ -57,18 +58,18 @@ class PosteventIndex(SearchIndex, Indexable):
         postevent = Postevent.objects.all()       
         return postevent
 
-class SubCategoryIndex(SearchIndex, Indexable):
-    text = CharField(document=True, use_template=True)
-    searchtext = CharField()
-    # category = CharField(model_attr='category__id')
-    subcategory = CharField(model_attr='name') 
+# class SubCategoryIndex(SearchIndex, Indexable):
+#     text = CharField(document=True, use_template=True)
+#     searchtext = CharField()
+#     # category = CharField(model_attr='category__id')
+#     subcategory = CharField(model_attr='name') 
 
-    def get_model(self):
-        return SubCategory
+#     def get_model(self):
+#         return SubCategory
 
-    def index_queryset(self, **kwargs):
-        print 'index_queryset subcategory'
-        subcategories = SubCategory.objects.all()
-        return subcategories        
+#     def index_queryset(self, **kwargs):
+#         print 'index_queryset subcategory'
+#         subcategories = SubCategory.objects.all()
+#         return subcategories        
 
 # register_model_for_search(Product, ProductIndex)

@@ -13,11 +13,11 @@ from haystack.query import SQ
 default_param_mappings = OrderedDict(
   #FieldName = Form Variable
   # locality = 'locality__in', 
-  festtype = 'festtype__id',
-  city = 'city__id',  
+  festtype = 'festtype',
+  city = 'city',  
   festname = 'festname',
-  subcategory = 'subcategory__id',
-  category = 'category__id'
+  # subcategory = 'name',
+  # category = 'category__id'
   )
 
 default_geo_params = {
@@ -151,7 +151,7 @@ def searchresults(q=None, params=None,
         .distance('geolocation', country)
 
     if geo_orderby:
-      sqs = sqs.order_by('distance')
+      sqs = sqs.order_by('dista           nce')
 
   print "Created query", unicode(sqs.query), geo_location, geo_params
   print "Created query", sqs
