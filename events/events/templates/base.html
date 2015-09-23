@@ -70,13 +70,14 @@
          {% endif %}
 
    <!-- HEADER REGISTER -->
+   {% if not user.is_authenticated %}
         <div class="header-register">
           <a href="#" class=""><i class="fa fa-plus-square"></i> Register</a>
           &nbsp;&nbsp;&nbsp;<a href="/">{{request.user.email}}</a>
           <span class="signup_error" style="{% if request.REQUEST.st %} display:block;color:red;font-size:17px; {%else%} display: none; {% endif %}">
           {%for message in messages%}{{message}}{% endfor %}</span>
 
-          <div>
+        <div>
 
             <form id="user_form" method="post" action="/register/" name="sign_up">
             {% csrf_token %}
@@ -145,7 +146,15 @@
             </form>
           </div>
 
-        </div> <!-- END .HEADER-REGISTER -->
+        </div>
+      {% else %}
+        <div class="header-register">
+          <a href="/">{{request.user.email}}</a>
+          <span class="signup_error" style="{% if request.REQUEST.st %} display:block;color:red;font-size:17px; {%else%} display: none; {% endif %}">
+          {%for message in messages%}{{message}}{% endfor %}</span>
+        </div>
+      {% endif %}
+         <!-- END .HEADER-REGISTER -->
         <!-- HEADER-LOGIN -->
        <!--  <div class="header-login">
 
