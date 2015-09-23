@@ -7668,10 +7668,12 @@ fieldset[disabled] .btn-default-inverse.active {
   position: relative;
   background: url(../img/content/footer_logo_bg.jpg) top center no-repeat;
   background-size: cover;
-  height: 125px;
+  height: 220px;
   text-align: center;
   border-radius: 6px;
   overflow: hidden;
+  width:240px;
+  margin: 0 auto;
 }
 #footer .main-footer .about-globo .footer-logo a {
   position: relative;
@@ -8102,3 +8104,16 @@ fieldset[disabled] .btn-default-inverse.active {
   margin-left: 100px;
 
 }*/
+.advertisement{
+  height: 600px;
+  width:160px;
+  position: relative;
+
+}
+.advertisement img{
+  max-width: 159px;
+  max-height: 599px;
+  position: absolute;
+  /*left: 50%;
+  top: 50%;*/
+}

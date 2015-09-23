@@ -217,11 +217,12 @@
         </div> <!-- END HEADER-LANGUAGE -->
 
         <!-- CALL TO ACTION -->
+        {% if user.is_authenticated %}
         <div class="header-call-to-action">
           <a href="/post_event" class="btn btn-default"><i class="fa fa-plus"></i> Add Post</a>
           <a href="/banner" class="btn btn-default"><i class="fa fa-plus"></i> Add Banner</a>
         </div><!-- END .HEADER-CALL-TO-ACTION -->
-
+        {% endif %}
       </div><!-- END .CONTAINER -->
     </div>
     <!-- END .HEADER-TOP-BAR -->
@@ -360,22 +361,22 @@
       <div class="container">
         <div class="row">
 
-          <div class="col-md-3 col-sm-6">
+          <div class="col-md-4 col-sm-6">
             <div class="about-globo">
-              <h3>About Globo</h3>
+              <h3>About Eventswat</h3>
 
               <div class="footer-logo">
-                <a href="/"><img src="{%static "img/footer_logo.png"%}" alt=""></a>
+                <a href="/"><img src="{%static "img/logo.png"%}" height="150" alt=""></a>
                 <span></span> <!-- This content for overlay effect -->
               </div>
 
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Proin nibh augue,
-                suscipit a, scelerisque sed, lacinia in, mi. Cras vel lorem.</p>
+              <!-- <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Proin nibh augue,
+                suscipit a, scelerisque sed, lacinia in, mi. Cras vel lorem.</p> -->
 
             </div> <!-- End .about-globo -->
           </div> <!-- end Grid layout-->
 
-          <div class="col-md-3 col-sm-6">
+          <!-- <div class="col-md-3 col-sm-6">
             <h3>Latest From Blog</h3>
 
             <div class="latest-post clearfix">
@@ -401,30 +402,23 @@
 
               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
             </div>
-          </div> <!-- end Grid layout-->
+          </div> --> <!-- end Grid layout-->
 
-          <div class="col-md-3 col-sm-6 clearfix">
+          <div class="col-md-4 col-sm-6 clearfix">
             <div class="popular-categories">
               <h3>Popular Categories</h3>
 
               <ul>
-                <li><a href="#"><i class="fa fa-shopping-cart"></i>E-commerce</a></li>
-                <li><a href="#"><i class="fa fa-paper-plane-o"></i>Entertainment</a></li>
-                <li><a href="#"><i class="fa fa-cogs"></i>Industry</a></li>
-                <li><a href="#"><i class="fa fa-book"></i>Libraries &amp; Public Office</a></li>
-                <li><a href="#"><i class="fa fa-building-o"></i>Real Estate</a></li>
+                <li><a href="#"><i class="fa fa-shopping-cart"></i>Medical</a></li>
+                <li><a href="#"><i class="fa fa-paper-plane-o"></i>Engineering</a></li>
+                <li><a href="#"><i class="fa fa-cogs"></i>Law</a></li>
+                <li><a href="#"><i class="fa fa-book"></i>Management</a></li>
               </ul>
             </div> <!-- end .popular-categories-->
           </div> <!-- end Grid layout-->
 
-          <div class="col-md-3 col-sm-6">
+          <div class="col-md-4 col-sm-6">
             <div class="newsletter">
-              <h3>Newsletter</h3>
-
-              <form action="#">
-                <input type="Email" placeholder="Email address">
-                <button><i class="fa fa-plus"></i></button>
-              </form>
 
               <h3>Keep In Touch</h3>
 
@@ -433,6 +427,11 @@
                 <li><a href="#"><i class="fa fa-twitter"></i></a></li>
                 <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
                 <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+              </ul>
+
+              <h3>Contact Us</h3> 
+              <ul class="list">
+                <!-- <li>Pondicherry</li> -->
               </ul>
             </div> <!-- end .newsletter-->
 
@@ -443,16 +442,16 @@
 
     <div class="copyright">
       <div class="container">
-        <p>Copyright 2014 &copy; globo. All rights reserved. Powered by  <a href="#">Uouapps</a></p>
+        <p>Copyright 2014 &copy; Eventswat.com. All rights reserved. Powered by  <a href="#">Eventswat</a></p>
 
-        <ul class="list-inline">
+        <!-- <ul class="list-inline">
           <li><a href="#">Home</a></li>
           <li><a href="#">About Us</a></li>
           <li><a href="#">Shortcodes</a></li>
           <li><a href="#">Blog</a></li>
           <li><a href="#">Pricing</a></li>
           <li><a href="#">Contact</a></li>
-        </ul>
+        </ul> -->
       </div> <!-- END .container -->
     </div> <!-- end .copyright-->
   </footer> <!-- end #footer -->

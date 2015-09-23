@@ -4,6 +4,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from events.models import *
 from college_event.models import *
 from college_event.views import *
+from events.models import Userprofile
 
 from events.forms import *
 from events.forms import UserForm
@@ -246,9 +247,9 @@ def submit_event(request):
 			count=count-1
 			handle_uploaded_file(uploaded_file)
 			if count==0:
-				photosgroup=photosgroup  + 'events/static/img/' + str(uploaded_file)
+				photosgroup=photosgroup  + '/static/img/' + str(uploaded_file)
 			else:
-				photosgroup=photosgroup  + 'events/static/img/' +str(uploaded_file) + ','
+				photosgroup=photosgroup  + '/static/img/' +str(uploaded_file) + ','
 		event_poster=photosgroup
 		event_contactperson=request.POST['queries']
 		event_registrationurl=request.POST['festurl']
@@ -289,7 +290,11 @@ def submit_event(request):
 
 
 		message="Your data succesfully submitted"
-	return render_to_response("post_event.html", context_instance=RequestContext(request))
+		if request.POST['price']:
+			price=request.POST.get('price','0')
+		response=render_to_response("post_event.html",{'message':message}, context_instance=RequestContext(request))
+		response.set_cookie('price',price)
+	return response
 
 
 def subcategory_for_category(request):

@@ -112,7 +112,17 @@
               </form>
 
             </div> <!-- end .location-details -->     
+            <div class="advertisement" style="color:black;">
+                <p>Advertisement</p>
+                {% for banners in banner|get_banner %}
+                {% if banners.pageurl == 'event/' and banners.position == 'left' and banners.admin_status == True %}
+                
+                      <img src="/media/{{banners.banner}}" >
 
+                {% endif %}
+                {% endfor %}
+               <!--  <img src="img/add.jpg" alt=""> -->
+              </div>
           </div> <!-- end .page-sidebar -->
         <div class="col-md-7 ">
           <div class="page-content">
@@ -146,7 +156,7 @@
                       <div class="single-product">
                         <figure>
                         
-                          <img src="{{STATIC_ROOT }}/{{events.object.poster|get_photos}}" alt="">
+                          <img src="/{{events.object.poster|get_photos}}" alt="">
 
                           <div class="rating">
 
@@ -158,7 +168,7 @@
                               <li><a href="#"><i class="fa fa-star-o"></i></a></li>
                             </ul> -->
 
-                            <p>Featured</p>
+                            
 
                           </div> <!-- end .rating -->
 
@@ -178,7 +188,7 @@
 
                         <h5><a href="/details/{{events.object.id}}">{{events.object.enddate}}</a> <a href="/details/{{events.object.id}}">{{event.object.collegename}}</a></h5>
 
-                        <p>{{events.object.festdescription}}</p>
+                        <p><a href="/details/{{events.object.id}}">{{events.object.festdescription}}</a></p>
 
                         <a class="read-more" href="/details/{{events.object.id}}"><i class="fa fa-angle-right"></i>Read More</a>
 
@@ -228,17 +238,10 @@
               <div class="advertisement col-md-2" style="color:black;">
                 <p>Advertisement</p>
                 {% for banners in banner|get_banner %}
-                {% if banners.pageurl == '/search/?q=' and banners.position == 'right' %}
-                  <div class="item">
-                  
-                      <img src="media/{{banners.banner}}" >
-                    
-                    <div class="slide-content">
-                     
-                    </div>
+                {% if banners.pageurl == 'event/' and banners.position == 'right' and banners.admin_status == True %}
+                
+                      <img src="/media/{{banners.banner}}" >
 
-
-                  </div>
                 {% endif %}
                 {% endfor %}
                <!--  <img src="img/add.jpg" alt=""> -->
