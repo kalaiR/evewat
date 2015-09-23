@@ -268,7 +268,7 @@ CREATE TABLE `college_event_city` (
 
 LOCK TABLES `college_event_city` WRITE;
 /*!40000 ALTER TABLE `college_event_city` DISABLE KEYS */;
-INSERT INTO `college_event_city` VALUES (1,'Pondicherry',1),(2,'Chennai',1),(3,'Villupuram',1),(4,'Madurai',1),(5,'Trichy',2),(6,'Cuddalore',1);
+INSERT INTO `college_event_city` VALUES (1,'Pondicherry',1),(2,'Chennai',1),(3,'Villupuram',1),(4,'Madurai',1),(5,'Trichy',2),(6,'Cuddalore',1),(7,'Scottsdale',3);
 /*!40000 ALTER TABLE `college_event_city` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -382,7 +382,7 @@ CREATE TABLE `college_event_country` (
 
 LOCK TABLES `college_event_country` WRITE;
 /*!40000 ALTER TABLE `college_event_country` DISABLE KEYS */;
-INSERT INTO `college_event_country` VALUES (1,'IN','India'),(2,'SG','Singapore');
+INSERT INTO `college_event_country` VALUES (1,'IN','India'),(2,'SG','Singapore'),(3,'US','United States');
 /*!40000 ALTER TABLE `college_event_country` ENABLE KEYS */;
 UNLOCK TABLES;
 

@@ -23,12 +23,12 @@ class CityAdmin(admin.ModelAdmin):
 	search_fields = ['id', 'city']
 	list_per_page = 50
 
-class LocationAdmin(admin.ModelAdmin):
-	fields=['city','locality']
-	list_display = ('id', 'locality')
-	list_filter = ['locality']
-	search_fields = ['id', 'locality']
-	list_per_page = 50
+# class LocationAdmin(admin.ModelAdmin):
+# 	fields=['city','locality']
+# 	list_display = ('id', 'locality')
+# 	list_filter = ['locality']
+# 	search_fields = ['id', 'locality']
+# 	list_per_page = 50
 
 # class CollegetypeAdmin(admin.ModelAdmin):
 # 	fields=['college_type']
@@ -38,8 +38,8 @@ class LocationAdmin(admin.ModelAdmin):
 # 	list_per_page = 50
 
 class CollegeAdmin(admin.ModelAdmin):
-	fields=['collegetype','city','location','college_name']
-	list_display = ('id','city','location', 'college_name')
+	fields=['collegetype','city','college_name']
+	list_display = ('id','city', 'college_name')
 	list_filter = ['college_name']
 	search_fields = ['id', 'college_name']
 	list_per_page = 50
@@ -65,7 +65,7 @@ class PosteventAdmin(admin.ModelAdmin):
 	
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(City, CityAdmin)
-admin.site.register(Location, LocationAdmin)
+# admin.site.register(Location, LocationAdmin)
 # admin.site.register(Collegetype, CollegetypeAdmin)
 admin.site.register(College, CollegeAdmin)
 admin.site.register(Department, DepartmentAdmin)
