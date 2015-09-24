@@ -47,11 +47,9 @@ class JSONResponse(HttpResponse):
 # Create your views here.
 def home(request):
 	subcategory = SubCategory.objects.all()
-	college = College.objects.all()
-	dept=Department.objects.all()
 	city =get_current_country_cities(request)
 	recentad = Postevent.objects.filter().order_by('-id')[:4]
-	ctx = {'subcategory':subcategory, 'city': city,'college':college,'recentad':recentad,'dept':dept}
+	ctx = {'subcategory':subcategory, 'city': city,'recentad':recentad}
 	return render_to_response("index.html",ctx, context_instance=RequestContext(request))
 
 @csrf_protect 
@@ -137,20 +135,48 @@ def register(request):
 			userprofile.lastname = lastname=request.POST['lastname']
 			userprofile.mobile=request.POST['mobile']
 
-			if request.POST['select_city'] != '':
+			# print "request.POST['select_city']", request.POST['select_city']
+			# print "request.POST['select_college']", request.POST['select_college']
+			# print "request.POST['select_dept']", request.POST['select_dept']
+
+			if request.POST['select_city'] != '' and request.POST['select_city'] != 'select_city':
 				city=City.objects.get(id=request.POST['select_city'])
 				userprofile.city_id = city.id
-			if request.POST['select_college'] != '':
+			if request.POST['select_college'] != '' and request.POST['select_college'] != 'select_college':
 				college=College.objects.get(id=request.POST['select_college'])
 				userprofile.college_id =college.id
-			if request.POST['select_dept'] != '':
+			if request.POST['select_dept'] != '' and request.POST['select_dept'] != 'select_department':
 				department=Department.objects.get(id=request.POST['select_dept'])
-				userprofile.department_id =department.id	
+				userprofile.department_id =department.id
+
+			# if request.POST['select_city'] != '' and request.POST['select_city'] != 'select_city':
+			# 	city=City.objects.get(id=request.POST['select_city'])
+			# 	userprofile.city_id = city.id
+
+			# try:
+			# 	error={}
+			# 	if College.objects.get(id=request.POST['select_college']).exists():
+			# 		college=College.objects.get(id=request.POST['select_college'])
+			# 		userprofile.college_id =college.id
+			# 	else:
+			# 		error['select_college'] = ugettext('Please choose college based on city')
+			# 		raise ValidationError(error['select_college'], 3)
+
+			# 	if Department.objects.get(id=request.POST['select_dept']).exists():
+			# 		department=Department.objects.get(id=request.POST['select_dept'])
+			# 		userprofile.department_id =department.id
+			# 	else:
+			# 		error['select_dept'] = ugettext('Please choose department based on college')
+			# 		raise ValidationError(error['select_dept'], 4)
+
+			# except ValidationError as e:
+			# 	messages.add_message(request, messages.ERROR, e.messages[-1]) 
+			# 	redirect_path = "/"
+			# 	query_string = 'st=%d' % e.code
+			# 	redirect_url = format_redirect_url(redirect_path, query_string)
+			# 	return HttpResponseRedirect(redirect_url)
 
 			userprofile.confirmation_code = ''.join(random.choice(string.ascii_uppercase + string.digits + string.ascii_lowercase) for x in range(33))
-			# print confirmation_code
-			
-			# print 'p', p
 			userprofile.save()			
 			# send_registration_confirmation(user)
 			registered = True

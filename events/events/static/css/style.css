@@ -8024,6 +8024,10 @@ fieldset[disabled] .btn-default-inverse.active {
     color: black;
 }
 
+#user_form input, #login_val input{
+  width:104%;
+}
+
 #user_form .uou-custom-select {
   position:relative !important;
   padding:0px !important;
@@ -8033,6 +8037,7 @@ fieldset[disabled] .btn-default-inverse.active {
 }
 #user_form .uou-custom-select .select-clone {
   position:relative !important;
+  width: 104%;
 }
 
 .popup{
@@ -8065,12 +8070,10 @@ fieldset[disabled] .btn-default-inverse.active {
   position: relative !important;
   padding:0px !important;
   width: 412px !important;
+  background: none !important;
 }
-/*.form-control, .signup_labelError{
-  position: absolute;
-}
-*/
-.signup_labelError, .error_message{
+
+.signup_labelError, .error_message, .labelError{
   display: none;
   color: red;
   padding:0px 0px 0px 8px;
@@ -8080,30 +8083,11 @@ fieldset[disabled] .btn-default-inverse.active {
   width:205px !important;
 }
 
-/*.item img{
-  top:50%;
-  left:50%;
-  height: auto !important;
-  width: auto !important;
-  max-height: 100px !important;
-  max-width: :100px !important;
-}*/
-
 .our-partners #partners-slider .owl-item{
   width: 350px !important;
 }
 
-/*.slider-content .owl-item .item img{
-  max-height: 400px !important;
-  max-width: 800px !important;
-  top:50%;
-  left:50%;
-  height: auto;
-  width:auto;
-  margin-top: 100px;
-  margin-left: 100px;
 
-}*/
 .advertisement{
   height: 600px;
   width:160px;
@@ -8116,4 +8100,14 @@ fieldset[disabled] .btn-default-inverse.active {
   position: absolute;
   /*left: 50%;
   top: 50%;*/
+}
+
+.create_user, #signin{
+  width:85% ! important;
+  margin: 0px 10px 0px 34px !important;
+  height: 32px;
+}
+
+#user_form .uou-custom-select .placeholder{
+  width:104%;
 }
