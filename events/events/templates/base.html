@@ -77,13 +77,13 @@
    <!-- HEADER REGISTER -->
    {% if not user.is_authenticated %}
         <div class="header-register">
+        
           <a href="#" class=""><i class="fa fa-plus-square"></i> Register</a>
           &nbsp;&nbsp;&nbsp;<a href="/">{{request.user.email}}</a>
-          <span class="signup_error" style="{% if request.REQUEST.st %} display:block;color:red;font-size:17px; {%else%} display: none; {% endif %}">
-          {%for message in messages%}{{message}}{% endfor %}</span>
-
-        <div>
-
+          <span class="signup_error" style="{% if request.REQUEST.rst %} display:block;color:red;font-size:17px; {%else%} display: none; {% endif %}">
+              {%for message in messages%}{{message}}{% endfor %}
+          </span>
+          <div>        
             <form id="user_form" method="post" action="/register/" name="sign_up">
             {% csrf_token %}
 
@@ -138,10 +138,7 @@
             <label id="id_department_required" class="signup_labelError" style="font-size:12px;display:none;">Please Choose department</label>
             </div>
 
-            
-            
-            <input type="button" class="btn btn-default create_user" value="Register" name="Create" id="create_user">
-              
+            <input type="button" class="btn btn-default create_user" value="Register" name="Create" id="create_user">  
             </form>
           </div>
 

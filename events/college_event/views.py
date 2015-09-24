@@ -90,18 +90,14 @@ def logout_view(request):
 
 @csrf_protect
 def register(request):  
-	# print 'register'
 	context = RequestContext(request) 
 	registered = False
 	user=User()
 	userprofile=Userprofile()
 	if request.method == 'POST': 
-
 		email=request.POST['email_id']
-		# print 'email', email
 		username=request.POST['username']
-		# print 'username', username
-
+		
 		try:
 			error={}
 			if User.objects.filter(email=email).exists():
@@ -115,29 +111,21 @@ def register(request):
 		except ValidationError as e:
 			messages.add_message(request, messages.ERROR, e.messages[-1]) 
 			redirect_path = "/"
-			query_string = 'st=%d' % e.code
+			query_string = 'rst=%d' % e.code
 			redirect_url = format_redirect_url(redirect_path, query_string)
 			return HttpResponseRedirect(redirect_url)
 
 		if not error:
 			user.is_active = True
 			user.username=request.POST['username']
-			# print 'user.username', user.username
 			user.email=request.POST['email_id']
-			# print 'post email', user.email
 			user.password=request.POST['password']
-			# print 'post pswd', user.password 
 			user.set_password(user.password)
-			# user.first_name=request.POST['user_id']
 			user.save()
 			userprofile = Userprofile()
 			userprofile.user_id=user.id
 			userprofile.lastname = lastname=request.POST['lastname']
 			userprofile.mobile=request.POST['mobile']
-
-			# print "request.POST['select_city']", request.POST['select_city']
-			# print "request.POST['select_college']", request.POST['select_college']
-			# print "request.POST['select_dept']", request.POST['select_dept']
 
 			if request.POST['select_city'] != '' and request.POST['select_city'] != 'select_city':
 				city=City.objects.get(id=request.POST['select_city'])
@@ -149,48 +137,17 @@ def register(request):
 				department=Department.objects.get(id=request.POST['select_dept'])
 				userprofile.department_id =department.id
 
-			# if request.POST['select_city'] != '' and request.POST['select_city'] != 'select_city':
-			# 	city=City.objects.get(id=request.POST['select_city'])
-			# 	userprofile.city_id = city.id
-
-			# try:
-			# 	error={}
-			# 	if College.objects.get(id=request.POST['select_college']).exists():
-			# 		college=College.objects.get(id=request.POST['select_college'])
-			# 		userprofile.college_id =college.id
-			# 	else:
-			# 		error['select_college'] = ugettext('Please choose college based on city')
-			# 		raise ValidationError(error['select_college'], 3)
-
-			# 	if Department.objects.get(id=request.POST['select_dept']).exists():
-			# 		department=Department.objects.get(id=request.POST['select_dept'])
-			# 		userprofile.department_id =department.id
-			# 	else:
-			# 		error['select_dept'] = ugettext('Please choose department based on college')
-			# 		raise ValidationError(error['select_dept'], 4)
-
-			# except ValidationError as e:
-			# 	messages.add_message(request, messages.ERROR, e.messages[-1]) 
-			# 	redirect_path = "/"
-			# 	query_string = 'st=%d' % e.code
-			# 	redirect_url = format_redirect_url(redirect_path, query_string)
-			# 	return HttpResponseRedirect(redirect_url)
-
 			userprofile.confirmation_code = ''.join(random.choice(string.ascii_uppercase + string.digits + string.ascii_lowercase) for x in range(33))
 			userprofile.save()			
 			# send_registration_confirmation(user)
 			registered = True
 			user = User.objects.get(username=user.username)
-			print "user",user
-			# print 'reg user', user
+			print "user", user
 			user.backend='django.contrib.auth.backends.ModelBackend'
-			login(request, user)
-			
+			login(request, user)	
 			return HttpResponseRedirect('/start/?user_id=' + str(user.id))
-
 	else:	 
 			user_id = user.id
-			# print 'else user_id', user_id
 			return render_to_response('index.html', {'user_id':user_id} ,context_instance=RequestContext(request))
 
 
