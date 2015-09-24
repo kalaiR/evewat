@@ -52,12 +52,22 @@
 
             <form method="post" id="login_val" action="/login/" name="sign_in">
 
+<<<<<<< HEAD
             {% csrf_token %}           
               <input type="text" class="form-control"  placeholder="Username" id="emailid_signup" name="username" autocomplete="off" >
+=======
+            {% csrf_token %}      
+                 
+              <div class="field_control">   
+              <input type="text" class="form-control"  placeholder="Username" id="emailid_signup" name="username">
+>>>>>>> da0839a99e82355588c6b290aa8b00c2f3d7f3e2
               <label for="emailid_signup" id="emailid_required" class="labelError" style="display:none;color:red;">Please enter User name</label>  
+              </div>
 
+              <div class="field_control">   
               <input type="password" class="form-control" name="password" id="password_signup" placeholder="Password">
               <label for="password" id="password_required" class="labelError" style="display:none;color:red;">Please enter Password</label>
+              </div>
 
               <input type="hidden" value="{% if request.REQUEST.next %}{{ request.REQUEST.next }}{% else %}{% if request.META.HTTP_REFERER %}{{ request.META.HTTP_REFERER }}{% else %}/{% endif %}{% endif %}" name="next" /> 
 
@@ -72,13 +82,13 @@
    <!-- HEADER REGISTER -->
    {% if not user.is_authenticated %}
         <div class="header-register">
+        
           <a href="#" class=""><i class="fa fa-plus-square"></i> Register</a>
           &nbsp;&nbsp;&nbsp;<a href="/">{{request.user.email}}</a>
-          <span class="signup_error" style="{% if request.REQUEST.st %} display:block;color:red;font-size:17px; {%else%} display: none; {% endif %}">
-          {%for message in messages%}{{message}}{% endfor %}</span>
-
-        <div>
-
+          <span class="signup_error" style="{% if request.REQUEST.rst %} display:block;color:red;font-size:17px; {%else%} display: none; {% endif %}">
+              {%for message in messages%}{{message}}{% endfor %}
+          </span>
+          <div>        
             <form id="user_form" method="post" action="/register/" name="sign_up">
             {% csrf_token %}
 
@@ -93,7 +103,11 @@
             </div>
 
             <div class="field_control">
+<<<<<<< HEAD
             <input type="email" class="form-control" name="email_id" placeholder="email_id" id="emailid_signin" autocomplete="off">
+=======
+            <input type="email" class="form-control" name="email_id" placeholder="Email_id" id="emailid_signin">
+>>>>>>> da0839a99e82355588c6b290aa8b00c2f3d7f3e2
             <label for="emailid_signin" id="emailid_required1" class="signup_labelError">Please enter email id</label>
             <span id="valid_signup_email_required" class="error_message">Please enter valid Email</span>
             </div>
@@ -104,13 +118,17 @@
             </div>
 
             <div class="field_control">
+<<<<<<< HEAD
             <input type="password" class="form-control" name="password" placeholder="password" id="password_signin" autocomplete="off">
+=======
+            <input type="password" class="form-control" name="password" placeholder="Password" id="password_signin">
+>>>>>>> da0839a99e82355588c6b290aa8b00c2f3d7f3e2
             <span id="result"></span>
             <label for="password" id="password_signin1" class="signup_labelError" style="display:none;color:red;">Please enter Password</label>
             </div>
 
             <div class="field_control">
-            <select class="select_option select_city" data-placeholder="-Select City-" name="select_city">
+            <select class="select_option select_city" data-placeholder="Select City" name="select_city">
               <option value="">Select City</option>
               {% for cities in city %}
               <option id="city_selected" value="{{cities.id}}">{{cities.city}} </option>
@@ -120,29 +138,27 @@
             </div>
             
             <div class="field_control">
-            <select class="select_option select_college" data-placeholder="-Select College-" name="select_college">
-              <option value="">Select College</option>
-              {% for colleges in college %}
-              <option id="college_selected" value="{{colleges.id}}">{{colleges.college_name}} </option>
-              {% endfor %}
+            <select class="select_option select_college" data-placeholder="Select College" name="select_college">
+              <option value="">Select College</option>   
             </select>
             <label id="id_college_required" class="signup_labelError" style="font-size:12px;display:none;">Please Choose College</label>
             </div>
 
             <div class="field_control">
-            <select class="select_option select_dept" data-placeholder="-Select Department-" name="select_dept">
-              <option value="">Select Department</option>
-              {% for depts in dept %}
-              <option id="department_selected" value="{{depts.id}}">{{depts.department}} </option>
-              {% endfor %}
+            <select class="select_option select_dept" data-placeholder="Select Department" name="select_dept">
+              <option value="">Select Department</option>             
             </select>
             <label id="id_department_required" class="signup_labelError" style="font-size:12px;display:none;">Please Choose department</label>
             </div>
 
+<<<<<<< HEAD
             
             
             <input type="submit" class="btn btn-default" value="Register" name="Create" id="create_user">
               
+=======
+            <input type="button" class="btn btn-default create_user" value="Register" name="Create" id="create_user">  
+>>>>>>> da0839a99e82355588c6b290aa8b00c2f3d7f3e2
             </form>
           </div>
 
