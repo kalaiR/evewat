@@ -5,6 +5,8 @@ from django.conf import settings
 from payu.utils import generate_hash
 from django.http import HttpResponseRedirect, HttpResponse
 import uuid
+from django.contrib.auth.models import User
+from events.models import Userprofile
 
 def my_random_string(string_length=10):
 	"""Returns a random string of length string_length."""
@@ -14,11 +16,13 @@ def my_random_string(string_length=10):
 	return random[0:string_length]
 
 def buy_order(request):
-	initial = request.POST.get('initial',request.COOKIES.get('initial'))
-	fname=request.POST.get('fname',request.COOKIES.get('fname'))
-	lname=request.POST.get('lname',request.COOKIES.get('lname'))
-	pnumber=request.POST.get('pnumber',request.COOKIES.get('pnumber'))
-	email=request.POST.get('email',request.COOKIES.get('email'))
+	user=Userprofile.objects.get(user_id=request.user.id)
+	mobile=user.mobile
+	initial = 'mr'
+	fname=request.user.username
+	lname=request.user.username
+	pnumber=mobile
+	email=request.user.email
 	txnid=my_random_string(8)
 	cleaned_data = {'key': settings.PAYU_INFO['merchant_key'], 
 					'txnid':txnid,'amount': request.COOKIES.get('price'), 
@@ -40,7 +44,8 @@ def buy_order(request):
 				<input type="hidden" name="phone" value="%s" />
 				<input type="hidden" name="key" value="%s" />
 				<input type="hidden" name="hash" value ="%s" />
-				
+				<input type="hidden" name="curl" value="%s" />
+				<input type="hidden" name="furl" value="%s" />
 				<input type="hidden" name="txnid" value="%s" />
 				<input type="hidden" name="productinfo" value="%s" />
 				<input type="hidden" name="amount" value="%s" />
@@ -55,7 +60,8 @@ def buy_order(request):
 						 pnumber,
 						 settings.PAYU_INFO['merchant_key'],
 						 hash_o,
-						 
+						 settings.PAYU_INFO['curl'],
+						 settings.PAYU_INFO['furl'],
 						 txnid,
 						 request.COOKIES.get('banner'),
 						 request.COOKIES.get('price'),

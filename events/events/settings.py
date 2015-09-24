@@ -10,6 +10,7 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 # for img upload
 FOR_IMG=os.path.join(os.path.dirname(__file__), 'static/img/')
@@ -48,6 +49,8 @@ INSTALLED_APPS = (
     
 
 )
+
+SITE_ID = 1
 
 HAYSTACK_CONNECTIONS = {
     'default': {
@@ -111,6 +114,7 @@ STATIC_URL = '/static/'
 
 STATIC_ROOT = 'static'
 
+
 STATICFILES_DIRS = (
     os.path.join(os.path.dirname(__file__), 'static'),
 )
@@ -153,8 +157,8 @@ PAYU_INFO = {
              # for production environment use 'https://secure.payu.in/_payment'
              'payment_url': 'https://test.payu.in/_payment',
              #success url for hotel
-             'surl':'http://localhost:8001/upload_banner',
-             'surl1':'http://localhost:8000/success',
-             'curl':'http://localhost:8000/post_event',
-             'furl':'http://localhost:8000/post_event',
+             'surl':'http://192.169.200.166:8000/upload_banner',
+             'surl1':'http://192.169.200.166:8000/success',
+             'curl':'http://192.169.200.166:8000/post_event',
+             'furl':'http://192.169.200.166:8000/post_event',
             }

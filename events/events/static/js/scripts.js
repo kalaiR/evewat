@@ -1015,3 +1015,7 @@ $('#paid').click(function(){
 $('#create_user').click(function(){
   $('.popup').show();
 });
+
+var thewidth=$('.advertisement img').width();
+var theheight=$('.advertisement img').height();
+//$('.advertisement img').css({'margin-left':-thewidth/2+'px','margin-top':-theheight/2+'px'});

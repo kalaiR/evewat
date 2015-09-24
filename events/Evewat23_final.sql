@@ -1,10 +1,10 @@
 CREATE DATABASE  IF NOT EXISTS `evewat` /*!40100 DEFAULT CHARACTER SET latin1 */;
 USE `evewat`;
--- MySQL dump 10.13  Distrib 5.5.43, for debian-linux-gnu (x86_64)
+-- MySQL dump 10.13  Distrib 5.5.44, for debian-linux-gnu (x86_64)
 --
 -- Host: 127.0.0.1    Database: evewat
 -- ------------------------------------------------------
--- Server version	5.5.43-0ubuntu0.14.04.1
+-- Server version	5.5.44-0ubuntu0.14.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -129,7 +129,7 @@ CREATE TABLE `auth_user` (
 
 LOCK TABLES `auth_user` WRITE;
 /*!40000 ALTER TABLE `auth_user` DISABLE KEYS */;
-INSERT INTO `auth_user` VALUES (1,'pbkdf2_sha256$12000$O4mFrmTcbemB$PX6wp+Qnubjjlws0McXR1810LElzFCLTSCn9k7uLK9g=','2015-09-23 08:31:17',1,'root','','','root@gmail.com',1,1,'2015-09-02 06:10:23'),(6,'pbkdf2_sha256$12000$8TrIfTKF6iWD$WQdOuOEkAbqEw9HqLjwBTkZI2bOR5u+YKx4CL1h2NEE=','2015-09-10 10:28:05',0,'selvi','','','selvi@gmail.com',0,1,'2015-09-02 07:37:52'),(7,'pbkdf2_sha256$12000$H1vxLMKujW6Y$CTKAD6cChPbJCeopKlWZ+lK1J1R3yHFnvCdwURCRFjA=','2015-09-07 06:29:26',0,'neethu','','','neethu@globalensolutions.com',0,1,'2015-09-02 10:28:44'),(8,'pbkdf2_sha256$12000$3tKROpHmJWom$6G1YyK6hqC1FijF0OZnTqGek7XIHYCiLvvWE5PAOWf8=','2015-09-02 11:20:37',0,'nandhini','','','nandhini@gmail.com',0,1,'2015-09-02 11:20:37'),(9,'pbkdf2_sha256$12000$rJL4df4HTRSb$QGaSu/mWDgkETaudcLB8bpJ1lziVFc/MPPjOF91JAE4=','2015-09-19 07:39:59',0,'ramya','','','ramya@globalensolutions.com',0,1,'2015-09-02 11:39:59'),(10,'pbkdf2_sha256$12000$dodz33cWdAba$MKeqXTWDmYWSnOQIvDogeUrmxgffx2nOeHuln77kBXM=','2015-09-03 05:25:01',0,'sara','','','sara@gmail.com',0,1,'2015-09-02 11:52:30'),(11,'pbkdf2_sha256$12000$ozZMkyELnNKk$ata/kjqiQ7hho/yp8iNc8ObQPsnnGfDG7i1vAIOfbgM=','2015-09-02 12:42:45',0,'pradeepa','','','rpradeepa812@gmail.com',0,1,'2015-09-02 12:42:44'),(12,'pbkdf2_sha256$12000$teZUJ2OLxajr$vySWq0gTYmYGUNaKJz3AsBNNkX20V+NhmUkOxNNKZzc=','2015-09-03 04:36:06',0,'sathish','','','sathish@gmail.com',0,1,'2015-09-03 04:18:30'),(13,'pbkdf2_sha256$12000$4tufUrFqyrxk$euiYIJJpZ3SE3RxAHTFwQKOU2bZhYAGqlfCG9I9WPxs=','2015-09-03 05:17:12',0,'guru','','','guru@globalensolutions.com',0,1,'2015-09-03 05:17:12'),(14,'pbkdf2_sha256$12000$wOXr1pumalFS$5qYDOTbYnBOGO/e17gHBuIs29q0IkTHqezQYoGvebwQ=','2015-09-07 13:08:24',0,'spriya','','','shanmugapriya@gmail.com',0,1,'2015-09-07 12:27:32'),(15,'pbkdf2_sha256$12000$lhN1PiOGpeTN$yzCRaG8a9h73traLvMqKLLZ5xc8APODQwSuNxl/rQHk=','2015-09-09 04:13:16',0,'saran','','','saran@gmail.com',0,1,'2015-09-08 11:38:19'),(16,'pbkdf2_sha256$12000$RnPEuIKwuHdQ$KWIimmTX+0Iu0VXGvzYX+1st8HqYY44Pju7T1Tcnuj4=','2015-09-08 11:56:26',0,'devi','','','devi@gmail.com',0,1,'2015-09-08 11:56:25'),(17,'pbkdf2_sha256$12000$z4PAWSQoGjVf$5UYQ2X8yBChNnm674H+rC5E88QlXD4TlVQhVpkAUfl4=','2015-09-08 12:13:33',0,'user','','','user@gmail.com',0,1,'2015-09-08 12:13:33'),(18,'pbkdf2_sha256$12000$gpfIRxwTn3pb$ClSiJopSqs/IKkHg0T326vNlsfOdSo9gqoRIK5/bX2Y=','2015-09-09 06:54:11',0,'sang','','','sang@gmail.com',0,1,'2015-09-09 06:54:11'),(19,'pbkdf2_sha256$12000$XYc7Gjh5P179$4062AtjrcmSlDJqPuDhQj9ryRZe0IO9hui4m+HrklaI=','2015-09-09 07:29:51',0,'nisha','','','nisha@gmail.com',0,1,'2015-09-09 07:29:51'),(20,'pbkdf2_sha256$12000$xMWzidnYZtnj$SOq1We0xA3vx9H6ddzre7rLrA25z959ulPkhmt01tsY=','2015-09-09 10:18:06',0,'geetha','','','geetha@gmail.com',0,1,'2015-09-09 10:18:06'),(21,'pbkdf2_sha256$12000$VMbxP7ItqKGk$IjYHBGeIPxCg9W7NRve6MBCA333AAGNeI3BenZnfsJ8=','2015-09-22 13:22:45',0,'kalai','','','kalai@gmail.com',0,1,'2015-09-10 04:59:48'),(22,'pbkdf2_sha256$12000$rYeCsFd1svtK$ZblA43UnQphV/gJMmTu8soPV58XC9XRAVtbSES/py40=','2015-09-14 08:42:04',0,'Priya','','','avbmail93@gmail.com',0,1,'2015-09-14 04:31:56'),(23,'pbkdf2_sha256$12000$7OhZIRaR8vnd$BqwLf3CzC2Vp1ohon1zrp9CY3Ps/BBWYfM1CJYBb0ZU=','2015-09-19 07:38:48',0,'sati','','','sati@gmail.com',0,1,'2015-09-19 07:38:47'),(24,'pbkdf2_sha256$10000$fatYvLzOx7iL$SYl+pqmoTD+qKD1VUX9IRwQeAMzPdJKOkxfNsP/2gRw=','2015-09-21 12:31:27',0,'kalaiarasi','','','kalaimca.gsdfd@gmail.com',0,1,'2015-09-21 12:31:27'),(52,'pbkdf2_sha256$12000$yVjzxMFRRdLg$g3ZuG+rLGwAO+uj/RnZ/JzvCdoNYnwLquqa6OEhuFVI=','2015-09-22 04:28:40',0,'test','','','test@gmail.com',0,1,'2015-09-22 04:28:40'),(53,'pbkdf2_sha256$12000$z8ewoq6WXURw$Y4ll2ILZPu35BVMrpkUzcxettJMeFt+geaSttCFTrOA=','2015-09-22 04:31:02',0,'test1','','','test1@gmail.com',0,1,'2015-09-22 04:31:01'),(54,'pbkdf2_sha256$12000$cHwHDJtnlPQX$0mAhSeKoEKsoIvVe5EEdqIfeXvsegsJ1ip2sT/sjCnM=','2015-09-22 04:33:06',0,'test2','','','test2@gmail.com',0,1,'2015-09-22 04:33:05'),(55,'pbkdf2_sha256$12000$SMoIbLw0IlIp$6/RnXGti8i+eDZ2IWXV4dAhqrZJSerTmwUI3fS7C9fE=','2015-09-22 05:08:59',0,'dfdf','','','dadfs@gmail.com',0,1,'2015-09-22 05:08:59'),(56,'pbkdf2_sha256$12000$RS0IcjZ7CDNY$Sx2VSVpz8F0YUQGjT9+p8yiozZMMfNbhQgpYc/D3yEc=','2015-09-22 05:23:37',0,'dasf','','','asdfa@gmail.com',0,1,'2015-09-22 05:23:37'),(57,'pbkdf2_sha256$12000$pIgTtmhxSN8P$2Zyo/cNllXh/u9OesZDD6WheUfBOuRqB/QJ+1XMlDbo=','2015-09-22 05:25:42',0,'dfasfd','','','asdf@gmail.com',0,1,'2015-09-22 05:25:42'),(58,'pbkdf2_sha256$12000$hoWx016TizlP$AkINS6IibXmBc+D8noV3iafWGQ+HY2iimWMnC5nW34Y=','2015-09-22 07:36:51',0,'dfd','','','dfsad@gmail.com',0,1,'2015-09-22 07:36:51'),(59,'pbkdf2_sha256$12000$7VKaYDPOJGV1$ta/jC2A5LleEq0f0faW0ZABwm+XWqVFip6G3eIqkkTs=','2015-09-22 07:38:01',0,'test3','','','test3@gmail.com',0,1,'2015-09-22 07:38:01'),(60,'pbkdf2_sha256$12000$mfnvvEmsv1in$VGErFmPdZMDOL9qGamlUGNrPYCdGPvEOfX7QsKK08gY=','2015-09-22 07:51:33',0,'test4','','','test4@gmail.com',0,1,'2015-09-22 07:51:33'),(61,'pbkdf2_sha256$12000$8egSVvLSNRId$sl3qG6ruan1rVxhyFgGQdRFBDJOkmybQKz+TXqEU8Gs=','2015-09-22 07:52:21',0,'test5','','','test5@gmail.com',0,1,'2015-09-22 07:52:21'),(62,'pbkdf2_sha256$12000$Obw6UzGkw2Cb$W4bk4N9w+4iRWwZXT4yw5V7WjNXMHeWy51KUVfPvaaQ=','2015-09-23 08:35:18',0,'test6','','','test6@gmail.com',0,1,'2015-09-23 08:35:18');
+INSERT INTO `auth_user` VALUES (1,'pbkdf2_sha256$12000$O4mFrmTcbemB$PX6wp+Qnubjjlws0McXR1810LElzFCLTSCn9k7uLK9g=','2015-09-23 08:31:17',1,'root','','','root@gmail.com',1,1,'2015-09-02 06:10:23'),(6,'pbkdf2_sha256$12000$8TrIfTKF6iWD$WQdOuOEkAbqEw9HqLjwBTkZI2bOR5u+YKx4CL1h2NEE=','2015-09-10 10:28:05',0,'selvi','','','selvi@gmail.com',0,1,'2015-09-02 07:37:52'),(7,'pbkdf2_sha256$12000$H1vxLMKujW6Y$CTKAD6cChPbJCeopKlWZ+lK1J1R3yHFnvCdwURCRFjA=','2015-09-07 06:29:26',0,'neethu','','','neethu@globalensolutions.com',0,1,'2015-09-02 10:28:44'),(8,'pbkdf2_sha256$12000$3tKROpHmJWom$6G1YyK6hqC1FijF0OZnTqGek7XIHYCiLvvWE5PAOWf8=','2015-09-02 11:20:37',0,'nandhini','','','nandhini@gmail.com',0,1,'2015-09-02 11:20:37'),(9,'pbkdf2_sha256$12000$rJL4df4HTRSb$QGaSu/mWDgkETaudcLB8bpJ1lziVFc/MPPjOF91JAE4=','2015-09-19 07:39:59',0,'ramya','','','ramya@globalensolutions.com',0,1,'2015-09-02 11:39:59'),(10,'pbkdf2_sha256$12000$dodz33cWdAba$MKeqXTWDmYWSnOQIvDogeUrmxgffx2nOeHuln77kBXM=','2015-09-03 05:25:01',0,'sara','','','sara@gmail.com',0,1,'2015-09-02 11:52:30'),(11,'pbkdf2_sha256$12000$ozZMkyELnNKk$ata/kjqiQ7hho/yp8iNc8ObQPsnnGfDG7i1vAIOfbgM=','2015-09-02 12:42:45',0,'pradeepa','','','rpradeepa812@gmail.com',0,1,'2015-09-02 12:42:44'),(12,'pbkdf2_sha256$12000$teZUJ2OLxajr$vySWq0gTYmYGUNaKJz3AsBNNkX20V+NhmUkOxNNKZzc=','2015-09-03 04:36:06',0,'sathish','','','sathish@gmail.com',0,1,'2015-09-03 04:18:30'),(13,'pbkdf2_sha256$12000$4tufUrFqyrxk$euiYIJJpZ3SE3RxAHTFwQKOU2bZhYAGqlfCG9I9WPxs=','2015-09-03 05:17:12',0,'guru','','','guru@globalensolutions.com',0,1,'2015-09-03 05:17:12'),(14,'pbkdf2_sha256$12000$wOXr1pumalFS$5qYDOTbYnBOGO/e17gHBuIs29q0IkTHqezQYoGvebwQ=','2015-09-07 13:08:24',0,'spriya','','','shanmugapriya@gmail.com',0,1,'2015-09-07 12:27:32'),(15,'pbkdf2_sha256$12000$lhN1PiOGpeTN$yzCRaG8a9h73traLvMqKLLZ5xc8APODQwSuNxl/rQHk=','2015-09-09 04:13:16',0,'saran','','','saran@gmail.com',0,1,'2015-09-08 11:38:19'),(16,'pbkdf2_sha256$12000$RnPEuIKwuHdQ$KWIimmTX+0Iu0VXGvzYX+1st8HqYY44Pju7T1Tcnuj4=','2015-09-08 11:56:26',0,'devi','','','devi@gmail.com',0,1,'2015-09-08 11:56:25'),(17,'pbkdf2_sha256$12000$z4PAWSQoGjVf$5UYQ2X8yBChNnm674H+rC5E88QlXD4TlVQhVpkAUfl4=','2015-09-08 12:13:33',0,'user','','','user@gmail.com',0,1,'2015-09-08 12:13:33'),(18,'pbkdf2_sha256$12000$gpfIRxwTn3pb$ClSiJopSqs/IKkHg0T326vNlsfOdSo9gqoRIK5/bX2Y=','2015-09-09 06:54:11',0,'sang','','','sang@gmail.com',0,1,'2015-09-09 06:54:11'),(19,'pbkdf2_sha256$12000$XYc7Gjh5P179$4062AtjrcmSlDJqPuDhQj9ryRZe0IO9hui4m+HrklaI=','2015-09-09 07:29:51',0,'nisha','','','nisha@gmail.com',0,1,'2015-09-09 07:29:51'),(20,'pbkdf2_sha256$12000$xMWzidnYZtnj$SOq1We0xA3vx9H6ddzre7rLrA25z959ulPkhmt01tsY=','2015-09-09 10:18:06',0,'geetha','','','geetha@gmail.com',0,1,'2015-09-09 10:18:06'),(21,'pbkdf2_sha256$12000$VMbxP7ItqKGk$IjYHBGeIPxCg9W7NRve6MBCA333AAGNeI3BenZnfsJ8=','2015-09-22 13:22:45',0,'kalai','','','kalai@gmail.com',0,1,'2015-09-10 04:59:48'),(22,'pbkdf2_sha256$12000$rYeCsFd1svtK$ZblA43UnQphV/gJMmTu8soPV58XC9XRAVtbSES/py40=','2015-09-14 08:42:04',0,'Priya','','','avbmail93@gmail.com',0,1,'2015-09-14 04:31:56'),(23,'pbkdf2_sha256$12000$7OhZIRaR8vnd$BqwLf3CzC2Vp1ohon1zrp9CY3Ps/BBWYfM1CJYBb0ZU=','2015-09-19 07:38:48',0,'sati','','','sati@gmail.com',0,1,'2015-09-19 07:38:47'),(24,'pbkdf2_sha256$10000$fatYvLzOx7iL$SYl+pqmoTD+qKD1VUX9IRwQeAMzPdJKOkxfNsP/2gRw=','2015-09-21 12:31:27',0,'kalaiarasi','','','kalaimca.gsdfd@gmail.com',0,1,'2015-09-21 12:31:27'),(52,'pbkdf2_sha256$12000$yVjzxMFRRdLg$g3ZuG+rLGwAO+uj/RnZ/JzvCdoNYnwLquqa6OEhuFVI=','2015-09-22 04:28:40',0,'test','','','test@gmail.com',0,1,'2015-09-22 04:28:40'),(53,'pbkdf2_sha256$12000$z8ewoq6WXURw$Y4ll2ILZPu35BVMrpkUzcxettJMeFt+geaSttCFTrOA=','2015-09-23 12:57:22',0,'test1','','','test1@gmail.com',0,1,'2015-09-22 04:31:01'),(54,'pbkdf2_sha256$12000$cHwHDJtnlPQX$0mAhSeKoEKsoIvVe5EEdqIfeXvsegsJ1ip2sT/sjCnM=','2015-09-22 04:33:06',0,'test2','','','test2@gmail.com',0,1,'2015-09-22 04:33:05'),(55,'pbkdf2_sha256$12000$SMoIbLw0IlIp$6/RnXGti8i+eDZ2IWXV4dAhqrZJSerTmwUI3fS7C9fE=','2015-09-22 05:08:59',0,'dfdf','','','dadfs@gmail.com',0,1,'2015-09-22 05:08:59'),(56,'pbkdf2_sha256$12000$RS0IcjZ7CDNY$Sx2VSVpz8F0YUQGjT9+p8yiozZMMfNbhQgpYc/D3yEc=','2015-09-22 05:23:37',0,'dasf','','','asdfa@gmail.com',0,1,'2015-09-22 05:23:37'),(57,'pbkdf2_sha256$12000$pIgTtmhxSN8P$2Zyo/cNllXh/u9OesZDD6WheUfBOuRqB/QJ+1XMlDbo=','2015-09-22 05:25:42',0,'dfasfd','','','asdf@gmail.com',0,1,'2015-09-22 05:25:42'),(58,'pbkdf2_sha256$12000$hoWx016TizlP$AkINS6IibXmBc+D8noV3iafWGQ+HY2iimWMnC5nW34Y=','2015-09-22 07:36:51',0,'dfd','','','dfsad@gmail.com',0,1,'2015-09-22 07:36:51'),(59,'pbkdf2_sha256$12000$7VKaYDPOJGV1$ta/jC2A5LleEq0f0faW0ZABwm+XWqVFip6G3eIqkkTs=','2015-09-22 07:38:01',0,'test3','','','test3@gmail.com',0,1,'2015-09-22 07:38:01'),(60,'pbkdf2_sha256$12000$mfnvvEmsv1in$VGErFmPdZMDOL9qGamlUGNrPYCdGPvEOfX7QsKK08gY=','2015-09-22 07:51:33',0,'test4','','','test4@gmail.com',0,1,'2015-09-22 07:51:33'),(61,'pbkdf2_sha256$12000$8egSVvLSNRId$sl3qG6ruan1rVxhyFgGQdRFBDJOkmybQKz+TXqEU8Gs=','2015-09-22 07:52:21',0,'test5','','','test5@gmail.com',0,1,'2015-09-22 07:52:21'),(62,'pbkdf2_sha256$12000$Obw6UzGkw2Cb$W4bk4N9w+4iRWwZXT4yw5V7WjNXMHeWy51KUVfPvaaQ=','2015-09-23 08:35:18',0,'test6','','','test6@gmail.com',0,1,'2015-09-23 08:35:18');
 /*!40000 ALTER TABLE `auth_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -358,6 +358,31 @@ INSERT INTO `college_event_collegedepartment_college` VALUES (1,1,1),(2,1,2),(3,
 UNLOCK TABLES;
 
 --
+-- Table structure for table `college_event_country`
+--
+
+DROP TABLE IF EXISTS `college_event_country`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `college_event_country` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `code` varchar(50) NOT NULL,
+  `country` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `college_event_country`
+--
+
+LOCK TABLES `college_event_country` WRITE;
+/*!40000 ALTER TABLE `college_event_country` DISABLE KEYS */;
+INSERT INTO `college_event_country` VALUES (1,'IN','India'),(2,'SG','Singapore');
+/*!40000 ALTER TABLE `college_event_country` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `college_event_department`
 --
 
@@ -379,6 +404,32 @@ LOCK TABLES `college_event_department` WRITE;
 /*!40000 ALTER TABLE `college_event_department` DISABLE KEYS */;
 INSERT INTO `college_event_department` VALUES (1,'Mechancial Enginneering'),(2,'Civil Engineering'),(3,'Computer Science Engineering'),(4,'Biotechnology');
 /*!40000 ALTER TABLE `college_event_department` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `college_event_location`
+--
+
+DROP TABLE IF EXISTS `college_event_location`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `college_event_location` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `city_id` int(11) DEFAULT NULL,
+  `locality` varchar(150) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `college_event_location_b376980e` (`city_id`),
+  CONSTRAINT `city_id_refs_id_50d2972a` FOREIGN KEY (`city_id`) REFERENCES `college_event_city` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `college_event_location`
+--
+
+LOCK TABLES `college_event_location` WRITE;
+/*!40000 ALTER TABLE `college_event_location` DISABLE KEYS */;
+/*!40000 ALTER TABLE `college_event_location` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -422,7 +473,7 @@ CREATE TABLE `college_event_postevent` (
 
 LOCK TABLES `college_event_postevent` WRITE;
 /*!40000 ALTER TABLE `college_event_postevent` DISABLE KEYS */;
-INSERT INTO `college_event_postevent` VALUES (1,'AnonymousUser','test@gmail.com',9876543210,'Innovace','innovace',1,1,'puducherry','2015-09-23','2015-09-25','2015-09-21','100','innovace conducted in our college, puducherry on the announced date','','events/static/img/dance1.jpg','','',0);
+INSERT INTO `college_event_postevent` VALUES (1,'AnonymousUser','test@gmail.com',9876543210,'Innovace','innovace',1,1,'puducherry','2015-09-23','2015-09-25','2015-09-21','100','innovace conducted in our college, puducherry on the announced date','','static/img/dance1.jpg','','',1);
 /*!40000 ALTER TABLE `college_event_postevent` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -508,6 +559,55 @@ INSERT INTO `college_event_subcategory_category` VALUES (1,1,1),(4,1,2),(11,1,4)
 UNLOCK TABLES;
 
 --
+-- Table structure for table `college_event_tempevent`
+--
+
+DROP TABLE IF EXISTS `college_event_tempevent`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `college_event_tempevent` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) DEFAULT NULL,
+  `email` varchar(50) DEFAULT NULL,
+  `mobile` bigint(20) DEFAULT NULL,
+  `festname` varchar(50) DEFAULT NULL,
+  `festcaption` varchar(50) DEFAULT NULL,
+  `festtype_id` int(11) DEFAULT NULL,
+  `city_id` int(11) DEFAULT NULL,
+  `state` varchar(50) DEFAULT NULL,
+  `startdate` date DEFAULT NULL,
+  `enddate` date DEFAULT NULL,
+  `deadline` longtext,
+  `registrationfee` longtext,
+  `festdescription` longtext,
+  `registrationurl` varchar(250) DEFAULT NULL,
+  `poster` varchar(500) DEFAULT NULL,
+  `venuedescription` longtext,
+  `contactperson` longtext,
+  `initial` varchar(50) DEFAULT NULL,
+  `fname` varchar(50) DEFAULT NULL,
+  `lname` varchar(50) DEFAULT NULL,
+  `phoneno` bigint(20) DEFAULT NULL,
+  `payu_mail` varchar(50) DEFAULT NULL,
+  `amount` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `college_event_tempevent_5c81e710` (`festtype_id`),
+  KEY `college_event_tempevent_b376980e` (`city_id`),
+  CONSTRAINT `city_id_refs_id_7f1630b3` FOREIGN KEY (`city_id`) REFERENCES `college_event_city` (`id`),
+  CONSTRAINT `festtype_id_refs_id_49a38036` FOREIGN KEY (`festtype_id`) REFERENCES `college_event_subcategory` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `college_event_tempevent`
+--
+
+LOCK TABLES `college_event_tempevent` WRITE;
+/*!40000 ALTER TABLE `college_event_tempevent` DISABLE KEYS */;
+/*!40000 ALTER TABLE `college_event_tempevent` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `django_admin_log`
 --
 
@@ -590,7 +690,7 @@ CREATE TABLE `django_session` (
 
 LOCK TABLES `django_session` WRITE;
 /*!40000 ALTER TABLE `django_session` DISABLE KEYS */;
-INSERT INTO `django_session` VALUES ('514wvhbi3qtdqiwjyw915nly88k50w1p','MWM2NDY3OTI1YTFlYmE4Zjg4YzE0Y2YwODUyNTNjYTIyZjBkMDE3Yjp7fQ==','2015-09-28 05:00:44'),('5820icnzg9gxhnc57sgr7o9oqko0sj74','MWM2NDY3OTI1YTFlYmE4Zjg4YzE0Y2YwODUyNTNjYTIyZjBkMDE3Yjp7fQ==','2015-10-02 09:49:12'),('6rof606zlq68upsgi5olp1xcaaco01gl','MWJhOGIwMjE0NDYwYmYzYWU3YjRkNmMwNjIwNjdhZWMxMTJjNzFmNzp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6OX0=','2015-09-24 10:56:30'),('7aqpvtfvovp866aw3yxowp8v9rgpv1ip','NDI0MmQxYjBkNjE0Nzg5YjlkMzUxNzYwYzI5NGM0NzZiY2M3MjE1MTp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6MTV9','2015-09-23 04:13:16'),('7xxcav4tks8cnogshj0585me6bf6cs2a','NDE3YTY5NTA5N2M0ZTYwMmUwMWIyNmYzZjFhMThiNzAwYTI4Zjc5OTp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6MX0=','2015-09-28 10:58:33'),('8kcw5p9hrvsdwwuiga8ybv323u0hiakt','ZGMzY2MzOTMzMmNjMmMxN2E4M2M0ZGQ0Y2ZmNjMzYzIzMGI0MTFiNzp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6MjJ9','2015-09-28 04:31:57'),('9k0sdywb16956n5iwyp3t18nuynfcsby','MWJhOGIwMjE0NDYwYmYzYWU3YjRkNmMwNjIwNjdhZWMxMTJjNzFmNzp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6OX0=','2015-10-03 07:39:59'),('9p5ijbn3heb43d00wygrdd1zfo4vmuys','MWM2NDY3OTI1YTFlYmE4Zjg4YzE0Y2YwODUyNTNjYTIyZjBkMDE3Yjp7fQ==','2015-09-17 04:08:43'),('dfj184mxjpbssh9924z2na6rcvhae24n','ZGMzY2MzOTMzMmNjMmMxN2E4M2M0ZGQ0Y2ZmNjMzYzIzMGI0MTFiNzp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6MjJ9','2015-09-28 06:24:03'),('ehqrxij4qts12q82p3mc5f0n4hjw0021','MWM2NDY3OTI1YTFlYmE4Zjg4YzE0Y2YwODUyNTNjYTIyZjBkMDE3Yjp7fQ==','2015-09-21 13:27:50'),('g55iv48i6whxxywb8gt6v6hyvwwp8dx5','MWM2NDY3OTI1YTFlYmE4Zjg4YzE0Y2YwODUyNTNjYTIyZjBkMDE3Yjp7fQ==','2015-09-17 04:16:04'),('h9f6ruh2dtznc6bcqxniys5thfy1sx65','MWM2NDY3OTI1YTFlYmE4Zjg4YzE0Y2YwODUyNTNjYTIyZjBkMDE3Yjp7fQ==','2015-09-17 05:24:38'),('hjlctcdd20zz9m6dondandvd7a02izy3','MWM2NDY3OTI1YTFlYmE4Zjg4YzE0Y2YwODUyNTNjYTIyZjBkMDE3Yjp7fQ==','2015-09-24 08:06:25'),('hockpo8tf0xrhbnn68y16rvhg7c143z0','NDE3YTY5NTA5N2M0ZTYwMmUwMWIyNmYzZjFhMThiNzAwYTI4Zjc5OTp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6MX0=','2015-09-22 12:55:45'),('k2dr7zn8l4xepi8r5v43nt02dwla7hgi','MWM2NDY3OTI1YTFlYmE4Zjg4YzE0Y2YwODUyNTNjYTIyZjBkMDE3Yjp7fQ==','2015-09-24 07:43:01'),('nrdjsxae0lx7z62jaeonaj6m1yinzaug','NDI0MmQxYjBkNjE0Nzg5YjlkMzUxNzYwYzI5NGM0NzZiY2M3MjE1MTp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6MTV9','2015-09-22 11:38:47'),('o5xfiaygz6v4vxmpkngc78bdob4tsghg','MWM2NDY3OTI1YTFlYmE4Zjg4YzE0Y2YwODUyNTNjYTIyZjBkMDE3Yjp7fQ==','2015-10-07 08:35:38'),('p7sltgr6g6bmbac42dangv4jo17qbi6t','OWVjYTA0MGFlOWFhYjhjNzkyZGRmNmU4M2Q5NjY1MGZjYmY2ZWEzMjp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6MjF9','2015-09-24 05:00:20'),('phqzr3hoz8hyzwo6fb6v46gn1hhk54ta','MWM2NDY3OTI1YTFlYmE4Zjg4YzE0Y2YwODUyNTNjYTIyZjBkMDE3Yjp7fQ==','2015-10-03 06:48:10'),('pxi0gzeqpxedwyxnpfxy06cdop7hsxcn','MWM2NDY3OTI1YTFlYmE4Zjg4YzE0Y2YwODUyNTNjYTIyZjBkMDE3Yjp7fQ==','2015-10-03 07:11:20'),('pyybvn3l8dofseirvamv9cnr4kvjmea5','MWM2NDY3OTI1YTFlYmE4Zjg4YzE0Y2YwODUyNTNjYTIyZjBkMDE3Yjp7fQ==','2015-10-06 07:52:26'),('szkjbro2ybcfz8zr452c2a8m1hqfuvib','MWM2NDY3OTI1YTFlYmE4Zjg4YzE0Y2YwODUyNTNjYTIyZjBkMDE3Yjp7fQ==','2015-09-17 05:24:45'),('taaayv73zzsavkptqyr4gvrmidzm154q','MWM2NDY3OTI1YTFlYmE4Zjg4YzE0Y2YwODUyNTNjYTIyZjBkMDE3Yjp7fQ==','2015-09-29 09:23:18'),('tp9jg6u5d22oueg3sox3ejw554svvc6l','MWJhOGIwMjE0NDYwYmYzYWU3YjRkNmMwNjIwNjdhZWMxMTJjNzFmNzp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6OX0=','2015-09-24 06:28:26'),('xbiclkr4dlyu99hqi2z46pcqo7a0j5jw','MWM2NDY3OTI1YTFlYmE4Zjg4YzE0Y2YwODUyNTNjYTIyZjBkMDE3Yjp7fQ==','2015-09-29 09:44:36'),('xi31c124jg6kncqdh0hayasf6lua2npy','YTM0MmE0NWM5OWFlYTllYTRhNWUzNWU4ZGZmYTQ5OGUzNTc1NzI5Mzp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6N30=','2015-09-21 06:29:26'),('z8w56o2344w201b9vl0nbbu8gv2gnsqd','NDE3YTY5NTA5N2M0ZTYwMmUwMWIyNmYzZjFhMThiNzAwYTI4Zjc5OTp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6MX0=','2015-09-17 10:23:53'),('zjasgi786a1uwvwjxj9mklyowxg7xmrq','OWVjYTA0MGFlOWFhYjhjNzkyZGRmNmU4M2Q5NjY1MGZjYmY2ZWEzMjp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6MjF9','2015-10-06 13:22:45'),('zl54fd4b8do06mufw160rktuw1ei0ssu','NDE3YTY5NTA5N2M0ZTYwMmUwMWIyNmYzZjFhMThiNzAwYTI4Zjc5OTp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6MX0=','2015-09-28 10:59:34');
+INSERT INTO `django_session` VALUES ('4398ul64xscqq50rmn3u3it1ukn8x1yd','MGE3NTgxYjMzNTdmNTA5NTFmMGVhZmExYjhiMzVlMjc4ODYxNWJjNDp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6NTN9','2015-10-07 12:57:22'),('514wvhbi3qtdqiwjyw915nly88k50w1p','MWM2NDY3OTI1YTFlYmE4Zjg4YzE0Y2YwODUyNTNjYTIyZjBkMDE3Yjp7fQ==','2015-09-28 05:00:44'),('5820icnzg9gxhnc57sgr7o9oqko0sj74','MWM2NDY3OTI1YTFlYmE4Zjg4YzE0Y2YwODUyNTNjYTIyZjBkMDE3Yjp7fQ==','2015-10-02 09:49:12'),('6rof606zlq68upsgi5olp1xcaaco01gl','MWJhOGIwMjE0NDYwYmYzYWU3YjRkNmMwNjIwNjdhZWMxMTJjNzFmNzp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6OX0=','2015-09-24 10:56:30'),('7aqpvtfvovp866aw3yxowp8v9rgpv1ip','NDI0MmQxYjBkNjE0Nzg5YjlkMzUxNzYwYzI5NGM0NzZiY2M3MjE1MTp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6MTV9','2015-09-23 04:13:16'),('7xxcav4tks8cnogshj0585me6bf6cs2a','NDE3YTY5NTA5N2M0ZTYwMmUwMWIyNmYzZjFhMThiNzAwYTI4Zjc5OTp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6MX0=','2015-09-28 10:58:33'),('8kcw5p9hrvsdwwuiga8ybv323u0hiakt','ZGMzY2MzOTMzMmNjMmMxN2E4M2M0ZGQ0Y2ZmNjMzYzIzMGI0MTFiNzp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6MjJ9','2015-09-28 04:31:57'),('9k0sdywb16956n5iwyp3t18nuynfcsby','MWJhOGIwMjE0NDYwYmYzYWU3YjRkNmMwNjIwNjdhZWMxMTJjNzFmNzp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6OX0=','2015-10-03 07:39:59'),('9p5ijbn3heb43d00wygrdd1zfo4vmuys','MWM2NDY3OTI1YTFlYmE4Zjg4YzE0Y2YwODUyNTNjYTIyZjBkMDE3Yjp7fQ==','2015-09-17 04:08:43'),('dfj184mxjpbssh9924z2na6rcvhae24n','ZGMzY2MzOTMzMmNjMmMxN2E4M2M0ZGQ0Y2ZmNjMzYzIzMGI0MTFiNzp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6MjJ9','2015-09-28 06:24:03'),('ehqrxij4qts12q82p3mc5f0n4hjw0021','MWM2NDY3OTI1YTFlYmE4Zjg4YzE0Y2YwODUyNTNjYTIyZjBkMDE3Yjp7fQ==','2015-09-21 13:27:50'),('g55iv48i6whxxywb8gt6v6hyvwwp8dx5','MWM2NDY3OTI1YTFlYmE4Zjg4YzE0Y2YwODUyNTNjYTIyZjBkMDE3Yjp7fQ==','2015-09-17 04:16:04'),('h9f6ruh2dtznc6bcqxniys5thfy1sx65','MWM2NDY3OTI1YTFlYmE4Zjg4YzE0Y2YwODUyNTNjYTIyZjBkMDE3Yjp7fQ==','2015-09-17 05:24:38'),('hjlctcdd20zz9m6dondandvd7a02izy3','MWM2NDY3OTI1YTFlYmE4Zjg4YzE0Y2YwODUyNTNjYTIyZjBkMDE3Yjp7fQ==','2015-09-24 08:06:25'),('hockpo8tf0xrhbnn68y16rvhg7c143z0','NDE3YTY5NTA5N2M0ZTYwMmUwMWIyNmYzZjFhMThiNzAwYTI4Zjc5OTp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6MX0=','2015-09-22 12:55:45'),('k2dr7zn8l4xepi8r5v43nt02dwla7hgi','MWM2NDY3OTI1YTFlYmE4Zjg4YzE0Y2YwODUyNTNjYTIyZjBkMDE3Yjp7fQ==','2015-09-24 07:43:01'),('nrdjsxae0lx7z62jaeonaj6m1yinzaug','NDI0MmQxYjBkNjE0Nzg5YjlkMzUxNzYwYzI5NGM0NzZiY2M3MjE1MTp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6MTV9','2015-09-22 11:38:47'),('o5xfiaygz6v4vxmpkngc78bdob4tsghg','MWM2NDY3OTI1YTFlYmE4Zjg4YzE0Y2YwODUyNTNjYTIyZjBkMDE3Yjp7fQ==','2015-10-07 08:35:38'),('p7sltgr6g6bmbac42dangv4jo17qbi6t','OWVjYTA0MGFlOWFhYjhjNzkyZGRmNmU4M2Q5NjY1MGZjYmY2ZWEzMjp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6MjF9','2015-09-24 05:00:20'),('phqzr3hoz8hyzwo6fb6v46gn1hhk54ta','MWM2NDY3OTI1YTFlYmE4Zjg4YzE0Y2YwODUyNTNjYTIyZjBkMDE3Yjp7fQ==','2015-10-03 06:48:10'),('pxi0gzeqpxedwyxnpfxy06cdop7hsxcn','MWM2NDY3OTI1YTFlYmE4Zjg4YzE0Y2YwODUyNTNjYTIyZjBkMDE3Yjp7fQ==','2015-10-03 07:11:20'),('pyybvn3l8dofseirvamv9cnr4kvjmea5','MWM2NDY3OTI1YTFlYmE4Zjg4YzE0Y2YwODUyNTNjYTIyZjBkMDE3Yjp7fQ==','2015-10-06 07:52:26'),('szkjbro2ybcfz8zr452c2a8m1hqfuvib','MWM2NDY3OTI1YTFlYmE4Zjg4YzE0Y2YwODUyNTNjYTIyZjBkMDE3Yjp7fQ==','2015-09-17 05:24:45'),('taaayv73zzsavkptqyr4gvrmidzm154q','MWM2NDY3OTI1YTFlYmE4Zjg4YzE0Y2YwODUyNTNjYTIyZjBkMDE3Yjp7fQ==','2015-09-29 09:23:18'),('tp9jg6u5d22oueg3sox3ejw554svvc6l','MWJhOGIwMjE0NDYwYmYzYWU3YjRkNmMwNjIwNjdhZWMxMTJjNzFmNzp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6OX0=','2015-09-24 06:28:26'),('xbiclkr4dlyu99hqi2z46pcqo7a0j5jw','MWM2NDY3OTI1YTFlYmE4Zjg4YzE0Y2YwODUyNTNjYTIyZjBkMDE3Yjp7fQ==','2015-09-29 09:44:36'),('xi31c124jg6kncqdh0hayasf6lua2npy','YTM0MmE0NWM5OWFlYTllYTRhNWUzNWU4ZGZmYTQ5OGUzNTc1NzI5Mzp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6N30=','2015-09-21 06:29:26'),('z8w56o2344w201b9vl0nbbu8gv2gnsqd','NDE3YTY5NTA5N2M0ZTYwMmUwMWIyNmYzZjFhMThiNzAwYTI4Zjc5OTp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6MX0=','2015-09-17 10:23:53'),('zjasgi786a1uwvwjxj9mklyowxg7xmrq','OWVjYTA0MGFlOWFhYjhjNzkyZGRmNmU4M2Q5NjY1MGZjYmY2ZWEzMjp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6MjF9','2015-10-06 13:22:45'),('zl54fd4b8do06mufw160rktuw1ei0ssu','NDE3YTY5NTA5N2M0ZTYwMmUwMWIyNmYzZjFhMThiNzAwYTI4Zjc5OTp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6MX0=','2015-09-28 10:59:34');
 /*!40000 ALTER TABLE `django_session` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -724,4 +824,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-09-23 14:13:39
+-- Dump completed on 2015-09-23 18:27:55

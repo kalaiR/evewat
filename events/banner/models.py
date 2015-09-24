@@ -18,7 +18,7 @@ class SiteBanner( models.Model ):
    link= models.CharField(max_length=200, null=True, blank=True)
    pageurl= models.CharField(max_length=50, null=True, blank=True, choices=PAGEURL)
    position=models.CharField(max_length=50, null=True, blank=True, choices=POSITION)
-   price=models.FloatField(max_length=50, null=True, blank=True)
+   price=models.FloatField(null=True, blank=True)
    admin_status = models.BooleanField(default=False)
    
    def __unicode__(self):
