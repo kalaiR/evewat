@@ -119,7 +119,7 @@
 
               <div class="change-view">
                 <div class="filter-input">
-                  <input type="text" placeholder="Filter by Keywords">
+                  <!-- <input type="text" placeholder="Filter by Keywords"> -->
                 </div>
               </div> <!-- end .change-view -->
 
@@ -142,9 +142,9 @@
     
                     {% endfor %}                 
                   
-                       <div class="view-more">
+                       <!-- <div class="view-more">
                         <a class="btn btn-default text-center" href="#"><i class="fa fa-plus-square-o"></i>View More</a>
-                      </div>
+                      </div> -->
 
                     </div> <!-- end .row -->
                   </div> <!-- end .tabe-pane -->           
@@ -250,14 +250,14 @@
   <div class="featured-listing" id= "featured-list">
     <div class="container">
       <div class="row clearfix">
-        <h2><strong>Freatured</strong> Listing</h2>
+        <h2><strong>Featured</strong> Events</h2>
         {% for recentad in recentad %}
          <div class="col-md-3 col-sm-4 col-xs-6">
           <div class="single-product">
             <figure>
-              <img src="{% static "img/content/tech.jpeg"%}" alt="">
+              <img src="/{{recentad.poster}}" alt="">
 
-              <div class="rating">
+              <!-- <div class="rating">
                 <ul class="list-inline">
                   <li><a href="#"><i class="fa fa-star"></i></a></li>
                   <li><a href="#"><i class="fa fa-star"></i></a></li>
@@ -268,11 +268,12 @@
 
                 <p>Featured</p>
 
-              </div> <!-- end .rating -->
+              </div>  --><!-- end .rating -->
 
               <figcaption>
-                <div class="bookmark">
-                  <a href="details/{{recentad.id}}"><i class="fa fa-bookmark-o"></i> Bookmark</a>
+                <div>
+                <p class="addBookmarkContainer">
+                  <a href="http://{{ request.META.HTTP_HOST }}/details/{{recentad.id}}" title="{{recentad.festname}}" class="bookmark"><i class="fa fa-bookmark-o" rel="sidebar"></i> Bookmark</a></p>
                 </div>
                 <div class="read-more">
                   <a href="details/{{recentad.id}}"><i class="fa fa-angle-right"></i> Read More</a>

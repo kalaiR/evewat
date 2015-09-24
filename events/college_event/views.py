@@ -60,9 +60,10 @@ def user_login(request):
 	Login User
 	"""
 	logout(request)
-	username = password = ''	
-
-	if request.POST["next"] != "http://localhost:8000/register/" :
+	username = password = ''
+	if request.POST.get("next") is None:
+		return HttpResponseRedirect('/')
+	elif request.POST.get("next"):
 		# print "request.POST['next']", request.POST['next']		
 
 		username = request.POST['username']
@@ -161,10 +162,10 @@ def register(request):
 			login(request, user)
 			
 			return HttpResponseRedirect('/start/?user_id=' + str(user.id))
-
+	elif user.id is None:
+		return HttpResponseRedirect('/')
 	else:	 
 			user_id = user.id
-			# print 'else user_id', user_id
 			return render_to_response('index.html', {'user_id':user_id} ,context_instance=RequestContext(request))
 
 
