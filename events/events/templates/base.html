@@ -52,7 +52,8 @@
 
             <form method="post" id="login_val" action="/login/" name="sign_in">
 
-            {% csrf_token %}           
+            {% csrf_token %}    
+              <div class="field_control">        
               <input type="text" class="form-control"  placeholder="Username" id="emailid_signup" name="username" autocomplete="off" >
               <label for="emailid_signup" id="emailid_required" class="labelError" style="display:none;color:red;">Please enter User name</label>  
               </div>
@@ -109,7 +110,6 @@
 
             <div class="field_control">
             <input type="password" class="form-control" name="password" placeholder="password" id="password_signin" autocomplete="off">
-
             <span id="result"></span>
             <label for="password" id="password_signin1" class="signup_labelError" style="display:none;color:red;">Please enter Password</label>
             </div>
@@ -137,7 +137,6 @@
             </select>
             <label id="id_department_required" class="signup_labelError" style="font-size:12px;display:none;">Please Choose department</label>
             </div>
-
             
             
             <input type="submit" class="btn btn-default create_user" value="Register" name="Create" id="create_user">
