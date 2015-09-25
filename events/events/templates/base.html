@@ -112,7 +112,7 @@
             <div class="field_control">
             <input type="password" class="form-control" name="password" placeholder="password" id="password_signin" autocomplete="off">
             <span id="result"></span>
-            <label for="password" id="password_signin1" class="signup_labelError" style="display:none;color:red;">Please enter Password</label>
+            <label for="password" id="password_signin1" class="signup_labelError" style="display:none;">Please enter Password</label>
             </div>
 
             <div class="field_control">
@@ -193,7 +193,7 @@
 
         
         <!-- HEADER-SOCIAL -->
-        <div class="header-social">
+ <!--        <div class="header-social">
           <a href="#">
             <span><i class="fa fa-share-alt"></i></span>
             <i class="fa fa-chevron-down social-arrow"></i>
@@ -205,11 +205,11 @@
             <li><a href="#"><i class="fa fa-twitter-square"></i></a></li>
             <li><a href="#"><i class="fa fa-linkedin-square"></i></a></li>
           </ul>
-        </div>
+        </div> -->
         <!-- END HEADER-SOCIAL -->
 
         <!-- HEADER-LANGUAGE -->
-        <div class="header-language">
+        <!-- <div class="header-language">
           <a href="#">
             <span>EN</span>
             <i class="fa fa-chevron-down"></i>
@@ -221,7 +221,7 @@
             <li><a href="#">PT</a></li>
             <li><a href="#">IT</a></li>
           </ul>
-        </div> <!-- END HEADER-LANGUAGE -->
+        </div> --> <!-- END HEADER-LANGUAGE -->
 
         <!-- CALL TO ACTION -->
         {% if user.is_authenticated %}
@@ -237,7 +237,7 @@
     <!-- HEADER SEARCH SECTION -->
     <div class="header-search slider-home">
       <div class="header-search-bar">
-        <form action="/search/?q=" method="get">
+         <form class="form" method="get" action="/search/?q=" id="f_search" name="f_search">
 
          <!--  <div class="search-toggle">
             <div class="container">
@@ -303,7 +303,7 @@
 
               <div class="select-location">                         
                  <select class="city" name="city">
-                  <option value="select_city" id="ajax_cityid">Select City</option> 
+                  <option value="">Select City</option> 
                    <!-- <option  id="currentid" value="{{request.COOKIES.global_city_id}}">"city"|get_current_city</option> -->
                    {% for cities in city|get_city %}
                         <option value="{{cities.id}}" id="ajax_cityid">{{ cities }} </option>
@@ -354,12 +354,12 @@
           </div> 
         </form>
       </div> 
-    <div class="popup">
+    <!-- <div class="popup">
       <div class="popup_text">
         <span>Thankyou for registration.</span><br/>
         <span> We have sent a verification code to your email address. Please click an the activation link to activate your account.</span>
       </div>
-    </div>
+    </div> -->
 {% block content %}
 {% endblock %}
   <footer id="footer">
