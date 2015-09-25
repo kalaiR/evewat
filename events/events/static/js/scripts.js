@@ -1,4 +1,4 @@
-;(function($) {
+(function($) {
 
   "use strict";
 
@@ -725,7 +725,7 @@ $('.user_details').click(function(){
 
   var sign_up_required =["emailid_signin", "username_signin", "lastname_signin", "mobile_signin" ];
 
-  jQuery('#create_user').click(function(){     
+  jQuery('#create_user').click(function(){    
       for (i=0;i<sign_up_required.length;i++) {
       var input = jQuery('#'+sign_up_required[i]);
       if (input.val() == "")  {   
