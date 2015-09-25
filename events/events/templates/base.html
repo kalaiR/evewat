@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-  <title>Globo</title>
+  <title>EventsWat</title>
 
   <!-- Stylesheets -->
   <link rel="stylesheet" href="{% static "css/style.css" %}">
@@ -45,16 +45,17 @@
         <div class="header-login">
 
           <a href="#" class=""><i class="fa fa-power-off" action="/login/"></i> Login</a>
+          <span class="signup_error" style="{% if request.REQUEST.lst %} display:block;color:red;font-size:17px; {%else%} display: none; {% endif %}">
+              {%for message in messages%}{{message}}{% endfor %}
+          </span>
  
           <div>
-
-           
-
             <form method="post" id="login_val" action="/login/" name="sign_in">
 
             {% csrf_token %}    
+            
               <div class="field_control">        
-              <input type="text" class="form-control"  placeholder="Username" id="emailid_signup" name="username" autocomplete="off" >
+              <input type="text" class="form-control"  placeholder="Username/Email" id="emailid_signup" name="username" autocomplete="off" >
               <label for="emailid_signup" id="emailid_required" class="labelError" style="display:none;color:red;">Please enter User name</label>  
               </div>
 
