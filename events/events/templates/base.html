@@ -45,17 +45,17 @@
         <div class="header-login">
 
           <a href="#" class=""><i class="fa fa-power-off" action="/login/"></i> Login</a>
+          <span class="signup_error" style="{% if request.REQUEST.lst %} display:block;color:red;font-size:17px; {%else%} display: none; {% endif %}">
+              {%for message in messages%}{{message}}{% endfor %}
+          </span>
  
           <div>
-
-           
-
             <form method="post" id="login_val" action="/login/" name="sign_in">
 
             {% csrf_token %}      
                  
               <div class="field_control">   
-              <input type="text" class="form-control"  placeholder="Username" id="emailid_signup" name="username">
+              <input type="text" class="form-control"  placeholder="Username/Email" id="emailid_signup" name="username">
               <label for="emailid_signup" id="emailid_required" class="labelError" style="display:none;color:red;">Please enter User name</label>  
               </div>
 

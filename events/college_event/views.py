@@ -52,6 +52,37 @@ def home(request):
 	ctx = {'subcategory':subcategory, 'city': city,'recentad':recentad}
 	return render_to_response("index.html",ctx, context_instance=RequestContext(request))
 
+# @csrf_protect 
+# def user_login(request):
+# 	"""
+# 	Login User
+# 	"""
+# 	logout(request)
+# 	username = password = ''	
+
+# 	if request.POST["next"] != "http://localhost:8000/register/" :
+# 		# print "request.POST['next']", request.POST['next']		
+
+# 		username = request.POST['username']
+# 		# print 'username', username
+# 		password = request.POST['password']
+# 		# print 'password', password
+# 		user = authenticate(username=username, password=password)
+# 		# print 'user', user
+# 		if user is not None:
+# 			if user.is_active:
+# 				login(request, user)
+# 				return HttpResponseRedirect(request.POST["next"])
+# 	else:
+# 		username = request.POST['username']
+# 		password = request.POST['password']
+# 		user = authenticate(username=username, password=password)
+# 		if user is not None:
+# 			if user.is_active:
+# 				login(request, user)
+# 				return HttpResponseRedirect('/')
+# 	return render_to_response('index.html',{'username':username},context_instance=RequestContext(request))
+
 @csrf_protect 
 def user_login(request):
 	"""
@@ -59,20 +90,53 @@ def user_login(request):
 	"""
 	logout(request)
 	username = password = ''	
-
-	if request.POST["next"] != "http://localhost:8000/register/" :
-		# print "request.POST['next']", request.POST['next']		
-
+	if request.POST["next"] != "http://localhost:8000/register/" :	
 		username = request.POST['username']
-		# print 'username', username
 		password = request.POST['password']
-		# print 'password', password
-		user = authenticate(username=username, password=password)
-		# print 'user', user
-		if user is not None:
-			if user.is_active:
-				login(request, user)
-				return HttpResponseRedirect(request.POST["next"])
+		try:
+			error={}
+			if '@' in username:
+				if not User.objects.filter(email=username).exists():
+					error['email_exists'] = ugettext('Email Does not exists')
+					print "error['email_exists']",error['email_exists']
+					raise ValidationError(error['email_exists'], 1)
+			else:
+				if not User.objects.filter(username=username).exists():
+					error['username_exists'] = ugettext('Username Does not exists')
+					print "error['username_exists']",error['username_exists']
+					raise ValidationError(error['username_exists'], 2)
+		except ValidationError as e:
+			messages.add_message(request, messages.ERROR, e.messages[-1]) 
+			redirect_path = request.POST["next"]
+			query_string = 'lst=%d' % e.code
+			redirect_url = format_redirect_url(redirect_path, query_string)
+			return HttpResponseRedirect(redirect_url)
+		if not error:
+			if not '@' in username:
+				user = User.objects.get(username=username)
+			else:
+				user = User.objects.get(email=username)
+			user.backend='django.contrib.auth.backends.ModelBackend'
+			try:
+				error={}
+				if user.check_password(password):
+					print user
+				else:
+					error['password'] = ugettext('Invalid password')
+					raise ValidationError(error['password'], 3)
+			except ValidationError as e:
+				messages.add_message(request, messages.ERROR, e.messages[-1]) 
+				redirect_path = request.POST["next"]
+				query_string = 'lst=%d' % e.code
+				redirect_url = format_redirect_url(redirect_path, query_string)
+				return HttpResponseRedirect(redirect_url) 
+			if user:           
+				if user.is_active:                
+					login(request, user)
+					print user.id
+					user_id=user.id
+					response=HttpResponseRedirect(request.POST["next"]) 
+					return response               
 	else:
 		username = request.POST['username']
 		password = request.POST['password']
@@ -81,7 +145,6 @@ def user_login(request):
 			if user.is_active:
 				login(request, user)
 				return HttpResponseRedirect('/')
-	return render_to_response('index.html',{'username':username},context_instance=RequestContext(request))
 
 def logout_view(request):
 	logout(request)
