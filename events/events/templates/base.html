@@ -52,10 +52,10 @@
           <div>
             <form method="post" id="login_val" action="/login/" name="sign_in">
 
-            {% csrf_token %}      
-                 
-              <div class="field_control">   
-              <input type="text" class="form-control"  placeholder="Username/Email" id="emailid_signup" name="username">
+            {% csrf_token %}    
+            
+              <div class="field_control">        
+              <input type="text" class="form-control"  placeholder="Username/Email" id="emailid_signup" name="username" autocomplete="off" >
               <label for="emailid_signup" id="emailid_required" class="labelError" style="display:none;color:red;">Please enter User name</label>  
               </div>
 
@@ -66,8 +66,8 @@
 
               <input type="hidden" value="{% if request.REQUEST.next %}{{ request.REQUEST.next }}{% else %}{% if request.META.HTTP_REFERER %}{{ request.META.HTTP_REFERER }}{% else %}/{% endif %}{% endif %}" name="next" /> 
 
-              <input type="button" class="btn btn-default" value="Login" name="create" id="signin">
-              <a href="#" class="btn btn-link">Forgot Password?</a>
+              <input type="submit" class="btn btn-default" value="Login" name="create" id="signin">
+              <!-- <a href="#" class="btn btn-link">Forgot Password?</a> -->
             </form>
           </div>
 
@@ -88,28 +88,29 @@
             {% csrf_token %}
 
             <div class="field_control">
-            <input type="text" class="form-control" name="username" placeholder="Firstname" id="username_signin">
+            <input type="text" class="form-control" name="username" placeholder="Firstname" id="username_signin" autocomplete="off">
             <label for="username_signin" id="username_required1" class="signup_labelError">Please enter First name</label>
             </div>
 
             <div class="field_control">
-            <input type="text" class="form-control" name="lastname" placeholder="Lastname" id="lastname_signin">
+            <input type="text" class="form-control" name="lastname" placeholder="Lastname" id="lastname_signin" autocomplete="off">
             <label for="lastname_signin" id="lastname_required1" class="signup_labelError">Please enter Last name</label>
             </div>
 
             <div class="field_control">
-            <input type="email" class="form-control" name="email_id" placeholder="Email_id" id="emailid_signin">
+            <input type="email" class="form-control" name="email_id" placeholder="email_id" id="emailid_signin" autocomplete="off">
+
             <label for="emailid_signin" id="emailid_required1" class="signup_labelError">Please enter email id</label>
             <span id="valid_signup_email_required" class="error_message">Please enter valid Email</span>
             </div>
 
             <div class="field_control">
-            <input type="text" class="form-control" name="mobile" placeholder="Mobile" id="mobile_signin">
+            <input type="text" class="form-control" name="mobile" placeholder="Mobile" id="mobile_signin" autocomplete="off">
             <label for="mobile_signin" id="mobile_required1" class="signup_labelError">Please enter Mobile number</label>
             </div>
 
             <div class="field_control">
-            <input type="password" class="form-control" name="password" placeholder="Password" id="password_signin">
+            <input type="password" class="form-control" name="password" placeholder="password" id="password_signin" autocomplete="off">
             <span id="result"></span>
             <label for="password" id="password_signin1" class="signup_labelError" style="display:none;color:red;">Please enter Password</label>
             </div>
@@ -137,8 +138,9 @@
             </select>
             <label id="id_department_required" class="signup_labelError" style="font-size:12px;display:none;">Please Choose department</label>
             </div>
-
-            <input type="button" class="btn btn-default create_user" value="Register" name="Create" id="create_user">  
+            
+            
+            <input type="submit" class="btn btn-default create_user" value="Register" name="Create" id="create_user">
             </form>
           </div>
 
@@ -428,7 +430,7 @@
               <h3>Keep In Touch</h3>
 
               <ul class="list-inline">
-                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                <li><a href="https://www.facebook.com/EventsWat"><i class="fa fa-facebook"></i></a></li>
                 <li><a href="#"><i class="fa fa-twitter"></i></a></li>
                 <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
                 <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
@@ -466,10 +468,12 @@
 </div> <!-- end #main-wrapper -->
 
 
-  <script src="{% static "js/jquery.ba-outside-events.min.js" %}"></script>
+  
 
   <script type="text/javascript" src="{% static "js/jquery.js" %}"></script>
   <script type="text/javascript" src="{% static "js/jquery-ui.js" %}"></script>
+  <script src="{% static "js/jquery.ba-outside-events.min.js" %}"></script>
+  
   <script type="text/javascript" src="{% static "js/gmaps.js"%}"></script>
   <script src="{% static "js/bootstrap.min.js"%}"></script>
   <script src="{% static "js/owl.carousel.js" %}"></script>

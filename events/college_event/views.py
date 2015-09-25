@@ -89,8 +89,11 @@ def user_login(request):
 	Login User
 	"""
 	logout(request)
-	username = password = ''	
-	if request.POST["next"] != "http://localhost:8000/register/" :	
+	username = password = ''
+	if request.POST.get("next") is None:
+		return HttpResponseRedirect('/')
+	elif request.POST.get("next"):
+		# print "request.POST['next']", request.POST['next']		
 		username = request.POST['username']
 		password = request.POST['password']
 		try:
@@ -163,14 +166,14 @@ def register(request):
 		
 		try:
 			error={}
-			if User.objects.filter(email=email).exists():
-				error['email_exists'] = ugettext('Email already exists')
-				# print "error['email_exists']",error['email_exists']
-				raise ValidationError(error['email_exists'], 1)
 			if User.objects.filter(username=username).exists():
 				error['username_exists'] = ugettext('Username already exists')
 				# print "error['username_exists']",error['username_exists']
-				raise ValidationError(error['username_exists'], 2)
+				raise ValidationError(error['username_exists'], 1)
+			if User.objects.filter(email=email).exists():
+				error['email_exists'] = ugettext('Email already exists')
+				# print "error['email_exists']",error['email_exists']
+				raise ValidationError(error['email_exists'], 2)		
 		except ValidationError as e:
 			messages.add_message(request, messages.ERROR, e.messages[-1]) 
 			redirect_path = "/"
@@ -209,6 +212,8 @@ def register(request):
 			user.backend='django.contrib.auth.backends.ModelBackend'
 			login(request, user)	
 			return HttpResponseRedirect('/start/?user_id=' + str(user.id))
+	elif user.id is None:
+		return HttpResponseRedirect('/')
 	else:	 
 			user_id = user.id
 			return render_to_response('index.html', {'user_id':user_id} ,context_instance=RequestContext(request))
