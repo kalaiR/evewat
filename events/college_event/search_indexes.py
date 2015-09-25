@@ -10,36 +10,33 @@ class PosteventIndex(SearchIndex, Indexable):
     text = CharField(document=True, use_template=True)
     searchtext = CharField()
     festtype = CharField(model_attr='festtype__id')
-    # print 'festtype', festtype    
     city = CharField(model_attr='city__id')    
+    festdescription = CharField(model_attr='festdescription')   
     festname = CharField(model_attr='festname')
-    # category = CharField(model_attr='category__id')
-    # subcategoryid = CharField(model_attr='subcategory__id')         
     
-
-
     def autoUpdateRebuild_index(self):
         update_index.Command().handle()
         rebuild_index.Command().handle()
 
-    # def prepare_searchtext(self, obj):
-    #     text = []
-    #     if obj.festname:
-    #         text.append(obj.festname)
-    #         print"text title", text
-    #     if obj.festtype:
-    #         text.append(obj.festtype)
-    #         print"text description", text 
-    #     #text += self.prepare_locations(obj)
-    #     # text += obj.country
-    #     print "text", text
-    #     search = []
-    #     for t in text:
-    #         t = re.sub(r'[^\w]', ' ', t, flags=re.UNICODE).split(' ')
-    #         for q in t:
-    #             if q and (not re.match(r'[^\w]', q, flags=re.UNICODE)):
-    #                 search.append(q)
-    #     return ' '.join(search)
+    def prepare_searchtext(self, obj):
+        print "prepare_searchtext"
+        text = []
+        if obj.festname:
+            text.append(obj.festname)
+            print"text title", text
+        if obj.festdescription:
+            text.append(obj.festdescription)
+            print"text description", text 
+        # text += self.prepare_locations(obj)
+        # text += obj.country
+        print "text", text
+        search = []
+        for t in text:
+            t = re.sub(r'[^\w]', ' ', t, flags=re.UNICODE).split(' ')
+            for q in t:
+                if q and (not re.match(r'[^\w]', q, flags=re.UNICODE)):
+                    search.append(q)
+        return ' '.join(search)
 
     # def prepare_locations(self,obj):
     #     countrys=[]
@@ -54,7 +51,7 @@ class PosteventIndex(SearchIndex, Indexable):
         return Postevent
     
     def index_queryset(self, **kwargs):
-        print 'index_queryset'       
+        # print 'index_queryset'       
         postevent = Postevent.objects.all()       
         return postevent
 

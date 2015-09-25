@@ -2,13 +2,12 @@
  * Advance Search - Brands autoload 
  */
 
-$('.search_btn').click(function() {
-        validateSearch();
-});
+
 function perform_search(){ 
+          alert("perform_search");
            
             var q = $('#form_search_filter').serialize();
-            // alert('q'  +q);  
+            alert('q'  +q);  
           
         
                     $.get('/search/?'+ q, function(data){                                                                                             
@@ -30,7 +29,11 @@ function attach_pagination_events(){
             
 }
 
-$(document).ready(function() {    
+$(document).ready(function() { 
+    $('.search-btn').click(function() {
+        validateSearch();
+  });
+
     
     function fill_subcategories(category_id) {     
     // alert("catid"+category_id);
@@ -90,15 +93,19 @@ $(document).ready(function() {
 
 function validateSearch() { 
    var is_search_page = window.location.href.indexOf('/search');
+   // alert("is_search_page"+is_search_page);
+   var q = $('#f_search').serialize();
+   alert("q"+q);
+   
    if(is_search_page > 1)
    {
-    
+      // alert("if");
    		$('[name=q]').val($('#q').val());
-		perform_search();
+		  perform_search();
    }
    else
    {
-    
+        // alert("else");
        	if($('#q').val() == ''){
 
 	         $('#q').val('');

@@ -59,7 +59,7 @@ urlpatterns = patterns('',
       template='search-result.html', 
       form_class=EventSearchFilter, 
       #results_per_page=settings.SEARCH_PAGE_NUMBER_OF_LEADS
-    )), 
+    ), name='newsearchPageV2'), 
 
     # url(r'^blog/', include('blog.urls')),
 

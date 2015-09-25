@@ -8075,7 +8075,6 @@ fieldset[disabled] .btn-default-inverse.active {
 
 .signup_labelError, .error_message, .labelError{
   display: none;
-  color: red;
   padding:0px 0px 0px 8px;
 }
 

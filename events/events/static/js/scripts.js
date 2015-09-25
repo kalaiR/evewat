@@ -768,7 +768,7 @@ $('.user_details').click(function(){
       if (input.val() == "")  {   
         input.addClass("error_input_field");
         input.css({"width":"50%"});
-        input.next('.signup_labelError').show();         
+        input.next('.signup_labelError').css({"color":"red"}).show();         
       } else {    
         input.removeClass("error_input_field");
         input.css({"width":"104%"});
@@ -781,7 +781,7 @@ $('.user_details').click(function(){
     if($('#password_signin').val() == ''){   
         $('#password_signin').addClass("error_input_field");
         $('#password_signin').css({"width":"50%"});
-        $('#password_signin').next().next('.signup_labelError').show();         
+        $('#password_signin').next().next('.signup_labelError').css({"color":"red"}).show();         
       } else {    
         $('#password_signin').removeClass("error_input_field");
         $('#password_signin').css({"width":"104%"});
@@ -795,7 +795,7 @@ $('.user_details').click(function(){
     if (!/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/.test($('#emailid_signin').val())) {
       $('#emailid_signin').addClass("error_input_field");
       $('#emailid_signin').css({"width":"50%"});
-      $('#emailid_signin').next().next('.error_message').show();
+      $('#emailid_signin').next().next('.error_message').css({"color":"red"}).show();
       // $('.error_message').show();
     }
     else
@@ -809,7 +809,7 @@ $('.user_details').click(function(){
     $('#user_form .select-clone').each(function(){
       if( $(this).siblings('.placeholder').text() == 'Select City' || $(this).siblings('.placeholder').text() == 'Select College' || $(this).siblings('.placeholder').text() == 'Select Department'){
         $(this).addClass('error_input_field');
-        $(this).parent().next('.signup_labelError').css("cssText", "display: block; position:absolute;top:4px;left:210px;").show();
+        $(this).parent().next('.signup_labelError').css("cssText", "display: block; position:absolute;top:4px;left:210px;color:red").show();
         $(this).parent().css("cssText", "width: 196px !important;");
       } 
       else{
@@ -840,7 +840,7 @@ $('.user_details').click(function(){
       var input = jQuery('#'+events_required[i]);
       if (input.val() == "")  {   
         input.addClass("error_input_field");
-        input.next('.labelError').show();         
+        input.next('.labelError').css({"color":"red"}).show();         
       } else {    
         input.removeClass("error_input_field");
         input.next('.labelError').hide();        
@@ -883,7 +883,7 @@ $('.user_details').click(function(){
       var input = jQuery('#'+events_details_required[i]);
       if (input.val() == "")  {   
         input.addClass("error_input_field");
-        input.next('.labelError').show();         
+        input.next('.labelError').css({"color":"red"}).show();         
       } else {    
         input.removeClass("error_input_field");
         input.next('.labelError').hide();        
@@ -991,10 +991,35 @@ $('.user_details').click(function(){
 
   //password strength
 
+  // $('#password_signin').keyup(function(){
+  //    strength_status = checkStrength($('#password_signin').val());
+  //    $('#password_signin').css({"width":"50%"});
+  //    if ($(this).next().next('.signup_labelError').text() == "Too short" || $(this).next().next('.signup_labelError').text() == "Weak" )
+  //     $(this).next().next('.signup_labelError').css({"color":"red"});
+  //    else if ($(this).next().next('.signup_labelError').text() == "Fair")
+  //     $(this).next().next('.signup_labelError').css({"color":"yellow"});
+  //    else if ($(this).next().next('.signup_labelError').text() == "Good")
+  //     $(this).next().next('.signup_labelError').css({"color":"lightblue"});
+  //    else
+  //     $(this).next().next('.signup_labelError').css({"color":"green"});
+  //   $(this).next().next('.signup_labelError').text(strength_status).show();
+  //   });
+
   $('#password_signin').keyup(function(){
-     $(this).next().next('.signup_labelError').text(checkStrength($('#password_signin').val())).show();
-     $('#password_signin').css({"width":"50%"});
-    });
+     strength_status = checkStrength($('#password_signin').val());
+     // alert(strength_status);
+     $('#password_signin').css({"width":"50%"});    
+     if ($(this).next().next('.signup_labelError').text() == "Too short" || $(this).next().next('.signup_labelError').text() == "Weak")
+      $(this).next().next('.signup_labelError').css({"color":"red"});
+     else if ($(this).next().next('.signup_labelError').text() == "Fair")
+      $(this).next().next('.signup_labelError').css({"color":"yellow"});
+     else if ($(this).next().next('.signup_labelError').text() == "Good")
+      $(this).next().next('.signup_labelError').css({"color":"lightblue"});
+     else if ($(this).next().next('.signup_labelError').text() == "Strong" )
+      $(this).next().next('.signup_labelError').css({"color":"green"});
+    $(this).next().next('.signup_labelError').text(strength_status).show();
+  });
+
 });
 
     function checkStrength(password){
@@ -1034,6 +1059,11 @@ $('.user_details').click(function(){
         return 'Weak'
     } else if (strength == 2 ) {
         $('#result').removeClass()
+        $('#result').addClass('fair')
+        return 'Fair'
+    } 
+    else if (strength == 3 ) {
+        $('#result').removeClass()
         $('#result').addClass('good')
         return 'Good'
     } else {
@@ -1047,9 +1077,9 @@ $('#paid').click(function(){
   $('.payment').toggle();
 });
 
-$('#create_user').click(function(){
-  $('.popup').show();
-});
+// $('#create_user').click(function(){
+  // $('.popup').show();
+// });
 
 var thewidth=$('.advertisement img').width();
 var theheight=$('.advertisement img').height();
