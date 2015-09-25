@@ -62,7 +62,7 @@ def user_login(request):
 	if request.POST.get("next") is None:
 		return HttpResponseRedirect('/')
 	elif request.POST.get("next"):
-		# print "request.POST['next']", request.POST['next']		
+		print "request.POST['nexfddddddddddddt']", request.POST.get("next")		
 
 		username = request.POST['username']
 		# print 'username', username
@@ -73,7 +73,7 @@ def user_login(request):
 		if user is not None:
 			if user.is_active:
 				login(request, user)
-				return HttpResponseRedirect(request.POST["next"])
+				return HttpResponseRedirect(request.POST.get("next"))
 	else:
 		username = request.POST['username']
 		password = request.POST['password']
