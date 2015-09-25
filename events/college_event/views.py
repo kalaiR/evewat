@@ -280,7 +280,12 @@ def post_event(request):
 	premium=PremiumPriceInfo.objects.all()
 	return render_to_response("post_event.html",{'premium':premium,'subcategory':subcategory}, context_instance=RequestContext(request))
 
-
+def post_event_v2(request):
+	category= Category.objects.all()
+	subcategory = SubCategory.objects.all()
+	state=City.objects.values_list('state',flat=True)
+	premium=PremiumPriceInfo.objects.all()
+	return render_to_response("post_event_v2.html",{'premium':premium,'subcategory':subcategory,'category':category,'state':list(set(state))}, context_instance=RequestContext(request))
 
 def submit_event(request):
 	if request.method=="POST":
@@ -348,6 +353,54 @@ def submit_event(request):
 		if request.POST['price']:
 			price=request.POST.get('price','0')
 		response=render_to_response("post_event.html",{'message':message}, context_instance=RequestContext(request))
+		response.set_cookie('price',price)
+	return response
+
+def submit_event_v2(request):
+	if request.method=="POST":
+		postevent=Postevent_v2()
+		postevent.name=request.POST['name']
+		postevent.email=request.POST['email']
+		postevent.mobile=request.POST.get('mobile','0')
+		postevent.event_title=request.POST.get('eventtitle','')
+		postevent.startdate=request.POST.get('startdate','')
+		postevent.enddate=request.POST.get('enddate','')
+		postevent_category=Category.objects.get(id=request.POST.get('category',''))
+		postevent.category=postevent_category
+		postevent_subcategory=SubCategory.objects.get(id=request.POST.get('eventtype',''))
+		postevent.eventtype=postevent_subcategory
+		postevent.eventdescription=request.POST.get('eventdescription','')
+		postevent.address=request.POST.get('address','')
+		postevent.organizer=request.POST.get('organizer','')
+		postevent.state=request.POST.get('state','')
+		postevent_city=City.objects.get(id=request.POST.get('city',''))
+		postevent.city=postevent_city
+		postevent_college=College.objects.get(id=request.POST.get('college',''))
+		postevent.college=postevent_college
+		postevent.department=request.POST.get('dept','')
+		postevent_poster=request.FILES.getlist('poster[]')
+		def handle_uploaded_file(f):        	
+			postevent_poster = open('events/static/img/' + '%s' % f.name, 'wb+')
+			# print "settings.FOR_IMG",settings.STATIC_ROOT 
+			for chunk in f.chunks():
+				postevent_poster.write(chunk)
+			postevent_poster.close()
+		photosgroup = ''
+		
+		count=len(postevent_poster)
+		for uploaded_file in postevent_poster:
+			count=count-1
+			handle_uploaded_file(uploaded_file)
+			if count==0:
+				photosgroup=photosgroup  + '/static/img/' + str(uploaded_file)
+			else:
+				photosgroup=photosgroup  + '/static/img/' +str(uploaded_file) + ','
+		postevent.poster=photosgroup
+		postevent.save()
+		message="Your data succesfully submitted"
+		if request.POST['price']:
+			price=request.POST.get('price','0')
+		response=render_to_response("post_event_v2.html",{'message':message}, context_instance=RequestContext(request))
 		response.set_cookie('price',price)
 	return response
 
@@ -503,6 +556,28 @@ def find_department(request):
 		objs = CollegeDepartment.objects.filter(college__id=request.GET['college_id'])
 		print "objs", objs
 		return JSONResponse([{'id': o.department.id, 'name': smart_unicode(o.department)}
+		for o in objs])
+	else:
+		return JSONResponse({'error': 'Not Ajax or no GET'})
+	
+
+def find_subcategory(request):
+	from django.utils.encoding import smart_unicode, force_unicode
+	if request.is_ajax() and request.GET and 'category_id' in request.GET:
+		print request.GET['category_id']
+		objs = SubCategory.objects.filter(category__id=request.GET['category_id'])
+		print "objs", objs
+		return JSONResponse([{'id': o.id, 'name': smart_unicode(o.name)}
+		for o in objs])
+	else:
+		return JSONResponse({'error': 'Not Ajax or no GET'})
+
+def find_city(request):
+	from django.utils.encoding import smart_unicode, force_unicode
+	if request.is_ajax() and request.GET and 'state' in request.GET:
+		print request.GET['state']
+		objs = City.objects.filter(state=request.GET['state'])
+		return JSONResponse([{'id': o.id, 'name': smart_unicode(o.city)}
 		for o in objs])
 	else:
 		return JSONResponse({'error': 'Not Ajax or no GET'})

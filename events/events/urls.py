@@ -36,8 +36,10 @@ urlpatterns = patterns('',
      # getting tarted
     url(r'^start/$', 'college_event.views.start',name='start'),
     url(r'^post_event$', 'college_event.views.post_event', name='post_event'),
+    url(r'^post_event_v2$', 'college_event.views.post_event_v2', name='post_event_v2'),
     url(r'^banner$', 'college_event.views.banner', name='banner'),
     url(r'^submit_event$', 'college_event.views.submit_event', name='submit_event'),
+    url(r'^submit_event_v2$', 'college_event.views.submit_event_v2', name='submit_event_v2'),
     url(r'^success_event$', 'college_event.views.success_event', name='success_event'),
     url(r'^upload_banner$', 'college_event.views.upload_banner', name='upload_banner'),
     url(r'^success$', 'college_event.views.success', name='success'),
@@ -63,6 +65,8 @@ urlpatterns = patterns('',
 
     url(r'^find_colleges/$', 'college_event.views.find_colleges',name='find_colleges'),
     url(r'^find_department/$', 'college_event.views.find_department',name='find_department'),
+    url(r'^find_subcategory/$', 'college_event.views.find_subcategory',name='find_subcategory'),
+    url(r'^find_city/$', 'college_event.views.find_city',name='find_city'),
 
     url(r'^admin/', include(admin.site.urls)),
 )+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

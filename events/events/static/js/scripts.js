@@ -130,6 +130,18 @@
       homeSlide.trigger('owl.prev');
     });
 
+    function find_city(state){
+      $.get('/find_city/', { state: state }, function(data) {
+      $('.select_city').html($('<option>').text("Select City").attr('value', "select_city"));
+      $(".select_city").siblings('.select-clone').html($('<li>').text("Select City").attr('data-value', "select_city"));
+      $.each(data, function(key,value) {
+        $('.select_city').append($('<option>').text(value.name).attr('value', value.id));
+        $(".select_city").siblings('.select-clone').append($('<li>').text(value.name).attr('data-value', value.id));
+      });
+      });
+    }
+
+
    function find_colleges(city_id){
       $.get('/find_colleges/', { city_id: city_id }, function(data) {
       $('.select_college').html($('<option>').text("Select College").attr('value', "select_college"));
@@ -140,6 +152,7 @@
       });
       });
     }
+
 
    function find_department(college_id){
       $.get('/find_department/', { college_id: college_id }, function(data) {
@@ -152,11 +165,21 @@
       });
     }
 
-
+    function find_subcategory(category_id){
+      $.get('/find_subcategory/', { category_id: category_id }, function(data) {
+      $('.select_subcategory').html($('<option>').text("Event Subcategory").attr('value', "select_subcategory"));
+      $(".select_subcategory").siblings('.select-clone').html($('<li>').text("Event Subcategory").attr('data-value', "select_subcategory"));
+      $.each(data, function(key,value) {
+        $('.select_subcategory').append($('<option>').text(value.name).attr('value', value.id));
+        $(".select_subcategory").siblings('.select-clone').append($('<li>').text(value.name).attr('data-value', value.id));
+      });
+      });
+    }
 
   // UOU Selects
   // ---------------------------------------------------------
   $.fn.uouCustomSelect = function () {
+
     var $select = $(this);
 
     $select.wrap('<div class="uou-custom-select"></div>');
@@ -199,13 +222,24 @@
       $select.find('option[value="' + $this.data('value') + '"]').prop('selected', true);
       // if ($this.parent('select-clone').siblings('select').hasClass('select_city'))
       if ($this.parents().children().hasClass('select_city'))
-      {
+      { 
+        
         if ($this.parent().siblings('.placeholder').text() != "Select City")
           find_colleges($this.data('value'));
       }
       if ($this.parents().children().hasClass('select_college')){
         if ($this.parent().siblings('.placeholder').text() != "Select College")
         find_department($this.data('value'));
+      }
+      if ($this.parents().children().hasClass('select_category'))
+      {
+        if ($this.parent().siblings('.placeholder').text() != "Event Category")
+          find_subcategory($this.data('value'));
+      }
+      if ($this.parents().children().hasClass('select_state'))
+      {
+        if ($this.parent().siblings('.placeholder').text() != "State")
+          find_city($this.data('value'));
       }
       if ($this.parents().children().hasClass('festtype'))
         // alert($select.find('option[value="' + $this.data('value') + '"]'));
@@ -230,8 +264,8 @@
     }
 
     $select.on('change', function () {
-      cosole.log(chnaged);
-      cosole.log($(this).val());
+      console.log(changed);
+      console.log($(this).val());
     });
   };
 
@@ -620,24 +654,27 @@ $("document").ready(function($){
 
 
 $("document").ready(function($){
-  // $("a.bookmark").click(function(e){
+  $("a.bookmark").click(function(e){
 
-  //   e.preventDefault(); // this will prevent the anchor tag from going the user off to the link
-  //   var bookmarkUrl = this.href;
-  //   var bookmarkTitle = this.title;
-  //   if (window.sidebar) { // For Mozilla Firefox Bookmark
-  //     window.sidebar.addPanel(bookmarkTitle, bookmarkUrl,"");
-  //   } else if( window.external || document.all) { // For IE Favorite
-  //       window.external.AddFavorite( bookmarkUrl, bookmarkTitle);
-  //   } else if(window.opera) { // For Opera Browsers
-  //       $("a.bookmark").attr("href",bookmarkUrl);
-  //       $("a.bookmark").attr("title",bookmarkTitle);
-  //       $("a.bookmark").attr("rel","sidebar");
-  //   } else { // for other browsers which does not support
-  //       alert('Your browser does not support this bookmark action');
-  //     return false;
-  // }
-  // });
+     // this will prevent the anchor tag from going the user off to the link
+    var bookmarkUrl = this.href;
+    var bookmarkTitle = this.title;
+    if (window.sidebar) { // For Mozilla Firefox Bookmark
+      e.preventDefault();
+      window.sidebar.addPanel(bookmarkTitle, bookmarkUrl,"");
+    } else if( window.external || document.all) { // For IE Favorite
+        e.preventDefault();
+        window.external.AddFavorite( bookmarkUrl, bookmarkTitle);
+    } else if(window.opera) { // For Opera Browsers
+        e.preventDefault();
+        $("a.bookmark").attr("href",bookmarkUrl);
+        $("a.bookmark").attr("title",bookmarkTitle);
+        $("a.bookmark").attr("rel","sidebar");
+    } else { // for other browsers which does not support
+        alert('Your browser does not support this bookmark action');
+      return false;
+  }
+  });
 
 $('.events_fields').hide();
 $('.eventdetail_fields').hide();

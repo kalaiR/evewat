@@ -1,0 +1,265 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static from staticfiles %} 
+{% block content %}
+
+      
+      <div class="page-heading contact-us-heading">
+        <span></span> <!-- for dark-overlay on the bg -->
+
+        <div class="container">
+          <h1>Post <span>Event</span></h1>
+
+          <div class="heading-link">
+            <a href="#">Home</a>
+
+            <i>/</i>
+
+            <a href="#">Post Event</a>
+          </div>
+
+        </div> <!-- END .container-->
+      </div> <!-- END .about-us-heading -->
+
+    </div> <!-- END .SEARCH and slide-section -->
+
+
+    
+  </header> <!-- end #header -->
+
+  <div id="page-content">
+    <div class="container">
+      <div class="page-content">
+        <div class="contact-us">
+          <div class="row">
+            <div class="col-md-12">
+            {% if message%}
+              <script type="text/javascript">
+                window.onload = function(){ window.location="http://{{request.META.HTTP_HOST}}/post_event"; }
+              </script>
+              <h4 class="text-center">{{message}}</h4>
+            {%endif%}
+            <h3>Submit your event</h3>
+            <div class="contact-form">
+              <form action="{%url "college_event.views.submit_event_v2" %}" name="postevent" enctype="multipart/form-data" method="POST">{% csrf_token %}
+                <div class="events">Event Details</div>
+                <div class="events_fields">
+                  <div class="row">
+                    <div class="col-md-6 col-md-offset-3">
+                      <input type="text" placeholder="Event Title" name="eventtitle" id="festcaption_val">
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <input  type="text" placeholder="startdate"  id="datepicker" name="startdate" />
+                    </div>
+                    <div class="col-md-6">
+                      <input  type="text" placeholder="enddate"  id="datepicker1" name="enddate" />
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <select class="category select_option select_category" name="category ">
+                        <option value="">Event Category</option>
+                        {% for categories in category %}
+                          <option value="{{categories.id}}">{{ categories.name }} </option>
+                        {% endfor%}                    
+                      </select>
+                    </div>
+                    <div class="col-md-6">
+                      <select class="eventtype select_subcategory" name="eventtype" data-placeholder="Event Subcategory">
+                        <option value="">Event Subcategory</option>                   
+                      </select>
+                    </div> 
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <textarea placeholder="Event Description" name="eventdescription"></textarea>
+                    </div>
+                  </div> 
+                </div>
+                <div class="events_details">Events Details</div>
+                <div class="eventdetail_fields">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <textarea placeholder="Address" name="address"></textarea>
+                    </div>
+                    <div class="col-md-6">
+                      <textarea placeholder="Orgamizer details" name="organizer"></textarea>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <select class="state select_state" name="state">
+                        <option value="">State</option>
+                        {% for states in state %}
+                          <option value="{{states}}">{{ states }} </option>
+                        {% endfor%}                    
+                      </select>
+                    </div>
+                    <div class="col-md-6">
+                      <select class="city select_option select_city" data-placeholder="Select City" name="city">
+                        <option value="">Select City</option>                
+                      </select>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <select class="college select_option select_college" data-placeholder="Select College" name="college">
+                        <option value="">Select College</option> 
+                                          
+                      </select>
+                    </div>
+                    <div class="col-md-6">
+                      <select class="dept select_option select_dept" data-placeholder="Select Department" name="dept">
+                        <option value="">Select Department</option>
+                                           
+                      </select>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <input type='file' id='poster' class="poster" name='poster[]' multiple='multiple'/>
+                    </div>
+                  </div> 
+                </div>
+                <div class="user_details">User Details</div>
+                <div class="user_fields">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <input type="text" placeholder="Name" name="name" value="{{ request.user }}"required>
+                    </div>
+                    <div class="col-md-6">
+                      <input type="email" placeholder="Email" name="email" value="{{ request.user.email }}" required>
+                    </div>
+                  </div> 
+                  <div class="row">
+                    <div class="col-md-12">
+                      <input type="text" placeholder="Phone number" name="mobile">      
+                    </div>
+                  </div> 
+                  <div class="row">
+                    <div class="col-md-6 col-sm-6 col-lg-3">
+                      <div class="pricing-table">
+                        <h3><strong>Free</strong>User</h3>
+                        <div class="price">
+                          <span>
+                            {% for premiums in premium %}
+                              {% if premiums.purpose == "free" %}
+                                INR {{ premiums.premium_price|floatformat }}
+                              {% endif %}
+                            {% endfor %}
+                          </span>
+                        </div>
+                      </div>
+                      <ul class="feature">
+                        <li><i class="fa fa-check-circle-o"></i> post 10 adds free</li>
+                        <li><i class="fa fa-check-circle-o"></i> adds dispaly in 1 month</li>
+                        <li><i class="fa fa-check-circle-o"></i> Free poster display after the paid poster</li>
+                        <li><i class="fa fa-check-circle-o"></i> Sending SMS and mail</li>
+                   
+                      </ul>
+                      <!-- <input type="submit" class="btn btn-default post_event" data-user="freeuser" value="Free User"> -->
+                      <a class="btn btn-default post_event" href="#" data-user="freeuser"><i class="fa fa-envelope-o"></i>Free User</a>
+                    </div> <!-- end grid-layout -->
+                    <div class="col-md-6 col-sm-6 col-lg-3">
+                      <div class="pricing-table">
+                        <h3><strong>Paid</strong>User</h3>
+                        <div class="price">
+                          <span>
+                            {% for premiums in premium %}
+                              {% if premiums.purpose == 'paid' %}
+                                INR {{ premiums.premium_price|floatformat }}
+                                <input type="hidden" name="price" value="{{ premiums.premium_price|floatformat }}" >
+                              {% endif %}
+                            {% endfor %}    
+                          </span>
+                        </div>
+                      </div>
+                      <ul class="feature">
+                        <li><i class="fa fa-check-circle-o"></i> Display for 1 month</li>
+                        <li><i class="fa fa-check-circle-o"></i> Notifications are send by mail and Sms</li>
+                        <li><i class="fa fa-check-circle-o"></i> Display the poster in which page you want</li>
+                        <!-- <li><i class="fa fa-check-circle-o"></i> Loren ipsum dolor sit amet</li>
+                        <li><i class="fa fa-check-circle-o"></i> Loren ipsum dolor sit amet</li> -->
+                      </ul>
+                      <a class="btn btn-default" id="paid" data-user="paiduser"><i class="fa fa-envelope-o"></i>Paid User</a>
+                      <input type="hidden" name="userstatus" value="" id="paid" >  
+                    </div> <!-- end grid-layout -->
+                  </div>
+                </form>
+            <div class="payment">
+            <form method="post" action="{% url 'payu.views.paid_user' %}" name="payment_form">
+    {% csrf_token %}
+                                <div class="col-md-8">
+                                    <h5><strong>PayU Money</strong></h5>
+                                   
+                                    <h5>Amount Payable :  {% for premiums in premium %}
+                                  
+                                  {% if premiums.purpose == 'paid' %}
+                                  $ {{ premiums.premium_price|floatformat }}
+
+                                  <input type="hidden" name="price" value="{{ premiums.premium_price|floatformat }}" >
+                                  
+                                  {% endif %}
+
+                                 {% endfor %}</h5>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <select name="initial" class="prefix_required">
+                                                <option selected="selected" value="Select">Select</option>
+                                                <option value="mr">Mr</option>
+                                                <option value="mr">Mrs</option>
+                                                <option value="mr">Miss</option>
+                                            </select>
+                                            <label id="festtype_required" class="prefix_labelError" style="font-size:15px;color:red;display:none;">Select this field</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>First Name</label>
+                                            <input id="fname_required" class="form-control fname" type="text" name="fname">
+                                            <label for="fname_required" class="pay_labelError" style="display:none;color:red;">Please enter First name</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Lastname</label>
+                                            <input id="lname_required" class="form-control lname" type="text" name="lname" />
+                                            <label for="lname_required" class="pay_labelError" style="display:none;color:red;">Please enter Last name</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Phone Number</label>
+                                            <input id="mobileno_val"class="form-control mobileno" type="text" name="pnumber" />
+                                            <label for="mobileno_val" class="pay_labelError" style="display:none;color:red;">Please enter Mobile number</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Email</label>
+                                            <input id="email_blank" class="form-control email" type="text" name="email" />
+                                            <label for="email_blank" class="pay_labelError" style="display:none;color:red;">Please Email</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="btn btn-default" id ="paynow" type="submit">Make payment</button>
+                                    <p class="margintop5">By Clicking on Make payment, you agree to all the <a href="#">Terms and Conditions</a></p>
+                            </form>
+</div>
+           </div>
+           </div>
+           </div>
+           </div>
+           </div>
+           </div>
+           </div>
+
+
+
+
+ {% endblock %}

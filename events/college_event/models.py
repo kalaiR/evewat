@@ -31,8 +31,9 @@ class SubCategory(models.Model):
 
 class City(models.Model):
 	city=models.CharField(max_length=150, null=True, blank=True)
-	country_code=models.CharField(max_length=10, null=True, blank=True)
-	country_name=models.CharField(max_length=50, null=True, blank=True)
+	state=models.CharField(max_length=100, null=True, blank=True)
+	country_code=models.CharField(max_length=10, null=True, blank=True,default='IN')
+	country_name=models.CharField(max_length=50, null=True, blank=True,default='india')
 	def __unicode__(self):
 		return self.city
 
@@ -132,7 +133,27 @@ class PremiumPriceInfo(models.Model):
 # 	amount=models.BigIntegerField(null=True, blank=True)
 # 	def __unicode__(self):
 # 		return self.festname
+	
+class Postevent_v2(models.Model):
+	"""docstring for Postevent_v2"""
+	name= models.CharField(max_length=50, null=True, blank=True)
+	email= models.EmailField(max_length=50, null=True, blank=True)
+	mobile= models.BigIntegerField(null=True, blank=True)
+	event_title=models.CharField(max_length=50,null=True, blank=True)
+	startdate= models.DateField(max_length=50,null=True, blank=True)
+	enddate= models.DateField(max_length=50,null=True, blank=True)
+	category= models.ForeignKey(Category,null=True, blank=True)	
+	eventtype= models.ForeignKey(SubCategory,null=True, blank=True)	
+	eventdescription= models.TextField(null=True, blank=True)	
+	address= models.TextField(null=True, blank=True)
+	organizer= models.TextField(null=True, blank=True)
+	state= models.CharField(max_length=50,null=True, blank=True)
+	city= models.ForeignKey(City,null=True, blank=True)
+	college=models.ForeignKey(College,null=True, blank=True)
+	department=models.CharField(max_length=50,null=True, blank=True)
+	poster = models.ImageField(upload_to='events/static/img/',null=True, max_length=500)	
+	admin_status = models.BooleanField(default=False)
 
-
+	def __unicode__(self):
+		return self.event_title
 		
-

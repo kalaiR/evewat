@@ -3139,7 +3139,7 @@ button {
   width: 100%;
   height: inherit;
   line-height: 24px;
-  padding: 3px 30px 3px 15px;
+  padding: 8px 30px 8px 15px;
   margin: 0;
   color: #919191;
   font-size: 16px;
@@ -8110,4 +8110,8 @@ fieldset[disabled] .btn-default-inverse.active {
 
 #user_form .uou-custom-select .placeholder{
   width:104%;
+}
+
+.contact-us .contact-form input:first-child {
+  width: 100% !important;
 }
