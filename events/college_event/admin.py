@@ -62,9 +62,16 @@ class PosteventAdmin(admin.ModelAdmin):
 		return obj.admin_status 
 	admin_status.boolean = False
 
+class PremiumPriceInfoAdmin(admin.ModelAdmin):
+	fields=['premium_price','currency','purpose','month']
+	list_display = ('premium_price','currency','purpose','month')
+	list_filter = ['currency']
+	search_fields = ['id', 'currency']
+	list_per_page = 50
 	
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(City, CityAdmin)
+admin.site.register(PremiumPriceInfo, PremiumPriceInfoAdmin)
 # admin.site.register(Location, LocationAdmin)
 # admin.site.register(Collegetype, CollegetypeAdmin)
 admin.site.register(College, CollegeAdmin)

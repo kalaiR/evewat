@@ -1,6 +1,6 @@
 import datetime
 from haystack.indexes import *
-from models import Postevent
+from models import Postevent_v2
 # from models import SubCategory
 from django.contrib.auth.models import User
 from haystack.management.commands import update_index
@@ -9,37 +9,34 @@ from django.template import RequestContext
 class PosteventIndex(SearchIndex, Indexable):  
     text = CharField(document=True, use_template=True)
     searchtext = CharField()
-    festtype = CharField(model_attr='festtype__id')
-    # print 'festtype', festtype    
+    eventtype = CharField(model_attr='eventtype__id')
     city = CharField(model_attr='city__id')    
-    festname = CharField(model_attr='festname')
-    # category = CharField(model_attr='category__id')
-    # subcategoryid = CharField(model_attr='subcategory__id')         
+    #festdescription = CharField(model_attr='festdescription')   
+    eventtitle = CharField(model_attr='event_title')
     
-
-
     def autoUpdateRebuild_index(self):
         update_index.Command().handle()
         rebuild_index.Command().handle()
 
-    # def prepare_searchtext(self, obj):
-    #     text = []
-    #     if obj.festname:
-    #         text.append(obj.festname)
-    #         print"text title", text
-    #     if obj.festtype:
-    #         text.append(obj.festtype)
-    #         print"text description", text 
-    #     #text += self.prepare_locations(obj)
-    #     # text += obj.country
-    #     print "text", text
-    #     search = []
-    #     for t in text:
-    #         t = re.sub(r'[^\w]', ' ', t, flags=re.UNICODE).split(' ')
-    #         for q in t:
-    #             if q and (not re.match(r'[^\w]', q, flags=re.UNICODE)):
-    #                 search.append(q)
-    #     return ' '.join(search)
+    def prepare_searchtext(self, obj):
+        print "prepare_searchtext"
+        text = []
+        if obj.event_title:
+            text.append(obj.event_title)
+            print"text title", text
+        # if obj.festdescription:
+        #     text.append(obj.festdescription)
+        #     print"text description", text 
+        # text += self.prepare_locations(obj)
+        # text += obj.country
+        print "text", text
+        search = []
+        for t in text:
+            t = re.sub(r'[^\w]', ' ', t, flags=re.UNICODE).split(' ')
+            for q in t:
+                if q and (not re.match(r'[^\w]', q, flags=re.UNICODE)):
+                    search.append(q)
+        return ' '.join(search)
 
     # def prepare_locations(self,obj):
     #     countrys=[]
@@ -51,11 +48,11 @@ class PosteventIndex(SearchIndex, Indexable):
     #     return countrys
     
     def get_model(self):
-        return Postevent
+        return Postevent_v2
     
     def index_queryset(self, **kwargs):
-        print 'index_queryset'       
-        postevent = Postevent.objects.all()       
+        # print 'index_queryset'       
+        postevent = Postevent_v2.objects.all()       
         return postevent
 
 # class SubCategoryIndex(SearchIndex, Indexable):

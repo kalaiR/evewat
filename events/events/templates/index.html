@@ -135,7 +135,7 @@
                     <div class="col-md-3 col-sm-4 col-xs-6">
                         <div class="category-item">
 
-                          <a href="search/?q=&amp;subcataegoryid={{subcategory.id}}">{{subcategory.name}}</a>
+                          <a href="search/?q=&amp;eventtype={{subcategory.id}}">{{subcategory.name}}</a>
                         </div>
 
                       </div>
@@ -216,7 +216,7 @@
 
                       <ul class="nav nav-tabs home-tab" role="tablist" class="category_click">
                         <li class="active">
-                          <a role="tab" data-toggle="tab">All Categories
+                          <a role="tab" data-toggle="tab" class="select_all_category">All Categories
                             <span>Display all sub-categories</span>
                           </a>
                         </li>
@@ -272,8 +272,8 @@
 
               <figcaption>
                 <div>
-                <p class="addBookmarkContainer">
-                  <a href="http://{{ request.META.HTTP_HOST }}/details/{{recentad.id}}" title="{{recentad.festname}}" class="bookmark"><i class="fa fa-bookmark-o" rel="sidebar"></i> Bookmark</a></p>
+              
+                  <a href="http://{{ request.META.HTTP_HOST }}/details/{{recentad.id}}" title="{{recentad.festname}}" class="bookmark"><i class="fa fa-bookmark-o" rel="sidebar"></i> Bookmark</a>
                 </div>
                 <div class="read-more">
                   <a href="details/{{recentad.id}}"><i class="fa fa-angle-right"></i> Read More</a>
@@ -632,7 +632,10 @@
         {% for banners in banner|get_banner %}
         {% if banners.pageurl == '/' and banners.position == 'bottom' %}  
         <div class="item">  
-            <img src="media/{{banners.banner}}"  alt="">   
+            <img src="media/{{banners.banner}}"  alt="">    
+        </div>
+        <div class="item">  
+            <img src="media/{{banners.banner}}"  alt="">    
         </div>       
         {% endif %}
         {% endfor %}

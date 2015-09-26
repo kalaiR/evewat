@@ -101,7 +101,7 @@
   //-----------------------------------------
   $("#partners-slider").owlCarousel({
     autoPlay: 3000,
-    items : 6,
+    items : 4,
     itemsDesktop : [1199,4],
     itemsDesktopSmall : [979,3],
     itemsTablet: [600,2]
@@ -113,7 +113,8 @@
   var homeSlide = $("#home-slider");
 
   homeSlide.owlCarousel({
-
+    autoPlay: 3000,
+    items : 1,
     navigation : false, // Show next and prev buttons
     slideSpeed : 600,
     paginationSpeed : 600,
@@ -130,6 +131,18 @@
       homeSlide.trigger('owl.prev');
     });
 
+    function find_city(state){
+      $.get('/find_city/', { state: state }, function(data) {
+      $('.select_city').html($('<option>').text("Select City").attr('value', "select_city"));
+      $(".select_city").siblings('.select-clone').html($('<li>').text("Select City").attr('data-value', "select_city"));
+      $.each(data, function(key,value) {
+        $('.select_city').append($('<option>').text(value.name).attr('value', value.id));
+        $(".select_city").siblings('.select-clone').append($('<li>').text(value.name).attr('data-value', value.id));
+      });
+      });
+    }
+
+
    function find_colleges(city_id){
       $.get('/find_colleges/', { city_id: city_id }, function(data) {
       $('.select_college').html($('<option>').text("Select College").attr('value', "select_college"));
@@ -140,6 +153,7 @@
       });
       });
     }
+
 
    function find_department(college_id){
       $.get('/find_department/', { college_id: college_id }, function(data) {
@@ -152,11 +166,21 @@
       });
     }
 
-
+    function find_subcategory(category_id){
+      $.get('/find_subcategory/', { category_id: category_id }, function(data) {
+      $('.select_subcategory').html($('<option>').text("Event Subcategory").attr('value', "select_subcategory"));
+      $(".select_subcategory").siblings('.select-clone').html($('<li>').text("Event Subcategory").attr('data-value', "select_subcategory"));
+      $.each(data, function(key,value) {
+        $('.select_subcategory').append($('<option>').text(value.name).attr('value', value.id));
+        $(".select_subcategory").siblings('.select-clone').append($('<li>').text(value.name).attr('data-value', value.id));
+      });
+      });
+    }
 
   // UOU Selects
   // ---------------------------------------------------------
   $.fn.uouCustomSelect = function () {
+
     var $select = $(this);
 
     $select.wrap('<div class="uou-custom-select"></div>');
@@ -199,13 +223,24 @@
       $select.find('option[value="' + $this.data('value') + '"]').prop('selected', true);
       // if ($this.parent('select-clone').siblings('select').hasClass('select_city'))
       if ($this.parents().children().hasClass('select_city'))
-      {
+      { 
+        
         if ($this.parent().siblings('.placeholder').text() != "Select City")
           find_colleges($this.data('value'));
       }
       if ($this.parents().children().hasClass('select_college')){
         if ($this.parent().siblings('.placeholder').text() != "Select College")
         find_department($this.data('value'));
+      }
+      if ($this.parents().children().hasClass('select_category'))
+      {
+        if ($this.parent().siblings('.placeholder').text() != "Event Category")
+          find_subcategory($this.data('value'));
+      }
+      if ($this.parents().children().hasClass('select_state'))
+      {
+        if ($this.parent().siblings('.placeholder').text() != "State")
+          find_city($this.data('value'));
       }
       if ($this.parents().children().hasClass('festtype'))
         // alert($select.find('option[value="' + $this.data('value') + '"]'));
@@ -215,7 +250,7 @@
 
 
     // Hide
-    $container.on('clickoutside touchendoutside', function () {
+    $container.on('clickoutside touchendoutside mouseoveroutside', function () {
       if (!dragging) {
         $container.removeClass('active');
         $list.slideUp(250);
@@ -230,8 +265,8 @@
     }
 
     $select.on('change', function () {
-      cosole.log(chnaged);
-      cosole.log($(this).val());
+      console.log(changed);
+      console.log($(this).val());
     });
   };
 
@@ -620,24 +655,30 @@ $("document").ready(function($){
 
 
 $("document").ready(function($){
-  // $("a.bookmark").click(function(e){
+  $('.select-location,.category-search').click(function(){
+    $('.base_search').focus();
+  });
+  $("a.bookmark").click(function(e){
 
-  //   e.preventDefault(); // this will prevent the anchor tag from going the user off to the link
-  //   var bookmarkUrl = this.href;
-  //   var bookmarkTitle = this.title;
-  //   if (window.sidebar) { // For Mozilla Firefox Bookmark
-  //     window.sidebar.addPanel(bookmarkTitle, bookmarkUrl,"");
-  //   } else if( window.external || document.all) { // For IE Favorite
-  //       window.external.AddFavorite( bookmarkUrl, bookmarkTitle);
-  //   } else if(window.opera) { // For Opera Browsers
-  //       $("a.bookmark").attr("href",bookmarkUrl);
-  //       $("a.bookmark").attr("title",bookmarkTitle);
-  //       $("a.bookmark").attr("rel","sidebar");
-  //   } else { // for other browsers which does not support
-  //       alert('Your browser does not support this bookmark action');
-  //     return false;
-  // }
-  // });
+     // this will prevent the anchor tag from going the user off to the link
+    var bookmarkUrl = this.href;
+    var bookmarkTitle = this.title;
+    if (window.sidebar) { // For Mozilla Firefox Bookmark
+      e.preventDefault();
+      window.sidebar.addPanel(bookmarkTitle, bookmarkUrl,"");
+    } else if( window.external || document.all) { // For IE Favorite
+        e.preventDefault();
+        window.external.AddFavorite( bookmarkUrl, bookmarkTitle);
+    } else if(window.opera) { // For Opera Browsers
+        e.preventDefault();
+        $("a.bookmark").attr("href",bookmarkUrl);
+        $("a.bookmark").attr("title",bookmarkTitle);
+        $("a.bookmark").attr("rel","sidebar");
+    } else { // for other browsers which does not support
+        alert('Your browser does not support this bookmark action');
+      return false;
+  }
+  });
 
 $('.events_fields').hide();
 $('.eventdetail_fields').hide();
@@ -731,7 +772,7 @@ $('.user_details').click(function(){
       if (input.val() == "")  {   
         input.addClass("error_input_field");
         input.css({"width":"50%"});
-        input.next('.signup_labelError').show();         
+        input.next('.signup_labelError').css({"color":"red"}).show();         
       } else {    
         input.removeClass("error_input_field");
         input.css({"width":"104%"});
@@ -744,7 +785,7 @@ $('.user_details').click(function(){
     if($('#password_signin').val() == ''){   
         $('#password_signin').addClass("error_input_field");
         $('#password_signin').css({"width":"50%"});
-        $('#password_signin').next().next('.signup_labelError').show();         
+        $('#password_signin').next().next('.signup_labelError').css({"color":"red"}).show();         
       } else {    
         $('#password_signin').removeClass("error_input_field");
         $('#password_signin').css({"width":"104%"});
@@ -758,7 +799,7 @@ $('.user_details').click(function(){
     if (!/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/.test($('#emailid_signin').val())) {
       $('#emailid_signin').addClass("error_input_field");
       $('#emailid_signin').css({"width":"50%"});
-      $('#emailid_signin').next().next('.error_message').show();
+      $('#emailid_signin').next().next('.error_message').css({"color":"red"}).show();
       // $('.error_message').show();
     }
     else
@@ -772,7 +813,7 @@ $('.user_details').click(function(){
     $('#user_form .select-clone').each(function(){
       if( $(this).siblings('.placeholder').text() == 'Select City' || $(this).siblings('.placeholder').text() == 'Select College' || $(this).siblings('.placeholder').text() == 'Select Department'){
         $(this).addClass('error_input_field');
-        $(this).parent().next('.signup_labelError').css("cssText", "display: block; position:absolute;top:4px;left:210px;").show();
+        $(this).parent().next('.signup_labelError').css("cssText", "display: block; position:absolute;top:4px;left:210px;color:red").show();
         $(this).parent().css("cssText", "width: 196px !important;");
       } 
       else{
@@ -804,7 +845,7 @@ $('.user_details').click(function(){
       var input = jQuery('#'+events_required[i]);
       if (input.val() == "")  {   
         input.addClass("error_input_field");
-        input.next('.labelError').show();         
+        input.next('.labelError').css({"color":"red"}).show();         
       } else {    
         input.removeClass("error_input_field");
         input.next('.labelError').hide();        
@@ -847,7 +888,7 @@ $('.user_details').click(function(){
       var input = jQuery('#'+events_details_required[i]);
       if (input.val() == "")  {   
         input.addClass("error_input_field");
-        input.next('.labelError').show();         
+        input.next('.labelError').css({"color":"red"}).show();         
       } else {    
         input.removeClass("error_input_field");
         input.next('.labelError').hide();        
@@ -955,10 +996,35 @@ $('.user_details').click(function(){
 
   //password strength
 
+  // $('#password_signin').keyup(function(){
+  //    strength_status = checkStrength($('#password_signin').val());
+  //    $('#password_signin').css({"width":"50%"});
+  //    if ($(this).next().next('.signup_labelError').text() == "Too short" || $(this).next().next('.signup_labelError').text() == "Weak" )
+  //     $(this).next().next('.signup_labelError').css({"color":"red"});
+  //    else if ($(this).next().next('.signup_labelError').text() == "Fair")
+  //     $(this).next().next('.signup_labelError').css({"color":"yellow"});
+  //    else if ($(this).next().next('.signup_labelError').text() == "Good")
+  //     $(this).next().next('.signup_labelError').css({"color":"lightblue"});
+  //    else
+  //     $(this).next().next('.signup_labelError').css({"color":"green"});
+  //   $(this).next().next('.signup_labelError').text(strength_status).show();
+  //   });
+
   $('#password_signin').keyup(function(){
-     $(this).next().next('.signup_labelError').text(checkStrength($('#password_signin').val())).show();
-     $('#password_signin').css({"width":"50%"});
-    });
+     strength_status = checkStrength($('#password_signin').val());
+     // alert(strength_status);
+     $('#password_signin').css({"width":"50%"});    
+     if ($(this).next().next('.signup_labelError').text() == "Too short" || $(this).next().next('.signup_labelError').text() == "Weak")
+      $(this).next().next('.signup_labelError').css({"color":"red"});
+     else if ($(this).next().next('.signup_labelError').text() == "Fair")
+      $(this).next().next('.signup_labelError').css({"color":"yellow"});
+     else if ($(this).next().next('.signup_labelError').text() == "Good")
+      $(this).next().next('.signup_labelError').css({"color":"lightblue"});
+     else if ($(this).next().next('.signup_labelError').text() == "Strong" )
+      $(this).next().next('.signup_labelError').css({"color":"green"});
+    $(this).next().next('.signup_labelError').text(strength_status).show();
+  });
+
 });
 
     function checkStrength(password){
@@ -998,6 +1064,11 @@ $('.user_details').click(function(){
         return 'Weak'
     } else if (strength == 2 ) {
         $('#result').removeClass()
+        $('#result').addClass('fair')
+        return 'Fair'
+    } 
+    else if (strength == 3 ) {
+        $('#result').removeClass()
         $('#result').addClass('good')
         return 'Good'
     } else {
@@ -1011,10 +1082,11 @@ $('#paid').click(function(){
   $('.payment').toggle();
 });
 
-$('#create_user').click(function(){
-  $('.popup').show();
-});
+// $('#create_user').click(function(){
+  // $('.popup').show();
+// });
 
 var thewidth=$('.advertisement img').width();
 var theheight=$('.advertisement img').height();
 //$('.advertisement img').css({'margin-left':-thewidth/2+'px','margin-top':-theheight/2+'px'});
+
