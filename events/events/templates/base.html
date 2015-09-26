@@ -295,9 +295,9 @@
               <div class="keywords">
              <!--    <input type="text" class="form-control" placeholder="Keywords"> -->
              {% if query or request.REQUEST.q or request.REQUEST.q == '' %}
-              <input type="text" name="q" id="q" class="form-control input-lg" placeholder="Keywords" value="{% if query %}{{ query }}{% elif request.REQUEST.q %}{{request.REQUEST.q}}{% elif request.REQUEST.q == '' %}{% else %}{% endif %}" />
+              <input type="text" name="q" id="q" class="form-control input-lg" placeholder="Keywords" value="{% if query %}{{ query }}{% elif request.REQUEST.q %}{{request.REQUEST.q}}{% elif request.REQUEST.q == '' %}{% else %}{% endif %}" autocomplete="off"/>
             {% else %}
-              <input type="text" name="q" id="q" class="form-control input-lg" placeholder="Keywords" value="{% if recent_viewed_search %}{% for subcategory in recent_viewed_search|slice:'1' %}{% if subcategory.activity_view %}{{ subcategory.activity_view }}{% else %}{% endif %}{% endfor %}{% else %}{% endif %}" />
+              <input type="text" name="q" id="q" class="form-control input-lg" placeholder="Keywords" value="{% if recent_viewed_search %}{% for subcategory in recent_viewed_search|slice:'1' %}{% if subcategory.activity_view %}{{ subcategory.activity_view }}{% else %}{% endif %}{% endfor %}{% else %}{% endif %}" autocomplete="off"/>
             {% endif %}
               </div>
 
@@ -313,8 +313,8 @@
                 </div>
 
               <div class="category-search">
-                <select class="category_choose" name="festtype">                 
-                    <option value="">Fest type</option>
+                <select class="category_choose" name="eventtype">                 
+                    <option value="">Event type</option>
                     {% for subcategory in subcategory %}
                               <option value="{{subcategory.id}}">{{ subcategory.name }} </option>
                      {% endfor%} 
@@ -349,7 +349,7 @@
                 
               </div>
 
-              <button class="search-btn" type="submit"><i class="fa fa-search"></i></button>
+              <button class="search-btn base_search" type="submit"><i class="fa fa-search"></i></button>
             </div>
           </div> 
         </form>

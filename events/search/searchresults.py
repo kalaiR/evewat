@@ -13,7 +13,7 @@ from haystack.query import SQ
 default_param_mappings = OrderedDict(
   #FieldName = Form Variable
   # locality = 'locality__in', 
-  festtype = 'festtype',
+  eventtype = 'eventtype',
   city = 'city',  
   # festname = 'festname',
   # subcategory = 'name',
@@ -82,10 +82,10 @@ def searchresults(q=None, params=None, orderby=None, groupby=None,
   """Perform search leads using haystack"""
   print 'Leadsearch as Search'
   if not model_cls:
-    model_cls = Postevent
+    model_cls = Postevent_v2
 
   if params is None:
-    params = OrderedDict([('festtype', None), ('city', None), ('festname', None)])   
+    params = OrderedDict([('eventtype', None), ('city', None), ('eventtitle', None)])   
   #   params = OrderedDict([('locations', None), ('keywords', None), ('lang', ['en', 'sv', 'de']), ('category', None), ('budget_start', None), ('budget_end', None), ('deal_start', None), ('deal_end', None), ('price_start', None), ('price_end', None), ('created_start', None), ('created_end', None), ('ranking_start', None), ('ranking_end', None), ('rating_start', None), ('rating_end', None)]) 
  
   

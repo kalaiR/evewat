@@ -1,6 +1,6 @@
 import datetime
 from haystack.indexes import *
-from models import Postevent
+from models import Postevent_v2
 # from models import SubCategory
 from django.contrib.auth.models import User
 from haystack.management.commands import update_index
@@ -9,10 +9,10 @@ from django.template import RequestContext
 class PosteventIndex(SearchIndex, Indexable):  
     text = CharField(document=True, use_template=True)
     searchtext = CharField()
-    festtype = CharField(model_attr='festtype__id')
+    eventtype = CharField(model_attr='eventtype__id')
     city = CharField(model_attr='city__id')    
-    festdescription = CharField(model_attr='festdescription')   
-    festname = CharField(model_attr='festname')
+    #festdescription = CharField(model_attr='festdescription')   
+    eventtitle = CharField(model_attr='event_title')
     
     def autoUpdateRebuild_index(self):
         update_index.Command().handle()
@@ -21,12 +21,12 @@ class PosteventIndex(SearchIndex, Indexable):
     def prepare_searchtext(self, obj):
         print "prepare_searchtext"
         text = []
-        if obj.festname:
-            text.append(obj.festname)
+        if obj.event_title:
+            text.append(obj.event_title)
             print"text title", text
-        if obj.festdescription:
-            text.append(obj.festdescription)
-            print"text description", text 
+        # if obj.festdescription:
+        #     text.append(obj.festdescription)
+        #     print"text description", text 
         # text += self.prepare_locations(obj)
         # text += obj.country
         print "text", text
@@ -48,11 +48,11 @@ class PosteventIndex(SearchIndex, Indexable):
     #     return countrys
     
     def get_model(self):
-        return Postevent
+        return Postevent_v2
     
     def index_queryset(self, **kwargs):
         # print 'index_queryset'       
-        postevent = Postevent.objects.all()       
+        postevent = Postevent_v2.objects.all()       
         return postevent
 
 # class SubCategoryIndex(SearchIndex, Indexable):

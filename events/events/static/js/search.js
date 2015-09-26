@@ -4,10 +4,8 @@
 
 
 function perform_search(){ 
-          alert("perform_search");
            
             var q = $('#form_search_filter').serialize();
-            alert('q'  +q);  
           
         
                     $.get('/search/?'+ q, function(data){                                                                                             
@@ -49,7 +47,17 @@ $(document).ready(function() {
         $(".subcategories").html(options);
       });
   }
- 
+  function fill_all_subcategories() {
+  $.getJSON("/all_subcategory_for_category/",function(ret) {
+        var options = '';       
+        for (var i in ret) {
+          options += "<div class='col-md-3 col-sm-4 col-xs-6 '><div class='category-item' id='search_result'><a  class='event_click' href='/search/?q=&subcategoryid=" + ret[i].id +"'>" + ret[i].name +"</a> </div></div>";
+
+          }
+             
+        $(".subcategories").html(options);
+      });
+  }
     $('.select_category').click(function () {   
         var category = $(this).text();
         // alert('category'+ category);
@@ -61,6 +69,12 @@ $(document).ready(function() {
         $('[name=categoryid]').val(trim_catid);        
         
       
+    });
+
+    $('.select_all_category').click(function () {  
+      
+      fill_all_subcategories();
+
     });
 
     
@@ -95,7 +109,6 @@ function validateSearch() {
    var is_search_page = window.location.href.indexOf('/search');
    // alert("is_search_page"+is_search_page);
    var q = $('#f_search').serialize();
-   alert("q"+q);
    
    if(is_search_page > 1)
    {

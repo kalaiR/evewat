@@ -9,7 +9,7 @@ from search.searchresults import searchresults as eventsearch
 from haystack.query import SearchQuerySet
 from haystack.inputs import Clean, Raw, AutoQuery, Exact
 from haystack.query import SQ
-from college_event.models import Postevent
+from college_event.models import Postevent_v2
 
 class Partial(Clean):
 	input_type_name = 'partial'
@@ -35,9 +35,9 @@ class EventSearchFilter(FacetedSearchForm):
 	model = None
 
 
-	festtype = forms.CharField(required=False)		
+	eventtype = forms.CharField(required=False)		
 	city = forms.CharField(required=False)		
-	festname = forms.CharField(required=False)	
+	eventtitle = forms.CharField(required=False)	
 
 	def no_query_found(self):
 	  print 'no_query_found'  
@@ -64,7 +64,7 @@ class EventSearchFilter(FacetedSearchForm):
 	def get_default_filters(self):
 	  print 'get_default_filters'
 	  sqs = SearchQuerySet().all()
-	  sqs = sqs.models(Postevent)
+	  sqs = sqs.models(Postevent_v2)
 	  print 'sqs',sqs			
 	  return sqs
 
@@ -74,7 +74,7 @@ class EventSearchFilter(FacetedSearchForm):
 
 	def get_model_class(self):
 	  print 'get_model_class'
-	  return Postevent
+	  return Postevent_v2
 
 	def search(self):
 	  print 'searchv2'
@@ -83,9 +83,9 @@ class EventSearchFilter(FacetedSearchForm):
 		  default_filters=self.get_default_filters())
 		
 	  _params = [
-		'festtype',
+		'eventtype',
 		'city',
-		'festname',
+		'eventtitle',
 	  ]
 	  params = OrderedDict()
 	  print 'params', params
@@ -96,9 +96,9 @@ class EventSearchFilter(FacetedSearchForm):
 		  params[p] =  None
 
 
-	  if params['festtype']:
-		params['festtype'] = params['festtype']
-		print "params['festtype']", params['festtype']
+	  if params['eventtype']:
+		params['eventtype'] = params['eventtype']
+		print "params['eventtype']", params['eventtype']
 
 	  if params['city']:
 		params['city'] = params['city']

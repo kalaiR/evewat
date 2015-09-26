@@ -405,12 +405,20 @@ def submit_event_v2(request):
 	return response
 
 
+def all_subcategory_for_category(request):
+
+	if request.is_ajax():
+		objs1 = SubCategory.objects.all()
+		print 'tetsdfdddddddddddddd',objs1
+		return JSONResponse([{'name': o1.name, 'id': o1.id} for o1 in objs1])	    
+	else:
+		return JSONResponse({'error': 'Not Ajax or no GET'})
+
 def subcategory_for_category(request):
 	print "subcategory_for_category"
 	if request.is_ajax() and request.GET and 'category_id' in request.GET:
 		print request.GET['category_id']         
 		objs1 = SubCategory.objects.filter(category__id=request.GET['category_id'])
-		print 'objs', objs1
 		return JSONResponse([{'name': o1.name, 'id': o1.id}
 			for o1 in objs1])	    
 	else:

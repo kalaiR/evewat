@@ -101,7 +101,7 @@
   //-----------------------------------------
   $("#partners-slider").owlCarousel({
     autoPlay: 3000,
-    items : 6,
+    items : 4,
     itemsDesktop : [1199,4],
     itemsDesktopSmall : [979,3],
     itemsTablet: [600,2]
@@ -113,7 +113,8 @@
   var homeSlide = $("#home-slider");
 
   homeSlide.owlCarousel({
-
+    autoPlay: 3000,
+    items : 1,
     navigation : false, // Show next and prev buttons
     slideSpeed : 600,
     paginationSpeed : 600,
@@ -249,7 +250,7 @@
 
 
     // Hide
-    $container.on('clickoutside touchendoutside', function () {
+    $container.on('clickoutside touchendoutside mouseoveroutside', function () {
       if (!dragging) {
         $container.removeClass('active');
         $list.slideUp(250);
@@ -654,6 +655,9 @@ $("document").ready(function($){
 
 
 $("document").ready(function($){
+  $('.select-location,.category-search').click(function(){
+    $('.base_search').focus();
+  });
   $("a.bookmark").click(function(e){
 
      // this will prevent the anchor tag from going the user off to the link
@@ -1084,3 +1088,4 @@ $('#paid').click(function(){
 var thewidth=$('.advertisement img').width();
 var theheight=$('.advertisement img').height();
 //$('.advertisement img').css({'margin-left':-thewidth/2+'px','margin-top':-theheight/2+'px'});
+

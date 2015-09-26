@@ -50,6 +50,7 @@ urlpatterns = patterns('',
     url(r'^payment_event/', 'payu.views.paid_user', name='payment'),
     #getting subcategory
     url(r'^subcategory_for_category/$', 'college_event.views.subcategory_for_category',name='subcategory'),
+    url(r'^all_subcategory_for_category/$', 'college_event.views.all_subcategory_for_category',name='all_subcategory'),
 
     # Find event when ajax call
     url(r'^event_for_subcategory/$', 'college_event.views.event_for_subcategory',name='event'),

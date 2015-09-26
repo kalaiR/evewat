@@ -11,11 +11,11 @@
           <h1>Post <span>Event</span></h1>
 
           <div class="heading-link">
-            <a href="#">Home</a>
+            <a href="/">Home</a>
 
             <i>/</i>
 
-            <a href="#">Post Event</a>
+            <a href="/post_event_v2">Post Event</a>
           </div>
 
         </div> <!-- END .container-->
@@ -51,10 +51,10 @@
                   </div>
                   <div class="row">
                     <div class="col-md-6">
-                      <input  type="text" placeholder="startdate"  id="datepicker" name="startdate" />
+                      <input  type="text" placeholder="Startdate"  id="datepicker" name="startdate" />
                     </div>
                     <div class="col-md-6">
-                      <input  type="text" placeholder="enddate"  id="datepicker1" name="enddate" />
+                      <input  type="text" placeholder="Enddate"  id="datepicker1" name="enddate" />
                     </div>
                   </div>
                   <div class="row">
@@ -78,7 +78,7 @@
                     </div>
                   </div> 
                 </div>
-                <div class="events_details">Events Details</div>
+                <div class="events_details">Event Location</div>
                 <div class="eventdetail_fields">
                   <div class="row">
                     <div class="col-md-6">
@@ -124,7 +124,7 @@
                   </div> 
                 </div>
                 <div class="user_details">User Details</div>
-                <div class="user_fields">
+                <div class="user_fields price-listing">
                   <div class="row">
                     <div class="col-md-6">
                       <input type="text" placeholder="Name" name="name" value="{{ request.user }}"required>
@@ -139,7 +139,7 @@
                     </div>
                   </div> 
                   <div class="row">
-                    <div class="col-md-6 col-sm-6 col-lg-3">
+                    <div class="col-md-6 col-sm-6 col-lg-6">
                       <div class="pricing-table">
                         <h3><strong>Free</strong>User</h3>
                         <div class="price">
@@ -151,7 +151,7 @@
                             {% endfor %}
                           </span>
                         </div>
-                      </div>
+                      
                       <ul class="feature">
                         <li><i class="fa fa-check-circle-o"></i> post 10 adds free</li>
                         <li><i class="fa fa-check-circle-o"></i> adds dispaly in 1 month</li>
@@ -161,8 +161,8 @@
                       </ul>
                       <!-- <input type="submit" class="btn btn-default post_event" data-user="freeuser" value="Free User"> -->
                       <a class="btn btn-default post_event" href="#" data-user="freeuser"><i class="fa fa-envelope-o"></i>Free User</a>
-                    </div> <!-- end grid-layout -->
-                    <div class="col-md-6 col-sm-6 col-lg-3">
+                    </div> </div><!-- end grid-layout -->
+                    <div class="col-md-6 col-sm-6 col-lg-6">
                       <div class="pricing-table">
                         <h3><strong>Paid</strong>User</h3>
                         <div class="price">
@@ -175,7 +175,7 @@
                             {% endfor %}    
                           </span>
                         </div>
-                      </div>
+                      
                       <ul class="feature">
                         <li><i class="fa fa-check-circle-o"></i> Display for 1 month</li>
                         <li><i class="fa fa-check-circle-o"></i> Notifications are send by mail and Sms</li>
@@ -185,7 +185,7 @@
                       </ul>
                       <a class="btn btn-default" id="paid" data-user="paiduser"><i class="fa fa-envelope-o"></i>Paid User</a>
                       <input type="hidden" name="userstatus" value="" id="paid" >  
-                    </div> <!-- end grid-layout -->
+                    </div></div> <!-- end grid-layout -->
                   </div>
                 </form>
             <div class="payment">
