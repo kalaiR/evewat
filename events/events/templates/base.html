@@ -112,7 +112,7 @@
             <div class="field_control">
             <input type="password" class="form-control" name="password" placeholder="password" id="password_signin" autocomplete="off">
             <span id="result"></span>
-            <label for="password" id="password_signin1" class="signup_labelError" style="display:none;color:red;">Please enter Password</label>
+            <label for="password" id="password_signin1" class="signup_labelError" style="display:none;">Please enter Password</label>
             </div>
 
             <div class="field_control">
@@ -193,7 +193,7 @@
 
         
         <!-- HEADER-SOCIAL -->
-        <div class="header-social">
+ <!--        <div class="header-social">
           <a href="#">
             <span><i class="fa fa-share-alt"></i></span>
             <i class="fa fa-chevron-down social-arrow"></i>
@@ -205,11 +205,11 @@
             <li><a href="#"><i class="fa fa-twitter-square"></i></a></li>
             <li><a href="#"><i class="fa fa-linkedin-square"></i></a></li>
           </ul>
-        </div>
+        </div> -->
         <!-- END HEADER-SOCIAL -->
 
         <!-- HEADER-LANGUAGE -->
-        <div class="header-language">
+        <!-- <div class="header-language">
           <a href="#">
             <span>EN</span>
             <i class="fa fa-chevron-down"></i>
@@ -221,12 +221,12 @@
             <li><a href="#">PT</a></li>
             <li><a href="#">IT</a></li>
           </ul>
-        </div> <!-- END HEADER-LANGUAGE -->
+        </div> --> <!-- END HEADER-LANGUAGE -->
 
         <!-- CALL TO ACTION -->
         {% if user.is_authenticated %}
         <div class="header-call-to-action">
-          <a href="/post_event" class="btn btn-default"><i class="fa fa-plus"></i> Add Post</a>
+          <a href="/post_event_v2" class="btn btn-default"><i class="fa fa-plus"></i> Add Post</a>
           <a href="/banner" class="btn btn-default"><i class="fa fa-plus"></i> Add Banner</a>
         </div><!-- END .HEADER-CALL-TO-ACTION -->
         {% endif %}
@@ -237,7 +237,7 @@
     <!-- HEADER SEARCH SECTION -->
     <div class="header-search slider-home">
       <div class="header-search-bar">
-        <form action="/search/?q=" method="get">
+         <form class="form" method="get" action="/search/?q=" id="f_search" name="f_search">
 
          <!--  <div class="search-toggle">
             <div class="container">
@@ -295,15 +295,15 @@
               <div class="keywords">
              <!--    <input type="text" class="form-control" placeholder="Keywords"> -->
              {% if query or request.REQUEST.q or request.REQUEST.q == '' %}
-              <input type="text" name="q" id="q" class="form-control input-lg" placeholder="Keywords" value="{% if query %}{{ query }}{% elif request.REQUEST.q %}{{request.REQUEST.q}}{% elif request.REQUEST.q == '' %}{% else %}{% endif %}" />
+              <input type="text" name="q" id="q" class="form-control input-lg" placeholder="Keywords" value="{% if query %}{{ query }}{% elif request.REQUEST.q %}{{request.REQUEST.q}}{% elif request.REQUEST.q == '' %}{% else %}{% endif %}" autocomplete="off"/>
             {% else %}
-              <input type="text" name="q" id="q" class="form-control input-lg" placeholder="Keywords" value="{% if recent_viewed_search %}{% for subcategory in recent_viewed_search|slice:'1' %}{% if subcategory.activity_view %}{{ subcategory.activity_view }}{% else %}{% endif %}{% endfor %}{% else %}{% endif %}" />
+              <input type="text" name="q" id="q" class="form-control input-lg" placeholder="Keywords" value="{% if recent_viewed_search %}{% for subcategory in recent_viewed_search|slice:'1' %}{% if subcategory.activity_view %}{{ subcategory.activity_view }}{% else %}{% endif %}{% endfor %}{% else %}{% endif %}" autocomplete="off"/>
             {% endif %}
               </div>
 
               <div class="select-location">                         
                  <select class="city" name="city">
-                  <option value="select_city" id="ajax_cityid">Select City</option> 
+                  <option value="">Select City</option> 
                    <!-- <option  id="currentid" value="{{request.COOKIES.global_city_id}}">"city"|get_current_city</option> -->
                    {% for cities in city|get_city %}
                         <option value="{{cities.id}}" id="ajax_cityid">{{ cities }} </option>
@@ -313,8 +313,8 @@
                 </div>
 
               <div class="category-search">
-                <select class="category_choose" name="festtype">                 
-                    <option value="">Fest type</option>
+                <select class="category_choose" name="eventtype">                 
+                    <option value="">Event type</option>
                     {% for subcategory in subcategory %}
                               <option value="{{subcategory.id}}">{{ subcategory.name }} </option>
                      {% endfor%} 
@@ -349,17 +349,17 @@
                 
               </div>
 
-              <button class="search-btn" type="submit"><i class="fa fa-search"></i></button>
+              <button class="search-btn base_search" type="submit"><i class="fa fa-search"></i></button>
             </div>
           </div> 
         </form>
       </div> 
-    <div class="popup">
+    <!-- <div class="popup">
       <div class="popup_text">
         <span>Thankyou for registration.</span><br/>
         <span> We have sent a verification code to your email address. Please click an the activation link to activate your account.</span>
       </div>
-    </div>
+    </div> -->
 {% block content %}
 {% endblock %}
   <footer id="footer">

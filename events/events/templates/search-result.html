@@ -156,7 +156,7 @@
                       <div class="single-product">
                         <figure>
                         
-                          <img src="/{{events.object.poster|get_photos}}" alt="">
+                          <img src="{{events.object.poster|get_photos}}" alt="">
 
                           <div class="rating">
 
@@ -184,11 +184,11 @@
                           </figcaption>
                         </figure>
 
-                        <h4><a href="/details/{{events.object.id}}">{{events.object.festname}},{{ events.object.city.city }},{{events.object.state}}</a></h4>
+                        <h4><a href="/details/{{events.object.id}}">{{events.object.event_title}},{{ events.object.city.city }},{{events.object.state}}</a></h4>
 
-                        <h5><a href="/details/{{events.object.id}}">{{events.object.enddate}}</a> <a href="/details/{{events.object.id}}">{{event.object.collegename}}</a></h5>
+                        <h5><a href="/details/{{events.object.id}}">{{events.object.enddate}}</a> on <a href="/details/{{events.object.id}}">{{events.object.college.college_name}}</a></h5>
 
-                        <p><a href="/details/{{events.object.id}}">{{events.object.festdescription}}</a></p>
+                        <p><a href="/details/{{events.object.id}}">{{events.object.eventdescription}}</a></p>
 
                         <a class="read-more" href="/details/{{events.object.id}}"><i class="fa fa-angle-right"></i>Read More</a>
 
