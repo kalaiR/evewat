@@ -19,7 +19,15 @@ class SiteBanner( models.Model ):
    pageurl= models.CharField(max_length=50, null=True, blank=True, choices=PAGEURL)
    position=models.CharField(max_length=50, null=True, blank=True, choices=POSITION)
    price=models.FloatField(null=True, blank=True)
-   admin_status = models.BooleanField(default=False)
-   
+   admin_status = models.BooleanField(default=False) 
+   duration=models.IntegerField(null=True, blank=True,help_text="No of days")  
    def __unicode__(self):
     return self.link
+    
+class BannerPrice(models.Model):
+    page=models.CharField(max_length=50,choices=PAGEURL)
+    position=models.CharField(max_length=50,choices=POSITION)
+    price = models.FloatField(null=True, default=0.0)
+    duration=models.IntegerField(null=True, blank=True,help_text="No of days")
+    def __unicode__(self):
+        return self.position

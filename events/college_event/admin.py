@@ -52,6 +52,17 @@ class DepartmentAdmin(admin.ModelAdmin):
 	list_per_page = 50
 
 class PosteventAdmin(admin.ModelAdmin):
+	filelds=['name','eventtype','city','event_title','startdate','admin_status']
+	list_display = ('id', 'name','eventtype','city','event_title','startdate','admin_status')
+	list_filter = ['id','event_title','city']	
+	search_fields = ['id', 'event_title']
+	list_per_page = 50
+
+	def admin_status(self, obj):
+		return obj.admin_status 
+	admin_status.boolean = False
+
+class PosteventAdmin_v2(admin.ModelAdmin):
 	filelds=['name','festtype','city','festname','registrationfee','startdate','admin_status']
 	list_display = ('id', 'name','festtype','city','festname','registrationfee','startdate','admin_status')
 	list_filter = ['id','festname','city']	
@@ -76,6 +87,6 @@ admin.site.register(PremiumPriceInfo, PremiumPriceInfoAdmin)
 # admin.site.register(Collegetype, CollegetypeAdmin)
 admin.site.register(College, CollegeAdmin)
 admin.site.register(Department, DepartmentAdmin)
-admin.site.register(Postevent, PosteventAdmin)    
+admin.site.register(Postevent_v2, PosteventAdmin)    
 admin.site.register(SubCategory, SubCategoryAdmin)   
 admin.site.register(CollegeDepartment) 

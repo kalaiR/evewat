@@ -445,7 +445,7 @@ def event(request,pname=None):
 	return render_to_response("search-result.html",{'events':postevent,'pname':pname, 'college':college}, context_instance=RequestContext(request))
 
 def details(request,id=None):
-	postevent=Postevent.objects.get(pk=id)
+	postevent=Postevent_v2.objects.get(pk=id)
 	return render_to_response("company-profile.html",{'events':postevent}, context_instance=RequestContext(request))
 
 def banner(request):
