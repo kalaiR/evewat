@@ -3363,7 +3363,7 @@ fieldset[disabled] .btn-default-inverse.active {
   float: left;
   z-index: 9999;
   margin-right: 20px;
-  padding: 6px 0;
+  padding: 15px 0;
   font-weight: 700;
 }
 #header .header-top-bar .header-login div,
@@ -3396,12 +3396,20 @@ fieldset[disabled] .btn-default-inverse.active {
   opacity: 1;
   transform: translateY(0);
 }
-#header .header-top-bar .header-logo {
+#header .header-top-bar .header-logo_text {
   float: left;
   width: 45%;
   text-align: center;
   text-transform: uppercase;
+  padding:10px 0px;
 }
+.header-logo {
+  float: left;
+  text-align: center;
+  text-transform: uppercase;
+  margin:0px 35px 0px 0px;
+}
+.header-logo a { display:block; }
 #header .header-top-bar .header-logo h2 {
   margin: 0;
   font-family: 'Raleway', sans-serif;
@@ -3486,6 +3494,7 @@ fieldset[disabled] .btn-default-inverse.active {
 }
 #header .header-top-bar .header-call-to-action {
   float: right;
+  padding:12px 0px;
 }
 @media (max-width: 992px) {
   #header .header-top-bar .header-call-to-action {
@@ -7129,9 +7138,9 @@ fieldset[disabled] .btn-default-inverse.active {
   }
 }
 .company-heading-view .company-slider-content .general-view .logo-image img {
-  height: 62%;
-  width: 62%;
-  margin-top: 50px;
+  height: 100%;
+  width: 100%;
+  /*margin-top: 50px;*/
   border-radius: 3px;
 }
 @media (max-width: 768px) {
@@ -8127,6 +8136,16 @@ fieldset[disabled] .btn-default-inverse.active {
 .price-listing .pricing-table ul {
   min-height: 250px;
 }
-.ui-datepicker .ui-datepicker-title,.ui-datepicker .ui-datepicker-prev,.ui-datepicker .ui-datepicker-next {
+/*.ui-datepicker .ui-datepicker-title,.ui-datepicker .ui-datepicker-prev,.ui-datepicker .ui-datepicker-next {
   color: #000 !important;
+}*/
+.link_required ,.price_required{
+    padding: 9px 14px;
+}
+#banner_post .row{
+  margin-bottom: 15px;
+  margin-top: 15px;
+}
+.payment input{
+  height: 40px;
 }

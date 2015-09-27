@@ -27,11 +27,11 @@
 
       <div class="company-heading-view">
         <div class="container">
-          <div class="button-content">
+          <!-- <div class="button-content">
             <button class="general-view-btn active"><i class="fa fa-newspaper-o"></i><span>General</span></button>
             <button class="map-view-btn"><i class="fa fa-map-marker"></i><span>Map</span></button>
             <button class="male-view-btn"><i class="fa fa-male"></i><span>Street</span></button>
-          </div>
+          </div> -->
         </div>
 
         <div class="company-slider-content">
@@ -41,10 +41,10 @@
             <div class="container">
 
               <div class="logo-image">
-                <img src="img/content/company-logo.jpg" alt="">
+                <img src="{{events.poster}}" alt="">
               </div>
 
-              <h1>Company name</h1>
+              <h1>{{events.event_title}}</h1>
             </div>
           </div> <!-- END .general-view -->
 
@@ -123,25 +123,25 @@
 
             <div class="tab-content">
               <div class="tab-pane active" id="company-profile">
-                <h2>{{events.festname}}</h2>
+                <h2>{{events.event_title}}</h2>
                 <h5>
-                  <a href="#">{{events.festtype}}</a>
+                  <a href="#">{{events.eventtype}}</a>
                 </h5>
 
-                <div class="social-link text-right">
+                <!-- <div class="social-link text-right">
                   <ul class="list-inline">
                     <li><a href="/{{events.facebook}}"><i class="fa fa-facebook"></i></a></li>
                     <li><a href="/{{events.twitter}}"><i class="fa fa-twitter"></i></a></li>
                     <li><a href="/{{events.youtube}}"><i class="fa fa-google-plus"></i></a></li>
                   </ul>
-                </div>
+                </div> -->
 
                 <div class="company-text">
                   <p>
-                    <strong>{{events.festdescription}}</strong>
+                    <strong>{{events.eventdescription}}</strong>
                   </p>
 
-                  <p>{{events.collegename}},{{events.city}},{{events.state}}
+                  <p>{{events.college}},{{events.city}},{{events.state}}
                   </p>
                   <p>Organized by {{events.department}}
                   </p>
@@ -1596,7 +1596,7 @@
                   <strong>E-mail</strong><span>{{events.email}}</span>
                 </li>
 
-                <li>
+                <!-- <li>
                   <strong>Registration Fees</strong>
                   <span>{{events.registrationfee}}</span>
                 </li>
@@ -1608,7 +1608,7 @@
                 <li>
                   <strong>Venue</strong>
                   <span>{{events.venuedescription}}</span>
-                </li>
+                </li> -->
 
               </ul>
             </div>
@@ -1627,10 +1627,10 @@
                   <span>{{events.enddate}}</span>
                 </li>
 
-                <li>
+                <!-- <li>
                   <strong>Deadline</strong>
                   <span>{{events.deadline}}</span>
-                </li>
+                </li> -->
               </ul>
             </div>
 
@@ -1654,9 +1654,9 @@
                 RENDER MY CONTENT
             {% endfor %}
         </div>
-        <div id="footerContent">
+        <!-- <div id="footerContent">
             {%block page_foot%}
                 Page <pdf:pagenumber>
             {%endblock%}
-        </div>
+        </div> -->
 {% endblock %}

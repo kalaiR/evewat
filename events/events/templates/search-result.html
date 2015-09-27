@@ -68,7 +68,7 @@
       <div class="row">
         <div class="page-sidebar">
             <div class="col-md-3 category-toggle">
-            <div class="location-details">
+            <!-- <div class="location-details">
               <form action="#">
                 <div class="select-country">
                   <label>City</label>
@@ -82,7 +82,7 @@
   
                 </select>     
 
-                </div> <!-- end .select-country -->
+                </div> <!- end .select-country ->
 
                 <div class="select-state">
                  <label>Category</label>                
@@ -94,7 +94,7 @@
                     {% endfor %}
                   </select>
 
-                </div> <!-- end .select-state -->
+                </div> <!- end .select-state ->
 
                 <div class="select-state">
                    <label>College</label>
@@ -108,10 +108,10 @@
                   </select>
 
 
-                </div> <!-- end .zip-code -->
+                </div> <!- end .zip-code ->
               </form>
 
-            </div> <!-- end .location-details -->     
+            </div> --> <!-- end .location-details -->     
             <div class="advertisement" style="color:black;">
                 <p>Advertisement</p>
                 {% for banners in banner|get_banner %}
@@ -155,22 +155,9 @@
 
                       <div class="single-product">
                         <figure>
-                        
-                          <img src="{{events.object.poster|get_photos}}" alt="">
-
-                          <div class="rating">
-
-                            <!-- <ul class="list-inline">
-                              <li><a href="#"><i class="fa fa-star"></i></a></li>
-                              <li><a href="#"><i class="fa fa-star"></i></a></li>
-                              <li><a href="#"><i class="fa fa-star"></i></a></li>
-                              <li><a href="#"><i class="fa fa-star-half-o"></i></a></li>
-                              <li><a href="#"><i class="fa fa-star-o"></i></a></li>
-                            </ul> -->
-
-                            
-
-                          </div> <!-- end .rating -->
+                          <a href="http://{{request.META.HTTP_HOST}}/details/{{events.object.id}}">
+                            <img src="{{events.object.poster|get_photos}}" alt="">
+                          </a>
 
                           <figcaption>
                             <div class="bookmark">
