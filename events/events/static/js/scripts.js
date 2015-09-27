@@ -887,6 +887,7 @@ $('.user_details').click(function(){
         $(this).parent().next('.signup_labelError').hide();
         $(this).parent().css("cssText", "width: 411px !important;");
       }
+      
     });
 
     if ($(":input").hasClass("error_input_field") || $('#user_form .select-clone').hasClass('error_input_field')){
