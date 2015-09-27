@@ -3139,7 +3139,7 @@ button {
   width: 100%;
   height: inherit;
   line-height: 24px;
-  padding: 3px 30px 3px 15px;
+  padding: 8px 30px 8px 15px;
   margin: 0;
   color: #919191;
   font-size: 16px;
@@ -7988,10 +7988,10 @@ fieldset[disabled] .btn-default-inverse.active {
 .events,.events_details,.user_details{
   background-color: #dddddd;
     border-radius: 4px;
-    height: 24px;
     margin-bottom: 16px;
     text-align: center;
     width: 100%;
+    padding: 8px 0px;
 }
 .image_banner {
     height: 100%;
@@ -8075,7 +8075,6 @@ fieldset[disabled] .btn-default-inverse.active {
 
 .signup_labelError, .error_message, .labelError{
   display: none;
-  color: red;
   padding:0px 0px 0px 8px;
 }
 
@@ -8110,4 +8109,24 @@ fieldset[disabled] .btn-default-inverse.active {
 
 #user_form .uou-custom-select .placeholder{
   width:104%;
+}
+
+.contact-us .contact-form input:first-child {
+  width: 100% !important;
+}
+
+.simpleFilePreview_multiUI{
+  width: auto !important;
+  margin-left: 0px !important;
+  margin-bottom: 20px;
+}
+.simpleFilePreview{
+  margin-top: 16px;
+
+}
+.price-listing .pricing-table ul {
+  min-height: 250px;
+}
+.ui-datepicker .ui-datepicker-title,.ui-datepicker .ui-datepicker-prev,.ui-datepicker .ui-datepicker-next {
+  color: #000 !important;
 }
