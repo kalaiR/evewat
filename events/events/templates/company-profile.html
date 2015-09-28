@@ -20,7 +20,31 @@
   <script src="{% static "js/gomap.js" %}"></script>
 
   <script src="{% static "js/gmaps.js" %}"></script>
-
+  <script type="text/javascript">
+  $("document").ready(function($){
+    var address1=$('.city_map').text();
+  var geocoder =  new google.maps.Geocoder();
+  geocoder.geocode( { 'address': address1},  
+    function(results, status) {
+      var latitude1=results[0].geometry.location.lat();
+      var longitude1=results[0].geometry.location.lng();
+      $("#company_map_canvas").goMap(
+        {
+          maptype: 'ROADMAP',
+          zoom: 15,
+          scrollwheel: false,
+          address: address1,
+          markers: [{
+              latitude:latitude1,
+              longitude:longitude1,
+              icon: '/static/img/map-marker-company.png',
+              html: address1
+            }]
+        });
+      
+  });
+  });
+  </script>
 <body>
 <div id="main-wrapper">
 
@@ -36,7 +60,7 @@
           <div class="button-content">
             <button class="general-view-btn active"><i class="fa fa-newspaper-o"></i><span>General</span></button>
             <button class="map-view-btn"><i class="fa fa-map-marker"></i><span>Map</span></button>
-            <button class="male-view-btn"><i class="fa fa-male"></i><span>Street</span></button>
+            <!-- <button class="male-view-btn"><i class="fa fa-male"></i><span>Street</span></button> -->
           </div>
         </div>
 

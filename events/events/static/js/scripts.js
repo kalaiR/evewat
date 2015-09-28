@@ -386,27 +386,7 @@
 
 
   // company map initialization
-  var address1=$('.city_map').text();
-  var geocoder =  new google.maps.Geocoder();
-  geocoder.geocode( { 'address': address1},  
-    function(results, status) {
-      var latitude1=results[0].geometry.location.lat();
-      var longitude1=results[0].geometry.location.lng();
-      $("#company_map_canvas").goMap(
-        {
-          maptype: 'ROADMAP',
-          zoom: 15,
-          scrollwheel: false,
-          address: address1,
-          markers: [{
-              latitude:latitude1,
-              longitude:longitude1,
-              icon: '/static/img/map-marker-company.png',
-              html: address1
-            }]
-        });
-      
-  });
+  
   // $("#company_map_canvas").goMap(
     
   
@@ -802,16 +782,16 @@ $('.events').click(function(){
   $('.events_fields').toggle();
 });
 
-$('.events_details').click(function(){
-  $('.eventdetail_fields').toggle();
-  $('.events_fields').hide();
-});
+// $('.events_details').click(function(){
+//   $('.eventdetail_fields').toggle();
+//   $('.events_fields').hide();
+// });
 
-$('.user_details').click(function(){
-  $('.user_fields').toggle();
-  $('.eventdetail_fields').hide();
-  $('.events_fields').hide();
-});
+// $('.user_details').click(function(){
+//   $('.user_fields').toggle();
+//   $('.eventdetail_fields').hide();
+//   $('.events_fields').hide();
+// });
 
 
     $( "#datepicker" ).datepicker({
@@ -836,18 +816,7 @@ $('.user_details').click(function(){
 });          
  // validation by pradeepa//
 
-  // Image upload
-  $(document).on('change','.poster',function(){
-      files = this.files;
-      size = files[0].size;
-      //max size 50kb => 50*1000
-      if( size > 1000*1000){
-       alert('Please upload less than 50kb file');
-       return false;
-      }
-      return true;
-   });
-
+  
   //login form validation
 
   var sign_in_required =["emailid_signup", "password_signup"];
@@ -952,79 +921,151 @@ $('.user_details').click(function(){
 
   //events
 
-  var events_required =["festname_required", "festcaption_val"];
+  // var events_required =["festname_required", "festcaption_val"];
 
-  jQuery('#post_event').click(function(){     
-      for (i=0;i<events_required.length;i++) {
-      var input = jQuery('#'+events_required[i]);
-      if (input.val() == "")  {   
-        input.addClass("error_input_field");
-        input.next('.labelError').css({"color":"red"}).show();         
-      } else {    
-        input.removeClass("error_input_field");
-        input.next('.labelError').hide();        
-      }
-    }
+  jQuery('.events_details').click(function(){     
 
-    if($('.festtype_required').val() == 'Fest type'){
-      $('.drop_labelError').show();
+    if($('.eventtitle').val() == ''){
+      $('.eventtitle_error').show();
       return false;
     }
     else{
-      $('.drop_labelError').hide();
+      $('.eventtitle_error').hide();
+    }
+
+    if($('.startdate').val() == ''){
+      $('.date1_error').show();
+      return false;
+    }
+    else{
+      $('.date1_error').hide();
     }  
 
-
-      if ($(":input").hasClass("error_input_field")){
+    if($('.enddate').val() == ''){
+      $('.date2_error').show();
       return false;
-      }
-      else{
-        $('form[name="postevent"]').submit();      
-        return true;
-     }
- 
+    }
+    else{
+      $('.date2_error').hide();
+    }
+
+    if($('.category').val() == ''){
+      $('.category_error').show();
+      return false;
+    }
+    else{
+      $('.category_error').hide();
+    }
+    if($('.eventtype').val() == 'select_subcategory'){
+      $('.subcategory_error').show();
+      return false;
+    }
+    else{
+      $('.subcategory_error').hide();
+    }
+    if($('.eventdescription').val() == ''){
+      $('.eventdescription_error').show();
+      return false;
+    }
+    else{
+      $('.eventdescription_error').hide();
+      $('.eventdetail_fields').show();
+    }
   });
 
   //Event details
 
-  var events_details_required =["festdes_required", "regfees_required", "festurl_required", "reach_required", "queries_required", "state_required"];
+jQuery('.user_details').click(function(){     
 
-  jQuery('form[name="postevent"] .post_event').on( "click", function() {
-      // alert("clicked");
-      // alert($(this).data("user"));
-      var  value = $(this).data("user"); 
-       // alert(value);
-       $("input[name='userstatus']").val($(this).data("user"));
-      // $("#paid").val(value);
-      // alert($("#paid").val(value));
-      
-      for (i=0;i<events_details_required.length;i++) {
-      var input = jQuery('#'+events_details_required[i]);
-      if (input.val() == "")  {   
-        input.addClass("error_input_field");
-        input.next('.labelError').css({"color":"red"}).show();         
-      } else {    
-        input.removeClass("error_input_field");
-        input.next('.labelError').hide();        
-      }
-    }
-
-    if($('.city_required').val() == 'Select City'){
-      $('.drop_labelError1').show();
+    if($('.address').val() == ''){
+      $('.address_error').show();
       return false;
     }
     else{
-      $('.drop_labelError1').hide();
+      $('.address_error').hide();
+    }
+
+    if($('.organizer').val() == ''){
+      $('.organizer_error').show();
+      return false;
+    }
+    else{
+      $('.organizer_error').hide();
     }  
 
-      if ($(":input").hasClass("error_input_field")){
+    if($('.state').val() == ''){
+      $('.state_error').show();
       return false;
+    }
+    else{
+      $('.state_error').hide();
+    }
+
+    if($('.select_city').val() == 'select_city'){
+      $('.city_error').show();
+      return false;
+    }
+    else{
+      $('.city_error').hide();
+    }
+    if($('.select_college').val() == 'select_college'){
+      $('.college_error').show();
+      return false;
+    }
+    else{
+      $('.college_error').hide();
+    }
+    if($('.select_dept').val() == 'select_department'){
+      $('.dept_error').show();
+      return false;
+    }
+    else{
+      $('.dept_error').hide();
+      
+    }
+
+  });
+// Image upload
+    $(document).on('change','.poster',function(){
+      files = this.files;
+      size = files[0].size;
+      //max size 50kb => 50*1000
+      if( size > 1024*2000){
+       alert('Please upload less than 2mb file');
+       return false;
       }
       else{
-        $('form[name="postevent"]').submit();      
+        $('.user_fields').show();
         return true;
       }
-  });
+      
+    });
+  // user validation
+$('.post_event,#paid').click(function(){
+  if($('.name').val() == ''){
+      $('.name_error').show();
+      return false;
+    }
+    else{
+      $('.name_error').hide();
+    }
+    if($('.email').val() == ''){
+      $('.email_error').show();
+      return false;
+    }
+    else{
+      $('.email_error').hide();
+    }
+    if($('.mobile').val() == '' && $('.mobile').val().length==10 ){
+      $('.mobile_error').show();
+      return false;
+    }
+    else{
+      $('.mobile_error').hide();
+    }
+});
+
+
   //upload banner validation
 
   jQuery('#banner_upload').click(function(){

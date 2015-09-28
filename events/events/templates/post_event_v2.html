@@ -46,15 +46,18 @@
                 <div class="events_fields">
                   <div class="row">
                     <div class="col-md-6 col-md-offset-3">
-                      <input type="text" placeholder="Event Title" name="eventtitle" id="festcaption_val">
+                      <input type="text" placeholder="Event Title" name="eventtitle" id="eventtitle" class="eventtitle" value="">
+                      <label for="festcaption_val" class="eventtitle_error" style="display:none;color:red;">Please enter Event Title</label>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-md-6">
-                      <input  type="text" placeholder="Startdate"  id="datepicker" name="startdate" />
+                      <input  type="text" placeholder="Startdate"  id="datepicker" name="startdate" value="" class="startdate" />
+                      <label for="datepicker" class="date1_error" style="display:none;color:red;">Please Choose Start Date</label>
                     </div>
                     <div class="col-md-6">
-                      <input  type="text" placeholder="Enddate"  id="datepicker1" name="enddate" />
+                      <input  type="text" placeholder="Enddate"  id="datepicker1" name="enddate" class="enddate" value="" />
+                      <label for="datepicker1" class="date2_error" style="display:none;color:red;">Please enter End Date</label>
                     </div>
                   </div>
                   <div class="row">
@@ -65,16 +68,19 @@
                           <option value="{{categories.id}}">{{ categories.name }} </option>
                         {% endfor%}                    
                       </select>
+                      <label for="category" class="category_error" style="display:none;color:red;">Please Choose Event Category</label>
                     </div>
                     <div class="col-md-6">
                       <select class="eventtype select_subcategory" name="eventtype" data-placeholder="Event Subcategory">
                         <option value="">Event Subcategory</option>                   
                       </select>
+                      <label class="subcategory_error" style="display:none;color:red;">Please Choose Event Subcategory</label>
                     </div> 
                   </div>
                   <div class="row">
                     <div class="col-md-12">
-                      <textarea placeholder="Event Description" name="eventdescription"></textarea>
+                      <textarea placeholder="Event Description" name="eventdescription" class="eventdescription" value=""></textarea>
+                      <label class="eventdescription_error" style="display:none;color:red;">Please Enter Event description</label>
                     </div>
                   </div> 
                 </div>
@@ -82,10 +88,12 @@
                 <div class="eventdetail_fields">
                   <div class="row">
                     <div class="col-md-6">
-                      <textarea placeholder="Address" name="address"></textarea>
+                      <textarea placeholder="Address" name="address" class="address" value=""></textarea>
+                       <label class="address_error" style="display:none;color:red;">Please Enter Address</label>
                     </div>
                     <div class="col-md-6">
-                      <textarea placeholder="Orgamizer details" name="organizer"></textarea>
+                      <textarea placeholder="Organizer details" name="organizer" class="organizer" value="" ></textarea>
+                      <label class="organizer_error" style="display:none;color:red;">Please Enter Organizer Details</label>
                     </div>
                   </div>
                   <div class="row">
@@ -96,11 +104,13 @@
                           <option value="{{states}}">{{ states }} </option>
                         {% endfor%}                    
                       </select>
+                      <label class="state_error" style="display:none;color:red;">Please Choose State</label>
                     </div>
                     <div class="col-md-6">
                       <select class="city select_option select_city" data-placeholder="Select City" name="city">
                         <option value="">Select City</option>                
                       </select>
+                      <label class="city_error" style="display:none;color:red;">Please Choose City</label>
                     </div>
                   </div>
                   <div class="row">
@@ -109,17 +119,19 @@
                         <option value="">Select College</option> 
                                           
                       </select>
+                      <label class="college_error" style="display:none;color:red;">Please Choose College</label>
                     </div>
                     <div class="col-md-6">
                       <select class="dept select_option select_dept" data-placeholder="Select Department" name="dept">
                         <option value="">Select Department</option>
                                            
                       </select>
+                      <label class="dept_error" style="display:none;color:red;">Please Choose Department</label>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-md-12">
-                      <input type='file' id='poster' class="poster" name='poster[]' multiple='multiple'/>
+                      <input type='file' id='poster' class="poster" name='poster[]' multiple='multiple'required/>
                     </div>
                   </div> 
                 </div>
@@ -127,15 +139,18 @@
                 <div class="user_fields price-listing">
                   <div class="row">
                     <div class="col-md-6">
-                      <input type="text" placeholder="Name" name="name" value="{{ request.user }}"required>
+                      <input type="text" placeholder="Name" name="name" value="{{ request.user }}" class="name" required >
+                      <label class="name_error" style="display:none;color:red;">Please Enter Name</label>
                     </div>
                     <div class="col-md-6">
-                      <input type="email" placeholder="Email" name="email" value="{{ request.user.email }}" required>
+                      <input type="email" placeholder="Email" name="email" value="{{ request.user.email }}" class="email" required>
                     </div>
+                    <label class="email_error" style="display:none;color:red;">Please Enter Mail Id</label>
                   </div> 
                   <div class="row">
                     <div class="col-md-12">
-                      <input type="text" placeholder="Phone number" name="mobile">      
+                      <input type="text" placeholder="Phone number" name="mobile" class="mobile" value=""> 
+                      <label class="mobile_error" style="display:none;color:red;">Please Enter Valid Phonenumber</label>     
                     </div>
                   </div> 
                   <div class="row">
