@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static from staticfiles %}
 {% load i18n %}
 {% block content %}
 <style type="text/css">
@@ -13,7 +14,12 @@
                     height: 1cm;
                 }
             }
-        </style>
+</style>
+  <script type="text/javascript" src="//maps.google.com/maps/api/js?sensor=true"></script>
+
+  <script src="{% static "js/gomap.js" %}"></script>
+
+  <script src="{% static "js/gmaps.js" %}"></script>
 
 <body>
 <div id="main-wrapper">
@@ -27,11 +33,11 @@
 
       <div class="company-heading-view">
         <div class="container">
-          <!-- <div class="button-content">
+          <div class="button-content">
             <button class="general-view-btn active"><i class="fa fa-newspaper-o"></i><span>General</span></button>
             <button class="map-view-btn"><i class="fa fa-map-marker"></i><span>Map</span></button>
             <button class="male-view-btn"><i class="fa fa-male"></i><span>Street</span></button>
-          </div> -->
+          </div>
         </div>
 
         <div class="company-slider-content">
@@ -141,7 +147,7 @@
                     <strong>{{events.eventdescription}}</strong>
                   </p>
 
-                  <p>{{events.college}},{{events.city}},{{events.state}}
+                  <p>{{events.college}},<span class="city_map">{{events.city}}</span>,{{events.state}}
                   </p>
                   <p>Organized by {{events.department}}
                   </p>

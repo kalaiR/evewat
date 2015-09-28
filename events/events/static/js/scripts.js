@@ -1,3 +1,4 @@
+
 (function($) {
 
   "use strict";
@@ -79,6 +80,7 @@
       if ($this.hasClass('active')) { $this.removeClass('active'); }
     });
   });
+
 
 
 
@@ -384,24 +386,41 @@
 
 
   // company map initialization
-
-  // $("#company_map_canvas").goMap({
-
+  var address1=$('.city_map').text();
+  var geocoder =  new google.maps.Geocoder();
+  geocoder.geocode( { 'address': address1},  
+    function(results, status) {
+      var latitude1=results[0].geometry.location.lat();
+      var longitude1=results[0].geometry.location.lng();
+      $("#company_map_canvas").goMap(
+        {
+          maptype: 'ROADMAP',
+          zoom: 15,
+          scrollwheel: false,
+          address: address1,
+          markers: [{
+              latitude:latitude1,
+              longitude:longitude1,
+              icon: '/static/img/map-marker-company.png',
+              html: address1
+            }]
+        });
+      
+  });
+  // $("#company_map_canvas").goMap(
+    
+  
+  // {
   //   maptype: 'ROADMAP',
   //   zoom: 15,
   //   scrollwheel: false,
-  //   address: '26-98 U.S. 101, San Francisco, CA 94103, USA',
+  //   address: address1,
   //   markers: [{
-  //       latitude: 37.7762546,
-  //       longitude: -122.43277669999998,
-  //       icon: 'img/content/map-marker-company.png',
+  //       latitude:latitude1,
+  //       longitude:longitude1,
+  //       icon: '{{ STATIC_URL|escapejs}}/img/map-marker-company.png',
   //       html: 'Globo'
-  //     },{
-  //       latitude: 37.77013804160774,
-  //       longitude: -122.40819811820984,
-  //       icon: 'img/content/map-marker-company.png',
-  //       html: 'Globo'
-  //   }]
+  //     }]
   // });
 
   // company-map-street
@@ -715,12 +734,41 @@ $("document").ready(function($){
 $("document").ready(function($){
   // $('.addpost_tipsy').tipsy({gravity: 'e'});
   // $('.addbanner_tipsy').tipsy({gravity: 'e'});
+
+  $(function() {    
+    $("#fitltercitytxt" ).autocomplete({
+    open: function(){
+        setTimeout(function () {
+            $('.ui-autocomplete').css('z-index', 9999);
+        }, 0);
+    },
+
+    source: function (request, response) {
+        $.getJSON("/getcity?term=" + request.term, function (data) {             
+            response($.map(data, function (value, key) {                            
+                return {
+                    label: value.label,
+                    value: value.value,
+                    extra: value.cityid
+                };
+            }));
+        });
+    },
+    select : function(event, ui) {
+            alert(ui.item.extra);
+            $('#fitltercity').val(ui.item.extra);                
+    },
+    minLength: 2,
+    delay: 100
+    });
+  });
+
   $('.addpost_tipsy,.addbanner_tipsy').click(function(){
     alert('Please Login or Register');
   });
 
   $('.select-location,.category-search').click(function(){
-    $('.base_search').focus();
+    //$('.base_search').focus();
   });
 
 

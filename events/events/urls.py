@@ -70,6 +70,7 @@ urlpatterns = patterns('',
     url(r'^find_city/$', 'college_event.views.find_city',name='find_city'),
     url(r'^find_position/$', 'banner.views.find_position',name='find_position'),
     url(r'^find_price/$', 'banner.views.find_price',name='find_price'),
+    url(r'^getcity/$', 'college_event.views.getcity',name='getcity'),
 
     url(r'^admin/', include(admin.site.urls)),
 )+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

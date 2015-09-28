@@ -8149,3 +8149,6 @@ fieldset[disabled] .btn-default-inverse.active {
 .payment input{
   height: 40px;
 }
+ui-autocomplete {
+  z-index: 9999;
+}

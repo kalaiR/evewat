@@ -33,7 +33,9 @@ from django.utils import simplejson
 import simplejson as json
 from events.util import get_current_country_cities
 # from events.context_processors import *
-
+#For geo
+from django.contrib.gis.geoip import GeoIP
+from events import globals
 
 from django.contrib.auth.decorators import login_required
 import random
@@ -445,7 +447,12 @@ def event(request,pname=None):
 	return render_to_response("search-result.html",{'events':postevent,'pname':pname, 'college':college}, context_instance=RequestContext(request))
 
 def details(request,id=None):
+
 	postevent=Postevent_v2.objects.get(pk=id)
+	print 'postevent',postevent.city
+	
+	# g = GeoIP()
+	# city=City.objects.get()
 	return render_to_response("company-profile.html",{'events':postevent}, context_instance=RequestContext(request))
 
 def banner(request):
@@ -590,4 +597,20 @@ def find_city(request):
 	else:
 		return JSONResponse({'error': 'Not Ajax or no GET'})
 	
-	
+def getcity(request):
+	from collections import OrderedDict
+	results = []
+	unsort_dict = {}
+	key_loc = request.GET.get('term')
+	city_lists = City.objects.filter(city__icontains=key_loc)
+
+	for city_list in city_lists:
+		cityname = city_list.city.strip()
+		cityid = city_list.id
+		unsort_dict[cityname] = {'cityid':cityid, 'label':cityname, 'value':cityname}
+
+	sorted_dic = OrderedDict(sorted(unsort_dict.iteritems(), key=lambda v: v[0]))
+	for k, v in sorted_dic.iteritems():  
+		results.append(v)
+
+	return HttpResponse(simplejson.dumps(results), mimetype='application/json')
