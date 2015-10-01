@@ -45,7 +45,6 @@ INSTALLED_APPS = (
     'payu',
     'transaction',
     'banner',
-
     
 
 )
@@ -138,6 +137,11 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'social_auth.context_processors.social_auth_by_type_backends',
     'social_auth.context_processors.social_auth_login_redirect',
 )
+COMPRESS_ENABLED = True
+
+COMPRESS_JS_FILTERS = [
+    'compressor.filters.template.TemplateFilter',
+]
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
@@ -150,6 +154,7 @@ GEOIP_PATH = os.path.join(os.path.dirname(__file__), 'static/geoip/')
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',
 )
 
 PAYU_INFO = {
@@ -158,8 +163,8 @@ PAYU_INFO = {
              # for production environment use 'https://secure.payu.in/_payment'
              'payment_url': 'https://test.payu.in/_payment',
              #success url for hotel
-             'surl':'http://192.169.200.166:8000/upload_banner',
-             'surl1':'http://192.169.200.166:8000/success',
-             'curl':'http://192.169.200.166:8000/post_event',
-             'furl':'http://192.169.200.166:8000/post_event',
+             'surl':'http://www.eventswat.com/upload_banner',
+             'surl1':'http://www.eventswat.com/success',
+             'curl':'http://www.eventswat.com/post_event',
+             'furl':'http://www.eventswat.com/post_event',
             }

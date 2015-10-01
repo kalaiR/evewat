@@ -14,7 +14,8 @@ default_param_mappings = OrderedDict(
   #FieldName = Form Variable
   # locality = 'locality__in', 
   eventtype = 'eventtype',
-  city = 'city',  
+  city = 'city',
+  payment='payment',  
   # festname = 'festname',
   # subcategory = 'name',
   # category = 'category__id'
@@ -25,13 +26,9 @@ default_geo_params = {
   'radius': 20
 }
 
-# default_orderby_mappings = {
-#   # 'createddate': '-created',
-#   # 'modifieddate': '-modified',
-#   'pricelow': 'price',
-#   'pricehigh': '-price',
-#   'ispremium': '-ispremium'
-# }
+default_orderby_mappings = {
+  'payment': '-payment'
+}
 
 # default_event_filters = {
 #   'active': 1,
@@ -85,13 +82,12 @@ def searchresults(q=None, params=None, orderby=None, groupby=None,
     model_cls = Postevent_v2
 
   if params is None:
-    params = OrderedDict([('eventtype', None), ('city', None), ('eventtitle', None)])   
+    params = OrderedDict([('eventtype', None), ('city', None), ('eventtitle', None),('payment', None)])   
   #   params = OrderedDict([('locations', None), ('keywords', None), ('lang', ['en', 'sv', 'de']), ('category', None), ('budget_start', None), ('budget_end', None), ('deal_start', None), ('deal_end', None), ('price_start', None), ('price_end', None), ('created_start', None), ('created_end', None), ('ranking_start', None), ('ranking_end', None), ('rating_start', None), ('rating_end', None)]) 
  
   
-  # if orderby is None:
-  #   # orderby = 'created'  
-  #    orderby = 'city'
+  if orderby is None:
+     orderby = 'payment'
   
 
   mappings = param_mappings or default_param_mappings

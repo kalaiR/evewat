@@ -25,14 +25,10 @@ urlpatterns = patterns('',
      # User login verfication
     url(r'^login/$', 'college_event.views.user_login', name='user_login'),
     url(r'^logout/$', 'college_event.views.logout_view', name='logout_view'),
-
-
     #registeration
     url(r'^register/$', 'college_event.views.register', name='register'),
-    
     # for registeration confirm
     url(r'^confirm/$', 'college_event.views.confirm', name='confirm'),
-
      # getting tarted
     url(r'^start/$', 'college_event.views.start',name='start'),
     url(r'^post_event$', 'college_event.views.post_event', name='post_event'),
@@ -70,6 +66,12 @@ urlpatterns = patterns('',
     url(r'^find_city/$', 'college_event.views.find_city',name='find_city'),
     url(r'^find_position/$', 'banner.views.find_position',name='find_position'),
     url(r'^find_price/$', 'banner.views.find_price',name='find_price'),
+    url(r'^getcity/$', 'college_event.views.getcity',name='getcity'),
+    url(r'^getstate/$', 'college_event.views.getstate',name='getstate'),
+    url(r'^getcollege/$', 'college_event.views.getcollege',name='getcollege'),
+    url(r'^getdept/$', 'college_event.views.getdept',name='getdept'),
+    url(r'^getcity_base/$', 'college_event.views.getcity_base',name='getcity_base'),
 
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^import/', 'college_event.views.importcollegedata', name='importcollegedata'),
 )+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

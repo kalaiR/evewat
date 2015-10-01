@@ -13,6 +13,7 @@ class PosteventIndex(SearchIndex, Indexable):
     city = CharField(model_attr='city__id')    
     #festdescription = CharField(model_attr='festdescription')   
     eventtitle = CharField(model_attr='event_title')
+    payment=CharField(model_attr='payment')
     
     def autoUpdateRebuild_index(self):
         update_index.Command().handle()
