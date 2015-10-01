@@ -366,17 +366,19 @@ def submit_event_v2(request):
                 for chunk in f.chunks():
                     postevent_poster.write(chunk)
                 postevent_poster.close()
-            photosgroup = ''
-            
+            photosgroup = ''         
             count=len(postevent_poster)
-            for uploaded_file in postevent_poster:
-                count=count-1
-                handle_uploaded_file(uploaded_file)
-                if count==0:
-                    photosgroup=photosgroup  + '/static/img/' + str(uploaded_file)
-                else:
-                    photosgroup=photosgroup  + '/static/img/' +str(uploaded_file) + ','
-            postevent.poster=photosgroup
+            if count :
+                for uploaded_file in postevent_poster:
+                    count=count-1
+                    handle_uploaded_file(uploaded_file)
+                    if count==0:
+                        photosgroup=photosgroup  + '/static/img/' + str(uploaded_file)
+                    else:
+                        photosgroup=photosgroup  + '/static/img/' +str(uploaded_file) + ','
+                postevent.poster=photosgroup
+            else:
+                postevent.poster='/static/img/logo.png'
             if request.POST.get('plan')!='0':
                 postevent.payment=request.POST.get('plan')
             postevent.save()
@@ -387,17 +389,19 @@ def submit_event_v2(request):
             if user_amount!='0' and request.user.is_authenticated():
                 return HttpResponseRedirect('/payment_event/')
             elif user_amount=='0':
-                response=render_to_response("post_event_v2.html",{'message':message}, context_instance=RequestContext(request))
-                response.delete_cookie('eventtitle')
-                response.delete_cookie('startdate')
-                response.delete_cookie('enddate')
-                response.delete_cookie('plan')
-                response.delete_cookie('category_name')
-                response.delete_cookie('eventtype_name')
-                response.delete_cookie('eventtype')
-                response.delete_cookie('category')
-                response.delete_cookie('eventdescription')
-                return response
+                response=render_to_response("post_event_v2.html",{'message':message}, context_instance=RequestContext(request))  
+            else:
+                response= render_to_response("post_event_v2.html",{'message':'Insufficient data'}, context_instance=RequestContext(request))
+            response.delete_cookie('eventtitle')
+            response.delete_cookie('startdate')
+            response.delete_cookie('enddate')
+            response.delete_cookie('plan')
+            response.delete_cookie('category_name')
+            response.delete_cookie('eventtype_name')
+            response.delete_cookie('eventtype')
+            response.delete_cookie('category')
+            response.delete_cookie('eventdescription')
+            return response
     except:
         response = render_to_response("post_event_v2.html",{'message':'Something went to wrong'}, context_instance=RequestContext(request))
         response.delete_cookie('eventtitle')
@@ -551,7 +555,15 @@ def success(request):
         # response.set_cookie('payudetails',payid)
         # response.set_cookie('payustatus',paystatus)
         # response.set_cookie('orderdetails',order.id)
+        response.delete_cookie('eventtitle')
+        response.delete_cookie('startdate')
+        response.delete_cookie('enddate')
         response.delete_cookie('plan')
+        response.delete_cookie('category_name')
+        response.delete_cookie('eventtype_name')
+        response.delete_cookie('eventtype')
+        response.delete_cookie('category')
+        response.delete_cookie('eventdescription')
     else:
         response =HttpResponseRedirect('/') 
     return response
@@ -880,4 +892,3 @@ def getcity_base(request):
 
     return HttpResponse(simplejson.dumps(results), mimetype='application/json')
     
-
