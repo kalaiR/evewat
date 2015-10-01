@@ -414,9 +414,9 @@ def submit_event_v2(request):
             # paiduser=PremiumPriceInfo.objects.get(purpose='paid')
             # premium_amount=int(paiduser.premium_price)
             user_amount=request.POST.get('plan')
-            if user_amount!='0':
+            if user_amount!='0' and request.user.is_authenticated():
                 return HttpResponseRedirect('/payment_event/')
-            else:
+            elif user_amount=='0':
                 response=render_to_response("post_event_v2.html",{'message':message}, context_instance=RequestContext(request))
                 response.delete_cookie('eventtitle')
                 response.delete_cookie('startdate')

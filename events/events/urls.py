@@ -25,14 +25,10 @@ urlpatterns = patterns('',
      # User login verfication
     url(r'^login/$', 'college_event.views.user_login', name='user_login'),
     url(r'^logout/$', 'college_event.views.logout_view', name='logout_view'),
-
-
     #registeration
     url(r'^register/$', 'college_event.views.register', name='register'),
-    
     # for registeration confirm
     url(r'^confirm/$', 'college_event.views.confirm', name='confirm'),
-
      # getting tarted
     url(r'^start/$', 'college_event.views.start',name='start'),
     url(r'^post_event$', 'college_event.views.post_event', name='post_event'),

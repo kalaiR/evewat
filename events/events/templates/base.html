@@ -49,7 +49,7 @@
         <div class="header-login">
 
           <a href="#" class=""><i class="fa fa-power-off" action="/login/"></i> Login</a>
-          <span class="signup_error" style="{% if request.REQUEST.lst %} display:block;color:red;font-size:17px; {%else%} display: none; {% endif %}">
+          <span class="signup_error" style="{% if request.REQUEST.lst and not request.path == '/post_event_v2' %} display:block;color:red;font-size:17px; {%else%} display: none; {% endif %}">
               {%for message in messages%}{{message}}{% endfor %}
           </span>
           <!-- <a class="login_act">login_act</a> -->

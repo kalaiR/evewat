@@ -1,6 +1,6 @@
 {% load static from staticfiles %}
 {% block content %}
-<div class="popup_fade"></div><!--popup_fade-->
+<div class="popup_fade" style="{% if request.REQUEST.lst and request.path == '/post_event_v2' %} display:block; {%else%} display: none; {% endif %}"></div><!--popup_fade-->
 
 <div class="signup_popup popup_pos" id="joinus_popup_content">
         <div class="popup_heading">
@@ -66,7 +66,7 @@
     </div><!--signup_popup-->
 
 
-    <div class="signup_popup popup_pos" id="signin_popup">
+    <div class="signup_popup popup_pos" id="signin_popup" style="{% if request.REQUEST.lst and request.path == '/post_event_v2'%} display:block; {%else%} display: none; {% endif %}">
         <div class="popup_heading">
             <a href="#" class="logo"></a>
             <div class="fr">
@@ -75,23 +75,23 @@
             </div>
             <div class="clear_both"></div>
         </div><!--popup_heading-->
-        <div class="popup_contents">
+        <div class="popup_contents" class="">
             <form method="post" action="/login/">
                 {% csrf_token %}
                 <input type="text" class="text_val_act" value="Email" maxlength='75' id="emailid_signup" name="username" autocomplete="off" />
                 <!-- <span class="error_msg labelError"  id="emailid_required" >Please enter User name</span> -->
                 <input type="password" class="text_val_act" placeholder="Password" value="" name="password"/>
     
-                <!-- {% if error_message %}
+               
                 {% for message in messages %}
                 <span class="error_msg">{{ message }}</span>
                 {% endfor %}
-                {% endif %} -->
+                
                
                 <div class="btns">
                     <div class="fl">
                     	<input type="hidden" value="singin" name="signin">
-                        <input type="hidden" value="{{ request.get_full_path }}" name="next" />
+                        <input type="hidden" value="{{ request.path }}" name="next" />
                         
                         <a id="forgotpassword_act" class='forgotpassword'>Forgot your password?</a>
                     </div>

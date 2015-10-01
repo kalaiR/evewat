@@ -721,7 +721,10 @@ $("document").ready(function($){
   });
 
   $('.cancel_btn, .close_btn').on('click', function (){
+    $.removeCookie('plan',{ path: '/' });
     $('.deposit_popup, .popup_fade, .forgotpassword_popup, .terms_services_popup, #signin_popup, #joinus_popup_content, #signin_popup1, #email_activate, #login_window, #login_window1, .lead_details_popup, #directbuy_signin_popup, #auction_popup, #ask_question_popup, #thank_you_popup').hide();
+    $('#plan_change').show();
+    $('input[name="plan"]').val() == '';
   });
 
   $('.login_act').on('click', function (){
