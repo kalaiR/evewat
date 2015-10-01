@@ -10,7 +10,7 @@ class CategoryAdmin(admin.ModelAdmin):
 	list_per_page = 50
 
 class SubCategoryAdmin(admin.ModelAdmin):
-	fields=['name', 'icon']
+	fields=['name', 'icon', 'category']
 	list_display = ('id','name','icon')
 	list_filter = ['name']
 	search_fields = ['id', 'name']

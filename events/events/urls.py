@@ -73,4 +73,5 @@ urlpatterns = patterns('',
     url(r'^getcity/$', 'college_event.views.getcity',name='getcity'),
 
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^import/', 'college_event.views.importcollegedata', name='importcollegedata'),
 )+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
