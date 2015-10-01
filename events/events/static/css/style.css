@@ -6410,7 +6410,7 @@ fieldset[disabled] .btn-default-inverse.active {
   border-color: #aaaaaa;
 }
 .contact-us .contact-form input:first-child {
-    margin-top: 25px;
+    /*margin-top: 25px;*/
     width: 40%;
 }
 @media (max-width: 768px) {
@@ -6450,7 +6450,7 @@ fieldset[disabled] .btn-default-inverse.active {
 .contact-us .contact-form .btn {
   padding: 8px 15px;
   font-weight: bold;
-  margin-left: 44%;
+  /*margin-left: 44%;*/
 }
 .contact-us .contact-form .btn .fa {
   padding-right: 8px;
@@ -6509,7 +6509,7 @@ fieldset[disabled] .btn-default-inverse.active {
   position: relative;
   width: 100%;
   height: auto;
-  text-align: center;
+  /*text-align: center;*/
   line-height: 25px;
 }
 .price-listing h3 {
@@ -8151,4 +8151,246 @@ fieldset[disabled] .btn-default-inverse.active {
 }
 ui-autocomplete {
   z-index: 9999;
+}
+
+.clear_both { clear:both; }
+/*************************** popup ***************************/
+.popup_fade {
+    background:#4b576f; 
+    filter:0;
+    -moz-opacity:0.7;    -khtml-opacity: 0.7;
+    opacity: 0.7;       filter: alpha(opacity=70);  
+    filter: progid:DXImageTransform.Microsoft.Alpha(opacity=70); 
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(opacity=70)"; 
+    zoom: 1;    display: none;
+    width: 100%;    height: 100%;
+    position: absolute;    top: 0;    z-index: 1100;
+   }
+.voucher_popup, .payout_popup, .deposit_popup, .signup_popup, .forgotpassword_popup {
+    width:440px;    height:auto;
+    padding:10px;
+    position:absolute;
+    background:#fdfdfd;
+    display: none;  z-index:9991;
+    margin:0px 0px 0px -220px;  left:50%; top: 150px;
+   -webkit-box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.08);
+   -moz-box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.08);
+   box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.08);
+ }
+.terms_services_popup, .home_terms_link {
+    width:700px;    height:auto;
+    padding:5px;
+    position:absolute;
+    background:#fdfdfd;
+    display: none;  z-index:9991;
+    margin:0px 0px 0px -350px;  left:50%; top: 100px;
+   -webkit-box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.08);
+   -moz-box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.08);
+   box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.08);
+ }
+.home_terms_link { top: 100px !important; }
+.popup_heading {
+    posiiton:relative;
+ }
+.close_btn {
+    position:absolute;
+    displplay:block;
+    background: url("/static/img/close_btn.png?version=2.4.1") no-repeat 0px 0px;
+    width:28px;
+    height:29px;
+    top:-14px;
+    right:-11px;
+    z-index: 99999;
+    border:none;
+    cursor:pointer;
+    padding:0px;
+} 
+.payout_popup, .deposit_popup { top:19px; }
+.popup_header_en {
+    height:46px; line-height: 46px;
+    padding:0px 14px 0px 10px;
+    font-size: 30px; color:#FFFFFF; 
+    background:#4b576e url("/static/img/fixido_logo_en.png?version=2.4.1") no-repeat 321px -232px;
+}
+.popup_header_sv {
+    height:46px; line-height: 46px;
+    padding:0px 14px 0px 10px;
+    font-size: 30px; color:#FFFFFF; 
+    background:#4b576e url("/static/img/fixido_logo_sv.png?version=2.4.1") no-repeat 321px -232px;
+}
+.popup_header_de {
+    height:46px; line-height: 46px;
+    padding:0px 14px 0px 10px;
+    font-size: 30px; color:#FFFFFF; 
+    background:#4b576e url("/static/img/fixido_logo_de.png?version=2.4.1") no-repeat 321px -232px;
+}
+.instructions {
+    font-size: 22px; color:#4b576e; font-family: Helvetica;
+    text-align: center;
+    line-height:26px;
+    padding:7px 0px 5px;
+   -webkit-box-shadow: 0px 5px 5px rgba(0,0,0,0.08);
+    -moz-box-shadow: 0px 5px 5px rgba(0,0,0,0.08);
+    box-shadow: 0px 5px 5px rgba(0,0,0,0.08);
+    border-bottom:1px solid #dadada;
+}
+.popup_content {
+    padding:9px 14px 9px;
+    border-bottom:1px solid #dadada;
+   -webkit-box-shadow: 0px 5px 5px rgba(0,0,0,0.08);
+    -moz-box-shadow: 0px 5px 5px rgba(0,0,0,0.08);
+    box-shadow: 0px 5px 5px rgba(0,0,0,0.08);
+}
+.deposit_popup .popup_content{
+    padding: 0px;
+  height: 590px;
+  box-shadow: none;
+  border-bottom:none;
+}
+.popup_content .row1 {
+    background: url("/static/img/popup_divider.png?version=2.4.1") no-repeat center bottom;
+    padding: 0px 0px 33px;  margin: 9px 0px 16px;
+}
+.popup_content .last {
+    background:none;
+    margin:0px; padding:5px 0 10px;
+}
+.popup_content .row1 input { margin: 0px 0px 0px 24px; }
+.popup_content .no {
+    width:15px; line-height:14px;
+    margin:0px 8px 0px 0px;
+    text-align:center;
+    color: #fff;
+    font-family:Arial; font-size:14px; font-weight: bold;
+    background:#4b576e; display:block;
+    border: 1px solid #5c677b; border-width:1px 0px;    
+}
+.popup_content label {  color:#000; font-size:14px; }
+.popup_content  .last label{ width:372px; } 
+.popup_footer { padding:14px 0px 17px 0px; }
+.popup_footer input[type="reset"] { margin:0px 18px 0px 8px; }
+.popup_content .row1 li { padding:0px 0px 8px; }
+.popup_content .row1 ul { margin:0px 0px 0px 23px; padding:0px; }
+.popup_content .row1 li.last { padding:0px; }
+.popup_content .row1 li label, .payout_popup .popup_content .row2 li label {
+    width:72px; color:#000; font-weight:bold;
+    line-height: 26px;
+}
+.payout_popup div.incl_title {
+    font-size: 13px;
+    font-style: italic;
+    display: block;
+    padding: 5px 0px;
+}
+.payout_popup .popup_content .row1 { padding:0px 0px 18px; }
+.payout_popup .popup_content .row2 li label { width:142px; line-height:24px; }
+.payout_popup .popup_content .row2 li span { color:#000; font-weight:bold; line-height:24px; width:87px; padding-right:9px; }
+.payout_popup .popup_content .row2 li input { width:73px; height:16px; margin:0px 13px 0px 0px; }
+.deposit_popup .row1 { padding:0px 0px 17px; }
+.deposit_popup .row1 li { padding:0px;}
+.deposit_popup .row1 li span, .deposit_popup .row1 li label { line-height:21px; }
+.deposit_popup .row2 label { width:373px; }
+.forgotpassword_popup {
+    width:360px; padding:13px 0px 0px;
+    display:none;
+}
+.popup_heading {
+    padding:0px 17px 0px;
+}
+.forgotpassword_popup .popup_heading {
+    padding:0px 17px 0px !important;
+}
+.popup_heading span {
+    font-size:12px; font-family:Arial; color:#000000; font-weight: bold;
+    display:block; text-align:right; padding-bottom:4px; cursor:pointer;
+}
+.popup_heading .logo {
+    width:277px; height:48px; 
+    float:left;
+    padding:0px; margin:0px;
+    background: url("/static/img/logo_text.png?version=2.4.1") no-repeat 0px 0px;
+}
+.popup_heading .logo_sv {
+    width:173px; height:48px; 
+    float:left;
+    padding:0px; margin:0px;
+    background: url("/static/img/fixido_logo_sv.png?version=2.4.1") no-repeat 0px -140px;
+}
+.popup_heading .logo_de {
+    width:173px; height:48px; 
+    float:left;
+    padding:0px; margin:0px;
+    background: url("/static/img/fixido_logo_de.png?version=2.4.1") no-repeat 0px -140px;
+}
+.popup_heading .linkedin_signup {
+    width: 130px; height:24px;
+    float:left;
+    background: url("/static/img/linkedin_logo.png?version=2.4.1") no-repeat;    
+}
+.signup_popup .popup_contents, .forgotpassword_popup .popup_contents, .terms_services_popup .popup_contents {
+    padding:0px 17px; position: relative;
+}
+.terms_services_popup .popup_contents {
+    height:400px;
+    overflow: auto;
+}
+
+.reset_password_popup .popup_contents input[type="text"], .reset_password_popup .popup_contents input[type="password"] {
+    margin-bottom:10px !important;
+}
+.btns { padding:0px 0px 13px; }
+.btns label { font-size:11px; font-family: Helvetica; color:#000; line-height:22px; }
+.btns label a { color:#044476; }
+.btns input [type="button"] { width:75px; line-height:22px; }
+.btns .check { margin:4px 5px 0px; float:left; }
+.btns .fl a { color:#000000 !important; line-height:22px; }
+.error_fields {
+    border:1px solid #df0024 !important;
+    color:#df0024 !important;   
+}
+.error_msg {
+    font-size:12px; color:#df0024 !important;
+    display: block; margin:-19px 0 11px;
+}
+.max_pwd_error {
+    color: #DF0024 !important;
+    display: none;
+    font-size: 12px;
+    margin: 0px 0 0px 10px; 
+} 
+.popup_footers {
+    border-top: 1px solid #bebebe;
+    line-height:47px;   text-align:center;
+   -webkit-box-shadow: 0px 5px 5px rgba(0,0,0,0.08);
+    -moz-box-shadow: 0px 5px 5px rgba(0,0,0,0.08);
+    box-shadow: 0px 5px 5px rgba(0,0,0,0.08);
+    background:#f7f7f7;
+}
+.popup_footers span { font-size:10px; font-family:Arial; color:#000; }
+.popup_footers a { font-size:24px; color:#559fd9; text-decoration:underline;}
+.underline { text-decoration:underline; cursor:pointer; }
+.popup_contents input[type="text"], .popup_contents input[type="password"] {
+    width: 387px !important;
+    color: #333333 !important;
+    font-family:Arial !important; font-size:14px !important;
+    margin-bottom:31px !important;
+    border:1px solid #000;
+    padding:10px 0px 10px 5px;
+
+}
+.custom_btn {
+    background-color: #4889f0;
+    background-image: -moz-linear-gradient(center top , #4889f0, #4d90fc);
+    background-repeat: repeat-x;
+    border: 1px solid #3079ed;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-family: Arial;
+    font-size: 15px;
+    line-height: 22px;
+    margin-bottom: 0;
+    text-align: center;
+    vertical-align: middle;
+    width:auto;
 }

@@ -1,8 +1,7 @@
-
 (function($) {
 
   "use strict";
-
+  $.cookie.raw = true;
   var $body = $('body');
   // var $head = $('head');
   // var $mainWrapper = $('#main-wrapper');
@@ -20,8 +19,8 @@
 
   // jquery ui call functionfor calendar
   //------------------------------------------------
-  $( "#datepicker" ).datepicker({ minDate: 0});
-  $( "#datepicker1" ).datepicker({ minDate: 0});
+  $( "#datepicker" ).datepicker({ minDate: 0,dateFormat: 'dd-mm-yy'});
+  $( "#datepicker1" ).datepicker({ minDate: 0,dateFormat: 'dd-mm-yy'});
 
   // Touch
   // ---------------------------------------------------------
@@ -111,28 +110,7 @@
   });
 
 
-  // home slider section
-  //-------------------------------------------
-  var homeSlide = $("#home-slider");
 
-  homeSlide.owlCarousel({
-    autoPlay: 3000,
-    items : 1,
-    navigation : false, // Show next and prev buttons
-    slideSpeed : 600,
-    paginationSpeed : 600,
-    singleItem:true
-
-  });
-
-
-  // Custom Navigation Events
-    $(".next").click(function(){
-      homeSlide.trigger('owl.next');
-    });
-    $(".prev").click(function(){
-      homeSlide.trigger('owl.prev');
-    });
 
     function find_position(path){
       $.get('/find_position/', { path: path }, function(data) {
@@ -159,7 +137,7 @@
 
     function find_city(state){
       $.get('/find_city/', { state: state }, function(data) {
-      $('.select_city').html($('<option>').text("Select City").attr('value', "select_city"));
+      $('.select_city').html($('<option>').text("Select City"));
       $(".select_city").siblings('.select-clone').html($('<li>').text("Select City").attr('data-value', "select_city"));
       $.each(data, function(key,value) {
         $('.select_city').append($('<option>').text(value.name).attr('value', value.id));
@@ -171,7 +149,7 @@
 
    function find_colleges(city_id){
       $.get('/find_colleges/', { city_id: city_id }, function(data) {
-      $('.select_college').html($('<option>').text("Select College").attr('value', "select_college"));
+      $('.select_college').html($('<option>').text("Select College"));
       $(".select_college").siblings('.select-clone').html($('<li>').text("Select College").attr('data-value', "select_college"));
       $.each(data, function(key,value) {
         $('.select_college').append($('<option>').text(value.name).attr('value', value.id));
@@ -183,7 +161,7 @@
 
    function find_department(college_id){
       $.get('/find_department/', { college_id: college_id }, function(data) {
-      $('.select_dept').html($('<option>').text("Select Department").attr('value', "select_department"));
+      $('.select_dept').html($('<option>').text("Select Department"));
       $(".select_dept").siblings('.select-clone').html($('<li>').text("Select Department").attr('data-value', "select_department"));
       $.each(data, function(key,value) {
         $('.select_dept').append($('<option>').text(value.name).attr('value', value.name));
@@ -220,7 +198,6 @@
 
     // $('<input class="value-holder" type="text" disabled="disabled" placeholder="' + placeholder + '"><i class="fa fa-chevron-down"></i>').insertBefore($list);
     $('<input class="value-holder" type="hidden" disabled="disabled" placeholder="' + placeholder + '"><span class="placeholder">' + placeholder + '</span><i class="fa fa-chevron-down"></i>').insertBefore($list);
-    $('<input class="value-holder" type="text" placeholder="' + placeholder + '" name="'+placeholder+'"> value=""');
 
     var $valueHolder = $container.children('.value-holder');
     var $valuePlaceholder = $container.children('.placeholder');
@@ -432,35 +409,35 @@
 
 
 
-  $('a[data-toggle="tab"]').on('shown.bs.tab', function (event) {
-    if(event.target.outerText == 'CONTACT'){
-      $("#contact_map_canvas_one").goMap({
-        maptype: 'ROADMAP',
-        zoom: 13,
-        scrollwheel: false,
+  // $('a[data-toggle="tab"]').on('shown.bs.tab', function (event) {
+  //   if(event.target.outerText == 'CONTACT'){
+  //     $("#contact_map_canvas_one").goMap({
+  //       maptype: 'ROADMAP',
+  //       zoom: 13,
+  //       scrollwheel: false,
 
-        markers: [{
-          latitude: 37.792218928191865,
-          longitude: -122.43700504302979,
-          icon: 'img/content/map-marker-company.png'
-        }]
-      });
+  //       markers: [{
+  //         latitude: 37.792218928191865,
+  //         longitude: -122.43700504302979,
+  //         icon: 'img/content/map-marker-company.png'
+  //       }]
+  //     });
 
 
-      $("#contact_map_canvas_two").goMap({
+  //     $("#contact_map_canvas_two").goMap({
 
-        maptype: 'ROADMAP',
-        zoom: 13,
-        scrollwheel: false,
+  //       maptype: 'ROADMAP',
+  //       zoom: 13,
+  //       scrollwheel: false,
 
-        markers: [{
-          latitude: 37.77125750792944,
-          longitude: -122.4085521697998,
-          icon: 'img/content/map-marker-company.png'
-        }]
-      });
-    }
-  });
+  //       markers: [{
+  //         latitude: 37.77125750792944,
+  //         longitude: -122.4085521697998,
+  //         icon: 'img/content/map-marker-company.png'
+  //       }]
+  //     });
+  //   }
+  // });
   
 
 
@@ -696,6 +673,9 @@
 $("document").ready(function($){
   var nav = $('.header-search-bar');
 
+
+
+
   $(window).scroll(function () {
     if ($(this).scrollTop() > 60) {
         nav.addClass("sticky");
@@ -710,10 +690,77 @@ $("document").ready(function($){
 });
 
 
+  jQuery.fn.center = function () {
+    this.css("top", ( jQuery(window).height() - this.height() ) / 2+jQuery(window).scrollTop()+100 + "px");
+    return this;
+  }
+  
+  $(window).scroll(function (){
+    $(".popup_pos").center();
+        
+  });
 
-$("document").ready(function($){
+
+  $("document").ready(function($){
+
+
+
+  var body_win_height = parseInt(document.body.clientHeight) ;
+  var win_height = parseInt(document.documentElement.clientHeight) ;
+  if( body_win_height > win_height) {
+      $('.popup_fade').height(body_win_height);
+  } else {
+      $('.popup_fade').height(win_height);
+  }
+  
+  $(".popup_pos").center();
+
+  $('.popup_cancel_btn').on('click',function() {
+    $('.pop_up').hide();
+    $('.popup_fade').hide();
+  });
+
+  $('.cancel_btn, .close_btn').on('click', function (){
+    $('.deposit_popup, .popup_fade, .forgotpassword_popup, .terms_services_popup, #signin_popup, #joinus_popup_content, #signin_popup1, #email_activate, #login_window, #login_window1, .lead_details_popup, #directbuy_signin_popup, #auction_popup, #ask_question_popup, #thank_you_popup').hide();
+  });
+
+  $('.login_act').on('click', function (){
+        $('.popup_fade:first').show();
+        $('#signin_popup').show();
+        
+  });
+
+
   // $('.addpost_tipsy').tipsy({gravity: 'e'});
   // $('.addbanner_tipsy').tipsy({gravity: 'e'});
+
+  // home slider section
+  //-------------------------------------------
+  var homeSlide = $("#home-slider");
+
+  homeSlide.owlCarousel({
+    
+    items : 1,
+    loop:true,
+    autoPlay: true,
+    navigation : false, // Show next and prev buttons
+    slideSpeed : 600,
+    paginationSpeed : 600,
+    singleItem:true
+
+
+  });
+
+
+  // Custom Navigation Events
+    $(".next").click(function(){
+      homeSlide.trigger('owl.next');
+    });
+    $(".prev").click(function(){
+      homeSlide.trigger('owl.prev');
+    });
+
+
 
   $(function() {    
     $("#fitltercitytxt" ).autocomplete({
@@ -724,7 +771,8 @@ $("document").ready(function($){
     },
 
     source: function (request, response) {
-        $.getJSON("/getcity?term=" + request.term, function (data) {             
+
+        $.getJSON("/getcity_base?term=" + request.term, function (data) {             
             response($.map(data, function (value, key) {                            
                 return {
                     label: value.label,
@@ -735,7 +783,6 @@ $("document").ready(function($){
         });
     },
     select : function(event, ui) {
-            alert(ui.item.extra);
             $('#fitltercity').val(ui.item.extra);                
     },
     minLength: 2,
@@ -743,9 +790,116 @@ $("document").ready(function($){
     });
   });
 
-  $('.addpost_tipsy,.addbanner_tipsy').click(function(){
-    alert('Please Login or Register');
+  $(function() {    
+    $("#state" ).autocomplete({
+    open: function(){
+        setTimeout(function () {
+            $('.ui-autocomplete').css('z-index', 9999);
+        }, 0);
+    },
+
+    source: function (request, response) {
+        $.getJSON("/getstate?term=" + request.term, function (data) {             
+            response($.map(data, function (value, key) {                            
+                return {
+                    label: value.label,
+                    value: value.value,
+                    extra: value.cityid
+                };
+            }));
+        });
+    },
+    select : function(event, ui) {
+            $('#statetxt').val(ui.item.value);                
+    },
+    minLength: 2,
+    delay: 100
+    });
   });
+  $(function() {    
+    $("#city" ).autocomplete({
+    open: function(){
+        setTimeout(function () {
+            $('.ui-autocomplete').css('z-index', 9999);
+        }, 0);
+    },
+
+    source: function (request, response) {
+         var state=$('#statetxt').val();
+        $.getJSON("/getcity?term=" + request.term+"&state="+state, function (data) {             
+            response($.map(data, function (value, key) {                            
+                return {
+                    label: value.label,
+                    value: value.value,
+                    extra: value.cityid
+                };
+            }));
+        });
+    },
+    select : function(event, ui) {
+            $('#citytxt').val(ui.item.extra);                
+    },
+    minLength: 2,
+    delay: 100
+    });
+  });
+
+  $(function() {    
+    $("#college" ).autocomplete({
+    open: function(){
+        setTimeout(function () {
+            $('.ui-autocomplete').css('z-index', 9999);
+        }, 0);
+    },
+
+    source: function (request, response) {
+        var city=$('#citytxt').val();
+        $.getJSON("/getcollege?term=" + request.term+"&city="+city, function (data) {             
+            response($.map(data, function (value, key) {                            
+                return {
+                    label: value.label,
+                    value: value.value,
+                    extra: value.collegeid
+                };
+            }));
+        });
+    },
+    select : function(event, ui) {
+            $('#collegetxt').val(ui.item.extra);                
+    },
+    minLength: 2,
+    delay: 100
+    });
+  });
+
+  $(function() {    
+    $("#dept" ).autocomplete({
+    open: function(){
+        setTimeout(function () {
+            $('.ui-autocomplete').css('z-index', 9999);
+        }, 0);
+    },
+
+    source: function (request, response) {
+        var college=$('#collegetxt').val();
+        $.getJSON("/getdept?term=" + request.term+"&college="+college, function (data) {             
+            response($.map(data, function (value, key) {                            
+                return {
+                    label: value.label,
+                    value: value.value,
+                    extra: value.cityid
+                };
+            }));
+        });
+    },
+    select : function(event, ui) {
+            $('#depttxt').val(ui.item.value);                
+    },
+    minLength: 2,
+    delay: 100
+    });
+  });
+
 
   $('.select-location,.category-search').click(function(){
     //$('.base_search').focus();
@@ -774,7 +928,6 @@ $("document").ready(function($){
   }
   });
 
-$('.events_fields').hide();
 $('.eventdetail_fields').hide();
 $('.user_fields').hide();
 
@@ -920,10 +1073,32 @@ $('.events').click(function(){
   //postevent form validation
 
   //events
+    // var events_required =["festname_required", "festcaption_val"];
+  $('.free').click(function(){
+    $('input[name="plan"]').val($('input[name="free"]').val());
+    $('.plan_table_act').hide();
+    $('.eventdetail_fields').show();
+    
+  });
+  $('.paid').click(function(){
+    $('input[name="plan"]').val($('input[name="paid"]').val());
+    $('.plan_table_act').hide();
+    $('.eventdetail_fields').show();
+  });
+  $('.login_act').click(function(){
+    $('input[name="plan"]').val($('input[name="paid"]').val());
+  });
+  if($.cookie('plan')){
+    $('.plan_table_act').hide();
+  }
+  else{
+   $('.plan_table_act').show(); 
+  }
+  $('.plan_change').click(function(){
+    $('.plan_table_act').show();
+  });
 
-  // var events_required =["festname_required", "festcaption_val"];
-
-  jQuery('.events_details').click(function(){     
+  jQuery('.free,.events_details,.login_act,.paid').click(function(){     
 
     if($('.eventtitle').val() == ''){
       $('.eventtitle_error').show();
@@ -969,6 +1144,39 @@ $('.events').click(function(){
     }
     else{
       $('.eventdescription_error').hide();
+
+      $.cookie('eventtitle',$('.eventtitle').val(),{path: '/',raw: true});
+      $.cookie('startdate',$('.startdate').val(),{path: '/',raw: true});
+      $.cookie('enddate',$('.enddate').val(),{path: '/',raw: true});
+      if ($.cookie('category')){
+        $.cookie('category',$('.category_id').val(),{path: '/',raw: true});
+        $.cookie('category_name',$('.category_name').val(),{path: '/',raw: true});
+        
+      }
+      else{
+        $.cookie('category',$('.category option:selected').val(),{path: '/',raw: true});
+        $.cookie('category_name',$('.category option:selected').text(),{path: '/',raw: true});
+        
+      }
+      if ($.cookie('eventtype')){
+        $.cookie('eventtype',$('.eventtype_id').val(),{path: '/',raw: true});
+        $.cookie('eventtype_name',$('.eventtype_name').val(),{path: '/',raw: true});
+      }
+      else{
+        $.cookie('eventtype',$('.eventtype option:selected').val(),{path: '/',raw: true});
+        $.cookie('eventtype_name',$('.eventtype option:selected').text(),{path: '/',raw: true});
+      }
+      $.cookie('eventdescription',$('.eventdescription').val(),{path: '/',raw: true});
+      $.cookie('eventdescription',$('.eventdescription').val(),{path: '/',raw: true});
+      $.cookie('plan',$('input[name="plan"]').val(),{path: '/',raw: true});
+
+    }
+    if($('input[name="plan"]').val() == ''){
+      $('.plan_error').show();
+      return false;
+    }
+    else{
+      $('.plan_error').hide();
       $('.eventdetail_fields').show();
     }
   });
@@ -1021,7 +1229,7 @@ jQuery('.user_details').click(function(){
     }
     else{
       $('.dept_error').hide();
-      
+      $('.user_fields').show();
     }
 
   });
@@ -1036,12 +1244,22 @@ jQuery('.user_details').click(function(){
       }
       else{
         $('.user_fields').show();
+        // $.cookie('address',$('.address').val());
+        // $.cookie('organizer',$('.organizer').val());
+        // $.cookie('state',$('.state').val());
+        // $.cookie('city_post',$('.city' ).val());
+        // $.cookie('college',$('.college').val());
+        // $.cookie('dept',$('.dept').val());
+        
+        // var imgData = getBase64Image(bannerImage);
+        // var localStorage.setItem("imgData", imgData);
         return true;
       }
       
     });
   // user validation
 $('.post_event,#paid').click(function(){
+  
   if($('.name').val() == ''){
       $('.name_error').show();
       return false;
@@ -1056,13 +1274,17 @@ $('.post_event,#paid').click(function(){
     else{
       $('.email_error').hide();
     }
-    if($('.mobile').val() == '' && $('.mobile').val().length==10 ){
+    if($('.mobile').val() == '' ){
+      // alert($('.mobile').val());
       $('.mobile_error').show();
       return false;
     }
     else{
       $('.mobile_error').hide();
     }
+  $.cookie('name',$('.name').val(),{path: '/',raw: true});
+  $.cookie('email',$('.email').val(),{path: '/',raw: true});
+  $.cookie('mobile',$('.mobile').val(),{path: '/',raw: true});
 });
 
 

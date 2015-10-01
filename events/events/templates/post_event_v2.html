@@ -43,125 +43,72 @@
             <div class="contact-form">
               <form action="{%url "college_event.views.submit_event_v2" %}" name="postevent" enctype="multipart/form-data" method="POST">{% csrf_token %}
                 <div class="events">Event Details</div>
-                <div class="events_fields">
+                <div class="events_fields price-listing">
                   <div class="row">
                     <div class="col-md-6 col-md-offset-3">
-                      <input type="text" placeholder="Event Title" name="eventtitle" id="eventtitle" class="eventtitle" value="">
+                      <input type="text" placeholder="Event Title" name="eventtitle" id="eventtitle" class="eventtitle" value="{% if request.COOKIES.eventtitle %}{{request.COOKIES.eventtitle}}{% else %}{% endif %}">
                       <label for="festcaption_val" class="eventtitle_error" style="display:none;color:red;">Please enter Event Title</label>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-md-6">
-                      <input  type="text" placeholder="Startdate"  id="datepicker" name="startdate" value="" class="startdate" />
+                      <input  type="text" placeholder="Startdate"  id="datepicker" name="startdate" value="{% if request.COOKIES.startdate %}{{request.COOKIES.startdate}}{% else %}{% endif %}" class="startdate" />
                       <label for="datepicker" class="date1_error" style="display:none;color:red;">Please Choose Start Date</label>
                     </div>
                     <div class="col-md-6">
-                      <input  type="text" placeholder="Enddate"  id="datepicker1" name="enddate" class="enddate" value="" />
+                      <input  type="text" placeholder="Enddate"  id="datepicker1" name="enddate" class="enddate" value="{% if request.COOKIES.enddate %}{{request.COOKIES.enddate}}{% else %}{% endif %}" />
                       <label for="datepicker1" class="date2_error" style="display:none;color:red;">Please enter End Date</label>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-md-6">
+                    {% if request.COOKIES.category %}
+                      <input type="text" placeholder="{{request.COOKIES.category_name}}" id="category_name" class="category_name" value="{{request.COOKIES.category_name}}">
+                      <input type="hidden" name="category" id="category_id" class="category_id" value="{{request.COOKIES.category}}">
+                    <!-- <select class="category select_option select_category" name="category ">
+                    <option value="{{request.COOKIES.category}}" selected="selected">{{request.COOKIES.category_name}}</option>
+
+                      </select> -->
+                      {% else %}
                       <select class="category select_option select_category" name="category ">
                         <option value="">Event Category</option>
                         {% for categories in category %}
                           <option value="{{categories.id}}">{{ categories.name }} </option>
                         {% endfor%}                    
                       </select>
+                    {% endif %}
                       <label for="category" class="category_error" style="display:none;color:red;">Please Choose Event Category</label>
                     </div>
                     <div class="col-md-6">
+                    {% if request.COOKIES.eventtype %}
+                      <input type="text" placeholder="{{request.COOKIES.eventtype_name}}" id="eventtype" class="eventtype_name" value="{{request.COOKIES.eventtype_name}}">
+                      <input type="hidden" name="eventtype" id="eventtype" class="eventtype_id" value="{{request.COOKIES.eventtype}}">
+                      {% else %}
                       <select class="eventtype select_subcategory" name="eventtype" data-placeholder="Event Subcategory">
                         <option value="">Event Subcategory</option>                   
                       </select>
+                      {% endif %}
                       <label class="subcategory_error" style="display:none;color:red;">Please Choose Event Subcategory</label>
                     </div> 
                   </div>
                   <div class="row">
                     <div class="col-md-12">
-                      <textarea placeholder="Event Description" name="eventdescription" class="eventdescription" value=""></textarea>
+                      <textarea placeholder="Event Description" name="eventdescription" class="eventdescription" value="">{% if request.COOKIES.eventdescription %}{{request.COOKIES.eventdescription}}{% else %}{% endif %}</textarea>
                       <label class="eventdescription_error" style="display:none;color:red;">Please Enter Event description</label>
                     </div>
-                  </div> 
-                </div>
-                <div class="events_details">Event Location</div>
-                <div class="eventdetail_fields">
-                  <div class="row">
-                    <div class="col-md-6">
-                      <textarea placeholder="Address" name="address" class="address" value=""></textarea>
-                       <label class="address_error" style="display:none;color:red;">Please Enter Address</label>
-                    </div>
-                    <div class="col-md-6">
-                      <textarea placeholder="Organizer details" name="organizer" class="organizer" value="" ></textarea>
-                      <label class="organizer_error" style="display:none;color:red;">Please Enter Organizer Details</label>
-                    </div>
                   </div>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <select class="state select_state" name="state">
-                        <option value="">State</option>
-                        {% for states in state %}
-                          <option value="{{states}}">{{ states }} </option>
-                        {% endfor%}                    
-                      </select>
-                      <label class="state_error" style="display:none;color:red;">Please Choose State</label>
-                    </div>
-                    <div class="col-md-6">
-                      <select class="city select_option select_city" data-placeholder="Select City" name="city">
-                        <option value="">Select City</option>                
-                      </select>
-                      <label class="city_error" style="display:none;color:red;">Please Choose City</label>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <select class="college select_option select_college" data-placeholder="Select College" name="college">
-                        <option value="">Select College</option> 
-                                          
-                      </select>
-                      <label class="college_error" style="display:none;color:red;">Please Choose College</label>
-                    </div>
-                    <div class="col-md-6">
-                      <select class="dept select_option select_dept" data-placeholder="Select Department" name="dept">
-                        <option value="">Select Department</option>
-                                           
-                      </select>
-                      <label class="dept_error" style="display:none;color:red;">Please Choose Department</label>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-12">
-                      <input type='file' id='poster' class="poster" name='poster[]' multiple='multiple'required/>
-                    </div>
-                  </div> 
-                </div>
-                <div class="user_details">User Details</div>
-                <div class="user_fields price-listing">
-                  <div class="row">
-                    <div class="col-md-6">
-                      <input type="text" placeholder="Name" name="name" value="{{ request.user }}" class="name" required >
-                      <label class="name_error" style="display:none;color:red;">Please Enter Name</label>
-                    </div>
-                    <div class="col-md-6">
-                      <input type="email" placeholder="Email" name="email" value="{{ request.user.email }}" class="email" required>
-                    </div>
-                    <label class="email_error" style="display:none;color:red;">Please Enter Mail Id</label>
-                  </div> 
-                  <div class="row">
-                    <div class="col-md-12">
-                      <input type="text" placeholder="Phone number" name="mobile" class="mobile" value=""> 
-                      <label class="mobile_error" style="display:none;color:red;">Please Enter Valid Phonenumber</label>     
-                    </div>
-                  </div> 
-                  <div class="row">
+                  <div class="row plan_table_act " id="plan_change" style="{% if request.COOKIES.plan %} display:none;{% else %}{%endif%}">
+
+                  
                     <div class="col-md-6 col-sm-6 col-lg-6">
                       <div class="pricing-table">
                         <h3><strong>Free</strong>User</h3>
                         <div class="price">
-                          <span>
+                          <span class="free">
                             {% for premiums in premium %}
                               {% if premiums.purpose == "free" %}
                                 INR {{ premiums.premium_price|floatformat }}
+                                <input type="hidden" name="free" value="{{ premiums.premium_price|floatformat }}">
                               {% endif %}
                             {% endfor %}
                           </span>
@@ -175,17 +122,17 @@
                    
                       </ul>
                       <!-- <input type="submit" class="btn btn-default post_event" data-user="freeuser" value="Free User"> -->
-                      <a class="btn btn-default post_event" href="#" data-user="freeuser"><i class="fa fa-envelope-o"></i>Free User</a>
+                      <a class="btn btn-default free" href="#" data-user="freeuser"><i class="fa fa-envelope-o"></i>Free User</a>
                     </div> </div><!-- end grid-layout -->
                     <div class="col-md-6 col-sm-6 col-lg-6">
                       <div class="pricing-table">
                         <h3><strong>Paid</strong>User</h3>
                         <div class="price">
-                          <span>
+                          <span class="paid">
                             {% for premiums in premium %}
                               {% if premiums.purpose == 'paid' %}
                                 INR {{ premiums.premium_price|floatformat }}
-                                <input type="hidden" name="price" value="{{ premiums.premium_price|floatformat }}" >
+                                <input type="hidden" name="paid" value="{{ premiums.premium_price|floatformat }}" >
                               {% endif %}
                             {% endfor %}    
                           </span>
@@ -198,10 +145,86 @@
                         <!-- <li><i class="fa fa-check-circle-o"></i> Loren ipsum dolor sit amet</li>
                         <li><i class="fa fa-check-circle-o"></i> Loren ipsum dolor sit amet</li> -->
                       </ul>
-                      <a class="btn btn-default" id="paid" data-user="paiduser"><i class="fa fa-envelope-o"></i>Paid User</a>
-                      <input type="hidden" name="userstatus" value="" id="paid" >  
+                    {% if user.is_authenticated %}
+                      <a class="btn btn-default paid"  data-user="paiduser"><i class="fa fa-envelope-o"></i>Paid User</a> 
+                    {% else %}
+                      <a class="btn btn-default login_act"  data-user="paiduser"><i class="fa fa-envelope-o"></i>Paid User</a> 
+                    {% endif %}
                     </div></div> <!-- end grid-layout -->
                   </div>
+                  <label class="plan_error col-md-12 text-center" style="display:none;color:red;">Please Choose Plan</label>
+                </div>
+                <input type="hidden" value="{% if request.COOKIES.plan %}{{request.COOKIES.plan}}{% else %}{% endif %}" name="plan">
+                <div class="events_details">Event Location</div>
+                <div class="eventdetail_fields" style="display:block !important;">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <textarea placeholder="Address" name="address" class="address" value=""></textarea>
+                       <label class="address_error" style="display:none;color:red;">Please Enter Address</label>
+                    </div>
+                    <div class="col-md-6">
+                      <textarea placeholder="Organizer details" name="organizer" class="organizer" value="" ></textarea>
+                      <label class="organizer_error" style="display:none;color:red;">Please Enter Organizer Details</label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <input type="text" placeholder="State" name="state" id="state" class="state ui-autocomplete-input" value="">
+                      <input type="hidden" name="state" id="statetxt" class="state" value="">
+                      <label class="state_error" style="display:none;color:red;">Please Choose State</label>
+                    </div>
+                    <div class="col-md-6">
+                      <input type="text" placeholder="City" id="city" class="city ui-autocomplete-input" value="" name="city">
+                      <input type="hidden" name="city" id="citytxt" class="city" value="">
+                      <label class="city_error" style="display:none;color:red;">Please Choose City</label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <input type="text" placeholder="College" id="college" class="college ui-autocomplete-input" value="" name="college">
+                      <input type="hidden" name="college" id="collegetxt" class="college" value="">
+                      <label class="college_error" style="display:none;color:red;">Please Choose College</label>
+                    </div>
+                    <div class="col-md-6">
+                      <input type="text" placeholder="Departmetn" id="dept" class="dept ui-autocomplete-input" value="" name="dept">
+                      <input type="hidden" name="dept" id="depttxt" class="dept" value="">
+                      <label class="dept_error" style="display:none;color:red;">Please Choose Department</label>
+                    </div>
+                  </div>
+                  
+                </div>
+                <div class="user_details">Upload Banner</div>
+
+                
+                <div class="user_fields ">
+                <div class="row">
+                    <div class="col-md-12">
+                      <input type='file' id='poster' class="poster" name='poster[]' multiple='multiple'/>
+                    </div>
+                  </div> 
+                  <div class="row">
+                    <div class="col-md-6">
+                      <input type="text" placeholder="Name" name="name" value="{{ request.user }}" class="name" required >
+                      <label class="name_error" style="display:none;color:red;">Please Enter Name</label>
+                    </div>
+                    <div class="col-md-6">
+                      <input type="email" placeholder="Email" name="email" value="{{ request.user.email }}" class="email" required>
+                    </div>
+                    <label class="email_error" style="display:none;color:red;">Please Enter Mail Id</label>
+                  </div> 
+                  <div class="row">
+                    <div class="col-md-12">
+                      <input type="text" placeholder="Phone number" name="mobile" class="mobile"  value=""> 
+                      <label class="mobile_error" style="display:none;color:red;">Please Enter Valid Phonenumber</label>     
+                    </div>
+                  </div> 
+                  <div class="row">
+                    <div class="col-md-12">
+                    <input type="submit" class="btn btn-default post_event" value="submit">
+                    <a href="#plan_change"><span class="plan_change">Change Your plan</span></a>
+                    </div>
+                  </div>
+                  
                 </form>
 <div class="payment">
     <form method="post" action="{% url 'payu.views.paid_user' %}" name="payment_form">

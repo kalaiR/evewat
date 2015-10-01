@@ -58,37 +58,6 @@ def home(request):
     ctx = {'subcategory':subcategory, 'city': city,'recentad':recentad}
     return render_to_response("index.html",ctx, context_instance=RequestContext(request))
 
-# @csrf_protect 
-# def user_login(request):
-#   """
-#   Login User
-#   """
-#   logout(request)
-#   username = password = ''    
-
-#   if request.POST["next"] != "http://localhost:8000/register/" :
-#       # print "request.POST['next']", request.POST['next']        
-
-#       username = request.POST['username']
-#       # print 'username', username
-#       password = request.POST['password']
-#       # print 'password', password
-#       user = authenticate(username=username, password=password)
-#       # print 'user', user
-#       if user is not None:
-#           if user.is_active:
-#               login(request, user)
-#               return HttpResponseRedirect(request.POST["next"])
-#   else:
-#       username = request.POST['username']
-#       password = request.POST['password']
-#       user = authenticate(username=username, password=password)
-#       if user is not None:
-#           if user.is_active:
-#               login(request, user)
-#               return HttpResponseRedirect('/')
-#   return render_to_response('index.html',{'username':username},context_instance=RequestContext(request))
-
 @csrf_protect 
 def user_login(request):
     """
@@ -203,15 +172,16 @@ def register(request):
             userprofile.lastname = lastname=request.POST['lastname']
             userprofile.mobile=request.POST['mobile']
 
-            if request.POST['select_city'] != '' and request.POST['select_city'] != 'select_city':
-                city=City.objects.get(id=request.POST['select_city'])
-                userprofile.city_id = city.id
-            if request.POST['select_college'] != '' and request.POST['select_college'] != 'select_college':
-                college=College.objects.get(id=request.POST['select_college'])
-                userprofile.college_id =college.id
-            if request.POST['select_dept'] != '' and request.POST['select_dept'] != 'select_department':
-                department=Department.objects.get(id=request.POST['select_dept'])
-                userprofile.department_id =department.id
+            
+            # if request.POST['select_city'] != '' and request.POST['select_city'] != 'select_city':
+            #     city=City.objects.get(id=request.POST['select_city'])
+            #     userprofile.city_id = city.id
+            # if request.POST['select_college'] != '' and request.POST['select_college'] != 'select_college':
+            #     college=College.objects.get(id=request.POST['select_college'])
+            #     userprofile.college_id =college.id
+            # if request.POST['select_dept'] != '' and request.POST['select_dept'] != 'select_department':
+            #     department=Department.objects.get(id=request.POST['select_dept'])
+            #     userprofile.department_id =department.id
 
             userprofile.confirmation_code = ''.join(random.choice(string.ascii_uppercase + string.digits + string.ascii_lowercase) for x in range(33))
             userprofile.save()          
@@ -225,8 +195,8 @@ def register(request):
     elif user.id is None:
         return HttpResponseRedirect('/')
     else:    
-            user_id = user.id
-            return render_to_response('index.html', {'user_id':user_id} ,context_instance=RequestContext(request))
+        user_id = user.id
+        return render_to_response('index.html', {'user_id':user_id} ,context_instance=RequestContext(request))
 
 
 # def send_registration_confirmation(user):
@@ -363,59 +333,88 @@ def submit_event(request):
     return response
 
 def submit_event_v2(request):
-    if request.method=="POST":
-        postevent=Postevent_v2()
-        postevent.name=request.POST['name']
-        postevent.email=request.POST['email']
-        postevent.mobile=request.POST.get('mobile','0')
-        postevent.event_title=request.POST.get('eventtitle','')
-        postevent.startdate=request.POST.get('startdate','')
-        postevent.enddate=request.POST.get('enddate','')
-        postevent_category=Category.objects.get(id=request.POST.get('category',''))
-        postevent.category=postevent_category
-        postevent_subcategory=SubCategory.objects.get(id=request.POST.get('eventtype',''))
-        postevent.eventtype=postevent_subcategory
-        postevent.eventdescription=request.POST.get('eventdescription','')
-        postevent.address=request.POST.get('address','')
-        postevent.organizer=request.POST.get('organizer','')
-        postevent.state=request.POST.get('state','')
-        postevent_city=City.objects.get(id=request.POST.get('city',''))
-        postevent.city=postevent_city
-        postevent_college=College.objects.get(id=request.POST.get('college',''))
-        postevent.college=postevent_college
-        postevent.department=request.POST.get('dept','')
-        postevent_poster=request.FILES.getlist('poster[]')
-        def handle_uploaded_file(f):            
-            postevent_poster = open('events/static/img/' + '%s' % f.name, 'wb+')
-            # print "settings.FOR_IMG",settings.STATIC_ROOT 
-            for chunk in f.chunks():
-                postevent_poster.write(chunk)
-            postevent_poster.close()
-        photosgroup = ''
-        
-        count=len(postevent_poster)
-        for uploaded_file in postevent_poster:
-            count=count-1
-            handle_uploaded_file(uploaded_file)
-            if count==0:
-                photosgroup=photosgroup  + '/static/img/' + str(uploaded_file)
+    try:
+        if request.method=="POST":
+            postevent=Postevent_v2()
+            postevent.name=request.POST['name']
+            postevent.email=request.POST['email']
+            postevent.mobile=request.POST.get('mobile','0')
+            postevent.event_title=request.POST.get('eventtitle','')
+            startdate=request.POST.get('startdate','')
+            date,month,year=startdate.split('-')
+            postevent.startdate=year+'-'+month+'-'+date
+            enddate=request.POST.get('enddate','')
+            date,month,year=enddate.split('-')
+            postevent.enddate=year+'-'+month+'-'+date
+            postevent_category=Category.objects.get(id=request.POST.get('category',''))
+            postevent.category=postevent_category
+            postevent_subcategory=SubCategory.objects.get(id=request.POST.get('eventtype',''))
+            postevent.eventtype=postevent_subcategory
+            postevent.eventdescription=request.POST.get('eventdescription','')
+            postevent.address=request.POST.get('address','')
+            postevent.organizer=request.POST.get('organizer','')
+            postevent.state=request.POST.get('state','')
+            postevent_city=City.objects.get(id=request.POST.get('city',''))
+            postevent.city=postevent_city
+            postevent_college=College.objects.get(id=request.POST.get('college',''))
+            postevent.college=postevent_college
+            postevent.department=request.POST.get('dept','')
+            postevent_poster=request.FILES.getlist('poster[]')
+            def handle_uploaded_file(f):            
+                postevent_poster = open('events/static/img/' + '%s' % f.name, 'wb+')
+                # print "settings.FOR_IMG",settings.STATIC_ROOT 
+                for chunk in f.chunks():
+                    postevent_poster.write(chunk)
+                postevent_poster.close()
+            photosgroup = ''
+            
+            count=len(postevent_poster)
+            for uploaded_file in postevent_poster:
+                count=count-1
+                handle_uploaded_file(uploaded_file)
+                if count==0:
+                    photosgroup=photosgroup  + '/static/img/' + str(uploaded_file)
+                else:
+                    photosgroup=photosgroup  + '/static/img/' +str(uploaded_file) + ','
+            postevent.poster=photosgroup
+            if request.POST.get('plan')!='0':
+                postevent.payment=request.POST.get('plan')
+            postevent.save()
+            message="Your data succesfully submitted"
+            # paiduser=PremiumPriceInfo.objects.get(purpose='paid')
+            # premium_amount=int(paiduser.premium_price)
+            user_amount=request.POST.get('plan')
+            if user_amount!='0':
+                return HttpResponseRedirect('/payment_event/')
             else:
-                photosgroup=photosgroup  + '/static/img/' +str(uploaded_file) + ','
-        postevent.poster=photosgroup
-        postevent.save()
-        message="Your data succesfully submitted"
-        if request.POST['price']:
-            price=request.POST.get('price','0')
-        response=render_to_response("post_event_v2.html",{'message':message}, context_instance=RequestContext(request))
-        response.set_cookie('price',price)
-    return response
-
+                response=render_to_response("post_event_v2.html",{'message':message}, context_instance=RequestContext(request))
+                response.delete_cookie('eventtitle')
+                response.delete_cookie('startdate')
+                response.delete_cookie('enddate')
+                response.delete_cookie('plan')
+                response.delete_cookie('category_name')
+                response.delete_cookie('eventtype_name')
+                response.delete_cookie('eventtype')
+                response.delete_cookie('category')
+                response.delete_cookie('eventdescription')
+                return response
+    except:
+        response = render_to_response("post_event_v2.html",{'message':'Something went to wrong'}, context_instance=RequestContext(request))
+        response.delete_cookie('eventtitle')
+        response.delete_cookie('startdate')
+        response.delete_cookie('enddate')
+        response.delete_cookie('plan')
+        response.delete_cookie('category_name')
+        response.delete_cookie('eventtype_name')
+        response.delete_cookie('eventtype')
+        response.delete_cookie('category')
+        response.delete_cookie('eventdescription')
+        return response
 
 def all_subcategory_for_category(request):
 
     if request.is_ajax():
         objs1 = SubCategory.objects.all()
-        print 'tetsdfdddddddddddddd',objs1
         return JSONResponse([{'name': o1.name, 'id': o1.id} for o1 in objs1])       
     else:
         return JSONResponse({'error': 'Not Ajax or no GET'})
@@ -531,27 +530,30 @@ def upload_banner(request):
 
 @csrf_exempt
 def success(request):
-
-    # order=Order()
-    # user=User()   
-    # # order.user =User.objects.get(username=username)
-    # order.price=request.COOKIES.get('price')
-    # order.position=request.COOKIES.get('position')
-    # order.banner=request.COOKIES.get('banner')
-    # order.save()
-    # transaction=Transaction()
-    # # transaction.order=Order.objects.get(id=request.COOKIES.get('orderdetails'))
-    # # transaction.payu_details=PayuDetails.objects.get(id=request.COOKIES.get('payudetails'))
-    # transaction.payu_status=request.COOKIES.get('payustatus')
-    # print "transaction.payu_status",transaction.payu_status
-    # transaction.save()
-    # payid, paystatus=store_payudetails(request)
-    # print "payid", payid
-    # print "paystatus", paystatus
-    response = render_to_response("success.html",context_instance=RequestContext(request))
-    # response.set_cookie('payudetails',payid)
-    # response.set_cookie('payustatus',paystatus)
-    # response.set_cookie('orderdetails',order.id)
+    if 'field9' in request.POST:
+        # order=Order()
+        # user=User()   
+        # # order.user =User.objects.get(username=username)
+        # order.price=request.COOKIES.get('price')
+        # order.position=request.COOKIES.get('position')
+        # order.banner=request.COOKIES.get('banner')
+        # order.save()
+        # transaction=Transaction()
+        # # transaction.order=Order.objects.get(id=request.COOKIES.get('orderdetails'))
+        # # transaction.payu_details=PayuDetails.objects.get(id=request.COOKIES.get('payudetails'))
+        # transaction.payu_status=request.COOKIES.get('payustatus')
+        # print "transaction.payu_status",transaction.payu_status
+        # transaction.save()
+        # payid, paystatus=store_payudetails(request)
+        # print "payid", payid
+        # print "paystatus", paystatus
+        response = render_to_response("success.html",context_instance=RequestContext(request))
+        # response.set_cookie('payudetails',payid)
+        # response.set_cookie('payustatus',paystatus)
+        # response.set_cookie('orderdetails',order.id)
+        response.delete_cookie('plan')
+    else:
+        response =HttpResponseRedirect('/') 
     return response
     
 def success_event(request): 
@@ -606,8 +608,9 @@ def getcity(request):
     results = []
     unsort_dict = {}
     key_loc = request.GET.get('term')
-    city_lists = City.objects.filter(city__icontains=key_loc)
-
+    state=request.GET.get('state')
+    filterargs = { 'state': state, 'city__icontains': key_loc }
+    city_lists = City.objects.filter(**filterargs)
     for city_list in city_lists:
         cityname = city_list.city.strip()
         cityid = city_list.id
@@ -620,7 +623,7 @@ def getcity(request):
     return HttpResponse(simplejson.dumps(results), mimetype='application/json')
 
 def importcollegedata(request):
-  
+
   saved = False
   saved_leads = []
   
@@ -799,4 +802,82 @@ def importcollegedata(request):
       
   return render_to_response('import.html', {'form': form, 'saved':saved, 'saved_leads': saved_leads}, 
     context_instance=RequestContext(request))
+
+
+def getstate(request):
+    from collections import OrderedDict
+    results = []
+    unsort_dict = {}
+    key_loc = request.GET.get('term')
+    state_lists = City.objects.filter(state__icontains=key_loc)
+
+    for state_list in state_lists:
+        statename = state_list.state.strip()
+        stateid = state_list.id
+        unsort_dict[statename] = {'stateid':stateid, 'label':statename, 'value':statename}
+
+    sorted_dic = OrderedDict(sorted(unsort_dict.iteritems(), key=lambda v: v[0]))
+    for k, v in sorted_dic.iteritems():  
+        results.append(v)
+
+    return HttpResponse(simplejson.dumps(results), mimetype='application/json')
+
+def getcollege(request):
+    from collections import OrderedDict
+    results = []
+    unsort_dict = {}
+    key_loc = request.GET.get('term')
+    city=request.GET.get('city')
+    filterargs = { 'city_id': city, 'college_name__icontains': key_loc }
+    college_lists = College.objects.filter(**filterargs)
+
+    for college_list in college_lists:
+        collegename = college_list.college_name.strip()
+        collegeid = college_list.id
+        unsort_dict[collegename] = {'collegeid':collegeid, 'label':collegename, 'value':collegename}
+
+    sorted_dic = OrderedDict(sorted(unsort_dict.iteritems(), key=lambda v: v[0]))
+    for k, v in sorted_dic.iteritems():  
+        results.append(v)
+
+    return HttpResponse(simplejson.dumps(results), mimetype='application/json')
+
+def getdept(request):
+    from collections import OrderedDict
+    results = []
+    unsort_dict = {}
+    key_loc = request.GET.get('term')
+    college=request.GET.get('college')
+    filterargs={'college__id':college}
+    department_lists = Department.objects.filter(department__icontains=key_loc)
+    for department_list in department_lists:
+        departmentname = department_list.department.strip()
+        departmentid = department_list.id
+        unsort_dict[departmentname] = {'departmentid':departmentid, 'label':departmentname, 'value':departmentname}
+
+    sorted_dic = OrderedDict(sorted(unsort_dict.iteritems(), key=lambda v: v[0]))
+    for k, v in sorted_dic.iteritems():  
+        results.append(v)
+
+    return HttpResponse(simplejson.dumps(results), mimetype='application/json')
+
+
+def getcity_base(request):
+    from collections import OrderedDict
+    results = []
+    unsort_dict = {}
+    key_loc = request.GET.get('term')
+    city_lists = City.objects.filter(city__icontains= key_loc)
+
+    for city_list in city_lists:
+        cityname = city_list.city.strip()
+        cityid = city_list.id
+        unsort_dict[cityname] = {'cityid':cityid, 'label':cityname, 'value':cityname}
+
+    sorted_dic = OrderedDict(sorted(unsort_dict.iteritems(), key=lambda v: v[0]))
+    for k, v in sorted_dic.iteritems():  
+        results.append(v)
+
+    return HttpResponse(simplejson.dumps(results), mimetype='application/json')
+    
 

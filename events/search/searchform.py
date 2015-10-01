@@ -37,7 +37,8 @@ class EventSearchFilter(FacetedSearchForm):
 
 	eventtype = forms.CharField(required=False)		
 	city = forms.CharField(required=False)		
-	eventtitle = forms.CharField(required=False)	
+	eventtitle = forms.CharField(required=False)
+	payment = forms.CharField(required=False)	
 
 	def no_query_found(self):
 	  print 'no_query_found'  
@@ -86,6 +87,7 @@ class EventSearchFilter(FacetedSearchForm):
 		'eventtype',
 		'city',
 		'eventtitle',
+		'payment'
 	  ]
 	  params = OrderedDict()
 	  print 'params', params
@@ -109,9 +111,9 @@ class EventSearchFilter(FacetedSearchForm):
 	  groupby = None
 	  orderby = None
 
-	 #  orderby_mappings = {
-		# 'city':'city'
-	 #  }
+	  orderby_mappings = {
+		'payment':'-payment'
+	  }
 	  
 	  # if self.cleaned_data['groupby']:
 	  #   groupby = self.cleaned_data['groupby']
@@ -121,9 +123,8 @@ class EventSearchFilter(FacetedSearchForm):
 		# if orderby in orderby_mappings:
 		#   orderby = orderby_mappings[groupby]
 
-	 #  if not orderby:
-		# print "not orderby"
-		# orderby = orderby_mappings['city']
+	  if not orderby:
+		orderby = orderby_mappings['payment']
 
 	  return eventsearch(q, params, orderby, groupby, model_cls=self.get_model_class(), 
 		default_filters=self.get_default_filters(), 
