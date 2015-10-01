@@ -42,6 +42,9 @@ import random
 import string
 import datetime
 
+import time
+import openpyxl
+from forms import UploadFileForm
 
 class JSONResponse(HttpResponse):
     def __init__(self, data):
@@ -53,39 +56,7 @@ def home(request):
     city =get_current_country_cities(request)
     recentad = Postevent.objects.filter().order_by('-id')[:4]
     ctx = {'subcategory':subcategory, 'city': city,'recentad':recentad}
-    print 'request.COOKIES',request.COOKIES
     return render_to_response("index.html",ctx, context_instance=RequestContext(request))
-    
-# @csrf_protect 
-# def user_login(request):
-#   """
-#   Login User
-#   """
-#   logout(request)
-#   username = password = ''    
-
-#   if request.POST["next"] != "http://localhost:8000/register/" :
-#       # print "request.POST['next']", request.POST['next']        
-
-#       username = request.POST['username']
-#       # print 'username', username
-#       password = request.POST['password']
-#       # print 'password', password
-#       user = authenticate(username=username, password=password)
-#       # print 'user', user
-#       if user is not None:
-#           if user.is_active:
-#               login(request, user)
-#               return HttpResponseRedirect(request.POST["next"])
-#   else:
-#       username = request.POST['username']
-#       password = request.POST['password']
-#       user = authenticate(username=username, password=password)
-#       if user is not None:
-#           if user.is_active:
-#               login(request, user)
-#               return HttpResponseRedirect('/')
-#   return render_to_response('index.html',{'username':username},context_instance=RequestContext(request))
 
 @csrf_protect 
 def user_login(request):
@@ -157,8 +128,6 @@ def user_login(request):
                 login(request, user)
                 return HttpResponseRedirect('/')
 
-
-
 def logout_view(request):
     logout(request)
     response = HttpResponseRedirect("/")
@@ -203,6 +172,7 @@ def register(request):
             userprofile.lastname = lastname=request.POST['lastname']
             userprofile.mobile=request.POST['mobile']
 
+            
             # if request.POST['select_city'] != '' and request.POST['select_city'] != 'select_city':
             #     city=City.objects.get(id=request.POST['select_city'])
             #     userprofile.city_id = city.id
@@ -641,7 +611,6 @@ def getcity(request):
     state=request.GET.get('state')
     filterargs = { 'state': state, 'city__icontains': key_loc }
     city_lists = City.objects.filter(**filterargs)
-
     for city_list in city_lists:
         cityname = city_list.city.strip()
         cityid = city_list.id
@@ -652,6 +621,188 @@ def getcity(request):
         results.append(v)
 
     return HttpResponse(simplejson.dumps(results), mimetype='application/json')
+
+def importcollegedata(request):
+
+  saved = False
+  saved_leads = []
+  
+  if request.method == 'POST':
+    form = UploadFileForm(request.POST, request.FILES)
+    
+    if form.is_valid():
+      
+      f = request.FILES['file']
+      path = os.path.join(settings.MEDIA_ROOT, 'imports')
+      
+      if not os.path.isdir(path):
+        os.mkdir(path)
+        
+      path = os.path.join(path, "%s_%s"%(request.user.pk, time.time())) 
+
+      destination = open(path, 'wb+')
+      for chunk in f.chunks():
+        destination.write(chunk)
+      destination.close()      
+      
+      
+      workbook = openpyxl.load_workbook(filename=path)      
+      sheet_names = workbook.get_sheet_names()
+
+      for sheet_name in sheet_names:
+        sheet = workbook.get_sheet_by_name(sheet_name)
+        if sheet_name == 'Sheet1':            
+            rows = sheet.get_highest_row()
+            cols = sheet.get_highest_column()
+
+            city_mapping = {}
+            collegeaddress_mapping = {}
+            collegecategory_mapping = {}
+
+            # consumeraddress_mapping = {}
+            # consumercompanyaddress_mapping = {}
+            # consumercompany_mapping = {}
+            # consumer_mapping = {}
+            # lead_mapping = {}
+            # leadkeyword_mapping = {}
+            # leadcategory_mapping = {}
+
+            city_fields = [f.attname for f in City._meta.local_fields]
+            collegename_fields = [f.attname for f in College._meta.local_fields]
+            collegecategory_fields = [f.attname for f in Category._meta.local_fields]
+
+            # consumeraddress_fields = [f.attname for f in ConsumerAddress._meta.local_fields]
+            # consumercompanyaddress_fields = [f.attname for f in CompanyAddress._meta.local_fields]
+            # lead_fields = [f.attname for f in Lead._meta.local_fields]
+            # consumer_fields = [f.attname for f in Consumer._meta.local_fields]
+            # consumercompany_fields = [f.attname for f in ConsumerCompany._meta.local_fields]
+            # consumercompany_fields += [f.attname for f in CompanyAbstract._meta.fields]
+            # leadkeyword_fields = [f.attname for f in LeadKeyword._meta.local_fields]
+            # leadcategory_fields = [f.attname for f in LeadCategory._meta.local_fields]
+            
+            if rows > 1 and cols > 0 and sheet.cell(row=0, column=0) is not None:                            
+              for i in range( cols ):              
+                v = sheet.cell(row=0, column=i).value
+                v = v.replace(' ', '_').lower()                
+                
+                if v.startswith('city'):
+                   v = v.replace('city_', '')
+                   if v in city_fields:
+                     city_mapping[v] = i
+                
+                if v.startswith('state'):                   
+                   v = v.replace('state_', '')
+                   if v in city_fields:
+                     city_mapping[v] = i
+                
+                if v.startswith('country_code'):                   
+                   v = v.replace('country_code_', '')
+                   if v in city_fields:
+                     city_mapping[v] = i
+                
+                if v.startswith('country_name'):                   
+                   v = v.replace('country_name_', '')
+                   if v in city_fields:
+                     city_mapping[v] = i               
+                
+                if v.startswith('college_name'):                   
+                   v = v.replace('college_name_', '')
+                   if v in collegename_fields:
+                     collegeaddress_mapping[v] = i
+
+                if v.startswith('name'):                   
+                   v = v.replace('name_', '')
+                   if v in collegecategory_fields:
+                     collegecategory_mapping[v] = i     
+                                          
+                
+                # if v.startswith('consumer_consumercompanyaddress'):
+                #    v = v.replace('consumer_consumercompanyaddress_', '')
+                #    if v in consumercompanyaddress_fields:
+                #       consumercompanyaddress_mapping[v] = i
+                
+                # if v.startswith('consumer_consumercompany'):
+                #    v = v.replace('consumer_consumercompany_', '')
+                #    if v in consumercompany_fields:
+                #       consumercompany_mapping[v] = i
+                 
+                # if v.startswith('consumer'):
+                #    v = v.replace('consumer_', '')
+                #    if v in consumer_fields:
+                #      consumer_mapping[v] = i
+                            
+                # if v.startswith('leadkeyword'):
+                #    v = v.replace('leadkeyword_', '')
+                #    #v = v.replace('leadkeyword_', '')
+                #    if v in leadkeyword_fields: 
+                #      leadkeyword_mapping[v] = i
+                
+                # if v.startswith('leadcategory'):
+                #    v = v.replace('leadcategory_', '')
+                #    #v = v.replace('leadkeyword_', '')
+                #    if v in leadcategory_fields: 
+                #      leadcategory_mapping[v] = i   
+                        
+                else:
+                    print 'else-1'      
+                  # if v in lead_fields:
+                  #   lead_mapping[v] = i              
+              
+              print 'rows===>', rows
+              for i in range(1, rows):                
+                citylist = City() if len(city_mapping.keys()) > 0 else None                 
+                collegelist = College() if len(collegeaddress_mapping.keys()) > 0 else None
+                collegecategorylist = Category() if len(collegecategory_mapping.keys()) > 0 else None                      
+
+                print 'city_mapping'
+                for field in city_mapping:
+                  col = city_mapping[field]
+                  v = sheet.cell(row=i, column=col)                                
+                  if v:                    
+                    setattr(citylist, field, v.value)
+
+                for field in collegeaddress_mapping:
+                  col = collegeaddress_mapping[field]
+                  v = sheet.cell(row=i, column=col)                                
+                  if v:
+                    setattr(collegelist, field, v.value)    
+                
+                for field in collegecategory_mapping:
+                  col = collegecategory_mapping[field]
+                  v = sheet.cell(row=i, column=col)                                
+                  if v:                    
+                    setattr(collegecategorylist, field, v.value)                
+                
+                if citylist:
+                  if not City.objects.filter(city=citylist.city).exists():
+                    citylist.save() 
+
+                if collegecategorylist:
+                  if not Category.objects.filter(name=collegecategorylist.name).exists():
+                    collegecategorylist.save()      
+
+                if collegelist:
+                  if City.objects.filter(city=citylist.city).exists():
+                    cityvalue = City.objects.filter(city=citylist.city)                    
+                    for c in cityvalue:
+                        collegelist.city_id = c.id
+                    collegelist.save()
+                  
+                  if Category.objects.filter(name=collegecategorylist.name).exists():
+                    categoryvalue = Category.objects.filter(name=collegecategorylist.name)                    
+                    for c in categoryvalue:
+                        collegelist.collegetype_id = c.id
+                    collegelist.save()  
+          
+      saved = True
+      success_import= 'Successfully imported'
+      return render_to_response('import.html', {'success_import':success_import, 'form': form, 'saved':saved, 'saved_leads': saved_leads}, context_instance=RequestContext(request))
+  else:
+    form = UploadFileForm()
+      
+  return render_to_response('import.html', {'form': form, 'saved':saved, 'saved_leads': saved_leads}, 
+    context_instance=RequestContext(request))
+
 
 def getstate(request):
     from collections import OrderedDict
@@ -728,3 +879,5 @@ def getcity_base(request):
         results.append(v)
 
     return HttpResponse(simplejson.dumps(results), mimetype='application/json')
+    
+
