@@ -19,7 +19,8 @@
 
   // jquery ui call functionfor calendar
   //------------------------------------------------
-  $( "#datepicker" ).datepicker();
+  $( "#datepicker" ).datepicker({ minDate: 0});
+  $( "#datepicker1" ).datepicker({ minDate: 0});
 
   // Touch
   // ---------------------------------------------------------
@@ -101,7 +102,7 @@
   //-----------------------------------------
   $("#partners-slider").owlCarousel({
     autoPlay: 3000,
-    items : 4,
+    items : 3,
     itemsDesktop : [1199,4],
     itemsDesktopSmall : [979,3],
     itemsTablet: [600,2]
@@ -130,6 +131,29 @@
     $(".prev").click(function(){
       homeSlide.trigger('owl.prev');
     });
+
+    function find_position(path){
+      $.get('/find_position/', { path: path }, function(data) {
+      $('.position_required').html($('<option>').text("Select Position").attr('value', "position_required"));
+      //$(".position_required").siblings('.select-clone').html($('<li>').text("Select Position").attr('data-value', "position_required"));
+  
+      $.each(data, function(key,value) {
+        $('.position_required').append($('<option>').text(value.name).attr('value', value.name));
+        $(".position_required").siblings('.select-clone').append($('<li>').text(value.name).attr('data-value', value.name));
+      });
+      });
+    }
+    function find_price(position,path){
+      $.get('/find_price/', { position: position,path: path }, function(data) {
+      //$(".price_required").siblings('.select-clone').html($('<li>').text("Select Position").attr('data-value', "price_required"));
+      $.each(data, function(key,value) {
+        //$('.price_required').append($('<option>').text(value.name).attr('value', value.name));
+        //$(".price_required").siblings('.select-clone').append($('<li>').text(value.name).attr('data-value', value.id));
+        $(".price_required").val(value.name);
+        $('.banner_price_act').text('Amount: '+value.name)
+      });
+      });
+    }
 
     function find_city(state){
       $.get('/find_city/', { state: state }, function(data) {
@@ -160,8 +184,8 @@
       $('.select_dept').html($('<option>').text("Select Department").attr('value', "select_department"));
       $(".select_dept").siblings('.select-clone').html($('<li>').text("Select Department").attr('data-value', "select_department"));
       $.each(data, function(key,value) {
-        $('.select_dept').append($('<option>').text(value.name).attr('value', value.id));
-        $(".select_dept").siblings('.select-clone').append($('<li>').text(value.name).attr('data-value', value.id));
+        $('.select_dept').append($('<option>').text(value.name).attr('value', value.name));
+        $(".select_dept").siblings('.select-clone').append($('<li>').text(value.name).attr('data-value', value.name));
       });
       });
     }
@@ -242,6 +266,40 @@
         if ($this.parent().siblings('.placeholder').text() != "State")
           find_city($this.data('value'));
       }
+      if ($this.parents().children().hasClass('pageurl_required'))
+      {
+        if ($this.parent().siblings('.placeholder').text() != "Select Page URL")
+          if ($this.data('value')=='/')
+          {
+            find_position('home');
+          }
+          else if($this.data('value')=='event/')
+          {
+            find_position('list');
+          }
+          else
+          {
+            find_position('details');
+          }
+      } 
+      if ($this.parents().children().hasClass('position_required'))
+      {
+        if ($this.parent().siblings('.placeholder').text() != "Select Position")
+          var page=$('#pageurl_required').val();
+          if (page=='/')
+          {
+            var path='home';
+          }
+          else if(page=='event/')
+          {
+            var path='list';
+          }
+          else
+          {
+            var path='details';
+          }
+          find_price($this.data('value'),path);
+      }  
       if ($this.parents().children().hasClass('festtype'))
         // alert($select.find('option[value="' + $this.data('value') + '"]'));
         $select.find('option[value="' + $this.data('value') + '"]').attr('selected', true);  
@@ -655,9 +713,17 @@ $("document").ready(function($){
 
 
 $("document").ready(function($){
+  // $('.addpost_tipsy').tipsy({gravity: 'e'});
+  // $('.addbanner_tipsy').tipsy({gravity: 'e'});
+  $('.addpost_tipsy,.addbanner_tipsy').click(function(){
+    alert('Please Login or Register');
+  });
+
   $('.select-location,.category-search').click(function(){
     $('.base_search').focus();
   });
+
+
   $("a.bookmark").click(function(e){
 
      // this will prevent the anchor tag from going the user off to the link
@@ -953,7 +1019,9 @@ $('.user_details').click(function(){
     if ($(".position_required, .pageurl_required, .price_required, .link_required").hasClass("error_input_field")){
     return false;
     } else {
-      $('form[name="upload_banner"]').submit();      
+      $('form[name="upload_banner"]').submit();
+      $('.payment') 
+      $('.banner_price').text($('#price_required').val());     
       return true;
     }
 
