@@ -76,14 +76,14 @@ def buy_order(request):
 
 def paid_user(request):
 	initial = 'mr'
-	fname=request.POST.get('fname',request.COOKIES.get('fname'))
-	lname=request.POST.get('lname',request.COOKIES.get('lname'))
-	pnumber=request.POST.get('pnumber',request.COOKIES.get('pnumber'))
+	fname=request.POST.get('fname',request.COOKIES.get('name'))
+	lname=request.POST.get('lname',request.COOKIES.get('name'))
+	pnumber=request.POST.get('pnumber',request.COOKIES.get('mobile'))
 	email=request.POST.get('email',request.COOKIES.get('email'))
 	txnid=my_random_string(8)
 	cleaned_data = {'key': settings.PAYU_INFO['merchant_key'], 
-					'txnid':txnid,'amount': request.POST.get('price'), 
-					'productinfo':request.POST.get('price'),
+					'txnid':txnid,'amount': request.COOKIES.get('plan'), 
+					'productinfo':request.COOKIES.get('plan'),
 					'firstname':fname,
 					'email': email, 
 					'udf1':'', 'udf2': '', 'udf3': '', 
@@ -119,13 +119,8 @@ def paid_user(request):
 						 settings.PAYU_INFO['curl'],
 						 settings.PAYU_INFO['furl'],
 						 txnid,
-						 request.POST.get('price'),
-						 request.POST.get('price'),
+						 request.COOKIES.get('plan'),
+						 request.COOKIES.get('plan'),
 						 email,
 						  ))
-	response.set_cookie('initial',initial)
-	response.set_cookie('fname',fname)
-	response.set_cookie('lname',lname)
-	response.set_cookie('pnumber',pnumber)
-	response.set_cookie('email',email)
 	return response

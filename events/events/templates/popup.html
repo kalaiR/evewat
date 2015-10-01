@@ -1,0 +1,112 @@
+{% load static from staticfiles %}
+{% block content %}
+<div class="popup_fade"></div><!--popup_fade-->
+
+<div class="signup_popup popup_pos" id="joinus_popup_content">
+        <div class="popup_heading">
+            <a href="#" class="logo"></a>
+            <div class="fr">
+                <span class="close_btn"></span>
+                <!-- <a href="#" class="linkedin_signup"></a> -->
+            </div>
+            <div class="clear_both"></div>
+        </div><!--popup_heading-->
+        <div class="popup_contents">
+            <form action=""  id="popup_joinus_form" method="post" enctype="multipart/form-data" class="join_form">
+                {% csrf_token %}
+                <div class="label_holder">
+        
+        <label class="infield_p" for="fname_p">Name</label>
+        <div class="clear_both"></div>
+        <input type="text" name="fname" id="fname_p" value="" placeholder="" class="form_inputfileds alph_validation" maxlength='30' />
+                </div>
+    
+                <div class="label_holder">
+                    <label class="infield_p" for="company_name_p">Company</label>
+                    <div class="clear_both"></div>
+                    <input type="text" value="" placeholder="" name="company_name" id="company_name_p" class="form_inputfileds alph_validation" maxlength='256' />
+                </div>
+    
+                <div>
+                    <label class="" id='state_p' style="color:red !important"></label>
+                    <!-- {% if errors.email_exists %}
+                    {{ errors.email_exists }}
+                    {% endif %} -->
+                    <div class="label_holder">
+                        <label class="infield_p" for="email_p">Email</label>
+                        <input type="text" id="email_p" placeholder="" name="email" class="form_inputfileds email_input_act" value="" onchange="sndReq(this.value);" maxlength='75' />
+                    </div>
+                </div>
+    
+                <div class="label_holder">
+                    <label class="infield_p" for="phone_number_p">Phone number</label>
+                    <input type="text" value="" placeholder="" name="phone_number" id="phone_number_p" class="form_inputfileds "  maxlength='32' />
+                </div>
+    
+                <div class="terms_services termsofservice_act" >
+                    <span>By signing up, you accept our </span>
+    
+                    <a href="javascript:void(0);" >Terms of service</a>
+                </div><!-- terms_services -->
+                <!-- <input type="submit" name="{%if '/apidocs/' in request.path %}fxapi_registration{% else %}auto_buy_popup_reg{% endif %}"  class="btn signup_btn  banner_signup_form_send_p" data-emailexist ="true" value="Join us"> -->
+
+               <input type="submit" name="home_sign_up"  class="btn signup_btn  banner_signup_form_send_p" data-emailexist ="true" value="Join us">
+
+                
+                <!-- <input type="hidden" id='register_path_lead' value="{{request.path}}{% if request.GET.urlencode %}?{{ request.GET.urlencode }}{% endif %}" name="next" /> -->
+                <div class="clear_both"></div>
+            </form>
+        </div><!--popup_contents-->
+    
+        <div class="popup_footers">
+            <span>Already registered?</span>
+            <a href="javascript:void(0);" class="signin_alert1">Sign in</a>
+        </div><!--popup_footers-->
+        <div class="clear_both"></div>
+    </div><!--signup_popup-->
+
+
+    <div class="signup_popup popup_pos" id="signin_popup">
+        <div class="popup_heading">
+            <a href="#" class="logo"></a>
+            <div class="fr">
+                <span class="close_btn"></span>
+                <!-- <a href="#" class="linkedin_signup"></a> -->
+            </div>
+            <div class="clear_both"></div>
+        </div><!--popup_heading-->
+        <div class="popup_contents">
+            <form method="post" action="/login/">
+                {% csrf_token %}
+                <input type="text" class="text_val_act" value="Email" maxlength='75' id="emailid_signup" name="username" autocomplete="off" />
+                <!-- <span class="error_msg labelError"  id="emailid_required" >Please enter User name</span> -->
+                <input type="password" class="text_val_act" placeholder="Password" value="" name="password"/>
+    
+                <!-- {% if error_message %}
+                {% for message in messages %}
+                <span class="error_msg">{{ message }}</span>
+                {% endfor %}
+                {% endif %} -->
+               
+                <div class="btns">
+                    <div class="fl">
+                    	<input type="hidden" value="singin" name="signin">
+                        <input type="hidden" value="{{ request.get_full_path }}" name="next" />
+                        
+                        <a id="forgotpassword_act" class='forgotpassword'>Forgot your password?</a>
+                    </div>
+                    <input type="submit"name="home_buy_login"class="custom_btn fr" value="Sign in" />
+                    <div class="clear_both"></div>
+    
+                </div>
+            </form>
+        </div><!--popup_contents-->
+    
+        <div class="popup_footers">
+            <a href="javascript:void(0);" id="joinus_popup_window1">Join us now for free</a>
+        </div><!--popup_footers-->
+        <div class="clear_both"></div>
+    </div><!--signup_popup-->
+
+
+{% endblock %}

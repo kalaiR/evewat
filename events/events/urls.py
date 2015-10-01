@@ -71,6 +71,10 @@ urlpatterns = patterns('',
     url(r'^find_position/$', 'banner.views.find_position',name='find_position'),
     url(r'^find_price/$', 'banner.views.find_price',name='find_price'),
     url(r'^getcity/$', 'college_event.views.getcity',name='getcity'),
+    url(r'^getstate/$', 'college_event.views.getstate',name='getstate'),
+    url(r'^getcollege/$', 'college_event.views.getcollege',name='getcollege'),
+    url(r'^getdept/$', 'college_event.views.getdept',name='getdept'),
+    url(r'^getcity_base/$', 'college_event.views.getcity_base',name='getcity_base'),
 
     url(r'^admin/', include(admin.site.urls)),
 )+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

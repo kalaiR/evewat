@@ -2,10 +2,10 @@
 {% load i18n %}
 {% load static from staticfiles %}
 {% block content %}
-
+      {{ request.COOKIES.test }}
       <div class="slider-content">
 
-        <div id="home-slider" class="owl-carousel owl-theme">
+        <div id="home-slider" class="owl-carousel">
         
            {% for banners in banner|get_banner %}
            {% if banners.admin_status == True %}
