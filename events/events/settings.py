@@ -165,6 +165,6 @@ PAYU_INFO = {
              #success url for hotel
              'surl':'http://www.eventswat.com/upload_banner',
              'surl1':'http://www.eventswat.com/success',
-             'curl':'http://www.eventswat.com/post_event',
-             'furl':'http://www.eventswat.com/post_event',
+             'curl':'http://www.eventswat.com/post_event_v2',
+             'furl':'http://www.eventswat.com/post_event_v2',
             }

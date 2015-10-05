@@ -3090,14 +3090,14 @@ form {
   position: relative;
 }
 input {
-  outline: 0;
-  border: none;
-  width: 100%;
-  height: inherit;
-  color: #333333;
-  font-size: 16px;
-  padding: 5px 15px;
-  border-radius: 3px;
+  outline: 0 !important;
+  border: none !important;
+  width: 100% !important;
+  height: inherit !important;
+  color: #333333 !important;
+  font-size: 16px !important;
+  padding: 5px 15px !important;
+  border-radius: 3px !important;
 }
 button {
   border-radius: 3px;
@@ -3250,10 +3250,10 @@ fieldset[disabled] .btn {
   box-shadow: none;
 }
 .btn-default {
-  border: none;
-  color: #333333;
-  background-color: #fdc600;
-  border-color: #cccccc;
+  border: none !important;
+  color: #333333 !important;
+  background-color: #fdc600 !important;
+  border-color: #cccccc !important;
 }
 .btn-default:hover,
 .btn-default:focus,
@@ -3261,14 +3261,14 @@ fieldset[disabled] .btn {
 .btn-default:active,
 .btn-default.active,
 .open > .dropdown-toggle.btn-default {
-  color: #333333;
-  background-color: #ca9e00;
-  border-color: #adadad;
+  color: #333333 !important;
+  background-color: #ca9e00 !important;
+  border-color: #adadad !important;
 }
 .btn-default:active,
 .btn-default.active,
 .open > .dropdown-toggle.btn-default {
-  background-image: none;
+  background-image: none !important;
 }
 .btn-default.disabled,
 .btn-default[disabled],
@@ -3288,17 +3288,17 @@ fieldset[disabled] .btn-default:active,
 .btn-default.disabled.active,
 .btn-default[disabled].active,
 fieldset[disabled] .btn-default.active {
-  background-color: #fdc600;
-  border-color: #cccccc;
+  background-color: #fdc600 !important;
+  border-color: #cccccc !important;
 }
 .btn-default .badge {
-  color: #fdc600;
-  background-color: #333333;
+  color: #fdc600 !important;
+  background-color: #333333 !important;
 }
 .btn-default:hover,
 .btn-default:focus {
   background: #333333 !important;
-  color: #fdc600;
+  color: #fdc600 !important;
 }
 .btn-default-inverse {
   border: none;
@@ -4124,7 +4124,7 @@ fieldset[disabled] .btn-default-inverse.active {
 }
 .slider-content #home-slider .item > img {
    display: block;
-    height: 500px;
+    /*height: 500px;*/
     width: 100%;
 }
 @media (max-width: 992px) {
@@ -4220,11 +4220,13 @@ fieldset[disabled] .btn-default-inverse.active {
   position: absolute;
   top: 47%;
   left: -2px;
+  z-index:9999;
 }
 .slider-content .customNavigation .btn.next {
   position: absolute;
   top: 47%;
   right: -2px;
+  z-index:9999;
 }
 #header {
   position: relative;
@@ -6411,7 +6413,7 @@ fieldset[disabled] .btn-default-inverse.active {
 }
 .contact-us .contact-form input:first-child {
     /*margin-top: 25px;*/
-    width: 40%;
+   /* width: 40%;*/
 }
 @media (max-width: 768px) {
   .contact-us .contact-form input:first-child {
@@ -6420,14 +6422,14 @@ fieldset[disabled] .btn-default-inverse.active {
   }
 }
 .contact-us .contact-form input[type="email"] {
-   float: right;
+   /*float: right;
     margin-top: 24px;
-    width: 47%;
+    width: 47%;*/
 }
 @media (max-width: 768px) {
   .contact-us .contact-form input[type="email"] {
-    float: none;
-    width: 100%;
+    /*float: none;
+    width: 100%;*/
   }
 }
 .contact-us .contact-form textarea {
@@ -7675,8 +7677,9 @@ fieldset[disabled] .btn-default-inverse.active {
 }
 #footer .main-footer .about-globo .footer-logo {
   position: relative;
-  background: url(../img/content/footer_logo_bg.jpg) top center no-repeat;
-  background-size: cover;
+  /*background: url(../img/content/footer_logo_bg.jpg) top center no-repeat;*/
+  /*background-size: cover;*/
+  background: #fff;
   height: 220px;
   text-align: center;
   border-radius: 6px;
@@ -8121,7 +8124,7 @@ fieldset[disabled] .btn-default-inverse.active {
 }
 
 .contact-us .contact-form input:first-child {
-  width: 100% !important;
+  /*width: 100% !important;*/
 }
 
 .simpleFilePreview_multiUI{
@@ -8393,4 +8396,28 @@ ui-autocomplete {
     text-align: center;
     vertical-align: middle;
     width:auto;
+}
+.mandatory_main{
+  position: relative;
+}
+.mandatory{
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}
+.pointer{
+  cursor: pointer;
+}
+.header-call-to-action .btn-default{
+  min-width: 110px;
+  max-width: 162px;
+}
+select{
+  opacity: 0;
+}
+.page-content .about-us p{
+  text-align: justify;
+}
+.privacy_collect{
+  margin-left: 20px;
 }

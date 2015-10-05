@@ -2,18 +2,17 @@
 {% load i18n %}
 {% load static from staticfiles %}
 {% block content %}
-      {{ request.COOKIES.test }}
       <div class="slider-content">
 
         <div id="home-slider" class="owl-carousel">
         
            {% for banners in banner|get_banner %}
-           {% if banners.admin_status == True %}
+           {% if banners.pageurl == '/' and banners.position == 'top' and banners.admin_status == True %}
           <div class="item">
          
-            {% if banners.pageurl == '/' and banners.position == 'top' %}
+            
              <img src="media/{{banners.banner}}"  alt="" title="{{banners.link}}">
-            {% endif %}
+            
             
             <div class="slide-content">
               <!-- <a href="#"><img src="{% static "img/slider-logo.png" %}"alt=""></a>
@@ -24,7 +23,7 @@
 
 
           </div>
-            {% endif %}  
+            {% endif %}
           {% endfor %}
      
           <!-- <div class="item"><img src="media/static/banners/img/banner1.jpg"  alt="">
@@ -252,10 +251,11 @@
       <div class="row clearfix">
         <h2><strong>Featured</strong> Events</h2>
         {% for recentad in recentad %}
+        {% if recentad.admin_status == True %}
          <div class="col-md-3 col-sm-4 col-xs-6">
           <div class="single-product">
             <figure>
-              <img src="/{{recentad.poster}}" alt="">
+              <img src="{{recentad.poster}}" alt="">
 
               <!-- <div class="rating">
                 <ul class="list-inline">
@@ -288,6 +288,7 @@
           </div> <!-- end .single-product -->
 
         </div>
+        {% endif %}
         {% endfor %}
 
        <!--  <div class="col-md-3 col-sm-4 col-xs-6">

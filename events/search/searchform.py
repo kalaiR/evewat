@@ -27,11 +27,9 @@ class Partial(Clean):
 		if query_string[-1] != '*':
 		  query_string = query_string + u'*'
 
-		print "Searching", self.original, query_string
 		return 
 
 class EventSearchFilter(FacetedSearchForm):
-	print 'EventSearchFilter'
 	model = None
 
 
@@ -41,7 +39,6 @@ class EventSearchFilter(FacetedSearchForm):
 	payment = forms.CharField(required=False)	
 
 	def no_query_found(self):
-	  print 'no_query_found'  
 	  data = self.searchqueryset.all()  
 		
 	  if hasattr(self, 'cleaned_data'):
@@ -63,22 +60,17 @@ class EventSearchFilter(FacetedSearchForm):
 	  return data
   
 	def get_default_filters(self):
-	  print 'get_default_filters'
 	  sqs = SearchQuerySet().all()
 	  sqs = sqs.models(Postevent_v2)
-	  print 'sqs',sqs			
 	  return sqs
 
 	def get_default_search_field(self):
-	  print 'get_default_search_field'
 	  return 'searchtext'
 
 	def get_model_class(self):
-	  print 'get_model_class'
 	  return Postevent_v2
 
 	def search(self):
-	  print 'searchv2'
 	  if not hasattr(self, 'cleaned_data'):
 		return eventsearch(model_cls=self.get_model_class(), 
 		  default_filters=self.get_default_filters())
@@ -90,7 +82,6 @@ class EventSearchFilter(FacetedSearchForm):
 		'payment'
 	  ]
 	  params = OrderedDict()
-	  print 'params', params
 	  for p in _params:
 		if p in self.cleaned_data and self.cleaned_data[p]:
 		  params[p] =  self.cleaned_data[p]
@@ -100,11 +91,9 @@ class EventSearchFilter(FacetedSearchForm):
 
 	  if params['eventtype']:
 		params['eventtype'] = params['eventtype']
-		print "params['eventtype']", params['eventtype']
 
 	  if params['city']:
 		params['city'] = params['city']
-		print "params['city']", params['city']   
 
  
 	  q = self.cleaned_data['q'] if 'q' in self.cleaned_data else None

@@ -21,15 +21,12 @@ def get_city(request):
 		user_ip = '114.69.235.2'
 	g = GeoIP()
 	country = g.country_code(user_ip)
-	print "country", country   
 	current_city = get_global_city(request)
-	print "current_city", current_city
 	current_country_cities = City.objects.filter(country_code=country)
 	return current_country_cities
 
 @register.filter	
 def get_current_city_from_cookie(request):
-	print "get_current_city_from_cookie"
 	result = get_global_city(request)
 	return result
 

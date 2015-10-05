@@ -1,5 +1,4 @@
 (function($) {
-
   "use strict";
   $.cookie.raw = true;
   var $body = $('body');
@@ -19,9 +18,33 @@
 
   // jquery ui call functionfor calendar
   //------------------------------------------------
-  $( "#datepicker" ).datepicker({ minDate: 0,dateFormat: 'dd-mm-yy'});
-  $( "#datepicker1" ).datepicker({ minDate: 0,dateFormat: 'dd-mm-yy'});
+  $( ".startdate" ).datepicker({ format: 'dd-mm-yyyy'});
+  $( ".enddate" ).datepicker({ format: 'dd-mm-yyyy'});
+  // for date picker
 
+  var nowTemp = new Date();
+  var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
+
+  var checkin = $('#dpd1').datepicker({
+    onRender: function(date) {
+      return date.valueOf() < now.valueOf() ? 'disabled' : '';
+  }
+  }).on('changeDate', function(ev) {
+  if (ev.date.valueOf() > checkout.date.valueOf()) {
+    var newDate = new Date(ev.date)
+    newDate.setDate(newDate.getDate() + 1);
+    checkout.setValue(newDate);
+  }
+  checkin.hide();
+  $('#dpd2')[0].focus();
+  }).data('datepicker');
+var checkout = $('#dpd2').datepicker({
+  onRender: function(date) {
+    return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
+  }
+}).on('changeDate', function(ev) {
+  checkout.hide();
+}).data('datepicker');
   // Touch
   // ---------------------------------------------------------
   var dragging = false;
@@ -112,7 +135,208 @@
 
 
 
-    function find_position(path){
+  //   function find_position(path){
+  //     $.get('/find_position/', { path: path }, function(data) {
+  //     $('.position_required').html($('<option>').text("Select Position").attr('value', "position_required"));
+  //     //$(".position_required").siblings('.select-clone').html($('<li>').text("Select Position").attr('data-value', "position_required"));
+  
+  //     $.each(data, function(key,value) {
+  //       $('.position_required').append($('<option>').text(value.name).attr('value', value.name));
+  //       $(".position_required").siblings('.select-clone').append($('<li>').text(value.name).attr('data-value', value.name));
+  //     });
+  //     });
+  //   }
+  //   function find_price(position,path){
+  //     $.get('/find_price/', { position: position,path: path }, function(data) {
+  //     //$(".price_required").siblings('.select-clone').html($('<li>').text("Select Position").attr('data-value', "price_required"));
+  //     $.each(data, function(key,value) {
+  //       //$('.price_required').append($('<option>').text(value.name).attr('value', value.name));
+  //       //$(".price_required").siblings('.select-clone').append($('<li>').text(value.name).attr('data-value', value.id));
+  //       $(".price_required").val(value.name);
+  //       $('.banner_price_act').text('Amount: '+value.name)
+  //     });
+  //     });
+  //   }
+
+  //   function find_city(state){
+  //     $.get('/find_city/', { state: state }, function(data) {
+  //     $('.select_city').html($('<option>').text("Select City"));
+  //     $(".select_city").siblings('.select-clone').html($('<li>').text("Select City").attr('data-value', "select_city"));
+  //     $.each(data, function(key,value) {
+  //       $('.select_city').append($('<option>').text(value.name).attr('value', value.id));
+  //       $(".select_city").siblings('.select-clone').append($('<li>').text(value.name).attr('data-value', value.id));
+  //     });
+  //     });
+  //   }
+
+
+  //  function find_colleges(city_id){
+  //     $.get('/find_colleges/', { city_id: city_id }, function(data) {
+  //     $('.select_college').html($('<option>').text("Select College"));
+  //     $(".select_college").siblings('.select-clone').html($('<li>').text("Select College").attr('data-value', "select_college"));
+  //     $.each(data, function(key,value) {
+  //       $('.select_college').append($('<option>').text(value.name).attr('value', value.id));
+  //       $(".select_college").siblings('.select-clone').append($('<li>').text(value.name).attr('data-value', value.id));
+  //     });
+  //     });
+  //   }
+
+
+  //  function find_department(college_id){
+  //     $.get('/find_department/', { college_id: college_id }, function(data) {
+  //     $('.select_dept').html($('<option>').text("Select Department"));
+  //     $(".select_dept").siblings('.select-clone').html($('<li>').text("Select Department").attr('data-value', "select_department"));
+  //     $.each(data, function(key,value) {
+  //       $('.select_dept').append($('<option>').text(value.name).attr('value', value.name));
+  //       $(".select_dept").siblings('.select-clone').append($('<li>').text(value.name).attr('data-value', value.name));
+  //     });
+  //     });
+  //   }
+
+  //   function find_subcategory(category_id){
+  //     $.get('/find_subcategory/', { category_id: category_id }, function(data) {
+  //     $('.select_subcategory').html($('<option>').text("Event Subcategory").attr('value', "select_subcategory"));
+  //     $(".select_subcategory").siblings('.select-clone').html($('<li>').text("Event Subcategory").attr('data-value', "select_subcategory"));
+  //     $.each(data, function(key,value) {
+  //       $('.select_subcategory').append($('<option>').text(value.name).attr('value', value.id));
+  //       $(".select_subcategory").siblings('.select-clone').append($('<li>').text(value.name).attr('data-value', value.id));
+  //     });
+  //     });
+  //   }
+
+  // // UOU Selects
+  // // ---------------------------------------------------------
+  // $.fn.uouCustomSelect = function () {
+
+  //   var $select = $(this);
+
+  //   $select.wrap('<div class="uou-custom-select"></div>');
+
+  //   var $container = $select.parent('.uou-custom-select');
+
+  //   $container.append('<ul class="select-clone"></ul>');
+
+  //   var $list = $container.children('.select-clone'),
+  //     placeholder = $select.data('placeholder') ? $select.data('placeholder') : $select.find('option:eq(0)').text();
+
+  //   // $('<input class="value-holder" type="text" disabled="disabled" placeholder="' + placeholder + '"><i class="fa fa-chevron-down"></i>').insertBefore($list);
+  //   $('<input class="value-holder" type="hidden" disabled="disabled" placeholder="' + placeholder + '"><span class="placeholder">' + placeholder + '</span><i class="fa fa-chevron-down"></i>').insertBefore($list);
+
+  //   var $valueHolder = $container.children('.value-holder');
+  //   var $valuePlaceholder = $container.children('.placeholder');
+
+  //   // Create clone list
+  //   $select.find('option').each(function () {
+  //     var $this = $(this);
+
+  //     $list.append('<li data-value="' + $this.val() + '">' + $this.text() + '</li>');
+  //   });
+
+  //   // Toggle list
+  //   $container.on('click', function () {
+  //     // console.log('click ' + $container);
+  //     $container.toggleClass('active');
+  //     $list.slideToggle(250);
+  //   });
+
+  //   // Option Select
+  //  $list.delegate('li','click', function () {
+  //     var $this = $(this);
+  //     var id_value = $this.attr('data-value');     
+  //     $valueHolder.val(id_value);
+  //     $valuePlaceholder.html($this.text());
+  //     // $(input.valueHolder).parent().next('input[type="hidden"]#subcategoryid').val(id_value);
+  //     $select.find('option[value="' + $this.data('value') + '"]').prop('selected', true);
+  //     // if ($this.parent('select-clone').siblings('select').hasClass('select_city'))
+  //     if ($this.parents().children().hasClass('select_city'))
+  //     { 
+        
+  //       if ($this.parent().siblings('.placeholder').text() != "Select City")
+  //         find_colleges($this.data('value'));
+  //     }
+  //     if ($this.parents().children().hasClass('select_college')){
+  //       if ($this.parent().siblings('.placeholder').text() != "Select College")
+  //       find_department($this.data('value'));
+  //     }
+  //     if ($this.parents().children().hasClass('select_category'))
+  //     {
+  //       if ($this.parent().siblings('.placeholder').text() != "Event Category")
+  //         find_subcategory($this.data('value'));
+  //     }
+  //     if ($this.parents().children().hasClass('select_state'))
+  //     {
+  //       if ($this.parent().siblings('.placeholder').text() != "State")
+  //         find_city($this.data('value'));
+  //     }
+  //     if ($this.parents().children().hasClass('pageurl_required'))
+  //     {
+  //       if ($this.parent().siblings('.placeholder').text() != "Select Page URL")
+  //         if ($this.data('value')=='/')
+  //         {
+  //           find_position('home');
+  //         }
+  //         else if($this.data('value')=='event/')
+  //         {
+  //           find_position('list');
+  //         }
+  //         else
+  //         {
+  //           find_position('details');
+  //         }
+  //     } 
+  //     if ($this.parents().children().hasClass('position_required'))
+  //     {
+  //       if ($this.parent().siblings('.placeholder').text() != "Select Position")
+  //         var page=$('#pageurl_required').val();
+  //         if (page=='/')
+  //         {
+  //           var path='home';
+  //         }
+  //         else if(page=='event/')
+  //         {
+  //           var path='list';
+  //         }
+  //         else
+  //         {
+  //           var path='details';
+  //         }
+  //         find_price($this.data('value'),path);
+  //     }  
+  //     if ($this.parents().children().hasClass('festtype'))
+  //       // alert($select.find('option[value="' + $this.data('value') + '"]'));
+  //       $select.find('option[value="' + $this.data('value') + '"]').attr('selected', true);  
+
+  //   });
+
+
+  //   // Hide
+  //   $container.on('clickoutside touchendoutside mouseoveroutside', function () {
+  //     if (!dragging) {
+  //       $container.removeClass('active');
+  //       $list.slideUp(250);
+  //     }
+  //   });
+
+  //   // Links
+  //   if ($select.hasClass('links')) {
+  //     $select.on('change', function () {
+  //       window.location.href = select.val();
+  //     });
+  //   }
+
+  //   $select.on('change', function () {
+  //     console.log(changed);
+  //     console.log($(this).val());
+  //   });
+  // };
+
+  // $('select').each(function () {
+  //   $(this).uouCustomSelect();
+  // });
+
+  
+
+function find_position(path){
       $.get('/find_position/', { path: path }, function(data) {
       $('.position_required').html($('<option>').text("Select Position").attr('value', "position_required"));
       //$(".position_required").siblings('.select-clone').html($('<li>').text("Select Position").attr('data-value', "position_required"));
@@ -310,10 +534,6 @@
   $('select').each(function () {
     $(this).uouCustomSelect();
   });
-
-  
-
-
 
 
 
@@ -700,13 +920,29 @@ $("document").ready(function($){
         
   });
 
+$(document).mousemove(function(e){
+    if(e.pageY>75 && e.pageY< 275){
+      $('.header-search-bar').slideDown();
+    }
+    else{
+      $('.header-search-bar').hide();
+    }
+  });
 
-  $("document").ready(function($){
+$("document").ready(function($){
+  //alert($(window).height());
+  $('.header-search-bar').show();
 
-
+  
+  $('.slider-content #home-slider .item > img').css('height',$(window).height()-75);
+  $('.slider-content').css('height',$(window).height()-75);
+  if ($.cookie('eventdescription')){
+      $('.eventdescription').val($.cookie('eventdescription'));
+  }
 
   var body_win_height = parseInt(document.body.clientHeight) ;
   var win_height = parseInt(document.documentElement.clientHeight) ;
+  
   if( body_win_height > win_height) {
       $('.popup_fade').height(body_win_height);
   } else {
@@ -950,20 +1186,20 @@ $('.events').click(function(){
 // });
 
 
-    $( "#datepicker" ).datepicker({
-      changeMonth: false,
+    // $( "#datepicker" ).datepicker({
+    //   changeMonth: false,
            
-    });
-     $( "#datepicker1" ).datepicker({
-      changeMonth: false,
+    // });
+    //  $( "#datepicker1" ).datepicker({
+    //   changeMonth: false,
       
       
-    });
-     $( "#datepicker_deadline" ).datepicker({
-      changeMonth: false,
+    // });
+    //  $( "#datepicker_deadline" ).datepicker({
+    //   changeMonth: false,
       
      
-    });
+    // });
 
 
   $('.bxslider').bxSlider({
@@ -1147,31 +1383,31 @@ $('.events').click(function(){
     }
     else{
       $('.eventdescription_error').hide();
-
-      $.cookie('eventtitle',$('.eventtitle').val(),{path: '/',raw: true});
-      $.cookie('startdate',$('.startdate').val(),{path: '/',raw: true});
-      $.cookie('enddate',$('.enddate').val(),{path: '/',raw: true});
+      var date = new Date();
+      date.setTime(date.getTime() + (120 * 1000));
+      $.cookie('eventtitle',$('.eventtitle').val(),{path: '/',raw: true, expires: date});
+      $.cookie('startdate',$('.startdate').val(),{path: '/',raw: true,expires: date });
+      $.cookie('enddate',$('.enddate').val(),{path: '/',raw: true,expires: date});
       if ($.cookie('category')){
-        $.cookie('category',$('.category_id').val(),{path: '/',raw: true});
-        $.cookie('category_name',$('.category_name').val(),{path: '/',raw: true});
+        $.cookie('category',$('.category_id').val(),{path: '/',raw: true,expires: date});
+        $.cookie('category_name',$('.category_name').val(),{path: '/',raw: true,expires: date});
         
       }
       else{
-        $.cookie('category',$('.category option:selected').val(),{path: '/',raw: true});
-        $.cookie('category_name',$('.category option:selected').text(),{path: '/',raw: true});
+        $.cookie('category',$('.category option:selected').val(),{path: '/',raw: true,expires: date});
+        $.cookie('category_name',$('.category option:selected').text(),{path: '/',raw: true,expires: date});
         
       }
       if ($.cookie('eventtype')){
-        $.cookie('eventtype',$('.eventtype_id').val(),{path: '/',raw: true});
-        $.cookie('eventtype_name',$('.eventtype_name').val(),{path: '/',raw: true});
+        $.cookie('eventtype',$('.eventtype_id').val(),{path: '/',raw: true,expires: date});
+        $.cookie('eventtype_name',$('.eventtype_name').val(),{path: '/',raw: true,expires: date});
       }
       else{
-        $.cookie('eventtype',$('.eventtype option:selected').val(),{path: '/',raw: true});
-        $.cookie('eventtype_name',$('.eventtype option:selected').text(),{path: '/',raw: true});
+        $.cookie('eventtype',$('.eventtype option:selected').val(),{path: '/',raw: true,expires: date});
+        $.cookie('eventtype_name',$('.eventtype option:selected').text(),{path: '/',raw: true,expires: date});
       }
-      $.cookie('eventdescription',$('.eventdescription').val(),{path: '/',raw: true});
-      $.cookie('eventdescription',$('.eventdescription').val(),{path: '/',raw: true});
-      $.cookie('plan',$('input[name="plan"]').val(),{path: '/',raw: true});
+      $.cookie('eventdescription',$('.eventdescription').val(),{path: '/',raw: true,expires: date});
+      $.cookie('plan',$('input[name="plan"]').val(),{path: '/',raw: true,expires: date});
 
     }
     if($('input[name="plan"]').val() == ''){
@@ -1182,6 +1418,7 @@ $('.events').click(function(){
       $('.plan_error').hide();
       $('.eventdetail_fields').show();
     }
+
   });
 
   //Event details
@@ -1212,21 +1449,21 @@ jQuery('.user_details').click(function(){
       $('.state_error').hide();
     }
 
-    if($('.select_city').val() == 'select_city'){
+    if($('.select_city').val() == ''){
       $('.city_error').show();
       return false;
     }
     else{
       $('.city_error').hide();
     }
-    if($('.select_college').val() == 'select_college'){
+    if($('.college').val() == ''){
       $('.college_error').show();
       return false;
     }
     else{
       $('.college_error').hide();
     }
-    if($('.select_dept').val() == 'select_department'){
+    if($('.dept').val() == ''){
       $('.dept_error').show();
       return false;
     }
@@ -1235,11 +1472,24 @@ jQuery('.user_details').click(function(){
       $('.user_fields').show();
     }
 
+
   });
 // Image upload
     $(document).on('change','.poster',function(){
       files = this.files;
       size = files[0].size;
+      var oFReader = new FileReader();
+      oFReader.readAsDataURL(this.files[0]);
+      oFReader.onload = function (oFREvent) {
+        var image = new Image();
+        image.src = oFREvent.target.result;
+        image.onload = function () {
+          if ((this.width > 1200) && (this.height>700)&& (this.width<650)&& (this.height<1100)&& (this.size > 1024*2000)) {
+            alert("choose another file");
+          }
+         // access image size here & do further implementation
+        };
+      };
       //max size 50kb => 50*1000
       if( size > 1024*2000){
        alert('Please upload less than 2mb file');

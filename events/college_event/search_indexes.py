@@ -11,7 +11,6 @@ class PosteventIndex(SearchIndex, Indexable):
     searchtext = CharField()
     eventtype = CharField(model_attr='eventtype__id')
     city = CharField(model_attr='city__id')    
-    #festdescription = CharField(model_attr='festdescription')   
     eventtitle = CharField(model_attr='event_title')
     payment=CharField(model_attr='payment')
     
@@ -20,17 +19,14 @@ class PosteventIndex(SearchIndex, Indexable):
         rebuild_index.Command().handle()
 
     def prepare_searchtext(self, obj):
-        print "prepare_searchtext"
         text = []
         if obj.event_title:
             text.append(obj.event_title)
-            print"text title", text
         # if obj.festdescription:
         #     text.append(obj.festdescription)
         #     print"text description", text 
         # text += self.prepare_locations(obj)
         # text += obj.country
-        print "text", text
         search = []
         for t in text:
             t = re.sub(r'[^\w]', ' ', t, flags=re.UNICODE).split(' ')

@@ -160,6 +160,6 @@ PAYU_INFO = {
              #success url for hotel
              'surl':'http://localhost:8000/upload_banner',
              'surl1':'http://localhost:8000/success',
-             'curl':'http://localhost:8000/post_event',
-             'furl':'http://localhost:8000/post_event',
+             'curl':'http://localhost:8000/post_event_v2',
+             'furl':'http://localhost:8000/post_event_v2',
             }

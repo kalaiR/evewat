@@ -2,15 +2,13 @@
 {% load static from staticfiles %}
 {% load i18n %}
 {% block content %}
-
-      <div class="map-section">
         
-             <div class="slider-content">
+      <div class="slider-content">
 
         <div id="home-slider" class="owl-carousel owl-theme">
         
            {% for banners in banner|get_banner %}
-           {% if banners.admin_status == True %}
+           {% if banners.pageurl == '/' and banners.position == 'top' and banners.admin_status == True %}
           <div class="item">
          
             
@@ -56,8 +54,6 @@
         </div>
 
       </div> 
-
-      </div>
   
     <div class="header-nav-bar">      
     </div> <!-- end .header-nav-bar -->
@@ -175,7 +171,7 @@
 
                         <h5><a href="/details/{{events.object.id}}">{{events.object.enddate}}</a> on <a href="/details/{{events.object.id}}">{{events.object.college.college_name}}</a></h5>
 
-                        <p><a href="/details/{{events.object.id}}">{{events.object.eventdescription}}</a></p>
+                        <p><a href="/details/{{events.object.id}}">{{events.object.eventdescription|slice:":125"}}</a></p>
 
                         <a class="read-more" href="/details/{{events.object.id}}"><i class="fa fa-angle-right"></i>Read More</a>
 
