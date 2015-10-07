@@ -32,7 +32,7 @@ from payu.models import *
 from transaction.models import *
 from django.utils import simplejson
 import simplejson as json
-from events.util import get_current_country_cities
+#from events.util import get_current_country_cities
 # from events.context_processors import *
 
 

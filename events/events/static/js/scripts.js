@@ -133,209 +133,6 @@ var checkout = $('#dpd2').datepicker({
   });
 
 
-
-
-  //   function find_position(path){
-  //     $.get('/find_position/', { path: path }, function(data) {
-  //     $('.position_required').html($('<option>').text("Select Position").attr('value', "position_required"));
-  //     //$(".position_required").siblings('.select-clone').html($('<li>').text("Select Position").attr('data-value', "position_required"));
-  
-  //     $.each(data, function(key,value) {
-  //       $('.position_required').append($('<option>').text(value.name).attr('value', value.name));
-  //       $(".position_required").siblings('.select-clone').append($('<li>').text(value.name).attr('data-value', value.name));
-  //     });
-  //     });
-  //   }
-  //   function find_price(position,path){
-  //     $.get('/find_price/', { position: position,path: path }, function(data) {
-  //     //$(".price_required").siblings('.select-clone').html($('<li>').text("Select Position").attr('data-value', "price_required"));
-  //     $.each(data, function(key,value) {
-  //       //$('.price_required').append($('<option>').text(value.name).attr('value', value.name));
-  //       //$(".price_required").siblings('.select-clone').append($('<li>').text(value.name).attr('data-value', value.id));
-  //       $(".price_required").val(value.name);
-  //       $('.banner_price_act').text('Amount: '+value.name)
-  //     });
-  //     });
-  //   }
-
-  //   function find_city(state){
-  //     $.get('/find_city/', { state: state }, function(data) {
-  //     $('.select_city').html($('<option>').text("Select City"));
-  //     $(".select_city").siblings('.select-clone').html($('<li>').text("Select City").attr('data-value', "select_city"));
-  //     $.each(data, function(key,value) {
-  //       $('.select_city').append($('<option>').text(value.name).attr('value', value.id));
-  //       $(".select_city").siblings('.select-clone').append($('<li>').text(value.name).attr('data-value', value.id));
-  //     });
-  //     });
-  //   }
-
-
-  //  function find_colleges(city_id){
-  //     $.get('/find_colleges/', { city_id: city_id }, function(data) {
-  //     $('.select_college').html($('<option>').text("Select College"));
-  //     $(".select_college").siblings('.select-clone').html($('<li>').text("Select College").attr('data-value', "select_college"));
-  //     $.each(data, function(key,value) {
-  //       $('.select_college').append($('<option>').text(value.name).attr('value', value.id));
-  //       $(".select_college").siblings('.select-clone').append($('<li>').text(value.name).attr('data-value', value.id));
-  //     });
-  //     });
-  //   }
-
-
-  //  function find_department(college_id){
-  //     $.get('/find_department/', { college_id: college_id }, function(data) {
-  //     $('.select_dept').html($('<option>').text("Select Department"));
-  //     $(".select_dept").siblings('.select-clone').html($('<li>').text("Select Department").attr('data-value', "select_department"));
-  //     $.each(data, function(key,value) {
-  //       $('.select_dept').append($('<option>').text(value.name).attr('value', value.name));
-  //       $(".select_dept").siblings('.select-clone').append($('<li>').text(value.name).attr('data-value', value.name));
-  //     });
-  //     });
-  //   }
-
-  //   function find_subcategory(category_id){
-  //     $.get('/find_subcategory/', { category_id: category_id }, function(data) {
-  //     $('.select_subcategory').html($('<option>').text("Event Subcategory").attr('value', "select_subcategory"));
-  //     $(".select_subcategory").siblings('.select-clone').html($('<li>').text("Event Subcategory").attr('data-value', "select_subcategory"));
-  //     $.each(data, function(key,value) {
-  //       $('.select_subcategory').append($('<option>').text(value.name).attr('value', value.id));
-  //       $(".select_subcategory").siblings('.select-clone').append($('<li>').text(value.name).attr('data-value', value.id));
-  //     });
-  //     });
-  //   }
-
-  // // UOU Selects
-  // // ---------------------------------------------------------
-  // $.fn.uouCustomSelect = function () {
-
-  //   var $select = $(this);
-
-  //   $select.wrap('<div class="uou-custom-select"></div>');
-
-  //   var $container = $select.parent('.uou-custom-select');
-
-  //   $container.append('<ul class="select-clone"></ul>');
-
-  //   var $list = $container.children('.select-clone'),
-  //     placeholder = $select.data('placeholder') ? $select.data('placeholder') : $select.find('option:eq(0)').text();
-
-  //   // $('<input class="value-holder" type="text" disabled="disabled" placeholder="' + placeholder + '"><i class="fa fa-chevron-down"></i>').insertBefore($list);
-  //   $('<input class="value-holder" type="hidden" disabled="disabled" placeholder="' + placeholder + '"><span class="placeholder">' + placeholder + '</span><i class="fa fa-chevron-down"></i>').insertBefore($list);
-
-  //   var $valueHolder = $container.children('.value-holder');
-  //   var $valuePlaceholder = $container.children('.placeholder');
-
-  //   // Create clone list
-  //   $select.find('option').each(function () {
-  //     var $this = $(this);
-
-  //     $list.append('<li data-value="' + $this.val() + '">' + $this.text() + '</li>');
-  //   });
-
-  //   // Toggle list
-  //   $container.on('click', function () {
-  //     // console.log('click ' + $container);
-  //     $container.toggleClass('active');
-  //     $list.slideToggle(250);
-  //   });
-
-  //   // Option Select
-  //  $list.delegate('li','click', function () {
-  //     var $this = $(this);
-  //     var id_value = $this.attr('data-value');     
-  //     $valueHolder.val(id_value);
-  //     $valuePlaceholder.html($this.text());
-  //     // $(input.valueHolder).parent().next('input[type="hidden"]#subcategoryid').val(id_value);
-  //     $select.find('option[value="' + $this.data('value') + '"]').prop('selected', true);
-  //     // if ($this.parent('select-clone').siblings('select').hasClass('select_city'))
-  //     if ($this.parents().children().hasClass('select_city'))
-  //     { 
-        
-  //       if ($this.parent().siblings('.placeholder').text() != "Select City")
-  //         find_colleges($this.data('value'));
-  //     }
-  //     if ($this.parents().children().hasClass('select_college')){
-  //       if ($this.parent().siblings('.placeholder').text() != "Select College")
-  //       find_department($this.data('value'));
-  //     }
-  //     if ($this.parents().children().hasClass('select_category'))
-  //     {
-  //       if ($this.parent().siblings('.placeholder').text() != "Event Category")
-  //         find_subcategory($this.data('value'));
-  //     }
-  //     if ($this.parents().children().hasClass('select_state'))
-  //     {
-  //       if ($this.parent().siblings('.placeholder').text() != "State")
-  //         find_city($this.data('value'));
-  //     }
-  //     if ($this.parents().children().hasClass('pageurl_required'))
-  //     {
-  //       if ($this.parent().siblings('.placeholder').text() != "Select Page URL")
-  //         if ($this.data('value')=='/')
-  //         {
-  //           find_position('home');
-  //         }
-  //         else if($this.data('value')=='event/')
-  //         {
-  //           find_position('list');
-  //         }
-  //         else
-  //         {
-  //           find_position('details');
-  //         }
-  //     } 
-  //     if ($this.parents().children().hasClass('position_required'))
-  //     {
-  //       if ($this.parent().siblings('.placeholder').text() != "Select Position")
-  //         var page=$('#pageurl_required').val();
-  //         if (page=='/')
-  //         {
-  //           var path='home';
-  //         }
-  //         else if(page=='event/')
-  //         {
-  //           var path='list';
-  //         }
-  //         else
-  //         {
-  //           var path='details';
-  //         }
-  //         find_price($this.data('value'),path);
-  //     }  
-  //     if ($this.parents().children().hasClass('festtype'))
-  //       // alert($select.find('option[value="' + $this.data('value') + '"]'));
-  //       $select.find('option[value="' + $this.data('value') + '"]').attr('selected', true);  
-
-  //   });
-
-
-  //   // Hide
-  //   $container.on('clickoutside touchendoutside mouseoveroutside', function () {
-  //     if (!dragging) {
-  //       $container.removeClass('active');
-  //       $list.slideUp(250);
-  //     }
-  //   });
-
-  //   // Links
-  //   if ($select.hasClass('links')) {
-  //     $select.on('change', function () {
-  //       window.location.href = select.val();
-  //     });
-  //   }
-
-  //   $select.on('change', function () {
-  //     console.log(changed);
-  //     console.log($(this).val());
-  //   });
-  // };
-
-  // $('select').each(function () {
-  //   $(this).uouCustomSelect();
-  // });
-
-  
-
 function find_position(path){
       $.get('/find_position/', { path: path }, function(data) {
       $('.position_required').html($('<option>').text("Select Position").attr('value', "position_required"));
@@ -535,140 +332,6 @@ function find_position(path){
     $(this).uouCustomSelect();
   });
 
-
-
-  // map initialization
-  //-----------------------------------
-
-  // home-map customization
-
-  // $("#map_canvas").goMap({
-
-  //   maptype: 'ROADMAP',
-  //   scrollwheel: false,
-  //   zoom: 6,
-  //   markers: [{
-  //       latitude: 46.454889270677576,
-  //       longitude: 7.45697021484375,
-  //       icon: 'img/content/map-marker.png',
-  //       html: 'Globo'
-  //     },{
-  //       latitude: 49.31079887964633,
-  //       longitude: 4.361572265625,
-  //       icon: 'img/content/map-derection-100.png',
-  //       html: 'Globo'
-  //     },{
-  //       latitude: 44.96479793033104,
-  //       longitude: 4.691162109375,
-  //       icon: 'img/content/map-direction-1000.png',
-  //       html: 'Globo'
-  //     },{
-  //       latitude: 45.39844997630408,
-  //       longitude: 11.019287109375,
-  //       icon: 'img/content/map-direction-20.png',
-  //       html: 'Globo'
-
-  //     },{
-  //       latitude: 45.69083283645816,
-  //       longitude: 16.336669921875,
-  //       icon: 'img/content/map-direction-8.png',
-  //       html: 'Globo'
-  //     },{
-  //       latitude: 47.56170075451973,
-  //       longitude: 14.315185546875,
-  //       icon: 'img/content/map-direction-50.png',
-  //       html: 'Globo'
-  //   }]
-  // });
-
-
-  // company map initialization
-  
-  // $("#company_map_canvas").goMap(
-    
-  
-  // {
-  //   maptype: 'ROADMAP',
-  //   zoom: 15,
-  //   scrollwheel: false,
-  //   address: address1,
-  //   markers: [{
-  //       latitude:latitude1,
-  //       longitude:longitude1,
-  //       icon: '{{ STATIC_URL|escapejs}}/img/map-marker-company.png',
-  //       html: 'Globo'
-  //     }]
-  // });
-
-  // company-map-street
-
-
-
-
-
-
-  // contact map
-
-  // $("#contact_map_canvas").goMap({
-  //   maptype: 'ROADMAP',
-  //   zoom: 13,
-  //   scrollwheel: false,
-
-  //   markers: [{
-  //     latitude: 37.793100669930396,
-  //     longitude: -122.41769313812256,
-  //     icon: 'img/content/map-marker-company.png',
-  //     html: 'Globo'
-  //   }]
-  // });
-
-
-
-  // company-contact map
-
-
-
-
-  // $('a[data-toggle="tab"]').on('shown.bs.tab', function (event) {
-  //   if(event.target.outerText == 'CONTACT'){
-  //     $("#contact_map_canvas_one").goMap({
-  //       maptype: 'ROADMAP',
-  //       zoom: 13,
-  //       scrollwheel: false,
-
-  //       markers: [{
-  //         latitude: 37.792218928191865,
-  //         longitude: -122.43700504302979,
-  //         icon: 'img/content/map-marker-company.png'
-  //       }]
-  //     });
-
-
-  //     $("#contact_map_canvas_two").goMap({
-
-  //       maptype: 'ROADMAP',
-  //       zoom: 13,
-  //       scrollwheel: false,
-
-  //       markers: [{
-  //         latitude: 37.77125750792944,
-  //         longitude: -122.4085521697998,
-  //         icon: 'img/content/map-marker-company.png'
-  //       }]
-  //     });
-  //   }
-  // });
-  
-
-
-
-
-
-
-
-  // distance slider initialize
-
-  // distance slider
 
   $( "#slider-range-min" ).slider({
     range: "min",
@@ -897,11 +560,12 @@ $("document").ready(function($){
 
 
   $(window).scroll(function () {
-    if ($(this).scrollTop() > 60) {
+    if ($(this).scrollTop() > 430) {
         nav.addClass("sticky");
-
+        
     } else {
         nav.removeClass("sticky");
+         $( ".keywords input, .select-location input " ).blur();
     }
 
   });
@@ -909,6 +573,9 @@ $("document").ready(function($){
   
 });
 
+$( ".keywords input, .select-location input " ).focus(function() {
+  $('html, body').animate({ scrollTop: $(".header-search-bar").offset().top }, 500);
+});
 
   jQuery.fn.center = function () {
     this.css("top", ( jQuery(window).height() - this.height() ) / 2+jQuery(window).scrollTop()+100 + "px");
@@ -920,22 +587,14 @@ $("document").ready(function($){
         
   });
 
-$(document).mousemove(function(e){
-    if(e.pageY>75 && e.pageY< 275){
-      $('.header-search-bar').slideDown();
-    }
-    else{
-      $('.header-search-bar').hide();
-    }
-  });
 
 $("document").ready(function($){
   //alert($(window).height());
   $('.header-search-bar').show();
 
   
-  $('.slider-content #home-slider .item > img').css('height',$(window).height()-75);
-  $('.slider-content').css('height',$(window).height()-75);
+  // $('.slider-content #home-slider .item > img').css('height',$(window).height()-75);
+  // $('.slider-content').css('height',$(window).height()-75);
   if ($.cookie('eventdescription')){
       $('.eventdescription').val($.cookie('eventdescription'));
   }
@@ -969,10 +628,6 @@ $("document").ready(function($){
         
   });
 
-
-  // $('.addpost_tipsy').tipsy({gravity: 'e'});
-  // $('.addbanner_tipsy').tipsy({gravity: 'e'});
-
   // home slider section
   //-------------------------------------------
   var homeSlide = $("#home-slider");
@@ -985,7 +640,8 @@ $("document").ready(function($){
     navigation : false, // Show next and prev buttons
     slideSpeed : 600,
     paginationSpeed : 600,
-    singleItem:true
+    singleItem:true,
+    
 
 
   });
@@ -1173,34 +829,6 @@ $('.user_fields').hide();
 $('.events').click(function(){
   $('.events_fields').toggle();
 });
-
-// $('.events_details').click(function(){
-//   $('.eventdetail_fields').toggle();
-//   $('.events_fields').hide();
-// });
-
-// $('.user_details').click(function(){
-//   $('.user_fields').toggle();
-//   $('.eventdetail_fields').hide();
-//   $('.events_fields').hide();
-// });
-
-
-    // $( "#datepicker" ).datepicker({
-    //   changeMonth: false,
-           
-    // });
-    //  $( "#datepicker1" ).datepicker({
-    //   changeMonth: false,
-      
-      
-    // });
-    //  $( "#datepicker_deadline" ).datepicker({
-    //   changeMonth: false,
-      
-     
-    // });
-
 
   $('.bxslider').bxSlider({
   auto: true,
@@ -1497,15 +1125,6 @@ jQuery('.user_details').click(function(){
       }
       else{
         $('.user_fields').show();
-        // $.cookie('address',$('.address').val());
-        // $.cookie('organizer',$('.organizer').val());
-        // $.cookie('state',$('.state').val());
-        // $.cookie('city_post',$('.city' ).val());
-        // $.cookie('college',$('.college').val());
-        // $.cookie('dept',$('.dept').val());
-        
-        // var imgData = getBase64Image(bannerImage);
-        // var localStorage.setItem("imgData", imgData);
         return true;
       }
       
@@ -1591,57 +1210,6 @@ $('.post_event,#paid').click(function(){
 
 });
 
-  // //Payment
-
-  // var payment_details =["fname_required", "lname_required", "mobileno_val", "email_blank"];
-
-  // jQuery('#paynow').click(function(){     
-  //     for (i=0;i<payment_details.length;i++) {
-  //     var input = jQuery('#'+payment_details[i]);
-  //     if (input.val() == "")  {   
-  //       input.addClass("error_input_field");
-  //       input.next('.pay_labelError').show();         
-  //     } else {    
-  //       input.removeClass("error_input_field");
-  //       input.next('.pay_labelError').hide();        
-  //     }
-  //   }
-
-  // if($('.prefix_required').val() == 'Select'){
-  //           $(this).addClass("error_input_field");
-  //           $('.prefix_labelError').show();
-  //       }
-  //       else{
-  //         $(this).removeClass("error_input_field");
-  //         $('.prefix_labelError').hide(); 
-  //       }
-
-  // if ($(":input").hasClass("error_input_field")){
-  //     return false;
-  //     }
-  //     else{
-  //       $('form[name="payment_form"]').submit();      
-  //       return true;
-  //    }
-     
-  //   });
-
-  //password strength
-
-  // $('#password_signin').keyup(function(){
-  //    strength_status = checkStrength($('#password_signin').val());
-  //    $('#password_signin').css({"width":"50%"});
-  //    if ($(this).next().next('.signup_labelError').text() == "Too short" || $(this).next().next('.signup_labelError').text() == "Weak" )
-  //     $(this).next().next('.signup_labelError').css({"color":"red"});
-  //    else if ($(this).next().next('.signup_labelError').text() == "Fair")
-  //     $(this).next().next('.signup_labelError').css({"color":"yellow"});
-  //    else if ($(this).next().next('.signup_labelError').text() == "Good")
-  //     $(this).next().next('.signup_labelError').css({"color":"lightblue"});
-  //    else
-  //     $(this).next().next('.signup_labelError').css({"color":"green"});
-  //   $(this).next().next('.signup_labelError').text(strength_status).show();
-  //   });
-
   $('#password_signin').keyup(function(){
      strength_status = checkStrength($('#password_signin').val());
      // alert(strength_status);
@@ -1713,10 +1281,6 @@ $('.payment').hide();
 $('#paid').click(function(){
   $('.payment').toggle();
 });
-
-// $('#create_user').click(function(){
-  // $('.popup').show();
-// });
 
 var thewidth=$('.advertisement img').width();
 var theheight=$('.advertisement img').height();

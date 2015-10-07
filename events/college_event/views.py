@@ -24,17 +24,17 @@ from events.models import Userprofile
 from banner.models import *
 from django.contrib.auth import authenticate, login,logout
 from django.template import Context
-# from django.template.loader import get_template
+#from django.template.loader import get_template
 from django.template.response import TemplateResponse
 from events.util import format_redirect_url
 from payu.models import *
 from transaction.models import *
 from django.utils import simplejson
 import simplejson as json
-from events.util import get_current_country_cities
-# from events.context_processors import *
+# from events.util import get_current_country_cities
+#from events.context_processors import *
 #For geo
-from django.contrib.gis.geoip import GeoIP
+# from django.contrib.gis.geoip import GeoIP
 from events import globals
 
 from django.contrib.auth.decorators import login_required
@@ -53,9 +53,9 @@ class JSONResponse(HttpResponse):
 # Create your views here.
 def home(request):
     subcategory = SubCategory.objects.all()
-    city =get_current_country_cities(request)
+   # city =get_current_country_cities(request)
     recentad = Postevent_v2.objects.filter().order_by('-id')[:4]
-    ctx = {'subcategory':subcategory, 'city': city,'recentad':recentad}
+    ctx = {'subcategory':subcategory,'recentad':recentad}
     return render_to_response("index.html",ctx, context_instance=RequestContext(request))
 
 def about(request):

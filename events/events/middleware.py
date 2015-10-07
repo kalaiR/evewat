@@ -13,17 +13,17 @@ class Global(object):
     global_city=''
     global_city_id=''
     
-    def process_request(self, request):
-        globals.request = request
-        globals.user = getattr(request, 'user', None)
-        globals.ip = get_client_ip(request)
-        if ',' in globals.ip:
-            globals.ip = globals.ip.split(',')[0].strip()
-        globals.sess = request.session.session_key
-        self.global_country=get_global_country(request)
-        self.global_city=get_global_city(request)
-        self.global_city_id=get_global_city_id(request)
-        self.global_ip= globals.ip
+    # def process_request(self, request):
+    #     globals.request = request
+    #     globals.user = getattr(request, 'user', None)
+    #     globals.ip = get_client_ip(request)
+    #     if ',' in globals.ip:
+    #         globals.ip = globals.ip.split(',')[0].strip()
+    #     globals.sess = request.session.session_key
+    #     self.global_country=get_global_country(request)
+    #     self.global_city=get_global_city(request)
+    #     self.global_city_id=get_global_city_id(request)
+    #     self.global_ip= globals.ip
     
     def process_response(self, request, response):
         """while response set cookie for language"""

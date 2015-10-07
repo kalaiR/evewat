@@ -35,129 +35,7 @@
       <div class="header-logo text-center">
           <a href="/"><img src = "{% static "img/logo.png" %}" height="50"></a>
         </div>
-       {% if user.is_authenticated %}
-       <!-- HEADER-LOGOUT -->
-
-        <div class="header-logout">
-           <a href="/logout/" class=""><i class="fa fa-power-off"></i>Logout</a>
-           <a href="/">{{username}}</a>
-        </div> <!-- END .HEADER-LOGOUT -->
-
-
-        {% else %}       
-      
-        <!-- HEADER-LOGIN -->
-        <div class="header-login">
-
-          <a href="#" class=""><i class="fa fa-power-off" action="/login/"></i> Login</a>
-          <span class="signup_error" style="{% if request.REQUEST.lst and not request.path == '/post_event_v2' %} display:block;color:red;font-size:17px; {%else%} display: none; {% endif %}">
-              {%for message in messages%}{{message}}{% endfor %}
-          </span>
-          <!-- <a class="login_act">login_act</a> -->
- 
-          <div>
-            <form method="post" id="login_val" action="/login/" name="sign_in">
-
-            {% csrf_token %}    
-            
-              <div class="field_control">        
-              <input type="text" class="form-control"  placeholder="Username/Email" id="emailid_signup" name="username" autocomplete="off" >
-              <label for="emailid_signup" id="emailid_required" class="labelError" style="display:none;color:red;">Please enter User name</label>  
-              </div>
-
-              <div class="field_control">   
-              <input type="password" class="form-control" name="password" id="password_signup" placeholder="Password">
-              <label for="password" id="password_required" class="labelError" style="display:none;color:red;">Please enter Password</label>
-              </div>
-
-              <input type="hidden" value="{{ request.get_full_path }}" name="next" /> 
-
-              <input type="submit" class="btn btn-default" value="Login" name="create" id="signin">
-              <!-- <a href="#" class="btn btn-link">Forgot Password?</a> -->
-            </form>
-          </div>
-
-        </div> <!-- END .HEADER-LOGIN -->
-         {% endif %}
-
-   <!-- HEADER REGISTER -->
-   {% if not user.is_authenticated %}
-        <div class="header-register">
-        
-          <a href="#" class=""><i class="fa fa-plus-square"></i> Register</a>
-          &nbsp;&nbsp;&nbsp;<a href="/">{{request.user.email}}</a>
-          <span class="signup_error" style="{% if request.REQUEST.rst %} display:block;color:red;font-size:17px; {%else%} display: none; {% endif %}">
-              {%for message in messages%}{{message}}{% endfor %}
-          </span>
-          <div>        
-            <form id="user_form" method="post" action="/register/" name="sign_up">
-            {% csrf_token %}
-
-            <div class="field_control">
-            <input type="text" class="form-control" name="username" placeholder="Firstname" id="username_signin" autocomplete="off">
-            <label for="username_signin" id="username_required1" class="signup_labelError">Please enter First name</label>
-            </div>
-
-            <div class="field_control">
-            <input type="text" class="form-control" name="lastname" placeholder="Lastname" id="lastname_signin" autocomplete="off">
-            <label for="lastname_signin" id="lastname_required1" class="signup_labelError">Please enter Last name</label>
-            </div>
-
-            <div class="field_control">
-            <input type="email" class="form-control" name="email_id" placeholder="email_id" id="emailid_signin" autocomplete="off">
-
-            <label for="emailid_signin" id="emailid_required1" class="signup_labelError">Please enter email id</label>
-            <span id="valid_signup_email_required" class="error_message">Please enter valid Email</span>
-            </div>
-
-            <div class="field_control">
-            <input type="text" class="form-control" name="mobile" placeholder="Mobile" id="mobile_signin" autocomplete="off">
-            <label for="mobile_signin" id="mobile_required1" class="signup_labelError">Please enter Mobile number</label>
-            </div>
-
-            <div class="field_control">
-            <input type="password" class="form-control" name="password" placeholder="password" id="password_signin" autocomplete="off">
-            <span id="result"></span>
-            <label for="password" id="password_signin1" class="signup_labelError" style="display:none;">Please enter Password</label>
-            </div>
-
-            <!-- <div class="field_control">
-            <select class="select_option select_city" data-placeholder="Select City" name="select_city">
-              <option value="">Select City</option>
-              {% for cities in city %}
-              <option id="city_selected" value="{{cities.id}}">{{cities.city}} </option>
-              {% endfor %}
-            </select>
-            <label id="id_city_required" class="signup_labelError" style="font-size:12px;display:none;">Please Choose city</label>
-            </div>
-            
-            <div class="field_control">
-            <select class="select_option select_college" data-placeholder="Select College" name="select_college">
-              <option value="">Select College</option>   
-            </select>
-            <label id="id_college_required" class="signup_labelError" style="font-size:12px;display:none;">Please Choose College</label>
-            </div>
-
-            <div class="field_control">
-            <select class="select_option select_dept" data-placeholder="Select Department" name="select_dept">
-              <option value="">Select Department</option>             
-            </select>
-            <label id="id_department_required" class="signup_labelError" style="font-size:12px;display:none;">Please Choose department</label>
-            </div> -->
-            
-            
-            <input type="submit" class="btn btn-default create_user" value="Register" name="Create" id="create_user">
-            </form>
-          </div>
-
-        </div>
-      {% else %}
-        <div class="header-register">
-          <a href="/">{{request.user.email}}</a>
-          <span class="signup_error" style="{% if request.REQUEST.st %} display:block;color:red;font-size:17px; {%else%} display: none; {% endif %}">
-          {%for message in messages%}{{message}}{% endfor %}</span>
-        </div>
-      {% endif %}
+       
          <!-- END .HEADER-REGISTER -->
         <!-- HEADER-LOGIN -->
        <!--  <div class="header-login">
@@ -231,9 +109,147 @@
 
         <!-- CALL TO ACTION -->
         <div class="header-call-to-action">
+         <div class="fl">
+            
+
+   <!-- HEADER REGISTER -->
+   {% if not user.is_authenticated %}
+        <div class="header-register">
+        
+          <a href="#" class=""><i class="fa fa-plus-square"></i> Register</a>
+          &nbsp;&nbsp;&nbsp;<a href="/">{{request.user.email}}</a>
+          <span class="signup_error" style="{% if request.REQUEST.rst %} display:block;color:red;font-size:17px; {%else%} display: none; {% endif %}">
+              {%for message in messages%}{{message}}{% endfor %}
+          </span>
+          <div class="register_holder">        
+            <form id="user_form" method="post" action="/register/" name="sign_up">
+            {% csrf_token %}
+
+            <div class="field_control">
+            <input type="text" class="form-control" name="username" placeholder="Firstname" id="username_signin" autocomplete="off">
+            <label for="username_signin" id="username_required1" class="signup_labelError">Please enter First name</label>
+            </div>
+
+            <div class="field_control">
+            <input type="text" class="form-control" name="lastname" placeholder="Lastname" id="lastname_signin" autocomplete="off">
+            <label for="lastname_signin" id="lastname_required1" class="signup_labelError">Please enter Last name</label>
+            </div>
+
+            <div class="field_control">
+            <input type="email" class="form-control" name="email_id" placeholder="email_id" id="emailid_signin" autocomplete="off">
+
+            <label for="emailid_signin" id="emailid_required1" class="signup_labelError">Please enter email id</label>
+            <span id="valid_signup_email_required" class="error_message">Please enter valid Email</span>
+            </div>
+
+            <div class="field_control">
+            <input type="text" class="form-control" name="mobile" placeholder="Mobile" id="mobile_signin" autocomplete="off">
+            <label for="mobile_signin" id="mobile_required1" class="signup_labelError">Please enter Mobile number</label>
+            </div>
+
+            <div class="field_control">
+            <input type="password" class="form-control" name="password" placeholder="password" id="password_signin" autocomplete="off">
+            <span id="result"></span>
+            <label for="password" id="password_signin1" class="signup_labelError" style="display:none;">Please enter Password</label>
+            </div>
+
+            <!-- <div class="field_control">
+            <select class="select_option select_city" data-placeholder="Select City" name="select_city">
+              <option value="">Select City</option>
+              {% for cities in city %}
+              <option id="city_selected" value="{{cities.id}}">{{cities.city}} </option>
+              {% endfor %}
+            </select>
+            <label id="id_city_required" class="signup_labelError" style="font-size:12px;display:none;">Please Choose city</label>
+            </div>
+            
+            <div class="field_control">
+            <select class="select_option select_college" data-placeholder="Select College" name="select_college">
+              <option value="">Select College</option>   
+            </select>
+            <label id="id_college_required" class="signup_labelError" style="font-size:12px;display:none;">Please Choose College</label>
+            </div>
+
+            <div class="field_control">
+            <select class="select_option select_dept" data-placeholder="Select Department" name="select_dept">
+              <option value="">Select Department</option>             
+            </select>
+            <label id="id_department_required" class="signup_labelError" style="font-size:12px;display:none;">Please Choose department</label>
+            </div> -->
+            
+            
+            <input type="submit" class="btn btn-default create_user fr" value="Register" name="Create" id="create_user">
+            <a class="btn btn-link fl">Post 30 days free events</a>
+            <div class="clear_both"> </div>
+            </form>
+          </div>
+
+        </div>
+      {% else %}
+        <div class="header-register">
+          <a href="/">{{request.user.email}}</a>
+          <span class="signup_error" style="{% if request.REQUEST.st %} display:block;color:red;font-size:17px; {%else%} display: none; {% endif %}">
+          {%for message in messages%}{{message}}{% endfor %}</span>
+        </div>
+      {% endif %} 
+
+      {% if user.is_authenticated %}
+       <!-- HEADER-LOGOUT -->
+
+        <div class="header-logout">
+           <a href="/logout/" class=""><i class="fa fa-power-off"></i> Logout</a>
+           <a href="/">{{username}}</a>
+        </div> <!-- END .HEADER-LOGOUT -->
+
+
+        {% else %}       
+      
+        <!-- HEADER-LOGIN -->
+        <div class="header-login">
+
+          <a href="#" class=""><i class="fa fa-power-off" action="/login/"></i> Login</a>
+          <span class="signup_error" style="{% if request.REQUEST.lst and not request.path == '/post_event_v2' %} display:block;color:red;font-size:17px; {%else%} display: none; {% endif %}">
+              {%for message in messages%}{{message}}{% endfor %}
+          </span>
+          <!-- <a class="login_act">login_act</a> -->
+ 
+          <div class="login_holder">
+            <form method="post" id="login_val" action="/login/" name="sign_in">
+
+            {% csrf_token %}    
+            
+              <div class="field_control">        
+              <input type="text" class="form-control"  placeholder="Username/Email" id="emailid_signup" name="username" autocomplete="off" >
+              <label for="emailid_signup" id="emailid_required" class="labelError" style="display:none;color:red;">Please enter User name</label>  
+              </div>
+
+              <div class="field_control">   
+              <input type="password" class="form-control" name="password" id="password_signup" placeholder="Password">
+              <label for="password" id="password_required" class="labelError" style="display:none;color:red;">Please enter Password</label>
+              </div>
+
+              <input type="hidden" value="{{ request.get_full_path }}" name="next" /> 
+
+              <input type="submit" class="btn  btn-default fr" value="Login" name="create" id="signin">
+              <a href="#" class="btn btn-link fl">Forgot Password?</a>
+               <div class="clear_both"> </div>
+            </form>
+          </div>
+
+        </div> <!-- END .HEADER-LOGIN -->
+         {% endif %}
+
+          </div>
           <a href="/post_event_v2" class="btn btn-default"><i class="fa fa-plus"></i> Add Post</a>
           <a href="/banner" class="btn btn-default"><i class="fa fa-plus"></i> Add Banner</a>
+
+
+    
         </div><!-- END .HEADER-CALL-TO-ACTION -->
+
+
+        
+
       </div><!-- END .CONTAINER -->
     </div>
     <!-- END .HEADER-TOP-BAR -->
@@ -309,9 +325,7 @@
                  <!-- <select class="city" name="city">
                   <option value="">Select City</option> 
                    <option  id="currentid" value="{{request.COOKIES.global_city_id}}">"city"|get_current_city</option>
-                   {% for cities in city|get_city %}
-                        <option value="{{cities.id}}" id="ajax_cityid">{{ cities }} </option>
-                    {% endfor%} 
+                  
 
                   </select> -->        
                    <input type="text" class="form-control input-lg ui-autocomplete-input" placeholder="City" value="" id="fitltercitytxt" /> 
@@ -374,12 +388,12 @@
       <div class="container">
         <div class="row">
 
-          <div class="col-md-4 col-sm-6">
+          <div class="col-md-3 col-sm-6">
             <div class="about-globo">
               <h3>Eventswat</h3>
 
               <div class="footer-logo">
-                <a href="/"><img src="{%static "img/logo.png"%}" height="150" alt=""></a>
+                <a href="/"><img src="{%static "img/logo_150.png"%}" height="150" alt=""></a>
                <!--  <span></span> --> <!-- This content for overlay effect -->
               </div>
 
@@ -417,7 +431,7 @@
             </div>
           </div> --> <!-- end Grid layout-->
 
-          <div class="col-md-4 col-sm-6 clearfix">
+          <div class="col-md-3 col-sm-3 clearfix">
             <div class="popular-categories">
               <h3>Why Eventswat</h3>
               <ul>
@@ -429,7 +443,19 @@
             </div> <!-- end .popular-categories-->
           </div> <!-- end Grid layout-->
 
-          <div class="col-md-4 col-sm-6">
+          <div class="col-md-3 col-sm-3 clearfix">
+            <div class="popular-categories">
+              <h3>Why Eventswat</h3>
+              <ul>
+                <li><a href="/about"><i class="fa fa-shopping-cart"></i>About us</a></li>
+                <li><a href="/privacy"><i class="fa fa-paper-plane-o"></i>Privacy policy</a></li>
+                <li><a href="#"><i class="fa fa-cogs"></i>Terms and Conditions</a></li>
+                <li><a href="#"><i class="fa fa-book"></i>FAQs</a></li>
+              </ul>
+            </div> <!-- end .popular-categories-->
+          </div> <!-- end Grid layout-->
+
+          <div class="col-md-2 col-sm-6">
             <div class="newsletter">
 
               <h3>Keep In Touch</h3>
@@ -454,7 +480,7 @@
 
     <div class="copyright">
       <div class="container">
-        <p>Copyright 2014 &copy; Eventswat.com. All rights reserved. Powered by  <a href="/">Eventswat</a></p>
+        <p>Copyright 2014 &copy; <i class="logo_blue">Events</i><i class="logo_red">wat</i>.com. All rights reserved. Powered by  <a href="/"><i class="logo_blue">Events</i><i class="logo_red">wat</i></a></p>
 
         <!-- <ul class="list-inline">
           <li><a href="#">Home</a></li>
