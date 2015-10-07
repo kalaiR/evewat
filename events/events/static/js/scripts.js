@@ -890,24 +890,24 @@ function find_position(path){
 
 
 
-$("document").ready(function($){
-  var nav = $('.header-search-bar');
+// $("document").ready(function($){
+//   var nav = $('.header-search-bar');
 
 
 
 
-  $(window).scroll(function () {
-    if ($(this).scrollTop() > 60) {
-        nav.addClass("sticky");
+//   $(window).scroll(function () {
+//     if ($(this).scrollTop() > 60) {
+//         nav.addClass("sticky");
 
-    } else {
-        nav.removeClass("sticky");
-    }
+//     } else {
+//         nav.removeClass("sticky");
+//     }
 
-  });
+//   });
 
   
-});
+// });
 
 
   jQuery.fn.center = function () {
@@ -936,6 +936,10 @@ $("document").ready(function($){
   $('.west').tipsy({gravity: 'w'});
   $('.east').tipsy({gravity: 'e'});
   $('.south').tipsy({gravity: 's'});
+  $('.northwest').tipsy({gravity: 'nw'});
+  $('.southwest').tipsy({gravity: 'sw'});
+  $('.northeast').tipsy({gravity: 'ne'});
+  $('.southeast').tipsy({gravity: 'se'});
 
   // $('.header-search-bar').show();
 
@@ -1028,11 +1032,15 @@ $("document").ready(function($){
         });
     },
     select : function(event, ui) {
-            $('#fitltercity').val(ui.item.extra);                
+            $('#fitltercity').val(ui.item.value);                
     },
     minLength: 2,
     delay: 100
     });
+  });
+  
+  $("#fitltercitytxt" ).blur(function () {
+    $('#fitltercity').val($("#fitltercitytxt" ).val());
   });
 
   $(function() {    
@@ -1061,6 +1069,9 @@ $("document").ready(function($){
     delay: 100
     });
   });
+  $("#state" ).blur(function () {
+    $('#statetxt').val($("#state" ).val());
+  });
   $(function() {    
     $("#city" ).autocomplete({
     open: function(){
@@ -1082,13 +1093,16 @@ $("document").ready(function($){
         });
     },
     select : function(event, ui) {
-            $('#citytxt').val(ui.item.extra);                
+            $('#citytxt').val(ui.item.value);
+            $('#cityid').val(ui.item.extra);                
     },
     minLength: 2,
     delay: 100
     });
   });
-
+  $("#city" ).blur(function () {
+    $('#citytxt').val($("#city" ).val());
+  });
   $(function() {    
     $("#college" ).autocomplete({
     open: function(){
@@ -1098,7 +1112,7 @@ $("document").ready(function($){
     },
 
     source: function (request, response) {
-        var city=$('#citytxt').val();
+        var city=$('#cityid').val();
         $.getJSON("/getcollege?term=" + request.term+"&city="+city, function (data) {             
             response($.map(data, function (value, key) {                            
                 return {
@@ -1110,13 +1124,16 @@ $("document").ready(function($){
         });
     },
     select : function(event, ui) {
-            $('#collegetxt').val(ui.item.extra);                
+            $('#collegetxt').val(ui.item.value); 
+            $('#collegeid').val(ui.item.extra);               
     },
     minLength: 2,
     delay: 100
     });
   });
-
+$("#college" ).blur(function () {
+    $('#collegetxt').val($("#college" ).val());
+  });
   $(function() {    
     $("#dept" ).autocomplete({
     open: function(){
@@ -1126,7 +1143,7 @@ $("document").ready(function($){
     },
 
     source: function (request, response) {
-        var college=$('#collegetxt').val();
+        var college=$('#collegeid').val();
         $.getJSON("/getdept?term=" + request.term+"&college="+college, function (data) {             
             response($.map(data, function (value, key) {                            
                 return {
@@ -1144,7 +1161,9 @@ $("document").ready(function($){
     delay: 100
     });
   });
-
+  $("#dept" ).blur(function () {
+    $('#depttxt').val($("#dept" ).val());
+  });
 
   $('.select-location,.category-search').click(function(){
     //$('.base_search').focus();

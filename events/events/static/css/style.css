@@ -3156,7 +3156,7 @@ button {
 .uou-custom-select .select-clone {
   position: absolute;
   top: 100%;
-  z-index: 99;
+  z-index: 9999;
   display: none;
   background-color: #fff;
   margin: 0;
@@ -3544,12 +3544,12 @@ fieldset[disabled] .btn-default-inverse.active {
   width: 100%;
 }
 .header-search .header-search-bar {
-  position: absolute;
-  top: 0;
+  /*position: absolute;
+  top: 0;*/
   width: 100%;
   padding: 15px 0;
   background-color: rgba(0, 0, 0, 0.5);
-  z-index: 999;
+  z-index: 9999;
 }
 .header-search .header-search-bar .search-toggle {
   display: none;
@@ -7800,7 +7800,7 @@ fieldset[disabled] .btn-default-inverse.active {
   margin-right: 7px;
 }
 #footer .main-footer .newsletter ul li:hover {
-  background-color: #ffd231;
+  background-color: #0075BD;
 }
 #footer .main-footer .newsletter ul li a {
   display: block;
@@ -8445,4 +8445,10 @@ select{
   }
 .ui-menu-item:hover{
   background:#ddd!important;
+}
+.subcategories{
+  margin-top: 35px;
+}
+.datepicker td, .datepicker th {
+  padding: 10px !important;
 }

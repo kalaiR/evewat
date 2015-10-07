@@ -168,3 +168,10 @@ PAYU_INFO = {
              'curl':'http://www.eventswat.com/post_event_v2',
              'furl':'http://www.eventswat.com/post_event_v2',
             }
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'testmail123sample@gmail.com'
+EMAIL_HOST_PASSWORD = 'testmail123'
+EMAIL_PORT = 587

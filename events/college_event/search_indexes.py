@@ -10,7 +10,7 @@ class PosteventIndex(SearchIndex, Indexable):
     text = CharField(document=True, use_template=True)
     searchtext = CharField()
     eventtype = CharField(model_attr='eventtype__id')
-    city = CharField(model_attr='city__id')    
+    city = CharField(model_attr='city')    
     eventtitle = CharField(model_attr='event_title')
     payment=CharField(model_attr='payment')
     
@@ -22,6 +22,8 @@ class PosteventIndex(SearchIndex, Indexable):
         text = []
         if obj.event_title:
             text.append(obj.event_title)
+        if obj.city:
+            text.append(obj.city)
         # if obj.festdescription:
         #     text.append(obj.festdescription)
         #     print"text description", text 

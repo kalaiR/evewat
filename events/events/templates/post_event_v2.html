@@ -53,11 +53,11 @@
                   <div class="row">
                     <div class="col-md-6 mandatory_main" >
                       <input  type="text" placeholder="Startdate"  id="dpd1" name="startdate" value="{% if request.COOKIES.startdate %}{{request.COOKIES.startdate}}{% else %}{% endif %}" class="startdate" />
-                      <span  class="mandatory" style="color:red;">*</span>
+                      <span  class="mandatory" style="color:red;" autocomplete="off">*</span>
                       <label for="dpd2" class="date1_error" style="display:none;color:red;">Please Choose Start Date</label>
                     </div>
                     <div class="col-md-6 mandatory_main">
-                      <input  type="text" placeholder="Enddate"  id="dpd2" name="enddate" class="enddate" value="{% if request.COOKIES.enddate %}{{request.COOKIES.enddate}}{% else %}{% endif %}" />
+                      <input  type="text" placeholder="Enddate"  id="dpd2" name="enddate" class="enddate" value="{% if request.COOKIES.enddate %}{{request.COOKIES.enddate}}{% else %}{% endif %}"   autocomplete="off" />
                       <span  class="mandatory" style="color:red;">*</span>
                       <label for="dpd2" class="date2_error" style="display:none;color:red;">Please enter End Date</label>
                     </div>
@@ -191,6 +191,7 @@
                       <input type="text" placeholder="City" id="city" class="city ui-autocomplete-input" value="" name="city">
                       <span  class="mandatory" style="color:red;">*</span>
                       <input type="hidden" name="city" id="citytxt" class="city" value="">
+                      <input type="hidden" id="cityid" class="city" value="">
                       <label class="city_error" style="display:none;color:red;">Please Choose City</label>
                     </div>
                   </div>
@@ -199,12 +200,14 @@
                       <input type="text" placeholder="College" id="college" class="college ui-autocomplete-input" value="" name="college">
                       <span  class="mandatory" style="color:red;">*</span>
                       <input type="hidden" name="college" id="collegetxt" class="college" value="">
+                      <input type="hidden"  id="collegeid" class="college" value="">
                       <label class="college_error" style="display:none;color:red;">Please Choose College</label>
                     </div>
                     <div class="col-md-6 mandatory_main">
                       <input type="text" placeholder="Department" id="dept" class="dept ui-autocomplete-input" value="" name="dept">
                       <span  class="mandatory" style="color:red;">*</span>
                       <input type="hidden" name="dept" id="depttxt" class="dept" value="">
+                      <input type="hidden" id="deptid" class="dept" value="">
                       <label class="dept_error" style="display:none;color:red;">Please Choose Department</label>
                     </div>
                   </div>
