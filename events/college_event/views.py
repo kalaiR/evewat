@@ -20,23 +20,13 @@ from django.contrib import messages
 
 from django.contrib.auth import authenticate, login,logout
 from django.template import Context
-<<<<<<< HEAD
-=======
 #from django.template.loader import get_template
->>>>>>> 5fb0cd5bae45d4e23fb9c8385a33a4c270ba64f7
 from django.template.response import TemplateResponse
 from django.utils import simplejson
 import simplejson as json
-<<<<<<< HEAD
-from events.util import format_redirect_url
-=======
-# from events.util import get_current_country_cities
-#from events.context_processors import *
-#For geo
-# from django.contrib.gis.geoip import GeoIP
-from events import globals
 
->>>>>>> 5fb0cd5bae45d4e23fb9c8385a33a4c270ba64f7
+from events.util import format_redirect_url
+
 from django.contrib.auth.decorators import login_required
 import random
 import string
@@ -53,14 +43,9 @@ class JSONResponse(HttpResponse):
 
 def home(request):
     subcategory = SubCategory.objects.all()
-<<<<<<< HEAD
     recentad = Postevent.objects.filter().order_by('-id')[:4]
     ctx = {'subcategory':subcategory, 'recentad':recentad}
-=======
-   # city =get_current_country_cities(request)
-    recentad = Postevent_v2.objects.filter().order_by('-id')[:4]
-    ctx = {'subcategory':subcategory,'recentad':recentad}
->>>>>>> 5fb0cd5bae45d4e23fb9c8385a33a4c270ba64f7
+
     return render_to_response("index.html",ctx, context_instance=RequestContext(request))
 
 def about(request):
