@@ -42,8 +42,7 @@ INSTALLED_APPS = (
     'events',
     'haystack',
     'search',
-    'payu',
-    'transaction',
+    'payu',    
     'banner',
     
 
@@ -69,8 +68,6 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'events.middleware.Global',
-
 )
 
 ROOT_URLCONF = 'events.urls'

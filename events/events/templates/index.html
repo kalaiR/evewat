@@ -10,43 +10,11 @@
            {% for banners in banner|get_banner %}
            {% if banners.pageurl == '/' and banners.position == 'top' and banners.admin_status == True %}
           <div class="item">
-         
-            
              <img src="/media/{{banners.banner}}"  alt="" title="{{banners.link}}">
-            
-            
-            <div class="slide-content">
-              <!-- <a href="#"><img src="{% static "img/slider-logo.png" %}"alt=""></a>
-              <h1>The <span>Right</span> Place</h1>
-              <h2>For Business</h2> -->
-
-            </div>
-
-
           </div>
             {% endif %}
-          {% endfor %}
-     
-          <!-- <div class="item"><img src="media/static/banners/img/banner1.jpg"  alt="">
-            <div class="slide-content">
-              <a href="#"><img src="{% static "img/slider-logo.png" %}"alt=""></a>
-
-              <h1>The <span>Right</span> Place</h1>
-              <h2>For Business</h2>
-
-            </div>
-
-          </div>
-
-          <div class="item"><img src="media/static/banners/img/banner2.jpg"  alt="">
-            <div class="slide-content">
-              <a href="#"><img src="{% static "img/slider-logo.png"%}" alt=""></a>
-
-              <h1>The <span>Right</span> Place</h1>
-              <h2>For Business</h2>
-
-            </div>
-          </div> -->
+          {% endfor %}     
+          
         </div>
 
         <div class="customNavigation">
@@ -57,58 +25,8 @@
       </div> <!-- END .slider-content -->
     </div> <!-- END .SEARCH and slide-section -->
     <div class="header-search slider-home">
-<div class="header-search-bar">
+    <div class="header-search-bar">
          <form class="form" method="get" action="/search/?q=" id="f_search" name="f_search">
-
-         <!--  <div class="search-toggle">
-            <div class="container">
-              <div class="distance-range">
-                <p>
-                  <label for="amount-search">Distance:</label>
-                  <input type="text" id="amount-search">
-                </p>
-
-                <div id="slider-range-search"></div>
-              </div>  
-
-              <div class="distance-range">
-                <p>
-                  <label for="amount-search">Days published:</label>
-                  <input type="text" id="amount-search-day">
-                </p>
-
-                <div id="slider-range-search-day"></div>
-              </div>  
-
-              <p>Location:</p>
-              <div class="select-country">
-                <select class="" data-placeholder="-Select Country-">
-                  <option value="option1">option 1</option>
-                  <option value="option2">option 2</option>
-                  <option value="option3">option 3</option>
-                </select>
-              </div>
-
-              <div class="region">
-                <input type="text" placeholder="-Region-">
-              </div>
-
-              <div class="address">
-                <input type="text" placeholder="-Address-">
-              </div>
-
-              <div class="category-search">
-                <select class="" data-placeholder="-Select category-">
-                  <option value="option1">option 1</option>
-                  <option value="option2">option 2</option>
-                  <option value="option3">option 3</option>
-                </select>
-              </div>
-
-              <button class="search-btn" type="submit"><i class="fa fa-search"></i></button>
-
-            </div>
-          </div>  -->
 
           <div class="container">
            
@@ -122,15 +40,7 @@
             {% endif %}
               </div>
 
-              <div class="select-location">                         
-                 <!-- <select class="city" name="city">
-                  <option value="">Select City</option> 
-                   <option  id="currentid" value="{{request.COOKIES.global_city_id}}">"city"|get_current_city</option>
-                   {% for cities in city|get_city %}
-                        <option value="{{cities.id}}" id="ajax_cityid">{{ cities }} </option>
-                    {% endfor%} 
-
-                  </select> -->        
+              <div class="select-location">                                               
                    <input type="text" class="form-control input-lg ui-autocomplete-input" placeholder="City" value="" id="fitltercitytxt" /> 
                    <input type="hidden" class="form-control input-lg" placeholder="City" value="" id="fitltercity" name="city" />                  
                 </div>
@@ -141,37 +51,8 @@
                     {% for subcategory in subcategory %}
                               <option value="{{subcategory.id}}">{{ subcategory.name |capfirst}} </option>
                      {% endfor%} 
-
                  </select>
-                 
-                                  
-                          
-                      
-                    
-                  <!--   <option value="technical">Technical</option>
-                    <option value="cultural">Cultural</option>
-                    <option value="management">Management</option>
-                    <option value="sports">Sports</option>
-                    <option value="literary">Literary</option>
-                    <option value="conferences">Conferences</option>
-                    <option value="seminar">Seminar</option>
-                    <option value="workshop">Workshop</option>
-                    <option value="symposium">Symposium</option>
-                    <option value="youthsummit">Youth Summit</option>
-                    <option value="modelunitednations">Model United Nations</option>
-                    <option value="tedx">TEDx</option>
-                    <option value="summit">Summit</option>
-                    <option value="culture">Culture</option>
-                    <option value="conclave">Conclave</option>
-                    <option value="convention">Convention</option>
-                    <option value="entrepreneurshipsummit">Entrepreneurship Summit</option>
-                    <option value="medical">Medical</option>
-                    <option value="pharma">Pharma</option>
-                    <option value="biomedical">Bio Medical</option>
-                    <option value="OnlineEvents">Online Events</option>           -->
-                
               </div>
-
               <button class="search-btn base_search" type="submit"><i class="fa fa-search"></i></button>
             </div>
           </div> 
@@ -181,50 +62,8 @@
     <div class="container">
       <div class="header-nav-bar home-slide">
         <nav class="text-center">
-        <h3><span>Explore by Event categories</span></h3>
-          <button><i class="fa fa-bars"></i></button>
-
-        <!--   <ul class="primary-nav list-unstyled">
-            <li class="bg-color"><a href="#">Home<i class="fa fa-angle-down"></i></a>
-              <ul>
-                <li><a href="home-map-grid.html">Home-map(grid)</a></li>
-                <li><a href="home-map-list.html">Home-map(list)</a></li>
-                <li><a href="index.html">Home slider(view-1)</a></li>
-                <li><a href="home-category.html">Home slider(view-2)</a></li>
-              </ul>
-
-            </li>
-
-            <li class=""><a href="#">Company<i class="fa fa-angle-down"></i></a>
-
-              <ul>
-                <li><a href="company-profile.html">Company(Profile)</a></li>
-                <li><a href="company-product.html">Company(Product)</a></li>
-                <li><a href="company-portfolio.html">Company(Portfolio)</a></li>
-                <li><a href="company-events.html">Company(Events)</a></li>
-                <li><a href="company-blog.html">Company(Blog)</a></li>
-                <li><a href="company-contact.html">Company(contact)</a></li>
-              </ul>
-
-            </li>
-
-            <li><a href="sample-page.html">Sample Page</a></li>
-            <li><a href="shortcodes.html">Shortcodes</a></li>
-
-            <li class="">
-              <a href="#">Blog<i class="fa fa-angle-down"></i></a>
-
-              <ul>
-                <li><a href="blog-list.html">Blog list</a></li>
-                <li><a href="blog-post.html">Blog-post</a></li>
-              </ul>
-
-            </li>
-
-            <li><a href="price-listing.html">Price Listing</a></li>
-            <li><a href="about-us.html">About Us</a></li>
-            <li><a href="contact-us.html">Contact Us</a></li>
-          </ul> -->
+            <h3><span>Explore by Event categories</span></h3>
+            <button><i class="fa fa-bars"></i></button>
         </nav>
       </div> <!-- end .header-nav-bar -->
     </div> <!-- end .container -->

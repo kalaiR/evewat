@@ -51,7 +51,7 @@
         <div class="header-login">
 
           <a href="#" title="Please Login" class="northwest"><i class="fa fa-power-off" action="/login/"></i> Login</a>
-          <span class="signup_error" style="{% if request.REQUEST.lst and not request.path == '/post_event_v2' %} display:block;color:red;font-size:17px; {%else%} display: none; {% endif %}">
+          <span class="signup_error" style="{% if request.REQUEST.lst and not request.path == '/post_event' %} display:block;color:red;font-size:17px; {%else%} display: none; {% endif %}">
               {%for message in messages%}{{message}}{% endfor %}
           </span>
           <!-- <a class="login_act">login_act</a> -->
@@ -232,7 +232,7 @@
 
         <!-- CALL TO ACTION -->
         <div class="header-call-to-action">
-          <a href="/post_event_v2" class="btn btn-default northeast" title="Add your event"><i class="fa fa-plus"></i> Add Post</a>
+          <a href="/post_event" class="btn btn-default northeast" title="Add your event"><i class="fa fa-plus"></i> Add Post</a>
           <a href="/banner" class="btn btn-default northeast" title="Upload your event images"><i class="fa fa-plus"></i> Add Banner</a>
         </div><!-- END .HEADER-CALL-TO-ACTION -->
       </div><!-- END .CONTAINER -->
