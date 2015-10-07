@@ -17,8 +17,8 @@ class SubCategoryAdmin(admin.ModelAdmin):
 	list_per_page = 50
 
 class CityAdmin(admin.ModelAdmin):
-	fields=['city']
-	list_display = ('id', 'city')
+	fields=['city','state']
+	list_display = ('id', 'city','state')
 	list_filter = ['city']
 	search_fields = ['id', 'city']
 	list_per_page = 50
@@ -62,6 +62,11 @@ class PosteventAdmin(admin.ModelAdmin):
 		return obj.admin_status 
 	admin_status.boolean = False
 
+	def get_readonly_fields(self, request, obj=None):
+		if obj: # editing an existing object
+			return self.readonly_fields + ('payment',)
+		return self.readonly_fields
+
 class PosteventAdmin_v2(admin.ModelAdmin):
 	filelds=['name','festtype','city','festname','registrationfee','startdate','admin_status']
 	list_display = ('id', 'name','festtype','city','festname','registrationfee','startdate','admin_status')
@@ -72,6 +77,7 @@ class PosteventAdmin_v2(admin.ModelAdmin):
 	def admin_status(self, obj):
 		return obj.admin_status 
 	admin_status.boolean = False
+
 
 class PremiumPriceInfoAdmin(admin.ModelAdmin):
 	fields=['premium_price','currency','purpose','month']

@@ -18,7 +18,7 @@ class Category(models.Model):
 		
 class SubCategory(models.Model):
 	category = models.ManyToManyField(Category)
-	icon= models.ImageField(upload_to='category_icon',max_length=100) 
+	icon= models.ImageField(upload_to='subcategory/icon/',max_length=100) 
 	name = models.CharField(max_length=50) 
 	def __unicode__(self):
 		return self.name
@@ -148,8 +148,8 @@ class Postevent_v2(models.Model):
 	address= models.TextField(null=True, blank=True)
 	organizer= models.TextField(null=True, blank=True)
 	state= models.CharField(max_length=50,null=True, blank=True)
-	city= models.ForeignKey(City,null=True, blank=True)
-	college=models.ForeignKey(College,null=True, blank=True)
+	city= models.CharField(max_length=50,null=True, blank=True)
+	college=models.CharField(max_length=50,null=True, blank=True)
 	department=models.CharField(max_length=50,null=True, blank=True)
 	poster = models.ImageField(upload_to='events/static/img/',null=True, max_length=500)	
 	admin_status = models.BooleanField(default=False)

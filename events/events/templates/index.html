@@ -2,18 +2,18 @@
 {% load i18n %}
 {% load static from staticfiles %}
 {% block content %}
-      {{ request.COOKIES.test }}
+
       <div class="slider-content">
 
         <div id="home-slider" class="owl-carousel">
         
            {% for banners in banner|get_banner %}
-           {% if banners.admin_status == True %}
+           {% if banners.pageurl == '/' and banners.position == 'top' and banners.admin_status == True %}
           <div class="item">
          
-            {% if banners.pageurl == '/' and banners.position == 'top' %}
-             <img src="media/{{banners.banner}}"  alt="" title="{{banners.link}}">
-            {% endif %}
+            
+             <img src="/media/{{banners.banner}}"  alt="" title="{{banners.link}}">
+            
             
             <div class="slide-content">
               <!-- <a href="#"><img src="{% static "img/slider-logo.png" %}"alt=""></a>
@@ -24,7 +24,7 @@
 
 
           </div>
-            {% endif %}  
+            {% endif %}
           {% endfor %}
      
           <!-- <div class="item"><img src="media/static/banners/img/banner1.jpg"  alt="">
@@ -56,11 +56,132 @@
 
       </div> <!-- END .slider-content -->
     </div> <!-- END .SEARCH and slide-section -->
+    <div class="header-search slider-home">
+<div class="header-search-bar">
+         <form class="form" method="get" action="/search/?q=" id="f_search" name="f_search">
 
+         <!--  <div class="search-toggle">
+            <div class="container">
+              <div class="distance-range">
+                <p>
+                  <label for="amount-search">Distance:</label>
+                  <input type="text" id="amount-search">
+                </p>
+
+                <div id="slider-range-search"></div>
+              </div>  
+
+              <div class="distance-range">
+                <p>
+                  <label for="amount-search">Days published:</label>
+                  <input type="text" id="amount-search-day">
+                </p>
+
+                <div id="slider-range-search-day"></div>
+              </div>  
+
+              <p>Location:</p>
+              <div class="select-country">
+                <select class="" data-placeholder="-Select Country-">
+                  <option value="option1">option 1</option>
+                  <option value="option2">option 2</option>
+                  <option value="option3">option 3</option>
+                </select>
+              </div>
+
+              <div class="region">
+                <input type="text" placeholder="-Region-">
+              </div>
+
+              <div class="address">
+                <input type="text" placeholder="-Address-">
+              </div>
+
+              <div class="category-search">
+                <select class="" data-placeholder="-Select category-">
+                  <option value="option1">option 1</option>
+                  <option value="option2">option 2</option>
+                  <option value="option3">option 3</option>
+                </select>
+              </div>
+
+              <button class="search-btn" type="submit"><i class="fa fa-search"></i></button>
+
+            </div>
+          </div>  -->
+
+          <div class="container">
+           
+            <div class="search-value">
+              <div class="keywords">
+             <!--    <input type="text" class="form-control" placeholder="Keywords"> -->
+             {% if query or request.REQUEST.q or request.REQUEST.q == '' %}
+              <input type="text" name="q" id="q" class="form-control input-lg" placeholder="Event title" value="{% if query %}{{ query }}{% elif request.REQUEST.q %}{{request.REQUEST.q}}{% elif request.REQUEST.q == '' %}{% else %}{% endif %}" autocomplete="off"/>
+            {% else %}
+              <input type="text" name="q" id="q" class="form-control input-lg" placeholder="Event title" value="{% if recent_viewed_search %}{% for subcategory in recent_viewed_search|slice:'1' %}{% if subcategory.activity_view %}{{ subcategory.activity_view }}{% else %}{% endif %}{% endfor %}{% else %}{% endif %}" autocomplete="off"/>
+            {% endif %}
+              </div>
+
+              <div class="select-location">                         
+                 <!-- <select class="city" name="city">
+                  <option value="">Select City</option> 
+                   <option  id="currentid" value="{{request.COOKIES.global_city_id}}">"city"|get_current_city</option>
+                   {% for cities in city|get_city %}
+                        <option value="{{cities.id}}" id="ajax_cityid">{{ cities }} </option>
+                    {% endfor%} 
+
+                  </select> -->        
+                   <input type="text" class="form-control input-lg ui-autocomplete-input" placeholder="City" value="" id="fitltercitytxt" /> 
+                   <input type="hidden" class="form-control input-lg" placeholder="City" value="" id="fitltercity" name="city" />                  
+                </div>
+
+              <div class="category-search">
+                <select class="category_choose" name="eventtype">                 
+                    <option value="">Event type</option>
+                    {% for subcategory in subcategory %}
+                              <option value="{{subcategory.id}}">{{ subcategory.name |capfirst}} </option>
+                     {% endfor%} 
+
+                 </select>
+                 
+                                  
+                          
+                      
+                    
+                  <!--   <option value="technical">Technical</option>
+                    <option value="cultural">Cultural</option>
+                    <option value="management">Management</option>
+                    <option value="sports">Sports</option>
+                    <option value="literary">Literary</option>
+                    <option value="conferences">Conferences</option>
+                    <option value="seminar">Seminar</option>
+                    <option value="workshop">Workshop</option>
+                    <option value="symposium">Symposium</option>
+                    <option value="youthsummit">Youth Summit</option>
+                    <option value="modelunitednations">Model United Nations</option>
+                    <option value="tedx">TEDx</option>
+                    <option value="summit">Summit</option>
+                    <option value="culture">Culture</option>
+                    <option value="conclave">Conclave</option>
+                    <option value="convention">Convention</option>
+                    <option value="entrepreneurshipsummit">Entrepreneurship Summit</option>
+                    <option value="medical">Medical</option>
+                    <option value="pharma">Pharma</option>
+                    <option value="biomedical">Bio Medical</option>
+                    <option value="OnlineEvents">Online Events</option>           -->
+                
+              </div>
+
+              <button class="search-btn base_search" type="submit"><i class="fa fa-search"></i></button>
+            </div>
+          </div> 
+        </form>
+      </div> 
+      </div>
     <div class="container">
       <div class="header-nav-bar home-slide">
-        <nav>
-
+        <nav class="text-center">
+        <h3><span>Explore by Event categories</span></h3>
           <button><i class="fa fa-bars"></i></button>
 
         <!--   <ul class="primary-nav list-unstyled">
@@ -108,6 +229,7 @@
       </div> <!-- end .header-nav-bar -->
     </div> <!-- end .container -->
   </header> <!-- end #header -->
+                    
 
   <div id="page-content" class="home-slider-content">
     <div class="container">
@@ -128,14 +250,16 @@
                 <div class="tab-content">
 
                   <div class="tab-pane active" id="all-categories">
-                    <h3><span>Categories</span></h3>
+                    
 
                     <div class="row clearfix subcategories">                 
                    {% for subcategory in subcategory%}  
                     <div class="col-md-3 col-sm-4 col-xs-6">
                         <div class="category-item">
 
-                          <a href="search/?q=&amp;eventtype={{subcategory.id}}">{{subcategory.name}}</a>
+                          <a href="search/?q=&amp;eventtype={{subcategory.id}}">
+                          <!-- <img src="media/{{subcategory.icon}}"> -->
+                          {{subcategory.name}}</a>
                         </div>
 
                       </div>
@@ -222,7 +346,7 @@
                         </li>
                       {% for categories in initial_load|get_categories %}
                         <li>
-                          <a class="select_category"  role="tab" data-toggle="tab">{{categories.name}}</a>
+                          <a class="select_category"  role="tab" data-toggle="tab" title="Please choose any category">{{categories.name}}</a>
                            <input type="hidden" class="ajax_catid" value="{{categories.id}}">                                      
                           
                         </li>
@@ -250,12 +374,13 @@
   <div class="featured-listing" id= "featured-list">
     <div class="container">
       <div class="row clearfix">
-        <h2><strong>Featured</strong> Events</h2>
+        <h2><strong>Latest Events</strong></h2>
         {% for recentad in recentad %}
+        {% if recentad.admin_status == True %}
          <div class="col-md-3 col-sm-4 col-xs-6">
           <div class="single-product">
             <figure>
-              <img src="/{{recentad.poster}}" alt="">
+              <img src="{{recentad.poster}}" alt="">
 
               <!-- <div class="rating">
                 <ul class="list-inline">
@@ -288,6 +413,7 @@
           </div> <!-- end .single-product -->
 
         </div>
+        {% endif %}
         {% endfor %}
 
        <!--  <div class="col-md-3 col-sm-4 col-xs-6">

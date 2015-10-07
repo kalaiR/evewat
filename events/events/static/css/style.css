@@ -68,7 +68,9 @@ html {
 }
 body {
   margin: 0;
+  font-family: 'Droid Sans' !important;
 }
+.ui-widget { font-family: 'Droid Sans' !important; }
 article,
 aside,
 details,
@@ -107,6 +109,7 @@ a {
 a:active,
 a:hover {
   outline: 0;
+  color: #0075bd;
 }
 abbr[title] {
   border-bottom: 1px dotted;
@@ -2883,8 +2886,8 @@ a {
 }
 a:hover,
 a:focus {
-  color: #fdc600;
-  transition: all .3s ease;
+  /*color: #0075BD;
+  transition: all .3s ease;*/
 }
 a:focus {
   outline: thin dotted;
@@ -3090,14 +3093,14 @@ form {
   position: relative;
 }
 input {
-  outline: 0;
-  border: none;
-  width: 100%;
-  height: inherit;
-  color: #333333;
-  font-size: 16px;
-  padding: 5px 15px;
-  border-radius: 3px;
+  outline: 0 !important;
+  border: none !important;
+  width: 100% !important;
+  height: inherit !important;
+  color: #333333 !important;
+  font-size: 16px !important;
+  padding: 5px 15px !important;
+  border-radius: 3px !important;
 }
 button {
   border-radius: 3px;
@@ -3153,7 +3156,7 @@ button {
 .uou-custom-select .select-clone {
   position: absolute;
   top: 100%;
-  z-index: 99;
+  z-index: 9999;
   display: none;
   background-color: #fff;
   margin: 0;
@@ -3250,10 +3253,10 @@ fieldset[disabled] .btn {
   box-shadow: none;
 }
 .btn-default {
-  border: none;
-  color: #333333;
-  background-color: #fdc600;
-  border-color: #cccccc;
+  border: none !important;
+  color: #fff !important;
+  background-color: #0075BD !important;
+  border-color: #cccccc !important;
 }
 .btn-default:hover,
 .btn-default:focus,
@@ -3261,14 +3264,14 @@ fieldset[disabled] .btn {
 .btn-default:active,
 .btn-default.active,
 .open > .dropdown-toggle.btn-default {
-  color: #333333;
-  background-color: #ca9e00;
-  border-color: #adadad;
+  color: #333333 !important;
+  background-color: #ca9e00 !important;
+  border-color: #adadad !important;
 }
 .btn-default:active,
 .btn-default.active,
 .open > .dropdown-toggle.btn-default {
-  background-image: none;
+  background-image: none !important;
 }
 .btn-default.disabled,
 .btn-default[disabled],
@@ -3288,21 +3291,21 @@ fieldset[disabled] .btn-default:active,
 .btn-default.disabled.active,
 .btn-default[disabled].active,
 fieldset[disabled] .btn-default.active {
-  background-color: #fdc600;
-  border-color: #cccccc;
+  background-color: #0075BD !important;
+  border-color: #cccccc !important;
 }
 .btn-default .badge {
-  color: #fdc600;
-  background-color: #333333;
+  color: #0075BD !important;
+  background-color: #333333 !important;
 }
 .btn-default:hover,
 .btn-default:focus {
   background: #333333 !important;
-  color: #fdc600;
+  color: #0075BD !important;
 }
 .btn-default-inverse {
   border: none;
-  color: #fdc600;
+  color: #0075BD;
   background-color: #333333;
   border-color: #cccccc;
 }
@@ -3312,7 +3315,7 @@ fieldset[disabled] .btn-default.active {
 .btn-default-inverse:active,
 .btn-default-inverse.active,
 .open > .dropdown-toggle.btn-default-inverse {
-  color: #fdc600;
+  color: #0075BD;
   background-color: #1a1a1a;
   border-color: #adadad;
 }
@@ -3344,7 +3347,7 @@ fieldset[disabled] .btn-default-inverse.active {
 }
 .btn-default-inverse .badge {
   color: #333333;
-  background-color: #fdc600;
+  background-color: #0075BD;
 }
 /* HEADER */
 /* --------------------------------------- */
@@ -3375,20 +3378,21 @@ fieldset[disabled] .btn-default-inverse.active {
   left: 0;
   z-index: 99;
   padding: 10px;
-  width: 450px;
+  /*width: 450px;*/
   height: auto;
   background-color: rgba(0, 0, 0, 0.8);
   transition: all .4s ease;
 }
 #header .header-top-bar .header-login div input,
 #header .header-top-bar .header-register div input {
-  margin-bottom: 15px;
+  margin-bottom: 7px;
+  margin-top: 8px;
   border: 1px solid #777777;
   font-weight: normal;
 }
 #header .header-top-bar .header-login div a,
 #header .header-top-bar .header-register div a {
-  color: #fdc600;
+  color: #0075BD;
 }
 #header .header-top-bar .header-login.active div,
 #header .header-top-bar .header-register.active div {
@@ -3418,7 +3422,7 @@ fieldset[disabled] .btn-default-inverse.active {
 #header .header-top-bar .header-logo a .fa {
   position: relative;
   padding: 0 6px;
-  color: #fdc600;
+  color: #0075BD;
   font-size: 34px;
 }
 #header .header-top-bar .header-logo a:hover {
@@ -3445,7 +3449,7 @@ fieldset[disabled] .btn-default-inverse.active {
 }
 #header .header-top-bar .header-social > a:hover,
 #header .header-top-bar .header-language > a:hover {
-  color: #fdc600;
+  color: #0075BD;
 }
 #header .header-top-bar .header-social ul,
 #header .header-top-bar .header-language ul {
@@ -3478,7 +3482,7 @@ fieldset[disabled] .btn-default-inverse.active {
 }
 #header .header-top-bar .header-social ul a:hover,
 #header .header-top-bar .header-language ul a:hover {
-  color: #fdc600;
+  color: #0075BD;
 }
 #header .header-top-bar .header-social.active ul,
 #header .header-top-bar .header-language.active ul {
@@ -3540,12 +3544,12 @@ fieldset[disabled] .btn-default-inverse.active {
   width: 100%;
 }
 .header-search .header-search-bar {
-  position: absolute;
-  top: 0;
+  /*position: absolute;
+  top: 0;*/
   width: 100%;
   padding: 15px 0;
   background-color: rgba(0, 0, 0, 0.5);
-  z-index: 999;
+  z-index: 9999;
 }
 .header-search .header-search-bar .search-toggle {
   display: none;
@@ -3673,7 +3677,7 @@ fieldset[disabled] .btn-default-inverse.active {
 }
 .header-search .header-search-bar .toggle-btn:hover,
 .header-search .header-search-bar .search-btn:hover {
-  background-color: #fdc600;
+  background-color: #0075BD;
 }
 @media (max-width: 768px) {
   .header-search .header-search-bar .search-btn {
@@ -3699,7 +3703,7 @@ fieldset[disabled] .btn-default-inverse.active {
   border-left: 1px solid #aaaaaa;
 }
 .header-search .header-search-bar .search-btn {
-  background-color: #fdc600;
+  background-color: #0075BD;
   color: #333333;
   font-size: 16px;
 }
@@ -3778,7 +3782,7 @@ fieldset[disabled] .btn-default-inverse.active {
   position: relative;
   width: 100%;
   height: 500px;
-  background-color: #fdc600;
+  background-color: #0075BD;
 }
 .map-section #map_canvas {
   width: 100%;
@@ -3803,7 +3807,7 @@ fieldset[disabled] .btn-default-inverse.active {
   position: relative;
   width: 100%;
   height: 250px;
-  background-color: #fdc600;
+  background-color: #0075BD;
 }
 .company-contact .contact-map-company #contact_map_canvas_two,
 .company-contact .contact-map-company #contact_map_canvas_one {
@@ -3827,7 +3831,7 @@ fieldset[disabled] .btn-default-inverse.active {
 /* ----------------------------------------------- */
 #header .header-nav-bar {
   position: relative;
-  border-bottom: 3px solid #fdc600;
+  border-bottom: 3px solid #0075BD;
 }
 #header .header-nav-bar button {
   display: none;
@@ -3856,7 +3860,7 @@ fieldset[disabled] .btn-default-inverse.active {
     height: 40px;
     width: 35px;
     line-height: 37px;
-    background-color: #fdc600;
+    background-color: #0075BD;
     color: #fff;
     font-size: 18px;
     font-weight: bold;
@@ -3925,7 +3929,7 @@ fieldset[disabled] .btn-default-inverse.active {
   top: 22px;
 }
 #header .header-nav-bar .primary-nav > li.bg-color {
-  background-color: #fdc600;
+  background-color: #0075BD;
 }
 #header .header-nav-bar .primary-nav > li.active > ul {
   visibility: visible;
@@ -3964,7 +3968,7 @@ fieldset[disabled] .btn-default-inverse.active {
   color: #ffffff;
 }
 #header .header-nav-bar .primary-nav ul > li > a:hover {
-  color: #fdc600;
+  color: #0075BD;
   background-color: #4d4d4d;
 }
 #header .header-nav-bar .primary-nav ul > li:last-child a {
@@ -4016,7 +4020,7 @@ fieldset[disabled] .btn-default-inverse.active {
     border-bottom: 0;
   }
   #header .header-nav-bar .primary-nav > li ul li a:hover {
-    background-color: #fdc600;
+    background-color: #0075BD;
     color: inherit;
   }
 }
@@ -4177,7 +4181,7 @@ fieldset[disabled] .btn-default-inverse.active {
   font-weight: 800;
 }
 .slider-content #home-slider .item .slide-content h1 span {
-  color: #fdc600;
+  color: #0075BD;
 }
 @media (max-width: 768px) {
   .slider-content #home-slider .item .slide-content h1 {
@@ -4212,7 +4216,7 @@ fieldset[disabled] .btn-default-inverse.active {
 }
 .slider-content .customNavigation .btn {
   padding: 30px 18px;
-  background-color: #fdc600;
+  background-color: #0075BD;
   font-size: 25px;
   transition: all .3s ease;
 }
@@ -4220,11 +4224,15 @@ fieldset[disabled] .btn-default-inverse.active {
   position: absolute;
   top: 47%;
   left: -2px;
+  z-index:9999;
+  color: #fff;
 }
 .slider-content .customNavigation .btn.next {
   position: absolute;
   top: 47%;
   right: -2px;
+  z-index:9999;
+  color:#fff;
 }
 #header {
   position: relative;
@@ -4376,7 +4384,7 @@ fieldset[disabled] .btn-default-inverse.active {
   font-size: .7em;
   display: block;
   border: 0;
-  background-color: #fdc600;
+  background-color: #0075BD;
   border-radius: 6px;
 }
 .ui-slider-horizontal {
@@ -4394,7 +4402,7 @@ fieldset[disabled] .btn-default-inverse.active {
   margin-left: -0.6em;
 }
 .ui-widget-header {
-  background: #fdc600;
+  background: #0075BD;
   color: #222222;
   font-weight: bold;
 }
@@ -4429,7 +4437,7 @@ fieldset[disabled] .btn-default-inverse.active {
   transition: all .3s ease;
 }
 #categories .accordion ul li:hover {
-  background-color: #fdc600;
+  background-color: #0075BD;
 }
 #categories .accordion ul li a {
   display: block;
@@ -4487,7 +4495,7 @@ fieldset[disabled] .btn-default-inverse.active {
 #categories .accordion ul li.active {
   background-color: #fff;
   border-right: 0;
-  border-left: 3px solid #fdc600;
+  border-left: 3px solid #0075BD;
 }
 #categories .accordion ul li.active div {
   display: block;
@@ -4563,7 +4571,7 @@ fieldset[disabled] .btn-default-inverse.active {
   width: 100%;
   background: #eeeeee;
   border-radius: 3px;
-  border-left: 3px solid #fdc600;
+  border-left: 3px solid #0075BD;
   font-size: 18px;
   text-transform: uppercase;
 }
@@ -4618,7 +4626,7 @@ fieldset[disabled] .btn-default-inverse.active {
   color: #fff;
 }
 .post-sidebar .single-product figure .rating li a:hover {
-  color: #fdc600;
+  color: #0075BD;
 }
 .post-sidebar .single-product figure .rating p {
   position: absolute;
@@ -4630,7 +4638,7 @@ fieldset[disabled] .btn-default-inverse.active {
   line-height: 16px;
   font-size: 12px;
   font-weight: 800;
-  background: #fdc600;
+  background: #0075BD;
   color: #333333;
   font-family: 'Raleway', sans-serif;
   text-transform: uppercase;
@@ -4842,7 +4850,7 @@ fieldset[disabled] .btn-default-inverse.active {
 }
 .ui-datepicker-calendar td a:hover {
   color: #fff;
-  background-color: #fdc600 !important;
+  background-color: #0075BD !important;
   font-weight: bold;
 }
 .ui-state-default,
@@ -4870,7 +4878,7 @@ fieldset[disabled] .btn-default-inverse.active {
 }
 .company-sidebar .company-category li.active,
 .company-sidebar .company-category li:hover {
-  background: #fdc600;
+  background: #0075BD;
 }
 .company-sidebar .company-category li.active a,
 .company-sidebar .company-category li:hover a {
@@ -4885,7 +4893,7 @@ fieldset[disabled] .btn-default-inverse.active {
   width: 0;
   border-top: 7px solid transparent;
   border-bottom: 7px solid transparent;
-  border-left: 7px solid #fdc600;
+  border-left: 7px solid #0075BD;
 }
 .company-sidebar .company-category li:first-child {
   border-radius: 3px 3px 0 0;
@@ -4897,7 +4905,7 @@ fieldset[disabled] .btn-default-inverse.active {
 .company-sidebar .company-category li a {
   display: block;
   padding: 15px 20px;
-  color: #fdc600;
+  color: #0075BD;
   font-size: 15px;
   font-weight: bold;
   text-transform: uppercase;
@@ -4930,7 +4938,7 @@ fieldset[disabled] .btn-default-inverse.active {
   width: 100%;
   background: #eeeeee;
   border-radius: 3px;
-  border-left: 3px solid #fdc600;
+  border-left: 3px solid #0075BD;
   font-size: 18px;
   text-transform: uppercase;
 }
@@ -4956,7 +4964,7 @@ fieldset[disabled] .btn-default-inverse.active {
 .company-sidebar .opening-hours li span .fa {
   position: relative;
   top: -3px;
-  color: #fdc600;
+  color: #0075BD;
   padding-left: 10px;
 }
 .company-sidebar .square-button {
@@ -5009,7 +5017,7 @@ fieldset[disabled] .btn-default-inverse.active {
   font-size: 11px;
 }
 .change-view button.active {
-  background: #fdc600;
+  background: #0075BD;
   color: #333333;
   border: 0;
 }
@@ -5074,7 +5082,7 @@ fieldset[disabled] .btn-default-inverse.active {
 }
 .pagination li.active,
 .pagination li:hover {
-  background-color: #fdc600;
+  background-color: #0075BD;
   border: 0;
   border: 1px solid transparent;
 }
@@ -5134,7 +5142,7 @@ fieldset[disabled] .btn-default-inverse.active {
   font-size: 18px;
 }
 .product-details .tab-pane h2 .category-name b {
-  color: #fdc600;
+  color: #0075BD;
   padding: 0 10px;
 }
 .product-details .tab-pane h2 .comments {
@@ -5232,7 +5240,7 @@ fieldset[disabled] .btn-default-inverse.active {
   color: #fff;
 }
 .product-details .tab-pane .single-product figure .rating li a:hover {
-  color: #fdc600;
+  color: #0075BD;
 }
 .product-details .tab-pane .single-product figure .rating p {
   padding: 0 3px;
@@ -5240,7 +5248,7 @@ fieldset[disabled] .btn-default-inverse.active {
   font-size: 12px;
   font-family: 'Raleway', sans-serif;
   font-weight: 700;
-  background: #fdc600;
+  background: #0075BD;
   color: #333333;
   text-transform: uppercase;
 }
@@ -5253,7 +5261,7 @@ fieldset[disabled] .btn-default-inverse.active {
   width: 100%;
   height: 100%;
   text-align: center;
-  background-color: rgba(253, 198, 0, 0.8);
+  background-color: rgba(0, 117, 189, 0.8);
 }
 .product-details .tab-pane .single-product figure figcaption a {
   position: relative;
@@ -5272,7 +5280,7 @@ fieldset[disabled] .btn-default-inverse.active {
 }
 .product-details .tab-pane .single-product figure figcaption a:hover {
   background: #333333;
-  color: #fdc600;
+  color: #0075BD;
 }
 .product-details .tab-pane .single-product figure figcaption .bookmark {
   position: relative;
@@ -5355,7 +5363,7 @@ fieldset[disabled] .btn-default-inverse.active {
   font-size: 18px;
 }
 .product-details-list .tab-pane h2 .category-name b {
-  color: #fdc600;
+  color: #0075BD;
   padding: 0 10px;
 }
 .product-details-list .tab-pane h2 .comments {
@@ -5450,7 +5458,7 @@ fieldset[disabled] .btn-default-inverse.active {
   color: #fff;
 }
 .product-details-list .tab-pane .single-product figure .rating li a:hover {
-  color: #fdc600;
+  color: #0075BD;
 }
 .product-details-list .tab-pane .single-product figure .rating p {
   position: absolute;
@@ -5461,7 +5469,7 @@ fieldset[disabled] .btn-default-inverse.active {
   margin: 0;
   font-size: 11px;
   font-weight: 700;
-  background: #fdc600;
+  background: #0075BD;
   color: #333333;
   text-transform: uppercase;
   text-align: center;
@@ -5563,7 +5571,7 @@ fieldset[disabled] .btn-default-inverse.active {
   color: inherit;
 }
 .category-item:hover {
-  background-color: #fdc600;
+  background-color: #0075BD;
 }
 .view-more {
   width: 100%;
@@ -5622,7 +5630,7 @@ fieldset[disabled] .btn-default-inverse.active {
   width: 100%;
   height: 100%;
   text-align: center;
-  background-color: rgba(253, 198, 0, 0.8);
+  background-color: rgba(0, 117, 189, 0.8);
 }
 .company-product .single-product figure figcaption a,
 .company-portfolio .single-product figure figcaption a {
@@ -5644,7 +5652,7 @@ fieldset[disabled] .btn-default-inverse.active {
 .company-product .single-product figure figcaption a:hover,
 .company-portfolio .single-product figure figcaption a:hover {
   background: #333333;
-  color: #fdc600;
+  color: #0075BD;
 }
 .company-product .single-product figure figcaption .bookmark,
 .company-portfolio .single-product figure figcaption .bookmark {
@@ -5816,7 +5824,7 @@ fieldset[disabled] .btn-default-inverse.active {
   color: #fff;
 }
 .featured-listing .single-product figure .rating li a:hover {
-  color: #fdc600;
+  color: #0075BD;
 }
 .featured-listing .single-product figure .rating p {
   padding: 0 3px;
@@ -5824,7 +5832,7 @@ fieldset[disabled] .btn-default-inverse.active {
   font-size: 12px;
   font-family: 'Raleway', sans-serif;
   font-weight: 700;
-  background: #fdc600;
+  background: #0075BD;
   color: #333333;
   text-transform: uppercase;
 }
@@ -5837,7 +5845,7 @@ fieldset[disabled] .btn-default-inverse.active {
   width: 100%;
   height: 100%;
   text-align: center;
-  background-color: rgba(253, 198, 0, 0.8);
+  background-color: rgba(0, 117, 189, 0.8);
 }
 .featured-listing .single-product figure figcaption a {
   position: relative;
@@ -5856,7 +5864,7 @@ fieldset[disabled] .btn-default-inverse.active {
 }
 .featured-listing .single-product figure figcaption a:hover {
   background: #333333;
-  color: #fdc600;
+  color: #0075BD;
 }
 .featured-listing .single-product figure figcaption .bookmark {
   position: relative;
@@ -5991,7 +5999,7 @@ fieldset[disabled] .btn-default-inverse.active {
   color: #a2a2a2;
 }
 .classifieds-content .classifieds-category a:hover span {
-  color: #fdc600;
+  color: #0075BD;
 }
 .classifieds-content .classifieds-category > li > a {
   text-transform: uppercase;
@@ -6034,7 +6042,7 @@ fieldset[disabled] .btn-default-inverse.active {
 .register-content .registration-details {
   position: relative;
   padding: 100px 0;
-  background-color: rgba(253, 198, 0, 0.75);
+  background-color: rgba(0,117 ,189, 0.75);
   text-align: center;
   width: 100%;
 }
@@ -6101,7 +6109,7 @@ fieldset[disabled] .btn-default-inverse.active {
   line-height: 90px;
   font-size: 26px;
   background-color: #333333;
-  color: #fdc600;
+  color: #0075BD;
   border-radius: 50%;
 }
 .register-content .registration-details .business-member {
@@ -6194,7 +6202,7 @@ fieldset[disabled] .btn-default-inverse.active {
   float: left;
 }
 .page-heading h1 span {
-  color: #fdc600;
+  color: #0075BD;
 }
 @media (max-width: 480px) {
   .page-heading h1 {
@@ -6214,10 +6222,10 @@ fieldset[disabled] .btn-default-inverse.active {
   font-weight: bold;
 }
 .page-heading .heading-link a:hover {
-  color: #fdc600;
+  color: #0075BD;
 }
 .page-heading .heading-link i {
-  color: #fdc600;
+  color: #0075BD;
   padding: 0 3px;
   font-weight: bold;
 }
@@ -6377,7 +6385,7 @@ fieldset[disabled] .btn-default-inverse.active {
   height: 40px;
   width: 40px;
   border-radius: 3px;
-  background: #fdc600;
+  background: #0075BD;
   line-height: 40px;
   text-align: center;
 }
@@ -6411,7 +6419,7 @@ fieldset[disabled] .btn-default-inverse.active {
 }
 .contact-us .contact-form input:first-child {
     /*margin-top: 25px;*/
-    width: 40%;
+   /* width: 40%;*/
 }
 @media (max-width: 768px) {
   .contact-us .contact-form input:first-child {
@@ -6420,14 +6428,14 @@ fieldset[disabled] .btn-default-inverse.active {
   }
 }
 .contact-us .contact-form input[type="email"] {
-   float: right;
+   /*float: right;
     margin-top: 24px;
-    width: 47%;
+    width: 47%;*/
 }
 @media (max-width: 768px) {
   .contact-us .contact-form input[type="email"] {
-    float: none;
-    width: 100%;
+    /*float: none;
+    width: 100%;*/
   }
 }
 .contact-us .contact-form textarea {
@@ -6492,7 +6500,7 @@ fieldset[disabled] .btn-default-inverse.active {
   font-weight: 800;
 }
 .Price-list-heading h1 span {
-  color: #fdc600;
+  color: #0075BD;
 }
 @media (max-width: 768px) {
   .Price-list-heading h1 {
@@ -6594,7 +6602,7 @@ fieldset[disabled] .btn-default-inverse.active {
 }
 .price-listing .pricing-table:hover .price,
 .price-listing .pricing-table.active .price {
-  background-color: #fdc600;
+  background-color: #0075BD;
 }
 /* sample page begin */
 /* --------------------------------------- */
@@ -6625,7 +6633,7 @@ fieldset[disabled] .btn-default-inverse.active {
   font-weight: 800;
 }
 .sample-page-heading h1 span {
-  color: #fdc600;
+  color: #0075BD;
 }
 @media (max-width: 768px) {
   .sample-page-heading h1 {
@@ -6704,7 +6712,7 @@ fieldset[disabled] .btn-default-inverse.active {
   font-weight: 800;
   font-size: 29px;
   border-radius: 3px;
-  background: #fdc600;
+  background: #0075BD;
 }
 .blog-list .month {
   position: relative;
@@ -6865,7 +6873,7 @@ fieldset[disabled] .btn-default-inverse.active {
 .blog-post .share-this ul li {
   height: 50px;
   width: 50px;
-  background-color: #fdc600;
+  background-color: #0075BD;
   text-align: center;
   border-radius: 3px;
   margin-right: 7px;
@@ -7075,7 +7083,7 @@ fieldset[disabled] .btn-default-inverse.active {
 }
 .company-heading-view .button-content button.active,
 .company-heading-view .button-content button:hover {
-  background: #fdc600;
+  background: #0075BD;
   color: #333333;
 }
 @media (max-width: 768px) {
@@ -7236,7 +7244,7 @@ fieldset[disabled] .btn-default-inverse.active {
 .company-profile .social-link ul li {
   height: 40px;
   width: 40px;
-  background-color: #fdc600;
+  background-color: #0075BD;
   text-align: center;
   border-radius: 3px;
   margin-right: 7px;
@@ -7413,7 +7421,7 @@ fieldset[disabled] .btn-default-inverse.active {
   font-weight: 800;
   font-size: 29px;
   border-radius: 3px;
-  background: #fdc600;
+  background: #0075BD;
 }
 .company-events .month {
   position: relative;
@@ -7584,7 +7592,7 @@ fieldset[disabled] .btn-default-inverse.active {
   height: 40px;
   width: 40px;
   border-radius: 3px;
-  background: #fdc600;
+  background: #0075BD;
   line-height: 40px;
   text-align: center;
 }
@@ -7665,24 +7673,25 @@ fieldset[disabled] .btn-default-inverse.active {
   font-size: 15px;
 }
 #footer .main-footer a {
-  color: #e4b200;
+  color: #fff;
 }
 #footer .main-footer a:hover {
-  color: #fdc600;
+  color: #0075BD;
 }
 #footer .main-footer .about-globo {
   position: relative;
 }
 #footer .main-footer .about-globo .footer-logo {
   position: relative;
-  background: url(../img/content/footer_logo_bg.jpg) top center no-repeat;
-  background-size: cover;
+  /*background: url(../img/content/footer_logo_bg.jpg) top center no-repeat;*/
+  /*background-size: cover;*/
+  background: #fff;
   height: 220px;
   text-align: center;
   border-radius: 6px;
   overflow: hidden;
   width:240px;
-  margin: 0 auto;
+  /*margin: 0 auto;*/
 }
 #footer .main-footer .about-globo .footer-logo a {
   position: relative;
@@ -7694,7 +7703,7 @@ fieldset[disabled] .btn-default-inverse.active {
   left: 0;
   width: 100%;
   height: inherit;
-  background: rgba(253, 198, 0, 0.75);
+  background: rgba(0, 117, 189, 0.75);
 }
 @media (max-width: 992px) {
   #footer .main-footer .about-globo .footer-logo {
@@ -7780,18 +7789,18 @@ fieldset[disabled] .btn-default-inverse.active {
   background-color: #e4b200;
 }
 #footer .main-footer .newsletter button:hover {
-  background-color: #fdc600;
+  background-color: #0075BD;
 }
 #footer .main-footer .newsletter ul li {
   height: 50px;
   width: 50px;
-  background-color: #e4b200;
+  background-color: #fff;
   text-align: center;
   border-radius: 3px;
   margin-right: 7px;
 }
 #footer .main-footer .newsletter ul li:hover {
-  background-color: #ffd231;
+  background-color: #0075BD;
 }
 #footer .main-footer .newsletter ul li a {
   display: block;
@@ -7836,7 +7845,7 @@ fieldset[disabled] .btn-default-inverse.active {
   padding-left: 10px;
 }
 #footer .copyright ul li a:hover {
-  color: #fdc600;
+  color: #0075BD;
 }
 @media (max-width: 1200px) {
   #footer .copyright ul {
@@ -7911,7 +7920,7 @@ fieldset[disabled] .btn-default-inverse.active {
   margin-bottom: 80px;
 }
 .shortcodes .table-hover > thead {
-  background: #fdc600;
+  background: #0075BD;
 }
 .shortcodes .table-hover > thead > tr > th:first-child {
   border-radius: 3px 0 0 3px;
@@ -7940,7 +7949,7 @@ fieldset[disabled] .btn-default-inverse.active {
 }
 .shortcodes .nav-tabs {
   margin: 0;
-  border-bottom: 3px solid #fdc600;
+  border-bottom: 3px solid #0075BD;
 }
 .shortcodes .nav-tabs > li {
   padding: 0;
@@ -7957,8 +7966,8 @@ fieldset[disabled] .btn-default-inverse.active {
   color: inherit;
 }
 .shortcodes .nav-tabs > li.active > a {
-  background: #fdc600;
-  border: 1px solid #fdc600;
+  background: #0075BD;
+  border: 1px solid #0075BD;
 }
 .shortcodes .tab-content {
   margin: 0;
@@ -7992,7 +8001,7 @@ fieldset[disabled] .btn-default-inverse.active {
 }
 .shortcodes .vertical.tab-content {
   margin-left: 140px;
-  border-left: 3px solid #fdc600;
+  border-left: 3px solid #0075BD;
 }
 .events,.events_details,.user_details{
   background-color: #dddddd;
@@ -8111,8 +8120,8 @@ fieldset[disabled] .btn-default-inverse.active {
 }
 
 .create_user, #signin{
-  width:85% ! important;
-  margin: 0px 10px 0px 34px !important;
+ /* width:85% ! important;
+  margin: 0px 10px 0px 34px !important;*/
   height: 32px;
 }
 
@@ -8121,7 +8130,7 @@ fieldset[disabled] .btn-default-inverse.active {
 }
 
 .contact-us .contact-form input:first-child {
-  width: 100% !important;
+  /*width: 100% !important;*/
 }
 
 .simpleFilePreview_multiUI{
@@ -8393,4 +8402,53 @@ ui-autocomplete {
     text-align: center;
     vertical-align: middle;
     width:auto;
+}
+.mandatory_main{
+  position: relative;
+}
+.mandatory{
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}
+.pointer{
+  cursor: pointer;
+}
+.header-call-to-action .btn-default{
+  min-width: 110px;
+  max-width: 162px;
+}
+select{
+  opacity: 0;
+}
+.page-content .about-us p{
+  text-align: justify;
+}
+.privacy_collect{
+  margin-left: 20px;
+}
+.home-tab{
+  cursor: pointer;
+}
+.ui-menu .ui-menu-item a.ui-corner-all:hover, .ui-menu .ui-menu-item a.ui-corner-all:focus, .ui-menu .ui-menu-item a.ui-corner-all:active {
+    background:#ddd!important;
+    border-radius:0;
+    color: #000;
+    border: none;
+}
+.ui-menu-item a, .ui-menu-item:hover a { 
+  color:#000 !important; 
+  background:none !important;
+  border:none !important;
+  font-weight:normal !important;
+  margin:0px !important; 
+  }
+.ui-menu-item:hover{
+  background:#ddd!important;
+}
+.subcategories{
+  margin-top: 35px;
+}
+.datepicker td, .datepicker th {
+  padding: 10px !important;
 }

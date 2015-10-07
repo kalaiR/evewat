@@ -51,7 +51,7 @@ $(document).ready(function() {
   $.getJSON("/all_subcategory_for_category/",function(ret) {
         var options = '';       
         for (var i in ret) {
-          options += "<div class='col-md-3 col-sm-4 col-xs-6 '><div class='category-item' id='search_result'><a  class='event_click' href='/search/?q=&subcategoryid=" + ret[i].id +"'>" + ret[i].name +"</a> </div></div>";
+          options += "<div class='col-md-3 col-sm-4 col-xs-6 '><div class='category-item' id='search_result'><a  class='event_click' href='/search/?q=&eventtype=" + ret[i].id +"'>" + ret[i].name +"</a> </div></div>";
 
           }
              

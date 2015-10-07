@@ -54,9 +54,16 @@ class JSONResponse(HttpResponse):
 def home(request):
     subcategory = SubCategory.objects.all()
     city =get_current_country_cities(request)
-    recentad = Postevent.objects.filter().order_by('-id')[:4]
+    recentad = Postevent_v2.objects.filter().order_by('-id')[:4]
     ctx = {'subcategory':subcategory, 'city': city,'recentad':recentad}
     return render_to_response("index.html",ctx, context_instance=RequestContext(request))
+
+def about(request):
+    return render_to_response("about-us.html", context_instance=RequestContext(request))
+
+def privacy(request):
+    return render_to_response("privacy.html", context_instance=RequestContext(request))
+
 
 @csrf_protect 
 def user_login(request):
@@ -80,12 +87,10 @@ def user_login(request):
             if '@' in username:
                 if not User.objects.filter(email=username).exists():
                     error['email_exists'] = ugettext('Email Does not exists')
-                    print "error['email_exists']",error['email_exists']
                     raise ValidationError(error['email_exists'], 1)
             else:
                 if not User.objects.filter(username=username).exists():
                     error['username_exists'] = ugettext('Username Does not exists')
-                    print "error['username_exists']",error['username_exists']
                     raise ValidationError(error['username_exists'], 2)
         except ValidationError as e:
             messages.add_message(request, messages.ERROR, e.messages[-1]) 
@@ -115,7 +120,6 @@ def user_login(request):
             if user:           
                 if user.is_active:                
                     login(request, user)
-                    print user.id
                     user_id=user.id
                     response=HttpResponseRedirect(request.POST["next"]) 
                     return response               
@@ -147,11 +151,9 @@ def register(request):
             error={}
             if User.objects.filter(username=username).exists():
                 error['username_exists'] = ugettext('Username already exists')
-                # print "error['username_exists']",error['username_exists']
                 raise ValidationError(error['username_exists'], 1)
             if User.objects.filter(email=email).exists():
                 error['email_exists'] = ugettext('Email already exists')
-                # print "error['email_exists']",error['email_exists']
                 raise ValidationError(error['email_exists'], 2)     
         except ValidationError as e:
             messages.add_message(request, messages.ERROR, e.messages[-1]) 
@@ -188,7 +190,6 @@ def register(request):
             # send_registration_confirmation(user)
             registered = True
             user = User.objects.get(username=user.username)
-            print "user", user
             user.backend='django.contrib.auth.backends.ModelBackend'
             login(request, user)    
             return HttpResponseRedirect('/start/?user_id=' + str(user.id))
@@ -218,44 +219,38 @@ def register(request):
 def confirm(request, confirmation_code, username):    
     try:
         user = User.objects.get(username=username)        
-        print user.id
         profile = user.get_profile()
        
         # if profile.confirmation_code == confirmation_code and user.date_joined > (datetime.datetime.now()-datetime.timedelta(days=1)):
         if profile.confirmation_code == confirmation_code:
             # user.is_active = True
             profile.is_emailverified=True
-            print "user.is_emailverified", profile.is_emailverified
             # user.save()
             profile.save()
             user.backend='django.contrib.auth.backends.ModelBackend'
             login(request, user)
-            print "confirm7"
         return HttpResponseRedirect('/start/?user_id=' + str(user.id))    
     except:
         return HttpResponseRedirect('../../../../../')
 
 def start(request):
-    # print 'start'
     # city=City.objects.all()
     # category=Category.objects.all()
     path=request.path
-    # print path
     # event =event.objects.all()
     # recentad=event.objects.filter().order_by('-id')[:3]
-    user_id=Userprofile.objects.get(user_id=request.user.id)
-    # print "user start", user_id
+    # user_id=Userprofile.objects.get(user_id=request.user.id)
     
-    if request.user.is_authenticated:
-        userprofile=Userprofile.objects.get(user_id=request.user.id)
-    return render_to_response('index.html',{'path':path, 'userprofile':userprofile},context_instance=RequestContext(request))
+    # if request.user.is_authenticated:
+    #     userprofile=Userprofile.objects.get(user_id=request.user.id)
+    return render_to_response('index.html',{'path':path},context_instance=RequestContext(request))
 
 def post_event(request):
     subcategory = SubCategory.objects.all()
-    print 'subcategory from postevent',subcategory
     premium=PremiumPriceInfo.objects.all()
     return render_to_response("post_event.html",{'premium':premium,'subcategory':subcategory}, context_instance=RequestContext(request))
 
+@csrf_exempt
 def post_event_v2(request):
     category= Category.objects.all()
     subcategory = SubCategory.objects.all()
@@ -272,7 +267,6 @@ def submit_event(request):
         event_poster=request.FILES.getlist('poster[]')
         def handle_uploaded_file(f):            
             event_poster = open('events/static/img/' + '%s' % f.name, 'wb+')
-            # print "settings.FOR_IMG",settings.STATIC_ROOT 
             for chunk in f.chunks():
                 event_poster.write(chunk)
             event_poster.close()
@@ -295,13 +289,11 @@ def submit_event(request):
         event_festname=request.POST['festname']
         event_festcaption=request.POST['festcaption']
         event_temp=SubCategory.objects.get(id=request.POST['festtype'])
-        print "event_temp", event_temp
         event_festtype_id=event_temp.id
         event_state=request.POST['state']
         event_startdate=request.POST['startdate']
         event_enddate=request.POST['enddate']
         event_deadline=request.POST['deadline']
-        print request.POST['userstatus']
         #if request.POST['userstatus']=='free':
         postevent=Postevent()
         postevent.name=event_name
@@ -333,77 +325,65 @@ def submit_event(request):
     return response
 
 def submit_event_v2(request):
-    try:
-        if request.method=="POST":
-            postevent=Postevent_v2()
-            postevent.name=request.POST['name']
-            postevent.email=request.POST['email']
-            postevent.mobile=request.POST.get('mobile','0')
-            postevent.event_title=request.POST.get('eventtitle','')
-            startdate=request.POST.get('startdate','')
-            date,month,year=startdate.split('-')
-            postevent.startdate=year+'-'+month+'-'+date
-            enddate=request.POST.get('enddate','')
-            date,month,year=enddate.split('-')
-            postevent.enddate=year+'-'+month+'-'+date
-            postevent_category=Category.objects.get(id=request.POST.get('category',''))
-            postevent.category=postevent_category
-            postevent_subcategory=SubCategory.objects.get(id=request.POST.get('eventtype',''))
-            postevent.eventtype=postevent_subcategory
-            postevent.eventdescription=request.POST.get('eventdescription','')
-            postevent.address=request.POST.get('address','')
-            postevent.organizer=request.POST.get('organizer','')
-            postevent.state=request.POST.get('state','')
-            postevent_city=City.objects.get(id=request.POST.get('city',''))
-            postevent.city=postevent_city
-            postevent_college=College.objects.get(id=request.POST.get('college',''))
-            postevent.college=postevent_college
-            postevent.department=request.POST.get('dept','')
-            postevent_poster=request.FILES.getlist('poster[]')
-            def handle_uploaded_file(f):            
-                postevent_poster = open('events/static/img/' + '%s' % f.name, 'wb+')
-                # print "settings.FOR_IMG",settings.STATIC_ROOT 
-                for chunk in f.chunks():
-                    postevent_poster.write(chunk)
-                postevent_poster.close()
-            photosgroup = ''         
-            count=len(postevent_poster)
-            if count :
-                for uploaded_file in postevent_poster:
-                    count=count-1
-                    handle_uploaded_file(uploaded_file)
-                    if count==0:
-                        photosgroup=photosgroup  + '/static/img/' + str(uploaded_file)
-                    else:
-                        photosgroup=photosgroup  + '/static/img/' +str(uploaded_file) + ','
-                postevent.poster=photosgroup
-            else:
-                postevent.poster='/static/img/logo.png'
-            if request.POST.get('plan')!='0':
-                postevent.payment=request.POST.get('plan')
-            postevent.save()
-            message="Your data succesfully submitted"
-            # paiduser=PremiumPriceInfo.objects.get(purpose='paid')
-            # premium_amount=int(paiduser.premium_price)
-            user_amount=request.POST.get('plan')
-            if user_amount!='0' and request.user.is_authenticated():
-                return HttpResponseRedirect('/payment_event/')
-            elif user_amount=='0':
-                response=render_to_response("post_event_v2.html",{'message':message}, context_instance=RequestContext(request))  
-            else:
-                response= render_to_response("post_event_v2.html",{'message':'Insufficient data'}, context_instance=RequestContext(request))
-            response.delete_cookie('eventtitle')
-            response.delete_cookie('startdate')
-            response.delete_cookie('enddate')
-            response.delete_cookie('plan')
-            response.delete_cookie('category_name')
-            response.delete_cookie('eventtype_name')
-            response.delete_cookie('eventtype')
-            response.delete_cookie('category')
-            response.delete_cookie('eventdescription')
-            return response
-    except:
-        response = render_to_response("post_event_v2.html",{'message':'Something went to wrong'}, context_instance=RequestContext(request))
+    # try:
+    if request.method=="POST":
+        print 'request.POST.get',request.POST.get('collegetxt','')
+        postevent=Postevent_v2()
+        postevent.name=request.POST['name']
+        postevent.email=request.POST['email']
+        postevent.mobile=request.POST.get('mobile','0')
+        postevent.event_title=request.POST.get('eventtitle','')
+        startdate=request.POST.get('startdate','')
+        date,month,year=startdate.split('-')
+        postevent.startdate=year+'-'+month+'-'+date
+        enddate=request.POST.get('enddate','')
+        date,month,year=enddate.split('-')
+        postevent.enddate=year+'-'+month+'-'+date
+        postevent_category=Category.objects.get(id=request.POST.get('category',''))
+        postevent.category=postevent_category
+        postevent_subcategory=SubCategory.objects.get(id=request.POST.get('eventtype',''))
+        postevent.eventtype=postevent_subcategory
+        postevent.eventdescription=request.POST.get('eventdescription','')
+        postevent.address=request.POST.get('address','')
+        postevent.organizer=request.POST.get('organizer','')
+        postevent.state=request.POST.get('state','')
+        postevent_city=request.POST.get('city','')
+        postevent.city=postevent_city
+        postevent_college=request.POST.get('college','')
+        postevent.college=postevent_college
+        postevent.department=request.POST.get('dept','')
+        postevent_poster=request.FILES.getlist('poster[]')
+        def handle_uploaded_file(f):            
+            postevent_poster = open('events/static/img/' + '%s' % f.name, 'wb+')
+            for chunk in f.chunks():
+                postevent_poster.write(chunk)
+            postevent_poster.close()
+        photosgroup = ''         
+        count=len(postevent_poster)
+        if count :
+            for uploaded_file in postevent_poster:
+                count=count-1
+                handle_uploaded_file(uploaded_file)
+                if count==0:
+                    photosgroup=photosgroup  + '/static/img/' + str(uploaded_file)
+                else:
+                    photosgroup=photosgroup  + '/static/img/' +str(uploaded_file) + ','
+            postevent.poster=photosgroup
+        else:
+            postevent.poster='/static/img/logo.png'
+        if request.POST.get('plan')!='0':
+            postevent.payment=request.POST.get('plan')
+        postevent.save()
+        message="Your data succesfully submitted"
+        # paiduser=PremiumPriceInfo.objects.get(purpose='paid')
+        # premium_amount=int(paiduser.premium_price)
+        user_amount=request.POST.get('plan')
+        if user_amount!='0' and request.user.is_authenticated():
+            return HttpResponseRedirect('/payment_event/')
+        elif user_amount=='0':
+            response=render_to_response("post_event_v2.html",{'message':message}, context_instance=RequestContext(request))
+        else:
+            response= render_to_response("post_event_v2.html",{'message':'Insufficient data'}, context_instance=RequestContext(request))
         response.delete_cookie('eventtitle')
         response.delete_cookie('startdate')
         response.delete_cookie('enddate')
@@ -414,6 +394,18 @@ def submit_event_v2(request):
         response.delete_cookie('category')
         response.delete_cookie('eventdescription')
         return response
+    # except:
+    #     response = render_to_response("post_event_v2.html",{'message':'Something went to wrong'}, context_instance=RequestContext(request))
+    #     response.delete_cookie('eventtitle')
+    #     response.delete_cookie('startdate')
+    #     response.delete_cookie('enddate')
+    #     response.delete_cookie('plan')
+    #     response.delete_cookie('category_name')
+    #     response.delete_cookie('eventtype_name')
+    #     response.delete_cookie('eventtype')
+    #     response.delete_cookie('category')
+    #     response.delete_cookie('eventdescription')
+    #     return response
 
 def all_subcategory_for_category(request):
 
@@ -424,9 +416,7 @@ def all_subcategory_for_category(request):
         return JSONResponse({'error': 'Not Ajax or no GET'})
 
 def subcategory_for_category(request):
-    print "subcategory_for_category"
     if request.is_ajax() and request.GET and 'category_id' in request.GET:
-        print request.GET['category_id']         
         objs1 = SubCategory.objects.filter(category__id=request.GET['category_id'])
         return JSONResponse([{'name': o1.name, 'id': o1.id}
             for o1 in objs1])       
@@ -434,14 +424,9 @@ def subcategory_for_category(request):
         return JSONResponse({'error': 'Not Ajax or no GET'})
 
 def event_for_subcategory(request):
-    # print "brand_for_subcategory"
     if request.is_ajax() and request.GET and 'sub_category_id' in request.GET:
-        print request.GET['sub_category_id'] 
         # objs1 = Dropdown.objects.filter(subcat_refid=request.GET['sub_category_id']).exclude(brand_name='')
-        objs1 = Postevent.objects.filter(festtype_id=sub_category_id)
-        print 'objs1 in subcategory', objs1
-        for obj in objs1:
-            print obj.brand_name        
+        objs1 = Postevent.objects.filter(festtype_id=sub_category_id)        
         return JSONResponse([{'id': o1.id, 'name': smart_unicode(o1.brand_name)}
             for o1 in objs1])
     else:
@@ -456,8 +441,6 @@ def event(request,pname=None):
 def details(request,id=None):
 
     postevent=Postevent_v2.objects.get(pk=id)
-    print 'postevent',postevent.city
-    
     # g = GeoIP()
     # city=City.objects.get()
     return render_to_response("company-profile.html",{'events':postevent}, context_instance=RequestContext(request))
@@ -480,17 +463,12 @@ def banner(request):
 
 @csrf_exempt
 def upload_banner(request):
-    print "enter"
     if request.POST.get('link',False):
         uploadbanner=SiteBanner()
-        # print uploadbanner   request.POST.get('start',request.COOKIES.get('checkin'))
         uploadbanner.price=request.POST.get('price',request.COOKIES.get('price'))
-        print "uploadbanner.price",uploadbanner.price
         uploadbanner.position=request.POST.get('position',request.COOKIES.get('position'))
-        print "uploadbanner.position",uploadbanner.position
         uploadbanner.pageurl=request.POST.get('pageurl',request.COOKIES.get('pageurl'))
         uploadbanner.banner=request.FILES.get('banner',request.COOKIES.get('banner'))
-        print "uploadbanner.banner",uploadbanner.banner
         uploadbanner.link=request.POST['link']
         uploadbanner.save()
         response=HttpResponseRedirect("/payment/")
@@ -498,29 +476,21 @@ def upload_banner(request):
         response.set_cookie( 'position', uploadbanner.position )
         response.set_cookie( 'banner', uploadbanner.banner )
         response.set_cookie( 'pageurl', uploadbanner.pageurl )
-        
-        
     else:
         #Code for storing Payu Details
         # payudetails=PayuDetails()
-        
         # payudetails.status=request.POST.get('status')
         # payudetails.amount=request.POST.get('amount')
         # payudetails.save()
-
         # response.set_cookie('payudetails',payudetails.id)
         # response.set_cookie('payustatus',payudetails.status)
-
         # transaction=Transaction()
         # # transaction.order=Order.objects.get(id=request.COOKIES.get('orderdetails'))
         # # transaction.payu_details=PayuDetails.objects.get(id=request.COOKIES.get('payudetails'))
         # transaction.payu_status=request.COOKIES.get('payustatus')
-        # print "transaction.payu_status",transaction.payu_status
         # transaction.save()
 
         # payid, paystatus=store_payudetails(request)
-        # print "payid", payid
-        # print "paystatus", paystatus
         # # response = render_to_response("success.html",context_instance=RequestContext(request))
         # response.set_cookie('payudetails',payid)
         # response.set_cookie('payustatus',paystatus)
@@ -546,11 +516,8 @@ def success(request):
         # # transaction.order=Order.objects.get(id=request.COOKIES.get('orderdetails'))
         # # transaction.payu_details=PayuDetails.objects.get(id=request.COOKIES.get('payudetails'))
         # transaction.payu_status=request.COOKIES.get('payustatus')
-        # print "transaction.payu_status",transaction.payu_status
         # transaction.save()
         # payid, paystatus=store_payudetails(request)
-        # print "payid", payid
-        # print "paystatus", paystatus
         response = render_to_response("success.html",context_instance=RequestContext(request))
         # response.set_cookie('payudetails',payid)
         # response.set_cookie('payustatus',paystatus)
@@ -574,9 +541,7 @@ def success_event(request):
 def find_colleges(request):
     from django.utils.encoding import smart_unicode, force_unicode
     if request.is_ajax() and request.GET and 'city_id' in request.GET:
-        print request.GET['city_id']
         objs = College.objects.filter(city=request.GET['city_id'])
-        print "objs", objs
         return JSONResponse([{'id': o.id, 'name': smart_unicode(o.college_name)}
         for o in objs])
     else:
@@ -585,9 +550,7 @@ def find_colleges(request):
 def find_department(request):
     from django.utils.encoding import smart_unicode, force_unicode
     if request.is_ajax() and request.GET and 'college_id' in request.GET:
-        print request.GET['college_id']
         objs = CollegeDepartment.objects.filter(college__id=request.GET['college_id'])
-        print "objs", objs
         return JSONResponse([{'id': o.department.id, 'name': smart_unicode(o.department)}
         for o in objs])
     else:
@@ -597,9 +560,7 @@ def find_department(request):
 def find_subcategory(request):
     from django.utils.encoding import smart_unicode, force_unicode
     if request.is_ajax() and request.GET and 'category_id' in request.GET:
-        print request.GET['category_id']
         objs = SubCategory.objects.filter(category__id=request.GET['category_id'])
-        print "objs", objs
         return JSONResponse([{'id': o.id, 'name': smart_unicode(o.name)}
         for o in objs])
     else:
@@ -608,7 +569,6 @@ def find_subcategory(request):
 def find_city(request):
     from django.utils.encoding import smart_unicode, force_unicode
     if request.is_ajax() and request.GET and 'state' in request.GET:
-        print request.GET['state']
         objs = City.objects.filter(state=request.GET['state'])
         return JSONResponse([{'id': o.id, 'name': smart_unicode(o.city)}
         for o in objs])
@@ -756,17 +716,15 @@ def importcollegedata(request):
                 #      leadcategory_mapping[v] = i   
                         
                 else:
-                    print 'else-1'      
+                    pass
                   # if v in lead_fields:
                   #   lead_mapping[v] = i              
               
-              print 'rows===>', rows
               for i in range(1, rows):                
                 citylist = City() if len(city_mapping.keys()) > 0 else None                 
                 collegelist = College() if len(collegeaddress_mapping.keys()) > 0 else None
                 collegecategorylist = Category() if len(collegecategory_mapping.keys()) > 0 else None                      
 
-                print 'city_mapping'
                 for field in city_mapping:
                   col = city_mapping[field]
                   v = sheet.cell(row=i, column=col)                                

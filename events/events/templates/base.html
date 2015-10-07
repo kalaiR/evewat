@@ -11,14 +11,16 @@
 
   <!-- Stylesheets -->
   <link rel="stylesheet" href="{% static "css/style.css" %}">
-  <!-- <link rel="stylesheet" href="{% static "css/bootstrap.css" %}"> -->
+  
   <link rel="stylesheet" href="{% static "css/jquery-ui.css" %}">
   <link rel="stylesheet" href="{% static "css/jquery.bxslider.css" %}">
   <link href="{% static "css/simpleFilePreview.css" %}" rel="stylesheet">
   <link href="{% static "css/owl.carousel.css" %}" rel="stylesheet">
+  <link href="{% static "css/datepicker.css" %}" rel="stylesheet">
+  <link href="{% static "css/tipsy.css" %}" rel="stylesheet">
   <script type="text/javascript" src="{% static "js/jquery.js" %}"></script>
   <!-- GOOGLE FONTS -->
-
+  <link href='https://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'>
  
 
   <!--[if IE 9]>
@@ -48,7 +50,7 @@
         <!-- HEADER-LOGIN -->
         <div class="header-login">
 
-          <a href="#" class=""><i class="fa fa-power-off" action="/login/"></i> Login</a>
+          <a href="#" title="Please Login" class="northwest"><i class="fa fa-power-off" action="/login/"></i> Login</a>
           <span class="signup_error" style="{% if request.REQUEST.lst and not request.path == '/post_event_v2' %} display:block;color:red;font-size:17px; {%else%} display: none; {% endif %}">
               {%for message in messages%}{{message}}{% endfor %}
           </span>
@@ -60,19 +62,19 @@
             {% csrf_token %}    
             
               <div class="field_control">        
-              <input type="text" class="form-control"  placeholder="Username/Email" id="emailid_signup" name="username" autocomplete="off" >
-              <label for="emailid_signup" id="emailid_required" class="labelError" style="display:none;color:red;">Please enter User name</label>  
+              <input type="text" class="form-control"  placeholder="Enter your name or E-mail" id="emailid_signup" name="username" autocomplete="off" >
+              <label for="emailid_signup" id="emailid_required" class="labelError" style="display:none;color:red;">Please enter your name</label>  
               </div>
 
               <div class="field_control">   
-              <input type="password" class="form-control" name="password" id="password_signup" placeholder="Password">
-              <label for="password" id="password_required" class="labelError" style="display:none;color:red;">Please enter Password</label>
+              <input type="password" class="form-control" name="password" id="password_signup" placeholder="Enter Your Password">
+              <label for="password" id="password_required" class="labelError" style="display:none;color:red;">Please enter your Password</label>
               </div>
 
               <input type="hidden" value="{{ request.get_full_path }}" name="next" /> 
 
               <input type="submit" class="btn btn-default" value="Login" name="create" id="signin">
-              <!-- <a href="#" class="btn btn-link">Forgot Password?</a> -->
+              <a href="#" class="btn btn-link">Forgot Password?</a>
             </form>
           </div>
 
@@ -83,7 +85,7 @@
    {% if not user.is_authenticated %}
         <div class="header-register">
         
-          <a href="#" class=""><i class="fa fa-plus-square"></i> Register</a>
+          <a href="#" class="northwest" title="New Register" ><i class="fa fa-plus-square"></i> Register</a>
           &nbsp;&nbsp;&nbsp;<a href="/">{{request.user.email}}</a>
           <span class="signup_error" style="{% if request.REQUEST.rst %} display:block;color:red;font-size:17px; {%else%} display: none; {% endif %}">
               {%for message in messages%}{{message}}{% endfor %}
@@ -93,31 +95,31 @@
             {% csrf_token %}
 
             <div class="field_control">
-            <input type="text" class="form-control" name="username" placeholder="Firstname" id="username_signin" autocomplete="off">
-            <label for="username_signin" id="username_required1" class="signup_labelError">Please enter First name</label>
+            <input type="text" class="form-control" name="username" placeholder="Name" id="username_signin" autocomplete="off">
+            <label for="username_signin" id="username_required1" class="signup_labelError">Please enter your name</label>
             </div>
 
-            <div class="field_control">
+            <!-- <div class="field_control">
             <input type="text" class="form-control" name="lastname" placeholder="Lastname" id="lastname_signin" autocomplete="off">
             <label for="lastname_signin" id="lastname_required1" class="signup_labelError">Please enter Last name</label>
-            </div>
+            </div> -->
 
             <div class="field_control">
-            <input type="email" class="form-control" name="email_id" placeholder="email_id" id="emailid_signin" autocomplete="off">
+            <input type="email" class="form-control" name="email_id" placeholder="E-mail" id="emailid_signin" autocomplete="off">
 
-            <label for="emailid_signin" id="emailid_required1" class="signup_labelError">Please enter email id</label>
+            <label for="emailid_signin" id="emailid_required1" class="signup_labelError">Please enter your email id</label>
             <span id="valid_signup_email_required" class="error_message">Please enter valid Email</span>
             </div>
 
             <div class="field_control">
             <input type="text" class="form-control" name="mobile" placeholder="Mobile" id="mobile_signin" autocomplete="off">
-            <label for="mobile_signin" id="mobile_required1" class="signup_labelError">Please enter Mobile number</label>
+            <label for="mobile_signin" id="mobile_required1" class="signup_labelError">Please enter your mobile number</label>
             </div>
 
             <div class="field_control">
-            <input type="password" class="form-control" name="password" placeholder="password" id="password_signin" autocomplete="off">
+            <input type="password" class="form-control" name="password" placeholder="Password" id="password_signin" autocomplete="off">
             <span id="result"></span>
-            <label for="password" id="password_signin1" class="signup_labelError" style="display:none;">Please enter Password</label>
+            <label for="password" id="password_signin1" class="signup_labelError" style="display:none;">Please enter your password</label>
             </div>
 
             <!-- <div class="field_control">
@@ -191,7 +193,7 @@
 
         <!-- HEADER-LOG0 -->
         <div class="header-logo_text text-center">
-          <a href="/"><img src = "{% static "img/logo_text.png" %}" height="27"></a>
+          <a href="/" class="north" title="Explore your events"><img src = "{% static "img/logo_text.png" %}" height="27"></a>
         </div>
         <!-- END HEADER LOGO -->
         
@@ -230,8 +232,8 @@
 
         <!-- CALL TO ACTION -->
         <div class="header-call-to-action">
-          <a href="/post_event_v2" class="btn btn-default"><i class="fa fa-plus"></i> Add Post</a>
-          <a href="/banner" class="btn btn-default"><i class="fa fa-plus"></i> Add Banner</a>
+          <a href="/post_event_v2" class="btn btn-default northeast" title="Add your event"><i class="fa fa-plus"></i> Add Post</a>
+          <a href="/banner" class="btn btn-default northeast" title="Upload your event images"><i class="fa fa-plus"></i> Add Banner</a>
         </div><!-- END .HEADER-CALL-TO-ACTION -->
       </div><!-- END .CONTAINER -->
     </div>
@@ -239,126 +241,7 @@
 
     <!-- HEADER SEARCH SECTION -->
     <div class="header-search slider-home">
-      <div class="header-search-bar">
-         <form class="form" method="get" action="/search/?q=" id="f_search" name="f_search">
-
-         <!--  <div class="search-toggle">
-            <div class="container">
-              <div class="distance-range">
-                <p>
-                  <label for="amount-search">Distance:</label>
-                  <input type="text" id="amount-search">
-                </p>
-
-                <div id="slider-range-search"></div>
-              </div>  
-
-              <div class="distance-range">
-                <p>
-                  <label for="amount-search">Days published:</label>
-                  <input type="text" id="amount-search-day">
-                </p>
-
-                <div id="slider-range-search-day"></div>
-              </div>  
-
-              <p>Location:</p>
-              <div class="select-country">
-                <select class="" data-placeholder="-Select Country-">
-                  <option value="option1">option 1</option>
-                  <option value="option2">option 2</option>
-                  <option value="option3">option 3</option>
-                </select>
-              </div>
-
-              <div class="region">
-                <input type="text" placeholder="-Region-">
-              </div>
-
-              <div class="address">
-                <input type="text" placeholder="-Address-">
-              </div>
-
-              <div class="category-search">
-                <select class="" data-placeholder="-Select category-">
-                  <option value="option1">option 1</option>
-                  <option value="option2">option 2</option>
-                  <option value="option3">option 3</option>
-                </select>
-              </div>
-
-              <button class="search-btn" type="submit"><i class="fa fa-search"></i></button>
-
-            </div>
-          </div>  -->
-
-          <div class="container">
-           
-            <div class="search-value">
-              <div class="keywords">
-             <!--    <input type="text" class="form-control" placeholder="Keywords"> -->
-             {% if query or request.REQUEST.q or request.REQUEST.q == '' %}
-              <input type="text" name="q" id="q" class="form-control input-lg" placeholder="Event title" value="{% if query %}{{ query }}{% elif request.REQUEST.q %}{{request.REQUEST.q}}{% elif request.REQUEST.q == '' %}{% else %}{% endif %}" autocomplete="off"/>
-            {% else %}
-              <input type="text" name="q" id="q" class="form-control input-lg" placeholder="Event title" value="{% if recent_viewed_search %}{% for subcategory in recent_viewed_search|slice:'1' %}{% if subcategory.activity_view %}{{ subcategory.activity_view }}{% else %}{% endif %}{% endfor %}{% else %}{% endif %}" autocomplete="off"/>
-            {% endif %}
-              </div>
-
-              <div class="select-location">                         
-                 <!-- <select class="city" name="city">
-                  <option value="">Select City</option> 
-                   <option  id="currentid" value="{{request.COOKIES.global_city_id}}">"city"|get_current_city</option>
-                   {% for cities in city|get_city %}
-                        <option value="{{cities.id}}" id="ajax_cityid">{{ cities }} </option>
-                    {% endfor%} 
-
-                  </select> -->        
-                   <input type="text" class="form-control input-lg ui-autocomplete-input" placeholder="City" value="" id="fitltercitytxt" /> 
-                   <input type="hidden" class="form-control input-lg" placeholder="City" value="" id="fitltercity" name="city" />                  
-                </div>
-
-              <div class="category-search">
-                <select class="category_choose" name="eventtype">                 
-                    <option value="">Event type</option>
-                    {% for subcategory in subcategory %}
-                              <option value="{{subcategory.id}}">{{ subcategory.name }} </option>
-                     {% endfor%} 
-
-                 </select>
-                 
-                                  
-                          
-                      
-                    
-                  <!--   <option value="technical">Technical</option>
-                    <option value="cultural">Cultural</option>
-                    <option value="management">Management</option>
-                    <option value="sports">Sports</option>
-                    <option value="literary">Literary</option>
-                    <option value="conferences">Conferences</option>
-                    <option value="seminar">Seminar</option>
-                    <option value="workshop">Workshop</option>
-                    <option value="symposium">Symposium</option>
-                    <option value="youthsummit">Youth Summit</option>
-                    <option value="modelunitednations">Model United Nations</option>
-                    <option value="tedx">TEDx</option>
-                    <option value="summit">Summit</option>
-                    <option value="culture">Culture</option>
-                    <option value="conclave">Conclave</option>
-                    <option value="convention">Convention</option>
-                    <option value="entrepreneurshipsummit">Entrepreneurship Summit</option>
-                    <option value="medical">Medical</option>
-                    <option value="pharma">Pharma</option>
-                    <option value="biomedical">Bio Medical</option>
-                    <option value="OnlineEvents">Online Events</option>           -->
-                
-              </div>
-
-              <button class="search-btn base_search" type="submit"><i class="fa fa-search"></i></button>
-            </div>
-          </div> 
-        </form>
-      </div> 
+      
     <!-- <div class="popup">
       <div class="popup_text">
         <span>Thankyou for registration.</span><br/>
@@ -375,11 +258,11 @@
 
           <div class="col-md-4 col-sm-6">
             <div class="about-globo">
-              <h3>About Eventswat</h3>
+              <h3>Eventswat</h3>
 
               <div class="footer-logo">
                 <a href="/"><img src="{%static "img/logo.png"%}" height="150" alt=""></a>
-                <span></span> <!-- This content for overlay effect -->
+               <!--  <span></span> --> <!-- This content for overlay effect -->
               </div>
 
               <!-- <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Proin nibh augue,
@@ -419,10 +302,9 @@
           <div class="col-md-4 col-sm-6 clearfix">
             <div class="popular-categories">
               <h3>Why Eventswat</h3>
-
               <ul>
-                <li><a href="#"><i class="fa fa-shopping-cart"></i>About us</a></li>
-                <li><a href="#"><i class="fa fa-paper-plane-o"></i>Privacy policy</a></li>
+                <li><a href="/about"><i class="fa fa-shopping-cart"></i>About us</a></li>
+                <li><a href="/privacy"><i class="fa fa-paper-plane-o"></i>Privacy policy</a></li>
                 <li><a href="#"><i class="fa fa-cogs"></i>Terms and Conditions</a></li>
                 <li><a href="#"><i class="fa fa-book"></i>FAQs</a></li>
               </ul>
@@ -436,7 +318,7 @@
 
               <ul class="list-inline">
                 <li><a href="https://www.facebook.com/EventsWat"><i class="fa fa-facebook"></i></a></li>
-                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="https://twitter.com/eventswat1"><i class="fa fa-twitter"></i></a></li>
                 <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
                 <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
               </ul>
@@ -483,6 +365,7 @@
   <script src="{% static "js/bootstrap.min.js"%}"></script>
   <script src="{% static "js/owl.carousel.js" %}"></script>
   <script src="{% static "js/jquery.placeholder.min.js" %}"></script>
+  <script src="{% static "js/bootstrap-datepicker.js" %}"></script>
    <script type="text/javascript" src="{% static "js/jquery.simpleFilePreview.js" %}"></script>    
   
     <script src="{% static "js/jquery.iframe-transport.js" %}"></script>
@@ -495,7 +378,7 @@
     <script src="{% static "js/jquery.bxslider.js" %}"></script>
   <script src="{% static "js/jquery.tipsy.js" %}"></script>
   <script src="{% static "js/scripts.js" %}"></script>
-
+  
 
 </body>
 </html>

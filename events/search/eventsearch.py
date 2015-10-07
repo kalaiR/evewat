@@ -14,9 +14,8 @@ class EventSearchView(SearchView):
     def __call__(self, request):
         if 'q' in request.REQUEST \
             and unicode(request.REQUEST['q']).isdigit():
-                      
             eventid = long(request.REQUEST['q'])
-            if Postevent.objects.filter(id__exact=eventid).exists():
+            if Postevent_v2.objects.filter(id__exact=eventid).exists():
                 return redirect('details', eventid)
 
         # if request.user.is_authenticated():
