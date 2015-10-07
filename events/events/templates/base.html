@@ -19,7 +19,7 @@
   <link href="{% static "css/datepicker.css" %}" rel="stylesheet">
   <script type="text/javascript" src="{% static "js/jquery.js" %}"></script>
   <!-- GOOGLE FONTS -->
-
+  <link href='https://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'>
  
 
   <!--[if IE 9]>
@@ -49,7 +49,7 @@
         <!-- HEADER-LOGIN -->
         <div class="header-login">
 
-          <a href="#" class=""><i class="fa fa-power-off" action="/login/"></i> Login</a>
+          <a href="#" title="Please Login"><i class="fa fa-power-off" action="/login/"></i> Login</a>
           <span class="signup_error" style="{% if request.REQUEST.lst and not request.path == '/post_event_v2' %} display:block;color:red;font-size:17px; {%else%} display: none; {% endif %}">
               {%for message in messages%}{{message}}{% endfor %}
           </span>
@@ -61,13 +61,13 @@
             {% csrf_token %}    
             
               <div class="field_control">        
-              <input type="text" class="form-control"  placeholder="Username/Email" id="emailid_signup" name="username" autocomplete="off" >
-              <label for="emailid_signup" id="emailid_required" class="labelError" style="display:none;color:red;">Please enter User name</label>  
+              <input type="text" class="form-control"  placeholder="Enter your name or E-mail" id="emailid_signup" name="username" autocomplete="off" >
+              <label for="emailid_signup" id="emailid_required" class="labelError" style="display:none;color:red;">Please enter your name</label>  
               </div>
 
               <div class="field_control">   
-              <input type="password" class="form-control" name="password" id="password_signup" placeholder="Password">
-              <label for="password" id="password_required" class="labelError" style="display:none;color:red;">Please enter Password</label>
+              <input type="password" class="form-control" name="password" id="password_signup" placeholder="Enter Your Password">
+              <label for="password" id="password_required" class="labelError" style="display:none;color:red;">Please enter your Password</label>
               </div>
 
               <input type="hidden" value="{{ request.get_full_path }}" name="next" /> 
@@ -84,7 +84,7 @@
    {% if not user.is_authenticated %}
         <div class="header-register">
         
-          <a href="#" class=""><i class="fa fa-plus-square"></i> Register</a>
+          <a href="#" class="" title="New Register"><i class="fa fa-plus-square"></i> Register</a>
           &nbsp;&nbsp;&nbsp;<a href="/">{{request.user.email}}</a>
           <span class="signup_error" style="{% if request.REQUEST.rst %} display:block;color:red;font-size:17px; {%else%} display: none; {% endif %}">
               {%for message in messages%}{{message}}{% endfor %}
@@ -94,31 +94,31 @@
             {% csrf_token %}
 
             <div class="field_control">
-            <input type="text" class="form-control" name="username" placeholder="Firstname" id="username_signin" autocomplete="off">
-            <label for="username_signin" id="username_required1" class="signup_labelError">Please enter First name</label>
+            <input type="text" class="form-control" name="username" placeholder="Name" id="username_signin" autocomplete="off">
+            <label for="username_signin" id="username_required1" class="signup_labelError">Please enter your name</label>
             </div>
 
-            <div class="field_control">
+            <!-- <div class="field_control">
             <input type="text" class="form-control" name="lastname" placeholder="Lastname" id="lastname_signin" autocomplete="off">
             <label for="lastname_signin" id="lastname_required1" class="signup_labelError">Please enter Last name</label>
-            </div>
+            </div> -->
 
             <div class="field_control">
-            <input type="email" class="form-control" name="email_id" placeholder="email_id" id="emailid_signin" autocomplete="off">
+            <input type="email" class="form-control" name="email_id" placeholder="E-mail" id="emailid_signin" autocomplete="off">
 
-            <label for="emailid_signin" id="emailid_required1" class="signup_labelError">Please enter email id</label>
+            <label for="emailid_signin" id="emailid_required1" class="signup_labelError">Please enter your email id</label>
             <span id="valid_signup_email_required" class="error_message">Please enter valid Email</span>
             </div>
 
             <div class="field_control">
             <input type="text" class="form-control" name="mobile" placeholder="Mobile" id="mobile_signin" autocomplete="off">
-            <label for="mobile_signin" id="mobile_required1" class="signup_labelError">Please enter Mobile number</label>
+            <label for="mobile_signin" id="mobile_required1" class="signup_labelError">Please enter your mobile number</label>
             </div>
 
             <div class="field_control">
-            <input type="password" class="form-control" name="password" placeholder="password" id="password_signin" autocomplete="off">
+            <input type="password" class="form-control" name="password" placeholder="Password" id="password_signin" autocomplete="off">
             <span id="result"></span>
-            <label for="password" id="password_signin1" class="signup_labelError" style="display:none;">Please enter Password</label>
+            <label for="password" id="password_signin1" class="signup_labelError" style="display:none;">Please enter your password</label>
             </div>
 
             <!-- <div class="field_control">

@@ -134,7 +134,9 @@
                     <div class="col-md-3 col-sm-4 col-xs-6">
                         <div class="category-item">
 
-                          <a href="search/?q=&amp;eventtype={{subcategory.id}}">{{subcategory.name}}</a>
+                          <a href="search/?q=&amp;eventtype={{subcategory.id}}">
+                          <!-- <img src="media/{{subcategory.icon}}"> -->
+                          {{subcategory.name}}</a>
                         </div>
 
                       </div>
@@ -221,7 +223,7 @@
                         </li>
                       {% for categories in initial_load|get_categories %}
                         <li>
-                          <a class="select_category"  role="tab" data-toggle="tab">{{categories.name}}</a>
+                          <a class="select_category"  role="tab" data-toggle="tab" title="Please choose any category">{{categories.name}}</a>
                            <input type="hidden" class="ajax_catid" value="{{categories.id}}">                                      
                           
                         </li>
@@ -249,7 +251,7 @@
   <div class="featured-listing" id= "featured-list">
     <div class="container">
       <div class="row clearfix">
-        <h2><strong>Featured</strong> Events</h2>
+        <h2><strong>Latest Events</strong></h2>
         {% for recentad in recentad %}
         {% if recentad.admin_status == True %}
          <div class="col-md-3 col-sm-4 col-xs-6">

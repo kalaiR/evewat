@@ -18,7 +18,7 @@ class Category(models.Model):
 		
 class SubCategory(models.Model):
 	category = models.ManyToManyField(Category)
-	icon= models.ImageField(upload_to='category_icon',max_length=100) 
+	icon= models.ImageField(upload_to='subcategory/icon/',max_length=100) 
 	name = models.CharField(max_length=50) 
 	def __unicode__(self):
 		return self.name
