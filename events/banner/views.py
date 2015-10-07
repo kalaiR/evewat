@@ -18,6 +18,12 @@ from events.util import format_redirect_url
 from django.contrib.auth.decorators import login_required
 from django.utils import simplejson
 import simplejson as json
+
+#from events.util import get_current_country_cities
+# from events.context_processors import *
+
+
+from django.contrib.auth.decorators import login_required
 import random
 import string
 import datetime

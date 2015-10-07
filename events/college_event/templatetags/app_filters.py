@@ -10,7 +10,7 @@ register = template.Library()
 def get_banner(banner):
 	banner=SiteBanner.objects.all()
 	return banner
-
+	
 @register.filter
 def get_categories(initial_load):  
 	category=Category.objects.all()	

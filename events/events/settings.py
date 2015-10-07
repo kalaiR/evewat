@@ -142,9 +142,9 @@ COMPRESS_JS_FILTERS = [
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
-GEOS_LIBRARY_PATH = '/usr/local/lib/libgeos_c.so'
+# GEOS_LIBRARY_PATH = '/usr/local/lib/libgeos_c.so'
 
-GEOIP_PATH = os.path.join(os.path.dirname(__file__), 'static/geoip/')
+# GEOIP_PATH = os.path.join(os.path.dirname(__file__), 'static/geoip/')
 # GEOIP_PATH = os.path.join(os.path.dirname(__file__), '../static/geoip/')
 
 #img upload by pradeepa

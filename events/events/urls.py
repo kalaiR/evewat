@@ -13,6 +13,7 @@ from search.searchform import EventSearchFilter
 #For loading global functions
 from django.template.loader import add_to_builtins
 add_to_builtins('college_event.templatetags.app_filters')
+
 admin.autodiscover()
 
 urlpatterns = patterns('',
