@@ -1,5 +1,7 @@
+from college_event.models import *
 
-def eventtype(request):
-    from college_event.models import SubCategory
+def globalactivity(request):
     subcategory=SubCategory.objects.all()
-    return {'subcategory':subcategory}
+    recentad = Postevent_v2.objects.filter().order_by('-id')[:4]
+    path = request.path
+    return {'subcategory':subcategory,'recentad':recentad,'path':path}
