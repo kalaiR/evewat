@@ -1,10 +1,8 @@
 from django import template
 from django.db.models import *
-from college_event.models import *
 from banner.models import *
 from college_event.views import *
-#from django.contrib.gis.geoip import GeoIP
-from events import globals
+from college_event.models import *
 from events.util import *
 register = template.Library()
 

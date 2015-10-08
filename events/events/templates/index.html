@@ -3,12 +3,14 @@
 {% load app_filters %}
 {% load static from staticfiles %}
 {% block content %}
+
       <div class="slider-content">
 
         <div id="home-slider" class="owl-carousel">
         
            {% for banners in banner|get_banner %}
            {% if banners.pageurl == '/' and banners.position == 'top' and banners.admin_status == True %}
+<<<<<<< HEAD
             <div class="item">
          
             {% if 'start' in path %}  
@@ -26,30 +28,14 @@
             </div>
 
 
+=======
+          <div class="item">
+             <img src="/media/{{banners.banner}}"  alt="" title="{{banners.link}}">
+>>>>>>> a4d1031f2b5f9608ff903ea8317808ba027eb223
           </div>
             {% endif %}
-          {% endfor %}
-     
-          <!-- <div class="item"><img src="media/static/banners/img/banner1.jpg"  alt="">
-            <div class="slide-content">
-              <a href="#"><img src="{% static "img/slider-logo.png" %}"alt=""></a>
-
-              <h1>The <span>Right</span> Place</h1>
-              <h2>For Business</h2>
-
-            </div>
-
-          </div>
-
-          <div class="item"><img src="media/static/banners/img/banner2.jpg"  alt="">
-            <div class="slide-content">
-              <a href="#"><img src="{% static "img/slider-logo.png"%}" alt=""></a>
-
-              <h1>The <span>Right</span> Place</h1>
-              <h2>For Business</h2>
-
-            </div>
-          </div> -->
+          {% endfor %}     
+          
         </div>
 
         <div class="customNavigation">
@@ -59,9 +45,18 @@
 
       </div> <!-- END .slider-content -->
     </div> <!-- END .SEARCH and slide-section -->
+   
+    <div class="container">
+      <div class="header-nav-bar home-slide">
+        <nav class="text-center">
+            <h3><span>Explore by Event categories</span></h3>
+            <button><i class="fa fa-bars"></i></button>
+        </nav>
+      </div> <!-- end .header-nav-bar -->
+    </div> <!-- end .container -->
 
-    
   </header> <!-- end #header -->
+                    
 
   <div id="page-content" class="home-slider-content">
     <div class="container">
@@ -82,14 +77,16 @@
                 <div class="tab-content">
 
                   <div class="tab-pane active" id="all-categories">
-                    <h3><span>Categories</span></h3>
+                    
 
                     <div class="row clearfix subcategories">                 
                    {% for subcategory in subcategory%}  
                     <div class="col-md-3 col-sm-4 col-xs-6">
                         <div class="category-item">
 
-                          <a href="search/?q=&amp;eventtype={{subcategory.id}}">{{subcategory.name}}</a>
+                          <a href="search/?q=&amp;eventtype={{subcategory.id}}">
+                          <!-- <img src="media/{{subcategory.icon}}"> -->
+                          {{subcategory.name}}</a>
                         </div>
 
                       </div>
@@ -176,7 +173,7 @@
                         </li>
                       {% for categories in initial_load|get_categories %}
                         <li>
-                          <a class="select_category"  role="tab" data-toggle="tab">{{categories.name}}</a>
+                          <a class="select_category"  role="tab" data-toggle="tab" title="Please choose any category">{{categories.name}}</a>
                            <input type="hidden" class="ajax_catid" value="{{categories.id}}">                                      
                           
                         </li>
@@ -204,7 +201,7 @@
   <div class="featured-listing" id= "featured-list">
     <div class="container">
       <div class="row clearfix">
-        <h2><strong>Featured</strong> Events</h2>
+        <h2><strong>Latest Events</strong></h2>
         {% for recentad in recentad %}
         {% if recentad.admin_status == True %}
          <div class="col-md-3 col-sm-4 col-xs-6">

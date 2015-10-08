@@ -79,7 +79,7 @@ def searchresults(q=None, params=None, orderby=None, groupby=None,
   """Perform search leads using haystack"""
   print 'Leadsearch as Search'
   if not model_cls:
-    model_cls = Postevent_v2
+    model_cls = Postevent
 
   if params is None:
     params = OrderedDict([('eventtype', None), ('city', None), ('eventtitle', None),('payment', None)])   
