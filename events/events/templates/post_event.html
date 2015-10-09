@@ -125,10 +125,9 @@
                         </div>
                       
                       <ul class="feature">
-                        <li><i class="fa fa-check-circle-o"></i> post 10 adds free</li>
-                        <li><i class="fa fa-check-circle-o"></i> adds dispaly in 1 month</li>
-                        <li><i class="fa fa-check-circle-o"></i> Free poster display after the paid poster</li>
-                        <li><i class="fa fa-check-circle-o"></i> Sending SMS and mail</li>
+                        <li><i class="fa fa-check-circle-o"></i> Free advertising of 10 banners.</li>
+                        <li><i class="fa fa-check-circle-o"></i> Free  displaying of poster for a month.</li>
+                        <li><i class="fa fa-check-circle-o"></i> Notifying status via sms or mail</li>
                    
                       </ul>
                       <!-- <input type="submit" class="btn btn-default post_event" data-user="freeuser" value="Free User"> -->
@@ -149,9 +148,9 @@
                         </div>
                       
                       <ul class="feature">
-                        <li><i class="fa fa-check-circle-o"></i> Display for 1 month</li>
-                        <li><i class="fa fa-check-circle-o"></i> Notifications are send by mail and Sms</li>
-                        <li><i class="fa fa-check-circle-o"></i> Display the poster in which page you want</li>
+                        <li><i class="fa fa-check-circle-o"></i> Displaying poster for a month</li>
+                        <li><i class="fa fa-check-circle-o"></i> Notifying status via sms or email</li>
+                        <li><i class="fa fa-check-circle-o"></i> Publish your ads on the page you wish Prioritized banner</li>
                         <!-- <li><i class="fa fa-check-circle-o"></i> Loren ipsum dolor sit amet</li>
                         <li><i class="fa fa-check-circle-o"></i> Loren ipsum dolor sit amet</li> -->
                       </ul>
@@ -181,7 +180,7 @@
                       <input type="text" placeholder="Organizer E-mail" name="organizer_email" id="organizer_email" class="organizer_name " value="">
                       <span  class="mandatory" style="color:red;">*</span>
                       <label class="organizer_email_error" style="display:none;color:red;">Please Enter Valid Organizer Email</label>
-                      <input type="text" placeholder="Organizer mobile" name="organizer_mobile" id="organizer_mobile" class="organizer_mobile " value="">
+                      <input type="number" placeholder="Organizer mobile" name="organizer_mobile" id="organizer_mobile" class="organizer_mobile " value="" onkeyup="if(!this.checkValidity()){this.value='';alert('Please enter a number')};">
                       <span  class="mandatory" style="color:red;">*</span>
                       <label class="organizer_mobile_error" style="display:none;color:red;">Please Enter Organizer Mobile Number</label>
                     </div>
@@ -249,7 +248,7 @@ Guest
                   </div> 
                   <div class="row">
                     <div class="col-md-12 mandatory_main">
-                      <input type="text" placeholder="Phone number" name="mobile" class="mobile"  value=""> 
+                      <input type="number" placeholder="Phone number" name="mobile" class="mobile"  value="" onkeyup="if(!this.checkValidity()){this.value='';alert('Please enter a number')};"> 
                       <span  class="mandatory" style="color:red;">*</span>
                       <label class="mobile_error" style="display:none;color:red;">Please Enter Valid Phonenumber</label>     
                     </div>
