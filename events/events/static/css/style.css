@@ -8171,9 +8171,11 @@ fieldset[disabled] .btn-default-inverse.active {
   background: none !important;
 }
 
-.signup_labelError, .error_message, .labelError{
+.error_message, .labelError{
   display: none;
   padding:0px 0px 0px 8px;
+  color:#df0024;
+  font-weight: bold;
 }
 
 .uou-custom-select .select_city{
@@ -8548,6 +8550,18 @@ select{
   100% {
     opacity : 0   ;
   }  
+}
+
+.error_input_field{
+  width: 50% !important;
+}
+
+.login_holder .error_input_field{
+  width: 48% !important;
+}
+
+.login_holder input, .register_holder input{
+ font-size:13px !important;
 }
 
 
