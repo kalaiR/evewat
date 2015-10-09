@@ -840,6 +840,7 @@ $('.events').click(function(){
   auto: true,
   autoControls: true
 });          
+
 // validation by kalai//
 //login form validation on button click
   var sign_in_required =["emailid_signin", "password_signin"];
@@ -931,14 +932,15 @@ $('.events').click(function(){
       $('#emailid_signup').next().next('.error_message').hide();
     }
     }
-    if ($(":input").hasClass("error_input_field")){
+     if ($(":input").hasClass("error_input_field")){
     return false;
     }
     else{
-      $('form[name="sign_up"]').submit();      
+      $('form[name="sign_in"]').submit();      
       return true;
     }
-  });   
+});
+
 // validation on blur
 $('.header-call-to-action input').blur(function(){
         if ($(this).val() == "")  {   
