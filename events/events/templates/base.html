@@ -10,6 +10,7 @@
   <title>EventsWat</title>
 
   <!-- Stylesheets -->
+  <link rel="stylesheet" href="{% static "css/bootstrap-datepicker.css" %}">
   <link rel="stylesheet" href="{% static "css/style.css" %}">
   
   <link rel="stylesheet" href="{% static "css/jquery-ui.css" %}">
@@ -108,7 +109,7 @@
 
    <!-- HEADER REGISTER -->
    {% if not user.is_authenticated %}
-        <div class="header-register">
+       <div class="header-register">
         
           <a href="#" class="northwest" title="New Register" ><i class="fa fa-plus-square"></i> Register</a>
           &nbsp;&nbsp;&nbsp;<a href="/">{{request.user.email}}</a>
@@ -126,6 +127,7 @@
             </div>
 
             <div class="field_control">
+
             <input type="text" class="form-control" name="email_id" placeholder="Email" id="emailid_signup" autocomplete="off">
             <label for="emailid_signin" class="error_message">Please Enter your Email</label>
             <label class="error_message">Please Enter Valid Email</label>
@@ -254,8 +256,6 @@
     <!-- HEADER SEARCH SECTION -->
     {% if request.path == '/' or request.path == '/start/' %}
     <div class="header-search slider-home">
-
-
       <div class="header-search-bar">
          <form class="form" method="get" action="/search/?q=" id="f_search" name="f_search">
 
@@ -373,9 +373,12 @@
             </div>
           </div> 
         </form>
-      </div> 
-  {% endif %}
-    <!-- <div class="popup">
+      </div>
+      {% endif %}
+  
+  <!-- <div class="popup">
+
+ 
       <div class="popup_text">
         <span>Thankyou for registration.</span><br/>
         <span> We have sent a verification code to your email address. Please click an the activation link to activate your account.</span>
@@ -391,7 +394,7 @@
 
           <div class="col-md-3 col-sm-6">
             <div class="about-globo">
-              <h3>Eventswat</h3>
+              <!-- <h3>Eventswat</h3> -->
 
               <div class="footer-logo">
                 <a href="/"><img src="{%static "img/logo_150.png"%}" height="150" alt=""></a>

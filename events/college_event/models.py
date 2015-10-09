@@ -19,7 +19,8 @@ class Category(models.Model):
 		
 class SubCategory(models.Model):
 	category = models.ManyToManyField(Category)
-	icon= models.ImageField(upload_to='subcategory/icon/',max_length=100, blank=True) 
+	icon= models.ImageField(upload_to='subcategory/icon/',max_length=100) 
+	hover_icon= models.ImageField(upload_to='subcategory/icon/',max_length=100) 
 	name = models.CharField(max_length=50) 
 	def __unicode__(self):
 		return self.name
@@ -73,7 +74,7 @@ class Postevent(models.Model):
 	city= models.CharField(max_length=50)
 	college=models.CharField(max_length=50)
 	department=models.CharField(max_length=50)
-	poster = ContentTypeRestrictedFileField(upload_to='static/img',null=True,content_types=['image/jpeg','image/png'],max_upload_size=2097152,help_text="Please upload the banner Image with 2MB min and jpg, png format only allowed")	
+	poster = ContentTypeRestrictedFileField(upload_to='static/img/',null=True,content_types=['image/jpeg','image/png'],max_upload_size=2097152,help_text="Please upload the banner Image with 2MB min and jpg, png format only allowed")	
 	admin_status = models.BooleanField(default=False)
 	payment = models.BooleanField(default=False)
 

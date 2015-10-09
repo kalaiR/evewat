@@ -5614,14 +5614,16 @@ fieldset[disabled] .btn-default-inverse.active {
   background: #dddddd;
   border-radius: 3px;
   margin-bottom: 30px;
+  position:relative;
   text-align: center;
   transition: all .3s ease;
+
 }
 .category-item a {
   position: relative;
   display: block;
   height: 100%;
-  padding: 60px 20px 0;
+  padding: 150px 20px 0;
   font-size: 15px;
   font-weight: bold;
   text-transform: capitalize;
@@ -7757,6 +7759,7 @@ fieldset[disabled] .btn-default-inverse.active {
 
 #footer .main-footer .about-globo {
   position: relative;
+  margin:30px 0px 0px 0px;
 }
 #footer .main-footer .about-globo .footer-logo {
   position: relative;
@@ -8177,7 +8180,6 @@ fieldset[disabled] .btn-default-inverse.active {
   color:#df0024;
   font-weight: bold;
 }
-
 .uou-custom-select .select_city{
   width:205px !important;
 }
@@ -8555,7 +8557,6 @@ select{
 .error_input_field{
   width: 50% !important;
 }
-
 .login_holder .error_input_field{
   width: 48% !important;
 }
@@ -8563,5 +8564,36 @@ select{
 .login_holder input, .register_holder input{
  font-size:13px !important;
 }
+.sub_cat_icon, .sub_cat_icon_hover {
+  position:absolute;
+  top:32px;
+  left:42px;
 
-
+}
+.sub_cat_icon_hover {
+  display:none;
+}
+.category-item:hover .sub_cat_icon_hover {
+  display:block;
+}
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    display: none;
+    min-width: 160px;
+    padding: 5px 0;
+    margin: 2px 0 0;
+    list-style: none;
+    font-size: 15px;
+    text-align: left;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0,0,0,.15);
+    border-radius: 0;
+    -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+    box-shadow: 0 6px 12px rgba(0,0,0,.175);
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+}
