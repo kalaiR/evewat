@@ -18,8 +18,10 @@
 
   // jquery ui call functionfor calendar
   //------------------------------------------------
-  $( ".startdate" ).datepicker({ format: 'dd-mm-yyyy'});
-  $( ".enddate" ).datepicker({ format: 'dd-mm-yyyy'});
+  $(function () {
+    $(  ".startdate" ).datepicker({ format: 'dd-mm-yyyy', minDate: 0});
+    $( ".enddate" ).datepicker({ format: 'dd-mm-yyyy', minDate: 0});
+});
   // for date picker
 
   var nowTemp = new Date();
@@ -1175,24 +1177,25 @@ jQuery('.user_details').click(function(){
         image.src = oFREvent.target.result;
         image.onload = function () {
         alert(this.width);
-          if (this.width > 1200 ) {
-            alert("Exceeded Image width (1200 pixels).Please upload below 1200px width");
-            return false;
-          }
-          else if (this.width < 1100 ) {
-            alert("Image width (1100 pixels).Please upload above 1100px width");
-            return false;
-          }
-          else if (this.height > 700 ) {
-            alert("Exceeded height (700 pixels).Please upload below 700px height");
-            return false;
-          }
-           else if (this.height < 650 ) {
-            alert("Image height is (700 pixels).Please upload above 650px height");
-            return false;
-          }
-          else if (this.size >1024*2000 ) {
-            alert("Image height is (700 pixels).Please upload above 650px height");
+          // if (this.width > 1200 ) {
+          //   alert("Exceeded Image width (1200 pixels).Please upload below 1200px width");
+          //   return false;
+          // }
+          // else if (this.width < 1100 ) {
+          //   alert("Image width (1100 pixels).Please upload above 1100px width");
+          //   return false;
+          // }
+          // else if (this.height > 700 ) {
+          //   alert("Exceeded height (700 pixels).Please upload below 700px height");
+          //   return false;
+          // }
+          //  else if (this.height < 650 ) {
+          //   alert("Image height is (700 pixels).Please upload above 650px height");
+          //   return false;
+          // }
+          if (this.size >1024*1000 ) {
+            // alert("Image height is (700 pixels).Please upload above 650px height");
+            alert("please upload less than 1MB");
             return false;
           }
           else{

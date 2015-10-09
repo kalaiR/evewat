@@ -74,7 +74,7 @@ class Postevent(models.Model):
 	city= models.CharField(max_length=50,null=True, blank=True)
 	college=models.CharField(max_length=50,null=True, blank=True)
 	department=models.CharField(max_length=50,null=True, blank=True)
-	poster = models.ImageField(upload_to='events/static/img/',null=True, max_length=500)	
+	poster = models.ImageField(upload_to='/static/img/',null=True, max_length=500)	
 	admin_status = models.BooleanField(default=False)
 	payment = models.BooleanField(default=False)
 

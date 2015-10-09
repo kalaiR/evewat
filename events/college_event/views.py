@@ -35,6 +35,7 @@ import datetime
 import time
 import openpyxl
 from forms import UploadFileForm
+from django.utils.encoding import smart_unicode, force_unicode
 
 class JSONResponse(HttpResponse):
     def __init__(self, data):
@@ -169,7 +170,18 @@ def register(request):
             #     department=Department.objects.get(id=request.POST['select_dept'])
             #     userprofile.department_id =department.id
  
-            userprofile.save()          
+            userprofile.save() 
+            send_templated_mail(
+              template_name = 'welcome',
+              subject = 'Welcome Evewat',
+              from_email = 'testmail123sample@gmail.com',
+              recipient_list = [user.email],
+              context={
+                       'user': user.username,
+                       
+                         
+              },
+            )              
             registered = True
             user = User.objects.get(username=user.username)
             user.backend='django.contrib.auth.backends.ModelBackend'
@@ -244,6 +256,16 @@ def submit_event_v2(request):
         if request.POST.get('plan')!='0':
             postevent.payment=request.POST.get('plan')
         postevent.save()
+        send_templated_mail(
+              template_name = 'post',
+              subject = 'Post Event',
+              from_email = 'testmail123sample@gmail.com',
+              recipient_list = [postevent.email],
+              context={
+                       'user': postevent.name,
+                                           
+              },
+          )  
         message="Your data succesfully submitted"
         
         user_amount=request.POST.get('plan')
@@ -295,7 +317,7 @@ def event_for_subcategory(request):
 def all_subcategory_for_category(request):
     if request.is_ajax():
         objs1 = SubCategory.objects.all()
-        return JSONResponse([{'name': o1.name, 'id': o1.id} for o1 in objs1])       
+        return JSONResponse([{'name': o1.name, 'id': o1.id, 'icon':smart_unicode(o1.icon), 'hover_icon':smart_unicode(o1.hover_icon)} for o1 in objs1])       
     else:
         return JSONResponse({'error': 'Not Ajax or no GET'})
 
@@ -303,7 +325,7 @@ def all_subcategory_for_category(request):
 def subcategory_for_category(request):
     if request.is_ajax() and request.GET and 'category_id' in request.GET:
         objs1 = SubCategory.objects.filter(category__id=request.GET['category_id']) 
-        return JSONResponse([{'name': o1.name, 'id': o1.id} for o1 in objs1])       
+        return JSONResponse([{'name': o1.name, 'id': o1.id, 'icon':smart_unicode(o1.icon), 'hover_icon':smart_unicode(o1.hover_icon)} for o1 in objs1])       
     else:
         return JSONResponse({'error': 'No Ajax or No Get Request'})
 

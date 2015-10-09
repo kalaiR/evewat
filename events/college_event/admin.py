@@ -39,15 +39,34 @@ class DepartmentAdmin(admin.ModelAdmin):
 	list_per_page = 50
 
 class PosteventAdmin(admin.ModelAdmin):
-	filelds=['name','eventtype','city','event_title','startdate','admin_status']
+	filelds=['name','email','eventtype','city','event_title','startdate','admin_status']
 	list_display = ('id', 'name','eventtype','city','event_title','startdate','admin_status')
 	list_filter = ['id','event_title','city']	
 	search_fields = ['id', 'event_title']
 	list_per_page = 50
-
+	actions = ['send_EMAIL']
 	def admin_status(self, obj):
 		return obj.admin_status 
 	admin_status.boolean = False
+
+	def send_EMAIL(self,request, queryset):
+		from templated_email import send_templated_mail
+		if admin_status.boolean == True :
+			for i in queryset:
+				if i.email:
+					send_templated_mail(
+							template_name = 'premium_user',
+				            subject = 'Welcome Evewat',
+				            from_email = 'testmail123sample@gmail.com',
+				            recipient_list = [i.email],
+				            context={
+				                       'user': i.name,
+				                    },
+				        ) 
+		else :
+			return self.message_user(request, "Mail sent successfully ")
+
+         	
 
 	def get_readonly_fields(self, request, obj=None):
 		if obj: # editing an existing object
