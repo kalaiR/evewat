@@ -52,11 +52,11 @@ class JSONResponse(HttpResponse):
                 simplejson.dumps(data), mimetype='application/json')
 # Create your views here.
 def home(request):
-    subcategory = SubCategory.objects.all()
-   # city =get_current_country_cities(request)
-    recentad = Postevent_v2.objects.filter().order_by('-id')[:4]
-    ctx = {'subcategory':subcategory,'recentad':recentad}
-    return render_to_response("index.html",ctx, context_instance=RequestContext(request))
+   #  subcategory = SubCategory.objects.all()
+   # # city =get_current_country_cities(request)
+   #  recentad = Postevent_v2.objects.filter().order_by('-id')[:4]
+   #  ctx = {'subcategory':subcategory,'recentad':recentad}
+    return render_to_response("index.html", context_instance=RequestContext(request))
 
 def about(request):
     return render_to_response("about-us.html", context_instance=RequestContext(request))
@@ -171,7 +171,7 @@ def register(request):
             user.save()
             userprofile = Userprofile()
             userprofile.user_id=user.id
-            userprofile.lastname = lastname=request.POST['lastname']
+            # userprofile.lastname = lastname=request.POST['lastname']
             userprofile.mobile=request.POST['mobile']
 
             
@@ -234,16 +234,16 @@ def confirm(request, confirmation_code, username):
         return HttpResponseRedirect('../../../../../')
 
 def start(request):
-    # city=City.objects.all()
-    # category=Category.objects.all()
-    path=request.path
-    # event =event.objects.all()
-    # recentad=event.objects.filter().order_by('-id')[:3]
-    user_id=Userprofile.objects.get(user_id=request.user.id)
+    # # city=City.objects.all()
+    # # category=Category.objects.all()
+    # path=request.path
+    # # event =event.objects.all()
+    # # recentad=event.objects.filter().order_by('-id')[:3]
+    # user_id=Userprofile.objects.get(user_id=request.user.id)
     
-    if request.user.is_authenticated:
-        userprofile=Userprofile.objects.get(user_id=request.user.id)
-    return render_to_response('index.html',{'path':path, 'userprofile':userprofile},context_instance=RequestContext(request))
+    # if request.user.is_authenticated:
+    #     userprofile=Userprofile.objects.get(user_id=request.user.id)
+    return render_to_response('index.html',context_instance=RequestContext(request))
 
 def post_event(request):
     subcategory = SubCategory.objects.all()

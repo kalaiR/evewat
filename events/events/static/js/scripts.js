@@ -415,7 +415,13 @@ function find_position(path){
 
     $this.children('a').on('click', function (event) {
       event.preventDefault();
-      $this.toggleClass('active');
+      $this.toggleClass('active')
+      setTimeout (function(){
+        $('#username_signup').focus();
+      }, 20);
+      setTimeout (function(){
+        $('#emailid_signin').focus();
+      }, 20);;
       $this.siblings().removeClass('active');
       $('#header .header-language').removeClass('active');
       $('#header .header-social').removeClass('active');
@@ -837,97 +843,12 @@ $('.events').click(function(){
  // validation by pradeepa//
 
   
-  //login form validation
 
-  var sign_in_required =["emailid_signup", "password_signup"];
 
-  jQuery('#signin').click(function(){     
-      for (i=0;i<sign_in_required.length;i++) {
-      var input = jQuery('#'+sign_in_required[i]);
-      if (input.val() == "")  {   
-        input.addClass("error_input_field");
-        input.css({"width":"50%"});
-        input.next('.labelError').show();         
-      } else {    
-        input.removeClass("error_input_field");
-        input.css({"width":"104%"});
-        input.next('.labelError').hide();        
-      }
-    }
-    
-
-    if ($(":input").hasClass("error_input_field")){
-    return false;
-    }
-    else{
-      $('form[name="sign_in"]').submit();      
-      return true;
-    }
-    });
-
-  //Registration form validation
-
-  var sign_up_required =["emailid_signin", "username_signin", "lastname_signin", "mobile_signin" ];
+//Registration form validation
 
   jQuery('#create_user').click(function(){    
-      for (i=0;i<sign_up_required.length;i++) {
-      var input = jQuery('#'+sign_up_required[i]);
-      if (input.val() == "")  {   
-        input.addClass("error_input_field");
-        input.css({"width":"50%"});
-        input.next('.signup_labelError').css({"color":"red"}).show();         
-      } else {    
-        input.removeClass("error_input_field");
-        input.css({"width":"104%"});
-        input.next('.signup_labelError').hide();        
-      }
-    }
-
-    //password
-
-    if($('#password_signin').val() == ''){   
-        $('#password_signin').addClass("error_input_field");
-        $('#password_signin').css({"width":"50%"});
-        $('#password_signin').next().next('.signup_labelError').css({"color":"red"}).show();         
-      } else {    
-        $('#password_signin').removeClass("error_input_field");
-        $('#password_signin').css({"width":"104%"});
-        $('#password_signin').next().next('.signup_labelError').hide();       
-      }
-
-
-    //Validate the e-mail
-
-    if($('#emailid_signin').val() != ''){
-    if (!/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/.test($('#emailid_signin').val())) {
-      $('#emailid_signin').addClass("error_input_field");
-      $('#emailid_signin').css({"width":"50%"});
-      $('#emailid_signin').next().next('.error_message').css({"color":"red"}).show();
-      // $('.error_message').show();
-    }
-    else
-    {
-      $('#emailid_signin').removeClass("error_input_field");
-      $('#emailid_signin').css({"width":"104%"});
-      $('#emailid_signin').next().next('.error_message').hide();
-    }
-    }
-
-    $('#user_form .select-clone').each(function(){
-      if( $(this).siblings('.placeholder').text() == 'Select City' || $(this).siblings('.placeholder').text() == 'Select College' || $(this).siblings('.placeholder').text() == 'Select Department'){
-        $(this).addClass('error_input_field');
-        $(this).parent().next('.signup_labelError').css("cssText", "display: block; position:absolute;top:4px;left:210px;color:red").show();
-        $(this).parent().css("cssText", "width: 196px !important;");
-      } 
-      else{
-        $(this).removeClass('error_input_field');
-        $(this).parent().next('.signup_labelError').hide();
-        $(this).parent().css("cssText", "width: 411px !important;");
-      }
-      
-    });
-
-    if ($(":input").hasClass("error_input_field") || $('#user_form .select-clone').hasClass('error_input_field')){
+    if ($(":input").hasClass("error_input_field")){
     return false;
     }
     else{
@@ -935,6 +856,64 @@ $('.events').click(function(){
       return true;
     }
     });     
+
+  $('.header-call-to-action input').blur(function(){
+        if ($(this).val() == "")  {   
+          $(this).addClass("error_input_field");
+          $(this).next().next('.error_message').hide();
+          $(this).next('.error_message').show();         
+        } else {    
+          $(this).removeClass("error_input_field");
+          $(this).next('.error_message').hide();        
+        }
+        
+        if($('#emailid_signup').val() != ''){
+          if (!/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/.test($('#emailid_signup').val())) {
+            $('#emailid_signup').addClass("error_input_field");
+            $('#emailid_signup').next('.error_message').hide();
+            $('#emailid_signup').next().next('.error_message').show();
+          }
+          else
+          {
+            $('#emailid_signup').removeClass("error_input_field");
+            $('#emailid_signup').next().next('.error_message').hide();
+          }
+        }
+
+        //Validate the e-mail.
+        // email_val = $('#emailid_signin').val();  
+        if($('#emailid_signin').val().indexOf('@') !== -1){
+        if (!/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/.test($('#emailid_signin').val())) {
+          $("#emailid_signin").addClass("error_input_field");
+          $("#emailid_signin").next('.error_message').hide();
+          $("#emailid_signin").next().next('.error_message').show();
+        }
+        else
+        {
+          $("#emailid_signin").removeClass("error_input_field");
+          $("#emailid_signin").next().next('.error_message').hide();
+        }
+        }
+
+        if ($('#confirm_password_signup').val() != $('#password_signup').val()){
+        $('#confirm_password_signup').addClass("error_input_field");
+        $('#confirm_password_signup').next('.error_message').hide();  
+        $('#confirm_password_signup').next().next('.error_message').show(); 
+        }
+        else {    
+        $('#confirm_password_signup').removeClass("error_input_field");
+        $('#confirm_password_signup').next('.error_message').hide();    
+        $('#confirm_password_signup').next().next('.error_message').hide();    
+        }
+    });
+ jQuery('#signin').click(function(){  if ($(":input").hasClass("error_input_field")){
+    return false;
+    }
+    else{
+      $('form[name="sign_up"]').submit();      
+      return true;
+    }
+    });
   //end validation//
 
   //postevent form validation
@@ -1210,33 +1189,31 @@ $('.post_event,#paid').click(function(){
 
 });
 
-  $('#password_signin').keyup(function(){
-     strength_status = checkStrength($('#password_signin').val());
+  $('#password_signup').keyup(function(){
+     strength_status = checkStrength($('#password_signup').val());
      // alert(strength_status);
-     $('#password_signin').css({"width":"50%"});    
-     if ($(this).next().next('.signup_labelError').text() == "Too short" || $(this).next().next('.signup_labelError').text() == "Weak")
-      $(this).next().next('.signup_labelError').css({"color":"red"});
-     else if ($(this).next().next('.signup_labelError').text() == "Fair")
-      $(this).next().next('.signup_labelError').css({"color":"yellow"});
-     else if ($(this).next().next('.signup_labelError').text() == "Good")
-      $(this).next().next('.signup_labelError').css({"color":"lightblue"});
-     else if ($(this).next().next('.signup_labelError').text() == "Strong" )
-      $(this).next().next('.signup_labelError').css({"color":"green"});
-    $(this).next().next('.signup_labelError').text(strength_status).show();
+     $('#password_signup').addClass("error_input_field"); 
+     error_message = $(this).next('.error_message').text(strength_status);
+     if (error_message.html() == "Too short" || error_message.html() == "Weak")
+      $(this).next('.error_message').css({"color":"#df0024"});
+     else if (error_message.html() == "Fair")
+      $(this).next('.error_message').css({"color":"yellow"});
+     else if (error_message.html() == "Good")
+      $(this).next('.error_message').css({"color":"lightblue"});
+     else if (error_message.html() == "Strong" )
+      $(this).next('.error_message').css({"color":"#7CFC00"});
+    error_message.show();
   });
 
 });
 
-    function checkStrength(password){
+     function checkStrength(password){
     //initial strength
     var strength = 0
  
     //if the password length is less than 6, return message.
-    if (password.length < 6) {
-        $('#result').removeClass()
-        $('#result').addClass('short')
+    if (password.length < 6) 
         return 'Too short'
-    }
  
     //length is ok, lets continue.
  
@@ -1258,25 +1235,15 @@ $('.post_event,#paid').click(function(){
     //now we have calculated strength value, we can return messages
  
     //if value is less than 2
-    if (strength < 2 ) {
-        $('#result').removeClass()
-        $('#result').addClass('weak')
+    if (strength < 2 ) 
         return 'Weak'
-    } else if (strength == 2 ) {
-        $('#result').removeClass()
-        $('#result').addClass('fair')
+    else if (strength == 2 )
         return 'Fair'
-    } 
-    else if (strength == 3 ) {
-        $('#result').removeClass()
-        $('#result').addClass('good')
+    else if (strength == 3 ) 
         return 'Good'
-    } else {
-        $('#result').removeClass()
-        $('#result').addClass('strong')
+    else 
         return 'Strong'
-    }
-}  
+}
 $('.payment').hide();
 $('#paid').click(function(){
   $('.payment').toggle();
