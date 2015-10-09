@@ -1191,7 +1191,7 @@ jQuery('.user_details').click(function(){
             return false;
           }
           else if (this.size >1024*2000 ) {
-            alert("Image height is (700 pixels).Please upload above 650px height");
+            alert("Please upload less than 2mb file                                                                                                                                                                                                                                                                                                                                 ");
             return false;
           }
           else{

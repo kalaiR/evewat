@@ -8,14 +8,14 @@
 
         <div id="home-slider" class="owl-carousel">
         
-           {% for banners in banner|get_banner %}
-           {% if banners.pageurl == '/' and banners.position == 'top' and banners.admin_status == True %}
+           {% for banners in banner|get_main_banner %}
+           {% if banners.admin_status == True %}
             <div class="item">
          
             {% if 'start' in path %}  
-                <img src="../media/{{banners.banner}}"  alt="" title="{{banners.link}}">
+                <img src="../media/{{banners.mainbanner}}"  alt="">
             {% else %}
-                <img src="media/{{banners.banner}}"  alt="" title="{{banners.link}}">
+                <img src="media/{{banners.mainbanner}}"  alt="">
             {% endif %}
             
             

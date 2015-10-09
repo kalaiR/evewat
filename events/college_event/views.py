@@ -50,6 +50,11 @@ def about(request):
 def privacy(request):
     return render_to_response("privacy.html", context_instance=RequestContext(request))
 
+def terms_and_conditions(request):
+    return render_to_response("terms_and_conditions.html", context_instance=RequestContext(request))
+
+def faqs(request):
+    return render_to_response("faqs.html", context_instance=RequestContext(request))
 
 @csrf_protect 
 def user_login(request):
@@ -216,7 +221,6 @@ def submit_event_v2(request):
         postevent.eventtype=postevent_subcategory
         postevent.eventdescription=request.POST.get('eventdescription','')
         postevent.address=request.POST.get('address','')
-        postevent.organizer=request.POST.get('organizer','')
         postevent.state=request.POST.get('state','')
         postevent_city=request.POST.get('city','')
         postevent.city=postevent_city
@@ -247,6 +251,12 @@ def submit_event_v2(request):
         if request.POST.get('plan')!='0':
             postevent.payment=request.POST.get('plan')
         postevent.save()
+        organizer=Organizer()
+        organizer.organizer=postevent
+        organizer.organizer_name=request.POST.get('organizer_name','')
+        organizer.organizer_mobile=request.POST.get('organizer_mobile','')
+        organizer.organizer_email=request.POST.get('organizer_email','')
+        organizer.save()
         message="Your data succesfully submitted"
         
         user_amount=request.POST.get('plan')
@@ -316,6 +326,8 @@ def details(request,id=None):
 
 def banner(request):
     return render_to_response("uploadbanner.html",context_instance=RequestContext(request))
+
+
 
 def find_colleges(request):
     from django.utils.encoding import smart_unicode, force_unicode
