@@ -24,6 +24,8 @@ urlpatterns = patterns('',
     url(r'^logout/$', 'college_event.views.logout_view', name='logout_view'),
     #registeration
     url(r'^register/$', 'college_event.views.register', name='register'),
+    # for registeration confirm
+    # url(r'^confirm/$', 'college_event.views.confirm', name='confirm'),
     # forget password
     url(r'^(?i)password_reset/$', 'django.contrib.auth.views.password_reset', {
       'template_name':'registration/password_reset_form.html',

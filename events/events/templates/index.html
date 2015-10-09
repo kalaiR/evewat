@@ -10,8 +10,20 @@
         
            {% for banners in banner|get_banner %}
            {% if banners.pageurl == '/' and banners.position == 'top' and banners.admin_status == True %}
-          <div class="item">
-             <img src="/media/{{banners.banner}}"  alt="" title="{{banners.link}}">
+            <div class="item">
+         
+            {% if 'start' in path %}  
+                <img src="../media/{{banners.banner}}"  alt="" title="{{banners.link}}">
+            {% else %}
+                <img src="media/{{banners.banner}}"  alt="" title="{{banners.link}}">
+            {% endif %}
+            
+            
+            <div class="slide-content">
+              <!-- <a href="#"><img src="{% static "img/slider-logo.png" %}"alt=""></a>
+              <h1>The <span>Right</span> Place</h1>
+              <h2>For Business</h2> -->
+            </div>          
           </div>
             {% endif %}
           {% endfor %}     
@@ -565,7 +577,7 @@
         {% for banners in banner|get_banner %}
         {% if banners.pageurl == '/' and banners.position == 'bottom' %}  
         <div class="item">  
-            <a href="http://{{banners.link}}"><img src="media/{{banners.banner}}"  alt=""></a>  
+           <a href="http://{{banners.link}}">{% if 'start' in path %} <img src="../media/{{banners.banner}}"  alt=""> {% else %}<img src="media/{{banners.banner}}"  alt="">{% endif %}</a>  
         </div>       
         {% endif %}
         {% endfor %}

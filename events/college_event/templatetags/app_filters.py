@@ -13,7 +13,7 @@ def get_banner(banner):
 	
 @register.filter
 def get_categories(initial_load):  
-	category=Category.objects.all()	
+	category=Category.objects.all().order_by('id')	
 	return category
 
 @register.filter
