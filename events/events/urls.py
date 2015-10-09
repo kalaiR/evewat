@@ -24,6 +24,10 @@ urlpatterns = patterns('',
     url(r'^logout/$', 'college_event.views.logout_view', name='logout_view'),
     #registeration
     url(r'^register/$', 'college_event.views.register', name='register'),
+<<<<<<< HEAD
+    # for registeration confirm
+    # url(r'^confirm/$', 'college_event.views.confirm', name='confirm'),
+=======
     # forget password
     url(r'^(?i)password_reset/$', 'django.contrib.auth.views.password_reset', {
       'template_name':'registration/password_reset_form.html',
@@ -39,6 +43,7 @@ urlpatterns = patterns('',
         {'post_reset_redirect' : '/user/password/done/'}),
     url(r'^(?i)user/password/done/$', 
         'django.contrib.auth.views.password_reset_complete'),
+>>>>>>> a4d1031f2b5f9608ff903ea8317808ba027eb223
      # getting tarted
     url(r'^start/$', 'college_event.views.start',name='start'),
     url(r'^post_event$', 'college_event.views.post_event', name='post_event'),    

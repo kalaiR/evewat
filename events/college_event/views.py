@@ -42,11 +42,7 @@ class JSONResponse(HttpResponse):
                 simplejson.dumps(data), mimetype='application/json')
 
 def home(request):
-    subcategory = SubCategory.objects.all()
-    recentad = Postevent.objects.filter().order_by('-id')[:4]
-    ctx = {'subcategory':subcategory, 'recentad':recentad}
-
-    return render_to_response("index.html",ctx, context_instance=RequestContext(request))
+    return render_to_response("index.html", context_instance=RequestContext(request))
 
 def about(request):
     return render_to_response("about-us.html", context_instance=RequestContext(request))
@@ -160,7 +156,7 @@ def register(request):
             user.save()
             userprofile = Userprofile()
             userprofile.user_id=user.id
-            userprofile.lastname = lastname=request.POST['lastname']
+            # userprofile.lastname = lastname=request.POST['lastname']
             userprofile.mobile=request.POST['mobile']
             
             # if request.POST['select_city'] != '' and request.POST['select_city'] != 'select_city':
@@ -172,10 +168,8 @@ def register(request):
             # if request.POST['select_dept'] != '' and request.POST['select_dept'] != 'select_department':
             #     department=Department.objects.get(id=request.POST['select_dept'])
             #     userprofile.department_id =department.id
-
-            userprofile.confirmation_code = ''.join(random.choice(string.ascii_uppercase + string.digits + string.ascii_lowercase) for x in range(33))
+ 
             userprofile.save()          
-            # send_registration_confirmation(user)
             registered = True
             user = User.objects.get(username=user.username)
             user.backend='django.contrib.auth.backends.ModelBackend'
@@ -187,43 +181,11 @@ def register(request):
         user_id = user.id
         return render_to_response('index.html', {'user_id':user_id} ,context_instance=RequestContext(request))
 
-
-# def send_registration_confirmation(user):
-#   p = user.get_profile()
-#   title = "Evewat account confirmation"
-#   content = "http://localhost:8000/confirm/" + str(p.confirmation_code) + "/" + user.username
-#   send_templated_mail(
-#               template_name = 'welcome',
-#               subject = 'Welcome Evewat',
-#               from_email = 'testmail123sample@gmail.com',
-#               recipient_list = [user.email],
-#               context={
-#                        'user': user,
-#                        'content':content,
-                         
-#               },
-#           )
-
-# def confirm(request, confirmation_code, username):    
-#     try:
-#         user = User.objects.get(username=username)        
-#         profile = user.get_profile()
-       
-#         # if profile.confirmation_code == confirmation_code and user.date_joined > (datetime.datetime.now()-datetime.timedelta(days=1)):
-#         if profile.confirmation_code == confirmation_code:
-#             # user.is_active = True
-#             profile.is_emailverified=True
-#             # user.save()
-#             profile.save()
-#             user.backend='django.contrib.auth.backends.ModelBackend'
-#             login(request, user)
-#         return HttpResponseRedirect('/start/?user_id=' + str(user.id))    
-#     except:
-#         return HttpResponseRedirect('../../../../../')
-
 def start(request):
-    path=request.path
-    return render_to_response('index.html',{'path':path},context_instance=RequestContext(request))
+    # user_id=Userprofile.objects.get(user_id=request.user.id)
+    # if request.user.is_authenticated:
+    #     userprofile=Userprofile.objects.get(user_id=request.user.id)
+    return render_to_response('index.html',context_instance=RequestContext(request))
 
 @csrf_exempt
 def post_event(request):
