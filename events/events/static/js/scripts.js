@@ -417,12 +417,14 @@ function find_position(path){
 
     $this.children('a').on('click', function (event) {
       event.preventDefault();
+
       $this.toggleClass('active');
       setTimeout (function(){
         $('#username_signup').focus();
       }, 20);
       setTimeout (function(){
         $('#emailid_signin').focus();
+
       }, 20);
       $this.siblings().removeClass('active');
       $('#header .header-language').removeClass('active');
@@ -997,7 +999,6 @@ $('.header-call-to-action input').blur(function(){
  });
 //end validation//
 
-
   //postevent form validation
 
   //events
@@ -1327,7 +1328,7 @@ $('.post_event,#paid').click(function(){
 
 });
 
-    function checkStrength(password){
+     function checkStrength(password){
     //initial strength
     var strength = 0
  
@@ -1363,6 +1364,7 @@ $('.post_event,#paid').click(function(){
         return 'Good'
     else 
         return 'Strong'
+
 }  
 $('.payment').hide();
 $('#paid').click(function(){

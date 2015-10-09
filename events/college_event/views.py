@@ -182,9 +182,6 @@ def register(request):
         return render_to_response('index.html', {'user_id':user_id} ,context_instance=RequestContext(request))
 
 def start(request):
-    # user_id=Userprofile.objects.get(user_id=request.user.id)
-    # if request.user.is_authenticated:
-    #     userprofile=Userprofile.objects.get(user_id=request.user.id)
     return render_to_response('index.html',context_instance=RequestContext(request))
 
 @csrf_exempt

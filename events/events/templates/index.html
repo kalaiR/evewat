@@ -11,7 +11,7 @@
            {% for banners in banner|get_banner %}
            {% if banners.pageurl == '/' and banners.position == 'top' and banners.admin_status == True %}
             <div class="item">
-         
+
             {% if 'start' in path %}  
                 <img src="../media/{{banners.banner}}"  alt="" title="{{banners.link}}">
             {% else %}
@@ -75,10 +75,10 @@
                    {% for subcategory in subcategory%}  
                     <div class="col-md-3 col-sm-4 col-xs-6">
                         <div class="category-item">
+                          <img class="sub_cat_icon" src="media/{{subcategory.icon}}">
+                          <img class="sub_cat_icon_hover" src="media/{{subcategory.hover_icon}}">
+                          <a href="search/?q=&amp;eventtype={{subcategory.id}}">{{subcategory.name}}</a>
 
-                          <a href="search/?q=&amp;eventtype={{subcategory.id}}">
-                          <!-- <img src="media/{{subcategory.icon}}"> -->
-                          {{subcategory.name}}</a>
                         </div>
 
                       </div>
@@ -194,6 +194,47 @@
     <div class="container">
       <div class="row clearfix">
         <h2><strong>Latest Events</strong></h2>
+        {% for recentad in recentad %}
+        {% if recentad.admin_status == True %}
+         <div class="col-md-3 col-sm-4 col-xs-6">
+          <div class="single-product">
+            <figure>
+              <img src="{{recentad.poster}}" alt="">
+
+              <!-- <div class="rating">
+                <ul class="list-inline">
+                  <li><a href="#"><i class="fa fa-star"></i></a></li>
+                  <li><a href="#"><i class="fa fa-star"></i></a></li>
+                  <li><a href="#"><i class="fa fa-star"></i></a></li>
+                  <li><a href="#"><i class="fa fa-star-half-o"></i></a></li>
+                  <li><a href="#"><i class="fa fa-star-o"></i></a></li>
+                </ul>
+
+                <p>Featured</p>
+
+              </div>  --><!-- end .rating -->
+
+              <figcaption>
+                <div>
+              
+                  <a href="http://{{ request.META.HTTP_HOST }}/details/{{recentad.id}}" title="{{recentad.festname}}" class="bookmark"><i class="fa fa-bookmark-o" rel="sidebar"></i> Bookmark</a>
+                </div>
+                <div class="read-more">
+                  <a href="details/{{recentad.id}}"><i class="fa fa-angle-right"></i> Read More</a>
+                </div>
+
+              </figcaption>
+            </figure>
+            <h4><a href="details/{{recentad.id}}">{{recentad.festname}}</a></h4>
+
+            <h5><a href="details/{{recentad.id}}">{{recentad.festcaption}}</a></h5>
+
+          </div> <!-- end .single-product -->
+
+        </div>
+        {% endif %}
+        {% endfor %}
+
         {% for recentad in recentad %}
         {% if recentad.admin_status == True %}
          <div class="col-md-3 col-sm-4 col-xs-6">
@@ -545,7 +586,7 @@
   
     <div class="our-partners">
       <div class="container">
-        <h4>Upcoming Events</h4>
+        <h4>Trending Banners</h4>
        
         <!-- <div class="slider">
           <ul class="bxslider">
@@ -577,6 +618,7 @@
         {% for banners in banner|get_banner %}
         {% if banners.pageurl == '/' and banners.position == 'bottom' %}  
         <div class="item">  
+
            <a href="http://{{banners.link}}">{% if 'start' in path %} <img src="../media/{{banners.banner}}"  alt=""> {% else %}<img src="media/{{banners.banner}}"  alt="">{% endif %}</a>  
         </div>       
         {% endif %}
