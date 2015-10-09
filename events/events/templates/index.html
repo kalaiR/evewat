@@ -10,7 +10,6 @@
         
            {% for banners in banner|get_banner %}
            {% if banners.pageurl == '/' and banners.position == 'top' and banners.admin_status == True %}
-<<<<<<< HEAD
             <div class="item">
          
             {% if 'start' in path %}  
@@ -26,15 +25,7 @@
               <h2>For Business</h2> -->
 
             </div>
-
-
-=======
-          <div class="item">
-             <img src="/media/{{banners.banner}}"  alt="" title="{{banners.link}}">
->>>>>>> a4d1031f2b5f9608ff903ea8317808ba027eb223
-          </div>
-            {% endif %}
-          {% endfor %}     
+    
           
         </div>
 
