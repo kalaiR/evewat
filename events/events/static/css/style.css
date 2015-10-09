@@ -68,9 +68,7 @@ html {
 }
 body {
   margin: 0;
-  font-family: 'Droid Sans' !important;
 }
-.ui-widget { font-family: 'Droid Sans' !important; }
 article,
 aside,
 details,
@@ -109,7 +107,6 @@ a {
 a:active,
 a:hover {
   outline: 0;
-  color: #0075bd;
 }
 abbr[title] {
   border-bottom: 1px dotted;
@@ -3156,7 +3153,7 @@ button {
 .uou-custom-select .select-clone {
   position: absolute;
   top: 100%;
-  z-index: 9999;
+  z-index: 99;
   display: none;
   background-color: #fff;
   margin: 0;
@@ -3257,6 +3254,7 @@ fieldset[disabled] .btn {
   color: #fff !important;
   background-color: #0074bd !important;
   border-color: #fff !important;
+
 }
 .btn-default:hover,
 .btn-default:focus,
@@ -3291,11 +3289,11 @@ fieldset[disabled] .btn-default:active,
 .btn-default.disabled.active,
 .btn-default[disabled].active,
 fieldset[disabled] .btn-default.active {
-  background-color: #0075BD !important;
+  background-color: #fdc600 !important;
   border-color: #cccccc !important;
 }
 .btn-default .badge {
-  color: #0075BD !important;
+  color: #fdc600 !important;
   background-color: #333333 !important;
 }
 .btn-default:hover,
@@ -3305,7 +3303,7 @@ fieldset[disabled] .btn-default.active {
 }
 .btn-default-inverse {
   border: none;
-  color: #0075BD;
+  color: #fdc600;
   background-color: #333333;
   border-color: #cccccc;
 }
@@ -3315,7 +3313,7 @@ fieldset[disabled] .btn-default.active {
 .btn-default-inverse:active,
 .btn-default-inverse.active,
 .open > .dropdown-toggle.btn-default-inverse {
-  color: #0075BD;
+  color: #fdc600;
   background-color: #1a1a1a;
   border-color: #adadad;
 }
@@ -3347,7 +3345,7 @@ fieldset[disabled] .btn-default-inverse.active {
 }
 .btn-default-inverse .badge {
   color: #333333;
-  background-color: #0075BD;
+  background-color: #fdc600;
 }
 /* HEADER */
 /* --------------------------------------- */
@@ -3431,7 +3429,7 @@ fieldset[disabled] .btn-default-inverse.active {
 #header .header-top-bar .header-logo a .fa {
   position: relative;
   padding: 0 6px;
-  color: #0075BD;
+  color: #fdc600;
   font-size: 34px;
 }
 #header .header-top-bar .header-logo a:hover {
@@ -3458,7 +3456,7 @@ fieldset[disabled] .btn-default-inverse.active {
 }
 #header .header-top-bar .header-social > a:hover,
 #header .header-top-bar .header-language > a:hover {
-  color: #0075BD;
+  color: #fdc600;
 }
 #header .header-top-bar .header-social ul,
 #header .header-top-bar .header-language ul {
@@ -3491,7 +3489,7 @@ fieldset[disabled] .btn-default-inverse.active {
 }
 #header .header-top-bar .header-social ul a:hover,
 #header .header-top-bar .header-language ul a:hover {
-  color: #0075BD;
+  color: #fdc600;
 }
 #header .header-top-bar .header-social.active ul,
 #header .header-top-bar .header-language.active ul {
@@ -3554,7 +3552,6 @@ fieldset[disabled] .btn-default-inverse.active {
 }
 
 .header-search .header-search-bar {
-
   position: absolute;
   top: 430px;
   width: 100%;
@@ -3689,7 +3686,7 @@ fieldset[disabled] .btn-default-inverse.active {
 }
 .header-search .header-search-bar .toggle-btn:hover,
 .header-search .header-search-bar .search-btn:hover {
-  background-color: #0075BD;
+  background-color: #fdc600;
 }
 @media (max-width: 768px) {
   .header-search .header-search-bar .search-btn {
@@ -3732,7 +3729,7 @@ fieldset[disabled] .btn-default-inverse.active {
   border-left: 1px solid #aaaaaa;
 }
 .header-search .header-search-bar .search-btn {
-  background-color: #0075BD;
+  background-color: #fdc600;
   color: #333333;
   font-size: 16px;
 }
@@ -3815,7 +3812,7 @@ fieldset[disabled] .btn-default-inverse.active {
   position: relative;
   width: 100%;
   height: 500px;
-  background-color: #0075BD;
+  background-color: #fdc600;
 }
 .map-section #map_canvas {
   width: 100%;
@@ -3840,7 +3837,7 @@ fieldset[disabled] .btn-default-inverse.active {
   position: relative;
   width: 100%;
   height: 250px;
-  background-color: #0075BD;
+  background-color: #fdc600;
 }
 .company-contact .contact-map-company #contact_map_canvas_two,
 .company-contact .contact-map-company #contact_map_canvas_one {
@@ -3864,7 +3861,7 @@ fieldset[disabled] .btn-default-inverse.active {
 /* ----------------------------------------------- */
 #header .header-nav-bar {
   position: relative;
-  border-bottom: 3px solid #0075BD;
+  border-bottom: 3px solid #fdc600;
 }
 #header .header-nav-bar button {
   display: none;
@@ -3893,7 +3890,7 @@ fieldset[disabled] .btn-default-inverse.active {
     height: 40px;
     width: 35px;
     line-height: 37px;
-    background-color: #0075BD;
+    background-color: #fdc600;
     color: #fff;
     font-size: 18px;
     font-weight: bold;
@@ -3962,7 +3959,7 @@ fieldset[disabled] .btn-default-inverse.active {
   top: 22px;
 }
 #header .header-nav-bar .primary-nav > li.bg-color {
-  background-color: #0075BD;
+  background-color: #fdc600;
 }
 #header .header-nav-bar .primary-nav > li.active > ul {
   visibility: visible;
@@ -4001,7 +3998,7 @@ fieldset[disabled] .btn-default-inverse.active {
   color: #ffffff;
 }
 #header .header-nav-bar .primary-nav ul > li > a:hover {
-  color: #0075BD;
+  color: #fdc600;
   background-color: #4d4d4d;
 }
 #header .header-nav-bar .primary-nav ul > li:last-child a {
@@ -4053,7 +4050,7 @@ fieldset[disabled] .btn-default-inverse.active {
     border-bottom: 0;
   }
   #header .header-nav-bar .primary-nav > li ul li a:hover {
-    background-color: #0075BD;
+    background-color: #fdc600;
     color: inherit;
   }
 }
@@ -4215,7 +4212,7 @@ fieldset[disabled] .btn-default-inverse.active {
   font-weight: 800;
 }
 .slider-content #home-slider .item .slide-content h1 span {
-  color: #0075BD;
+  color: #fdc600;
 }
 @media (max-width: 768px) {
   .slider-content #home-slider .item .slide-content h1 {
@@ -4259,7 +4256,6 @@ fieldset[disabled] .btn-default-inverse.active {
   top: 47%;
   left: -2px;
   z-index:9999;
-
    /* IE 8 */
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
 
@@ -4445,7 +4441,7 @@ fieldset[disabled] .btn-default-inverse.active {
   font-size: .7em;
   display: block;
   border: 0;
-  background-color: #0075BD;
+  background-color: #fdc600;
   border-radius: 6px;
 }
 .ui-slider-horizontal {
@@ -4463,7 +4459,7 @@ fieldset[disabled] .btn-default-inverse.active {
   margin-left: -0.6em;
 }
 .ui-widget-header {
-  background: #0075BD;
+  background: #fdc600;
   color: #222222;
   font-weight: bold;
 }
@@ -4639,7 +4635,7 @@ fieldset[disabled] .btn-default-inverse.active {
   width: 100%;
   background: #eeeeee;
   border-radius: 3px;
-  border-left: 3px solid #0075BD;
+  border-left: 3px solid #fdc600;
   font-size: 18px;
   text-transform: uppercase;
 }
@@ -4694,7 +4690,7 @@ fieldset[disabled] .btn-default-inverse.active {
   color: #fff;
 }
 .post-sidebar .single-product figure .rating li a:hover {
-  color: #0075BD;
+  color: #fdc600;
 }
 .post-sidebar .single-product figure .rating p {
   position: absolute;
@@ -4706,7 +4702,7 @@ fieldset[disabled] .btn-default-inverse.active {
   line-height: 16px;
   font-size: 12px;
   font-weight: 800;
-  background: #0075BD;
+  background: #fdc600;
   color: #333333;
   font-family: 'Raleway', sans-serif;
   text-transform: uppercase;
@@ -4918,7 +4914,7 @@ fieldset[disabled] .btn-default-inverse.active {
 }
 .ui-datepicker-calendar td a:hover {
   color: #fff;
-  background-color: #0075BD !important;
+  background-color: #fdc600 !important;
   font-weight: bold;
 }
 .ui-state-default,
@@ -4946,7 +4942,7 @@ fieldset[disabled] .btn-default-inverse.active {
 }
 .company-sidebar .company-category li.active,
 .company-sidebar .company-category li:hover {
-  background: #0075BD;
+  background: #fdc600;
 }
 .company-sidebar .company-category li.active a,
 .company-sidebar .company-category li:hover a {
@@ -4961,7 +4957,7 @@ fieldset[disabled] .btn-default-inverse.active {
   width: 0;
   border-top: 7px solid transparent;
   border-bottom: 7px solid transparent;
-  border-left: 7px solid #0075BD;
+  border-left: 7px solid #fdc600;
 }
 .company-sidebar .company-category li:first-child {
   border-radius: 3px 3px 0 0;
@@ -4973,7 +4969,7 @@ fieldset[disabled] .btn-default-inverse.active {
 .company-sidebar .company-category li a {
   display: block;
   padding: 15px 20px;
-  color: #0075BD;
+  color: #fdc600;
   font-size: 15px;
   font-weight: bold;
   text-transform: uppercase;
@@ -5006,7 +5002,7 @@ fieldset[disabled] .btn-default-inverse.active {
   width: 100%;
   background: #eeeeee;
   border-radius: 3px;
-  border-left: 3px solid #0075BD;
+  border-left: 3px solid #fdc600;
   font-size: 18px;
   text-transform: uppercase;
 }
@@ -5032,7 +5028,7 @@ fieldset[disabled] .btn-default-inverse.active {
 .company-sidebar .opening-hours li span .fa {
   position: relative;
   top: -3px;
-  color: #0075BD;
+  color: #fdc600;
   padding-left: 10px;
 }
 .company-sidebar .square-button {
@@ -5085,7 +5081,7 @@ fieldset[disabled] .btn-default-inverse.active {
   font-size: 11px;
 }
 .change-view button.active {
-  background: #0075BD;
+  background: #fdc600;
   color: #333333;
   border: 0;
 }
@@ -5150,7 +5146,7 @@ fieldset[disabled] .btn-default-inverse.active {
 }
 .pagination li.active,
 .pagination li:hover {
-  background-color: #0075BD;
+  background-color: #fdc600;
   border: 0;
   border: 1px solid transparent;
 }
@@ -5210,7 +5206,7 @@ fieldset[disabled] .btn-default-inverse.active {
   font-size: 18px;
 }
 .product-details .tab-pane h2 .category-name b {
-  color: #0075BD;
+  color: #fdc600;
   padding: 0 10px;
 }
 .product-details .tab-pane h2 .comments {
@@ -5308,7 +5304,7 @@ fieldset[disabled] .btn-default-inverse.active {
   color: #fff;
 }
 .product-details .tab-pane .single-product figure .rating li a:hover {
-  color: #0075BD;
+  color: #fdc600;
 }
 .product-details .tab-pane .single-product figure .rating p {
   padding: 0 3px;
@@ -5316,7 +5312,7 @@ fieldset[disabled] .btn-default-inverse.active {
   font-size: 12px;
   font-family: 'Raleway', sans-serif;
   font-weight: 700;
-  background: #0075BD;
+  background: #fdc600;
   color: #333333;
   text-transform: uppercase;
 }
@@ -5329,7 +5325,7 @@ fieldset[disabled] .btn-default-inverse.active {
   width: 100%;
   height: 100%;
   text-align: center;
-  background-color: rgba(0, 117, 189, 0.8);
+  background-color: rgba(253, 198, 0, 0.8);
 }
 .product-details .tab-pane .single-product figure figcaption a {
   position: relative;
@@ -5348,7 +5344,7 @@ fieldset[disabled] .btn-default-inverse.active {
 }
 .product-details .tab-pane .single-product figure figcaption a:hover {
   background: #333333;
-  color: #0075BD;
+  color: #fdc600;
 }
 .product-details .tab-pane .single-product figure figcaption .bookmark {
   position: relative;
@@ -5431,7 +5427,7 @@ fieldset[disabled] .btn-default-inverse.active {
   font-size: 18px;
 }
 .product-details-list .tab-pane h2 .category-name b {
-  color: #0075BD;
+  color: #fdc600;
   padding: 0 10px;
 }
 .product-details-list .tab-pane h2 .comments {
@@ -5526,7 +5522,7 @@ fieldset[disabled] .btn-default-inverse.active {
   color: #fff;
 }
 .product-details-list .tab-pane .single-product figure .rating li a:hover {
-  color: #0075BD;
+  color: #fdc600;
 }
 .product-details-list .tab-pane .single-product figure .rating p {
   position: absolute;
@@ -5537,7 +5533,7 @@ fieldset[disabled] .btn-default-inverse.active {
   margin: 0;
   font-size: 11px;
   font-weight: 700;
-  background: #0075BD;
+  background: #fdc600;
   color: #333333;
   text-transform: uppercase;
   text-align: center;
@@ -5701,7 +5697,7 @@ fieldset[disabled] .btn-default-inverse.active {
   width: 100%;
   height: 100%;
   text-align: center;
-  background-color: rgba(0, 117, 189, 0.8);
+  background-color: rgba(253, 198, 0, 0.8);
 }
 .company-product .single-product figure figcaption a,
 .company-portfolio .single-product figure figcaption a {
@@ -5723,7 +5719,7 @@ fieldset[disabled] .btn-default-inverse.active {
 .company-product .single-product figure figcaption a:hover,
 .company-portfolio .single-product figure figcaption a:hover {
   background: #333333;
-  color: #0075BD;
+  color: #fdc600;
 }
 .company-product .single-product figure figcaption .bookmark,
 .company-portfolio .single-product figure figcaption .bookmark {
@@ -5895,7 +5891,7 @@ fieldset[disabled] .btn-default-inverse.active {
   color: #fff;
 }
 .featured-listing .single-product figure .rating li a:hover {
-  color: #0075BD;
+  color: #fdc600;
 }
 .featured-listing .single-product figure .rating p {
   padding: 0 3px;
@@ -5903,7 +5899,7 @@ fieldset[disabled] .btn-default-inverse.active {
   font-size: 12px;
   font-family: 'Raleway', sans-serif;
   font-weight: 700;
-  background: #0075BD;
+  background: #fdc600;
   color: #333333;
   text-transform: uppercase;
 }
@@ -5916,7 +5912,6 @@ fieldset[disabled] .btn-default-inverse.active {
   width: 100%;
   height: 100%;
   text-align: center;
-
   /*background-color: rgba(253, 198, 0, 0.8);*/
   background-color:rgba(0, 116, 189, 0.5);
 
@@ -5945,7 +5940,7 @@ fieldset[disabled] .btn-default-inverse.active {
 }
 .featured-listing .single-product figure figcaption a:hover {
   background: #333333;
-  color: #0075BD;
+  color: #fdc600;
 }
 .featured-listing .single-product figure figcaption .bookmark {
   position: relative;
@@ -6080,7 +6075,7 @@ fieldset[disabled] .btn-default-inverse.active {
   color: #a2a2a2;
 }
 .classifieds-content .classifieds-category a:hover span {
-  color: #0075BD;
+  color: #fdc600;
 }
 .classifieds-content .classifieds-category > li > a {
   text-transform: uppercase;
@@ -6123,7 +6118,7 @@ fieldset[disabled] .btn-default-inverse.active {
 .register-content .registration-details {
   position: relative;
   padding: 100px 0;
-  background-color: rgba(0,117 ,189, 0.75);
+  background-color: rgba(253, 198, 0, 0.75);
   text-align: center;
   width: 100%;
 }
@@ -6190,7 +6185,7 @@ fieldset[disabled] .btn-default-inverse.active {
   line-height: 90px;
   font-size: 26px;
   background-color: #333333;
-  color: #0075BD;
+  color: #fdc600;
   border-radius: 50%;
 }
 .register-content .registration-details .business-member {
@@ -6283,7 +6278,7 @@ fieldset[disabled] .btn-default-inverse.active {
   float: left;
 }
 .page-heading h1 span {
-  color: #0075BD;
+  color: #fdc600;
 }
 @media (max-width: 480px) {
   .page-heading h1 {
@@ -6303,10 +6298,10 @@ fieldset[disabled] .btn-default-inverse.active {
   font-weight: bold;
 }
 .page-heading .heading-link a:hover {
-  color: #0075BD;
+  color: #fdc600;
 }
 .page-heading .heading-link i {
-  color: #0075BD;
+  color: #fdc600;
   padding: 0 3px;
   font-weight: bold;
 }
@@ -6466,7 +6461,7 @@ fieldset[disabled] .btn-default-inverse.active {
   height: 40px;
   width: 40px;
   border-radius: 3px;
-  background: #0075BD;
+  background: #fdc600;
   line-height: 40px;
   text-align: center;
 }
@@ -6581,7 +6576,7 @@ fieldset[disabled] .btn-default-inverse.active {
   font-weight: 800;
 }
 .Price-list-heading h1 span {
-  color: #0075BD;
+  color: #fdc600;
 }
 @media (max-width: 768px) {
   .Price-list-heading h1 {
@@ -6683,7 +6678,7 @@ fieldset[disabled] .btn-default-inverse.active {
 }
 .price-listing .pricing-table:hover .price,
 .price-listing .pricing-table.active .price {
-  background-color: #0075BD;
+  background-color: #fdc600;
 }
 /* sample page begin */
 /* --------------------------------------- */
@@ -6714,7 +6709,7 @@ fieldset[disabled] .btn-default-inverse.active {
   font-weight: 800;
 }
 .sample-page-heading h1 span {
-  color: #0075BD;
+  color: #fdc600;
 }
 @media (max-width: 768px) {
   .sample-page-heading h1 {
@@ -6793,7 +6788,7 @@ fieldset[disabled] .btn-default-inverse.active {
   font-weight: 800;
   font-size: 29px;
   border-radius: 3px;
-  background: #0075BD;
+  background: #fdc600;
 }
 .blog-list .month {
   position: relative;
@@ -6954,7 +6949,7 @@ fieldset[disabled] .btn-default-inverse.active {
 .blog-post .share-this ul li {
   height: 50px;
   width: 50px;
-  background-color: #0075BD;
+  background-color: #fdc600;
   text-align: center;
   border-radius: 3px;
   margin-right: 7px;
@@ -7164,7 +7159,7 @@ fieldset[disabled] .btn-default-inverse.active {
 }
 .company-heading-view .button-content button.active,
 .company-heading-view .button-content button:hover {
-  background: #0075BD;
+  background: #fdc600;
   color: #333333;
 }
 @media (max-width: 768px) {
@@ -7325,7 +7320,7 @@ fieldset[disabled] .btn-default-inverse.active {
 .company-profile .social-link ul li {
   height: 40px;
   width: 40px;
-  background-color: #0075BD;
+  background-color: #fdc600;
   text-align: center;
   border-radius: 3px;
   margin-right: 7px;
@@ -7502,7 +7497,7 @@ fieldset[disabled] .btn-default-inverse.active {
   font-weight: 800;
   font-size: 29px;
   border-radius: 3px;
-  background: #0075BD;
+  background: #fdc600;
 }
 .company-events .month {
   position: relative;
@@ -7673,7 +7668,7 @@ fieldset[disabled] .btn-default-inverse.active {
   height: 40px;
   width: 40px;
   border-radius: 3px;
-  background: #0075BD;
+  background: #fdc600;
   line-height: 40px;
   text-align: center;
 }
@@ -7756,10 +7751,8 @@ fieldset[disabled] .btn-default-inverse.active {
 #footer .main-footer a {
   color: #fff;
 }
-
 #footer .main-footer a:hover, #footer .main-footer a:hover .fa {
   color: #0074bd !important;
-
 }
 
 #footer .main-footer .about-globo {
@@ -7787,7 +7780,7 @@ fieldset[disabled] .btn-default-inverse.active {
   left: 0;
   width: 100%;
   height: inherit;
-  background: rgba(0, 117, 189, 0.75);
+  background: rgba(253, 198, 0, 0.75);
 }
 @media (max-width: 992px) {
   #footer .main-footer .about-globo .footer-logo {
@@ -7876,10 +7869,9 @@ fieldset[disabled] .btn-default-inverse.active {
   background-color: #e4b200;
 }
 #footer .main-footer .newsletter button:hover {
-  background-color: #0075BD;
+  background-color: #fdc600;
 }
 #footer .main-footer .newsletter ul li {
-
   height: 25px;
   width: 25px;
   background-color: #fff;
@@ -7933,7 +7925,7 @@ fieldset[disabled] .btn-default-inverse.active {
   padding-left: 10px;
 }
 #footer .copyright ul li a:hover {
-  color: #0075BD;
+  color: #fdc600;
 }
 @media (max-width: 1200px) {
   #footer .copyright ul {
@@ -8008,7 +8000,7 @@ fieldset[disabled] .btn-default-inverse.active {
   margin-bottom: 80px;
 }
 .shortcodes .table-hover > thead {
-  background: #0075BD;
+  background: #fdc600;
 }
 .shortcodes .table-hover > thead > tr > th:first-child {
   border-radius: 3px 0 0 3px;
@@ -8037,7 +8029,7 @@ fieldset[disabled] .btn-default-inverse.active {
 }
 .shortcodes .nav-tabs {
   margin: 0;
-  border-bottom: 3px solid #0075BD;
+  border-bottom: 3px solid #fdc600;
 }
 .shortcodes .nav-tabs > li {
   padding: 0;
@@ -8054,8 +8046,8 @@ fieldset[disabled] .btn-default-inverse.active {
   color: inherit;
 }
 .shortcodes .nav-tabs > li.active > a {
-  background: #0075BD;
-  border: 1px solid #0075BD;
+  background: #fdc600;
+  border: 1px solid #fdc600;
 }
 .shortcodes .tab-content {
   margin: 0;
@@ -8089,7 +8081,7 @@ fieldset[disabled] .btn-default-inverse.active {
 }
 .shortcodes .vertical.tab-content {
   margin-left: 140px;
-  border-left: 3px solid #0075BD;
+  border-left: 3px solid #fdc600;
 }
 .events,.events_details,.user_details{
   background-color: #dddddd;
@@ -8516,33 +8508,6 @@ select{
 .privacy_collect{
   margin-left: 20px;
 }
-<<<<<<< HEAD
-.home-tab{
-  cursor: pointer;
-}
-.ui-menu .ui-menu-item a.ui-corner-all:hover, .ui-menu .ui-menu-item a.ui-corner-all:focus, .ui-menu .ui-menu-item a.ui-corner-all:active {
-    background:#ddd!important;
-    border-radius:0;
-    color: #000;
-    border: none;
-}
-.ui-menu-item a, .ui-menu-item:hover a { 
-  color:#000 !important; 
-  background:none !important;
-  border:none !important;
-  font-weight:normal !important;
-  margin:0px !important; 
-  }
-.ui-menu-item:hover{
-  background:#ddd!important;
-}
-.subcategories{
-  margin-top: 35px;
-}
-.datepicker td, .datepicker th {
-  padding: 10px !important;
-}
-=======
 .logo_blue { color:#0074bd; font-style: normal;}
 .logo_red { color:#e1004a; font-style: normal;}
 
@@ -8584,4 +8549,5 @@ select{
     opacity : 0   ;
   }  
 }
+
 

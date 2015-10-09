@@ -23,7 +23,8 @@
        {% csrf_token %}
         <div class="row">
             <div class="col-md-12">
-                <input type='file' id='banner' class="banner" name='banner'/>
+                <input type='file' id='banner' class="banner" name='banner' value="" />
+                <label for="image_required" class="imageError" style="display:none;color:red;">Please select image</label>
             </div>
         </div>
         <div class="row">

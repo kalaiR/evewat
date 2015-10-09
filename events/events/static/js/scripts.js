@@ -135,9 +135,11 @@ var checkout = $('#dpd2').datepicker({
 
 function find_position(path){
       $.get('/find_position/', { path: path }, function(data) {
+      $('.position_required').empty();
+      $(".position_required").siblings('.select-clone').empty();
       $('.position_required').html($('<option>').text("Select Position").attr('value', "position_required"));
-      //$(".position_required").siblings('.select-clone').html($('<li>').text("Select Position").attr('data-value', "position_required"));
-  
+      $(".position_required").siblings('.select-clone').html($('<li>').text("Select Position").attr('data-value', "position_required"));
+      
       $.each(data, function(key,value) {
         $('.position_required').append($('<option>').text(value.name).attr('value', value.name));
         $(".position_required").siblings('.select-clone').append($('<li>').text(value.name).attr('data-value', value.name));
@@ -1129,7 +1131,7 @@ jQuery('.user_details').click(function(){
 
 
   });
-// Image upload
+// Image upload in post event
     $(document).on('change','.poster',function(){
       files = this.files;
       size = files[0].size;
@@ -1139,23 +1141,66 @@ jQuery('.user_details').click(function(){
         var image = new Image();
         image.src = oFREvent.target.result;
         image.onload = function () {
-          if ((this.width > 1200) && (this.height>700)&& (this.width<650)&& (this.height<1100)&& (this.size > 1024*2000)) {
-            alert("choose another file");
+        alert(this.width);
+          if (this.width > 1200 ) {
+            alert("Exceeded Image width (1200 pixels).Please upload below 1200px width");
+            return false;
+          }
+          else if (this.width < 1100 ) {
+            alert("Image width (1100 pixels).Please upload above 1100px width");
+            return false;
+          }
+          else if (this.height > 700 ) {
+            alert("Exceeded height (700 pixels).Please upload below 700px height");
+            return false;
+          }
+           else if (this.height < 650 ) {
+            alert("Image height is (700 pixels).Please upload above 650px height");
+            return false;
+          }
+          else if (this.size >1024*2000 ) {
+            alert("Image height is (700 pixels).Please upload above 650px height");
+            return false;
+          }
+          else{
+            alert('true');
+            return true;
           }
          // access image size here & do further implementation
         };
       };
       //max size 50kb => 50*1000
-      if( size > 1024*2000){
-       alert('Please upload less than 2mb file');
-       return false;
-      }
-      else{
-        $('.user_fields').show();
-        return true;
-      }
+      // if( size > 1024*2000){
+      //  alert('Please upload less than 2mb file');
+      //  return false;
+      // }
+      // else{
+      //   $('.user_fields').show();
+      //   return true;
+      // }
       
     });
+
+//banner image upload validation
+$(document).on('change','.banner',function(){
+    files = this.files;
+    size = files[0].size;
+    if( size > 1024*2000){
+      alert('Please upload less than 2mb file');
+      $('.simpleFilePreview_filename').remove();
+      // show styled input "button"
+      $('.simpleFilePreview_remove').remove();
+      $('.simpleFilePreview_preview ').remove();
+      $('.banner').removeClass('simpleFilePreview_formInput');
+      $('.simpleFilePreview_input').show();
+       return false;
+    }
+    else{
+       $('.banner').addClass('simpleFilePreview_formInput');
+       
+    }
+});
+
   // user validation
 $('.post_event,#paid').click(function(){
   
@@ -1190,50 +1235,45 @@ $('.post_event,#paid').click(function(){
   //upload banner validation
 
   jQuery('#banner_upload').click(function(){
-
-    if($('.position_required').val() == 'Select Position'){
+    if(!$('.banner').val()){
             $(this).addClass("error_input_field");
-            $('.position_labelError').show();
+            $('.imageError').show();
+            return false;
         }
         else{
           $(this).removeClass("error_input_field");
-          $('.position_labelError').hide(); 
+          $('.imageError').hide(); 
         }
-
     if($('.pageurl_required').val() == 'Select Page URL'){
             $(this).addClass("error_input_field");
             $('.pageurl_labelError').show();
+            return false;
         }
         else{
           $(this).removeClass("error_input_field");
           $('.pageurl_labelError').hide(); 
         }
-
+    if($('.position_required').val() == 'position_required'){
+            $(this).addClass("error_input_field");
+            $('.position_labelError').show();
+            return false;
+        }
+        else{
+          $(this).removeClass("error_input_field");
+          $('.position_labelError').hide(); 
+        }
     if($('.price_required').val() == 'Select Price'){
             $(this).addClass("error_input_field");
             $('.price_labelError').show();
+            return false;
         }
         else{
           $(this).removeClass("error_input_field");
           $('.price_labelError').hide(); 
+          $('form[name="upload_banner"]').submit();
+          $('.banner_price').text($('#price_required').val());     
+          return true;
         }
-
-      if($('.link_required').val() == ''){   
-        $('.link_required').addClass("error_input_field");
-        $('.link_required').next('.link_labelError').show();         
-      } else {    
-        $('.link_required').removeClass("error_input_field");
-        $('.link_required').next('.link_labelError').hide();       
-      }
-
-    if ($(".position_required, .pageurl_required, .price_required, .link_required").hasClass("error_input_field")){
-    return false;
-    } else {
-      $('form[name="upload_banner"]').submit();
-      $('.payment') 
-      $('.banner_price').text($('#price_required').val());     
-      return true;
-    }
 
 });
 

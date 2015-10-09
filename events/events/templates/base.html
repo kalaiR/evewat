@@ -249,7 +249,9 @@
     <!-- END .HEADER-TOP-BAR -->
 
     <!-- HEADER SEARCH SECTION -->
+    {% if request.path == '/' or request.path == '/start/' %}
     <div class="header-search slider-home">
+
 
       <div class="header-search-bar">
          <form class="form" method="get" action="/search/?q=" id="f_search" name="f_search">
@@ -369,6 +371,7 @@
           </div> 
         </form>
       </div> 
+  {% endif %}
     <!-- <div class="popup">
       <div class="popup_text">
         <span>Thankyou for registration.</span><br/>

@@ -415,7 +415,7 @@ def getcity(request):
 
 @csrf_exempt
 def upload_banner(request):
-    if request.POST.get('link',False):
+    if request.POST.get('price',False):
         uploadbanner=SiteBanner()
         uploadbanner.price=request.POST.get('price',request.COOKIES.get('price'))
         uploadbanner.position=request.POST.get('position',request.COOKIES.get('position'))
@@ -428,13 +428,20 @@ def upload_banner(request):
         response.set_cookie( 'position', uploadbanner.position )
         response.set_cookie( 'banner', uploadbanner.banner )
         response.set_cookie( 'pageurl', uploadbanner.pageurl )
-    else:
+    #field9 is payu success variable
+    # this if condition for after success of payment
+    elif 'field9' in request.POST:
         message="Your data succesfully uploaded"
         response = render_to_response("uploadbanner.html",{'message':message},context_instance=RequestContext(request))
+    else:
+        message="Something went to wrong"
+        response = render_to_response("uploadbanner.html",{'message':message},context_instance=RequestContext(request))   
     return response
 
 @csrf_exempt
 def success(request):
+    #field9 is payu success variable
+    # this if condition for after success of payment
     if 'field9' in request.POST:
         response = render_to_response("success.html",context_instance=RequestContext(request))
         response.delete_cookie('eventtitle')
@@ -449,9 +456,7 @@ def success(request):
     else:
         response =HttpResponseRedirect('/') 
     return response
-    
-def success_event(request): 
-    return render_to_response("success.html",context_instance=RequestContext(request))   
+  
 
 def importcollegedata(request):
 
