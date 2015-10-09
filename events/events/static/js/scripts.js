@@ -558,29 +558,6 @@ function find_position(path){
 }(jQuery));
 
 
-
-// $("document").ready(function($){
-//   var nav = $('.header-search-bar');
-
-
-
-
-
-  $(window).scroll(function () {
-    if ($(this).scrollTop() > 430) {
-        nav.addClass("sticky");
-        
-    } else {
-        nav.removeClass("sticky");
-         $( ".keywords input, .select-location input " ).blur();
-    }
-
-
- });
-
-  
-// });
-
 $( ".keywords input, .select-location input " ).focus(function() {
   $('html, body').animate({ scrollTop: $(".header-search-bar").offset().top }, 500);
 });
@@ -598,6 +575,16 @@ $( ".keywords input, .select-location input " ).focus(function() {
 
 
 $("document").ready(function($){
+
+  var nav = $('.header-search-bar');
+    $(window).scroll(function () {
+      if ($(this).scrollTop() > 430) {
+        nav.addClass("sticky");
+      } else {
+        nav.removeClass("sticky");
+        $( ".keywords input, .select-location input " ).blur();
+      }
+  });
 
   $('.north').tipsy({gravity: 'n'});
   $('.west').tipsy({gravity: 'w'});
