@@ -28,7 +28,7 @@ urlpatterns = patterns('',
     #registeration
     url(r'^register/$', 'college_event.views.register', name='register'),
     # for registeration confirm
-    url(r'^confirm/$', 'college_event.views.confirm', name='confirm'),
+    # url(r'^confirm/$', 'college_event.views.confirm', name='confirm'),
      # getting tarted
     url(r'^start/$', 'college_event.views.start',name='start'),
     url(r'^post_event$', 'college_event.views.post_event', name='post_event'),

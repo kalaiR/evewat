@@ -118,7 +118,7 @@
         
           <a href="#" class=""><i class="fa fa-plus-square"></i> Register</a>
           &nbsp;&nbsp;&nbsp;<a href="/">{{request.user.email}}</a>
-          <span class="signup_error" style="{% if request.REQUEST.rst %} display:block;color:red;font-size:17px; {%else%} display: none; {% endif %}">
+          <span style="{% if request.REQUEST.rst %} display:block;color:#df0024;font-weight: bold; {%else%} display: none; {% endif %}">
               {%for message in messages%}{{message}}{% endfor %}
           </span>
           <div class="register_holder">        
@@ -126,31 +126,30 @@
             {% csrf_token %}
 
             <div class="field_control">
-            <input type="text" class="form-control" name="username" placeholder="Firstname" id="username_signin" autocomplete="off">
-            <label for="username_signin" id="username_required1" class="signup_labelError">Please enter First name</label>
+            <input type="text" class="form-control" name="username" placeholder="Your Name" id="username_signup" autocomplete="off" autofocus="true">
+            <label for="username_signin" class="error_message">Please Enter your Name</label>
             </div>
 
             <div class="field_control">
-            <input type="text" class="form-control" name="lastname" placeholder="Lastname" id="lastname_signin" autocomplete="off">
-            <label for="lastname_signin" id="lastname_required1" class="signup_labelError">Please enter Last name</label>
+            <input type="text" class="form-control" name="email_id" placeholder="Email" id="emailid_signup" autocomplete="off">
+            <label for="emailid_signin" class="error_message">Please Enter your Email</label>
+            <label class="error_message">Please Enter Valid Email</label>
             </div>
 
             <div class="field_control">
-            <input type="email" class="form-control" name="email_id" placeholder="email_id" id="emailid_signin" autocomplete="off">
-
-            <label for="emailid_signin" id="emailid_required1" class="signup_labelError">Please enter email id</label>
-            <span id="valid_signup_email_required" class="error_message">Please enter valid Email</span>
+            <input type="text" class="form-control" name="mobile" placeholder="Mobile" id="mobile_signup" autocomplete="off">
+            <label for="mobile_signin" class="error_message">Please Enter your Mobile</label>
             </div>
 
             <div class="field_control">
-            <input type="text" class="form-control" name="mobile" placeholder="Mobile" id="mobile_signin" autocomplete="off">
-            <label for="mobile_signin" id="mobile_required1" class="signup_labelError">Please enter Mobile number</label>
+            <input type="password" class="form-control" name="password" placeholder="Password" id="password_signup" autocomplete="off">
+            <label for="password" class="error_message" style="display:none;">Please enter Password</label>
             </div>
 
             <div class="field_control">
-            <input type="password" class="form-control" name="password" placeholder="password" id="password_signin" autocomplete="off">
-            <span id="result"></span>
-            <label for="password" id="password_signin1" class="signup_labelError" style="display:none;">Please enter Password</label>
+            <input type="password" class="form-control" name="confirm_password" placeholder="Confirm Password" id="confirm_password_signup" autocomplete="off">
+            <label for="confirm_password" class="error_message" style="display:none;">Please Re-enter Password</label>
+            <label for="confirm_password" class="error_message" style="display:none;">Password does not match</label>
             </div>
 
             <!-- <div class="field_control">
@@ -188,8 +187,9 @@
       {% else %}
         <div class="header-register">
           <a href="/">{{request.user.email}}</a>
-          <span class="signup_error" style="{% if request.REQUEST.st %} display:block;color:red;font-size:17px; {%else%} display: none; {% endif %}">
-          {%for message in messages%}{{message}}{% endfor %}</span>
+          <span style="{% if request.REQUEST.rst %} display:block;color:#df0024;font-weight: bold; {%else%} display: none; {% endif %}">
+              {%for message in messages%}{{message}}{% endfor %}
+          </span>
         </div>
       {% endif %} 
 
@@ -208,7 +208,7 @@
         <div class="header-login">
 
           <a href="#" class=""><i class="fa fa-power-off" action="/login/"></i> Login</a>
-          <span class="signup_error" style="{% if request.REQUEST.lst and not request.path == '/post_event_v2' %} display:block;color:red;font-size:17px; {%else%} display: none; {% endif %}">
+          <span style="{% if request.REQUEST.lst and not request.path == '/post_event_v2' %} display:block;color:#df0024;font-weight: bold; {%else%} display: none; {% endif %}">
               {%for message in messages%}{{message}}{% endfor %}
           </span>
           <!-- <a class="login_act">login_act</a> -->
@@ -219,13 +219,14 @@
             {% csrf_token %}    
             
               <div class="field_control">        
-              <input type="text" class="form-control"  placeholder="Username/Email" id="emailid_signup" name="username" autocomplete="off" >
-              <label for="emailid_signup" id="emailid_required" class="labelError" style="display:none;color:red;">Please enter User name</label>  
+              <input type="text" class="form-control"  placeholder="Username/Email" id="emailid_signin" name="username" autocomplete="off" >
+              <label for="emailid_signup" class="error_message">Enter your Username</label>
+              <label for="emailid_signup" class="error_message">Enter Valid Email</label>  
               </div>
 
               <div class="field_control">   
-              <input type="password" class="form-control" name="password" id="password_signup" placeholder="Password">
-              <label for="password" id="password_required" class="labelError" style="display:none;color:red;">Please enter Password</label>
+              <input type="password" class="form-control" name="password" id="password_signin" placeholder="Password">
+              <label for="password" class="error_message">Enter your Password</label>
               </div>
 
               <input type="hidden" value="{{ request.get_full_path }}" name="next" /> 
