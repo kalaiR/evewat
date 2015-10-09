@@ -6,6 +6,7 @@ from events.util import get_client_ip
 from events.util import *
 from college_event.models import *
 
+
 #Middleware class for finding global_lanugage, global_country, global_ip when user enter into the website
 class Global(object):
     global_country=''

@@ -9,7 +9,7 @@ from search.searchresults import searchresults as eventsearch
 from haystack.query import SearchQuerySet
 from haystack.inputs import Clean, Raw, AutoQuery, Exact
 from haystack.query import SQ
-from college_event.models import Postevent_v2
+from college_event.models import Postevent
 
 class Partial(Clean):
 	input_type_name = 'partial'
@@ -61,14 +61,14 @@ class EventSearchFilter(FacetedSearchForm):
   
 	def get_default_filters(self):
 	  sqs = SearchQuerySet().all()
-	  sqs = sqs.models(Postevent_v2)
+	  sqs = sqs.models(Postevent)
 	  return sqs
 
 	def get_default_search_field(self):
 	  return 'searchtext'
 
 	def get_model_class(self):
-	  return Postevent_v2
+	  return Postevent
 
 	def search(self):
 	  if not hasattr(self, 'cleaned_data'):

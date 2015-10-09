@@ -1,10 +1,8 @@
 from django import template
 from django.db.models import *
-from college_event.models import *
 from banner.models import *
 from college_event.views import *
-#from django.contrib.gis.geoip import GeoIP
-from events import globals
+from college_event.models import *
 from events.util import *
 register = template.Library()
 
@@ -15,7 +13,7 @@ def get_banner(banner):
 	
 @register.filter
 def get_categories(initial_load):  
-	category=Category.objects.all()	
+	category=Category.objects.all().order_by('id')	
 	return category
 
 @register.filter

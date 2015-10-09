@@ -323,7 +323,6 @@
     } else {
 
       p.append("<img src='"+src+"' class='simpleFilePreview_preview "+((fn)?'simpleFilePreview_hasFilename':'')+"' alt='"+((fn)?fn:'File Preview')+"' title='Remove "+((fn)?fn:'this file')+"' />");
-      $.cookie('poster',src);
       // for tooltips
       p.find('input.simpleFilePreview_formInput').attr('title', "Remove "+((fn)?fn:'this file'));
     }
