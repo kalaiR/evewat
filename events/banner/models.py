@@ -22,7 +22,7 @@ class SiteBanner( models.Model ):
     pageurl= models.CharField(max_length=50, choices=PAGEURL, help_text="Please select the page to display the banner")
     position=models.CharField(max_length=50, choices=POSITION, help_text="Please select the position to display the banner")
     price=models.FloatField(null=True, help_text="Please enter the price as INR")
-    startdate= models.DateTimeField(default=datetime.datetime.now,help_text="Startdate for banner") 
+    startdate= models.DateTimeField(default=datetime.datetime.now(),help_text="Startdate for banner") 
     enddate = models.DateTimeField(default=datetime.datetime.now()+timedelta(days=30),help_text="Enddate for banner") 
     duration=models.IntegerField(null=True, blank=True, help_text="No of days allowed")
     admin_status = models.BooleanField(default=False)
