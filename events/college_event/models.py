@@ -40,12 +40,12 @@ class College(models.Model):
 		return self.college_name
 
 class Department(models.Model):
-	department=models.CharField(max_length=150, null=True, blank=True)
+	department=models.CharField(max_length=150, null=True)
 	def __unicode__(self):
 		return self.department
 
 class CollegeDepartment(models.Model):
-	department=models.ForeignKey(Department, null=True, blank=True)
+	department=models.ForeignKey(Department, null=True)
 	college=models.ManyToManyField(College,null=True)
 	def __unicode__(self):
 		return self.department.department
