@@ -114,8 +114,7 @@
 							}
 							else
 							{
-								openActiveTab();
-								alert("test2");
+								openActiveTab();								
 								requredcontrol=false;
 								modul.find("#sf-msg").text("");
 							}
@@ -138,15 +137,13 @@
 					else
 					{
 						openActiveTab();
-						requredcontrol=false;
-						alert("test3");
+						requredcontrol=false;						
 					}
 				});
 				
 				function geriControl(sayac)
 				{
-					requredcontrol=false;
-					alert("test4");
+					requredcontrol=false;					
 					for (i=0; i<sayac; i++)
 					{
 						modul.find(".sf-steps-form>ul").eq(i).find(':input').each(function (){
@@ -215,8 +212,7 @@
 						else
 						{
 							openActiveTab();
-							requredcontrol=false;
-							alert("test1");
+							requredcontrol=false;							
 							modul.find("#sf-msg").text("");
 						}
 					}

@@ -141,13 +141,13 @@
 
                       <ul class="nav nav-tabs home-tab" role="tablist" class="category_click">
                         <li class="active">
-                          <a role="tab" data-toggle="tab" class="select_all_category">All Categories
+                          <a role="tab" data-toggle="tab" class="select_all_category pointer">All Categories
                             <span>Display all sub-categories</span>
                           </a>
                         </li>
                       {% for categories in initial_load|get_categories %}
                         <li>
-                          <a class="select_category"  role="tab" data-toggle="tab" title="Please choose any category">{{categories.name}}</a>
+                          <a class="select_category pointer"  role="tab" data-toggle="tab" title="Please choose any category">{{categories.name}}</a>
                            <input type="hidden" class="ajax_catid" value="{{categories.id}}">                                      
                           
                         </li>

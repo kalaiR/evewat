@@ -341,7 +341,7 @@
                 <select class="category_choose" name="eventtype">                 
                     <option value="">Event type</option>
                     {% for subcategory in subcategory %}
-                              <option value="{{subcategory.id}}">{{ subcategory.name }} </option>
+                              <option value="{{subcategory.id}}">{{ subcategory.name | capfirst }} </option>
                      {% endfor%} 
 
                  </select>
