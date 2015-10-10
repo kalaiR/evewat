@@ -45,6 +45,7 @@ class PosteventAdmin(admin.ModelAdmin):
 	search_fields = ['id', 'event_title']
 	list_per_page = 50
 	actions = ['send_EMAIL']
+	
 	def admin_status(self, obj):
 		return obj.admin_status 
 	admin_status.boolean = False

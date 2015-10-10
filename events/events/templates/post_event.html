@@ -2,7 +2,7 @@
 {% load i18n %}
 {% load static from staticfiles %} 
 {% block content %}
-<link rel="stylesheet" href="{% static "css/bootstrap.css" %}">
+<!-- <link rel="stylesheet" href="{% static "css/bootstrap.css" %}"> -->
       
       <div class="page-heading contact-us-heading">
         <span></span> <!-- for dark-overlay on the bg -->
@@ -52,8 +52,8 @@
                   </div>
                   <div class="row">
                     <div class="col-md-6 mandatory_main" >
-                      <input  type="text" placeholder="Startdate"  id="dpd1" name="startdate" value="{% if request.COOKIES.startdate %}{{request.COOKIES.startdate}}{% else %}{% endif %}" class="startdate" />
-                      <span  class="mandatory" style="color:red;" autocomplete="off">*</span>
+                      <input  type="text" placeholder="Startdate"  id="dpd1" name="startdate" value="{% if request.COOKIES.startdate %}{{request.COOKIES.startdate}}{% else %}{% endif %}" class="startdate" autocomplete="off"/>
+                      <span  class="mandatory" style="color:red;" >*</span>
                       <label for="dpd2" class="date1_error" style="display:none;color:red;">Please Choose Start Date</label>
                     </div>
                     <div class="col-md-6 mandatory_main">
@@ -65,7 +65,7 @@
                   <div class="row">
                     <div class="col-md-6 mandatory_main">
                     {% if request.COOKIES.category %}
-                      <input type="text" placeholder="{{request.COOKIES.category_name}}" id="category_name" class="category_name" value="{{request.COOKIES.category_name}}">
+                      <input type="text" placeholder="{{request.COOKIES.category_name}}" id="category_name" class="category_name" value="{{request.COOKIES.category_name|capfirst}}">
                       <span  class="mandatory" style="color:red;">*</span>
                       <input type="hidden" name="category" id="category_id" class="category_id" value="{{request.COOKIES.category}}">
                     <!-- <select class="category select_option select_category" name="category ">
@@ -76,7 +76,7 @@
                       <select class="category select_option select_category" name="category ">
                         <option value="">Event Category</option>
                         {% for categories in category %}
-                          <option value="{{categories.id}}">{{ categories.name }} </option>
+                          <option value="{{categories.id}}">{{ categories.name|capfirst }} </option>
                         {% endfor%}                    
                       </select>
                       <span  class="mandatory" style="color:red;">*</span>
@@ -86,9 +86,9 @@
                     </div>
                     <div class="col-md-6 mandatory_main">
                     {% if request.COOKIES.eventtype %}
-                      <input type="text" placeholder="{{request.COOKIES.eventtype_name}}" id="eventtype" class="eventtype_name" value="{{request.COOKIES.eventtype_name}}">
+                      <input type="text" placeholder="{{request.COOKIES.eventtype_name|capfirst}}" id="eventtype" class="eventtype_name" value="{{request.COOKIES.eventtype_name|capfirst}}">
                       <span  class="mandatory" style="color:red;">*</span>
-                      <input type="hidden" name="eventtype" id="eventtype" class="eventtype_id" value="{{request.COOKIES.eventtype}}">
+                      <input type="hidden" name="eventtype" id="eventtype" class="eventtype_id" value="{{request.COOKIES.eventtype|capfirst}}">
                       {% else %}
                       <select class="eventtype select_subcategory" name="eventtype" data-placeholder="Event Subcategory">
                         <option value="">Event Subcategory</option>                   

@@ -583,6 +583,7 @@ $( ".keywords input, .select-location input " ).focus(function() {
 
 
 $("document").ready(function($){
+  
 
   var nav = $('.header-search-bar');
     $(window).scroll(function () {
@@ -1031,8 +1032,9 @@ $('.header-call-to-action input').blur(function(){
     $('.plan_table_act').show();
   });
 
+
+
   jQuery('.free,.events_details,.login_act,.paid').click(function(){     
-    alert('trest');
     if($('.eventtitle').val() == ''){
       $('.eventtitle_error').show();
       return false;
@@ -1118,6 +1120,12 @@ $('.header-call-to-action input').blur(function(){
   //Event details
 
 jQuery('.user_details').click(function(){     
+    var mobile =$('.organize_moobile').val(); 
+    var pattern = /^\d{10}$/;
+    function isValidEmailAddress(emailAddress) {
+        var pattern = new RegExp(/^[+a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i);
+        return pattern.test(emailAddress);
+    };
 
     if($('.address').val() == ''){
       $('.address_error').show();
@@ -1127,7 +1135,7 @@ jQuery('.user_details').click(function(){
       $('.address_error').hide();
     }
 
-    if($('.organizer').val() == ''){
+    if($('.organize_name').val() == ''){
       $('.organizer_error').show();
       return false;
     }
@@ -1135,6 +1143,28 @@ jQuery('.user_details').click(function(){
       $('.organizer_error').hide();
     }  
 
+    if($('.organize_email').val() == ''){
+      $('.organizer_email_error').show();
+      return false;
+    }
+    else if(!isValidEmailAddress( $('.email').val() )){
+      $('.organizer_email_error').show().text('Enter Valid emailAddress');
+      return false;
+    }
+    else{
+      $('.organizer_email_error').hide();
+    }  
+    if($('.organize_moobile').val() == ''){
+      $('.organizer_mobile_error').show();
+      return false;
+    }
+     else if(!pattern.test(mobile)){
+      $('.organizer_mobile_error').show().text("It is not valid mobile number.input 10 digits number!");
+      return false;
+    }
+    else{
+      $('.organizer_mobile_error').hide();
+    } 
     if($('.state').val() == ''){
       $('.state_error').show();
       return false;
@@ -1178,7 +1208,6 @@ jQuery('.user_details').click(function(){
         var image = new Image();
         image.src = oFREvent.target.result;
         image.onload = function () {
-        alert(this.width);
 
           // if (this.width > 1200 ) {
           //   alert("Exceeded Image width (1200 pixels).Please upload below 1200px width");
@@ -1192,7 +1221,7 @@ jQuery('.user_details').click(function(){
           //   alert("Exceeded height (700 pixels).Please upload below 700px height");
           //   return false;
           // }
-          else if (this.height < 650 ) {
+          else if (this.height < 500 ) {
             alert("Image height should above be 500 px");
             return false;
           }
@@ -1202,7 +1231,6 @@ jQuery('.user_details').click(function(){
             return false;
           }
           else{
-            alert('true');
             return true;
           }
          // access image size here & do further implementation
@@ -1226,12 +1254,13 @@ $(document).on('change','.banner',function(){
     size = files[0].size;
     if( size > 1024*2000){
       alert('Please upload less than 2mb file');
-      $('.simpleFilePreview_filename').remove();
-      // show styled input "button"
-      $('.simpleFilePreview_remove').remove();
-      $('.simpleFilePreview_preview ').remove();
-      $('.banner').removeClass('simpleFilePreview_formInput');
-      $('.simpleFilePreview_input').show();
+        $('.simpleFilePreview_filename').remove();
+      // // show styled input "button"
+        $('.simpleFilePreview_remove').hide().end().find('.simpleFilePreview_preview ').remove();
+      // $('.simpleFilePreview_preview ').remove();
+       $('.banner').removeClass('simpleFilePreview_formInput');
+       $('.simpleFilePreview_input').show();
+       $('.banner').addClass('simpleFilePreview_formInput');
        return false;
     }
     else{
@@ -1243,7 +1272,7 @@ $(document).on('change','.banner',function(){
 
   // user validation
 $('.post_event,#paid').click(function(){
-   var mobile = $('.mobile').val();
+    var mobile =$('.mobile').val(); 
     var pattern = /^\d{10}$/;
 
   if($('.name').val() == ''){
@@ -1257,6 +1286,10 @@ $('.post_event,#paid').click(function(){
       $('.email_error').show();
       return false;
     }
+    else if( !isValidEmailAddress( $('.email').val() )){
+      $('.email_error').show().text('Enter Valid emailAddress');
+      return false;
+    }
     else{
       $('.email_error').hide();
     }
@@ -1266,7 +1299,7 @@ $('.post_event,#paid').click(function(){
       return false;
     }
     else if(!pattern.test(mobile)){
-      alert("It is not valid mobile number.input 10 digits number!");
+      $('.mobile_error').show().text("It is not valid mobile number.input 10 digits number!");
       return false;
     }
 
