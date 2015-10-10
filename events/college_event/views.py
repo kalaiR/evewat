@@ -50,6 +50,11 @@ def about(request):
 def privacy(request):
     return render_to_response("privacy.html", context_instance=RequestContext(request))
 
+def terms_and_conditions(request):
+    return render_to_response("terms_and_conditions.html", context_instance=RequestContext(request))
+
+def faqs(request):
+    return render_to_response("faqs.html", context_instance=RequestContext(request))
 
 @csrf_protect 
 def user_login(request):
