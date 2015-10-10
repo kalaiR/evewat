@@ -6,6 +6,7 @@ from django.views.decorators.csrf import csrf_exempt
 from PIL import Image
 from django.utils import simplejson
 from haystack.query import SearchQuerySet
+from college_event.extra import ContentTypeRestrictedFileField
 
 import simplejson as json
 import os
@@ -59,24 +60,32 @@ class PremiumPriceInfo(models.Model):
         return self.purpose
 	
 class Postevent(models.Model):
-	name= models.CharField(max_length=50, null=True, blank=True)
-	email= models.EmailField(max_length=50, null=True, blank=True)
-	mobile= models.BigIntegerField(null=True, blank=True)
-	event_title=models.CharField(max_length=50,null=True, blank=True)
-	startdate= models.DateField(max_length=50,null=True, blank=True)
-	enddate= models.DateField(max_length=50,null=True, blank=True)
-	category= models.ForeignKey(Category,null=True, blank=True)	
+	name= models.CharField(max_length=50, )
+	email= models.EmailField(max_length=50,)
+	mobile= models.BigIntegerField()
+	event_title=models.CharField(max_length=50,)
+	startdate= models.DateField(max_length=50,)
+	enddate= models.DateField(max_length=50,)
+	category= models.ForeignKey(Category,)	
 	eventtype= models.ForeignKey(SubCategory,null=True, blank=True)	
-	eventdescription= models.TextField(null=True, blank=True)	
-	address= models.TextField(null=True, blank=True)
-	organizer= models.TextField(null=True, blank=True)
-	state= models.CharField(max_length=50,null=True, blank=True)
-	city= models.CharField(max_length=50,null=True, blank=True)
-	college=models.CharField(max_length=50,null=True, blank=True)
-	department=models.CharField(max_length=50,null=True, blank=True)
-	poster = models.ImageField(upload_to='events/static/img/',null=True, max_length=500)	
+	eventdescription= models.TextField()	
+	address= models.TextField()
+	state= models.CharField(max_length=50,)
+	city= models.CharField(max_length=50)
+	college=models.CharField(max_length=50)
+	department=models.CharField(max_length=50)
+	poster = ContentTypeRestrictedFileField(upload_to='static/img/',null=True,content_types=['image/jpeg','image/png'],max_upload_size=2097152,help_text="Please upload the banner Image with 2MB min and jpg, png format only allowed")	
 	admin_status = models.BooleanField(default=False)
 	payment = models.BooleanField(default=False)
 
 	def __unicode__(self):
 		return self.event_title
+
+class Organizer(models.Model):
+	organizer = models.OneToOneField(Postevent)
+	organizer_name= models.CharField(max_length=50)
+	organizer_mobile= models.BigIntegerField()
+	organizer_email=models.EmailField(max_length=50)
+
+	def __unicode__(self):
+		return self.organizer_name
