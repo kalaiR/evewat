@@ -2,7 +2,7 @@
 {% load i18n %}
 {% load static from staticfiles %} 
 {% block content %}
-<link rel="stylesheet" href="{% static "css/bootstrap.css" %}">
+
       
       <div class="page-heading contact-us-heading">
         <span></span> <!-- for dark-overlay on the bg -->
@@ -21,320 +21,169 @@
         </div> <!-- END .container-->
       </div> <!-- END .about-us-heading -->
 
-    </div> <!-- END .SEARCH and slide-section -->
+
 
 
     
   </header> <!-- end #header -->
 
-  <div id="page-content">
-    <div class="container">
-      <div class="page-content">
-        <div class="contact-us">
-          <div class="row">
-            <div class="col-md-12">
-            {% if message%}
-              <script type="text/javascript">
-                window.onload = function(){ window.location="http://{{request.META.HTTP_HOST}}/post_event"; }
-              </script>
-              <h4 class="text-center">{{message}}</h4>
-            {%endif%}
-            <h3>Submit your event</h3>
-            <div class="contact-form">
-              <form action="{%url "college_event.views.submit_event_v2" %}" name="postevent" enctype="multipart/form-data" method="POST">{% csrf_token %}
-                <div class="events pointer">Event Details</div>
-                <div class="events_fields price-listing">
-                  <div class="row">
-                    <div class="col-md-6 col-md-offset-3 mandatory_main">
-                      <input type="text" placeholder="Event Title" name="eventtitle" id="eventtitle" class="eventtitle" value="{% if request.COOKIES.eventtitle %}{{request.COOKIES.eventtitle}}{% else %}{% endif %}" autocomplete="off"><span  class="mandatory" style="color:red;">*</span>
-                      <label for="festcaption_val" class="eventtitle_error" style="display:none;color:red;">Please enter Event Title</label>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-6 mandatory_main" >
-                      <input  type="text" placeholder="Startdate"  id="dpd1" name="startdate" value="{% if request.COOKIES.startdate %}{{request.COOKIES.startdate}}{% else %}{% endif %}" class="startdate" />
-                      <span  class="mandatory" style="color:red;" autocomplete="off">*</span>
-                      <label for="dpd2" class="date1_error" style="display:none;color:red;">Please Choose Start Date</label>
-                    </div>
-                    <div class="col-md-6 mandatory_main">
-                      <input  type="text" placeholder="Enddate"  id="dpd2" name="enddate" class="enddate" value="{% if request.COOKIES.enddate %}{{request.COOKIES.enddate}}{% else %}{% endif %}"   autocomplete="off" />
-                      <span  class="mandatory" style="color:red;">*</span>
-                      <label for="dpd2" class="date2_error" style="display:none;color:red;">Please enter End Date</label>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-6 mandatory_main">
-                    {% if request.COOKIES.category %}
-                      <input type="text" placeholder="{{request.COOKIES.category_name}}" id="category_name" class="category_name" value="{{request.COOKIES.category_name}}">
-                      <span  class="mandatory" style="color:red;">*</span>
-                      <input type="hidden" name="category" id="category_id" class="category_id" value="{{request.COOKIES.category}}">
-                    <!-- <select class="category select_option select_category" name="category ">
-                    <option value="{{request.COOKIES.category}}" selected="selected">{{request.COOKIES.category_name}}</option>
 
-                      </select> -->
-                      {% else %}
-                      <select class="category select_option select_category" name="category ">
-                        <option value="">Event Category</option>
-                        {% for categories in category %}
-                          <option value="{{categories.id}}">{{ categories.name }} </option>
-                        {% endfor%}                    
-                      </select>
-                      <span  class="mandatory" style="color:red;">*</span>
-                    {% endif %}
+<div class="container">
+  <!--STEPS FORM START ------------ -->
+        <div class="stepsForm">
+            <form action="{%url "college_event.views.submit_event_v2" %}" name="postevent" enctype="multipart/form-data" method="POST">{% csrf_token %}
+                <div class="sf-steps">
+                    <div class="sf-steps-content">
+                      <div>
+                          <span>1</span> Profile
+                        </div>
+                        <div>
+                          <span>2</span> Account
+                        </div>
+                        <div>
+                          <span>3</span> Extras
+                        </div>
+                    </div>
+                </div>                
+                <div class="sf-steps-form sf-radius"> 
                     
-                      <label for="category" class="category_error" style="display:none;color:red;">Please Choose Event Category</label>
-                    </div>
-                    <div class="col-md-6 mandatory_main">
-                    {% if request.COOKIES.eventtype %}
-                      <input type="text" placeholder="{{request.COOKIES.eventtype_name}}" id="eventtype" class="eventtype_name" value="{{request.COOKIES.eventtype_name}}">
-                      <span  class="mandatory" style="color:red;">*</span>
-                      <input type="hidden" name="eventtype" id="eventtype" class="eventtype_id" value="{{request.COOKIES.eventtype}}">
-                      {% else %}
-                      <select class="eventtype select_subcategory" name="eventtype" data-placeholder="Event Subcategory">
-                        <option value="">Event Subcategory</option>                   
-                      </select>
-                      <span  class="mandatory" style="color:red;">*</span>
-                      {% endif %}
-                      
-                      <label class="subcategory_error" style="display:none;color:red;">Please Choose Event Subcategory</label>
-                    </div> 
-                  </div>
-                  <div class="row">
-                    <div class="col-md-12 mandatory_main ">
-                      <!-- here cookies value assign from jquery cookies -->
-                      <textarea placeholder="Event Description" name="eventdescription" class="eventdescription" value=""></textarea>
-                      <span  class="mandatory" style="color:red;">*</span>
-                      <label class="eventdescription_error" style="display:none;color:red;">Please Enter Event description</label>
-                    </div>
-                  </div>
-                  <div class="row plan_table_act " id="plan_change" style="{% if request.COOKIES.plan %} display:none;{% else %}{%endif%}">
+                    <ul class="sf-content"> <!-- form step one --> 
+                         <li>
+                            <div class="sf_columns column_3">
 
-                  
-                    <div class="col-md-6 col-sm-6 col-lg-6">
-                      <div class="pricing-table">
-                        <h3><strong>Free</strong> User</h3>
-                        <div class="price">
-                          <span class="free">
-                            {% for premiums in premium %}
-                              {% if premiums.purpose == "free" %}
-                                INR {{ premiums.premium_price|floatformat }}
-                                <input type="hidden" name="free" value="{{ premiums.premium_price|floatformat }}">
-                              {% endif %}
-                            {% endfor %}
-                          </span>
-                        </div>
-                      
-                      <ul class="feature">
-                        <li><i class="fa fa-check-circle-o"></i> post 10 adds free</li>
-                        <li><i class="fa fa-check-circle-o"></i> adds dispaly in 1 month</li>
-                        <li><i class="fa fa-check-circle-o"></i> Free poster display after the paid poster</li>
-                        <li><i class="fa fa-check-circle-o"></i> Sending SMS and mail</li>
-                   
-                      </ul>
-                      <!-- <input type="submit" class="btn btn-default post_event" data-user="freeuser" value="Free User"> -->
-                      <a class="btn btn-default free" href="#" data-user="freeuser"><i class="fa fa-envelope-o"></i>Free User</a>
-                    </div> </div><!-- end grid-layout -->
-                    <div class="col-md-6 col-sm-6 col-lg-6">
-                      <div class="pricing-table">
-                        <h3><strong>Paid</strong> User</h3>
-                        <div class="price">
-                          <span class="paid">
-                            {% for premiums in premium %}
-                              {% if premiums.purpose == 'paid' %}
-                                INR {{ premiums.premium_price|floatformat }}
-                                <input type="hidden" name="paid" value="{{ premiums.premium_price|floatformat }}" >
-                              {% endif %}
-                            {% endfor %}    
-                          </span>
-                        </div>
-                      
-                      <ul class="feature">
-                        <li><i class="fa fa-check-circle-o"></i> Display for 1 month</li>
-                        <li><i class="fa fa-check-circle-o"></i> Notifications are send by mail and Sms</li>
-                        <li><i class="fa fa-check-circle-o"></i> Display the poster in which page you want</li>
-                        <!-- <li><i class="fa fa-check-circle-o"></i> Loren ipsum dolor sit amet</li>
-                        <li><i class="fa fa-check-circle-o"></i> Loren ipsum dolor sit amet</li> -->
-                      </ul>
-                    {% if user.is_authenticated %}
-                      <a class="btn btn-default paid"  data-user="paiduser"><i class="fa fa-envelope-o"></i>Paid User</a> 
-                    {% else %}
-                      <a class="btn btn-default login_act"  data-user="paiduser"><i class="fa fa-envelope-o"></i>Paid User</a> 
-                    {% endif %}
-                    </div></div> <!-- end grid-layout -->
-                  </div>
-                  <label class="plan_error col-md-12 text-center" style="display:none;color:red;">Please Choose Plan</label>
-                </div>
-                <input type="hidden" value="{% if request.COOKIES.plan %}{{request.COOKIES.plan}}{% else %}{% endif %}" name="plan">
-                <div class="events_details pointer">Event Location</div>
-                <div class="eventdetail_fields" style="display:block !important;">
-                  <div class="row">
-                    <div class="col-md-6 mandatory_main">
-                      <textarea placeholder="Address" name="address" class="address" value=""></textarea>
-                      <span  class="mandatory" style="color:red;">*</span>
-                       <label class="address_error" style="display:none;color:red;">Please Enter Address</label>
+                            <input type="text" placeholder="Event Title" name="eventtitle" id="eventtitle" class="eventtitle" value="{% if request.COOKIES.eventtitle %}{{request.COOKIES.eventtitle}}{% else %}{% endif %}" autocomplete="off"  data-required="true">
+                            <label for="festcaption_val" class="eventtitle_error" style="display:none;color:red;">Please enter Event Title</label>
+
+                             <label class="sf-select margintop_2rem">
+
+                                    {% if request.COOKIES.category %}
+                                    <input type="text" placeholder="{{request.COOKIES.category_name}}" id="category_name" class="category_name" value="{{request.COOKIES.category_name}}">
+                                    <span  class="mandatory" style="color:red;">*</span>
+                                    <input type="hidden" name="category" id="category_id" class="category_id" value="{{request.COOKIES.category}}">
+                                   
+                                    {% else %}
+                                    <select class="category select_option select_category" name="category">
+                                      <option value="">Event Category</option>
+                                      {% for categories in category %}
+                                        <option value="{{categories.id}}">{{ categories.name }} </option>
+                                      {% endfor%}                    
+                                    </select>
+                                    <span></span>
+                                  {% endif %}
+                                </label>
+
+                                <label class="sf-select margintop_2rem">
+                                    {% if request.COOKIES.eventtype %}
+                                      <input type="text" placeholder="{{request.COOKIES.eventtype_name}}" id="eventtype" class="eventtype_name" value="{{request.COOKIES.eventtype_name}}">
+                                      <span  class="mandatory" style="color:red;">*</span>
+                                      <input type="hidden" name="eventtype" id="eventtype" class="eventtype_id" value="{{request.COOKIES.eventtype}}">
+                                    {% else %}
+                                      <select class="eventtype select_subcategory" name="eventtype" data-placeholder="Event Subcategory">
+                                        <option value="">Event Subcategory</option>                   
+                                      </select>
+                                     <span></span>
+                                    {% endif %}
+                                </label>
+                                
+                            </div>
+
+
+
+                            <div class="sf_columns column_3">
+                            <textarea placeholder="Event Description" name="eventdescription" class="eventdescription" value="" data-required="true"></textarea>
+                               
+                            </div>
+                         </li>
+                         <li>
+                            <div class="sf_columns column_3">
+                                 <input  type="text" placeholder="Startdate"  id="dpd1" name="startdate" value="{% if request.COOKIES.startdate %}{{request.COOKIES.startdate}}{% else %}{% endif %}" class="startdate" />
+                            </div>
+                            <div class="sf_columns column_3">
+                                <input  type="text" placeholder="Enddate"  id="dpd2" name="enddate" class="enddate" value="{% if request.COOKIES.enddate %}{{request.COOKIES.enddate}}{% else %}{% endif %}"   autocomplete="off" />
+                            </div>
+                         </li>
+                         
+                         
+                    </ul>
                        
-                    </div>
-                    <div class="col-md-6 mandatory_main">
-                      <textarea placeholder="Organizer details" name="organizer" class="organizer" value="" ></textarea>
-                      <span  class="mandatory" style="color:red;">*</span>
-                      <label class="organizer_error" style="display:none;color:red;">Please Enter Organizer Details</label>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-6 mandatory_main">
-                      <input type="text" placeholder="State" name="state" id="state" class="state ui-autocomplete-input" value="">
-                      <span  class="mandatory" style="color:red;">*</span>
-                      <input type="hidden" name="state" id="statetxt" class="state" value="">
-                      <label class="state_error" style="display:none;color:red;">Please Choose State</label>
-                    </div>
-                    <div class="col-md-6 mandatory_main">
-                      <input type="text" placeholder="City" id="city" class="city ui-autocomplete-input" value="" name="city">
-                      <span  class="mandatory" style="color:red;">*</span>
-                      <input type="hidden" name="city" id="citytxt" class="city" value="">
-                      <input type="hidden" id="cityid" class="city" value="">
-                      <label class="city_error" style="display:none;color:red;">Please Choose City</label>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-6 mandatory_main">
-                      <input type="text" placeholder="College" id="college" class="college ui-autocomplete-input" value="" name="college">
-                      <span  class="mandatory" style="color:red;">*</span>
-                      <input type="hidden" name="college" id="collegetxt" class="college" value="">
-                      <input type="hidden"  id="collegeid" class="college" value="">
-                      <label class="college_error" style="display:none;color:red;">Please Choose College</label>
-                    </div>
-                    <div class="col-md-6 mandatory_main">
-                      <input type="text" placeholder="Department" id="dept" class="dept ui-autocomplete-input" value="" name="dept">
-                      <span  class="mandatory" style="color:red;">*</span>
-                      <input type="hidden" name="dept" id="depttxt" class="dept" value="">
-                      <input type="hidden" id="deptid" class="dept" value="">
-                      <label class="dept_error" style="display:none;color:red;">Please Choose Department</label>
-                    </div>
-                  </div>
-                  
-                </div>
-                <div class="user_details pointer">Upload Banner</div>
+                    <ul class="sf-content"> <!-- form step two --> 
+                         <li>
+                            <div class="sf_columns column_3">
+                                <textarea placeholder="Address" name="address" class="address" value=""></textarea>
+                            </div>
+                            <div class="sf_columns column_3">
+                                <input type="text" placeholder="Organizer name" name="organizer_name" id="organizer_name" class="organizer_name margintop_2rem" value="">
+                                
+                                <input type="text" placeholder="Organizer E-mail" name="organizer_email" id="organizer_email" class="organizer_name margintop_2rem" value="">
+                                
+                                <input type="text" placeholder="Organizer mobile" name="organizer_mobile" id="organizer_mobile" class="organizer_mobile margintop_2rem" value="">
+                            </div>
+                         </li>
+                         <li>
+                            <div class="sf_columns column_3">
+                                <input type="text" placeholder="State" name="state" id="state" class="state ui-autocomplete-input" value="">
+                                <input type="hidden" name="state" id="statetxt" class="state" value="">
+                            </div>
+                            <div class="sf_columns column_3">
+                                <input type="text" placeholder="City" id="city" class="city ui-autocomplete-input" value="" name="city">
+                                <input type="hidden" name="city" id="citytxt" class="city" value="">
+                                <input type="hidden" id="cityid" class="city" value="">
+                            </div>
+                         </li>
 
+                         <li>
+                            <div class="sf_columns column_3">
+                               <input type="text" placeholder="College" id="college" class="college ui-autocomplete-input" value="" name="college">
+                                <input type="hidden" name="college" id="collegetxt" class="college" value="">
+                                <input type="hidden"  id="collegeid" class="college" value="">
+                            </div>
+                            <div class="sf_columns column_3">
+                                <input type="text" placeholder="Department" id="dept" class="dept ui-autocomplete-input" value="" name="dept">
+                                <input type="hidden" name="dept" id="depttxt" class="dept" value="">
+                                <input type="hidden" id="deptid" class="dept" value="">
+                            </div>
+                         </li>
+
+                         
+                    </ul>
+    
+                    <ul class="sf-content"> <!-- form step tree --> 
+                         <li>
+                            <div class="sf_columns column_3">
+                                <input type="text" placeholder="Name" name="name" value="
+                                {% if request.user == 'AnonymousUser' %}
+                                Guest
+                                {% else %}
+                                {{request.user}}
+                                {% endif %}" class="name" readonly>
+                            </div>
+                            <div class="sf_columns column_3">
+                                <input type="email" placeholder="Email" name="email" value="{{ request.user.email }}" class="email" {% if user.is_authenticated %}readonly{% endif %}>
+                            </div>
+                         </li>
+
+                          <li>
+                            <div class="sf_columns column_3">
+                                <input type="text" placeholder="Phone number" name="mobile" class="mobile"  value="">
+                            </div>
+                            <div class="sf_columns column_3">
+                                <input type='file' id='' class="poster" name='poster[]' multiple='multiple'/>
+                            </div>
+                         </li>
+
+                         
+                         
+                    </ul>
+                </div>
                 
-                <div class="user_fields ">
-                <div class="row">
-                    <div class="col-md-12 ">
-                      <input type='file' id='poster' class="poster" name='poster[]' multiple='multiple'/>
-                    </div>
-                  </div> 
-                  <div class="row">
-                    <div class="col-md-6 mandatory_main">
-                      <input type="text" placeholder="Name" name="name" value="
-{% if request.user == 'AnonymousUser' %}
-Guest
-{% else %}
-{{request.user}}
-{% endif %}" class="name" readonly>
-                      <!-- <span  class="mandatory" style="color:red;">*</span> -->
-                      <label class="name_error" style="display:none;color:red;">Please Enter Name</label>
-                    </div>
-                    <div class="col-md-6 mandatory_main">
-
-                      <input type="email" placeholder="Email" name="email" value="{{ request.user.email }}" class="email" {% if user.is_authenticated %}readonly{% endif %}>
-                      <span  class="mandatory" style="color:red;">*</span>
-                      <label class="email_error" style="display:none;color:red;">Please Enter Mail Id</label>
-                    </div>
-                    
-                  </div> 
-                  <div class="row">
-                    <div class="col-md-12 mandatory_main">
-                      <input type="text" placeholder="Phone number" name="mobile" class="mobile"  value=""> 
-                      <span  class="mandatory" style="color:red;">*</span>
-                      <label class="mobile_error" style="display:none;color:red;">Please Enter Valid Phonenumber</label>     
-                    </div>
-                  </div> 
-                  <div class="row">
-                    <div class="col-md-12">
-                    <input type="submit" class="btn btn-default post_event" value="submit">
-                    <a href="#plan_change"><span class="plan_change">Change Your plan</span></a>
-                    </div>
-                  </div>
-                  
-                </form>
-<div class="payment">
-    <form method="post" action="{% url 'payu.views.paid_user' %}" name="payment_form">
-    {% csrf_token %}
-       <div class="row">
-            <div class="col-md-12">
-                <h5><strong>PayU Money</strong></h5>
-            </div>
+                <div class="sf-steps-navigation sf-align-right">
+                  <span id="sf-msg" class="sf-msg-error"></span>
+                  <button id="sf-prev" type="button" class="sf-button">Previous</button>
+                    <button id="sf-next" type="button" class="sf-button">Next</button>
+                </div>
+            </form>
         </div>
-        <div class="row">
-            <div class="col-md-4">
-                <div class="form-group">
-                    <select name="initial" class="prefix_required">
-                        <option selected="selected" value="Select">Select</option>
-                        <option value="mr">Mr</option>
-                        <option value="mr">Mrs</option>
-                        <option value="mr">Miss</option>
-                    </select>
-                    <label id="festtype_required" class="prefix_labelError" style="font-size:15px;color:red;display:none;">Select this field</label>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="form-group">
-                    <input id="fname_required" class="form-control fname" type="text" name="fname" placeholder="Firstname">
-                    <label for="fname_required" class="pay_labelError" style="display:none;color:red;">Please enter First name</label>
-
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="form-group">
-                    <input id="lname_required" class="form-control lname" type="text" name="lname" placeholder="Lastname"/>
-                    <label for="lname_required" class="pay_labelError" style="display:none;color:red;">Please enter Last name</label>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4">
-                <div class="form-group">
-                    <input id="mobileno_val"class="form-control mobileno" type="text" name="pnumber"  placeholder="Mobile no"/>
-                    <label for="mobileno_val" class="pay_labelError" style="display:none;color:red;">Please enter Mobile number</label>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="form-group">
-                    <input id="email_blank" class="form-control email" type="text" name="email"  placeholder="Email"/>
-                    <label for="email_blank" class="pay_labelError" style="display:none;color:red;">Please Email</label>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="form-group">
-                    <h5><strong>Amount</strong></h5>
-                    <span class="banner_price">
-                      {% for premiums in premium %}
-                        {% if premiums.purpose == 'paid' %}
-                          INR{{ premiums.premium_price|floatformat }}
-                          <input type="hidden" name="price" value="{{ premiums.premium_price|floatformat }}" >                                 
-                        {% endif %}
-                      {% endfor %}
-                    </span>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6 col-md-offset-3">
-                <button class="btn btn-default" id ="paynow" type="submit">Make payment</button>
-                <p class="margintop5">By Clicking on Make payment, you agree to all the <a href="#">Terms and Conditions</a></p>
-            </div>
-        </div> 
-    </form>
-        
-      </div>
-           </div>
-           </div>
-           </div>
-           </div>
-           </div>
-           </div>
-           </div>
-
-
-
+        <!--STEPS FORM END -------------- -->
+</div><!-- container -->
 
  {% endblock %}

@@ -3091,7 +3091,7 @@ form {
 }
 input {
   outline: 0 !important;
-  border: none !important;
+  border: none;
   width: 100% !important;
   height: inherit !important;
   color: #333333 !important;
@@ -8597,3 +8597,20 @@ select{
     -webkit-background-clip: padding-box;
     background-clip: padding-box;
 }
+.sf-select select {
+  opacity:1;
+}
+.margintop_2rem {
+  margin-top:2rem;
+}
+.eventdescription, .post_event .address {
+  height:223px !important;
+}
+.post_event .dropdown-menu {
+  width:40% !important;
+  height:auto !important;
+  font-size:20px !important;
+}
+.datepicker td, .datepicker th {
+  border-radius:20px !important;
+} 

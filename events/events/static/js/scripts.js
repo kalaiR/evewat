@@ -195,145 +195,14 @@ function find_position(path){
 
     function find_subcategory(category_id){
       $.get('/find_subcategory/', { category_id: category_id }, function(data) {
-      $('.select_subcategory').html($('<option>').text("Event Subcategory").attr('value', "select_subcategory"));
-      $(".select_subcategory").siblings('.select-clone').html($('<li>').text("Event Subcategory").attr('data-value', "select_subcategory"));
+         $('.select_subcategory').empty();
       $.each(data, function(key,value) {
         $('.select_subcategory').append($('<option>').text(value.name).attr('value', value.id));
-        $(".select_subcategory").siblings('.select-clone').append($('<li>').text(value.name).attr('data-value', value.id));
       });
       });
     }
 
-  // UOU Selects
-  // ---------------------------------------------------------
-  $.fn.uouCustomSelect = function () {
-
-    var $select = $(this);
-
-    $select.wrap('<div class="uou-custom-select"></div>');
-
-    var $container = $select.parent('.uou-custom-select');
-
-    $container.append('<ul class="select-clone"></ul>');
-
-    var $list = $container.children('.select-clone'),
-      placeholder = $select.data('placeholder') ? $select.data('placeholder') : $select.find('option:eq(0)').text();
-
-    // $('<input class="value-holder" type="text" disabled="disabled" placeholder="' + placeholder + '"><i class="fa fa-chevron-down"></i>').insertBefore($list);
-    $('<input class="value-holder" type="hidden" disabled="disabled" placeholder="' + placeholder + '"><span class="placeholder">' + placeholder + '</span><i class="fa fa-chevron-down"></i>').insertBefore($list);
-
-    var $valueHolder = $container.children('.value-holder');
-    var $valuePlaceholder = $container.children('.placeholder');
-
-    // Create clone list
-    $select.find('option').each(function () {
-      var $this = $(this);
-
-      $list.append('<li data-value="' + $this.val() + '">' + $this.text() + '</li>');
-    });
-
-    // Toggle list
-    $container.on('click', function () {
-      // console.log('click ' + $container);
-      $container.toggleClass('active');
-      $list.slideToggle(250);
-    });
-
-    // Option Select
-   $list.delegate('li','click', function () {
-      var $this = $(this);
-      var id_value = $this.attr('data-value');     
-      $valueHolder.val(id_value);
-      $valuePlaceholder.html($this.text());
-      // $(input.valueHolder).parent().next('input[type="hidden"]#subcategoryid').val(id_value);
-      $select.find('option[value="' + $this.data('value') + '"]').prop('selected', true);
-      // if ($this.parent('select-clone').siblings('select').hasClass('select_city'))
-      if ($this.parents().children().hasClass('select_city'))
-      { 
-        
-        if ($this.parent().siblings('.placeholder').text() != "Select City")
-          find_colleges($this.data('value'));
-      }
-      if ($this.parents().children().hasClass('select_college')){
-        if ($this.parent().siblings('.placeholder').text() != "Select College")
-        find_department($this.data('value'));
-      }
-      if ($this.parents().children().hasClass('select_category'))
-      {
-        if ($this.parent().siblings('.placeholder').text() != "Event Category")
-          find_subcategory($this.data('value'));
-      }
-      if ($this.parents().children().hasClass('select_state'))
-      {
-        if ($this.parent().siblings('.placeholder').text() != "State")
-          find_city($this.data('value'));
-      }
-      if ($this.parents().children().hasClass('pageurl_required'))
-      {
-        if ($this.parent().siblings('.placeholder').text() != "Select Page URL")
-          if ($this.data('value')=='/')
-          {
-            find_position('home');
-          }
-          else if($this.data('value')=='event/')
-          {
-            find_position('list');
-          }
-          else
-          {
-            find_position('details');
-          }
-      } 
-      if ($this.parents().children().hasClass('position_required'))
-      {
-        if ($this.parent().siblings('.placeholder').text() != "Select Position")
-          var page=$('#pageurl_required').val();
-          if (page=='/')
-          {
-            var path='home';
-          }
-          else if(page=='event/')
-          {
-            var path='list';
-          }
-          else
-          {
-            var path='details';
-          }
-          find_price($this.data('value'),path);
-      }  
-      if ($this.parents().children().hasClass('festtype'))
-        // alert($select.find('option[value="' + $this.data('value') + '"]'));
-        $select.find('option[value="' + $this.data('value') + '"]').attr('selected', true);  
-
-    });
-
-
-    // Hide
-    $container.on('clickoutside touchendoutside mouseoveroutside', function () {
-      if (!dragging) {
-        $container.removeClass('active');
-        $list.slideUp(250);
-      }
-    });
-
-    // Links
-    if ($select.hasClass('links')) {
-      $select.on('change', function () {
-        window.location.href = select.val();
-      });
-    }
-
-    $select.on('change', function () {
-      console.log(changed);
-      console.log($(this).val());
-    });
-  };
-
-  $('select').each(function () {
-    $(this).uouCustomSelect();
-  });
-
+  
 
   $( "#slider-range-min" ).slider({
     range: "min",
@@ -359,7 +228,10 @@ function find_position(path){
   $( "#amount-search" ).val( $( "#slider-range-search" ).slider( "value" ) +   "km");
 
 
-
+  $('.select_category').on('change' ,function(){
+    var id = $('.select_category').val();
+    find_subcategory(id);
+  });
 
   $( "#slider-range-search-day" ).slider({
     range: "min",
@@ -579,6 +451,22 @@ $( ".keywords input, .select-location input " ).focus(function() {
 
 
 $("document").ready(function($){
+
+  $(".stepsForm").stepsForm({
+      width     :'100%',
+      active      :0,
+      errormsg    :'Check faulty fields.',
+      sendbtntext   :'Create Account',
+      posturl     :'core/demo_steps_form.php',
+      theme     :'green',
+    }); 
+    
+    $(".container .themes>span").click(function(e) {
+      $(".container .themes>span").removeClass("selectedx");
+      $(this).addClass("selectedx");
+            $(".stepsForm").removeClass().addClass("stepsForm");
+      $(".stepsForm").addClass("sf-theme-"+$(this).attr("data-value"));
+        });
 
   var nav = $('.header-search-bar');
     $(window).scroll(function () {
