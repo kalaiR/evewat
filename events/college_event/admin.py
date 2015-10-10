@@ -45,6 +45,7 @@ class PosteventAdmin(admin.ModelAdmin):
 	search_fields = ['id', 'event_title']
 	list_per_page = 50
 	actions = ['send_EMAIL']
+	
 	def admin_status(self, obj):
 		return obj.admin_status 
 	admin_status.boolean = False
@@ -63,8 +64,7 @@ class PosteventAdmin(admin.ModelAdmin):
 				                       'user': i.name,
 				                    },
 				        ) 
-		else :
-			return self.message_user(request, "Mail sent successfully ")
+		
 
          	
 
@@ -79,8 +79,20 @@ class PremiumPriceInfoAdmin(admin.ModelAdmin):
 	list_filter = ['currency']
 	search_fields = ['id', 'currency']
 	list_per_page = 50
+
+class FeedbackAdmin(admin.ModelAdmin):
+	fields=['name','email','comments','rating']
+	list_display = ('name','email','comments','rating')
+	list_filter = ['name']
+	search_fields = ['id', 'name']
+	list_per_page = 50
+
+
 	
-admin.site.register(Category, CategoryAdmin)
+
+	
+# admin.site.register(Category, CategoryAdmin)
+admin.site.register(Feedback, FeedbackAdmin)
 admin.site.register(City, CityAdmin)
 admin.site.register(PremiumPriceInfo, PremiumPriceInfoAdmin)
 admin.site.register(College, CollegeAdmin)

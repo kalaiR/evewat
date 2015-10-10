@@ -40,7 +40,7 @@ $(document).ready(function() {
          // alert('category_id1'+ret);
         var options = '';       
         for (var i in ret) {
-          options += "<div class='col-md-3 col-sm-4 col-xs-6 '><div class='category-item'><img class='sub_cat_icon' src='media/" + ret[i].icon + "'><img class='sub_cat_icon_hover' src='media/" + ret[i].hover_icon + "'><a  class='event_click' href='/search/?q=&eventtype=" + ret[i].id +"'>" + ret[i].name +"</a> </div></div>";
+          options += "<div class='col-md-3 col-sm-4 col-xs-6 '><div class='category-item'><img class='sub_cat_icon' src='../media/" + ret[i].icon + "'><img class='sub_cat_icon_hover' src='../media/" + ret[i].hover_icon + "'><a  class='event_click' href='/search/?q=&eventtype=" + ret[i].id +"'>" + ret[i].name +"</a> </div></div>";
 
           }
              
@@ -51,7 +51,7 @@ $(document).ready(function() {
   $.getJSON("/all_subcategory_for_category/",function(ret) {
         var options = '';       
         for (var i in ret) {
-          options += "<div class='col-md-3 col-sm-4 col-xs-6 '><div class='category-item'><img class='sub_cat_icon' src='media/" + ret[i].icon + "'><img class='sub_cat_icon_hover' src='media/" + ret[i].hover_icon + "'><a  class='event_click' href='/search/?q=&eventtype=" + ret[i].id +"'>" + ret[i].name +"</a> </div></div>";
+          options += "<div class='col-md-3 col-sm-4 col-xs-6 '><div class='category-item'><img class='sub_cat_icon' src='../media/" + ret[i].icon + "'><img class='sub_cat_icon_hover' src='../media/" + ret[i].hover_icon + "'><a  class='event_click' href='/search/?q=&eventtype=" + ret[i].id +"'>" + ret[i].name +"</a> </div></div>";
 
           }
              
