@@ -43,8 +43,6 @@ INSTALLED_APPS = (
     'search',
     'payu',    
     'banner',
-    
-
 )
 
 SITE_ID = 1

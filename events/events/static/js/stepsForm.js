@@ -138,13 +138,14 @@
 					{
 						openActiveTab();
 						requredcontrol=false;
+
 					}
 				});
 				
 				function geriControl(sayac)
 				{
-					requredcontrol=false;
-					
+
+					requredcontrol=false;					
 					for (i=0; i<sayac; i++)
 					{
 						modul.find(".sf-steps-form>ul").eq(i).find(':input').each(function (){
@@ -213,8 +214,7 @@
 						else
 						{
 							openActiveTab();
-							requredcontrol=false;
-						
+							requredcontrol=false;							
 							modul.find("#sf-msg").text("");
 						}
 					}
