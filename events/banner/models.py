@@ -40,9 +40,10 @@ class SiteBanner( models.Model ):
             self.price=result.price
             super(SiteBanner, self).save()
         except:
-            #raise ValidationError("This Page url and postion not available.")
+            raise ValidationError("This Page url and postion not available.")
+            
             #messages.add_message('',ERROR, 'This Page url and postion not available.')
-            return HttpResponseRedirect('/admin/banner/sitebanner/add/')
+            #return HttpResponseRedirect('/admin/banner/sitebannersdfsadfaf/add/')
 
     
 class BannerPrice(models.Model):

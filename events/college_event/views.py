@@ -341,9 +341,9 @@ def subcategory_for_category(request):
 
 def details(request,id=None):
     postevent=Postevent.objects.get(pk=id)
-    print postevent.id
-    organizer=Organizer.objects.get(organizer_id=postevent.id)
-    return render_to_response("company-profile.html",{'events':postevent,'organizer':organizer}, context_instance=RequestContext(request))
+    organizer=Organizer.objects.filter(postevent__id=postevent.id)
+    print organizer
+    return render_to_response("company-profile.html",{'events':postevent,'organizer':organizer[0]}, context_instance=RequestContext(request))
 
 def banner(request):
     return render_to_response("uploadbanner.html",context_instance=RequestContext(request))

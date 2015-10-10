@@ -58,7 +58,17 @@ class PremiumPriceInfo(models.Model):
     month=models.IntegerField(null=True, blank=True)
     def __unicode__(self):
         return self.purpose
+
+class Organizer(models.Model):
 	
+	organizer_name= models.CharField(max_length=50)
+	organizer_mobile= models.BigIntegerField()
+	organizer_email=models.EmailField(max_length=50)
+
+	def __unicode__(self):
+		return self.organizer_name
+
+
 class Postevent(models.Model):
 	name= models.CharField(max_length=50, )
 	email= models.EmailField(max_length=50,)
@@ -70,6 +80,7 @@ class Postevent(models.Model):
 	eventtype= models.ForeignKey(SubCategory,null=True, blank=True)	
 	eventdescription= models.TextField()	
 	address= models.TextField()
+	organizer = models.ManyToManyField(Organizer)
 	state= models.CharField(max_length=50,)
 	city= models.CharField(max_length=50)
 	college=models.CharField(max_length=50)
@@ -81,14 +92,6 @@ class Postevent(models.Model):
 	def __unicode__(self):
 		return self.event_title
 
-class Organizer(models.Model):
-	organizer = models.OneToOneField(Postevent)
-	organizer_name= models.CharField(max_length=50)
-	organizer_mobile= models.BigIntegerField()
-	organizer_email=models.EmailField(max_length=50)
-
-	def __unicode__(self):
-		return self.organizer_name
 
 class Feedback(models.Model):
 	name= models.CharField(max_length=50, null=True)
