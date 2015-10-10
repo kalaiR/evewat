@@ -115,7 +115,6 @@
 							else
 							{
 								openActiveTab();
-								alert("test2");
 								requredcontrol=false;
 								modul.find("#sf-msg").text("");
 							}
@@ -139,14 +138,13 @@
 					{
 						openActiveTab();
 						requredcontrol=false;
-						alert("test3");
 					}
 				});
 				
 				function geriControl(sayac)
 				{
 					requredcontrol=false;
-					alert("test4");
+					
 					for (i=0; i<sayac; i++)
 					{
 						modul.find(".sf-steps-form>ul").eq(i).find(':input').each(function (){
@@ -216,7 +214,7 @@
 						{
 							openActiveTab();
 							requredcontrol=false;
-							alert("test1");
+						
 							modul.find("#sf-msg").text("");
 						}
 					}

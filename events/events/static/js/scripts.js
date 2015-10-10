@@ -534,7 +534,7 @@ $('.close').click(function(){
   });
 
   $('.login_act').on('click', function (){
-        alert('hai');
+
         $('.popup_fade:first').show();
         $('#signin_popup').show();
         

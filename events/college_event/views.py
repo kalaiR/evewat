@@ -279,7 +279,7 @@ def submit_event_v2(request):
         message="Your data succesfully submitted"
         
         user_amount=request.POST.get('plan')
-        if user_amount!='0' and request.user.is_authenticated():
+        if user_amount!='0':
             return HttpResponseRedirect('/payment_event/')
         elif user_amount=='0':
             response=render_to_response("post_event.html",{'message':message}, context_instance=RequestContext(request))

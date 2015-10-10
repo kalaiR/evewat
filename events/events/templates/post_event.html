@@ -4,27 +4,11 @@
 {% block content %}
   </header> <!-- end #header -->
 
-<script type="text/javascript" src="{% static "js/stepsForm.js" %}"></script>
 <div class="container">
   <!--STEPS FORM START  -->
         <div class="stepsForm">
         <script type="text/javascript">
-        $("document").ready(function($){
-          $(".stepsForm").stepsForm({
-              width     :'100%',
-              active      :0,
-              errormsg    :'Please fill the all fields.',
-              sendbtntext   :'submit',
-              posturl     :'/submit_event_v2',
-              theme     :'green',
-            }); 
-            
-            $(".container .themes>span").click(function(e) {
-                $(".container .themes>span").removeClass("selectedx");
-                $(this).addClass("selectedx");
-                $(".stepsForm").removeClass().addClass("stepsForm");
-                $(".stepsForm").addClass("sf-theme-"+$(this).attr("data-value"));
-            });
+  
 
             var nav = $('.header-search-bar');
               $(window).scroll(function () {
@@ -35,7 +19,7 @@
                   $( ".keywords input, .select-location input " ).blur();
                 }
             });
-        });
+      
         </script>
         {% if message%}
               <script type="text/javascript">
@@ -165,11 +149,7 @@
                         <!-- <li><i class="fa fa-check-circle-o"></i> Loren ipsum dolor sit amet</li>
                         <li><i class="fa fa-check-circle-o"></i> Loren ipsum dolor sit amet</li> -->
                       </ul>
-                    {% if user.is_authenticated %}
                       <a class="btn btn-default paid"  data-user="paiduser"><i class="fa fa-envelope-o"></i>Paid User</a> 
-                    {% else %}
-                      <a class="btn btn-default login_act"  data-user="paiduser"><i class="fa fa-envelope-o"></i>Paid User</a> 
-                    {% endif %}
                     </div></div> <!-- end grid-layout -->
                   </div>
                   <label class="plan_error col-md-12 text-center" style="display:none;color:red;">Please Choose Plan</label>
