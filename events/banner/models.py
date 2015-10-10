@@ -3,6 +3,9 @@ from datetime import timedelta
 from django.db import models
 from college_event.extra import ContentTypeRestrictedFileField
 from django import forms
+from django.core.exceptions import ValidationError
+from django.http import HttpResponseRedirect, HttpResponse
+from django.contrib import messages
 
 POSITION = (
     ('bottom', 'Bottom of the page'),
@@ -35,9 +38,11 @@ class SiteBanner( models.Model ):
         try:
             result = BannerPrice.objects.get(**filterargs)
             self.price=result.price
+            super(SiteBanner, self).save()
         except:
-            raise forms.ValidationError("This Page url and postion not available.")
-        super(SiteBanner, self).save()
+            #raise ValidationError("This Page url and postion not available.")
+            #messages.add_message('',ERROR, 'This Page url and postion not available.')
+            return HttpResponseRedirect('/admin/banner/sitebanner/add/')
 
     
 class BannerPrice(models.Model):

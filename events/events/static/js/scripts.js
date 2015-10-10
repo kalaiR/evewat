@@ -18,14 +18,17 @@
 
   // jquery ui call functionfor calendar
   //------------------------------------------------
-  $( ".startdate" ).datepicker({ format: 'dd-mm-yyyy'});
-  $( ".enddate" ).datepicker({ format: 'dd-mm-yyyy'});
+  $(function () {
+    $(  "#dpd1" ).datepicker({ format: 'dd-mm-yyyy', minDate: 0});
+    $( "#dpd2" ).datepicker({ format: 'dd-mm-yyyy', minDate: 0});
+});
   // for date picker
 
   var nowTemp = new Date();
   var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
 
   var checkin = $('#dpd1').datepicker({
+    format: 'dd-mm-yyyy',
     onRender: function(date) {
       return date.valueOf() < now.valueOf() ? 'disabled' : '';
   }
@@ -39,6 +42,7 @@
   $('#dpd2')[0].focus();
   }).data('datepicker');
 var checkout = $('#dpd2').datepicker({
+  format: 'dd-mm-yyyy',
   onRender: function(date) {
     return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
   }
@@ -1028,7 +1032,7 @@ $('.header-call-to-action input').blur(function(){
   });
 
   jQuery('.free,.events_details,.login_act,.paid').click(function(){     
-
+    alert('trest');
     if($('.eventtitle').val() == ''){
       $('.eventtitle_error').show();
       return false;
@@ -1175,24 +1179,26 @@ jQuery('.user_details').click(function(){
         image.src = oFREvent.target.result;
         image.onload = function () {
         alert(this.width);
-          if (this.width > 1200 ) {
-            alert("Exceeded Image width (1200 pixels).Please upload below 1200px width");
+
+          // if (this.width > 1200 ) {
+          //   alert("Exceeded Image width (1200 pixels).Please upload below 1200px width");
+          //   return false;
+          // }
+          if (this.width < 500 ) {
+            alert("Image width should be above 500 px");
             return false;
           }
-          else if (this.width < 1100 ) {
-            alert("Image width (1100 pixels).Please upload above 1100px width");
+          // else if (this.height > 700 ) {
+          //   alert("Exceeded height (700 pixels).Please upload below 700px height");
+          //   return false;
+          // }
+          else if (this.height < 650 ) {
+            alert("Image height should above be 500 px");
             return false;
           }
-          else if (this.height > 700 ) {
-            alert("Exceeded height (700 pixels).Please upload below 700px height");
-            return false;
-          }
-           else if (this.height < 650 ) {
-            alert("Image height is (700 pixels).Please upload above 650px height");
-            return false;
-          }
-          else if (this.size >1024*2000 ) {
-            alert("Image height is (700 pixels).Please upload above 650px height");
+          else if (this.size >1024*1000 ) {
+            // alert("Image height is (700 pixels).Please upload above 650px height");
+            alert("please upload less than 1MB");
             return false;
           }
           else{
@@ -1234,9 +1240,12 @@ $(document).on('change','.banner',function(){
     }
 });
 
+
   // user validation
 $('.post_event,#paid').click(function(){
-  
+   var mobile = $('.mobile').val();
+    var pattern = /^\d{10}$/;
+
   if($('.name').val() == ''){
       $('.name_error').show();
       return false;
@@ -1256,6 +1265,11 @@ $('.post_event,#paid').click(function(){
       $('.mobile_error').show();
       return false;
     }
+    else if(!pattern.test(mobile)){
+      alert("It is not valid mobile number.input 10 digits number!");
+      return false;
+    }
+
     else{
       $('.mobile_error').hide();
     }
