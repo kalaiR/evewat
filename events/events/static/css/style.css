@@ -8597,3 +8597,26 @@ select{
     -webkit-background-clip: padding-box;
     background-clip: padding-box;
 }
+.feedback_popup{
+  width:400px;
+  background-color: #f8f8f8;
+  border:1px solid;
+  position:absolute;
+  right:-32px;
+  z-index: 999999;
+ 
+}
+.feed{
+  margin-bottom: 10px;
+}
+.feedback1{
+  position: absolute;
+  right:-32px;
+  transform: rotate(270deg);
+  z-index:9999;
+}
+.close{
+  position: absolute;
+  right:40px;
+  top:0;
+}

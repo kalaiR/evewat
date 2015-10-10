@@ -584,6 +584,19 @@ $( ".keywords input, .select-location input " ).focus(function() {
 
 $("document").ready(function($){
 
+  $(".feedback_popup").hide();
+
+$('.feedback1').click(function(){
+  
+  $(".feedback_popup").show();
+  $('.feedback1').hide();
+});
+
+$('.close').click(function(){
+  $(".feedback_popup").hide();
+  $('.feedback1').show();
+});
+
   var nav = $('.header-search-bar');
     $(window).scroll(function () {
       if ($(this).scrollTop() > 430) {
@@ -1388,4 +1401,5 @@ $('#paid').click(function(){
 var thewidth=$('.advertisement img').width();
 var theheight=$('.advertisement img').height();
 //$('.advertisement img').css({'margin-left':-thewidth/2+'px','margin-top':-theheight/2+'px'});
+
 

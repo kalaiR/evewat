@@ -89,3 +89,11 @@ class Organizer(models.Model):
 
 	def __unicode__(self):
 		return self.organizer_name
+
+class Feedback(models.Model):
+	name= models.CharField(max_length=50, null=True)
+	email= models.EmailField(max_length=50)
+	comments= models.TextField()
+	rating=models.IntegerField()
+	
+		
