@@ -90,9 +90,6 @@ class FeedbackAdmin(admin.ModelAdmin):
 class OrganizerAdmin(admin.ModelAdmin):
 	list_display = ('organizer_name','organizer_email','organizer_email')
 
-	
-
-	
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Feedback, FeedbackAdmin)
 admin.site.register(City, CityAdmin)

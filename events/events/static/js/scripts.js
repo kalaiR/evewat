@@ -813,7 +813,7 @@ $('.events').click(function(){
         input.next('.error_message').show();         
       } else {    
         input.removeClass("error_input_field");
-        input.next().next('.error_message').hide();
+
         input.next('.error_message').hide();        
       }
     }
@@ -858,6 +858,7 @@ $('.events').click(function(){
     if($('#mobile_signup').val() != ''){
       mobile_validation('#mobile_signup');
     }
+
      if ($(":input").hasClass("error_input_field")){
     return false;
     }
@@ -896,6 +897,7 @@ $('.header-call-to-action input').blur(function(){
 
         if(id=="#mobile_signup")
           mobile_validation(id);
+
 
         if ((id=="#confirm_password_signup") && ($(id).val()!='')){
           if($(id).val()!=$('#password_signup').val()){
