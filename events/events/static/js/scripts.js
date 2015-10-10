@@ -294,26 +294,21 @@ function find_position(path){
 
     $this.children('a').on('click', function (event) {
       event.preventDefault();
-
       $this.toggleClass('active');
       setTimeout (function(){
-        $('#username_signup').focus();
-      }, 20);
-      setTimeout (function(){
-        $('#emailid_signin').focus();
-
-      }, 20);
+        $this.find('form input[type="text"]:first').focus();
+      }, 1000);
       $this.siblings().removeClass('active');
       $('#header .header-language').removeClass('active');
       $('#header .header-social').removeClass('active');
     });
 
     $this.on('clickoutside touchendoutside', function () {
-      if ($this.hasClass('active')) { $this.removeClass('active'); }
+      if ($this.hasClass('active')) { 
+        $this.removeClass('active'); 
+      }
     });
   });
-
-
 
   var $headerNavbar = $('#header .header-nav-bar .primary-nav > li');
 
