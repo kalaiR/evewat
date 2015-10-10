@@ -22,6 +22,7 @@
     $(  "#dpd1" ).datepicker({ format: 'dd-mm-yyyy', minDate: 0});
     $( "#dpd2" ).datepicker({ format: 'dd-mm-yyyy', minDate: 0});
 });
+
   // for date picker
 
   var nowTemp = new Date();
@@ -914,6 +915,7 @@ $('.events').click(function(){
         input.next('.error_message').show();         
       } else {    
         input.removeClass("error_input_field");
+        input.next().next('.error_message').hide();
         input.next('.error_message').hide();        
       }
     }
@@ -954,6 +956,10 @@ $('.events').click(function(){
       $('#emailid_signup').next().next('.error_message').hide();
     }
     }
+    //Validate the mobile
+    if($('#mobile_signup').val() != ''){
+      mobile_validation('#mobile_signup');
+    }
      if ($(":input").hasClass("error_input_field")){
     return false;
     }
@@ -971,6 +977,7 @@ $('.header-call-to-action input').blur(function(){
           $(this).next('.error_message').show();         
         } else {    
           $(this).removeClass("error_input_field");
+          $(this).next().next('.error_message').hide();
           $(this).next('.error_message').hide();        
         }
 
@@ -984,9 +991,13 @@ $('.header-call-to-action input').blur(function(){
             else
             {
               $(id).removeClass("error_input_field");
+              $(id).next('.error_message').hide();
               $(id).next().next('.error_message').hide();
             } 
         }
+
+        if(id=="#mobile_signup")
+          mobile_validation(id);
 
         if ((id=="#confirm_password_signup") && ($(id).val()!='')){
           if($(id).val()!=$('#password_signup').val()){
@@ -1324,23 +1335,50 @@ $('.post_event,#paid').click(function(){
 
 });
 
+  // $('#mobile_signup').keyup(function(){
+  //   mobile_validation($(this));
+  // });
+
   $('#password_signup').keyup(function(){
      strength_status = checkStrength($('#password_signup').val());
      // alert(strength_status);
      $('#password_signup').addClass("error_input_field"); 
-     error_message = $(this).next('.error_message').text(strength_status);
+     error_message = $(this).next().next('.error_message').text(strength_status);
      if (error_message.html() == "Too short" || error_message.html() == "Weak")
-      $(this).next('.error_message').css({"color":"#df0024"});
+      $(this).next().next('.error_message').css({"color":"#df0024"});
      else if (error_message.html() == "Fair")
-      $(this).next('.error_message').css({"color":"yellow"});
+      $(this).next().next('.error_message').css({"color":"yellow"});
      else if (error_message.html() == "Good")
-      $(this).next('.error_message').css({"color":"lightblue"});
+      $(this).next().next('.error_message').css({"color":"lightblue"});
      else if (error_message.html() == "Strong" )
-      $(this).next('.error_message').css({"color":"#7CFC00"});
+      $(this).next().next('.error_message').css({"color":"#7CFC00"});
+    $(this).next('.error_message').hide(); 
     error_message.show();
   });
 
 });
+
+      function mobile_validation(id){
+        var mob = /^[1-9]{1}[0-9]{9}$/;
+        var txtMobile =$(id).val();
+        // alert(txtMobile.length);
+        if (txtMobile == ""){
+          $(id).addClass("error_input_field"); 
+          $(id).next().next('.error_message').hide();
+          $(id).next('.error_message').show();
+        }
+        else if (mob.test(txtMobile) == false) {
+        $(id).addClass("error_input_field"); 
+        $(id).next('.error_message').hide();
+        $(id).next().next('.error_message').show();
+        // txtMobile.focus();
+        } 
+        else{
+        $(id).removeClass("error_input_field"); 
+        $(id).next('.error_message').hide();   
+        $(id).next().next('.error_message').hide();
+        }
+      }
 
      function checkStrength(password){
     //initial strength

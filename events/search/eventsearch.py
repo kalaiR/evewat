@@ -1,9 +1,9 @@
 # coding: utf-8 
 # -*- coding: utf-8 -*-
 from django.shortcuts import redirect
-from haystack.views import SearchView
+# from haystack.views import SearchView
 
-# from search.searchsites import SearchView
+from search.searchsites import SearchView
 
 from college_event.models import *
 
