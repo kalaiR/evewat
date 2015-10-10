@@ -33,23 +33,48 @@
         <div class="customNavigation">
           <a class="btn prev"><i class="fa fa-angle-left"></i></a>
           <a class="btn next"><i class="fa fa-angle-right"></i></a>
+
         </div>
 
       </div> <!-- END .slider-content -->
     </div> <!-- END .SEARCH and slide-section -->
    
-    <div class="container">
+   <!--  <div class="container">
       <div class="header-nav-bar home-slide">
         <nav class="text-center">
             <h3><span>Explore by Event categories</span></h3>
             <button><i class="fa fa-bars"></i></button>
         </nav>
-      </div> <!-- end .header-nav-bar -->
-    </div> <!-- end .container -->
+      </div>
+    </div> --> <!-- end .container -->
+
 
   </header> <!-- end #header -->
-                    
+   <a class="btn btn-default feedback1">FEEDBACK</a>                 
+   <div class="feedback_popup">
+           <form action="{%url "college_event.views.feedback" %}" id="form" method="post" name="form">{% csrf_token %}
+              <a class="close"> <i class="fa fa-times"></i></a>
 
+                   <h2 >
+                    Rate my website!
+                  </h2>
+                  <input type="text"  name="name" class="feed" placeholder=" name">
+                  <input type="email"   name="email" class="feed " placeholder="ex: myname@example.com">
+                  <select class="feed"name="rating">
+                    <option value="0">Please select your Rating </option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                  </select>
+                  <textarea placeholder="comments" name="comments" class="feed" value=""></textarea><br/>
+                   <button class="btn btn-default" type="submit" >
+              Submit
+            </button>
+      
+                  </form>
+    </div>
   <div id="page-content" class="home-slider-content">
     <div class="container">
       <div class="home-with-slide">
@@ -143,7 +168,7 @@
 <div class="featured-listing" id= "featured-list">
 <div class="our-partners">
     <div class="container">
-      <h2>Trending Banners</h2>
+      <h2>Prioritized Banners</h2>
                        
                         
       <div id="partners-slider" class="owl-carousel owl-theme">
@@ -163,7 +188,7 @@
     <div class="our-partners">
       <div class="container">
       <div class="row clearfix">
-        <h2><strong>Latest Events</strong></h2>
+        <h2><strong>Upcoming Events</strong></h2>
 
 
         {% for recentad in recentad %}
@@ -200,4 +225,8 @@
       </div>
       </div>
     <!-- END OUR PARTNER SLIDER -->
+    
+
+  
+
 {% endblock %}

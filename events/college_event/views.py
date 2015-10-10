@@ -267,7 +267,7 @@ def submit_event_v2(request):
         organizer.organizer_email=request.POST.get('organizer_email','')
         organizer.save()
         send_templated_mail(
-              template_name = 'post',
+              template_name = 'post_event',
               subject = 'Post Event',
               from_email = 'testmail123sample@gmail.com',
               recipient_list = [postevent.email],
@@ -418,6 +418,16 @@ def upload_banner(request):
         uploadbanner.banner=request.FILES.get('banner',request.COOKIES.get('banner'))
         uploadbanner.link=request.POST['link']
         uploadbanner.save()
+        send_templated_mail(
+              template_name = 'banner',
+              subject = 'Uplaod Banner',
+              from_email = 'testmail123sample@gmail.com',
+              recipient_list = [request.user.email ],
+              context={
+                       'user': request.user,
+                                           
+              },
+          )  
         response=HttpResponseRedirect("/payment/")
         response.set_cookie( 'price', uploadbanner.price )
         response.set_cookie( 'position', uploadbanner.position )
@@ -666,3 +676,12 @@ def getcity_base(request):
 
     return HttpResponse(simplejson.dumps(results), mimetype='application/json')
     
+def feedback(request):
+    if request.method=="POST":
+        feedback=Feedback()
+        feedback.name=request.POST.get('name')
+        feedback.email=request.POST.get('email')
+        feedback.comments=request.POST.get('comments')
+        feedback.rating=request.POST.get('rating')
+        feedback.save()
+        return render_to_response("index.html", context_instance=RequestContext(request))
