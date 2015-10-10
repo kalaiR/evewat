@@ -20,7 +20,7 @@ from django.template import RequestContext
 from haystack.forms import ModelSearchForm, FacetedSearchForm
 from haystack.query import EmptySearchQuerySet
 
-RESULTS_PER_PAGE = getattr(settings, 'HAYSTACK_SEARCH_RESULTS_PER_PAGE', 20)
+RESULTS_PER_PAGE = getattr(settings, 'HAYSTACK_SEARCH_RESULTS_PER_PAGE', 2)
 
 class Highlighter(object):
     css_class = 'highlighted'
@@ -312,7 +312,7 @@ class SearchView(object):
             self.form_class = ModelSearchForm
 
         if not results_per_page is None:
-            self.results_per_page = results_per_page
+            self.results_per_page = RESULTS_PER_PAGE
 
         if template:
             self.template = template

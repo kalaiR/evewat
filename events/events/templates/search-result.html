@@ -7,12 +7,12 @@
 
         <div id="home-slider" class="owl-carousel owl-theme">
         
-           {% for banners in banner|get_banner %}
-           {% if banners.pageurl == '/' and banners.position == 'top' and banners.admin_status == True %}
+          {% for banners in banner|get_main_banner %}
+           {% if banners.admin_status == True %}
           <div class="item">
          
             
-             <img src="/media/{{banners.banner}}"  alt="">
+             <img src="/media/{{banners.mainbanner}}"  alt="">
             
             <div class="slide-content">
               <!-- <a href="#"><img src="{% static "img/slider-logo.png" %}"alt=""></a>
@@ -72,7 +72,7 @@
                  <select class="city" name="city">
                       <option value="select_city" id="ajax_cityid">Select City</option>                     
                      <option  id="currentid" value="{{request.COOKIES.global_city_id}}">{{ request.COOKIES.city }}</option>
-                     {% for cities in city|get_city %}
+                     {% for cities in city %}
                           <option value="{{cities.id}}" id="ajax_cityid">{{ cities }} </option>
                       {% endfor%} 
   
@@ -209,9 +209,16 @@
                             {% endif %}
                           </li> 
                       </ul>
-
                     </div>
+                    <div class="col-md-12">
+                    {% for banners in banner|get_banner %}
+                    {% if banners.pageurl == 'event/' and banners.position == 'bottom' and banners.admin_status == True %}
+                    
+                          <img src="/media/{{banners.banner}}" >
 
+                    {% endif %}
+                    {% endfor %}
+                    </div>
                   </div> <!-- end .row -->
                 </div> <!-- end .tabe-pane -->
               </div> <!-- end .product-details-->

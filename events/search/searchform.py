@@ -35,7 +35,7 @@ class EventSearchFilter(FacetedSearchForm):
 
 	eventtype = forms.CharField(required=False)		
 	city = forms.CharField(required=False)		
-	eventtitle = forms.CharField(required=False)
+	event_title = forms.CharField(required=False)
 	payment = forms.CharField(required=False)	
 
 	def no_query_found(self):
@@ -78,7 +78,7 @@ class EventSearchFilter(FacetedSearchForm):
 	  _params = [
 		'eventtype',
 		'city',
-		'eventtitle',
+		'event_title',
 		'payment'
 	  ]
 	  params = OrderedDict()

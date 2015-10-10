@@ -7,6 +7,11 @@ from events.util import *
 register = template.Library()
 
 @register.filter
+def get_main_banner(banner):
+	banner=Mainbanner.objects.all()
+	return banner
+
+@register.filter
 def get_banner(banner):
 	banner=SiteBanner.objects.all()
 	return banner

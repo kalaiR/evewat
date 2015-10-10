@@ -8,14 +8,14 @@
 
         <div id="home-slider" class="owl-carousel">
         
-           {% for banners in banner|get_banner %}
-           {% if banners.pageurl == '/' and banners.position == 'top' and banners.admin_status == True %}
+           {% for banners in banner|get_main_banner %}
+           {% if banners.admin_status == True %}
             <div class="item">
 
             {% if 'start' in path %}  
-                <img src="../media/{{banners.banner}}"  alt="" title="{{banners.link}}">
+                <img src="../media/{{banners.mainbanner}}"  alt="">
             {% else %}
-                <img src="media/{{banners.banner}}"  alt="" title="{{banners.link}}">
+                <img src="media/{{banners.mainbanner}}"  alt="">
             {% endif %}
             
             
@@ -188,31 +188,38 @@
       </div> <!-- end .home-with-slide -->
     </div> <!-- end .container -->
   </div>  <!-- end #page-content -->
+<div class="featured-listing" id= "featured-list">
 
-
-  <div class="featured-listing" id= "featured-list">
     <div class="container">
+      <h4>Trending Banners</h4>
+                       
+                        
+      <div id="partners-slider" class="owl-carousel owl-theme">
+      {% for banners in banner|get_banner %}
+      {% if banners.pageurl == '/' and banners.position == 'bottom' %}  
+      <div class="item">  
+
+         <a href="http://{{banners.link}}">{% if 'start' in path %} <img src="../media/{{banners.banner}}"  alt=""> {% else %}<img src="media/{{banners.banner}}"  alt="">{% endif %}</a>  
+      </div>       
+      {% endif %}
+      {% endfor %}
+      </div>
+
+    </div>  <!-- end .container -->
+  </div>  <!-- end .featured-listing -->
+  
+    <div class="our-partners">
+      <div class="container">
       <div class="row clearfix">
         <h2><strong>Latest Events</strong></h2>
+
+
         {% for recentad in recentad %}
         {% if recentad.admin_status == True %}
          <div class="col-md-3 col-sm-4 col-xs-6">
           <div class="single-product">
             <figure>
               <img src="{{recentad.poster}}" alt="">
-
-              <!-- <div class="rating">
-                <ul class="list-inline">
-                  <li><a href="#"><i class="fa fa-star"></i></a></li>
-                  <li><a href="#"><i class="fa fa-star"></i></a></li>
-                  <li><a href="#"><i class="fa fa-star"></i></a></li>
-                  <li><a href="#"><i class="fa fa-star-half-o"></i></a></li>
-                  <li><a href="#"><i class="fa fa-star-o"></i></a></li>
-                </ul>
-
-                <p>Featured</p>
-
-              </div>  --><!-- end .rating -->
 
               <figcaption>
                 <div>
@@ -235,356 +242,9 @@
         {% endif %}
         {% endfor %}
 
-      
-
-       <!--  <div class="col-md-3 col-sm-4 col-xs-6">
-
-          <div class="single-product">
-            <figure>
-              <img src="{% static "img/content/mba.jpeg"%}" alt="">
-
-              <div class="rating">
-                <ul class="list-inline">
-                  <li><a href="#"><i class="fa fa-star"></i></a></li>
-                  <li><a href="#"><i class="fa fa-star"></i></a></li>
-                  <li><a href="#"><i class="fa fa-star"></i></a></li>
-                  <li><a href="#"><i class="fa fa-star-half-o"></i></a></li>
-                  <li><a href="#"><i class="fa fa-star-o"></i></a></li>
-                </ul>
-
-                <p>Featured</p>
-
-              </div>  --><!-- end .rating -->
-
-             <!--  <figcaption>
-                <div class="bookmark">
-                  <a href="#"><i class="fa fa-bookmark-o"></i> Bookmark</a>
-                </div>
-                <div class="read-more">
-                  <a href="#"><i class="fa fa-angle-right"></i> Read More</a>
-                </div>
-
-              </figcaption>
-            </figure>
-            <h4><a href="#">Old Bookman's</a></h4>
-
-            <h5><a href="#">Category</a>, <a href="#">Another Category</a></h5>
-
-          </div> --> <!-- end .single-product -->
-
-     <!--    </div> -->
-
-       <!--  <div class="col-md-3 col-sm-4 col-xs-6">
-
-          <div class="single-product">
-            <figure>
-              <img src="{% static "img/content/flight.jpeg" %}" alt="">
-
-              <div class="rating">
-                <ul class="list-inline">
-                  <li><a href="#"><i class="fa fa-star"></i></a></li>
-                  <li><a href="#"><i class="fa fa-star"></i></a></li>
-                  <li><a href="#"><i class="fa fa-star"></i></a></li>
-                  <li><a href="#"><i class="fa fa-star-half-o"></i></a></li>
-                  <li><a href="#"><i class="fa fa-star-o"></i></a></li>
-                </ul>
-
-                <p>Featured</p>
-
-              </div> --> <!-- end .rating -->
-
-            <!--   <figcaption>
-                <div class="bookmark">
-                  <a href="#"><i class="fa fa-bookmark-o"></i> Bookmark</a>
-                </div>
-                <div class="read-more">
-                  <a href="#"><i class="fa fa-angle-right"></i> Read More</a>
-                </div>
-
-              </figcaption>
-            </figure>
-            <h4><a href="#">Old Bookman's</a></h4>
-
-            <h5><a href="#">Category</a>, <a href="#">Another Category</a></h5>
-
-          </div> --> <!-- end .single-product -->
-
-       <!--  </div>
-
-        <div class="col-md-3 col-sm-4 col-xs-6">
-
-          <div class="single-product">
-            <figure>
-              <img src="{% static "img/content/grad.jpeg"%}" alt="">
-
-              <div class="rating">
-                <ul class="list-inline">
-                  <li><a href="#"><i class="fa fa-star"></i></a></li>
-                  <li><a href="#"><i class="fa fa-star"></i></a></li>
-                  <li><a href="#"><i class="fa fa-star"></i></a></li>
-                  <li><a href="#"><i class="fa fa-star-half-o"></i></a></li>
-                  <li><a href="#"><i class="fa fa-star-o"></i></a></li>
-                </ul>
-
-                <p>Featured</p>
-
-              </div> --> <!-- end .rating -->
-
-            <!--   <figcaption>
-                <div class="bookmark">
-                  <a href="#"><i class="fa fa-bookmark-o"></i> Bookmark</a>
-                </div>
-                <div class="read-more">
-                  <a href="#"><i class="fa fa-angle-right"></i> Read More</a>
-                </div>
-
-              </figcaption>
-            </figure>
-            <h4><a href="#">Old Bookman's</a></h4>
-
-            <h5><a href="#">Category</a>, <a href="#">Another Category</a></h5>
-
-          </div>  --><!-- end .single-product -->
-
-        </div><!--end photo-->
-        
 
       </div>  <!-- end .row -->
-
-      <!-- <div class="discover-more">
-
-        <a class="btn btn-default text-center" href="#"><i class="fa fa-plus-square-o"></i>Discover More</a>
-      </div> -->
-    </div>  <!-- end .container -->
-  </div>  <!-- end .featured-listing -->
-
-
-  <!-- <div class="classifieds-content">
-    <div class="container">
-      <div class="heading-section clearfix">
-        <h1>Classifieds</h1>
-
-        <a href="#" class="btn btn-default"><i class="fa fa-plus"></i> Post Your Ad</a>
-
-        <form action="#">
-          <input type="text" placeholder="Search by keywords">
-
-          <button type="submit"><i class="fa fa-search"></i></button>
-        </form>
-      </div> 
-      
-      <div class="row">
-        <div class="col-md-3 col-sm-6">
-          <ul class="classifieds-category">
-            <li><a href="#"><i class="fa fa-bullhorn"></i>Advartising <span>(1786)</span></a>
-
-              <ul class="sub-category">
-                <li><a href="#">Antiques <span>(43)</span></a></li>
-                <li><a href="#">Books <span>(31)</span></a></li>
-                <li><a href="#">Cars &amp; Motorcycles <span>(49)</span></a></li>
-                <li><a href="#">Computer &amp; Tablets <span>(111)</span></a></li>
-                <li><a href="#">Creative &amp; Digitals <span>(67)</span></a></li>
-                <li><a href="#">Fashion <span>(45)</span></a></li>
-                <li><a href="#">Fitness &amp; Sport <span>(78)</span></a></li>
-              </ul>
-
-            </li>
-
-            <li><a href="#"><i class="fa fa-home"></i>Home &amp; Garden <span>(754)</span></a>
-
-              <ul class="sub-category">
-                <li><a href="#">Antiques <span>(43)</span></a></li>
-                <li><a href="#">Books <span>(31)</span></a></li>
-                <li><a href="#">Cars &amp; Motorcycles <span>(49)</span></a></li>
-                <li><a href="#">Computer &amp; Tablets <span>(111)</span></a></li>
-                <li><a href="#">Creative &amp; Digitals <span>(67)</span></a></li>
-              </ul>
-
-            </li>
-          </ul> 
-
-        </div> 
-        <div class="col-md-3 col-sm-6">
-          <ul class="classifieds-category">
-            <li><a href="#"><i class="fa fa-shopping-cart"></i>E-commerce <span>(1987)</span></a>
-
-              <ul class="sub-category">
-                <li><a href="#">Antiques <span>(43)</span></a></li>
-                <li><a href="#">Books <span>(31)</span></a></li>
-                <li><a href="#">Cars &amp; Motorcycles <span>(49)</span></a></li>
-                <li><a href="#">Computer &amp; Tablets <span>(111)</span></a></li>
-                <li><a href="#">Creative &amp; Digitals <span>(67)</span></a></li>
-                <li><a href="#">Fashion <span>(45)</span></a></li>
-                <li><a href="#">Fitness &amp; Sport <span>(78)</span></a></li>
-                <li><a href="#">Furnishing <span>(13)</span></a></li>
-                <li><a href="#">Health &amp; Beauty <span>(99)</span></a></li>
-              </ul>
-
-            </li>
-
-            <li><a href="#"><i class="fa fa-cogs"></i>Industry <span>(1405)</span></a>
-
-              <ul class="sub-category">
-                <li><a href="#">Antiques <span>(43)</span></a></li>
-                <li><a href="#">Books <span>(31)</span></a></li>
-                <li><a href="#">Cars &amp; Motorcycles <span>(49)</span></a></li>
-                <li><a href="#">Computer &amp; Tablets <span>(111)</span></a></li>
-                <li><a href="#">Creative &amp; Digitals <span>(67)</span></a></li>
-                <li><a href="#">Fashion <span>(45)</span></a></li>
-                <li><a href="#">Fitness &amp; Sport <span>(78)</span></a></li>
-                <li><a href="#">Furnishing <span>(13)</span></a></li>
-              </ul>
-
-            </li>
-          </ul>
-          
-        </div> 
-
-        <div class="col-md-3 col-sm-6">
-          <ul class="classifieds-category">
-            <li><a href="#"><i class="fa fa-graduation-cap"></i>Education <span>(996)</span></a>
-
-              <ul class="sub-category">
-                <li><a href="#">Antiques <span>(43)</span></a></li>
-                <li><a href="#">Books <span>(31)</span></a></li>
-                <li><a href="#">Cars &amp; Motorcycles <span>(49)</span></a></li>
-                <li><a href="#">Computer &amp; Tablets <span>(111)</span></a></li>
-                <li><a href="#">Creative &amp; Digitals <span>(67)</span></a></li>
-                <li><a href="#">Fashion <span>(45)</span></a></li>
-              </ul>
-
-            </li>
-
-            <li><a href="#"><i class="fa fa-book"></i>Libraries &amp; Public <span>(1256)</span></a>
-
-              <ul class="sub-category">
-                <li><a href="#">Antiques <span>(43)</span></a></li>
-                <li><a href="#">Books <span>(31)</span></a></li>
-                <li><a href="#">Cars &amp; Motorcycles <span>(49)</span></a></li>
-                <li><a href="#">Computer &amp; Tablets <span>(111)</span></a></li>
-                <li><a href="#">Creative &amp; Digitals <span>(67)</span></a></li>
-                <li><a href="#">Fashion <span>(45)</span></a></li>
-                <li><a href="#">Fitness &amp; Sport <span>(78)</span></a></li>
-                <li><a href="#">Furnishing <span>(13)</span></a></li>
-              </ul>
-
-            </li>
-          </ul>
-          END .CLASSIFIES-CATEGORY
-        </div> 
-
-        <div class="col-md-3 col-sm-6">
-          <ul class="classifieds-category">
-            <li><a href="#"><i class="fa fa-paper-plane-o"></i>Entertainment <span>(2726)</span></a>
-
-              <ul class="sub-category">
-                <li><a href="#">Antiques <span>(43)</span></a></li>
-                <li><a href="#">Books <span>(31)</span></a></li>
-                <li><a href="#">Cars &amp; Motorcycles <span>(49)</span></a></li>
-                <li><a href="#">Computer &amp; Tablets <span>(111)</span></a></li>
-                <li><a href="#">Creative &amp; Digitals <span>(67)</span></a></li>
-              </ul>
-
-            </li>
-
-            <li><a href="#"><i class="fa fa-building-o"></i>Real Estate <span>(1131)</span></a>
-
-              <ul class="sub-category">
-                <li><a href="#">Antiques <span>(43)</span></a></li>
-                <li><a href="#">Books <span>(31)</span></a></li>
-                <li><a href="#">Cars &amp; Motorcycles <span>(49)</span></a></li>
-                <li><a href="#">Computer &amp; Tablets <span>(111)</span></a></li>
-                <li><a href="#">Creative &amp; Digitals <span>(67)</span></a></li>
-                <li><a href="#">Fitness &amp; Sport <span>(78)</span></a></li>
-                <li><a href="#">Furnishing <span>(13)</span></a></li>
-                <li><a href="#">Health &amp; Beauty <span>(99)</span></a></li>
-              </ul>
-
-            </li>
-          </ul>
-         
-        </div> 
-      </div> 
-    </div> 
- -->
-
-  <!-- <div class="register-content">
-    <div class="reg-heading">
-      <h1><strong>Register</strong> now</h1>
-    </div>
- -->
-    <!-- <div class="registration-details">
-      <div class="container">
-        <div class="box regular-member">
-          <h2><strong>Regular</strong> Member</h2>
-
-          <p><i class="fa fa-check-circle-o"></i> Loren ipsum dolor sit amet</p>
-          <p><i class="fa fa-check-circle-o"></i> Loren ipsum dolor sit amet</p>
-          <p><i class="fa fa-check-circle-o"></i> Loren ipsum dolor sit amet</p>
-
-          <a href="#" class="btn btn-default-inverse"><i class="fa fa-plus"></i> Register Now</a>
-        </div>
-
-        <div class="alternate">
-          <h2>OR</h2>
-        </div>
-
-        <div class="box business-member">
-          <h2><strong>Business</strong> Member</h2>
-
-          <p><i class="fa fa-check-circle-o"></i> Loren ipsum dolor sit amet</p>
-          <p><i class="fa fa-check-circle-o"></i> Loren ipsum dolor sit amet</p>
-          <p><i class="fa fa-check-circle-o"></i> Loren ipsum dolor sit amet</p>
-
-          <a href="#" class="btn btn-default-inverse"><i class="fa fa-plus"></i> Register Now</a>
-        </div>
-
-      </div>
-      
-    </div>
-   
-  </div> -->
-  
-    <div class="our-partners">
-      <div class="container">
-        <h4>Trending Banners</h4>
-       
-        <!-- <div class="slider">
-          <ul class="bxslider">
-            {% for banners in banner|get_banner %}
-               {% if banners.pageurl == '/' and banners.position == 'bottom' %}
-                  <li> <img src="media/{{banners.banner}}"  alt=""> </li>
-                {% endif %}
-            {% endfor %}
-            
-          </ul>
-        </div> -->
-      
-        <!-- <div id="partners-slider" class="owl-carousel owl-theme">
-       
-          <div class="item"><a href="{{banners.0}}"><img src="static/banners/banner1.jpeg" alt=""></a></div>
-          <div class="item"><a href="{{banners.0}}"><img src="static/banners/banner2.jpeg"alt=""></a></div>
-          <div class="item"><a href="{{banners.0}}"><img src="static/banners/banner3.jpeg"alt=""></a></div>
-          <div class="item"><a href="{{banners.0}}"><img src="static/banners/banner4.jpeg"alt=""></a></div>
-          <div class="item"><a href="{{banners.0}}"><img src="static/banners/banner5.jpeg"alt=""></a></div>
-          <div class="item"><a href="{{banners.0}}"><img src="static/banners/banner6.png"alt=""></a></div>
-         <div class="item"><a href="{{banners.0}}"><img src="static/banners/banner1.jpeg" alt=""></a></div>
-          <div class="item"><a href="{{banners.0}}"><img src="static/banners/banner2.jpeg"alt=""></a></div>
-          <div class="item"><a href="{{banners.0}}"><img src="static/banners/banner3.jpeg"alt=""></a></div>
-          <div class="item"><a href="{{banners.0}}"><img src="static/banners/banner4.jpeg"alt=""></a></div>
-          <div class="item"><a href="{{banners.0}}"><img src="static/banners/banner5.jpeg"alt=""></a></div>
-          <div class="item"><a href="{{banners.0}}"><img src="static/banners/banner6.png"alt=""></a></div>
-        </div> -->
-        <div id="partners-slider" class="owl-carousel owl-theme">
-        {% for banners in banner|get_banner %}
-        {% if banners.pageurl == '/' and banners.position == 'bottom' %}  
-        <div class="item">  
-
-           <a href="http://{{banners.link}}">{% if 'start' in path %} <img src="../media/{{banners.banner}}"  alt=""> {% else %}<img src="media/{{banners.banner}}"  alt="">{% endif %}</a>  
-        </div>       
-        {% endif %}
-        {% endfor %}
-         </div>
+                        
       </div>
       </div>
     <!-- END OUR PARTNER SLIDER -->
