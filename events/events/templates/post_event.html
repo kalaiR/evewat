@@ -3,28 +3,7 @@
 {% load static from staticfiles %} 
 {% block content %}
 
-      
-      <div class="page-heading contact-us-heading">
-        <span></span> <!-- for dark-overlay on the bg -->
 
-        <div class="container">
-          <h1>Post <span>Event</span></h1>
-
-          <div class="heading-link">
-            <a href="/">Home</a>
-
-            <i>/</i>
-
-            <a href="/post_event">Post Event</a>
-          </div>
-
-        </div> <!-- END .container-->
-      </div> <!-- END .about-us-heading -->
-
-
-
-
-    
   </header> <!-- end #header -->
 
 
@@ -35,13 +14,13 @@
                 <div class="sf-steps">
                     <div class="sf-steps-content">
                       <div>
-                          <span>1</span> Profile
+                          <span>1</span> Event details
                         </div>
                         <div>
-                          <span>2</span> Account
+                          <span>2</span> Event location
                         </div>
                         <div>
-                          <span>3</span> Extras
+                          <span>3</span> User details
                         </div>
 
                     </div>
@@ -103,6 +82,69 @@
                                 <input  type="text" placeholder="Enddate"  id="dpd2" name="enddate" class="enddate" value="{% if request.COOKIES.enddate %}{{request.COOKIES.enddate}}{% else %}{% endif %}"   autocomplete="off" />
                             </div>
                          </li>
+
+                         <li>
+                            <div class="sf_columns column_6 price-listing">
+                                <div class="row plan_table_act " id="plan_change" style="{% if request.COOKIES.plan %} display:none;{% else %}{%endif%}">
+
+                  
+                    <div class="col-md-6 col-sm-6 col-lg-6">
+                      <div class="pricing-table">
+                        <h3><strong>Free</strong> User</h3>
+                        <div class="price">
+                          <span class="free">
+                            {% for premiums in premium %}
+                              {% if premiums.purpose == "free" %}
+                                INR {{ premiums.premium_price|floatformat }}
+                                <input type="hidden" name="free" value="{{ premiums.premium_price|floatformat }}">
+                              {% endif %}
+                            {% endfor %}
+                          </span>
+                        </div>
+                      
+                      <ul class="feature">
+                        <li><i class="fa fa-check-circle-o"></i> post 10 adds free</li>
+                        <li><i class="fa fa-check-circle-o"></i> adds dispaly in 1 month</li>
+                        <li><i class="fa fa-check-circle-o"></i> Free poster display after the paid poster</li>
+                        <li><i class="fa fa-check-circle-o"></i> Sending SMS and mail</li>
+                   
+                      </ul>
+                      <!-- <input type="submit" class="btn btn-default post_event" data-user="freeuser" value="Free User"> -->
+                      <a class="btn btn-default free" href="#" data-user="freeuser"><i class="fa fa-envelope-o"></i>Free User</a>
+                    </div> </div><!-- end grid-layout -->
+                    <div class="col-md-6 col-sm-6 col-lg-6">
+                      <div class="pricing-table">
+                        <h3><strong>Paid</strong> User</h3>
+                        <div class="price">
+                          <span class="paid">
+                            {% for premiums in premium %}
+                              {% if premiums.purpose == 'paid' %}
+                                INR {{ premiums.premium_price|floatformat }}
+                                <input type="hidden" name="paid" value="{{ premiums.premium_price|floatformat }}" >
+                              {% endif %}
+                            {% endfor %}    
+                          </span>
+                        </div>
+                      
+                      <ul class="feature">
+                        <li><i class="fa fa-check-circle-o"></i> Display for 1 month</li>
+                        <li><i class="fa fa-check-circle-o"></i> Notifications are send by mail and Sms</li>
+                        <li><i class="fa fa-check-circle-o"></i> Display the poster in which page you want</li>
+                        <!-- <li><i class="fa fa-check-circle-o"></i> Loren ipsum dolor sit amet</li>
+                        <li><i class="fa fa-check-circle-o"></i> Loren ipsum dolor sit amet</li> -->
+                      </ul>
+                    {% if user.is_authenticated %}
+                      <a class="btn btn-default paid"  data-user="paiduser"><i class="fa fa-envelope-o"></i>Paid User</a> 
+                    {% else %}
+                      <a class="btn btn-default login_act"  data-user="paiduser"><i class="fa fa-envelope-o"></i>Paid User</a> 
+                    {% endif %}
+                    </div></div> <!-- end grid-layout -->
+                  </div>
+                  <label class="plan_error col-md-12 text-center" style="display:none;color:red;">Please Choose Plan</label>
+                </div>
+                
+
+                         </li>
                          
                          
                     </ul>
@@ -113,7 +155,7 @@
                                 <textarea placeholder="Address" name="address" class="address" value=""></textarea>
                             </div>
                             <div class="sf_columns column_3">
-                                <input type="text" placeholder="Organizer name" name="organizer_name" id="organizer_name" class="organizer_name margintop_2rem" value="">
+                                <input type="text" placeholder="Organizer name" name="organizer_name" id="organizer_name" class="organizer_name" value="">
                                 
                                 <input type="text" placeholder="Organizer E-mail" name="organizer_email" id="organizer_email" class="organizer_name margintop_2rem" value="">
                                 
