@@ -1,7 +1,7 @@
 (function($) {
 
   "use strict";
-
+  $.cookie.raw = true;
   var $body = $('body');
   // var $head = $('head');
   // var $mainWrapper = $('#main-wrapper');
@@ -19,8 +19,8 @@
 
   // jquery ui call functionfor calendar
   //------------------------------------------------
-  $( "#datepicker" ).datepicker({ minDate: 0});
-  $( "#datepicker1" ).datepicker({ minDate: 0});
+  $( "#datepicker" ).datepicker({ minDate: 0,dateFormat: 'dd-mm-yy'});
+  $( "#datepicker1" ).datepicker({ minDate: 0,dateFormat: 'dd-mm-yy'});
 
   // Touch
   // ---------------------------------------------------------
@@ -83,6 +83,7 @@
 
 
 
+
   //home slide tab-content hide
   //---------------------------------------
   $('.home-tab li > a').on('click', function(){
@@ -109,28 +110,7 @@
   });
 
 
-  // home slider section
-  //-------------------------------------------
-  var homeSlide = $("#home-slider");
 
-  homeSlide.owlCarousel({
-    autoPlay: 3000,
-    items : 1,
-    navigation : false, // Show next and prev buttons
-    slideSpeed : 600,
-    paginationSpeed : 600,
-    singleItem:true
-
-  });
-
-
-  // Custom Navigation Events
-    $(".next").click(function(){
-      homeSlide.trigger('owl.next');
-    });
-    $(".prev").click(function(){
-      homeSlide.trigger('owl.prev');
-    });
 
     function find_position(path){
       $.get('/find_position/', { path: path }, function(data) {
@@ -157,7 +137,7 @@
 
     function find_city(state){
       $.get('/find_city/', { state: state }, function(data) {
-      $('.select_city').html($('<option>').text("Select City").attr('value', "select_city"));
+      $('.select_city').html($('<option>').text("Select City"));
       $(".select_city").siblings('.select-clone').html($('<li>').text("Select City").attr('data-value', "select_city"));
       $.each(data, function(key,value) {
         $('.select_city').append($('<option>').text(value.name).attr('value', value.id));
@@ -169,7 +149,7 @@
 
    function find_colleges(city_id){
       $.get('/find_colleges/', { city_id: city_id }, function(data) {
-      $('.select_college').html($('<option>').text("Select College").attr('value', "select_college"));
+      $('.select_college').html($('<option>').text("Select College"));
       $(".select_college").siblings('.select-clone').html($('<li>').text("Select College").attr('data-value', "select_college"));
       $.each(data, function(key,value) {
         $('.select_college').append($('<option>').text(value.name).attr('value', value.id));
@@ -181,7 +161,7 @@
 
    function find_department(college_id){
       $.get('/find_department/', { college_id: college_id }, function(data) {
-      $('.select_dept').html($('<option>').text("Select Department").attr('value', "select_department"));
+      $('.select_dept').html($('<option>').text("Select Department"));
       $(".select_dept").siblings('.select-clone').html($('<li>').text("Select Department").attr('data-value', "select_department"));
       $.each(data, function(key,value) {
         $('.select_dept').append($('<option>').text(value.name).attr('value', value.name));
@@ -218,7 +198,6 @@
 
     // $('<input class="value-holder" type="text" disabled="disabled" placeholder="' + placeholder + '"><i class="fa fa-chevron-down"></i>').insertBefore($list);
     $('<input class="value-holder" type="hidden" disabled="disabled" placeholder="' + placeholder + '"><span class="placeholder">' + placeholder + '</span><i class="fa fa-chevron-down"></i>').insertBefore($list);
-    $('<input class="value-holder" type="text" placeholder="' + placeholder + '" name="'+placeholder+'"> value=""');
 
     var $valueHolder = $container.children('.value-holder');
     var $valuePlaceholder = $container.children('.placeholder');
@@ -384,24 +363,21 @@
 
 
   // company map initialization
-
-  // $("#company_map_canvas").goMap({
-
+  
+  // $("#company_map_canvas").goMap(
+    
+  
+  // {
   //   maptype: 'ROADMAP',
   //   zoom: 15,
   //   scrollwheel: false,
-  //   address: '26-98 U.S. 101, San Francisco, CA 94103, USA',
+  //   address: address1,
   //   markers: [{
-  //       latitude: 37.7762546,
-  //       longitude: -122.43277669999998,
-  //       icon: 'img/content/map-marker-company.png',
+  //       latitude:latitude1,
+  //       longitude:longitude1,
+  //       icon: '{{ STATIC_URL|escapejs}}/img/map-marker-company.png',
   //       html: 'Globo'
-  //     },{
-  //       latitude: 37.77013804160774,
-  //       longitude: -122.40819811820984,
-  //       icon: 'img/content/map-marker-company.png',
-  //       html: 'Globo'
-  //   }]
+  //     }]
   // });
 
   // company-map-street
@@ -433,35 +409,35 @@
 
 
 
-  $('a[data-toggle="tab"]').on('shown.bs.tab', function (event) {
-    if(event.target.outerText == 'CONTACT'){
-      $("#contact_map_canvas_one").goMap({
-        maptype: 'ROADMAP',
-        zoom: 13,
-        scrollwheel: false,
+  // $('a[data-toggle="tab"]').on('shown.bs.tab', function (event) {
+  //   if(event.target.outerText == 'CONTACT'){
+  //     $("#contact_map_canvas_one").goMap({
+  //       maptype: 'ROADMAP',
+  //       zoom: 13,
+  //       scrollwheel: false,
 
-        markers: [{
-          latitude: 37.792218928191865,
-          longitude: -122.43700504302979,
-          icon: 'img/content/map-marker-company.png'
-        }]
-      });
+  //       markers: [{
+  //         latitude: 37.792218928191865,
+  //         longitude: -122.43700504302979,
+  //         icon: 'img/content/map-marker-company.png'
+  //       }]
+  //     });
 
 
-      $("#contact_map_canvas_two").goMap({
+  //     $("#contact_map_canvas_two").goMap({
 
-        maptype: 'ROADMAP',
-        zoom: 13,
-        scrollwheel: false,
+  //       maptype: 'ROADMAP',
+  //       zoom: 13,
+  //       scrollwheel: false,
 
-        markers: [{
-          latitude: 37.77125750792944,
-          longitude: -122.4085521697998,
-          icon: 'img/content/map-marker-company.png'
-        }]
-      });
-    }
-  });
+  //       markers: [{
+  //         latitude: 37.77125750792944,
+  //         longitude: -122.4085521697998,
+  //         icon: 'img/content/map-marker-company.png'
+  //       }]
+  //     });
+  //   }
+  // });
   
 
 
@@ -697,6 +673,9 @@
 $("document").ready(function($){
   var nav = $('.header-search-bar');
 
+
+
+
   $(window).scroll(function () {
     if ($(this).scrollTop() > 60) {
         nav.addClass("sticky");
@@ -711,16 +690,222 @@ $("document").ready(function($){
 });
 
 
-
-$("document").ready(function($){
-  // $('.addpost_tipsy').tipsy({gravity: 'e'});
-  // $('.addbanner_tipsy').tipsy({gravity: 'e'});
-  $('.addpost_tipsy,.addbanner_tipsy').click(function(){
-    alert('Please Login or Register');
+  jQuery.fn.center = function () {
+    this.css("top", ( jQuery(window).height() - this.height() ) / 2+jQuery(window).scrollTop()+100 + "px");
+    return this;
+  }
+  
+  $(window).scroll(function (){
+    $(".popup_pos").center();
+        
   });
 
+
+  $("document").ready(function($){
+
+
+
+  var body_win_height = parseInt(document.body.clientHeight) ;
+  var win_height = parseInt(document.documentElement.clientHeight) ;
+  if( body_win_height > win_height) {
+      $('.popup_fade').height(body_win_height);
+  } else {
+      $('.popup_fade').height(win_height);
+  }
+  
+  $(".popup_pos").center();
+
+  $('.popup_cancel_btn').on('click',function() {
+    $('.pop_up').hide();
+    $('.popup_fade').hide();
+  });
+
+  $('.cancel_btn, .close_btn').on('click', function (){
+    $.removeCookie('plan',{ path: '/' });
+    $('.deposit_popup, .popup_fade, .forgotpassword_popup, .terms_services_popup, #signin_popup, #joinus_popup_content, #signin_popup1, #email_activate, #login_window, #login_window1, .lead_details_popup, #directbuy_signin_popup, #auction_popup, #ask_question_popup, #thank_you_popup').hide();
+    $('#plan_change').show();
+    $('input[name="plan"]').val() == '';
+  });
+
+  $('.login_act').on('click', function (){
+        $('.popup_fade:first').show();
+        $('#signin_popup').show();
+        
+  });
+
+
+  // $('.addpost_tipsy').tipsy({gravity: 'e'});
+  // $('.addbanner_tipsy').tipsy({gravity: 'e'});
+
+  // home slider section
+  //-------------------------------------------
+  var homeSlide = $("#home-slider");
+
+  homeSlide.owlCarousel({
+    
+    items : 1,
+    loop:true,
+    autoPlay: true,
+    navigation : false, // Show next and prev buttons
+    slideSpeed : 600,
+    paginationSpeed : 600,
+    singleItem:true
+
+
+  });
+
+
+  // Custom Navigation Events
+    $(".next").click(function(){
+      homeSlide.trigger('owl.next');
+    });
+    $(".prev").click(function(){
+      homeSlide.trigger('owl.prev');
+    });
+
+
+
+  $(function() {    
+    $("#fitltercitytxt" ).autocomplete({
+    open: function(){
+        setTimeout(function () {
+            $('.ui-autocomplete').css('z-index', 9999);
+        }, 0);
+    },
+
+    source: function (request, response) {
+
+        $.getJSON("/getcity_base?term=" + request.term, function (data) {             
+            response($.map(data, function (value, key) {                            
+                return {
+                    label: value.label,
+                    value: value.value,
+                    extra: value.cityid
+                };
+            }));
+        });
+    },
+    select : function(event, ui) {
+            $('#fitltercity').val(ui.item.extra);                
+    },
+    minLength: 2,
+    delay: 100
+    });
+  });
+
+  $(function() {    
+    $("#state" ).autocomplete({
+    open: function(){
+        setTimeout(function () {
+            $('.ui-autocomplete').css('z-index', 9999);
+        }, 0);
+    },
+
+    source: function (request, response) {
+        $.getJSON("/getstate?term=" + request.term, function (data) {             
+            response($.map(data, function (value, key) {                            
+                return {
+                    label: value.label,
+                    value: value.value,
+                    extra: value.cityid
+                };
+            }));
+        });
+    },
+    select : function(event, ui) {
+            $('#statetxt').val(ui.item.value);                
+    },
+    minLength: 2,
+    delay: 100
+    });
+  });
+  $(function() {    
+    $("#city" ).autocomplete({
+    open: function(){
+        setTimeout(function () {
+            $('.ui-autocomplete').css('z-index', 9999);
+        }, 0);
+    },
+
+    source: function (request, response) {
+         var state=$('#statetxt').val();
+        $.getJSON("/getcity?term=" + request.term+"&state="+state, function (data) {             
+            response($.map(data, function (value, key) {                            
+                return {
+                    label: value.label,
+                    value: value.value,
+                    extra: value.cityid
+                };
+            }));
+        });
+    },
+    select : function(event, ui) {
+            $('#citytxt').val(ui.item.extra);                
+    },
+    minLength: 2,
+    delay: 100
+    });
+  });
+
+  $(function() {    
+    $("#college" ).autocomplete({
+    open: function(){
+        setTimeout(function () {
+            $('.ui-autocomplete').css('z-index', 9999);
+        }, 0);
+    },
+
+    source: function (request, response) {
+        var city=$('#citytxt').val();
+        $.getJSON("/getcollege?term=" + request.term+"&city="+city, function (data) {             
+            response($.map(data, function (value, key) {                            
+                return {
+                    label: value.label,
+                    value: value.value,
+                    extra: value.collegeid
+                };
+            }));
+        });
+    },
+    select : function(event, ui) {
+            $('#collegetxt').val(ui.item.extra);                
+    },
+    minLength: 2,
+    delay: 100
+    });
+  });
+
+  $(function() {    
+    $("#dept" ).autocomplete({
+    open: function(){
+        setTimeout(function () {
+            $('.ui-autocomplete').css('z-index', 9999);
+        }, 0);
+    },
+
+    source: function (request, response) {
+        var college=$('#collegetxt').val();
+        $.getJSON("/getdept?term=" + request.term+"&college="+college, function (data) {             
+            response($.map(data, function (value, key) {                            
+                return {
+                    label: value.label,
+                    value: value.value,
+                    extra: value.cityid
+                };
+            }));
+        });
+    },
+    select : function(event, ui) {
+            $('#depttxt').val(ui.item.value);                
+    },
+    minLength: 2,
+    delay: 100
+    });
+  });
+
+
   $('.select-location,.category-search').click(function(){
-    $('.base_search').focus();
+    //$('.base_search').focus();
   });
 
 
@@ -746,7 +931,6 @@ $("document").ready(function($){
   }
   });
 
-$('.events_fields').hide();
 $('.eventdetail_fields').hide();
 $('.user_fields').hide();
 
@@ -754,16 +938,16 @@ $('.events').click(function(){
   $('.events_fields').toggle();
 });
 
-$('.events_details').click(function(){
-  $('.eventdetail_fields').toggle();
-  $('.events_fields').hide();
-});
+// $('.events_details').click(function(){
+//   $('.eventdetail_fields').toggle();
+//   $('.events_fields').hide();
+// });
 
-$('.user_details').click(function(){
-  $('.user_fields').toggle();
-  $('.eventdetail_fields').hide();
-  $('.events_fields').hide();
-});
+// $('.user_details').click(function(){
+//   $('.user_fields').toggle();
+//   $('.eventdetail_fields').hide();
+//   $('.events_fields').hide();
+// });
 
 
     $( "#datepicker" ).datepicker({
@@ -788,18 +972,7 @@ $('.user_details').click(function(){
 });          
  // validation by pradeepa//
 
-  // Image upload
-  $(document).on('change','.poster',function(){
-      files = this.files;
-      size = files[0].size;
-      //max size 50kb => 50*1000
-      if( size > 1000*1000){
-       alert('Please upload less than 50kb file');
-       return false;
-      }
-      return true;
-   });
-
+  
   //login form validation
 
   var sign_in_required =["emailid_signup", "password_signup"];
@@ -903,80 +1076,221 @@ $('.user_details').click(function(){
   //postevent form validation
 
   //events
+    // var events_required =["festname_required", "festcaption_val"];
+  $('.free').click(function(){
+    $('input[name="plan"]').val($('input[name="free"]').val());
+    $('.plan_table_act').hide();
+    $('.eventdetail_fields').show();
+    
+  });
+  $('.paid').click(function(){
+    $('input[name="plan"]').val($('input[name="paid"]').val());
+    $('.plan_table_act').hide();
+    $('.eventdetail_fields').show();
+  });
+  $('.login_act').click(function(){
+    $('input[name="plan"]').val($('input[name="paid"]').val());
+  });
+  if($.cookie('plan')){
+    $('.plan_table_act').hide();
+  }
+  else{
+   $('.plan_table_act').show(); 
+  }
+  $('.plan_change').click(function(){
+    $('.plan_table_act').show();
+  });
 
-  var events_required =["festname_required", "festcaption_val"];
+  jQuery('.free,.events_details,.login_act,.paid').click(function(){     
 
-  jQuery('#post_event').click(function(){     
-      for (i=0;i<events_required.length;i++) {
-      var input = jQuery('#'+events_required[i]);
-      if (input.val() == "")  {   
-        input.addClass("error_input_field");
-        input.next('.labelError').css({"color":"red"}).show();         
-      } else {    
-        input.removeClass("error_input_field");
-        input.next('.labelError').hide();        
-      }
-    }
-
-    if($('.festtype_required').val() == 'Fest type'){
-      $('.drop_labelError').show();
+    if($('.eventtitle').val() == ''){
+      $('.eventtitle_error').show();
       return false;
     }
     else{
-      $('.drop_labelError').hide();
+      $('.eventtitle_error').hide();
+    }
+
+    if($('.startdate').val() == ''){
+      $('.date1_error').show();
+      return false;
+    }
+    else{
+      $('.date1_error').hide();
     }  
 
-
-      if ($(":input").hasClass("error_input_field")){
+    if($('.enddate').val() == ''){
+      $('.date2_error').show();
       return false;
+    }
+    else{
+      $('.date2_error').hide();
+    }
+
+    if($('.category').val() == ''){
+      $('.category_error').show();
+      return false;
+    }
+    else{
+      $('.category_error').hide();
+    }
+    if($('.eventtype').val() == 'select_subcategory'){
+      $('.subcategory_error').show();
+      return false;
+    }
+    else{
+      $('.subcategory_error').hide();
+    }
+    if($('.eventdescription').val() == ''){
+      $('.eventdescription_error').show();
+      return false;
+    }
+    else{
+      $('.eventdescription_error').hide();
+
+      $.cookie('eventtitle',$('.eventtitle').val(),{path: '/',raw: true});
+      $.cookie('startdate',$('.startdate').val(),{path: '/',raw: true});
+      $.cookie('enddate',$('.enddate').val(),{path: '/',raw: true});
+      if ($.cookie('category')){
+        $.cookie('category',$('.category_id').val(),{path: '/',raw: true});
+        $.cookie('category_name',$('.category_name').val(),{path: '/',raw: true});
+        
       }
       else{
-        $('form[name="postevent"]').submit();      
-        return true;
-     }
- 
+        $.cookie('category',$('.category option:selected').val(),{path: '/',raw: true});
+        $.cookie('category_name',$('.category option:selected').text(),{path: '/',raw: true});
+        
+      }
+      if ($.cookie('eventtype')){
+        $.cookie('eventtype',$('.eventtype_id').val(),{path: '/',raw: true});
+        $.cookie('eventtype_name',$('.eventtype_name').val(),{path: '/',raw: true});
+      }
+      else{
+        $.cookie('eventtype',$('.eventtype option:selected').val(),{path: '/',raw: true});
+        $.cookie('eventtype_name',$('.eventtype option:selected').text(),{path: '/',raw: true});
+      }
+      $.cookie('eventdescription',$('.eventdescription').val(),{path: '/',raw: true});
+      $.cookie('eventdescription',$('.eventdescription').val(),{path: '/',raw: true});
+      $.cookie('plan',$('input[name="plan"]').val(),{path: '/',raw: true});
+
+    }
+    if($('input[name="plan"]').val() == ''){
+      $('.plan_error').show();
+      return false;
+    }
+    else{
+      $('.plan_error').hide();
+      $('.eventdetail_fields').show();
+    }
   });
 
   //Event details
 
-  var events_details_required =["festdes_required", "regfees_required", "festurl_required", "reach_required", "queries_required", "state_required"];
+jQuery('.user_details').click(function(){     
 
-  jQuery('form[name="postevent"] .post_event').on( "click", function() {
-      // alert("clicked");
-      // alert($(this).data("user"));
-      var  value = $(this).data("user"); 
-       // alert(value);
-       $("input[name='userstatus']").val($(this).data("user"));
-      // $("#paid").val(value);
-      // alert($("#paid").val(value));
-      
-      for (i=0;i<events_details_required.length;i++) {
-      var input = jQuery('#'+events_details_required[i]);
-      if (input.val() == "")  {   
-        input.addClass("error_input_field");
-        input.next('.labelError').css({"color":"red"}).show();         
-      } else {    
-        input.removeClass("error_input_field");
-        input.next('.labelError').hide();        
-      }
-    }
-
-    if($('.city_required').val() == 'Select City'){
-      $('.drop_labelError1').show();
+    if($('.address').val() == ''){
+      $('.address_error').show();
       return false;
     }
     else{
-      $('.drop_labelError1').hide();
+      $('.address_error').hide();
+    }
+
+    if($('.organizer').val() == ''){
+      $('.organizer_error').show();
+      return false;
+    }
+    else{
+      $('.organizer_error').hide();
     }  
 
-      if ($(":input").hasClass("error_input_field")){
+    if($('.state').val() == ''){
+      $('.state_error').show();
       return false;
+    }
+    else{
+      $('.state_error').hide();
+    }
+
+    if($('.select_city').val() == 'select_city'){
+      $('.city_error').show();
+      return false;
+    }
+    else{
+      $('.city_error').hide();
+    }
+    if($('.select_college').val() == 'select_college'){
+      $('.college_error').show();
+      return false;
+    }
+    else{
+      $('.college_error').hide();
+    }
+    if($('.select_dept').val() == 'select_department'){
+      $('.dept_error').show();
+      return false;
+    }
+    else{
+      $('.dept_error').hide();
+      $('.user_fields').show();
+    }
+
+  });
+// Image upload
+    $(document).on('change','.poster',function(){
+      files = this.files;
+      size = files[0].size;
+      //max size 50kb => 50*1000
+      if( size > 1024*2000){
+       alert('Please upload less than 2mb file');
+       return false;
       }
       else{
-        $('form[name="postevent"]').submit();      
+        $('.user_fields').show();
+        // $.cookie('address',$('.address').val());
+        // $.cookie('organizer',$('.organizer').val());
+        // $.cookie('state',$('.state').val());
+        // $.cookie('city_post',$('.city' ).val());
+        // $.cookie('college',$('.college').val());
+        // $.cookie('dept',$('.dept').val());
+        
+        // var imgData = getBase64Image(bannerImage);
+        // var localStorage.setItem("imgData", imgData);
         return true;
       }
-  });
+      
+    });
+  // user validation
+$('.post_event,#paid').click(function(){
+  
+  if($('.name').val() == ''){
+      $('.name_error').show();
+      return false;
+    }
+    else{
+      $('.name_error').hide();
+    }
+    if($('.email').val() == ''){
+      $('.email_error').show();
+      return false;
+    }
+    else{
+      $('.email_error').hide();
+    }
+    if($('.mobile').val() == '' ){
+      // alert($('.mobile').val());
+      $('.mobile_error').show();
+      return false;
+    }
+    else{
+      $('.mobile_error').hide();
+    }
+  $.cookie('name',$('.name').val(),{path: '/',raw: true});
+  $.cookie('email',$('.email').val(),{path: '/',raw: true});
+  $.cookie('mobile',$('.mobile').val(),{path: '/',raw: true});
+});
+
+
   //upload banner validation
 
   jQuery('#banner_upload').click(function(){
