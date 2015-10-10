@@ -26,8 +26,8 @@ class SubCategory(models.Model):
 		return self.name
 
 class City(models.Model):
-	city=models.CharField(max_length=150, null=True, blank=True, unique=True)
-	state=models.CharField(max_length=100, null=True, blank=True)
+	city=models.CharField(max_length=150, null=True)
+	state=models.CharField(max_length=100, null=True)
 	country_code=models.CharField(max_length=10, null=True, blank=True,default='IN')
 	country_name=models.CharField(max_length=50, null=True, blank=True,default='india')
 	def __unicode__(self):
