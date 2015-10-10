@@ -90,8 +90,7 @@ class FeedbackAdmin(admin.ModelAdmin):
 
 	
 
-	
-# admin.site.register(Category, CategoryAdmin)
+admin.site.register(Category, CategoryAdmin)
 admin.site.register(Feedback, FeedbackAdmin)
 admin.site.register(City, CityAdmin)
 admin.site.register(PremiumPriceInfo, PremiumPriceInfoAdmin)
