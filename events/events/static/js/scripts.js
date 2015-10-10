@@ -22,6 +22,7 @@
     $(  "#dpd1" ).datepicker({ format: 'dd-mm-yyyy', minDate: 0});
     $( "#dpd2" ).datepicker({ format: 'dd-mm-yyyy', minDate: 0});
 });
+
   // for date picker
 
   var nowTemp = new Date();
@@ -199,145 +200,14 @@ function find_position(path){
 
     function find_subcategory(category_id){
       $.get('/find_subcategory/', { category_id: category_id }, function(data) {
-      $('.select_subcategory').html($('<option>').text("Event Subcategory").attr('value', "select_subcategory"));
-      $(".select_subcategory").siblings('.select-clone').html($('<li>').text("Event Subcategory").attr('data-value', "select_subcategory"));
+         $('.select_subcategory').empty();
       $.each(data, function(key,value) {
         $('.select_subcategory').append($('<option>').text(value.name).attr('value', value.id));
-        $(".select_subcategory").siblings('.select-clone').append($('<li>').text(value.name).attr('data-value', value.id));
       });
       });
     }
 
-  // UOU Selects
-  // ---------------------------------------------------------
-  $.fn.uouCustomSelect = function () {
-
-    var $select = $(this);
-
-    $select.wrap('<div class="uou-custom-select"></div>');
-
-    var $container = $select.parent('.uou-custom-select');
-
-    $container.append('<ul class="select-clone"></ul>');
-
-    var $list = $container.children('.select-clone'),
-      placeholder = $select.data('placeholder') ? $select.data('placeholder') : $select.find('option:eq(0)').text();
-
-    // $('<input class="value-holder" type="text" disabled="disabled" placeholder="' + placeholder + '"><i class="fa fa-chevron-down"></i>').insertBefore($list);
-    $('<input class="value-holder" type="hidden" disabled="disabled" placeholder="' + placeholder + '"><span class="placeholder">' + placeholder + '</span><i class="fa fa-chevron-down"></i>').insertBefore($list);
-
-    var $valueHolder = $container.children('.value-holder');
-    var $valuePlaceholder = $container.children('.placeholder');
-
-    // Create clone list
-    $select.find('option').each(function () {
-      var $this = $(this);
-
-      $list.append('<li data-value="' + $this.val() + '">' + $this.text() + '</li>');
-    });
-
-    // Toggle list
-    $container.on('click', function () {
-      // console.log('click ' + $container);
-      $container.toggleClass('active');
-      $list.slideToggle(250);
-    });
-
-    // Option Select
-   $list.delegate('li','click', function () {
-      var $this = $(this);
-      var id_value = $this.attr('data-value');     
-      $valueHolder.val(id_value);
-      $valuePlaceholder.html($this.text());
-      // $(input.valueHolder).parent().next('input[type="hidden"]#subcategoryid').val(id_value);
-      $select.find('option[value="' + $this.data('value') + '"]').prop('selected', true);
-      // if ($this.parent('select-clone').siblings('select').hasClass('select_city'))
-      if ($this.parents().children().hasClass('select_city'))
-      { 
-        
-        if ($this.parent().siblings('.placeholder').text() != "Select City")
-          find_colleges($this.data('value'));
-      }
-      if ($this.parents().children().hasClass('select_college')){
-        if ($this.parent().siblings('.placeholder').text() != "Select College")
-        find_department($this.data('value'));
-      }
-      if ($this.parents().children().hasClass('select_category'))
-      {
-        if ($this.parent().siblings('.placeholder').text() != "Event Category")
-          find_subcategory($this.data('value'));
-      }
-      if ($this.parents().children().hasClass('select_state'))
-      {
-        if ($this.parent().siblings('.placeholder').text() != "State")
-          find_city($this.data('value'));
-      }
-      if ($this.parents().children().hasClass('pageurl_required'))
-      {
-        if ($this.parent().siblings('.placeholder').text() != "Select Page URL")
-          if ($this.data('value')=='/')
-          {
-            find_position('home');
-          }
-          else if($this.data('value')=='event/')
-          {
-            find_position('list');
-          }
-          else
-          {
-            find_position('details');
-          }
-      } 
-      if ($this.parents().children().hasClass('position_required'))
-      {
-        if ($this.parent().siblings('.placeholder').text() != "Select Position")
-          var page=$('#pageurl_required').val();
-          if (page=='/')
-          {
-            var path='home';
-          }
-          else if(page=='event/')
-          {
-            var path='list';
-          }
-          else
-          {
-            var path='details';
-          }
-          find_price($this.data('value'),path);
-      }  
-      if ($this.parents().children().hasClass('festtype'))
-        // alert($select.find('option[value="' + $this.data('value') + '"]'));
-        $select.find('option[value="' + $this.data('value') + '"]').attr('selected', true);  
-
-    });
-
-
-    // Hide
-    $container.on('clickoutside touchendoutside mouseoveroutside', function () {
-      if (!dragging) {
-        $container.removeClass('active');
-        $list.slideUp(250);
-      }
-    });
-
-    // Links
-    if ($select.hasClass('links')) {
-      $select.on('change', function () {
-        window.location.href = select.val();
-      });
-    }
-
-    $select.on('change', function () {
-      console.log(changed);
-      console.log($(this).val());
-    });
-  };
-
-  $('select').each(function () {
-    $(this).uouCustomSelect();
-  });
-
+  
 
   $( "#slider-range-min" ).slider({
     range: "min",
@@ -363,7 +233,10 @@ function find_position(path){
   $( "#amount-search" ).val( $( "#slider-range-search" ).slider( "value" ) +   "km");
 
 
-
+  $('.select_category').on('change' ,function(){
+    var id = $('.select_category').val();
+    find_subcategory(id);
+  });
 
   $( "#slider-range-search-day" ).slider({
     range: "min",
@@ -421,26 +294,21 @@ function find_position(path){
 
     $this.children('a').on('click', function (event) {
       event.preventDefault();
-
       $this.toggleClass('active');
       setTimeout (function(){
-        $('#username_signup').focus();
-      }, 20);
-      setTimeout (function(){
-        $('#emailid_signin').focus();
-
-      }, 20);
+        $this.find('form input[type="text"]:first').focus();
+      }, 1000);
       $this.siblings().removeClass('active');
       $('#header .header-language').removeClass('active');
       $('#header .header-social').removeClass('active');
     });
 
     $this.on('clickoutside touchendoutside', function () {
-      if ($this.hasClass('active')) { $this.removeClass('active'); }
+      if ($this.hasClass('active')) { 
+        $this.removeClass('active'); 
+      }
     });
   });
-
-
 
   var $headerNavbar = $('#header .header-nav-bar .primary-nav > li');
 
@@ -596,6 +464,22 @@ $('.close').click(function(){
   $(".feedback_popup").hide();
   $('.feedback1').show();
 });
+
+  $(".stepsForm").stepsForm({
+      width     :'100%',
+      active      :0,
+      errormsg    :'Check faulty fields.',
+      sendbtntext   :'Create Account',
+      posturl     :'core/demo_steps_form.php',
+      theme     :'green',
+    }); 
+    
+    $(".container .themes>span").click(function(e) {
+      $(".container .themes>span").removeClass("selectedx");
+      $(this).addClass("selectedx");
+            $(".stepsForm").removeClass().addClass("stepsForm");
+      $(".stepsForm").addClass("sf-theme-"+$(this).attr("data-value"));
+        });
 
   var nav = $('.header-search-bar');
     $(window).scroll(function () {
@@ -927,6 +811,7 @@ $('.events').click(function(){
         input.next('.error_message').show();         
       } else {    
         input.removeClass("error_input_field");
+        input.next().next('.error_message').hide();
         input.next('.error_message').hide();        
       }
     }
@@ -967,6 +852,10 @@ $('.events').click(function(){
       $('#emailid_signup').next().next('.error_message').hide();
     }
     }
+    //Validate the mobile
+    if($('#mobile_signup').val() != ''){
+      mobile_validation('#mobile_signup');
+    }
      if ($(":input").hasClass("error_input_field")){
     return false;
     }
@@ -984,6 +873,7 @@ $('.header-call-to-action input').blur(function(){
           $(this).next('.error_message').show();         
         } else {    
           $(this).removeClass("error_input_field");
+          $(this).next().next('.error_message').hide();
           $(this).next('.error_message').hide();        
         }
 
@@ -997,9 +887,13 @@ $('.header-call-to-action input').blur(function(){
             else
             {
               $(id).removeClass("error_input_field");
+              $(id).next('.error_message').hide();
               $(id).next().next('.error_message').hide();
             } 
         }
+
+        if(id=="#mobile_signup")
+          mobile_validation(id);
 
         if ((id=="#confirm_password_signup") && ($(id).val()!='')){
           if($(id).val()!=$('#password_signup').val()){
@@ -1337,23 +1231,50 @@ $('.post_event,#paid').click(function(){
 
 });
 
+  // $('#mobile_signup').keyup(function(){
+  //   mobile_validation($(this));
+  // });
+
   $('#password_signup').keyup(function(){
      strength_status = checkStrength($('#password_signup').val());
      // alert(strength_status);
      $('#password_signup').addClass("error_input_field"); 
-     error_message = $(this).next('.error_message').text(strength_status);
+     error_message = $(this).next().next('.error_message').text(strength_status);
      if (error_message.html() == "Too short" || error_message.html() == "Weak")
-      $(this).next('.error_message').css({"color":"#df0024"});
+      $(this).next().next('.error_message').css({"color":"#df0024"});
      else if (error_message.html() == "Fair")
-      $(this).next('.error_message').css({"color":"yellow"});
+      $(this).next().next('.error_message').css({"color":"yellow"});
      else if (error_message.html() == "Good")
-      $(this).next('.error_message').css({"color":"lightblue"});
+      $(this).next().next('.error_message').css({"color":"lightblue"});
      else if (error_message.html() == "Strong" )
-      $(this).next('.error_message').css({"color":"#7CFC00"});
+      $(this).next().next('.error_message').css({"color":"#7CFC00"});
+    $(this).next('.error_message').hide(); 
     error_message.show();
   });
 
 });
+
+      function mobile_validation(id){
+        var mob = /^[1-9]{1}[0-9]{9}$/;
+        var txtMobile =$(id).val();
+        // alert(txtMobile.length);
+        if (txtMobile == ""){
+          $(id).addClass("error_input_field"); 
+          $(id).next().next('.error_message').hide();
+          $(id).next('.error_message').show();
+        }
+        else if (mob.test(txtMobile) == false) {
+        $(id).addClass("error_input_field"); 
+        $(id).next('.error_message').hide();
+        $(id).next().next('.error_message').show();
+        // txtMobile.focus();
+        } 
+        else{
+        $(id).removeClass("error_input_field"); 
+        $(id).next('.error_message').hide();   
+        $(id).next().next('.error_message').hide();
+        }
+      }
 
      function checkStrength(password){
     //initial strength

@@ -3,7 +3,7 @@
 {% load app_filters %}
 {% load static from staticfiles %}
 {% block content %}
-
+ <script type="text/javascript" src="{% static "js/select.js" %}"></script>
       <div class="slider-content">
 
         <div id="home-slider" class="owl-carousel">
@@ -39,15 +39,15 @@
       </div> <!-- END .slider-content -->
     </div> <!-- END .SEARCH and slide-section -->
    
-    <div class="container">
+   <!--  <div class="container">
       <div class="header-nav-bar home-slide">
         <nav class="text-center">
             <h3><span>Explore by Event categories</span></h3>
             <button><i class="fa fa-bars"></i></button>
         </nav>
-      </div> <!-- end .header-nav-bar -->
+      </div>
+    </div> --> <!-- end .container -->
 
-    </div> <!-- end .container -->
 
   </header> <!-- end #header -->
    <a class="btn btn-default feedback1">FEEDBACK</a>                 
@@ -100,10 +100,14 @@
                    {% for subcategory in subcategory%}  
                     <div class="col-md-3 col-sm-4 col-xs-6">
                         <div class="category-item">
+                        {% if 'start' in path %}  
+                          <img class="sub_cat_icon" src="../media/{{subcategory.icon}}">
+                          <img class="sub_cat_icon_hover" src="../media/{{subcategory.hover_icon}}">
+                          {% else %}
                           <img class="sub_cat_icon" src="media/{{subcategory.icon}}">
                           <img class="sub_cat_icon_hover" src="media/{{subcategory.hover_icon}}">
+                        {% endif %}
                           <a href="search/?q=&amp;eventtype={{subcategory.id}}">{{subcategory.name}}</a>
-
                         </div>
 
                       </div>
@@ -216,7 +220,7 @@
 <div class="featured-listing" id= "featured-list">
 
     <div class="container">
-      <h4>Trending Banners</h4>
+      <h2>Prioritized Banners</h2>
                        
                         
       <div id="partners-slider" class="owl-carousel owl-theme">
@@ -236,7 +240,8 @@
     <div class="our-partners">
       <div class="container">
       <div class="row clearfix">
-        <h2><strong>Latest Events</strong></h2>
+        <h2><strong>Upcoming Events</strong></h2>
+
 
         {% for recentad in recentad %}
         {% if recentad.admin_status == True %}
@@ -265,6 +270,7 @@
         </div>
         {% endif %}
         {% endfor %}
+
 
       </div>  <!-- end .row -->
                         

@@ -12,7 +12,7 @@
   <!-- Stylesheets -->
   <link rel="stylesheet" href="{% static "css/bootstrap-datepicker.css" %}">
   <link rel="stylesheet" href="{% static "css/style.css" %}">
-  
+  <link rel="stylesheet" href="{% static "css/stepsForm.css" %}">
   <link rel="stylesheet" href="{% static "css/jquery-ui.css" %}">
   <link rel="stylesheet" href="{% static "css/jquery.bxslider.css" %}">
   <link href="{% static "css/simpleFilePreview.css" %}" rel="stylesheet">
@@ -20,6 +20,7 @@
   <link href="{% static "css/datepicker.css" %}" rel="stylesheet">
   <link href="{% static "css/tipsy.css" %}" rel="stylesheet">
   <script type="text/javascript" src="{% static "js/jquery.js" %}"></script>
+
   <!-- GOOGLE FONTS -->
   <link href='https://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'>
  
@@ -29,7 +30,7 @@
   <![endif]-->
 
 </head>
-<body>
+<body {% if request.path == '/post_event' %} class="post_event" {% endif %}>
 <div id="main-wrapper">
   <header id="header">
     <div class="header-top-bar">
@@ -122,7 +123,7 @@
 
             <div class="field_control">
 
-            <input type="text" class="form-control" name="username" placeholder="Your Name" id="username_signup" autocomplete="off" autofocus="true">
+            <input type="text" class="form-control" name="username" placeholder="Your Name" id="username_signup" autocomplete="off">
             <label for="username_signin" class="error_message">Please Enter your Name</label>
             </div>
 
@@ -136,11 +137,13 @@
             <div class="field_control">
             <input type="text" class="form-control" name="mobile" placeholder="Mobile" id="mobile_signup" autocomplete="off">
             <label for="mobile_signin" class="error_message">Please Enter your Mobile</label>
+            <label for="mobile_signin" class="error_message">Enter valid mobile number</label>
             </div>
 
             <div class="field_control">
             <input type="password" class="form-control" name="password" placeholder="Password" id="password_signup" autocomplete="off">
-            <label for="password" class="error_message" style="display:none;">Please enter Password</label>
+            <label for="password" class="error_message">Please Enter Password</label>
+            <label for="password" class="error_message strength"></label>
             </div>
             
             <div class="field_control">
@@ -241,8 +244,10 @@
 
 
           </div>
-          <a href="/post_event" class="btn btn-default"><i class="fa fa-plus"></i> Add Event</a>
-          <a href="/banner" class="btn btn-default"><i class="fa fa-plus"></i> Add Banner Event</a>
+          <a href="/post_event" class="btn btn-default"><i class="fa fa-plus"></i> Post Event</a>
+
+          <a href="/banner" class="btn btn-default"><i class="fa fa-plus"></i> Post Banner</a>
+
 
         </div><!-- END .HEADER-CALL-TO-ACTION -->
 
@@ -350,7 +355,7 @@
                     <option value="management">Management</option>
                     <option value="sports">Sports</option>
                     <option value="literary">Literary</option>
-                    <option value="conferences">Conferences</option>
+                    <option value="confesrences">Conferences</option>
                     <option value="seminar">Seminar</option>
                     <option value="workshop">Workshop</option>
                     <option value="symposium">Symposium</option>
@@ -437,32 +442,38 @@
 
           <div class="col-md-3 col-sm-3 clearfix">
             <div class="popular-categories">
-              <h3>Why Eventswat</h3>
+              <h3>eventswat.com</h3>
               <ul>
-                <li><a href="/about"><i class="fa fa-shopping-cart"></i>About us</a></li>
-                <li><a href="/privacy"><i class="fa fa-paper-plane-o"></i>Privacy policy</a></li>
-                 <li><a href="/terms_and_conditions"><i class="fa fa-cogs"></i>Terms and Conditions</a></li>
-                <li><a href="/faqs"><i class="fa fa-book"></i>FAQs</a></li>
+                <li><a href="/about"><i class="fa fa-info-circle"></i>About us</a></li>
+                <li><a href="/privacy"><i class="fa fa-tasks"></i>Privacy policy</a></li>
+
+                 <li><a href="/terms_and_conditions"><i class="fa fa-exclamation-triangle"></i>Terms and Conditions</a></li>
+
+                <li><a href="/faqs"><i class="fa fa-question-circle"></i>FAQs</a></li>
               </ul>
             </div> <!-- end .popular-categories-->
           </div> <!-- end Grid layout-->
 
           <div class="col-md-3 col-sm-3 clearfix">
             <div class="popular-categories">
-              <h3>Why Eventswat</h3>
+              <h3>Join our hands</h3>
               <ul>
-                <li><a href="/about"><i class="fa fa-shopping-cart"></i>Feedback</a></li>
-                <li><a href="/privacy"><i class="fa fa-paper-plane-o"></i>Careers</a></li>
-                 <li><a href="/terms_and_conditions"><i class="fa fa-cogs"></i>Advertise with us</a></li>
-                <li><a href="/faqs"><i class="fa fa-book"></i>FAQs</a></li>
+
+                <li><a href="/about"><i class="fa fa-comment"></i>Feedback</a></li>
+                <li><a href="/privacy"><i class="fa fa-briefcase"></i>Careers</a></li>
+                <li><a href="/terms_and_conditions"><i class="fa fa-newspaper-o"></i>Advertise with us</a></li>
+
+                <li><a href="/faqs"><i class="fa fa-gift"></i>special offers</a></li>
               </ul>
             </div> <!-- end .popular-categories-->
           </div> <!-- end Grid layout-->
 
-          <div class="col-md-2 col-sm-6">
+          <div class="col-md-3 col-sm-6">
             <div class="newsletter">
-
-              <h3>Keep In Touch</h3>
+              <h3>We are available at</h3> 
+              <span class="contact_detail"><a href="/"><i class="fa fa-mobile adjust_space"></i></a></span>
+              <span class="contact_detail"><a href="/"><i class="fa fa-envelope adjust_space"></i>eventswat@gmail.com</a></span>
+              <h3>Track us</h3>
 
               <ul class="list-inline">
                 <li><a href="https://www.facebook.com/EventsWat"><i class="fa fa-facebook"></i></a></li>
@@ -471,7 +482,7 @@
                 <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
               </ul>
 
-              <h3>Get in touch with us</h3> 
+              
               <ul class="list">
                 <!-- <li>Pondicherry</li> -->
               </ul>
@@ -525,7 +536,9 @@
     
     <script src="{% static "js/jquery.bxslider.js" %}"></script>
   <script src="{% static "js/jquery.tipsy.js" %}"></script>
+  <script type="text/javascript" src="{% static "js/stepsForm.js" %}"></script>
   <script src="{% static "js/scripts.js" %}"></script>
+
   
 
 </body>
