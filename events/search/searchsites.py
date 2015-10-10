@@ -20,7 +20,7 @@ from django.template import RequestContext
 from haystack.forms import ModelSearchForm, FacetedSearchForm
 from haystack.query import EmptySearchQuerySet
 
-RESULTS_PER_PAGE = getattr(settings, 'HAYSTACK_SEARCH_RESULTS_PER_PAGE', 20)
+RESULTS_PER_PAGE = getattr(settings, 'HAYSTACK_SEARCH_RESULTS_PER_PAGE', 5)
 
 class Highlighter(object):
     css_class = 'highlighted'
@@ -292,14 +292,14 @@ class EventSearchEngine(ElasticsearchSearchEngine):
 
 
 class SearchView(object):
-    # print 'SearchView in Search_sites'
-    # template = 'search/search.html'
-    # extra_context = {}
-    # query = ''
-    # results = EmptySearchQuerySet()
-    # request = None
-    # form = None
-    # results_per_page = RESULTS_PER_PAGE
+    print 'SearchView in Search_sites'
+    template = 'search/search.html'
+    extra_context = {}
+    query = ''
+    results = EmptySearchQuerySet()
+    request = None
+    form = None
+    results_per_page = RESULTS_PER_PAGE
 
     def __init__(self, template=None, load_all=True, form_class=None, searchqueryset=None, context_class=RequestContext, results_per_page=None):
         print 'SearchView in __init__'        
@@ -333,121 +333,121 @@ class SearchView(object):
 
         return self.create_response()
 
-    # def build_form(self, form_kwargs=None):
+    def build_form(self, form_kwargs=None):
 
-    #     print 'SearchView in build_form()'
-    #     """
-    #     Instantiates the form the class should use to process the search query.
-    #     """
-    #     data = None
-    #     kwargs = {
-    #         'load_all': self.load_all,
-    #     }
-    #     if form_kwargs:
-    #         kwargs.update(form_kwargs)
+        print 'SearchView in build_form()'
+        """
+        Instantiates the form the class should use to process the search query.
+        """
+        data = None
+        kwargs = {
+            'load_all': self.load_all,
+        }
+        if form_kwargs:
+            kwargs.update(form_kwargs)
 
-    #     if len(self.request.GET):
-    #         data = self.request.GET
+        if len(self.request.GET):
+            data = self.request.GET
 
-    #     if self.searchqueryset is not None:
-    #         kwargs['searchqueryset'] = self.searchqueryset
+        if self.searchqueryset is not None:
+            kwargs['searchqueryset'] = self.searchqueryset
 
-    #     return self.form_class(data, **kwargs)
+        return self.form_class(data, **kwargs)
 
-    # def get_query(self):
+    def get_query(self):
 
-    #     print 'SearchView in get_query()'
-    #     """
-    #     Returns the query provided by the user.
+        print 'SearchView in get_query()'
+        """
+        Returns the query provided by the user.
 
-    #     Returns an empty string if the query is invalid.
-    #     """
-    #     if self.form.is_valid():
-    #         return self.form.cleaned_data['q']
+        Returns an empty string if the query is invalid.
+        """
+        if self.form.is_valid():
+            return self.form.cleaned_data['q']
 
-    #     return ''
+        return ''
 
-    # def get_results(self):
-    #     print 'get_results'    
-    #     """
-    #     Fetches the results via the form.
+    def get_results(self):
+        print 'get_results'    
+        """
+        Fetches the results via the form.
 
-    #     Returns an empty list if there's no query to search with.
-    #     """
-    #     return self.form.search()
+        Returns an empty list if there's no query to search with.
+        """
+        return self.form.search()
 
-    # def build_page(self):
-    #     print 'build_page' 
-    #     """
-    #     Paginates the results appropriately.
+    def build_page(self):
+        print 'build_page' 
+        """
+        Paginates the results appropriately.
 
-    #     In case someone does not want to use Django's built-in pagination, it
-    #     should be a simple matter to override this method to do what they would
-    #     like.
-    #     """
+        In case someone does not want to use Django's built-in pagination, it
+        should be a simple matter to override this method to do what they would
+        like.
+        """
        
        
-    #     if self.request.GET.get('page'):
-    #         page_no = self.request.GET.get('page')
-    #         if page_no > 1 :
-    #             page_no = int(self.request.GET.get('page'))
-    #         else:
-    #             page_no = 1
-    #     else:
-    #         page_no = 1
+        if self.request.GET.get('page'):
+            page_no = self.request.GET.get('page')
+            if page_no > 1 :
+                page_no = int(self.request.GET.get('page'))
+            else:
+                page_no = 1
+        else:
+            page_no = 1
             
       
-    #     if self.request.GET.get('result_per_page'):
-    #         result_display = self.request.GET.get('result_per_page')
-    #         if result_display >  1 :
-    #             result_display = int(self.request.GET.get('result_per_page'))
-    #         else:
-    #             result_display = 5 
-    #     else:
-    #         result_display = 5
+        if self.request.GET.get('result_per_page'):
+            result_display = self.request.GET.get('result_per_page')
+            if result_display >  1 :
+                result_display = int(self.request.GET.get('result_per_page'))
+            else:
+                result_display = 5 
+        else:
+            result_display = 5
 
         
-    #     start_offset = (page_no - 1) * result_display
-    #     self.results[start_offset:start_offset + result_display]
+        start_offset = (page_no - 1) * result_display
+        self.results[start_offset:start_offset + result_display]
 
-    #     paginator = Paginator(self.results, result_display)
+        paginator = Paginator(self.results, result_display)
 
-    #     try:
-    #         page = paginator.page(page_no)
-    #     except InvalidPage:
-    #         raise Http404("No such page!")
+        try:
+            page = paginator.page(page_no)
+        except InvalidPage:
+            raise Http404("No such page!")
 
-    #     return (paginator, page)
+        return (paginator, page)
 
-    # def extra_context(self):
-    #     print 'build_page'
-    #     """
-    #     Allows the addition of more context variables as needed.
+    def extra_context(self):
+        print 'build_page'
+        """
+        Allows the addition of more context variables as needed.
 
-    #     Must return a dictionary.
-    #     """
-    #     return {}
+        Must return a dictionary.
+        """
+        return {}
 
-    # def create_response(self):
-    #     print 'Create response'
-    #     """
-    #     Generates the actual HttpResponse to send back to the user.
-    #     """
-    #     (paginator, page) = self.build_page()
+    def create_response(self):
+        print 'Create response'
+        """
+        Generates the actual HttpResponse to send back to the user.
+        """
+        (paginator, page) = self.build_page()
 
-    #     context = {
-    #         'query': self.query,
-    #         'form': self.form,
-    #         'page': page,
-    #         'paginator': paginator,
-    #         'suggestion': None,
-    #     }
+        context = {
+            'query': self.query,
+            'form': self.form,
+            'page': page,
+            'paginator': paginator,
+            'suggestion': None,
+        }
 
-    #     if self.results and hasattr(self.results, 'query') and self.results.query.backend.include_spelling:
-    #         context['suggestion'] = self.form.get_suggestion()
+        if self.results and hasattr(self.results, 'query') and self.results.query.backend.include_spelling:
+            context['suggestion'] = self.form.get_suggestion()
 
-    #     context.update(self.extra_context())
-    #     return render_to_response(self.template, context, context_instance=self.context_class(self.request))
+        context.update(self.extra_context())
+        return render_to_response(self.template, context, context_instance=self.context_class(self.request))
 
 
 

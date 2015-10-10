@@ -1,5 +1,4 @@
 (function($) {
-
   "use strict";
   $.cookie.raw = true;
   var $body = $('body');
@@ -19,9 +18,38 @@
 
   // jquery ui call functionfor calendar
   //------------------------------------------------
-  $( "#datepicker" ).datepicker({ minDate: 0,dateFormat: 'dd-mm-yy'});
-  $( "#datepicker1" ).datepicker({ minDate: 0,dateFormat: 'dd-mm-yy'});
+  $(function () {
+    $(  "#dpd1" ).datepicker({ format: 'dd-mm-yyyy', minDate: 0});
+    $( "#dpd2" ).datepicker({ format: 'dd-mm-yyyy', minDate: 0});
+});
 
+  // for date picker
+
+  var nowTemp = new Date();
+  var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
+
+  var checkin = $('#dpd1').datepicker({
+    format: 'dd-mm-yyyy',
+    onRender: function(date) {
+      return date.valueOf() < now.valueOf() ? 'disabled' : '';
+  }
+  }).on('changeDate', function(ev) {
+  if (ev.date.valueOf() > checkout.date.valueOf()) {
+    var newDate = new Date(ev.date)
+    newDate.setDate(newDate.getDate() + 1);
+    checkout.setValue(newDate);
+  }
+  checkin.hide();
+  $('#dpd2')[0].focus();
+  }).data('datepicker');
+var checkout = $('#dpd2').datepicker({
+  format: 'dd-mm-yyyy',
+  onRender: function(date) {
+    return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
+  }
+}).on('changeDate', function(ev) {
+  checkout.hide();
+}).data('datepicker');
   // Touch
   // ---------------------------------------------------------
   var dragging = false;
@@ -110,13 +138,13 @@
   });
 
 
-
-
-    function find_position(path){
+function find_position(path){
       $.get('/find_position/', { path: path }, function(data) {
+      $('.position_required').empty();
+      $(".position_required").siblings('.select-clone').empty();
       $('.position_required').html($('<option>').text("Select Position").attr('value', "position_required"));
-      //$(".position_required").siblings('.select-clone').html($('<li>').text("Select Position").attr('data-value', "position_required"));
-  
+      $(".position_required").siblings('.select-clone').html($('<li>').text("Select Position").attr('data-value', "position_required"));
+      
       $.each(data, function(key,value) {
         $('.position_required').append($('<option>').text(value.name).attr('value', value.name));
         $(".position_required").siblings('.select-clone').append($('<li>').text(value.name).attr('data-value', value.name));
@@ -172,283 +200,14 @@
 
     function find_subcategory(category_id){
       $.get('/find_subcategory/', { category_id: category_id }, function(data) {
-      $('.select_subcategory').html($('<option>').text("Event Subcategory").attr('value', "select_subcategory"));
-      $(".select_subcategory").siblings('.select-clone').html($('<li>').text("Event Subcategory").attr('data-value', "select_subcategory"));
+         $('.select_subcategory').empty();
       $.each(data, function(key,value) {
         $('.select_subcategory').append($('<option>').text(value.name).attr('value', value.id));
-        $(".select_subcategory").siblings('.select-clone').append($('<li>').text(value.name).attr('data-value', value.id));
       });
       });
     }
 
-  // UOU Selects
-  // ---------------------------------------------------------
-  $.fn.uouCustomSelect = function () {
-
-    var $select = $(this);
-
-    $select.wrap('<div class="uou-custom-select"></div>');
-
-    var $container = $select.parent('.uou-custom-select');
-
-    $container.append('<ul class="select-clone"></ul>');
-
-    var $list = $container.children('.select-clone'),
-      placeholder = $select.data('placeholder') ? $select.data('placeholder') : $select.find('option:eq(0)').text();
-
-    // $('<input class="value-holder" type="text" disabled="disabled" placeholder="' + placeholder + '"><i class="fa fa-chevron-down"></i>').insertBefore($list);
-    $('<input class="value-holder" type="hidden" disabled="disabled" placeholder="' + placeholder + '"><span class="placeholder">' + placeholder + '</span><i class="fa fa-chevron-down"></i>').insertBefore($list);
-
-    var $valueHolder = $container.children('.value-holder');
-    var $valuePlaceholder = $container.children('.placeholder');
-
-    // Create clone list
-    $select.find('option').each(function () {
-      var $this = $(this);
-
-      $list.append('<li data-value="' + $this.val() + '">' + $this.text() + '</li>');
-    });
-
-    // Toggle list
-    $container.on('click', function () {
-      // console.log('click ' + $container);
-      $container.toggleClass('active');
-      $list.slideToggle(250);
-    });
-
-    // Option Select
-   $list.delegate('li','click', function () {
-      var $this = $(this);
-      var id_value = $this.attr('data-value');     
-      $valueHolder.val(id_value);
-      $valuePlaceholder.html($this.text());
-      // $(input.valueHolder).parent().next('input[type="hidden"]#subcategoryid').val(id_value);
-      $select.find('option[value="' + $this.data('value') + '"]').prop('selected', true);
-      // if ($this.parent('select-clone').siblings('select').hasClass('select_city'))
-      if ($this.parents().children().hasClass('select_city'))
-      { 
-        
-        if ($this.parent().siblings('.placeholder').text() != "Select City")
-          find_colleges($this.data('value'));
-      }
-      if ($this.parents().children().hasClass('select_college')){
-        if ($this.parent().siblings('.placeholder').text() != "Select College")
-        find_department($this.data('value'));
-      }
-      if ($this.parents().children().hasClass('select_category'))
-      {
-        if ($this.parent().siblings('.placeholder').text() != "Event Category")
-          find_subcategory($this.data('value'));
-      }
-      if ($this.parents().children().hasClass('select_state'))
-      {
-        if ($this.parent().siblings('.placeholder').text() != "State")
-          find_city($this.data('value'));
-      }
-      if ($this.parents().children().hasClass('pageurl_required'))
-      {
-        if ($this.parent().siblings('.placeholder').text() != "Select Page URL")
-          if ($this.data('value')=='/')
-          {
-            find_position('home');
-          }
-          else if($this.data('value')=='event/')
-          {
-            find_position('list');
-          }
-          else
-          {
-            find_position('details');
-          }
-      } 
-      if ($this.parents().children().hasClass('position_required'))
-      {
-        if ($this.parent().siblings('.placeholder').text() != "Select Position")
-          var page=$('#pageurl_required').val();
-          if (page=='/')
-          {
-            var path='home';
-          }
-          else if(page=='event/')
-          {
-            var path='list';
-          }
-          else
-          {
-            var path='details';
-          }
-          find_price($this.data('value'),path);
-      }  
-      if ($this.parents().children().hasClass('festtype'))
-        // alert($select.find('option[value="' + $this.data('value') + '"]'));
-        $select.find('option[value="' + $this.data('value') + '"]').attr('selected', true);  
-
-    });
-
-
-    // Hide
-    $container.on('clickoutside touchendoutside mouseoveroutside', function () {
-      if (!dragging) {
-        $container.removeClass('active');
-        $list.slideUp(250);
-      }
-    });
-
-    // Links
-    if ($select.hasClass('links')) {
-      $select.on('change', function () {
-        window.location.href = select.val();
-      });
-    }
-
-    $select.on('change', function () {
-      console.log(changed);
-      console.log($(this).val());
-    });
-  };
-
-  $('select').each(function () {
-    $(this).uouCustomSelect();
-  });
-
   
-
-
-
-
-
-  // map initialization
-  //-----------------------------------
-
-  // home-map customization
-
-  // $("#map_canvas").goMap({
-
-  //   maptype: 'ROADMAP',
-  //   scrollwheel: false,
-  //   zoom: 6,
-  //   markers: [{
-  //       latitude: 46.454889270677576,
-  //       longitude: 7.45697021484375,
-  //       icon: 'img/content/map-marker.png',
-  //       html: 'Globo'
-  //     },{
-  //       latitude: 49.31079887964633,
-  //       longitude: 4.361572265625,
-  //       icon: 'img/content/map-derection-100.png',
-  //       html: 'Globo'
-  //     },{
-  //       latitude: 44.96479793033104,
-  //       longitude: 4.691162109375,
-  //       icon: 'img/content/map-direction-1000.png',
-  //       html: 'Globo'
-  //     },{
-  //       latitude: 45.39844997630408,
-  //       longitude: 11.019287109375,
-  //       icon: 'img/content/map-direction-20.png',
-  //       html: 'Globo'
-
-  //     },{
-  //       latitude: 45.69083283645816,
-  //       longitude: 16.336669921875,
-  //       icon: 'img/content/map-direction-8.png',
-  //       html: 'Globo'
-  //     },{
-  //       latitude: 47.56170075451973,
-  //       longitude: 14.315185546875,
-  //       icon: 'img/content/map-direction-50.png',
-  //       html: 'Globo'
-  //   }]
-  // });
-
-
-  // company map initialization
-  
-  // $("#company_map_canvas").goMap(
-    
-  
-  // {
-  //   maptype: 'ROADMAP',
-  //   zoom: 15,
-  //   scrollwheel: false,
-  //   address: address1,
-  //   markers: [{
-  //       latitude:latitude1,
-  //       longitude:longitude1,
-  //       icon: '{{ STATIC_URL|escapejs}}/img/map-marker-company.png',
-  //       html: 'Globo'
-  //     }]
-  // });
-
-  // company-map-street
-
-
-
-
-
-
-  // contact map
-
-  // $("#contact_map_canvas").goMap({
-  //   maptype: 'ROADMAP',
-  //   zoom: 13,
-  //   scrollwheel: false,
-
-  //   markers: [{
-  //     latitude: 37.793100669930396,
-  //     longitude: -122.41769313812256,
-  //     icon: 'img/content/map-marker-company.png',
-  //     html: 'Globo'
-  //   }]
-  // });
-
-
-
-  // company-contact map
-
-
-
-
-  // $('a[data-toggle="tab"]').on('shown.bs.tab', function (event) {
-  //   if(event.target.outerText == 'CONTACT'){
-  //     $("#contact_map_canvas_one").goMap({
-  //       maptype: 'ROADMAP',
-  //       zoom: 13,
-  //       scrollwheel: false,
-
-  //       markers: [{
-  //         latitude: 37.792218928191865,
-  //         longitude: -122.43700504302979,
-  //         icon: 'img/content/map-marker-company.png'
-  //       }]
-  //     });
-
-
-  //     $("#contact_map_canvas_two").goMap({
-
-  //       maptype: 'ROADMAP',
-  //       zoom: 13,
-  //       scrollwheel: false,
-
-  //       markers: [{
-  //         latitude: 37.77125750792944,
-  //         longitude: -122.4085521697998,
-  //         icon: 'img/content/map-marker-company.png'
-  //       }]
-  //     });
-  //   }
-  // });
-  
-
-
-
-
-
-
-
-  // distance slider initialize
-
-  // distance slider
 
   $( "#slider-range-min" ).slider({
     range: "min",
@@ -474,7 +233,10 @@
   $( "#amount-search" ).val( $( "#slider-range-search" ).slider( "value" ) +   "km");
 
 
-
+  $('.select_category').on('change' ,function(){
+    var id = $('.select_category').val();
+    find_subcategory(id);
+  });
 
   $( "#slider-range-search-day" ).slider({
     range: "min",
@@ -533,17 +295,20 @@
     $this.children('a').on('click', function (event) {
       event.preventDefault();
       $this.toggleClass('active');
+      setTimeout (function(){
+        $this.find('form input[type="text"]:first').focus();
+      }, 1000);
       $this.siblings().removeClass('active');
       $('#header .header-language').removeClass('active');
       $('#header .header-social').removeClass('active');
     });
 
     $this.on('clickoutside touchendoutside', function () {
-      if ($this.hasClass('active')) { $this.removeClass('active'); }
+      if ($this.hasClass('active')) { 
+        $this.removeClass('active'); 
+      }
     });
   });
-
-
 
   var $headerNavbar = $('#header .header-nav-bar .primary-nav > li');
 
@@ -669,26 +434,9 @@
 }(jQuery));
 
 
-
-$("document").ready(function($){
-  var nav = $('.header-search-bar');
-
-
-
-
-  $(window).scroll(function () {
-    if ($(this).scrollTop() > 60) {
-        nav.addClass("sticky");
-
-    } else {
-        nav.removeClass("sticky");
-    }
-
-  });
-
-  
+$( ".keywords input, .select-location input " ).focus(function() {
+  $('html, body').animate({ scrollTop: $(".header-search-bar").offset().top }, 500);
 });
-
 
   jQuery.fn.center = function () {
     this.css("top", ( jQuery(window).height() - this.height() ) / 2+jQuery(window).scrollTop()+100 + "px");
@@ -701,12 +449,70 @@ $("document").ready(function($){
   });
 
 
-  $("document").ready(function($){
 
+$("document").ready(function($){
+  
 
+  $(".feedback_popup").hide();
+
+$('.feedback1').click(function(){
+  
+  $(".feedback_popup").show();
+  $('.feedback1').hide();
+});
+
+$('.close').click(function(){
+  $(".feedback_popup").hide();
+  $('.feedback1').show();
+});
+
+  $(".stepsForm").stepsForm({
+      width     :'100%',
+      active      :0,
+      errormsg    :'Please fill the all fields.',
+      sendbtntext   :'submit',
+      posturl     :'/submit_event_v2',
+      theme     :'green',
+    }); 
+    
+    $(".container .themes>span").click(function(e) {
+        $(".container .themes>span").removeClass("selectedx");
+        $(this).addClass("selectedx");
+        $(".stepsForm").removeClass().addClass("stepsForm");
+        $(".stepsForm").addClass("sf-theme-"+$(this).attr("data-value"));
+    });
+
+  var nav = $('.header-search-bar');
+    $(window).scroll(function () {
+      if ($(this).scrollTop() > 430) {
+        nav.addClass("sticky");
+      } else {
+        nav.removeClass("sticky");
+        $( ".keywords input, .select-location input " ).blur();
+      }
+  });
+
+  $('.north').tipsy({gravity: 'n'});
+  $('.west').tipsy({gravity: 'w'});
+  $('.east').tipsy({gravity: 'e'});
+  $('.south').tipsy({gravity: 's'});
+  $('.northwest').tipsy({gravity: 'nw'});
+  $('.southwest').tipsy({gravity: 'sw'});
+  $('.northeast').tipsy({gravity: 'ne'});
+  $('.southeast').tipsy({gravity: 'se'});
+
+  // $('.header-search-bar').show();
+
+  
+  // $('.slider-content #home-slider .item > img').css('height',$(window).height()-75);
+  // $('.slider-content').css('height',$(window).height()-75);
+  if ($.cookie('eventdescription')){
+      $('.eventdescription').val($.cookie('eventdescription'));
+  }
 
   var body_win_height = parseInt(document.body.clientHeight) ;
   var win_height = parseInt(document.documentElement.clientHeight) ;
+  
   if( body_win_height > win_height) {
       $('.popup_fade').height(body_win_height);
   } else {
@@ -728,14 +534,11 @@ $("document").ready(function($){
   });
 
   $('.login_act').on('click', function (){
+
         $('.popup_fade:first').show();
         $('#signin_popup').show();
         
   });
-
-
-  // $('.addpost_tipsy').tipsy({gravity: 'e'});
-  // $('.addbanner_tipsy').tipsy({gravity: 'e'});
 
   // home slider section
   //-------------------------------------------
@@ -749,7 +552,8 @@ $("document").ready(function($){
     navigation : false, // Show next and prev buttons
     slideSpeed : 600,
     paginationSpeed : 600,
-    singleItem:true
+    singleItem:true,
+    
 
 
   });
@@ -786,11 +590,15 @@ $("document").ready(function($){
         });
     },
     select : function(event, ui) {
-            $('#fitltercity').val(ui.item.extra);                
+            $('#fitltercity').val(ui.item.value);                
     },
     minLength: 2,
     delay: 100
     });
+  });
+  
+  $("#fitltercitytxt" ).blur(function () {
+    $('#fitltercity').val($("#fitltercitytxt" ).val());
   });
 
   $(function() {    
@@ -819,6 +627,9 @@ $("document").ready(function($){
     delay: 100
     });
   });
+  $("#state" ).blur(function () {
+    $('#statetxt').val($("#state" ).val());
+  });
   $(function() {    
     $("#city" ).autocomplete({
     open: function(){
@@ -840,13 +651,16 @@ $("document").ready(function($){
         });
     },
     select : function(event, ui) {
-            $('#citytxt').val(ui.item.extra);                
+            $('#citytxt').val(ui.item.value);
+            $('#cityid').val(ui.item.extra);                
     },
     minLength: 2,
     delay: 100
     });
   });
-
+  $("#city" ).blur(function () {
+    $('#citytxt').val($("#city" ).val());
+  });
   $(function() {    
     $("#college" ).autocomplete({
     open: function(){
@@ -856,7 +670,7 @@ $("document").ready(function($){
     },
 
     source: function (request, response) {
-        var city=$('#citytxt').val();
+        var city=$('#cityid').val();
         $.getJSON("/getcollege?term=" + request.term+"&city="+city, function (data) {             
             response($.map(data, function (value, key) {                            
                 return {
@@ -868,13 +682,16 @@ $("document").ready(function($){
         });
     },
     select : function(event, ui) {
-            $('#collegetxt').val(ui.item.extra);                
+            $('#collegetxt').val(ui.item.value); 
+            $('#collegeid').val(ui.item.extra);               
     },
     minLength: 2,
     delay: 100
     });
   });
-
+$("#college" ).blur(function () {
+    $('#collegetxt').val($("#college" ).val());
+  });
   $(function() {    
     $("#dept" ).autocomplete({
     open: function(){
@@ -884,7 +701,7 @@ $("document").ready(function($){
     },
 
     source: function (request, response) {
-        var college=$('#collegetxt').val();
+        var college=$('#collegeid').val();
         $.getJSON("/getdept?term=" + request.term+"&college="+college, function (data) {             
             response($.map(data, function (value, key) {                            
                 return {
@@ -902,7 +719,9 @@ $("document").ready(function($){
     delay: 100
     });
   });
-
+  $("#dept" ).blur(function () {
+    $('#depttxt').val($("#dept" ).val());
+  });
 
   $('.select-location,.category-search').click(function(){
     //$('.base_search').focus();
@@ -938,59 +757,42 @@ $('.events').click(function(){
   $('.events_fields').toggle();
 });
 
-// $('.events_details').click(function(){
-//   $('.eventdetail_fields').toggle();
-//   $('.events_fields').hide();
-// });
-
-// $('.user_details').click(function(){
-//   $('.user_fields').toggle();
-//   $('.eventdetail_fields').hide();
-//   $('.events_fields').hide();
-// });
-
-
-    $( "#datepicker" ).datepicker({
-      changeMonth: false,
-           
-    });
-     $( "#datepicker1" ).datepicker({
-      changeMonth: false,
-      
-      
-    });
-     $( "#datepicker_deadline" ).datepicker({
-      changeMonth: false,
-      
-     
-    });
-
-
   $('.bxslider').bxSlider({
   auto: true,
   autoControls: true
 });          
- // validation by pradeepa//
 
-  
-  //login form validation
-
-  var sign_in_required =["emailid_signup", "password_signup"];
-
-  jQuery('#signin').click(function(){     
+// validation by kalai//
+//login form validation on button click
+  var sign_in_required =["emailid_signin", "password_signin"];
+  jQuery('#signin').click(function(){ 
+    email_val = $('#emailid_signin').val();    
       for (i=0;i<sign_in_required.length;i++) {
       var input = jQuery('#'+sign_in_required[i]);
       if (input.val() == "")  {   
         input.addClass("error_input_field");
-        input.css({"width":"50%"});
-        input.next('.labelError').show();         
+        input.next().next('.error_message').hide();         
+        input.next('.error_message').show();         
       } else {    
         input.removeClass("error_input_field");
-        input.css({"width":"104%"});
-        input.next('.labelError').hide();        
+        input.next().next('.error_message').hide(); 
+        input.next('.error_message').hide();        
       }
     }
     
+    //Validate the e-mail.
+    if(email_val.indexOf('@') !== -1){
+    if (!/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/.test(email_val)) {
+      $("#emailid_signin").addClass("error_input_field");
+      $("#emailid_signin").next('.error_message').hide();
+      $("#emailid_signin").next().next('.error_message').show();
+    }
+    else
+    {
+      $("#emailid_signin").removeClass("error_input_field");
+      $("#emailid_signin").next().next('.error_message').hide();
+    }
+    }
 
     if ($(":input").hasClass("error_input_field")){
     return false;
@@ -999,79 +801,118 @@ $('.events').click(function(){
       $('form[name="sign_in"]').submit();      
       return true;
     }
-    });
-
-  //Registration form validation
-
-  var sign_up_required =["emailid_signin", "username_signin", "lastname_signin", "mobile_signin" ];
-
-  jQuery('#create_user').click(function(){    
-      for (i=0;i<sign_up_required.length;i++) {
+  });
+//Registration form validation on button click
+   jQuery('#create_user').click(function(){  
+    var sign_up_required =["emailid_signup", "username_signup", "mobile_signup", "password_signup", "confirm_password_signup" ];  
+    for (i=0;i<sign_up_required.length;i++) {
       var input = jQuery('#'+sign_up_required[i]);
       if (input.val() == "")  {   
         input.addClass("error_input_field");
-        input.css({"width":"50%"});
-        input.next('.signup_labelError').css({"color":"red"}).show();         
+        input.next().next('.error_message').hide();
+        input.next('.error_message').show();         
       } else {    
         input.removeClass("error_input_field");
-        input.css({"width":"104%"});
-        input.next('.signup_labelError').hide();        
+
+        input.next('.error_message').hide();        
       }
     }
-
     //password
-
-    if($('#password_signin').val() == ''){   
-        $('#password_signin').addClass("error_input_field");
-        $('#password_signin').css({"width":"50%"});
-        $('#password_signin').next().next('.signup_labelError').css({"color":"red"}).show();         
+    if($('#password_signup').val() == ''){   
+        $('#password_signup').addClass("error_input_field");
+        $('#password_signup').next('.error_message').show();         
       } else {    
-        $('#password_signin').removeClass("error_input_field");
-        $('#password_signin').css({"width":"104%"});
-        $('#password_signin').next().next('.signup_labelError').hide();       
+        $('#password_signup').removeClass("error_input_field");
+        $('#password_signup').next('.error_message').hide();       
       }
-
-
+    // confirm password
+    if($('#confirm_password_signup').val() == ''){   
+        $('#confirm_password_signup').addClass("error_input_field");
+        $('#confirm_password_signup').next().next('.error_message').hide(); 
+        $('#confirm_password_signup').next('.error_message').show();             
+      } 
+      else if ($('#confirm_password_signup').val() != $('#password_signup').val()){
+        $('#confirm_password_signup').addClass("error_input_field");
+        $('#confirm_password_signup').next('.error_message').hide();  
+        $('#confirm_password_signup').next().next('.error_message').show(); 
+      }
+      else {    
+        $('#confirm_password_signup').removeClass("error_input_field");
+        $('#confirm_password_signup').next('.error_message').hide();    
+        $('#confirm_password_signup').next().next('.error_message').hide();    
+      }
     //Validate the e-mail
-
-    if($('#emailid_signin').val() != ''){
-    if (!/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/.test($('#emailid_signin').val())) {
-      $('#emailid_signin').addClass("error_input_field");
-      $('#emailid_signin').css({"width":"50%"});
-      $('#emailid_signin').next().next('.error_message').css({"color":"red"}).show();
-      // $('.error_message').show();
+    if($('#emailid_signup').val() != ''){
+    if (!/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/.test($('#emailid_signup').val())) {
+      $('#emailid_signup').addClass("error_input_field");
+      $('#emailid_signup').next('.error_message').hide();
+      $('#emailid_signup').next().next('.error_message').show();
     }
     else
     {
-      $('#emailid_signin').removeClass("error_input_field");
-      $('#emailid_signin').css({"width":"104%"});
-      $('#emailid_signin').next().next('.error_message').hide();
+      $('#emailid_signup').removeClass("error_input_field");
+      $('#emailid_signup').next().next('.error_message').hide();
     }
     }
+    //Validate the mobile
+    if($('#mobile_signup').val() != ''){
+      mobile_validation('#mobile_signup');
+    }
 
-    $('#user_form .select-clone').each(function(){
-      if( $(this).siblings('.placeholder').text() == 'Select City' || $(this).siblings('.placeholder').text() == 'Select College' || $(this).siblings('.placeholder').text() == 'Select Department'){
-        $(this).addClass('error_input_field');
-        $(this).parent().next('.signup_labelError').css("cssText", "display: block; position:absolute;top:4px;left:210px;color:red").show();
-        $(this).parent().css("cssText", "width: 196px !important;");
-      } 
-      else{
-        $(this).removeClass('error_input_field');
-        $(this).parent().next('.signup_labelError').hide();
-        $(this).parent().css("cssText", "width: 411px !important;");
-      }
-      
-    });
-
-    if ($(":input").hasClass("error_input_field") || $('#user_form .select-clone').hasClass('error_input_field')){
+     if ($(":input").hasClass("error_input_field")){
     return false;
     }
     else{
-      $('form[name="sign_up"]').submit();      
+      $('form[name="sign_in"]').submit();      
       return true;
     }
-    });     
-  //end validation//
+});
+
+// validation on blur
+$('.header-call-to-action input').blur(function(){
+        if ($(this).val() == "")  {   
+          $(this).addClass("error_input_field");
+          $(this).next().next('.error_message').hide();
+          $(this).next('.error_message').show();         
+        } else {    
+          $(this).removeClass("error_input_field");
+          $(this).next().next('.error_message').hide();
+          $(this).next('.error_message').hide();        
+        }
+
+        id = "#" + $(this).attr('id');
+        if ((id=="#emailid_signup" && $(id).val() != '') || (id=="#emailid_signin" && $(id).val().indexOf('@') !== -1)){
+           if (!/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/.test($(id).val())) {
+              $(id).addClass("error_input_field");
+              $(id).next('.error_message').hide();
+              $(id).next().next('.error_message').show();
+            }
+            else
+            {
+              $(id).removeClass("error_input_field");
+              $(id).next('.error_message').hide();
+              $(id).next().next('.error_message').hide();
+            } 
+        }
+
+        if(id=="#mobile_signup")
+          mobile_validation(id);
+
+
+        if ((id=="#confirm_password_signup") && ($(id).val()!='')){
+          if($(id).val()!=$('#password_signup').val()){
+            $(id).addClass("error_input_field");
+            $(id).next('.error_message').hide();  
+            $(id).next().next('.error_message').show(); 
+          }
+          else {    
+          $(id).removeClass("error_input_field");
+          $(id).next('.error_message').hide();    
+          $(id).next().next('.error_message').hide();    
+          }
+        }    
+ });
+//end validation//
 
   //postevent form validation
 
@@ -1101,8 +942,9 @@ $('.events').click(function(){
     $('.plan_table_act').show();
   });
 
-  jQuery('.free,.events_details,.login_act,.paid').click(function(){     
 
+
+  jQuery('.free,.events_details,.paid').click(function(){     
     if($('.eventtitle').val() == ''){
       $('.eventtitle_error').show();
       return false;
@@ -1147,31 +989,31 @@ $('.events').click(function(){
     }
     else{
       $('.eventdescription_error').hide();
-
-      $.cookie('eventtitle',$('.eventtitle').val(),{path: '/',raw: true});
-      $.cookie('startdate',$('.startdate').val(),{path: '/',raw: true});
-      $.cookie('enddate',$('.enddate').val(),{path: '/',raw: true});
+      var date = new Date();
+      date.setTime(date.getTime() + (120 * 1000));
+      $.cookie('eventtitle',$('.eventtitle').val(),{path: '/',raw: true, expires: date});
+      $.cookie('startdate',$('.startdate').val(),{path: '/',raw: true,expires: date });
+      $.cookie('enddate',$('.enddate').val(),{path: '/',raw: true,expires: date});
       if ($.cookie('category')){
-        $.cookie('category',$('.category_id').val(),{path: '/',raw: true});
-        $.cookie('category_name',$('.category_name').val(),{path: '/',raw: true});
+        $.cookie('category',$('.category_id').val(),{path: '/',raw: true,expires: date});
+        $.cookie('category_name',$('.category_name').val(),{path: '/',raw: true,expires: date});
         
       }
       else{
-        $.cookie('category',$('.category option:selected').val(),{path: '/',raw: true});
-        $.cookie('category_name',$('.category option:selected').text(),{path: '/',raw: true});
+        $.cookie('category',$('.category option:selected').val(),{path: '/',raw: true,expires: date});
+        $.cookie('category_name',$('.category option:selected').text(),{path: '/',raw: true,expires: date});
         
       }
       if ($.cookie('eventtype')){
-        $.cookie('eventtype',$('.eventtype_id').val(),{path: '/',raw: true});
-        $.cookie('eventtype_name',$('.eventtype_name').val(),{path: '/',raw: true});
+        $.cookie('eventtype',$('.eventtype_id').val(),{path: '/',raw: true,expires: date});
+        $.cookie('eventtype_name',$('.eventtype_name').val(),{path: '/',raw: true,expires: date});
       }
       else{
-        $.cookie('eventtype',$('.eventtype option:selected').val(),{path: '/',raw: true});
-        $.cookie('eventtype_name',$('.eventtype option:selected').text(),{path: '/',raw: true});
+        $.cookie('eventtype',$('.eventtype option:selected').val(),{path: '/',raw: true,expires: date});
+        $.cookie('eventtype_name',$('.eventtype option:selected').text(),{path: '/',raw: true,expires: date});
       }
-      $.cookie('eventdescription',$('.eventdescription').val(),{path: '/',raw: true});
-      $.cookie('eventdescription',$('.eventdescription').val(),{path: '/',raw: true});
-      $.cookie('plan',$('input[name="plan"]').val(),{path: '/',raw: true});
+      $.cookie('eventdescription',$('.eventdescription').val(),{path: '/',raw: true,expires: date});
+      $.cookie('plan',$('input[name="plan"]').val(),{path: '/',raw: true,expires: date});
 
     }
     if($('input[name="plan"]').val() == ''){
@@ -1182,11 +1024,18 @@ $('.events').click(function(){
       $('.plan_error').hide();
       $('.eventdetail_fields').show();
     }
+
   });
 
   //Event details
 
 jQuery('.user_details').click(function(){     
+    var mobile =$('.organize_moobile').val(); 
+    var pattern = /^\d{10}$/;
+    function isValidEmailAddress(emailAddress) {
+        var pattern = new RegExp(/^[+a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i);
+        return pattern.test(emailAddress);
+    };
 
     if($('.address').val() == ''){
       $('.address_error').show();
@@ -1196,7 +1045,7 @@ jQuery('.user_details').click(function(){
       $('.address_error').hide();
     }
 
-    if($('.organizer').val() == ''){
+    if($('.organize_name').val() == ''){
       $('.organizer_error').show();
       return false;
     }
@@ -1204,6 +1053,28 @@ jQuery('.user_details').click(function(){
       $('.organizer_error').hide();
     }  
 
+    if($('.organize_email').val() == ''){
+      $('.organizer_email_error').show();
+      return false;
+    }
+    else if(!isValidEmailAddress( $('.email').val() )){
+      $('.organizer_email_error').show().text('Enter Valid emailAddress');
+      return false;
+    }
+    else{
+      $('.organizer_email_error').hide();
+    }  
+    if($('.organize_moobile').val() == ''){
+      $('.organizer_mobile_error').show();
+      return false;
+    }
+     else if(!pattern.test(mobile)){
+      $('.organizer_mobile_error').show().text("It is not valid mobile number.input 10 digits number!");
+      return false;
+    }
+    else{
+      $('.organizer_mobile_error').hide();
+    } 
     if($('.state').val() == ''){
       $('.state_error').show();
       return false;
@@ -1212,21 +1083,21 @@ jQuery('.user_details').click(function(){
       $('.state_error').hide();
     }
 
-    if($('.select_city').val() == 'select_city'){
+    if($('.select_city').val() == ''){
       $('.city_error').show();
       return false;
     }
     else{
       $('.city_error').hide();
     }
-    if($('.select_college').val() == 'select_college'){
+    if($('.college').val() == ''){
       $('.college_error').show();
       return false;
     }
     else{
       $('.college_error').hide();
     }
-    if($('.select_dept').val() == 'select_department'){
+    if($('.dept').val() == ''){
       $('.dept_error').show();
       return false;
     }
@@ -1235,34 +1106,85 @@ jQuery('.user_details').click(function(){
       $('.user_fields').show();
     }
 
+
   });
-// Image upload
+// Image upload in post event
     $(document).on('change','.poster',function(){
       files = this.files;
       size = files[0].size;
+      var oFReader = new FileReader();
+      oFReader.readAsDataURL(this.files[0]);
+      oFReader.onload = function (oFREvent) {
+        var image = new Image();
+        image.src = oFREvent.target.result;
+        image.onload = function () {
+
+          // if (this.width > 1200 ) {
+          //   alert("Exceeded Image width (1200 pixels).Please upload below 1200px width");
+          //   return false;
+          // }
+          if (this.width < 500 ) {
+            alert("Image width should be above 500 px");
+            return false;
+          }
+          // else if (this.height > 700 ) {
+          //   alert("Exceeded height (700 pixels).Please upload below 700px height");
+          //   return false;
+          // }
+          else if (this.height < 500 ) {
+            alert("Image height should above be 500 px");
+            return false;
+          }
+          else if (this.size >1024*1000 ) {
+            // alert("Image height is (700 pixels).Please upload above 650px height");
+            alert("please upload less than 1MB");
+            return false;
+          }
+          else{
+            return true;
+          }
+         // access image size here & do further implementation
+        };
+      };
       //max size 50kb => 50*1000
-      if( size > 1024*2000){
-       alert('Please upload less than 2mb file');
-       return false;
-      }
-      else{
-        $('.user_fields').show();
-        // $.cookie('address',$('.address').val());
-        // $.cookie('organizer',$('.organizer').val());
-        // $.cookie('state',$('.state').val());
-        // $.cookie('city_post',$('.city' ).val());
-        // $.cookie('college',$('.college').val());
-        // $.cookie('dept',$('.dept').val());
-        
-        // var imgData = getBase64Image(bannerImage);
-        // var localStorage.setItem("imgData", imgData);
-        return true;
-      }
+      // if( size > 1024*2000){
+      //  alert('Please upload less than 2mb file');
+      //  return false;
+      // }
+      // else{
+      //   $('.user_fields').show();
+      //   return true;
+      // }
       
     });
+
+//banner image upload validation
+$(document).on('change','.banner',function(){
+    files = this.files;
+    size = files[0].size;
+    if( size > 1024*2000){
+      alert('Please upload less than 2mb file');
+        $('.simpleFilePreview_filename').remove();
+      // // show styled input "button"
+        $('.simpleFilePreview_remove').hide().end().find('.simpleFilePreview_preview ').remove();
+      // $('.simpleFilePreview_preview ').remove();
+       $('.banner').removeClass('simpleFilePreview_formInput');
+       $('.simpleFilePreview_input').show();
+       $('.banner').addClass('simpleFilePreview_formInput');
+       return false;
+    }
+    else{
+       $('.banner').addClass('simpleFilePreview_formInput');
+       
+    }
+});
+
+
   // user validation
 $('.post_event,#paid').click(function(){
-  
+    var mobile =$('.mobile').val(); 
+    var pattern = /^\d{10}$/;
+
   if($('.name').val() == ''){
       $('.name_error').show();
       return false;
@@ -1274,6 +1196,10 @@ $('.post_event,#paid').click(function(){
       $('.email_error').show();
       return false;
     }
+    // else if( !isValidEmailAddress( $('.email').val() )){
+    //   $('.email_error').show().text('Enter Valid emailAddress');
+    //   return false;
+    // }
     else{
       $('.email_error').hide();
     }
@@ -1282,6 +1208,11 @@ $('.post_event,#paid').click(function(){
       $('.mobile_error').show();
       return false;
     }
+    else if(!pattern.test(mobile)){
+      $('.mobile_error').show().text("It is not valid mobile number.input 10 digits number!");
+      return false;
+    }
+
     else{
       $('.mobile_error').hide();
     }
@@ -1294,131 +1225,100 @@ $('.post_event,#paid').click(function(){
   //upload banner validation
 
   jQuery('#banner_upload').click(function(){
-
-    if($('.position_required').val() == 'Select Position'){
+    if(!$('.banner').val()){
             $(this).addClass("error_input_field");
-            $('.position_labelError').show();
+            $('.imageError').show();
+            return false;
         }
         else{
           $(this).removeClass("error_input_field");
-          $('.position_labelError').hide(); 
+          $('.imageError').hide(); 
         }
-
     if($('.pageurl_required').val() == 'Select Page URL'){
             $(this).addClass("error_input_field");
             $('.pageurl_labelError').show();
+            return false;
         }
         else{
           $(this).removeClass("error_input_field");
           $('.pageurl_labelError').hide(); 
         }
-
+    if($('.position_required').val() == 'position_required'){
+            $(this).addClass("error_input_field");
+            $('.position_labelError').show();
+            return false;
+        }
+        else{
+          $(this).removeClass("error_input_field");
+          $('.position_labelError').hide(); 
+        }
     if($('.price_required').val() == 'Select Price'){
             $(this).addClass("error_input_field");
             $('.price_labelError').show();
+            return false;
         }
         else{
           $(this).removeClass("error_input_field");
           $('.price_labelError').hide(); 
+          $('form[name="upload_banner"]').submit();
+          $('.banner_price').text($('#price_required').val());     
+          return true;
         }
-
-      if($('.link_required').val() == ''){   
-        $('.link_required').addClass("error_input_field");
-        $('.link_required').next('.link_labelError').show();         
-      } else {    
-        $('.link_required').removeClass("error_input_field");
-        $('.link_required').next('.link_labelError').hide();       
-      }
-
-    if ($(".position_required, .pageurl_required, .price_required, .link_required").hasClass("error_input_field")){
-    return false;
-    } else {
-      $('form[name="upload_banner"]').submit();
-      $('.payment') 
-      $('.banner_price').text($('#price_required').val());     
-      return true;
-    }
 
 });
 
-  // //Payment
+  // $('#mobile_signup').keyup(function(){
+  //   mobile_validation($(this));
+  // });
 
-  // var payment_details =["fname_required", "lname_required", "mobileno_val", "email_blank"];
-
-  // jQuery('#paynow').click(function(){     
-  //     for (i=0;i<payment_details.length;i++) {
-  //     var input = jQuery('#'+payment_details[i]);
-  //     if (input.val() == "")  {   
-  //       input.addClass("error_input_field");
-  //       input.next('.pay_labelError').show();         
-  //     } else {    
-  //       input.removeClass("error_input_field");
-  //       input.next('.pay_labelError').hide();        
-  //     }
-  //   }
-
-  // if($('.prefix_required').val() == 'Select'){
-  //           $(this).addClass("error_input_field");
-  //           $('.prefix_labelError').show();
-  //       }
-  //       else{
-  //         $(this).removeClass("error_input_field");
-  //         $('.prefix_labelError').hide(); 
-  //       }
-
-  // if ($(":input").hasClass("error_input_field")){
-  //     return false;
-  //     }
-  //     else{
-  //       $('form[name="payment_form"]').submit();      
-  //       return true;
-  //    }
-     
-  //   });
-
-  //password strength
-
-  // $('#password_signin').keyup(function(){
-  //    strength_status = checkStrength($('#password_signin').val());
-  //    $('#password_signin').css({"width":"50%"});
-  //    if ($(this).next().next('.signup_labelError').text() == "Too short" || $(this).next().next('.signup_labelError').text() == "Weak" )
-  //     $(this).next().next('.signup_labelError').css({"color":"red"});
-  //    else if ($(this).next().next('.signup_labelError').text() == "Fair")
-  //     $(this).next().next('.signup_labelError').css({"color":"yellow"});
-  //    else if ($(this).next().next('.signup_labelError').text() == "Good")
-  //     $(this).next().next('.signup_labelError').css({"color":"lightblue"});
-  //    else
-  //     $(this).next().next('.signup_labelError').css({"color":"green"});
-  //   $(this).next().next('.signup_labelError').text(strength_status).show();
-  //   });
-
-  $('#password_signin').keyup(function(){
-     strength_status = checkStrength($('#password_signin').val());
+  $('#password_signup').keyup(function(){
+     strength_status = checkStrength($('#password_signup').val());
      // alert(strength_status);
-     $('#password_signin').css({"width":"50%"});    
-     if ($(this).next().next('.signup_labelError').text() == "Too short" || $(this).next().next('.signup_labelError').text() == "Weak")
-      $(this).next().next('.signup_labelError').css({"color":"red"});
-     else if ($(this).next().next('.signup_labelError').text() == "Fair")
-      $(this).next().next('.signup_labelError').css({"color":"yellow"});
-     else if ($(this).next().next('.signup_labelError').text() == "Good")
-      $(this).next().next('.signup_labelError').css({"color":"lightblue"});
-     else if ($(this).next().next('.signup_labelError').text() == "Strong" )
-      $(this).next().next('.signup_labelError').css({"color":"green"});
-    $(this).next().next('.signup_labelError').text(strength_status).show();
+     $('#password_signup').addClass("error_input_field"); 
+     error_message = $(this).next().next('.error_message').text(strength_status);
+     if (error_message.html() == "Too short" || error_message.html() == "Weak")
+      $(this).next().next('.error_message').css({"color":"#df0024"});
+     else if (error_message.html() == "Fair")
+      $(this).next().next('.error_message').css({"color":"yellow"});
+     else if (error_message.html() == "Good")
+      $(this).next().next('.error_message').css({"color":"lightblue"});
+     else if (error_message.html() == "Strong" )
+      $(this).next().next('.error_message').css({"color":"#7CFC00"});
+    $(this).next('.error_message').hide(); 
+    error_message.show();
   });
 
 });
 
-    function checkStrength(password){
+      function mobile_validation(id){
+        var mob = /^[1-9]{1}[0-9]{9}$/;
+        var txtMobile =$(id).val();
+        // alert(txtMobile.length);
+        if (txtMobile == ""){
+          $(id).addClass("error_input_field"); 
+          $(id).next().next('.error_message').hide();
+          $(id).next('.error_message').show();
+        }
+        else if (mob.test(txtMobile) == false) {
+        $(id).addClass("error_input_field"); 
+        $(id).next('.error_message').hide();
+        $(id).next().next('.error_message').show();
+        // txtMobile.focus();
+        } 
+        else{
+        $(id).removeClass("error_input_field"); 
+        $(id).next('.error_message').hide();   
+        $(id).next().next('.error_message').hide();
+        }
+      }
+
+     function checkStrength(password){
     //initial strength
     var strength = 0
  
     //if the password length is less than 6, return message.
-    if (password.length < 6) {
-        $('#result').removeClass()
-        $('#result').addClass('short')
+    if (password.length < 6) 
         return 'Too short'
-    }
  
     //length is ok, lets continue.
  
@@ -1440,35 +1340,23 @@ $('.post_event,#paid').click(function(){
     //now we have calculated strength value, we can return messages
  
     //if value is less than 2
-    if (strength < 2 ) {
-        $('#result').removeClass()
-        $('#result').addClass('weak')
+    if (strength < 2 ) 
         return 'Weak'
-    } else if (strength == 2 ) {
-        $('#result').removeClass()
-        $('#result').addClass('fair')
+    else if (strength == 2 )
         return 'Fair'
-    } 
-    else if (strength == 3 ) {
-        $('#result').removeClass()
-        $('#result').addClass('good')
+    else if (strength == 3 ) 
         return 'Good'
-    } else {
-        $('#result').removeClass()
-        $('#result').addClass('strong')
+    else 
         return 'Strong'
-    }
+
 }  
 $('.payment').hide();
 $('#paid').click(function(){
   $('.payment').toggle();
 });
 
-// $('#create_user').click(function(){
-  // $('.popup').show();
-// });
-
 var thewidth=$('.advertisement img').width();
 var theheight=$('.advertisement img').height();
 //$('.advertisement img').css({'margin-left':-thewidth/2+'px','margin-top':-theheight/2+'px'});
+
 

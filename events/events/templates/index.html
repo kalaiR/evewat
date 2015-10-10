@@ -1,114 +1,80 @@
 {% extends 'base.html' %}
 {% load i18n %}
+{% load app_filters %}
 {% load static from staticfiles %}
 {% block content %}
-      {{ request.COOKIES.test }}
+ <script type="text/javascript" src="{% static "js/select.js" %}"></script>
       <div class="slider-content">
 
         <div id="home-slider" class="owl-carousel">
         
-           {% for banners in banner|get_banner %}
+           {% for banners in banner|get_main_banner %}
            {% if banners.admin_status == True %}
-          <div class="item">
-         
-            {% if banners.pageurl == '/' and banners.position == 'top' %}
-             <img src="media/{{banners.banner}}"  alt="" title="{{banners.link}}">
+            <div class="item">
+
+            {% if 'start' in path %}  
+                <img src="../media/{{banners.mainbanner}}"  alt="">
+            {% else %}
+                <img src="media/{{banners.mainbanner}}"  alt="">
             {% endif %}
+            
             
             <div class="slide-content">
               <!-- <a href="#"><img src="{% static "img/slider-logo.png" %}"alt=""></a>
               <h1>The <span>Right</span> Place</h1>
               <h2>For Business</h2> -->
-
-            </div>
-
-
+            </div>          
           </div>
-            {% endif %}  
-          {% endfor %}
-     
-          <!-- <div class="item"><img src="media/static/banners/img/banner1.jpg"  alt="">
-            <div class="slide-content">
-              <a href="#"><img src="{% static "img/slider-logo.png" %}"alt=""></a>
-
-              <h1>The <span>Right</span> Place</h1>
-              <h2>For Business</h2>
-
-            </div>
-
-          </div>
-
-          <div class="item"><img src="media/static/banners/img/banner2.jpg"  alt="">
-            <div class="slide-content">
-              <a href="#"><img src="{% static "img/slider-logo.png"%}" alt=""></a>
-
-              <h1>The <span>Right</span> Place</h1>
-              <h2>For Business</h2>
-
-            </div>
-          </div> -->
+            {% endif %}
+          {% endfor %}     
+          
         </div>
 
         <div class="customNavigation">
           <a class="btn prev"><i class="fa fa-angle-left"></i></a>
           <a class="btn next"><i class="fa fa-angle-right"></i></a>
+
         </div>
 
       </div> <!-- END .slider-content -->
     </div> <!-- END .SEARCH and slide-section -->
-
-    <div class="container">
+   
+   <!--  <div class="container">
       <div class="header-nav-bar home-slide">
-        <nav>
-
-          <button><i class="fa fa-bars"></i></button>
-
-        <!--   <ul class="primary-nav list-unstyled">
-            <li class="bg-color"><a href="#">Home<i class="fa fa-angle-down"></i></a>
-              <ul>
-                <li><a href="home-map-grid.html">Home-map(grid)</a></li>
-                <li><a href="home-map-list.html">Home-map(list)</a></li>
-                <li><a href="index.html">Home slider(view-1)</a></li>
-                <li><a href="home-category.html">Home slider(view-2)</a></li>
-              </ul>
-
-            </li>
-
-            <li class=""><a href="#">Company<i class="fa fa-angle-down"></i></a>
-
-              <ul>
-                <li><a href="company-profile.html">Company(Profile)</a></li>
-                <li><a href="company-product.html">Company(Product)</a></li>
-                <li><a href="company-portfolio.html">Company(Portfolio)</a></li>
-                <li><a href="company-events.html">Company(Events)</a></li>
-                <li><a href="company-blog.html">Company(Blog)</a></li>
-                <li><a href="company-contact.html">Company(contact)</a></li>
-              </ul>
-
-            </li>
-
-            <li><a href="sample-page.html">Sample Page</a></li>
-            <li><a href="shortcodes.html">Shortcodes</a></li>
-
-            <li class="">
-              <a href="#">Blog<i class="fa fa-angle-down"></i></a>
-
-              <ul>
-                <li><a href="blog-list.html">Blog list</a></li>
-                <li><a href="blog-post.html">Blog-post</a></li>
-              </ul>
-
-            </li>
-
-            <li><a href="price-listing.html">Price Listing</a></li>
-            <li><a href="about-us.html">About Us</a></li>
-            <li><a href="contact-us.html">Contact Us</a></li>
-          </ul> -->
+        <nav class="text-center">
+            <h3><span>Explore by Event categories</span></h3>
+            <button><i class="fa fa-bars"></i></button>
         </nav>
-      </div> <!-- end .header-nav-bar -->
-    </div> <!-- end .container -->
-  </header> <!-- end #header -->
+      </div>
+    </div> --> <!-- end .container -->
 
+
+  </header> <!-- end #header -->
+   <a class="btn btn-default feedback1">FEEDBACK</a>                 
+   <div class="feedback_popup">
+           <form action="{%url "college_event.views.feedback" %}" id="form" method="post" name="form" class="feedback_form">{% csrf_token %}
+              <a class="close"> <i class="fa fa-times"></i></a>
+
+                   <h2 >
+                    Rate my website!
+                  </h2>
+                  <input type="text"  name="name" class="feed" placeholder=" name">
+                  <input type="email"   name="email" class="feed " placeholder="ex: myname@example.com">
+                  <select class="feed"name="rating">
+                    <option value="0">Please select your Rating </option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                  </select>
+                  <textarea placeholder="comments" name="comments" class="feed" value=""></textarea><br/>
+                   <button class="btn btn-default" type="submit" >
+              Submit
+            </button>
+      
+                  </form>
+    </div>
   <div id="page-content" class="home-slider-content">
     <div class="container">
       <div class="home-with-slide">
@@ -128,13 +94,19 @@
                 <div class="tab-content">
 
                   <div class="tab-pane active" id="all-categories">
-                    <h3><span>Categories</span></h3>
+                    
 
                     <div class="row clearfix subcategories">                 
                    {% for subcategory in subcategory%}  
                     <div class="col-md-3 col-sm-4 col-xs-6">
                         <div class="category-item">
-
+                        {% if 'start' in path %}  
+                          <img class="sub_cat_icon" src="../media/{{subcategory.icon}}">
+                          <img class="sub_cat_icon_hover" src="../media/{{subcategory.hover_icon}}">
+                          {% else %}
+                          <img class="sub_cat_icon" src="media/{{subcategory.icon}}">
+                          <img class="sub_cat_icon_hover" src="media/{{subcategory.hover_icon}}">
+                        {% endif %}
                           <a href="search/?q=&amp;eventtype={{subcategory.id}}">{{subcategory.name}}</a>
                         </div>
 
@@ -159,53 +131,6 @@
             <button><i class="fa fa-briefcase"></i></button>
 
             <div class="page-sidebar">
-             <!--  <div class="custom-search">
-
-                <div class="location-details">
-                  <form action="#">
-                    <div class="select-country">
-                      <label>Country</label>
-
-                      <select class="" data-placeholder="-Select-">
-                        <option value="option1">option 1</option>
-                        <option value="option2">option 2</option>
-                        <option value="option3">option 3</option>
-                        <option value="option4">option 4</option>
-                      </select>
-
-                    </div> 
-
-                    <div class="select-state">
-                      <label>State</label>
-
-                      <select class="" data-placeholder="-Select-">
-                        <option value="option1">option 1</option>
-                        <option value="option2">option 2</option>
-                        <option value="option3">option 3</option>
-                        <option value="option4">option 4</option>
-                      </select>
-
-                    </div> 
-
-                    <div class="zip-code">
-                      <label>ZIP Code</label>
-
-                      <input type="text" placeholder="Enter">
-
-                    </div> 
-                  </form>
-
-                </div> 
-                <div class="distance-range">
-                  <p>
-                    <label for="amount">Distance</label>
-                    <input type="text" id="amount">
-                  </p>
-
-                  <div id="slider-range-min"></div>
-                </div>  
-              </div> 
- -->
               <!-- Category accordion -->
               <div id="categories">
                 <div class="accordion">
@@ -216,22 +141,17 @@
 
                       <ul class="nav nav-tabs home-tab" role="tablist" class="category_click">
                         <li class="active">
-                          <a role="tab" data-toggle="tab" class="select_all_category">All Categories
+                          <a role="tab" data-toggle="tab" class="select_all_category pointer">All Categories
                             <span>Display all sub-categories</span>
                           </a>
                         </li>
                       {% for categories in initial_load|get_categories %}
                         <li>
-                          <a class="select_category"  role="tab" data-toggle="tab">{{categories.name}}</a>
+                          <a class="select_category pointer"  role="tab" data-toggle="tab" title="Please choose any category">{{categories.name}}</a>
                            <input type="hidden" class="ajax_catid" value="{{categories.id}}">                                      
                           
                         </li>
                       {% endfor %}  
-
-                       <!--  <li>
-                          <a href="#" role="tab" data-toggle="tab"><i class="fa fa-angle-right"></i>See More</a>
-
-                        </li> -->
 
                       </ul>
                        <input type="hidden"  id="categoryid"  value="" name="categoryid"/>   
@@ -245,399 +165,68 @@
       </div> <!-- end .home-with-slide -->
     </div> <!-- end .container -->
   </div>  <!-- end #page-content -->
-
-
-  <div class="featured-listing" id= "featured-list">
+<div class="featured-listing" id= "featured-list">
+<div class="our-partners">
     <div class="container">
+      <h2>Prioritized Banners</h2>
+                       
+                        
+      <div id="partners-slider" class="owl-carousel owl-theme">
+      {% for banners in banner|get_banner %}
+      {% if banners.pageurl == '/' and banners.position == 'bottom' %}  
+      <div class="item">  
+
+         <a href="http://{{banners.link}}">{% if 'start' in path %} <img src="../media/{{banners.banner}}"  alt=""> {% else %}<img src="media/{{banners.banner}}"  alt="">{% endif %}</a>  
+      </div>       
+      {% endif %}
+      {% endfor %}
+      </div>
+      </div>
+    </div>  <!-- end .container -->
+  </div>  <!-- end .featured-listing -->
+  <div class="feature" id= "featured-list">
+    <div class="our-partners">
+      <div class="container">
       <div class="row clearfix">
-        <h2><strong>Featured</strong> Events</h2>
+        <h2><strong>Upcoming Events</strong></h2>
+
+
         {% for recentad in recentad %}
+        {% if recentad.admin_status == True %}
          <div class="col-md-3 col-sm-4 col-xs-6">
           <div class="single-product">
             <figure>
-              <img src="/{{recentad.poster}}" alt="">
-
-              <!-- <div class="rating">
-                <ul class="list-inline">
-                  <li><a href="#"><i class="fa fa-star"></i></a></li>
-                  <li><a href="#"><i class="fa fa-star"></i></a></li>
-                  <li><a href="#"><i class="fa fa-star"></i></a></li>
-                  <li><a href="#"><i class="fa fa-star-half-o"></i></a></li>
-                  <li><a href="#"><i class="fa fa-star-o"></i></a></li>
-                </ul>
-
-                <p>Featured</p>
-
-              </div>  --><!-- end .rating -->
+              <img src="{{recentad.poster}}" alt="">
 
               <figcaption>
                 <div>
               
-                  <a href="http://{{ request.META.HTTP_HOST }}/details/{{recentad.id}}" title="{{recentad.festname}}" class="bookmark"><i class="fa fa-bookmark-o" rel="sidebar"></i> Bookmark</a>
-                </div>
+<!--                   <a href="http://{{ request.META.HTTP_HOST }}/details/{{recentad.id}}" title="{{recentad.festname}}" class="bookmark"><i class="fa fa-bookmark-o" rel="sidebar"></i> Bookmark</a>
+ -->                </div>
                 <div class="read-more">
                   <a href="details/{{recentad.id}}"><i class="fa fa-angle-right"></i> Read More</a>
                 </div>
 
               </figcaption>
             </figure>
-            <h4><a href="details/{{recentad.id}}">{{recentad.festname}}</a></h4>
+            <h4><a href="details/{{recentad.id}}">{{recentad.event_title}}</a></h4>
 
-            <h5><a href="details/{{recentad.id}}">{{recentad.festcaption}}</a></h5>
+            <h5><a href="details/{{recentad.id}}">{{recentad.city}}</a></h5>
 
           </div> <!-- end .single-product -->
 
         </div>
-        {% endfor %}
-
-       <!--  <div class="col-md-3 col-sm-4 col-xs-6">
-
-          <div class="single-product">
-            <figure>
-              <img src="{% static "img/content/mba.jpeg"%}" alt="">
-
-              <div class="rating">
-                <ul class="list-inline">
-                  <li><a href="#"><i class="fa fa-star"></i></a></li>
-                  <li><a href="#"><i class="fa fa-star"></i></a></li>
-                  <li><a href="#"><i class="fa fa-star"></i></a></li>
-                  <li><a href="#"><i class="fa fa-star-half-o"></i></a></li>
-                  <li><a href="#"><i class="fa fa-star-o"></i></a></li>
-                </ul>
-
-                <p>Featured</p>
-
-              </div>  --><!-- end .rating -->
-
-             <!--  <figcaption>
-                <div class="bookmark">
-                  <a href="#"><i class="fa fa-bookmark-o"></i> Bookmark</a>
-                </div>
-                <div class="read-more">
-                  <a href="#"><i class="fa fa-angle-right"></i> Read More</a>
-                </div>
-
-              </figcaption>
-            </figure>
-            <h4><a href="#">Old Bookman's</a></h4>
-
-            <h5><a href="#">Category</a>, <a href="#">Another Category</a></h5>
-
-          </div> --> <!-- end .single-product -->
-
-     <!--    </div> -->
-
-       <!--  <div class="col-md-3 col-sm-4 col-xs-6">
-
-          <div class="single-product">
-            <figure>
-              <img src="{% static "img/content/flight.jpeg" %}" alt="">
-
-              <div class="rating">
-                <ul class="list-inline">
-                  <li><a href="#"><i class="fa fa-star"></i></a></li>
-                  <li><a href="#"><i class="fa fa-star"></i></a></li>
-                  <li><a href="#"><i class="fa fa-star"></i></a></li>
-                  <li><a href="#"><i class="fa fa-star-half-o"></i></a></li>
-                  <li><a href="#"><i class="fa fa-star-o"></i></a></li>
-                </ul>
-
-                <p>Featured</p>
-
-              </div> --> <!-- end .rating -->
-
-            <!--   <figcaption>
-                <div class="bookmark">
-                  <a href="#"><i class="fa fa-bookmark-o"></i> Bookmark</a>
-                </div>
-                <div class="read-more">
-                  <a href="#"><i class="fa fa-angle-right"></i> Read More</a>
-                </div>
-
-              </figcaption>
-            </figure>
-            <h4><a href="#">Old Bookman's</a></h4>
-
-            <h5><a href="#">Category</a>, <a href="#">Another Category</a></h5>
-
-          </div> --> <!-- end .single-product -->
-
-       <!--  </div>
-
-        <div class="col-md-3 col-sm-4 col-xs-6">
-
-          <div class="single-product">
-            <figure>
-              <img src="{% static "img/content/grad.jpeg"%}" alt="">
-
-              <div class="rating">
-                <ul class="list-inline">
-                  <li><a href="#"><i class="fa fa-star"></i></a></li>
-                  <li><a href="#"><i class="fa fa-star"></i></a></li>
-                  <li><a href="#"><i class="fa fa-star"></i></a></li>
-                  <li><a href="#"><i class="fa fa-star-half-o"></i></a></li>
-                  <li><a href="#"><i class="fa fa-star-o"></i></a></li>
-                </ul>
-
-                <p>Featured</p>
-
-              </div> --> <!-- end .rating -->
-
-            <!--   <figcaption>
-                <div class="bookmark">
-                  <a href="#"><i class="fa fa-bookmark-o"></i> Bookmark</a>
-                </div>
-                <div class="read-more">
-                  <a href="#"><i class="fa fa-angle-right"></i> Read More</a>
-                </div>
-
-              </figcaption>
-            </figure>
-            <h4><a href="#">Old Bookman's</a></h4>
-
-            <h5><a href="#">Category</a>, <a href="#">Another Category</a></h5>
-
-          </div>  --><!-- end .single-product -->
-
-        </div><!--end photo-->
-        
-
-      </div>  <!-- end .row -->
-
-      <!-- <div class="discover-more">
-
-        <a class="btn btn-default text-center" href="#"><i class="fa fa-plus-square-o"></i>Discover More</a>
-      </div> -->
-    </div>  <!-- end .container -->
-  </div>  <!-- end .featured-listing -->
-
-
-  <!-- <div class="classifieds-content">
-    <div class="container">
-      <div class="heading-section clearfix">
-        <h1>Classifieds</h1>
-
-        <a href="#" class="btn btn-default"><i class="fa fa-plus"></i> Post Your Ad</a>
-
-        <form action="#">
-          <input type="text" placeholder="Search by keywords">
-
-          <button type="submit"><i class="fa fa-search"></i></button>
-        </form>
-      </div> 
-      
-      <div class="row">
-        <div class="col-md-3 col-sm-6">
-          <ul class="classifieds-category">
-            <li><a href="#"><i class="fa fa-bullhorn"></i>Advartising <span>(1786)</span></a>
-
-              <ul class="sub-category">
-                <li><a href="#">Antiques <span>(43)</span></a></li>
-                <li><a href="#">Books <span>(31)</span></a></li>
-                <li><a href="#">Cars &amp; Motorcycles <span>(49)</span></a></li>
-                <li><a href="#">Computer &amp; Tablets <span>(111)</span></a></li>
-                <li><a href="#">Creative &amp; Digitals <span>(67)</span></a></li>
-                <li><a href="#">Fashion <span>(45)</span></a></li>
-                <li><a href="#">Fitness &amp; Sport <span>(78)</span></a></li>
-              </ul>
-
-            </li>
-
-            <li><a href="#"><i class="fa fa-home"></i>Home &amp; Garden <span>(754)</span></a>
-
-              <ul class="sub-category">
-                <li><a href="#">Antiques <span>(43)</span></a></li>
-                <li><a href="#">Books <span>(31)</span></a></li>
-                <li><a href="#">Cars &amp; Motorcycles <span>(49)</span></a></li>
-                <li><a href="#">Computer &amp; Tablets <span>(111)</span></a></li>
-                <li><a href="#">Creative &amp; Digitals <span>(67)</span></a></li>
-              </ul>
-
-            </li>
-          </ul> 
-
-        </div> 
-        <div class="col-md-3 col-sm-6">
-          <ul class="classifieds-category">
-            <li><a href="#"><i class="fa fa-shopping-cart"></i>E-commerce <span>(1987)</span></a>
-
-              <ul class="sub-category">
-                <li><a href="#">Antiques <span>(43)</span></a></li>
-                <li><a href="#">Books <span>(31)</span></a></li>
-                <li><a href="#">Cars &amp; Motorcycles <span>(49)</span></a></li>
-                <li><a href="#">Computer &amp; Tablets <span>(111)</span></a></li>
-                <li><a href="#">Creative &amp; Digitals <span>(67)</span></a></li>
-                <li><a href="#">Fashion <span>(45)</span></a></li>
-                <li><a href="#">Fitness &amp; Sport <span>(78)</span></a></li>
-                <li><a href="#">Furnishing <span>(13)</span></a></li>
-                <li><a href="#">Health &amp; Beauty <span>(99)</span></a></li>
-              </ul>
-
-            </li>
-
-            <li><a href="#"><i class="fa fa-cogs"></i>Industry <span>(1405)</span></a>
-
-              <ul class="sub-category">
-                <li><a href="#">Antiques <span>(43)</span></a></li>
-                <li><a href="#">Books <span>(31)</span></a></li>
-                <li><a href="#">Cars &amp; Motorcycles <span>(49)</span></a></li>
-                <li><a href="#">Computer &amp; Tablets <span>(111)</span></a></li>
-                <li><a href="#">Creative &amp; Digitals <span>(67)</span></a></li>
-                <li><a href="#">Fashion <span>(45)</span></a></li>
-                <li><a href="#">Fitness &amp; Sport <span>(78)</span></a></li>
-                <li><a href="#">Furnishing <span>(13)</span></a></li>
-              </ul>
-
-            </li>
-          </ul>
-          
-        </div> 
-
-        <div class="col-md-3 col-sm-6">
-          <ul class="classifieds-category">
-            <li><a href="#"><i class="fa fa-graduation-cap"></i>Education <span>(996)</span></a>
-
-              <ul class="sub-category">
-                <li><a href="#">Antiques <span>(43)</span></a></li>
-                <li><a href="#">Books <span>(31)</span></a></li>
-                <li><a href="#">Cars &amp; Motorcycles <span>(49)</span></a></li>
-                <li><a href="#">Computer &amp; Tablets <span>(111)</span></a></li>
-                <li><a href="#">Creative &amp; Digitals <span>(67)</span></a></li>
-                <li><a href="#">Fashion <span>(45)</span></a></li>
-              </ul>
-
-            </li>
-
-            <li><a href="#"><i class="fa fa-book"></i>Libraries &amp; Public <span>(1256)</span></a>
-
-              <ul class="sub-category">
-                <li><a href="#">Antiques <span>(43)</span></a></li>
-                <li><a href="#">Books <span>(31)</span></a></li>
-                <li><a href="#">Cars &amp; Motorcycles <span>(49)</span></a></li>
-                <li><a href="#">Computer &amp; Tablets <span>(111)</span></a></li>
-                <li><a href="#">Creative &amp; Digitals <span>(67)</span></a></li>
-                <li><a href="#">Fashion <span>(45)</span></a></li>
-                <li><a href="#">Fitness &amp; Sport <span>(78)</span></a></li>
-                <li><a href="#">Furnishing <span>(13)</span></a></li>
-              </ul>
-
-            </li>
-          </ul>
-          END .CLASSIFIES-CATEGORY
-        </div> 
-
-        <div class="col-md-3 col-sm-6">
-          <ul class="classifieds-category">
-            <li><a href="#"><i class="fa fa-paper-plane-o"></i>Entertainment <span>(2726)</span></a>
-
-              <ul class="sub-category">
-                <li><a href="#">Antiques <span>(43)</span></a></li>
-                <li><a href="#">Books <span>(31)</span></a></li>
-                <li><a href="#">Cars &amp; Motorcycles <span>(49)</span></a></li>
-                <li><a href="#">Computer &amp; Tablets <span>(111)</span></a></li>
-                <li><a href="#">Creative &amp; Digitals <span>(67)</span></a></li>
-              </ul>
-
-            </li>
-
-            <li><a href="#"><i class="fa fa-building-o"></i>Real Estate <span>(1131)</span></a>
-
-              <ul class="sub-category">
-                <li><a href="#">Antiques <span>(43)</span></a></li>
-                <li><a href="#">Books <span>(31)</span></a></li>
-                <li><a href="#">Cars &amp; Motorcycles <span>(49)</span></a></li>
-                <li><a href="#">Computer &amp; Tablets <span>(111)</span></a></li>
-                <li><a href="#">Creative &amp; Digitals <span>(67)</span></a></li>
-                <li><a href="#">Fitness &amp; Sport <span>(78)</span></a></li>
-                <li><a href="#">Furnishing <span>(13)</span></a></li>
-                <li><a href="#">Health &amp; Beauty <span>(99)</span></a></li>
-              </ul>
-
-            </li>
-          </ul>
-         
-        </div> 
-      </div> 
-    </div> 
- -->
-
-  <!-- <div class="register-content">
-    <div class="reg-heading">
-      <h1><strong>Register</strong> now</h1>
-    </div>
- -->
-    <!-- <div class="registration-details">
-      <div class="container">
-        <div class="box regular-member">
-          <h2><strong>Regular</strong> Member</h2>
-
-          <p><i class="fa fa-check-circle-o"></i> Loren ipsum dolor sit amet</p>
-          <p><i class="fa fa-check-circle-o"></i> Loren ipsum dolor sit amet</p>
-          <p><i class="fa fa-check-circle-o"></i> Loren ipsum dolor sit amet</p>
-
-          <a href="#" class="btn btn-default-inverse"><i class="fa fa-plus"></i> Register Now</a>
-        </div>
-
-        <div class="alternate">
-          <h2>OR</h2>
-        </div>
-
-        <div class="box business-member">
-          <h2><strong>Business</strong> Member</h2>
-
-          <p><i class="fa fa-check-circle-o"></i> Loren ipsum dolor sit amet</p>
-          <p><i class="fa fa-check-circle-o"></i> Loren ipsum dolor sit amet</p>
-          <p><i class="fa fa-check-circle-o"></i> Loren ipsum dolor sit amet</p>
-
-          <a href="#" class="btn btn-default-inverse"><i class="fa fa-plus"></i> Register Now</a>
-        </div>
-
-      </div>
-      
-    </div>
-   
-  </div> -->
-  
-    <div class="our-partners">
-      <div class="container">
-        <h4>Upcoming Events</h4>
-       
-        <!-- <div class="slider">
-          <ul class="bxslider">
-            {% for banners in banner|get_banner %}
-               {% if banners.pageurl == '/' and banners.position == 'bottom' %}
-                  <li> <img src="media/{{banners.banner}}"  alt=""> </li>
-                {% endif %}
-            {% endfor %}
-            
-          </ul>
-        </div> -->
-      
-        <!-- <div id="partners-slider" class="owl-carousel owl-theme">
-       
-          <div class="item"><a href="{{banners.0}}"><img src="static/banners/banner1.jpeg" alt=""></a></div>
-          <div class="item"><a href="{{banners.0}}"><img src="static/banners/banner2.jpeg"alt=""></a></div>
-          <div class="item"><a href="{{banners.0}}"><img src="static/banners/banner3.jpeg"alt=""></a></div>
-          <div class="item"><a href="{{banners.0}}"><img src="static/banners/banner4.jpeg"alt=""></a></div>
-          <div class="item"><a href="{{banners.0}}"><img src="static/banners/banner5.jpeg"alt=""></a></div>
-          <div class="item"><a href="{{banners.0}}"><img src="static/banners/banner6.png"alt=""></a></div>
-         <div class="item"><a href="{{banners.0}}"><img src="static/banners/banner1.jpeg" alt=""></a></div>
-          <div class="item"><a href="{{banners.0}}"><img src="static/banners/banner2.jpeg"alt=""></a></div>
-          <div class="item"><a href="{{banners.0}}"><img src="static/banners/banner3.jpeg"alt=""></a></div>
-          <div class="item"><a href="{{banners.0}}"><img src="static/banners/banner4.jpeg"alt=""></a></div>
-          <div class="item"><a href="{{banners.0}}"><img src="static/banners/banner5.jpeg"alt=""></a></div>
-          <div class="item"><a href="{{banners.0}}"><img src="static/banners/banner6.png"alt=""></a></div>
-        </div> -->
-        <div id="partners-slider" class="owl-carousel owl-theme">
-        {% for banners in banner|get_banner %}
-        {% if banners.pageurl == '/' and banners.position == 'bottom' %}  
-        <div class="item">  
-            <a href="http://{{banners.link}}"><img src="media/{{banners.banner}}"  alt=""></a>  
-        </div>       
         {% endif %}
         {% endfor %}
-         </div>
+
+
+      </div>  <!-- end .row -->
+                        
       </div>
       </div>
     <!-- END OUR PARTNER SLIDER -->
+    
+
+  
+
 {% endblock %}

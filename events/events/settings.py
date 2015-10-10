@@ -28,7 +28,6 @@ TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = (
@@ -42,11 +41,8 @@ INSTALLED_APPS = (
     'events',
     'haystack',
     'search',
-    'payu',
-    'transaction',
+    'payu',    
     'banner',
-    
-
 )
 
 SITE_ID = 1
@@ -69,8 +65,6 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'events.middleware.Global',
-
 )
 
 ROOT_URLCONF = 'events.urls'
@@ -130,7 +124,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.media",
     "django.core.context_processors.static",
     "django.core.context_processors.request",
-    'college_event.context_processors.eventtype',
+    'college_event.context_processors.globalactivity',
     "django.contrib.messages.context_processors.messages",
     'social_auth.context_processors.social_auth_by_name_backends',
     'social_auth.context_processors.social_auth_backends',
@@ -145,9 +139,9 @@ COMPRESS_JS_FILTERS = [
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
-GEOS_LIBRARY_PATH = '/usr/local/lib/libgeos_c.so'
+# GEOS_LIBRARY_PATH = '/usr/local/lib/libgeos_c.so'
 
-GEOIP_PATH = os.path.join(os.path.dirname(__file__), 'static/geoip/')
+# GEOIP_PATH = os.path.join(os.path.dirname(__file__), 'static/geoip/')
 # GEOIP_PATH = os.path.join(os.path.dirname(__file__), '../static/geoip/')
 
 #img upload by pradeepa
@@ -165,6 +159,13 @@ PAYU_INFO = {
              #success url for hotel
              'surl':'http://www.eventswat.com/upload_banner',
              'surl1':'http://www.eventswat.com/success',
-             'curl':'http://www.eventswat.com/post_event',
-             'furl':'http://www.eventswat.com/post_event',
+             'curl':'http://www.eventswat.com/post_event_v2',
+             'furl':'http://www.eventswat.com/post_event_v2',
             }
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'testmail123sample@gmail.com'
+EMAIL_HOST_PASSWORD = 'testmail123'
+EMAIL_PORT = 587
