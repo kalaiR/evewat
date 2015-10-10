@@ -75,10 +75,14 @@
                    {% for subcategory in subcategory%}  
                     <div class="col-md-3 col-sm-4 col-xs-6">
                         <div class="category-item">
+                        {% if 'start' in path %}  
+                          <img class="sub_cat_icon" src="../media/{{subcategory.icon}}">
+                          <img class="sub_cat_icon_hover" src="../media/{{subcategory.hover_icon}}">
+                          {% else %}
                           <img class="sub_cat_icon" src="media/{{subcategory.icon}}">
                           <img class="sub_cat_icon_hover" src="media/{{subcategory.hover_icon}}">
+                        {% endif %}
                           <a href="search/?q=&amp;eventtype={{subcategory.id}}">{{subcategory.name}}</a>
-
                         </div>
 
                       </div>
