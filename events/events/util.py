@@ -1,116 +1,11 @@
-# import os
 import random
 import string
 import uuid
 import urllib2
 from django.conf import settings
-# from django.contrib.gis.geoip import GeoIP
 from events import globals
-# from ipware.ip import get_ip
 from college_event.models import *
 from django.contrib import admin
-
-def get_client_ip(request):
-	# x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
-	# print "x_forwarded_for", x_forwarded_for
-	# if x_forwarded_for:
-	#     ip = x_forwarded_for.split(',')[0]
-	#     print "x_forwarded_for ip", ip
-	# else:
-	#     ip = request.META.get('REMOTE_ADDR')
-	#     print "remote ip", ip
-	# return ip
-	
-	# x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
-	# print "x_forwarded_for", x_forwarded_for
-	# if x_forwarded_for:
-	#     ip = x_forwarded_for.split(',')[-1].strip()
-	# else:
-	#     ip = request.META.get('REMOTE_ADDR')
-	# return ip
-
-	# ip = get_ip(request)
-	# print "iware ip", ip
-	# return ip
-
-	# import ipgetter
-	# IP = ipgetter.myip()
-	# print "IP from ipgetter", IP
-	# return IP 
-
-	''' This utility gets client's IP address from the request
-	'''
-	# return request.META.get('HTTP_X_FORWARDED_FOR', request.META.get('REMOTE_ADDR', '127.0.0.1'))
-
-# def get_current_country_cities(request):
-# 	user_ip = globals.ip
-# 	# local
-# 	if user_ip.startswith('127.0.0'):
-# 		user_ip = '114.69.235.2'
-# 	g = GeoIP()
-# 	country = g.country_code(user_ip)
-# 	current_country_cities = City.objects.filter(country_code=country)
-# 	return current_country_cities
-
-
-# def get_global_country(request):
-# 	""" This function get global language based on following assets
-		
-# 		1. authenticated user's language
-# 		2. cookie
-# 		2. fixido select language
-# 		3. query string
-# 		4. brower setting
-# 		5. default sweden
-# 	""" 
-# 	user_ip = globals.ip
-# 	# local
-# 	if user_ip.startswith('127.0.0'):
-# 		user_ip = '114.69.235.2'
-# 	g = GeoIP()
-# 	country = g.country_code(user_ip)
-# 	return country
-
-# def get_global_city(request):
-# 	""" This function get global language based on following assets
-		
-# 		1. authenticated user's language
-# 		2. cookie
-# 		2. fixido select language
-# 		3. query string
-# 		4. brower setting
-# 		5. default sweden
-# 	""" 
-# 	user_ip = globals.ip
-# 	# local
-# 	if user_ip.startswith('127.0.0'):
-# 		user_ip = '114.69.235.2'
-# 	g = GeoIP()
-# 	city=g.city(user_ip)['city']    
-# 	return city
-
-# def get_global_city_id(request):
-# 	user_ip = globals.ip
-# 	# local
-# 	if user_ip.startswith('127.0.0'):
-# 		user_ip = '114.69.235.2'
-# 	g = GeoIP()
-# 	city=g.city(user_ip)['city']
-# 	if not city:
-# 		city = "Pondicherry" 
-# 	if City.objects.filter(city=city).exists():
-# 		city = City.objects.get(city=city)
-# 		city_id=city.id
-# 	else:
-# 		country = get_global_country(request)
-# 		city_model = City()
-# 		city_model.city = city
-# 		city_model.country_code = country
-# 		city_model.country_name = g.country_name(user_ip)
-# 		city_model.save()
-# 		city_id = city_model.id
-# 	return city_id    
-
 
 def format_redirect_url(redirect_path, query_string):
 	''' utility to format redirect url with fixido query string

@@ -26,7 +26,7 @@ from django.utils import simplejson
 import simplejson as json
 
 from events.util import format_redirect_url
-
+from django.conf import settings
 from django.contrib.auth.decorators import login_required
 import random
 import string
@@ -239,7 +239,7 @@ def submit_event_v2(request):
         postevent_poster=request.FILES.getlist('poster[]')
         
         def handle_uploaded_file(f):            
-            postevent_poster = open('/static/img/' + '%s' % f.name, 'wb+')
+            postevent_poster = open(settings.MEDIA_ROOT+'/events/' + '%s' % f.name, 'wb+')
             for chunk in f.chunks():
                 postevent_poster.write(chunk)
             postevent_poster.close()
@@ -251,9 +251,9 @@ def submit_event_v2(request):
                 count=count-1
                 handle_uploaded_file(uploaded_file)
                 if count==0:
-                    photosgroup=photosgroup  + '/static/img/' + str(uploaded_file)
+                    photosgroup=photosgroup  + '/events/' + str(uploaded_file)
                 else:
-                    photosgroup=photosgroup  + '/static/img/' +str(uploaded_file) + ','
+                    photosgroup=photosgroup  + '/events/' +str(uploaded_file) + ','
             postevent.poster=photosgroup
         else:
             postevent.poster='/events/static/img/logo.png'

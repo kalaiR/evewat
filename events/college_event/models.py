@@ -4,11 +4,9 @@ from django.forms import ModelForm
 from django.contrib.auth.models import User
 from django.views.decorators.csrf import csrf_exempt
 from PIL import Image
-from django.utils import simplejson
 from haystack.query import SearchQuerySet
 from college_event.extra import ContentTypeRestrictedFileField
 
-import simplejson as json
 import os
 from django.conf import settings
 
