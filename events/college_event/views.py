@@ -239,7 +239,7 @@ def submit_event_v2(request):
         postevent_poster=request.FILES.getlist('poster[]')
         
         def handle_uploaded_file(f):            
-            postevent_poster = open('events/static/img/' + '%s' % f.name, 'wb+')
+            postevent_poster = open('/static/img/' + '%s' % f.name, 'wb+')
             for chunk in f.chunks():
                 postevent_poster.write(chunk)
             postevent_poster.close()
@@ -256,7 +256,7 @@ def submit_event_v2(request):
                     photosgroup=photosgroup  + '/static/img/' +str(uploaded_file) + ','
             postevent.poster=photosgroup
         else:
-            postevent.poster='/static/img/logo.png'
+            postevent.poster='/events/static/img/logo.png'
         if request.POST.get('plan')!='0':
             postevent.payment=request.POST.get('plan')
         postevent.save()
