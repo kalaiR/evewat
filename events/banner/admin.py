@@ -7,6 +7,7 @@ from django import forms
 class BannerPriceAdminForm(forms.ModelForm):
     class Meta:
         model = BannerPrice
+        fields = "__all__" 
 
     def clean_page_and_position(self):
         page = self.cleaned_data['page']

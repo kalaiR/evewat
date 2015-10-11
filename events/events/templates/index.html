@@ -4,229 +4,156 @@
 {% load static from staticfiles %}
 {% block content %}
  <script type="text/javascript" src="{% static "js/select.js" %}"></script>
-      <div class="slider-content">
-
-        <div id="home-slider" class="owl-carousel">
-        
-           {% for banners in banner|get_main_banner %}
-           {% if banners.admin_status == True %}
-            <div class="item">
-
-            {% if 'start' in path %}  
-                <img src="../media/{{banners.mainbanner}}"  alt="">
-            {% else %}
-                <img src="media/{{banners.mainbanner}}"  alt="">
-            {% endif %}
-            
-            
-            <div class="slide-content">
-              <!-- <a href="#"><img src="{% static "img/slider-logo.png" %}"alt=""></a>
-              <h1>The <span>Right</span> Place</h1>
-              <h2>For Business</h2> -->
-            </div>          
-          </div>
-            {% endif %}
-          {% endfor %}     
-          
-        </div>
-
-        <div class="customNavigation">
-          <a class="btn prev"><i class="fa fa-angle-left"></i></a>
-          <a class="btn next"><i class="fa fa-angle-right"></i></a>
-
-        </div>
-
-      </div> <!-- END .slider-content -->
-    </div> <!-- END .SEARCH and slide-section -->
-   
-   <!--  <div class="container">
-      <div class="header-nav-bar home-slide">
-        <nav class="text-center">
-            <h3><span>Explore by Event categories</span></h3>
-            <button><i class="fa fa-bars"></i></button>
-        </nav>
-      </div>
-    </div> --> <!-- end .container -->
-
-
-  </header> <!-- end #header -->
-   <a class="btn btn-default feedback1">FEEDBACK</a>                 
-   <div class="feedback_popup">
-           <form action="{%url "college_event.views.feedback" %}" id="form" method="post" name="form" class="feedback_form">{% csrf_token %}
-              <a class="close"> <i class="fa fa-times"></i></a>
-
-                   <h2 >
-                    Rate my website!
-                  </h2>
-                  <input type="text"  name="name" class="feed" placeholder=" name">
-                  <input type="email"   name="email" class="feed " placeholder="ex: myname@example.com">
-                  <select class="feed"name="rating">
-                    <option value="0">Please select your Rating </option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                  </select>
-                  <textarea placeholder="comments" name="comments" class="feed" value=""></textarea><br/>
-                   <button class="btn btn-default" type="submit" >
-              Submit
-            </button>
-      
-                  </form>
-    </div>
-  <div id="page-content" class="home-slider-content">
-    <div class="container">
-      <div class="home-with-slide">
-        <div class="row">
-
-          <div class="col-md-9 col-md-push-3">
-            <div class="page-content">
-
-              <div class="change-view">
-                <div class="filter-input">
-                  <!-- <input type="text" placeholder="Filter by Keywords"> -->
-                </div>
-              </div> <!-- end .change-view -->
-
-
-              <div class="product-details">
-                <div class="tab-content">
-
-                  <div class="tab-pane active" id="all-categories">
-                    
-
-                    <div class="row clearfix subcategories">                 
-                   {% for subcategory in subcategory%}  
-                    <div class="col-md-3 col-sm-4 col-xs-6">
-                        <div class="category-item">
-                        {% if 'start' in path %}  
-                          <img class="sub_cat_icon" src="../media/{{subcategory.icon}}">
-                          <img class="sub_cat_icon_hover" src="../media/{{subcategory.hover_icon}}">
-                          {% else %}
-                          <img class="sub_cat_icon" src="media/{{subcategory.icon}}">
-                          <img class="sub_cat_icon_hover" src="media/{{subcategory.hover_icon}}">
+            <div class="slider-content">
+                <div id="home-slider" class="owl-carousel">
+                    {% for banners in banner|get_main_banner %}
+                        {% if banners.admin_status == True %}
+                            <div class="item">
+                                {% if 'start' in path %}  
+                                    <img src="../media/{{banners.mainbanner}}"  alt="">
+                                {% else %}
+                                    <img src="media/{{banners.mainbanner}}"  alt="">
+                                {% endif %}  
+                                <div class="slide-content"></div>          
+                            </div>
                         {% endif %}
-                          <a href="search/?q=&amp;eventtype={{subcategory.id}}">{{subcategory.name}}</a>
-                        </div>
-
-                      </div>
-    
-                    {% endfor %}                 
-                  
-                       <!-- <div class="view-more">
-                        <a class="btn btn-default text-center" href="#"><i class="fa fa-plus-square-o"></i>View More</a>
-                      </div> -->
-
-                    </div> <!-- end .row -->
-                  </div> <!-- end .tabe-pane -->           
-   
-                </div> <!-- end .tabe-content -->
-
-              </div> <!-- end .product-details -->
-            </div> <!-- end .page-content -->
-          </div>
-
-          <div class="col-md-3 col-md-pull-9 category-toggle">
-            <button><i class="fa fa-briefcase"></i></button>
-
-            <div class="page-sidebar">
-              <!-- Category accordion -->
-              <div id="categories">
-                <div class="accordion">
-                  <form id="form_search_filter" class="form_search_filter">
-                     <input id="search_form" type="hidden" name="{{form.q.html_name}}"  value="{{form.q.value|default:''}}"/>
-                     <!-- <input type="hidden" name="page"  value="{{page.number}}"/>   -->
-                    <!--  <input type="hidden" name="city" id="city" value=""> -->    
-
-                      <ul class="nav nav-tabs home-tab" role="tablist" class="category_click">
-                        <li class="active">
-                          <a role="tab" data-toggle="tab" class="select_all_category pointer">All Categories
-                            <span>Display all sub-categories</span>
-                          </a>
-                        </li>
-                      {% for categories in initial_load|get_categories %}
-                        <li>
-                          <a class="select_category pointer"  role="tab" data-toggle="tab" title="Please choose any category">{{categories.name}}</a>
-                           <input type="hidden" class="ajax_catid" value="{{categories.id}}">                                      
-                          
-                        </li>
-                      {% endfor %}  
-
-                      </ul>
-                       <input type="hidden"  id="categoryid"  value="" name="categoryid"/>   
-                  </form>
-                </div> <!-- end .accordion -->
-              </div> <!-- end #categories -->
-
-            </div> <!-- end .page-sidebar -->
-          </div> <!-- end grid layout-->
-        </div> <!-- end .row -->
-      </div> <!-- end .home-with-slide -->
-    </div> <!-- end .container -->
-  </div>  <!-- end #page-content -->
-<div class="featured-listing" id= "featured-list">
-<div class="our-partners">
-    <div class="container">
-      <h2>Prioritized Banners</h2>
-                       
-                        
-      <div id="partners-slider" class="owl-carousel owl-theme">
-      {% for banners in banner|get_banner %}
-      {% if banners.pageurl == '/' and banners.position == 'bottom' %}  
-      <div class="item">  
-
-         <a href="http://{{banners.link}}">{% if 'start' in path %} <img src="../media/{{banners.banner}}"  alt=""> {% else %}<img src="media/{{banners.banner}}"  alt="">{% endif %}</a>  
-      </div>       
-      {% endif %}
-      {% endfor %}
-      </div>
-      </div>
-    </div>  <!-- end .container -->
-  </div>  <!-- end .featured-listing -->
-  <div class="feature" id= "featured-list">
-    <div class="our-partners">
-      <div class="container">
-      <div class="row clearfix">
-        <h2><strong>Upcoming Events</strong></h2>
-
-
-        {% for recentad in recentad %}
-        {% if recentad.admin_status == True %}
-         <div class="col-md-3 col-sm-4 col-xs-6">
-          <div class="single-product">
-            <figure>
-              <img src="{{recentad.poster}}" alt="">
-
-              <figcaption>
-                <div>
-              
-<!--                   <a href="http://{{ request.META.HTTP_HOST }}/details/{{recentad.id}}" title="{{recentad.festname}}" class="bookmark"><i class="fa fa-bookmark-o" rel="sidebar"></i> Bookmark</a>
- -->                </div>
-                <div class="read-more">
-                  <a href="details/{{recentad.id}}"><i class="fa fa-angle-right"></i> Read More</a>
+                    {% endfor %}     
                 </div>
+                <div class="customNavigation">
+                    <a class="btn prev"><i class="fa fa-angle-left"></i></a>
+                    <a class="btn next"><i class="fa fa-angle-right"></i></a>
+                </div>
+            </div> <!-- END .slider-content -->
+        </div> <!-- END .SEARCH and slide-section -->
+    </header> <!-- end #header -->
+    <a class="btn btn-default feedback1">FEEDBACK</a>                 
+    <div class="feedback_popup">
+        <form action="{%url "college_event.views.feedback" %}" id="form" method="post" name="form" class="feedback_form">{% csrf_token %}
+            <a class="close"> <i class="fa fa-times"></i></a>
+            <h2 >
+                Rate my website!
+            </h2>
+            <input type="text"  name="name" class="feed" placeholder=" name">
+            <input type="email"   name="email" class="feed " placeholder="ex: myname@example.com">
+            <select class="feed"name="rating">
+                <option value="0">Please select your Rating </option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+            <textarea placeholder="comments" name="comments" class="feed" value=""></textarea><br/>
+            <button class="btn btn-default" type="submit" >Submit</button>
+        </form>
+    </div>
+    <div id="page-content" class="home-slider-content">
+        <div class="container">
+            <div class="home-with-slide">
+                <div class="row">
+                    <div class="col-md-9 col-md-push-3">
+                        <div class="page-content">
+                            <div class="change-view">
+                                <div class="filter-input">
+                                </div>
+                            </div> <!-- end .change-view -->
+                            <div class="product-details">
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="all-categories">
+                                        <div class="row clearfix subcategories">         
+                                            {% for subcategory in subcategory%}  
+                                                <div class="col-md-3 col-sm-4 col-xs-6">
+                                                    <div class="category-item">
+                                                        {% if 'start' in path %}  
+                                                              <img class="sub_cat_icon" src="../media/{{subcategory.icon}}">
+                                                              <img class="sub_cat_icon_hover" src="../media/{{subcategory.hover_icon}}">
+                                                              {% else %}
+                                                              <img class="sub_cat_icon" src="media/{{subcategory.icon}}">
+                                                              <img class="sub_cat_icon_hover" src="media/{{subcategory.hover_icon}}">
+                                                        {% endif %}
+                                                        <a href="search/?q=&amp;eventtype={{subcategory.id}}">{{subcategory.name}}</a>
+                                                    </div>
 
-              </figcaption>
-            </figure>
-            <h4><a href="details/{{recentad.id}}">{{recentad.event_title}}</a></h4>
-
-            <h5><a href="details/{{recentad.id}}">{{recentad.city}}</a></h5>
-
-          </div> <!-- end .single-product -->
-
-        </div>
-        {% endif %}
-        {% endfor %}
-
-
-      </div>  <!-- end .row -->
-                        
-      </div>
-      </div>
-    <!-- END OUR PARTNER SLIDER -->
-    
-
-  
-
+                                                </div>
+                                            {% endfor %}                 
+                                        </div> <!-- end .row -->
+                                    </div> <!-- end .tabe-pane -->           
+                                </div> <!-- end .tabe-content -->
+                            </div> <!-- end .product-details -->
+                        </div> <!-- end .page-content -->
+                    </div>
+                    <div class="col-md-3 col-md-pull-9 category-toggle">
+                        <button><i class="fa fa-briefcase"></i></button>
+                        <div class="page-sidebar">
+                            <!-- Category accordion -->
+                            <div id="categories">
+                                <div class="accordion">
+                                    <form id="form_search_filter" class="form_search_filter">
+                                        <input id="search_form" type="hidden" name="{{form.q.html_name}}"  value="{{form.q.value|default:''}}"/>
+                                        <ul class="nav nav-tabs home-tab" role="tablist" class="category_click">
+                                                <li class="active">
+                                                    <a role="tab" data-toggle="tab" class="select_all_category pointer">All Categories
+                                                            <span>Display all sub-categories</span>
+                                                    </a>
+                                                </li>
+                                            {% for categories in initial_load|get_categories %}
+                                                <li>
+                                                    <a class="select_category pointer"  role="tab" data-toggle="tab" title="Please choose any category">{{categories.name}}</a>
+                                                    <input type="hidden" class="ajax_catid" value="{{categories.id}}">                                      
+                                                </li>
+                                            {% endfor %}  
+                                        </ul>
+                                        <input type="hidden"  id="categoryid"  value="" name="categoryid"/>   
+                                    </form>
+                                </div> <!-- end .accordion -->
+                            </div> <!-- end #categories -->
+                        </div> <!-- end .page-sidebar -->
+                    </div> <!-- end grid layout-->
+                </div> <!-- end .row -->
+            </div> <!-- end .home-with-slide -->
+        </div> <!-- end .container -->
+    </div>  <!-- end #page-content -->
+    <div class="featured-listing" id= "featured-list">
+        <div class="our-partners">
+            <div class="container">
+                <h2>Prioritized Banners</h2>                 
+                <div id="partners-slider" class="owl-carousel owl-theme">
+                    {% for banners in banner|get_banner %}
+                        {% if banners.pageurl == '/' and banners.position == 'bottom' %}  
+                            <div class="item">  
+                                <a href="http://{{banners.link}}">{% if 'start' in path %} <img src="../media/{{banners.banner}}"  alt=""> {% else %}<img src="media/{{banners.banner}}"  alt="">{% endif %}</a>  
+                            </div>       
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>  <!-- end .container -->
+    </div>  <!-- end .featured-listing -->
+    <div class="feature" id= "featured-list">
+        <div class="our-partners">
+            <div class="container">
+                <div class="row clearfix">
+                    <h2><strong>Upcoming Events</strong></h2>
+                    {% for recentad in recentad %}
+                        {% if recentad.admin_status == True %}
+                            <div class="col-md-3 col-sm-4 col-xs-6">
+                                <div class="single-product">
+                                    <figure>
+                                        <img src="/media/{{recentad.poster}}" alt="">
+                                        <figcaption>
+                                            <div></div>
+                                            <div class="read-more">
+                                                <a href="details/{{recentad.id}}"><i class="fa fa-angle-right"></i> Read More</a>
+                                            </div>
+                                        </figcaption>
+                                    </figure>
+                                    <h4><a href="details/{{recentad.id}}">{{recentad.event_title}}</a></h4>
+                                    <h5><a href="details/{{recentad.id}}">{{recentad.city}}</a></h5>
+                                </div> <!-- end .single-product -->
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>  <!-- end .row -->                 
+            </div>
+        </div><!-- END OUR PARTNER SLIDER -->
 {% endblock %}

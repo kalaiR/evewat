@@ -166,6 +166,16 @@ PAYU_INFO = {
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'testmail123sample@gmail.com'
-EMAIL_HOST_PASSWORD = 'testmail123'
+EMAIL_HOST_USER = 'eventswat@gmail.com'
+EMAIL_HOST_PASSWORD = 'Street11'
 EMAIL_PORT = 587
+
+
+TEMPLATED_EMAIL_BACKEND = 'templated_email.backends.vanilla_django.TemplateBackend'
+
+# You can use a shortcut version
+TEMPLATED_EMAIL_BACKEND = 'templated_email.backends.vanilla_django'
+
+# You can also use a class directly
+from templated_email.backends.vanilla_django import TemplateBackend
+TEMPLATED_EMAIL_BACKEND = TemplateBackend
