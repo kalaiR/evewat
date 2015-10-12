@@ -138,30 +138,8 @@ var checkout = $('#dpd2').datepicker({
   });
 
 
-function find_position(path){
-      $.get('/find_position/', { path: path }, function(data) {
-      $('.position_required').empty();
-      $(".position_required").siblings('.select-clone').empty();
-      $('.position_required').html($('<option>').text("Select Position").attr('value', "position_required"));
-      $(".position_required").siblings('.select-clone').html($('<li>').text("Select Position").attr('data-value', "position_required"));
-      
-      $.each(data, function(key,value) {
-        $('.position_required').append($('<option>').text(value.name).attr('value', value.name));
-        $(".position_required").siblings('.select-clone').append($('<li>').text(value.name).attr('data-value', value.name));
-      });
-      });
-    }
-    function find_price(position,path){
-      $.get('/find_price/', { position: position,path: path }, function(data) {
-      //$(".price_required").siblings('.select-clone').html($('<li>').text("Select Position").attr('data-value', "price_required"));
-      $.each(data, function(key,value) {
-        //$('.price_required').append($('<option>').text(value.name).attr('value', value.name));
-        //$(".price_required").siblings('.select-clone').append($('<li>').text(value.name).attr('data-value', value.id));
-        $(".price_required").val(value.name);
-        $('.banner_price_act').text('Amount: '+value.name)
-      });
-      });
-    }
+
+    
 
     function find_city(state){
       $.get('/find_city/', { state: state }, function(data) {
@@ -451,7 +429,6 @@ $( ".keywords input, .select-location input " ).focus(function() {
 
 
 $("document").ready(function($){
-  
 
   $(".feedback_popup").hide();
 
@@ -794,7 +771,7 @@ $('.events').click(function(){
     }
     }
 
-    if ($(":input").hasClass("error_input_field")){
+    if ($("#login_val :input").hasClass("error_input_field")){
     return false;
     }
     else{
@@ -859,7 +836,7 @@ $('.events').click(function(){
       mobile_validation('#mobile_signup');
     }
 
-     if ($(":input").hasClass("error_input_field")){
+     if ($("#user_form :input").hasClass("error_input_field")){
     return false;
     }
     else{
@@ -1181,19 +1158,20 @@ $(document).on('change','.banner',function(){
 
 
   // user validation
-$('.post_event,#paid').click(function(){
+$('#postevent').click(function(){
     var mobile =$('.mobile').val(); 
     var pattern = /^\d{10}$/;
 
   if($('.name').val() == ''){
-      $('.name_error').show();
+      $(this).addClass("sf-error")
       return false;
     }
     else{
       $('.name_error').hide();
     }
     if($('.email').val() == ''){
-      $('.email_error').show();
+      $('.email').addClass("sf-error");
+      $("#sf-msg").text("Please enter email address");
       return false;
     }
     // else if( !isValidEmailAddress( $('.email').val() )){
@@ -1201,20 +1179,23 @@ $('.post_event,#paid').click(function(){
     //   return false;
     // }
     else{
-      $('.email_error').hide();
+      $("#sf-msg").text("");
+      $('.email').removeClass("sf-error");
     }
     if($('.mobile').val() == '' ){
       // alert($('.mobile').val());
-      $('.mobile_error').show();
+      $('.mobile').addClass("sf-error");
+      $("#sf-msg").text("Please enter mobile number");
       return false;
     }
     else if(!pattern.test(mobile)){
-      $('.mobile_error').show().text("It is not valid mobile number.input 10 digits number!");
+      $("#sf-msg").text("It is not valid mobile number.input 10 digits number!");
       return false;
     }
-
     else{
-      $('.mobile_error').hide();
+     $("#sf-msg").text("");
+      $('.mobile').removeClass("sf-error");
+      return true;
     }
   $.cookie('name',$('.name').val(),{path: '/',raw: true});
   $.cookie('email',$('.email').val(),{path: '/',raw: true});

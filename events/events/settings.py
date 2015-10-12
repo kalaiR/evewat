@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'events.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',    # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'evewat1',                        # Or path to database file if using sqlite3.
+        'NAME': 'evewat',                        # Or path to database file if using sqlite3.
         'USER': 'root',                          # Not used with sqlite3.
         'PASSWORD': 'root',                      # Not used with sqlite3.
         'HOST': 'localhost',                     # Set to empty string for localhost. Not used with sqlite3.        
@@ -167,7 +167,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'eventswat@gmail.com'
-EMAIL_HOST_PASSWORD = 'Street11'
+EMAIL_HOST_PASSWORD = 'street11'
 EMAIL_PORT = 587
 
 

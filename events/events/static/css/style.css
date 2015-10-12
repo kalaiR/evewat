@@ -2875,7 +2875,7 @@ body {
 }
 #main-wrapper {
   position: relative;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 a {
   color: #333333;
@@ -5002,7 +5002,7 @@ fieldset[disabled] .btn-default-inverse.active {
   width: 100%;
   background: #eeeeee;
   border-radius: 3px;
-  border-left: 3px solid #fdc600;
+  border-left: 3px solid #e1004a;
   font-size: 18px;
   text-transform: uppercase;
 }
@@ -8855,4 +8855,37 @@ t
 }
 .adjust_space{
   padding: 0px 8px 0px 0px;
+}
+.content{
+  margin-left: 73px;
+  width: 253px;
+}
+.right_align span{
+  font-size: 30px;
+  margin-left: 170px !important;
+  margin-top: 50px !important;
+  position: absolute;
+}
+.bottom_banner{
+      border: 1px solid;
+    height: 90px !important;
+    margin-left: 210px;
+    margin-top: 555px;
+    position: absolute;
+    width: 750px !important;
+    }
+
+.bottom_banner img{
+   width: 749px !important;
+    height: 89px !important;
+      text-align: center;
+   
+}
+.ui-menu-item:hover{
+  background: #777 !important;
+}
+.ui-menu-item .ui-state-focus{
+  background: :none !important;
+  color:none !important;
+  border: none !important;
 }
