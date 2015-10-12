@@ -6,7 +6,7 @@
 					active			:0,
 					errormsg		:'Check faulty fields.',
 					sendbtntext		:'Create Account',
-					posturl			:'/submit_event_v2',
+					posturl			:'/post_event',
 					theme			:'default'
 				};
 			var settings=$.extend(defaults,settings);
@@ -21,10 +21,10 @@
 				modul.css({"width":settings.width});
 				modul.addClass("sf-theme-"+settings.theme);
 				openActiveTab();
-				modul.find(':input').on( "click", function() {
-					var ax=$(this).parent().parent().find("input").attr("type");
+				modul.find('.stepsForm input').on( "click", function() {
+					var ax=$(this).parent().parent().find(".stepsForm input").attr("type");
 					if (ax=="radio" || ax=="checkbox")
-						$(this).parent().parent().find("input").removeClass("sf-error");
+						$(this).parent().parent().find(".stepsForm input").removeClass("sf-error");
 					else
 						$(this).removeClass("sf-error");
 				});				
@@ -49,7 +49,7 @@
 				modul.find("#sf-next").on( "click", function() {
 					//devam etmesi için önce validate ler kontrol edilecek
 					requredcontrol=false;
-					modul.find(".sf-steps-form>ul").eq(settings.active).find(':input').each(function (){
+					modul.find(".sf-steps-form>ul").eq(settings.active).find('.stepsForm .input').each(function (){
 						if ($(this).attr("data-required")=="true" && $(this).val()=="")
 						{
 							$(this).addClass("sf-error");
@@ -59,7 +59,7 @@
 						{
 							if ( $(this).attr("type")=="radio" )
 							{
-								if ($(this).parent().parent().find("input[type='radio']:checked").length<1)
+								if ($(this).parent().parent().find(".stepsForm input[type='radio']:checked").length<1)
 								{
 									$(this).addClass("sf-error");
 									requredcontrol=true;
@@ -67,7 +67,7 @@
 							}
 							else
 							{
-								if ($(this).parent().parent().find("input[type='checkbox']:checked").length<1)
+								if ($(this).parent().parent().find(".stepsForm input[type='checkbox']:checked").length<1)
 								{
 									$(this).addClass("sf-error");
 									requredcontrol=true;
@@ -148,7 +148,7 @@
 					requredcontrol=false;					
 					for (i=0; i<sayac; i++)
 					{
-						modul.find(".sf-steps-form>ul").eq(i).find(':input').each(function (){
+						modul.find(".sf-steps-form>ul").eq(i).find('.stepsForm input').each(function (){
 							if ($(this).attr("data-required")=="true" && $(this).val()=="")
 							{
 								$(this).addClass("sf-error");
@@ -158,7 +158,7 @@
 							{
 								if ( $(this).attr("type")=="radio" )
 								{
-									if ($(this).parent().parent().find("input[type='radio']:checked").length<1)
+									if ($(this).parent().parent().find(".stepsForm input[type='radio']:checked").length<1)
 									{
 										$(this).addClass("sf-error");
 										requredcontrol=true;
@@ -166,7 +166,7 @@
 								}
 								else
 								{
-									if ($(this).parent().parent().find("input[type='checkbox']:checked").length<1)
+									if ($(this).parent().parent().find(".stepsForm input[type='checkbox']:checked").length<1)
 									{
 										$(this).addClass("sf-error");
 										requredcontrol=true;
@@ -265,7 +265,7 @@
 					modul.find(".sf-steps-form>.sf-content").css({"display":"none"});
 					modul.find(".sf-steps-form>ul").eq(settings.active).fadeIn();
 					modul.find(".sf-steps-content>div").eq(settings.active).addClass("sf-active");
-					if (settings.active==count-1)
+					if (settings.active==count)
 						modul.find("#sf-next").text(settings.sendbtntext).removeAttr('type').attr('type','submit');
 					else
 						modul.find("#sf-next").text(nextbtntext);

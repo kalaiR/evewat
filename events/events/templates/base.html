@@ -23,7 +23,7 @@
             <script src="js/media.match.min.js"></script>
         <![endif]-->
     </head>
-    <body {% if request.path == '/post_event' %} class="post_event" {% endif %}>
+    <body {% if request.path == '/post_event' %} class="post_event1" {% endif %}>
         <div id="main-wrapper">
             <header id="header">
             <div class="header-top-bar">
@@ -238,8 +238,9 @@
             <script src="{% static "js/search.js" %}"></script>
             <script src="{% static "js/jquery.bxslider.js" %}"></script>
             <script src="{% static "js/jquery.tipsy.js" %}"></script>
-            <script type="text/javascript" src="{% static "js/stepsForm.js" %}"></script>
             <script src="{% static "js/scripts.js" %}"></script>
+            <script type="text/javascript" src="{% static "js/stepsForm.js" %}"></script>
+            
             {% if request.path == '/banner' %}
             <script src="{% static "js/select.js" %}"></script>
             {% endif %}
