@@ -110,6 +110,7 @@
                   </div> <!-- end .change-view -->
 
                   <div id="search_result" class="row clearfix">
+
                   {% if page and page.object_list%}
                   {% for events in page.object_list %}
                     {% if events.object.admin_status == True %}
@@ -154,10 +155,13 @@
                    
                    
                     {% endif %}
-                  {%endfor%}
-                {% else %}
+
+                  {% endfor %}
+                  {% else %}
                        <div class="right_align"><span>{% trans "No Results Found" %}</span></div>
-                 {% endif %}
+                  
+                  {% endif %}
+                
 
                     <div class="pagination-center">
 
@@ -187,20 +191,16 @@
                           </li> 
                       </ul>
                     </div>
-                    <div class="col-md-12">
-<!--                     {% for banners in banner|get_banner %}
-                    {% if banners.pageurl == 'event/' and banners.position == 'bottom' and banners.admin_status == True %}
                     
-                          <img src="/media/{{banners.banner}}" >
-
-                    {% endif %}
-                    {% endfor %} -->
-                    </div>
-                  </div> <!-- end .row -->
+                  </div> <!-- end .row -->                 
                 </div> <!-- end .tabe-pane -->
               </div> <!-- end .product-details-->
-            </div> <!-- end .page-content -->
+   
+
+            </div> <!-- end .page-content -->       
+
           </div> <!-- end .tabe-content -->
+
 
               <div class="advertisement col-md-2" style="color:black;">
                 <p>Advertisement</p>
@@ -222,8 +222,10 @@
               </div> --> 
             </div>
             </div> <!-- row-->
+
            
           </div> <!-- end container-->
+          
         </div><!-- end .page-content -->
 
         <!-- 
