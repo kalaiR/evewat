@@ -116,13 +116,8 @@
                                 </div> <!-- END .HEADER-LOGIN -->
                             {% endif %}
                         </div>
-                        {% if user.is_authenticated %}
                             <a href="/post_event" class="btn btn-default"><i class="fa fa-plus"></i> Post Event</a>
                             <a href="/banner" class="btn btn-default"><i class="fa fa-plus"></i> Post Banner</a>
-                        {% else %}
-                            <a class="btn btn-default login_act"><i class="fa fa-plus"></i> Post Event</a>
-                            <a href="/banner" class="btn btn-default login_act"><i class="fa fa-plus"></i> Post Banner</a>
-                        {% endif %}
                     </div><!-- END .HEADER-CALL-TO-ACTION -->
                 </div><!-- END .CONTAINER -->
             </div><!-- END .HEADER-TOP-BAR -->
@@ -178,10 +173,10 @@
                                     <div class="popular-categories">
                                         <h3>eventswat.com</h3>
                                         <ul>
-                                            <li><a href="/about"><i class="fa fa-info-circle"></i>About us</a></li>
-                                            <li><a href="/privacy"><i class="fa fa-tasks"></i>Privacy policy</a></li>
-                                            <li><a href="/terms_and_conditions"><i class="fa fa-exclamation-triangle"></i>Terms and Conditions</a></li>
-                                            <li><a href="/faqs"><i class="fa fa-question-circle"></i>FAQs</a></li>
+                                            <li><a href="#"><i class="fa fa-info-circle"></i>About us</a></li>
+                                            <li><a href="#"><i class="fa fa-tasks"></i>Privacy policy</a></li>
+                                            <li><a href="#"><i class="fa fa-exclamation-triangle"></i>Terms and Conditions</a></li>
+                                            <li><a href="#"><i class="fa fa-question-circle"></i>FAQs</a></li>
                                         </ul>
                                     </div> <!-- end .popular-categories-->
                                 </div> <!-- end Grid layout-->
@@ -189,10 +184,10 @@
                                     <div class="popular-categories">
                                         <h3>Join our hands</h3>
                                         <ul>
-                                            <li><a href="/about"><i class="fa fa-comment"></i>Feedback</a></li>
-                                            <li><a href="/privacy"><i class="fa fa-briefcase"></i>Careers</a></li>
-                                            <li><a href="/terms_and_conditions"><i class="fa fa-newspaper-o"></i>Advertise with us</a></li>
-                                            <li><a href="/faqs"><i class="fa fa-gift"></i>special offers</a></li>
+                                            <li><a href="#"><i class="fa fa-comment"></i>Feedback</a></li>
+                                            <li><a href="#"><i class="fa fa-briefcase"></i>Careers</a></li>
+                                            <li><a href="#"><i class="fa fa-newspaper-o"></i>Advertise with us</a></li>
+                                            <li><a href="#"><i class="fa fa-gift"></i>special offers</a></li>
                                         </ul>
                                     </div> <!-- end .popular-categories-->
                                 </div> <!-- end Grid layout-->
@@ -226,7 +221,6 @@
             <script type="text/javascript" src="{% static "js/jquery-ui.js" %}"></script>
             <script src="{% static "js/jquery.ba-outside-events.min.js" %}"></script>
             <script type="text/javascript" src="{% static "js/jquery.cookie.js"%}"></script>
-            <script type="text/javascript" src="{% static "js/gmaps.js"%}"></script>
             <script src="{% static "js/bootstrap.min.js"%}"></script>
             <script src="{% static "js/owl.carousel.js" %}"></script>
             <script src="{% static "js/jquery.placeholder.min.js" %}"></script>

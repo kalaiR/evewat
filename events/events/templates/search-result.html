@@ -110,7 +110,7 @@
                   </div> <!-- end .change-view -->
 
                   <div id="search_result" class="row clearfix">
-                  
+
                   {% if page and page.object_list%}
                   {% for events in page.object_list %}
                     {% if events.object.admin_status == True %}
@@ -147,12 +147,14 @@
                    
                    
                     {% endif %}
+
                   {% endfor %}
                   {% else %}
                        <div class="right_align"><span>{% trans "No Results Found" %}</span></div>
                   
                   {% endif %}
                 
+
                     <div class="pagination-center">
 
                       <ul class="pagination">
@@ -202,6 +204,7 @@
                 {% endif %}
                 {% endfor %}
                <!--  <img src="img/add.jpg" alt=""> -->
+
               </div>  
                <div class="bottom_banner">
                 {% for banners in banner|get_banner %}
@@ -212,6 +215,7 @@
 
                     </div>        
           </div><!--page-sidebar-->
+
             </div> <!-- row-->
 
            

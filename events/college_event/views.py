@@ -61,9 +61,13 @@ def logout_view(request):
     return response
 
 def details(request,id=None):
-    postevent=Postevent.objects.get(pk=id)
-    organizer=Organizer.objects.filter(postevent__id=postevent.id)
-    return render_to_response("company-profile.html",{'events':postevent,'organizer':organizer[0]}, context_instance=RequestContext(request))
+    try:
+        postevent=Postevent.objects.get(pk=id)
+        organizer=Organizer.objects.filter(postevent__id=postevent.id)
+        return render_to_response("company-profile.html",{'events':postevent,'organizer':organizer[0]}, context_instance=RequestContext(request))
+    except:
+        return render_to_response("company-profile.html",{'message':'Sorry for inconvenience.Some thing went to wrong'}, context_instance=RequestContext(request))
+
 
 def banner(request):
     return render_to_response("uploadbanner.html",context_instance=RequestContext(request))
@@ -192,16 +196,18 @@ def register(request):
 
 @csrf_exempt
 def post_event(request):
-    category= Category.objects.all()
-    subcategory = SubCategory.objects.all()
-    state=City.objects.values_list('state',flat=True)
-    premium=PremiumPriceInfo.objects.all()
-    return render_to_response("post_event.html",{'premium':premium,'subcategory':subcategory,'category':category,'state':list(set(state))}, context_instance=RequestContext(request))
-
+    try:
+        category= Category.objects.all()
+        subcategory = SubCategory.objects.all()
+        state=City.objects.values_list('state',flat=True)
+        premium=PremiumPriceInfo.objects.all()
+        return render_to_response("post_event.html",{'premium':premium,'subcategory':subcategory,'category':category,'state':list(set(state))}, context_instance=RequestContext(request))
+    except:
+        return render_to_response("post_event.html",{'message':'Sorry for inconvenience.Some thing went to wrong'}, context_instance=RequestContext(request))
+        
 def submit_event_v2(request):
     try:
         if request.method=="POST":
-            print 'request.POST.get',request.POST.get('collegetxt','')
             postevent=Postevent()
             postevent.name=request.POST['name']
             postevent.email=request.POST['email']
@@ -245,7 +251,7 @@ def submit_event_v2(request):
                         photosgroup=photosgroup  + '/events/' +str(uploaded_file) + ','
                 postevent.poster=photosgroup
             else:
-                postevent.poster='/static/img/logo.png'
+                postevent.poster=settings.MEDIA_ROOT+'/events/img/logo.png'
             if request.POST.get('plan')!='0':
                 postevent.payment=request.POST.get('plan')
             postevent.save()
