@@ -292,18 +292,18 @@ def submit_event_v2(request):
             return response
         else:
             return render_to_response("post_event.html",{'message':'Insufficient data'}, context_instance=RequestContext(request))
-except:
-    response = render_to_response("post_event.html",{'message':'Something went to wrong'}, context_instance=RequestContext(request))
-    response.delete_cookie('eventtitle')
-    response.delete_cookie('startdate')
-    response.delete_cookie('enddate')
-    response.delete_cookie('plan')
-    response.delete_cookie('category_name')
-    response.delete_cookie('eventtype_name')
-    response.delete_cookie('eventtype')
-    response.delete_cookie('category')
-    response.delete_cookie('eventdescription')
-    return response
+    except:
+        response = render_to_response("post_event.html",{'message':'Something went to wrong'}, context_instance=RequestContext(request))
+        response.delete_cookie('eventtitle')
+        response.delete_cookie('startdate')
+        response.delete_cookie('enddate')
+        response.delete_cookie('plan')
+        response.delete_cookie('category_name')
+        response.delete_cookie('eventtype_name')
+        response.delete_cookie('eventtype')
+        response.delete_cookie('category')
+        response.delete_cookie('eventdescription')
+        return response
 
 @csrf_exempt
 def upload_banner(request):
@@ -551,6 +551,7 @@ def getdept(request):
     key_loc = request.GET.get('term')
     college=request.GET.get('college')
     filterargs={'college__id':college}
+    #print CollegeDepartment.objects.filter(college__id=college)
     department_lists = Department.objects.filter(department__icontains=key_loc)
     for department_list in department_lists:
         departmentname = department_list.department.strip()

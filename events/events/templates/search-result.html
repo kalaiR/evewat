@@ -118,7 +118,7 @@
                       <div class="single-product">
                         <figure>
                           <a href="http://{{request.META.HTTP_HOST}}/details/{{events.object.id}}">
-                            <img src="{{events.object.poster|get_photos}}" alt="">
+                            <img src="/media/{{events.object.poster|get_photos}}" alt="">
                           </a>
 
                           <figcaption>
@@ -133,11 +133,19 @@
                           </figcaption>
                         </figure>
 
-                        <h4><a href="/details/{{events.object.id}}">{{events.object.event_title}},{{ events.object.city.city }},{{events.object.state}}</a></h4>
-
-                        <h5><a href="/details/{{events.object.id}}">{{events.object.enddate}}</a> on <a href="/details/{{events.object.id}}">{{events.object.college.college_name}}</a></h5>
-
-                        <p><a href="/details/{{events.object.id}}">{{events.object.eventdescription|slice:":125"}}</a></p>
+                        <h4>
+                            <a href="/details/{{events.object.id}}">{{events.object.event_title}}</a>
+                        </h4>
+                        <h5>
+                            <a href="/details/{{events.object.id}}">{{events.object.college}}</a>
+                        </h5>
+                        <h5>
+                            <i class="fa fa-calendar-o"></i> &nbsp;{{events.object.enddate}}
+                        </h5>
+                        <h5>
+                            <i class="fa fa-map-marker"></i> &nbsp;&nbsp;<a href="/details/{{events.object.id}}">{{ events.object.city}}, {{events.object.state}}.
+                            </a>
+                        </h5>
 
                         <a class="read-more" href="/details/{{events.object.id}}"><i class="fa fa-angle-right"></i>Read More</a>
 
@@ -205,13 +213,13 @@
                 {% endfor %}
                <!--  <img src="img/add.jpg" alt=""> -->
               </div>
-              <div class="bottom_banner">
+              <!-- <div class="bottom_banner">
                 {% for banners in banner|get_banner %}
                   {% if banners.pageurl == 'event/' and banners.position == 'bottom' and banners.admin_status == True %}
                     <img src="/media/{{banners.banner}}" >
                   {% endif %}
                 {% endfor %}
-              </div> 
+              </div> --> 
             </div>
             </div> <!-- row-->
            
