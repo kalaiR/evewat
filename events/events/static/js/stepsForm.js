@@ -46,7 +46,7 @@
                 });
 				
 				//next click event ----------------------------------
-				modul.find("#sf-next").on( "click", function() {
+				modul.find("#sf-next,#postevent").on( "click", function() {
 					//devam etmesi için önce validate ler kontrol edilecek
 					requredcontrol=false;
 					modul.find(".sf-steps-form>ul").eq(settings.active).find(':input').each(function (){
@@ -54,6 +54,7 @@
 						{
 							$(this).addClass("sf-error");
 							requredcontrol=true;
+					
 						}
 						else if($(this).attr("data-required")=="true" && ( $(this).attr("type")=="radio" || $(this).attr("type")=="checkbox" ))
 						{
@@ -265,8 +266,14 @@
 					modul.find(".sf-steps-form>.sf-content").css({"display":"none"});
 					modul.find(".sf-steps-form>ul").eq(settings.active).fadeIn();
 					modul.find(".sf-steps-content>div").eq(settings.active).addClass("sf-active");
-					if (settings.active==count-1)
-						modul.find("#sf-next").text(settings.sendbtntext).removeAttr('type').attr('type','submit');
+
+
+					if (settings.active==count-1){
+						// modul.find("#sf-next").text(settings.sendbtntext);
+						modul.find("#sf-next").hide();
+						modul.find("#postevent").show();
+					}
+
 					else
 						modul.find("#sf-next").text(nextbtntext);
 					

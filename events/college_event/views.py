@@ -1,41 +1,36 @@
 from django.shortcuts import render_to_response, redirect, render
-from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse
+from django.core.files import File
+from django.core.exceptions import ValidationError
+from django.core.context_processors import csrf 
+from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_protect, csrf_exempt
+from django.contrib import messages
+from django.contrib.auth import authenticate, login,logout
+from django.template import Context
+from django.template.response import TemplateResponse
+from django.template import RequestContext
+from django.utils.translation import ugettext, ugettext_lazy as _
+from django.utils.encoding import smart_unicode, force_unicode
+from django.utils import simplejson
+from django.conf import settings
+
 from events.models import *
 from events.forms import *
 from college_event.models import *
 from banner.models import *
 from payu.models import *
-
-from django.core.files import File
-from django.contrib.auth.models import User
-from templated_email import send_templated_mail
-
-from django.core.context_processors import csrf 
-from django.views.decorators.csrf import csrf_protect, csrf_exempt
-
-from django.core.exceptions import ValidationError
-from django.utils.translation import ugettext, ugettext_lazy as _
-from django.contrib import messages
-
-from django.contrib.auth import authenticate, login,logout
-from django.template import Context
-#from django.template.loader import get_template
-from django.template.response import TemplateResponse
-from django.utils import simplejson
-import simplejson as json
-
 from events.util import format_redirect_url
-from django.conf import settings
-from django.contrib.auth.decorators import login_required
+from templated_email import send_templated_mail
+from forms import UploadFileForm
+
+import simplejson as json
 import random
 import string
 import datetime
-
 import time
 import openpyxl
-from forms import UploadFileForm
-from django.utils.encoding import smart_unicode, force_unicode
 
 class JSONResponse(HttpResponse):
     def __init__(self, data):
@@ -56,6 +51,26 @@ def terms_and_conditions(request):
 
 def faqs(request):
     return render_to_response("faqs.html", context_instance=RequestContext(request))
+
+def start(request):
+    return render_to_response('index.html',context_instance=RequestContext(request))
+
+def logout_view(request):
+    logout(request)
+    response = HttpResponseRedirect("/")
+    return response
+
+def details(request,id=None):
+    try:
+        postevent=Postevent.objects.get(pk=id)
+        organizer=Organizer.objects.filter(postevent__id=postevent.id)
+        return render_to_response("company-profile.html",{'events':postevent,'organizer':organizer[0]}, context_instance=RequestContext(request))
+    except:
+        return render_to_response("company-profile.html",{'message':'Sorry for inconvenience.Some thing went to wrong'}, context_instance=RequestContext(request))
+
+
+def banner(request):
+    return render_to_response("uploadbanner.html",context_instance=RequestContext(request))
 
 @csrf_protect 
 def user_login(request):
@@ -124,11 +139,6 @@ def user_login(request):
                 login(request, user)
                 return HttpResponseRedirect('/')
 
-def logout_view(request):
-    logout(request)
-    response = HttpResponseRedirect("/")
-    return response
-
 @csrf_protect
 def register(request):  
     context = RequestContext(request) 
@@ -162,19 +172,7 @@ def register(request):
             user.save()
             userprofile = Userprofile()
             userprofile.user_id=user.id
-            # userprofile.lastname = lastname=request.POST['lastname']
-            userprofile.mobile=request.POST['mobile']
-            
-            # if request.POST['select_city'] != '' and request.POST['select_city'] != 'select_city':
-            #     city=City.objects.get(id=request.POST['select_city'])
-            #     userprofile.city_id = city.id
-            # if request.POST['select_college'] != '' and request.POST['select_college'] != 'select_college':
-            #     college=College.objects.get(id=request.POST['select_college'])
-            #     userprofile.college_id =college.id
-            # if request.POST['select_dept'] != '' and request.POST['select_dept'] != 'select_department':
-            #     department=Department.objects.get(id=request.POST['select_dept'])
-            #     userprofile.department_id =department.id
- 
+            userprofile.mobile=request.POST['mobile'] 
             userprofile.save() 
             send_templated_mail(
               template_name = 'welcome',
@@ -183,8 +181,6 @@ def register(request):
               recipient_list = [user.email],
               context={
                        'user': user.username,
-                       
-                         
               },
             )              
             registered = True
@@ -198,93 +194,107 @@ def register(request):
         user_id = user.id
         return render_to_response('index.html', {'user_id':user_id} ,context_instance=RequestContext(request))
 
-def start(request):
-    return render_to_response('index.html',context_instance=RequestContext(request))
-
 @csrf_exempt
 def post_event(request):
-    category= Category.objects.all()
-    subcategory = SubCategory.objects.all()
-    state=City.objects.values_list('state',flat=True)
-    premium=PremiumPriceInfo.objects.all()
-    return render_to_response("post_event.html",{'premium':premium,'subcategory':subcategory,'category':category,'state':list(set(state))}, context_instance=RequestContext(request))
-
+    try:
+        category= Category.objects.all()
+        subcategory = SubCategory.objects.all()
+        state=City.objects.values_list('state',flat=True)
+        premium=PremiumPriceInfo.objects.all()
+        return render_to_response("post_event.html",{'premium':premium,'subcategory':subcategory,'category':category,'state':list(set(state))}, context_instance=RequestContext(request))
+    except:
+        return render_to_response("post_event.html",{'message':'Sorry for inconvenience.Some thing went to wrong'}, context_instance=RequestContext(request))
+        
 def submit_event_v2(request):
-    # try:
-    if request.method=="POST":
-        print 'request.POST.get',request.POST.get('collegetxt','')
-        postevent=Postevent()
-        postevent.name=request.POST['name']
-        postevent.email=request.POST['email']
-        postevent.mobile=request.POST.get('mobile','0')
-        postevent.event_title=request.POST.get('eventtitle','')
-        startdate=request.POST.get('startdate','')
-        date,month,year=startdate.split('-')
-        postevent.startdate=year+'-'+month+'-'+date
-        enddate=request.POST.get('enddate','')
-        date,month,year=enddate.split('-')
-        postevent.enddate=year+'-'+month+'-'+date
-        postevent_category=Category.objects.get(id=request.POST.get('category',''))
-        postevent.category=postevent_category
-        postevent_subcategory=SubCategory.objects.get(id=request.POST.get('eventtype',''))
-        postevent.eventtype=postevent_subcategory
-        postevent.eventdescription=request.POST.get('eventdescription','')
-        postevent.address=request.POST.get('address','')
-        postevent.state=request.POST.get('state','')
-        postevent_city=request.POST.get('city','')
-        postevent.city=postevent_city
-        postevent_college=request.POST.get('college','')
-        postevent.college=postevent_college
-        postevent.department=request.POST.get('dept','')
-        postevent_poster=request.FILES.getlist('poster[]')
-        
-        def handle_uploaded_file(f):            
-            postevent_poster = open(settings.MEDIA_ROOT+'/events/' + '%s' % f.name, 'wb+')
-            for chunk in f.chunks():
-                postevent_poster.write(chunk)
-            postevent_poster.close()
-        photosgroup = ''         
-        count=len(postevent_poster)
-        
-        if count :
-            for uploaded_file in postevent_poster:
-                count=count-1
-                handle_uploaded_file(uploaded_file)
-                if count==0:
-                    photosgroup=photosgroup  + '/events/' + str(uploaded_file)
-                else:
-                    photosgroup=photosgroup  + '/events/' +str(uploaded_file) + ','
-            postevent.poster=photosgroup
+    try:
+        if request.method=="POST":
+            postevent=Postevent()
+            postevent.name=request.POST['name']
+            postevent.email=request.POST['email']
+            postevent.mobile=request.POST.get('mobile','0')
+            postevent.event_title=request.POST.get('eventtitle','')
+            startdate=request.POST.get('startdate','')
+            date,month,year=startdate.split('-')
+            postevent.startdate=year+'-'+month+'-'+date
+            enddate=request.POST.get('enddate','')
+            date,month,year=enddate.split('-')
+            postevent.enddate=year+'-'+month+'-'+date
+            postevent_category=Category.objects.get(id=request.POST.get('category',''))
+            postevent.category=postevent_category
+            postevent_subcategory=SubCategory.objects.get(id=request.POST.get('eventtype',''))
+            postevent.eventtype=postevent_subcategory
+            postevent.eventdescription=request.POST.get('eventdescription','')
+            postevent.address=request.POST.get('address','')
+            postevent.state=request.POST.get('state','')
+            postevent_city=request.POST.get('city','')
+            postevent.city=postevent_city
+            postevent_college=request.POST.get('college','')
+            postevent.college=postevent_college
+            postevent.department=request.POST.get('dept','')
+            postevent_poster=request.FILES.getlist('poster[]')
+            
+            def handle_uploaded_file(f):            
+                postevent_poster = open(settings.MEDIA_ROOT+'/events/' + '%s' % f.name, 'wb+')
+                for chunk in f.chunks():
+                    postevent_poster.write(chunk)
+                postevent_poster.close()
+            photosgroup = ''         
+            count=len(postevent_poster)
+            
+            if count :
+                for uploaded_file in postevent_poster:
+                    count=count-1
+                    handle_uploaded_file(uploaded_file)
+                    if count==0:
+                        photosgroup=photosgroup  + '/events/' + str(uploaded_file)
+                    else:
+                        photosgroup=photosgroup  + '/events/' +str(uploaded_file) + ','
+                postevent.poster=photosgroup
+            else:
+                postevent.poster=settings.MEDIA_ROOT+'/events/img/logo.png'
+            if request.POST.get('plan')!='0':
+                postevent.payment=request.POST.get('plan')
+            postevent.save()
+            organizer=Organizer()
+            organizer.organizer=postevent
+            organizer.organizer_name=request.POST.get('organizer_name','')
+            organizer.organizer_mobile=request.POST.get('organizer_mobile','')
+            organizer.organizer_email=request.POST.get('organizer_email','')
+            organizer.save()
+            send_templated_mail(
+                  template_name = 'post_event',
+                  subject = 'Post Event',
+                  from_email = 'testmail123sample@gmail.com',
+                  recipient_list = [postevent.email],
+                  context={
+                           'user': postevent.name,
+                                               
+                  },
+              )  
+            message="Your data succesfully submitted"
+            
+            user_amount=request.POST.get('plan')
+            if user_amount!='0':
+                return HttpResponseRedirect('/payment_event/')
+            elif user_amount=='0':
+                response=render_to_response("post_event.html",{'message':message}, context_instance=RequestContext(request))
+            else:
+                response= render_to_response("post_event.html",{'message':'Insufficient data'}, context_instance=RequestContext(request))
+            response.delete_cookie('eventtitle')
+            response.delete_cookie('startdate')
+            response.delete_cookie('enddate')
+            response.delete_cookie('plan')
+            response.delete_cookie('category_name')
+            response.delete_cookie('eventtype_name')
+            response.delete_cookie('eventtype')
+            response.delete_cookie('category')
+            response.delete_cookie('eventdescription')
+            return response
+
         else:
-            postevent.poster='/events/static/img/logo.png'
-        if request.POST.get('plan')!='0':
-            postevent.payment=request.POST.get('plan')
-        postevent.save()
-        organizer=Organizer()
-        organizer.organizer=postevent
-        organizer.organizer_name=request.POST.get('organizer_name','')
-        organizer.organizer_mobile=request.POST.get('organizer_mobile','')
-        organizer.organizer_email=request.POST.get('organizer_email','')
-        organizer.save()
-        send_templated_mail(
-              template_name = 'post_event',
-              subject = 'Post Event',
-              from_email = 'testmail123sample@gmail.com',
-              recipient_list = [postevent.email],
-              context={
-                       'user': postevent.name,
-                                           
-              },
-          )  
-        message="Your data succesfully submitted"
-        
-        user_amount=request.POST.get('plan')
-        if user_amount!='0':
-            return HttpResponseRedirect('/payment_event/')
-        elif user_amount=='0':
-            response=render_to_response("post_event.html",{'message':message}, context_instance=RequestContext(request))
-        else:
-            response= render_to_response("post_event.html",{'message':'Insufficient data'}, context_instance=RequestContext(request))
+            return render_to_response("post_event.html",{'message':'Insufficient data'}, context_instance=RequestContext(request))
+    except:
+        response = render_to_response("post_event.html",{'message':'Something went to wrong'}, context_instance=RequestContext(request))
         response.delete_cookie('eventtitle')
         response.delete_cookie('startdate')
         response.delete_cookie('enddate')
@@ -295,118 +305,6 @@ def submit_event_v2(request):
         response.delete_cookie('category')
         response.delete_cookie('eventdescription')
         return response
-    # except:
-    #     response = render_to_response("post_event.html",{'message':'Something went to wrong'}, context_instance=RequestContext(request))
-    #     response.delete_cookie('eventtitle')
-    #     response.delete_cookie('startdate')
-    #     response.delete_cookie('enddate')
-    #     response.delete_cookie('plan')
-    #     response.delete_cookie('category_name')
-    #     response.delete_cookie('eventtype_name')
-    #     response.delete_cookie('eventtype')
-    #     response.delete_cookie('category')
-    #     response.delete_cookie('eventdescription')
-    #     return response
-
-def event_for_subcategory(request):
-    # print "brand_for_subcategory"
-    if request.is_ajax() and request.GET and 'sub_category_id' in request.GET:
-        print request.GET['sub_category_id'] 
-        # objs1 = Dropdown.objects.filter(subcat_refid=request.GET['sub_category_id']).exclude(brand_name='')
-        objs1 = Postevent.objects.filter(festtype_id=sub_category_id)
-        print 'objs1 in subcategory', objs1
-        for obj in objs1:
-            print obj.brand_name        
-        return JSONResponse([{'id': o1.id, 'name': smart_unicode(o1.brand_name)}
-            for o1 in objs1])
-    else:
-        return JSONResponse({'error': 'Not Ajax or no GET'})
-
-
-# To Load Categories in Home Page as Left Side bar
-def all_subcategory_for_category(request):
-    if request.is_ajax():
-        objs1 = SubCategory.objects.all()
-        return JSONResponse([{'name': o1.name, 'id': o1.id, 'icon':smart_unicode(o1.icon), 'hover_icon':smart_unicode(o1.hover_icon)} for o1 in objs1])       
-    else:
-        return JSONResponse({'error': 'Not Ajax or no GET'})
-
-# To Load SubCategories in Home Page as Left Side bar
-def subcategory_for_category(request):
-    if request.is_ajax() and request.GET and 'category_id' in request.GET:
-        objs1 = SubCategory.objects.filter(category__id=request.GET['category_id']) 
-        return JSONResponse([{'name': o1.name, 'id': o1.id, 'icon':smart_unicode(o1.icon), 'hover_icon':smart_unicode(o1.hover_icon)} for o1 in objs1])       
-    else:
-        return JSONResponse({'error': 'No Ajax or No Get Request'})
-
-def details(request,id=None):
-    postevent=Postevent.objects.get(pk=id)
-    organizer=Organizer.objects.filter(postevent__id=postevent.id)
-    print organizer
-    return render_to_response("company-profile.html",{'events':postevent,'organizer':organizer[0]}, context_instance=RequestContext(request))
-
-def banner(request):
-    return render_to_response("uploadbanner.html",context_instance=RequestContext(request))
-
-
-
-def find_colleges(request):
-    from django.utils.encoding import smart_unicode, force_unicode
-    if request.is_ajax() and request.GET and 'city_id' in request.GET:
-        objs = College.objects.filter(city=request.GET['city_id'])
-        return JSONResponse([{'id': o.id, 'name': smart_unicode(o.college_name)}
-        for o in objs])
-    else:
-        return JSONResponse({'error': 'Not Ajax or no GET'})
-
-def find_department(request):
-    from django.utils.encoding import smart_unicode, force_unicode
-    if request.is_ajax() and request.GET and 'college_id' in request.GET:
-        objs = CollegeDepartment.objects.filter(college__id=request.GET['college_id'])
-        return JSONResponse([{'id': o.department.id, 'name': smart_unicode(o.department)}
-        for o in objs])
-    else:
-        return JSONResponse({'error': 'Not Ajax or no GET'})
-    
-
-def find_subcategory(request):
-    from django.utils.encoding import smart_unicode, force_unicode
-    if request.is_ajax() and request.GET and 'category_id' in request.GET:
-        objs = SubCategory.objects.filter(category__id=request.GET['category_id'])
-        return JSONResponse([{'id': o.id, 'name': smart_unicode(o.name)}
-        for o in objs])
-    else:
-        return JSONResponse({'error': 'Not Ajax or no GET'})
-
-def find_city(request):
-    from django.utils.encoding import smart_unicode, force_unicode
-    if request.is_ajax() and request.GET and 'state' in request.GET:
-        objs = City.objects.filter(state=request.GET['state'])
-        return JSONResponse([{'id': o.id, 'name': smart_unicode(o.city)}
-        for o in objs])
-    else:
-        return JSONResponse({'error': 'Not Ajax or no GET'})
-
-def getcity(request):
-    from collections import OrderedDict
-    results = []
-    unsort_dict = {}
-    key_loc = request.GET.get('term')
-    state=request.GET.get('state')
-    filterargs = { 'state': state, 'city__icontains': key_loc }
-    city_lists = City.objects.filter(**filterargs)
-    for city_list in city_lists:
-        cityname = city_list.city.strip()
-        cityid = city_list.id
-        unsort_dict[cityname] = {'cityid':cityid, 'label':cityname, 'value':cityname}
-
-    sorted_dic = OrderedDict(sorted(unsort_dict.iteritems(), key=lambda v: v[0]))
-    for k, v in sorted_dic.iteritems():  
-        results.append(v)
-
-    return HttpResponse(simplejson.dumps(results), mimetype='application/json')
-
-
 
 @csrf_exempt
 def upload_banner(request):
@@ -599,6 +497,15 @@ def importcollegedata(request):
   return render_to_response('import.html', {'form': form, 'saved':saved, 'saved_leads': saved_leads}, 
     context_instance=RequestContext(request))
 
+def feedback(request):
+    if request.method=="POST":
+        feedback=Feedback()
+        feedback.name=request.POST.get('name')
+        feedback.email=request.POST.get('email')
+        feedback.comments=request.POST.get('comments')
+        feedback.rating=request.POST.get('rating')
+        feedback.save()
+        return render_to_response("index.html", context_instance=RequestContext(request))
 
 def getstate(request):
     from collections import OrderedDict
@@ -645,6 +552,7 @@ def getdept(request):
     key_loc = request.GET.get('term')
     college=request.GET.get('college')
     filterargs={'college__id':college}
+    #print CollegeDepartment.objects.filter(college__id=college)
     department_lists = Department.objects.filter(department__icontains=key_loc)
     for department_list in department_lists:
         departmentname = department_list.department.strip()
@@ -676,12 +584,85 @@ def getcity_base(request):
 
     return HttpResponse(simplejson.dumps(results), mimetype='application/json')
     
-def feedback(request):
-    if request.method=="POST":
-        feedback=Feedback()
-        feedback.name=request.POST.get('name')
-        feedback.email=request.POST.get('email')
-        feedback.comments=request.POST.get('comments')
-        feedback.rating=request.POST.get('rating')
-        feedback.save()
-        return render_to_response("index.html", context_instance=RequestContext(request))
+def event_for_subcategory(request):
+    if request.is_ajax() and request.GET and 'sub_category_id' in request.GET:
+        objs1 = Postevent.objects.filter(festtype_id=sub_category_id)
+        for obj in objs1:
+            print obj.brand_name        
+        return JSONResponse([{'id': o1.id, 'name': smart_unicode(o1.brand_name)}
+            for o1 in objs1])
+    else:
+        return JSONResponse({'error': 'Not Ajax or no GET'})
+
+
+# To Load Categories in Home Page as Left Side bar
+def all_subcategory_for_category(request):
+    if request.is_ajax():
+        objs1 = SubCategory.objects.all()
+        return JSONResponse([{'name': o1.name, 'id': o1.id, 'icon':smart_unicode(o1.icon), 'hover_icon':smart_unicode(o1.hover_icon)} for o1 in objs1])       
+    else:
+        return JSONResponse({'error': 'Not Ajax or no GET'})
+
+# To Load SubCategories in Home Page as Left Side bar
+def subcategory_for_category(request):
+    if request.is_ajax() and request.GET and 'category_id' in request.GET:
+        objs1 = SubCategory.objects.filter(category__id=request.GET['category_id']) 
+        return JSONResponse([{'name': o1.name, 'id': o1.id, 'icon':smart_unicode(o1.icon), 'hover_icon':smart_unicode(o1.hover_icon)} for o1 in objs1])       
+    else:
+        return JSONResponse({'error': 'No Ajax or No Get Request'})
+
+def find_colleges(request):
+    from django.utils.encoding import smart_unicode, force_unicode
+    if request.is_ajax() and request.GET and 'city_id' in request.GET:
+        objs = College.objects.filter(city=request.GET['city_id'])
+        return JSONResponse([{'id': o.id, 'name': smart_unicode(o.college_name)}
+        for o in objs])
+    else:
+        return JSONResponse({'error': 'Not Ajax or no GET'})
+
+def find_department(request):
+    from django.utils.encoding import smart_unicode, force_unicode
+    if request.is_ajax() and request.GET and 'college_id' in request.GET:
+        objs = CollegeDepartment.objects.filter(college__id=request.GET['college_id'])
+        return JSONResponse([{'id': o.department.id, 'name': smart_unicode(o.department)}
+        for o in objs])
+    else:
+        return JSONResponse({'error': 'Not Ajax or no GET'})
+    
+
+def find_subcategory(request):
+    from django.utils.encoding import smart_unicode, force_unicode
+    if request.is_ajax() and request.GET and 'category_id' in request.GET:
+        objs = SubCategory.objects.filter(category__id=request.GET['category_id'])
+        return JSONResponse([{'id': o.id, 'name': smart_unicode(o.name)}
+        for o in objs])
+    else:
+        return JSONResponse({'error': 'Not Ajax or no GET'})
+
+def find_city(request):
+    from django.utils.encoding import smart_unicode, force_unicode
+    if request.is_ajax() and request.GET and 'state' in request.GET:
+        objs = City.objects.filter(state=request.GET['state'])
+        return JSONResponse([{'id': o.id, 'name': smart_unicode(o.city)}
+        for o in objs])
+    else:
+        return JSONResponse({'error': 'Not Ajax or no GET'})
+
+def getcity(request):
+    from collections import OrderedDict
+    results = []
+    unsort_dict = {}
+    key_loc = request.GET.get('term')
+    state=request.GET.get('state')
+    filterargs = { 'state': state, 'city__icontains': key_loc }
+    city_lists = City.objects.filter(**filterargs)
+    for city_list in city_lists:
+        cityname = city_list.city.strip()
+        cityid = city_list.id
+        unsort_dict[cityname] = {'cityid':cityid, 'label':cityname, 'value':cityname}
+
+    sorted_dic = OrderedDict(sorted(unsort_dict.iteritems(), key=lambda v: v[0]))
+    for k, v in sorted_dic.iteritems():  
+        results.append(v)
+
+    return HttpResponse(simplejson.dumps(results), mimetype='application/json')

@@ -1,12 +1,6 @@
 from django.shortcuts import render_to_response, redirect, render
 from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse
-from events.models import *
-from events.forms import *
-from banner.models import *
-from college_event.models import *
-from college_event.views import *
-from college_event.forms import EventSearchForm
 from django.core.files import File
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
@@ -14,21 +8,20 @@ from django.utils.translation import ugettext, ugettext_lazy as _
 from django.contrib.auth import authenticate, login,logout
 from django.template import Context
 from django.template.response import TemplateResponse
-from events.util import format_redirect_url
 from django.contrib.auth.decorators import login_required
 from django.utils import simplejson
+from django.utils.encoding import smart_unicode, force_unicode
+from events.models import *
+from events.forms import *
+from events.util import format_redirect_url
+from banner.models import *
+from college_event.models import *
+from college_event.views import *
+from college_event.forms import EventSearchForm
 import simplejson as json
-
-#from events.util import get_current_country_cities
-# from events.context_processors import *
-
-
-from django.contrib.auth.decorators import login_required
 import random
 import string
 import datetime
-
-from django.utils.encoding import smart_unicode, force_unicode
 
 class JSONResponse(HttpResponse):
 	def __init__(self, data):
