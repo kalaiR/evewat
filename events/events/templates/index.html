@@ -134,8 +134,9 @@
             <div class="container">
                 <div class="row clearfix">
                     <h2><strong>Upcoming Events</strong></h2>
-                    {% for recentad in recentad %}
-                        {% if recentad.admin_status == True %}
+
+                    {% for recentad in recentad %}            
+                        
                             <div class="col-md-3 col-sm-4 col-xs-6">
                                 <div class="single-product">
                                     <figure>
@@ -151,7 +152,7 @@
                                     <h5><a href="details/{{recentad.id}}">{{recentad.city}}</a></h5>
                                 </div> <!-- end .single-product -->
                             </div>
-                        {% endif %}
+                    
                     {% endfor %}
                 </div>  <!-- end .row -->                 
             </div>

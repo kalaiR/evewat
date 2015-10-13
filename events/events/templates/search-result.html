@@ -110,6 +110,8 @@
                   </div> <!-- end .change-view -->
 
                   <div id="search_result" class="row clearfix">
+                  
+                  {% if page and page.object_list%}
                   {% for events in page.object_list %}
                     {% if events.object.admin_status == True %}
                     <div class="col-sm-4 col-xs-6">
@@ -145,8 +147,12 @@
                    
                    
                     {% endif %}
-                  {%endfor%}
-
+                  {% endfor %}
+                  {% else %}
+                       <div class="right_align"><span>{% trans "No Results Found" %}</span></div>
+                  
+                  {% endif %}
+                
                     <div class="pagination-center">
 
                       <ul class="pagination">
@@ -175,20 +181,16 @@
                           </li> 
                       </ul>
                     </div>
-                    <div class="col-md-12">
-<!--                     {% for banners in banner|get_banner %}
-                    {% if banners.pageurl == 'event/' and banners.position == 'bottom' and banners.admin_status == True %}
                     
-                          <img src="/media/{{banners.banner}}" >
-
-                    {% endif %}
-                    {% endfor %} -->
-                    </div>
-                  </div> <!-- end .row -->
+                  </div> <!-- end .row -->                 
                 </div> <!-- end .tabe-pane -->
               </div> <!-- end .product-details-->
-            </div> <!-- end .page-content -->
+   
+
+            </div> <!-- end .page-content -->       
+
           </div> <!-- end .tabe-content -->
+
 
               <div class="advertisement col-md-2" style="color:black;">
                 <p>Advertisement</p>
@@ -200,11 +202,21 @@
                 {% endif %}
                 {% endfor %}
                <!--  <img src="img/add.jpg" alt=""> -->
-              </div>
-          
+              </div>  
+               <div class="bottom_banner">
+                {% for banners in banner|get_banner %}
+                  {% if banners.pageurl == 'event/' and banners.position == 'bottom' and banners.admin_status == True %}
+                 <img src="/media/{{banners.banner}}" >
+                   {% endif %}
+                  {% endfor %}
+
+                    </div>        
+          </div><!--page-sidebar-->
             </div> <!-- row-->
+
            
           </div> <!-- end container-->
+          
         </div><!-- end .page-content -->
 
         <!-- 

@@ -5161,6 +5161,7 @@ fieldset[disabled] .btn-default-inverse.active {
   text-align: center;
   float: right;
   width: 69%;
+  margin-top: 100px !important;
 }
 /* product-details */
 .product-details {
@@ -8856,3 +8857,27 @@ t
 .adjust_space{
   padding: 0px 8px 0px 0px;
 }
+/*no results found*/
+.right_align span{
+  font-size: 30px;
+  margin-left: 170px !important;
+  margin-top: 50px !important;
+  position: absolute;
+}
+/*bottom_banner*/
+.bottom_banner{
+      border: 1px solid;
+    height: 90px !important;
+    margin-left: 210px;
+    margin-top: 555px;
+    position: absolute;
+    width: 750px !important;
+    }
+
+.bottom_banner img{
+   width: 749px !important;
+    height: 89px !important;    
+    text-align: center;
+   
+}
+ 
