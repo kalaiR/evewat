@@ -507,6 +507,7 @@ $('.close').click(function(){
     $.removeCookie('plan',{ path: '/' });
     $('.deposit_popup, .popup_fade, .forgotpassword_popup, .terms_services_popup, #signin_popup, #joinus_popup_content, #signin_popup1, #email_activate, #login_window, #login_window1, .lead_details_popup, #directbuy_signin_popup, #auction_popup, #ask_question_popup, #thank_you_popup').hide();
     $('#plan_change').show();
+    $('.header-search-bar').show();
     $('input[name="plan"]').val() == '';
   });
 
@@ -514,9 +515,15 @@ $('.close').click(function(){
 
         $('.popup_fade:first').show();
         $('#signin_popup').show();
+        $('.header-search-bar').hide();
         
   });
-
+  $('.post_event_btn_act').click(function(){
+    $('input[name="next"]').val('/post_event');
+  });
+    $('.upload_banner_btn_act').click(function(){
+    $('input[name="next"]').val('/upload_banner');
+  });
   // home slider section
   //-------------------------------------------
   var homeSlide = $("#home-slider");
@@ -1158,49 +1165,48 @@ $(document).on('change','.banner',function(){
 
 
   // user validation
-$('#postevent').click(function(){
-    var mobile =$('.mobile').val(); 
-    var pattern = /^\d{10}$/;
+// $('#postevent').click(function(){
+//     var mobile =$('.mobile').val(); 
+//     var pattern = /^\d{10}$/;
 
-  if($('.name').val() == ''){
-      $(this).addClass("sf-error")
-      return false;
-    }
-    else{
-      $("#sf-msg").text("");
-    }
-    if($('.email').val() == ''){
-      $('.email').addClass("sf-error");
-      $("#sf-msg").text("Please enter email address");
-      return false;
-    }
-    // else if( !isValidEmailAddress( $('.email').val() )){
-    //   $('.email_error').show().text('Enter Valid emailAddress');
-    //   return false;
-    // }
-    else{
-      $("#sf-msg").text("");
-      $('.email').removeClass("sf-error");
-    }
-    if($('.mobile').val() == '' ){
-      // alert($('.mobile').val());
-      $('.mobile').addClass("sf-error");
-      $("#sf-msg").text("Please enter mobile number");
-      return false;
-    }
-    else if(!pattern.test(mobile)){
-      $("#sf-msg").text("It is not valid mobile number.input 10 digits number!");
-      return false;
-    }
-    else{
-     $("#sf-msg").text("");
-      $('.mobile').removeClass("sf-error");
-      return true;
-    }
-  $.cookie('name',$('.name').val(),{path: '/',raw: true});
-  $.cookie('email',$('.email').val(),{path: '/',raw: true});
-  $.cookie('mobile',$('.mobile').val(),{path: '/',raw: true});
-});
+//   if($('.name').val() == ''){
+//       $(this).addClass("sf-error")
+//       return false;
+//     }
+//     else{
+//       $("#sf-msg").text("");
+//     }
+//     if($('.email').val() == ''){
+//       $('.email').addClass("sf-error");
+//       $("#sf-msg").text("Please enter email address");
+//       return false;
+//     }
+//     // else if( !isValidEmailAddress( $('.email').val() )){
+//     //   $('.email_error').show().text('Enter Valid emailAddress');
+//     //   return false;
+//     // }
+//     else{
+//       $("#sf-msg").text("");
+//       $('.email').removeClass("sf-error");
+//     }
+//     if($('.mobile').val() == '' ){
+//       $('.mobile').addClass("sf-error");
+//       $("#sf-msg").text("Please enter mobile number");
+//       return false;
+//     }
+//     else if(!pattern.test(mobile)){
+//       $("#sf-msg").text("It is not valid mobile number.input 10 digits number!");
+//       return false;
+//     }
+//     else{
+//      $("#sf-msg").text("");
+//       $('.mobile').removeClass("sf-error");
+//       return true;
+//     }
+//   $.cookie('name',$('.name').val(),{path: '/',raw: true});
+//   $.cookie('email',$('.email').val(),{path: '/',raw: true});
+//   $.cookie('mobile',$('.mobile').val(),{path: '/',raw: true});
+// });
 
 
   //upload banner validation

@@ -59,17 +59,19 @@
                         <img src="/media/{{events.poster}}" alt="">
                         <h2>Organizer Details</h2>
                         <ul class="list-unstyled">
-                            <li>
-                                <strong>Name</strong>
-                                <span>{{organizer.organizer_name}}</span>
-                            </li>
-                            <li>
-                              <strong>Phone</strong>
-                              <span>{{organizer.organizer_mobile}}</span>
-                            </li>
-                            <li>
-                              <strong>E-mail</strong><span>{{organizer.organizer_email}}</span>
-                            </li>
+                            {% for organizers in organizer %}
+                                <li>
+                                    <strong>Name</strong>
+                                    <span>{{organizers.organizer_name}}</span>
+                                </li>
+                                <li>
+                                  <strong>Phone</strong>
+                                  <span>{{organizers.organizer_mobile}}</span>
+                                </li>
+                                <li>
+                                  <strong>E-mail</strong><span>{{organizers.organizer_email}}</span>
+                                </li>
+                            {% endfor %}
                         </ul>
                     </div><!-- end contact-details -->
                     <div class="opening-hours">

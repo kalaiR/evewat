@@ -38,13 +38,19 @@ class DepartmentAdmin(admin.ModelAdmin):
 	search_fields = ['id', 'department']
 	list_per_page = 50
 
+class OraganizerInLine(admin.TabularInline):
+    model = Organizer
+    extra = 0
+
 class PosteventAdmin(admin.ModelAdmin):
+
 	filelds=['name','email','eventtype','city','event_title','startdate','admin_status']
 	list_display = ('id', 'name','eventtype','city','event_title','startdate','admin_status')
 	list_filter = ['id','event_title','city']	
 	search_fields = ['id', 'event_title']
 	list_per_page = 50
 	actions = ['send_EMAIL']
+	inlines = [ OraganizerInLine ]
 	
 	def admin_status(self, obj):
 		return obj.admin_status 
@@ -58,7 +64,7 @@ class PosteventAdmin(admin.ModelAdmin):
 					send_templated_mail(
 							template_name = 'premium_user',
 				            subject = 'Welcome Evewat',
-				            from_email = 'testmail123sample@gmail.com',
+				            from_email = 'eventswat@gmail.com',
 				            recipient_list = [i.email],
 				            context={
 				                       'user': i.name,
@@ -87,8 +93,8 @@ class FeedbackAdmin(admin.ModelAdmin):
 	search_fields = ['id', 'name']
 	list_per_page = 50
 
-class OrganizerAdmin(admin.ModelAdmin):
-	list_display = ('organizer_name','organizer_email','organizer_email')
+# class OrganizerAdmin(admin.ModelAdmin):
+# 	list_display = ('organizer_name','organizer_email','organizer_email')
 
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Feedback, FeedbackAdmin)
@@ -98,5 +104,5 @@ admin.site.register(College, CollegeAdmin)
 admin.site.register(Department, DepartmentAdmin)
 admin.site.register(Postevent, PosteventAdmin)    
 admin.site.register(SubCategory, SubCategoryAdmin)   
-admin.site.register(Organizer,OrganizerAdmin)   
+# admin.site.register(Organizer,OrganizerAdmin)   
 admin.site.register(CollegeDepartment) 
