@@ -1,6 +1,6 @@
 {% load static from staticfiles %}
 {% block content %}
-<div class="popup_fade" style="{% if request.REQUEST.lst and request.path == '/post_event_v2' %} display:block; {%else%} display: none; {% endif %}"></div><!--popup_fade-->
+<div class="popup_fade" style="{% if request.REQUEST.lst or request.REQUEST.lst and request.path == '/post_event' or  request.REQUEST.lst and request.path == '/upload_banner' %} display:block; {%else%} display: none; {% endif %}"></div><!--popup_fade-->
 
 <div class="signup_popup popup_pos" id="joinus_popup_content">
         <div class="popup_heading">
@@ -66,7 +66,7 @@
     </div><!--signup_popup-->
 
 
-    <div class="signup_popup popup_pos" id="signin_popup" style="{% if request.REQUEST.lst and request.path == '/post_event_v2'%} display:block; {%else%} display: none; {% endif %}">
+    <div class="signup_popup popup_pos" id="signin_popup" style="{% if request.REQUEST.lst or  request.REQUEST.lst and request.path == '/post_event' or  request.REQUEST.lst and request.path == '/upload_banner' %} display:block; {%else%} display: none; {% endif %}">
         <div class="popup_heading">
             <a href="#" class="logo"></a>
             <div class="fr">
@@ -78,7 +78,7 @@
         <div class="popup_contents" class="">
             <form method="post" action="/login/">
                 {% csrf_token %}
-                <input type="text" class="text_val_act" value="Email" maxlength='75' id="emailid_signup" name="username" autocomplete="off" />
+                <input type="text" class="text_val_act" value="" maxlength='75' id="emailid_signup" name="username" autocomplete="off" placeholder="Email"/>
                 <!-- <span class="error_msg labelError"  id="emailid_required" >Please enter User name</span> -->
                 <input type="password" class="text_val_act" placeholder="Password" value="" name="password"/>
     
