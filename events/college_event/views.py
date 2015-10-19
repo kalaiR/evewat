@@ -668,3 +668,10 @@ def getcity(request):
         results.append(v)
 
     return HttpResponse(simplejson.dumps(results), mimetype='application/json')
+
+def home_v2(request):
+   context = RequestContext(request,
+                           {'request': request,
+                            'user': request.user})
+   return render_to_response('home_v2.html',
+                             context_instance=context)
