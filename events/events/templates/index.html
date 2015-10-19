@@ -30,12 +30,14 @@
     <div class="feedback_popup">
         <form action="{%url "college_event.views.feedback" %}" id="form" method="post" name="form" class="feedback_form">{% csrf_token %}
             <a class="close"> <i class="fa fa-times"></i></a>
-            <h2 >
-                Rate my website!
-            </h2>
-            <input type="text"  name="name" class="feed" placeholder=" name">
-            <input type="email"   name="email" class="feed " placeholder="ex: myname@example.com">
-            <select class="feed"name="rating">
+            <h2 >Rate my website!</h2>
+            <div class="content">
+            <label for="text1">Name:
+            <input type="text" name="name" class="feed" placeholder=" name" /></label> 
+            <label for="text1">Email:
+            <input type="text" name="email" class="feed" placeholder=" email" /></label> 
+            <label for="text1">Rating:
+            <select class="feed"name="rating" placeholder="Rating"  >
                 <option value="0">Please select your Rating </option>
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -43,8 +45,12 @@
                 <option value="4">4</option>
                 <option value="5">5</option>
             </select>
+            </label><br/>
+            <label for="text1">Comments:
             <textarea placeholder="comments" name="comments" class="feed" value=""></textarea><br/>
+            </label>
             <button class="btn btn-default" type="submit" >Submit</button>
+            </div>
         </form>
     </div>
     <div id="page-content" class="home-slider-content">
@@ -135,23 +141,21 @@
                 <div class="row clearfix">
                     <h2><strong>Upcoming Events</strong></h2>
                     {% for recentad in recentad %}
-                        {% if recentad.admin_status == True %}
-                            <div class="col-md-3 col-sm-4 col-xs-6">
-                                <div class="single-product">
-                                    <figure>
-                                        <img src="/media/{{recentad.poster}}" alt="">
-                                        <figcaption>
-                                            <div></div>
-                                            <div class="read-more">
-                                                <a href="details/{{recentad.id}}"><i class="fa fa-angle-right"></i> Read More</a>
-                                            </div>
-                                        </figcaption>
-                                    </figure>
-                                    <h4><a href="details/{{recentad.id}}">{{recentad.event_title}}</a></h4>
-                                    <h5><a href="details/{{recentad.id}}">{{recentad.city}}</a></h5>
-                                </div> <!-- end .single-product -->
-                            </div>
-                        {% endif %}
+                        <div class="col-md-3 col-sm-4 col-xs-6">
+                            <div class="single-product">
+                                <figure>
+                                    <img src="/media/{{recentad.poster}}" alt="">
+                                    <figcaption>
+                                        <div></div>
+                                        <div class="read-more">
+                                            <a href="/details/{{recentad.id}}"><i class="fa fa-angle-right"></i> Read More</a>
+                                        </div>
+                                    </figcaption>
+                                </figure>
+                                <h4><a href="/details/{{recentad.id}}">{{recentad.event_title}}</a></h4>
+                                <h5><a href="/details/{{recentad.id}}">{{recentad.city}}</a></h5>
+                            </div> <!-- end .single-product -->
+                        </div>
                     {% endfor %}
                 </div>  <!-- end .row -->                 
             </div>
