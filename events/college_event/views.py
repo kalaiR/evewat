@@ -64,7 +64,7 @@ def details(request,id=None):
     try:
         postevent=Postevent.objects.get(pk=id)
         organizer=Organizer.objects.filter(postevent__id=postevent.id)
-        return render_to_response("company-profile.html",{'events':postevent,'organizer':organizer[0]}, context_instance=RequestContext(request))
+        return render_to_response("company-profile.html",{'events':postevent,'organizer':organizer}, context_instance=RequestContext(request))
     except:
         return render_to_response("company-profile.html",{'message':'Sorry for inconvenience.Some thing went to wrong'}, context_instance=RequestContext(request))
 
@@ -195,6 +195,7 @@ def register(request):
         return render_to_response('index.html', {'user_id':user_id} ,context_instance=RequestContext(request))
 
 @csrf_exempt
+@login_required(login_url='/?lst=1')
 def post_event(request):
     try:
         category= Category.objects.all()
@@ -207,7 +208,7 @@ def post_event(request):
         
 def submit_event_v2(request):
     try:
-        if request.method=="POST":
+    	if request.method=="POST":
             postevent=Postevent()
             postevent.name=request.POST['name']
             postevent.email=request.POST['email']
@@ -232,7 +233,7 @@ def submit_event_v2(request):
             postevent.college=postevent_college
             postevent.department=request.POST.get('dept','')
             postevent_poster=request.FILES.getlist('poster[]')
-            
+        
             def handle_uploaded_file(f):            
                 postevent_poster = open(settings.MEDIA_ROOT+'/events/' + '%s' % f.name, 'wb+')
                 for chunk in f.chunks():
@@ -240,7 +241,7 @@ def submit_event_v2(request):
                 postevent_poster.close()
             photosgroup = ''         
             count=len(postevent_poster)
-            
+        
             if count :
                 for uploaded_file in postevent_poster:
                     count=count-1
@@ -250,13 +251,14 @@ def submit_event_v2(request):
                     else:
                         photosgroup=photosgroup  + '/events/' +str(uploaded_file) + ','
                 postevent.poster=photosgroup
-            else:
-                postevent.poster=settings.MEDIA_ROOT+'/events/img/logo.png'
-            if request.POST.get('plan')!='0':
-                postevent.payment=request.POST.get('plan')
+           else:
+            postevent.poster='/events/img/logo_150.png'
+        # if request.POST.get('plan')!='0':
+        #     postevent.payment=request.POST.get('plan')
             postevent.save()
             organizer=Organizer()
-            organizer.organizer=postevent
+            post=Postevent.objects.order_by('-pk')[0]
+            organizer.postevent=postevent
             organizer.organizer_name=request.POST.get('organizer_name','')
             organizer.organizer_mobile=request.POST.get('organizer_mobile','')
             organizer.organizer_email=request.POST.get('organizer_email','')
@@ -267,46 +269,46 @@ def submit_event_v2(request):
                   from_email = 'testmail123sample@gmail.com',
                   recipient_list = [postevent.email],
                   context={
-                           'user': postevent.name,
-                                               
-                  },
-              )  
+                       'user': postevent.name,
+                               
+             	 },
+               )  
             message="Your data succesfully submitted"
-            
-            user_amount=request.POST.get('plan')
-            if user_amount!='0':
-                return HttpResponseRedirect('/payment_event/')
-            elif user_amount=='0':
-                response=render_to_response("post_event.html",{'message':message}, context_instance=RequestContext(request))
-            else:
-                response= render_to_response("post_event.html",{'message':'Insufficient data'}, context_instance=RequestContext(request))
+        
+        # user_amount=request.POST.get('plan')
+        # if user_amount!='0':
+        #     return HttpResponseRedirect('/payment_event/')
+        # elif user_amount=='0':
+        #     response=render_to_response("post_event.html",{'message':message}, context_instance=RequestContext(request))
+        #else:
+            response= render_to_response("post_event.html",{'message':message}, context_instance=RequestContext(request))
             response.delete_cookie('eventtitle')
             response.delete_cookie('startdate')
             response.delete_cookie('enddate')
-            response.delete_cookie('plan')
+        #response.delete_cookie('plan')
             response.delete_cookie('category_name')
             response.delete_cookie('eventtype_name')
             response.delete_cookie('eventtype')
             response.delete_cookie('category')
             response.delete_cookie('eventdescription')
             return response
-
         else:
             return render_to_response("post_event.html",{'message':'Insufficient data'}, context_instance=RequestContext(request))
-    except:
-        response = render_to_response("post_event.html",{'message':'Something went to wrong'}, context_instance=RequestContext(request))
-        response.delete_cookie('eventtitle')
-        response.delete_cookie('startdate')
-        response.delete_cookie('enddate')
-        response.delete_cookie('plan')
-        response.delete_cookie('category_name')
-        response.delete_cookie('eventtype_name')
-        response.delete_cookie('eventtype')
-        response.delete_cookie('category')
-        response.delete_cookie('eventdescription')
-        return response
+     except:
+         response = render_to_response("post_event.html",{'message':'Something went to wrong'}, context_instance=RequestContext(request))
+         response.delete_cookie('eventtitle')
+         response.delete_cookie('startdate')
+         response.delete_cookie('enddate')
+         response.delete_cookie('plan')
+         response.delete_cookie('category_name')
+         response.delete_cookie('eventtype_name')
+         response.delete_cookie('eventtype')
+         response.delete_cookie('category')
+         response.delete_cookie('eventdescription')
+         return response
 
 @csrf_exempt
+@login_required(login_url='/?lst=2')
 def upload_banner(request):
     if request.POST.get('price',False):
         uploadbanner=SiteBanner()
@@ -666,3 +668,10 @@ def getcity(request):
         results.append(v)
 
     return HttpResponse(simplejson.dumps(results), mimetype='application/json')
+
+def home_v2(request):
+   context = RequestContext(request,
+                           {'request': request,
+                            'user': request.user})
+   return render_to_response('home_v2.html',
+                             context_instance=context)

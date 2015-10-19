@@ -3557,7 +3557,7 @@ fieldset[disabled] .btn-default-inverse.active {
   width: 100%;
   padding: 15px 0;
   background-color: rgba(0, 116, 189, 0.5);
-  z-index: 9995;
+  z-index: 9991;
 }
 .header-search .header-search-bar .search-toggle {
   display: none;
@@ -3799,7 +3799,7 @@ fieldset[disabled] .btn-default-inverse.active {
   width: 100%;
   left: 0;
   top: 0px !important;
-  z-index:9995!important;
+  z-index:9991!important;
   /*background-color: #333333 !important;*/
    background-color: rgba(0, 116, 189, 0.5);
 }
