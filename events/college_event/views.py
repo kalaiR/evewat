@@ -251,10 +251,10 @@ def submit_event_v2(request):
                     else:
                         photosgroup=photosgroup  + '/events/' +str(uploaded_file) + ','
                 postevent.poster=photosgroup
-           else:
-            postevent.poster='/events/img/logo_150.png'
-        # if request.POST.get('plan')!='0':
-        #     postevent.payment=request.POST.get('plan')
+            else:
+                postevent.poster='/events/img/logo_150.png'
+	        # if request.POST.get('plan')!='0':
+       		# postevent.payment=request.POST.get('plan')
             postevent.save()
             organizer=Organizer()
             post=Postevent.objects.order_by('-pk')[0]
@@ -294,18 +294,18 @@ def submit_event_v2(request):
             return response
         else:
             return render_to_response("post_event.html",{'message':'Insufficient data'}, context_instance=RequestContext(request))
-     except:
-         response = render_to_response("post_event.html",{'message':'Something went to wrong'}, context_instance=RequestContext(request))
-         response.delete_cookie('eventtitle')
-         response.delete_cookie('startdate')
-         response.delete_cookie('enddate')
-         response.delete_cookie('plan')
-         response.delete_cookie('category_name')
-         response.delete_cookie('eventtype_name')
-         response.delete_cookie('eventtype')
-         response.delete_cookie('category')
-         response.delete_cookie('eventdescription')
-         return response
+    except:
+        response = render_to_response("post_event.html",{'message':'Something went to wrong'}, context_instance=RequestContext(request))
+        response.delete_cookie('eventtitle')
+        response.delete_cookie('startdate')
+        response.delete_cookie('enddate')
+        response.delete_cookie('plan')
+        response.delete_cookie('category_name')
+        response.delete_cookie('eventtype_name')
+        response.delete_cookie('eventtype')
+        response.delete_cookie('category')
+        response.delete_cookie('eventdescription')
+        return response
 
 @csrf_exempt
 @login_required(login_url='/?lst=2')

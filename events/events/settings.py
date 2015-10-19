@@ -43,7 +43,7 @@ INSTALLED_APPS = (
     'search',
     'payu',    
     'banner',
-    'social.apps.django_app.default',
+    # 'social.apps.django_app.default',
 )
 
 SITE_ID = 1
@@ -131,16 +131,18 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'social_auth.context_processors.social_auth_backends',
     'social_auth.context_processors.social_auth_by_type_backends',
     'social_auth.context_processors.social_auth_login_redirect',
+    # 'social.apps.django_app.context_processors.backends',
+    # 'social.apps.django_app.context_processors.login_redirect',
 
 )
 
-AUTHENTICATION_BACKENDS = (
-   'social.backends.facebook.FacebookOAuth2',
-   'social.backends.google.GoogleOAuth2',
-   'social_auth.backends.google.GoogleBackend',
-   'social.backends.twitter.TwitterOAuth',
-   'django.contrib.auth.backends.ModelBackend',
-)
+#AUTHENTICATION_BACKENDS = (
+   #'social.backends.facebook.FacebookOAuth2',
+   #'social.backends.google.GoogleOAuth2',
+   #'social_auth.backends.google.GoogleBackend',
+   #'social.backends.twitter.TwitterOAuth',
+   #'django.contrib.auth.backends.ModelBackend',
+#)
 
 LOGIN_REDIRECT_URL = '/'
 
