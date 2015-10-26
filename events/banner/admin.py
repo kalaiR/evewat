@@ -4,10 +4,11 @@ import datetime as dt
 import datetime
 from django import forms
 
+
 class BannerPriceAdminForm(forms.ModelForm):
     class Meta:
-        model = BannerPrice
-        fields = "__all__" 
+		model = BannerPrice
+		fields = "__all__" 
 
     def clean_page_and_position(self):
         page = self.cleaned_data['page']
@@ -37,6 +38,7 @@ class SiteBannerAdmin(admin.ModelAdmin):
 		if obj: # editing an existing object
 			return self.readonly_fields + ('startdate','enddate',)
 		return self.readonly_fields
+
 		
 class MainbannerAdmin(admin.ModelAdmin):
 	fields=['mainbanner','price', 'admin_status']
@@ -48,4 +50,3 @@ class MainbannerAdmin(admin.ModelAdmin):
 admin.site.register(Mainbanner, MainbannerAdmin)
 admin.site.register(SiteBanner, SiteBannerAdmin)
 admin.site.register(BannerPrice, BannerPriceAdmin)
-

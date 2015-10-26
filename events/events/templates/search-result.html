@@ -10,22 +10,22 @@
                             <img src="/media/{{banners.mainbanner}}"  alt="">
                             <div class="slide-content"></div>
                         </div>
-                    {% endif %}  
+                    {% endif %}
                 {% endfor %}
             </div>
             <div class="customNavigation">
                 <a class="btn prev"><i class="fa fa-angle-left"></i></a>
                 <a class="btn next"><i class="fa fa-angle-right"></i></a>
             </div>
-        </div> 
-        <div class="header-nav-bar">      
+        </div>
+        <div class="header-nav-bar">
         </div> <!-- end .header-nav-bar -->
     </header> <!-- end #header -->
     <div id="page-content">
         <div class="container">
             <div class="row">
                 <div class="page-sidebar">
-                    <div class="col-md-3 category-toggle">     
+                    <div class="col-md-3 category-toggle">
                         <div class="advertisement" style="color:black;">
                             <p>Advertisement</p>
                             {% for banners in banner|get_banner %}
@@ -38,9 +38,9 @@
                     </div> <!-- end .page-sidebar -->
                     <div class="col-md-7 ">
                         <div class="page-content">
-                            <div class="product-details-list view-switch">   
+                            <div class="product-details-list view-switch">
                                 <div class="tab-pane active">
-                                    <div class="change-view">                   
+                                    <div class="change-view">
                                     </div>
                                     <div id="search_result" class="row clearfix">
                                         {% if page and page.object_list%}
@@ -85,33 +85,33 @@
                                         <div class="pagination-center">
                                             <ul class="pagination">
                                                 <li>
-                                                    {% if page.has_previous %} 
+                                                    {% if page.has_previous %}
                                                     <a data-ajaxlink="true" data-ajaxpage="{{ page.previous_page_number }}" href="?q={{request.REQUEST.q}}&page={{ page.previous_page_number }}">
-                                                    <i class="fa  fa-angle-double-left"></i></a> 
+                                                    <i class="fa  fa-angle-double-left"></i></a>
                                                     {% endif %}
                                                 </li>
                                                 {% for p in page.paginator.page_range %}
                                                     {% if p|add:3 >= page.number and p|add:-3 <= page.number %}
-                                                        <li> {% if p == page.number %} class="active"{% endif %}>
+                                                        <li {% if p == page.number %} class="active"{% endif %}>
                                                             <a data-ajaxlink="true" data-ajaxpage="{{ p }}" href="?q={{request.REQUEST.q}}&page={{ p }}">
                                                                 {{ p }}
                                                             </a>
-                                                        </li> 
+                                                        </li>
                                                     {% endif %}
                                                 {% endfor %}
                                                 <li>
-                                                    {% if page.has_next %} 
+                                                    {% if page.has_next %}
                                                             <a data-ajaxlink="true" data-ajaxpage="{{ page.next_page_number }}" href="?q={{request.REQUEST.q}}&page={{ page.next_page_number }}">
                                                                 <i class="fa  fa-angle-double-right"></i>
                                                             </a>
                                                     {% endif %}
-                                                </li> 
+                                                </li>
                                             </ul>
                                         </div>
-                                    </div> <!-- end .row -->                 
+                                    </div> <!-- end .row -->
                                 </div> <!-- end .tabe-pane -->
                             </div> <!-- end .product-details-->
-                        </div> <!-- end .page-content -->       
+                        </div> <!-- end .page-content -->
                     </div> <!-- end .tabe-content -->
                     <div class="advertisement col-md-2" style="color:black;">
                         <p>Advertisement</p>
