@@ -207,41 +207,42 @@ def post_event(request):
         return render_to_response("post_event.html",{'message':'Sorry for inconvenience.Some thing went to wrong'}, context_instance=RequestContext(request))
         
 def submit_event_v2(request):
-    #try:
-    if request.method=="POST":
-        postevent=Postevent()
-        postevent.name=request.POST['name']
-        postevent.email=request.POST['email']
-        postevent.mobile=request.POST.get('mobile','0')
-        postevent.event_title=request.POST.get('eventtitle','')
-        startdate=request.POST.get('startdate','')
-        date,month,year=startdate.split('-')
-        postevent.startdate=year+'-'+month+'-'+date
-        enddate=request.POST.get('enddate','')
-        date,month,year=enddate.split('-')
-        postevent.enddate=year+'-'+month+'-'+date
-        postevent_category=Category.objects.get(id=request.POST.get('category',''))
-        postevent.category=postevent_category
-        postevent_subcategory=SubCategory.objects.get(id=request.POST.get('eventtype',''))
-        postevent.eventtype=postevent_subcategory
-        postevent.eventdescription=request.POST.get('eventdescription','')
-        postevent.address=request.POST.get('address','')
-        postevent.state=request.POST.get('state','')
-        postevent_city=request.POST.get('city','')
-        postevent.city=postevent_city
-        postevent_college=request.POST.get('college','')
-        postevent.college=postevent_college
-        postevent.department=request.POST.get('dept','')
-        postevent_poster=request.FILES.getlist('poster[]')
+    try:
+    	if request.method=="POST":
+            postevent=Postevent()
+            postevent.name=request.POST['name']
+            postevent.email=request.POST['email']
+            postevent.mobile=request.POST.get('mobile','0')
+            postevent.event_title=request.POST.get('eventtitle','')
+            startdate=request.POST.get('startdate','')
+            date,month,year=startdate.split('-')
+            postevent.startdate=year+'-'+month+'-'+date
+            enddate=request.POST.get('enddate','')
+            date,month,year=enddate.split('-')
+            postevent.enddate=year+'-'+month+'-'+date
+            postevent_category=Category.objects.get(id=request.POST.get('category',''))
+            postevent.category=postevent_category
+            postevent_subcategory=SubCategory.objects.get(id=request.POST.get('eventtype',''))
+            postevent.eventtype=postevent_subcategory
+            postevent.eventdescription=request.POST.get('eventdescription','')
+            postevent.address=request.POST.get('address','')
+            postevent.state=request.POST.get('state','')
+            postevent_city=request.POST.get('city','')
+            postevent.city=postevent_city
+            postevent_college=request.POST.get('college','')
+            postevent.college=postevent_college
+            postevent.department=request.POST.get('dept','')
+            postevent_poster=request.FILES.getlist('poster[]')
         
-        def handle_uploaded_file(f):            
-            postevent_poster = open(settings.MEDIA_ROOT+'/events/' + '%s' % f.name, 'wb+')
-            for chunk in f.chunks():
-                postevent_poster.write(chunk)
-            postevent_poster.close()
-        photosgroup = ''         
-        count=len(postevent_poster)
+            def handle_uploaded_file(f):            
+                postevent_poster = open(settings.MEDIA_ROOT+'/events/' + '%s' % f.name, 'wb+')
+                for chunk in f.chunks():
+                    postevent_poster.write(chunk)
+                postevent_poster.close()
+            photosgroup = ''         
+            count=len(postevent_poster)
         
+<<<<<<< HEAD
         if count :
             for uploaded_file in postevent_poster:
                 count=count-1
@@ -273,11 +274,12 @@ def submit_event_v2(request):
               from_email = 'testmail123sample@gmail.com',
               recipient_list = [postevent.email],
               context={
+
                        'user': postevent.name,
-                                           
-              },
-          )  
-        message="Your data succesfully submitted"
+                               
+             	 },
+               )  
+            message="Your data succesfully submitted"
         
         # user_amount=request.POST.get('plan')
         # if user_amount!='0':
@@ -285,31 +287,31 @@ def submit_event_v2(request):
         # elif user_amount=='0':
         #     response=render_to_response("post_event.html",{'message':message}, context_instance=RequestContext(request))
         #else:
-        response= render_to_response("post_event.html",{'message':message}, context_instance=RequestContext(request))
+            response= render_to_response("post_event.html",{'message':message}, context_instance=RequestContext(request))
+            response.delete_cookie('eventtitle')
+            response.delete_cookie('startdate')
+            response.delete_cookie('enddate')
+        #response.delete_cookie('plan')
+            response.delete_cookie('category_name')
+            response.delete_cookie('eventtype_name')
+            response.delete_cookie('eventtype')
+            response.delete_cookie('category')
+            response.delete_cookie('eventdescription')
+            return response
+        else:
+            return render_to_response("post_event.html",{'message':'Insufficient data'}, context_instance=RequestContext(request))
+    except:
+        response = render_to_response("post_event.html",{'message':'Something went to wrong'}, context_instance=RequestContext(request))
         response.delete_cookie('eventtitle')
         response.delete_cookie('startdate')
         response.delete_cookie('enddate')
-        #response.delete_cookie('plan')
+        response.delete_cookie('plan')
         response.delete_cookie('category_name')
         response.delete_cookie('eventtype_name')
         response.delete_cookie('eventtype')
         response.delete_cookie('category')
         response.delete_cookie('eventdescription')
         return response
-    else:
-        return render_to_response("post_event.html",{'message':'Insufficient data'}, context_instance=RequestContext(request))
-    # except:
-    #     response = render_to_response("post_event.html",{'message':'Something went to wrong'}, context_instance=RequestContext(request))
-    #     response.delete_cookie('eventtitle')
-    #     response.delete_cookie('startdate')
-    #     response.delete_cookie('enddate')
-    #     response.delete_cookie('plan')
-    #     response.delete_cookie('category_name')
-    #     response.delete_cookie('eventtype_name')
-    #     response.delete_cookie('eventtype')
-    #     response.delete_cookie('category')
-    #     response.delete_cookie('eventdescription')
-    #     return response
 
 @csrf_exempt
 @login_required(login_url='/?lst=2')
@@ -672,3 +674,10 @@ def getcity(request):
         results.append(v)
 
     return HttpResponse(simplejson.dumps(results), mimetype='application/json')
+
+def home_v2(request):
+   context = RequestContext(request,
+                           {'request': request,
+                            'user': request.user})
+   return render_to_response('home_v2.html',
+                             context_instance=context)

@@ -10,7 +10,7 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
-
+import smtplib
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 # for img upload
 FOR_IMG=os.path.join(os.path.dirname(__file__), 'static/img/')
@@ -43,6 +43,7 @@ INSTALLED_APPS = (
     'search',
     'payu',    
     'banner',
+    # 'social.apps.django_app.default',
 )
 
 SITE_ID = 1
@@ -131,14 +132,35 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'social_auth.context_processors.social_auth_backends',
     'social_auth.context_processors.social_auth_by_type_backends',
     'social_auth.context_processors.social_auth_login_redirect',
+    # 'social.apps.django_app.context_processors.backends',
+    # 'social.apps.django_app.context_processors.login_redirect',
+
 )
+
+#AUTHENTICATION_BACKENDS = (
+   #'social.backends.facebook.FacebookOAuth2',
+   #'social.backends.google.GoogleOAuth2',
+   #'social_auth.backends.google.GoogleBackend',
+   #'social.backends.twitter.TwitterOAuth',
+   #'django.contrib.auth.backends.ModelBackend',
+#)
+
+LOGIN_REDIRECT_URL = '/'
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY ='1080122031533-l55cc0kb6t0hr49ngr8j3t66b65v20s6.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET ='fSw6UV_COT9_VuAsTVoSuK2F'
+# SOCIAL_AUTH_GOOGLE_SCOPE=['https://www.googleapis.com/auth/userinfo.email']
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_USE_DEPRECATED_API = True
+SOCIAL_AUTH_GOOGLE_PLUS_USE_DEPRECATED_API = True
+
 COMPRESS_ENABLED = True
 
 COMPRESS_JS_FILTERS = [
     'compressor.filters.template.TemplateFilter',
 ]
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 # GEOS_LIBRARY_PATH = '/usr/local/lib/libgeos_c.so'
 
@@ -160,8 +182,8 @@ PAYU_INFO = {
              #success url for hotel
              'surl':'http://www.eventswat.com/upload_banner',
              'surl1':'http://www.eventswat.com/success',
-             'curl':'http://www.eventswat.com/post_event_v2',
-             'furl':'http://www.eventswat.com/post_event_v2',
+             'curl':'http://www.eventswat.com/post_event',
+             'furl':'http://www.eventswat.com/post_event',
             }
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -170,6 +192,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'eventswat@gmail.com'
 EMAIL_HOST_PASSWORD = 'street11'
 EMAIL_PORT = 587
+
 
 
 TEMPLATED_EMAIL_BACKEND = 'templated_email.backends.vanilla_django.TemplateBackend'
