@@ -147,9 +147,10 @@
                                         <select class="category_choose" name="eventtype">                 
                                             <option value="">Event type</option>
                                             {% for subcategory in subcategory %}
-                                                <option value="{{subcategory.id}}">{{ subcategory.name|capfirst }} </option>
+                                                <option  value="{{subcategory.id}}">{{ subcategory.name|capfirst }} </option>
                                             {% endfor%} 
                                         </select>
+                                            <input type="hidden" name="eventtype" value="" id="eventtype_id">
                                     </div>
                                     <button class="search-btn base_search" type="submit"><i class="fa fa-search"></i></button>
                                 </div>
@@ -157,8 +158,11 @@
                         </form>
                     </div>
                 {% endif %}
-                {% block content %}
-
+                {% block content %}                 
+                {% endblock %}
+                {% block results %}
+                {% endblock %}
+                {% block content_remainning %}
                 {% endblock %}
                 <footer id="footer">
                     <div class="main-footer">

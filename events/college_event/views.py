@@ -261,6 +261,10 @@ def submit_event_v2(request):
         organizer.postevent=postevent
         organizer.organizer_name=request.POST.get('organizer_name','')
         organizer.organizer_mobile=request.POST.get('organizer_mobile','')
+        print organizer.organizer_mobile,'organizer.organizer_mobile'
+        organizer.organizer_mobile_first=request.POST.get('organizer_mobile_2','')
+        print 'organizer.organizer_mobile_first', organizer.organizer_mobile_first
+        organizer.organizer_mobile_second=request.POST.get('organizer_mobile_3','') 
         organizer.organizer_email=request.POST.get('organizer_email','')
         organizer.save()
         send_templated_mail(

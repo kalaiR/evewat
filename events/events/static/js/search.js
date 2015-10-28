@@ -5,12 +5,11 @@
 
 function perform_search(){ 
            
-            var q = $('#form_search_filter').serialize();
-          
+            var q = $('#form_search_filter').serialize();         
         
                     $.get('/search/?'+ q, function(data){                                                                                             
                     $('#search_result').html(data);
-                    // attach_pagination_events();       
+                    attach_pagination_events();       
 
                 });
             }
@@ -21,7 +20,7 @@ function attach_pagination_events(){
             $('[data-ajaxlink=true]').click(function(ele){
             $("html, body").animate({ scrollTop: 0 }, "slow");
             $('[name=page]').val($(ele.currentTarget).attr('data-ajaxpage'));          
-            // perform_search();
+            perform_search();
             return false;
             });
             
@@ -40,7 +39,7 @@ $(document).ready(function() {
          // alert('category_id1'+ret);
         var options = '';       
         for (var i in ret) {
-          options += "<div class='col-md-3 col-sm-4 col-xs-6 '><div class='category-item'><img class='sub_cat_icon' src='../media/" + ret[i].icon + "'><img class='sub_cat_icon_hover' src='../media/" + ret[i].hover_icon + "'><a  class='event_click' href='/search/?q=&eventtype=" + ret[i].id +"'>" + ret[i].name +"</a> </div></div>";
+          options += "<div class='col-md-3 col-sm-4 col-xs-6 '><div class='category-item'><img class='sub_cat_icon' src='../media/" + ret[i].icon + "'><img class='sub_cat_icon_hover' src='../media/" + ret[i].hover_icon + "'><a  class='event_click' id=" + ret[i].id +"'>" + ret[i].name +"</a> </div></div>";
 
           }
              
@@ -51,13 +50,27 @@ $(document).ready(function() {
   $.getJSON("/all_subcategory_for_category/",function(ret) {
         var options = '';       
         for (var i in ret) {
-          options += "<div class='col-md-3 col-sm-4 col-xs-6 '><div class='category-item'><img class='sub_cat_icon' src='../media/" + ret[i].icon + "'><img class='sub_cat_icon_hover' src='../media/" + ret[i].hover_icon + "'><a  class='event_click' href='/search/?q=&eventtype=" + ret[i].id +"'>" + ret[i].name +"</a> </div></div>";
+          options += "<div class='col-md-3 col-sm-4 col-xs-6 '><div class='category-item'><img class='sub_cat_icon' src='../media/" + ret[i].icon + "'><img class='sub_cat_icon_hover' src='../media/" + ret[i].hover_icon + "'><a  class='event_click' id=" + ret[i].id +"'>" + ret[i].name +"</a> </div></div>";
 
           }
              
         $(".subcategories").html(options);
       });
   }
+
+    $(".category-item").bind('click', function (){
+      alert("eventtype");
+      var eventtype= $(this).find('a').attr('id');
+      alert(eventtype);
+    $('input[type="hidden"]#eventtype_id').val(eventtype);
+      // $('[name=eventtype]').val(eventtype);
+  
+     $('#f_search').submit().val(eventtype);
+
+    
+    });
+
+
     $('.select_category').click(function () {   
         var category = $(this).text();
         // alert('category'+ category);
@@ -97,10 +110,7 @@ $(document).ready(function() {
     //   perform_search();
     // });  
 
-    // $(".category_choose").change(function () {
-    //   // var selected_category = $( ".category_choose option:selected" ).val();
-    //   alert('selected_category');
-    // });
+   
 
 
 
