@@ -33,3 +33,9 @@ def get_photos(photo):
 	photo=str(photo).split(',')
 	return photo[0]
 
+@register.filter
+def get_subcategoriesCount(subCategoryId):  
+	subcategoriescounts = Postevent.objects.filter(eventtype=subCategoryId, admin_status=1).count()          		
+	# subcategoriescounts = Product.objects.filter(subcategory_id=subCategoryId).annotate(Count('subcategory'))			
+	return subcategoriescounts
+

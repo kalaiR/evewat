@@ -93,7 +93,7 @@
 {%block search_results1%}
                     <div class="col-md-12 ">
                         <div class="page-content">
-                            <div class="product-details-list view-switch">   
+                            <div class="product-details-list view-switch product-details-list-index">   
                                 <div class="tab-pane active">
                                     <div class="change-view">                   
                                     </div>
@@ -163,7 +163,15 @@
                                         {% else %}
                                             <div class="right_align"><span>{% trans "No Results Found" %}</span></div>
                                         {% endif %}
-                                    </div> <!-- end .row -->                 
+                                    </div> <!-- end .row -->   
+                        <div class="advertisement" style="color:black;">
+                            <p>Advertisement</p>
+                            {% for banners in banner|get_banner %}
+                                {% if banners.pageurl == 'event/' and banners.position == 'right' and banners.admin_status == True %}
+                                    <img src="/media/{{banners.banner}}" >
+                                {% endif %}
+                            {% endfor %}
+                        </div>              
                                 </div> <!-- end .tabe-pane -->
                             </div> <!-- end .product-details-->
                         </div> <!-- end .page-content -->       
@@ -204,7 +212,7 @@
                                                         {% for subcategories in categories.id|get_subcategories %}
                                                          <li class="subcategory_list_link">         
                                                             <a class="select_category pointer"  role="tab" data-toggle="tab" title="Please choose any category">{{subcategories.name}}</a>
-                                                            <input type="hidden" class="ajax_subcatid" value="{{subcategories.id}}">      
+                                                            <input type="hidden" class="ajax_subcatid" value="{{subcategories.id}}">  
                                                          </li>
                                                          {% endfor %}
                                                     </ul>                                     
