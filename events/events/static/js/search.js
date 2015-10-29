@@ -8,12 +8,11 @@ function perform_search(){
                 var q = $('#form_search_filter').serialize();
                 // alert("q===>"+q);
                 $.get('/ajax_search/?'+ q, function(data){  
-                // alert(data);                                                                                           
-                $('#search_result').html(data);
-                attach_pagination_events();       
+                  // alert(data);                                                                                           
+                  $('#search_result').html(data);
+                  attach_pagination_events();       
                 });
-            }
-
+}
 
 function attach_pagination_events(){
     // pagination_filter_align();
@@ -34,9 +33,11 @@ $(document).ready(function() {
     $('.search-btn').click(function() {
         validateSearch();
     });
-    // alert(window.location.pathname);
+
+    //newly added by kalai
     if (window.location.pathname == '/')
       perform_search();
+
     function fill_subcategories(category_id) {     
     // alert("catid"+category_id);
     $.getJSON("/subcategory_for_category/", {category_id: category_id},
@@ -63,18 +64,15 @@ $(document).ready(function() {
       });
   }
 
+    
     $(".category-item").bind('click', function (){
       alert("eventtype");
       var eventtype= $(this).find('a').attr('id');
       alert(eventtype);
-    $('input[type="hidden"]#eventtype_id').val(eventtype);
-      // $('[name=eventtype]').val(eventtype);
-  
-     $('#f_search').submit().val(eventtype);
-
-    
+      $('input[type="hidden"]#eventtype_id').val(eventtype);
+      // $('[name=eventtype]').val(eventtype);  
+      $('#f_search').submit().val(eventtype);
     });
-
 
     $('.select_category').click(function () {   
 
@@ -99,10 +97,17 @@ $(document).ready(function() {
        perform_search();
     });
 
-    $('.select_all_category').click(function () {  
-      
-      fill_all_subcategories();
+    //newly added by kalai
+    $('.subcategory_list_link').click(function () {   
+       var subcatid =  $(this).children('.ajax_subcatid').val();
+       var trim_subcatid = $.trim(subcatid);
+       $('[name=eventtype]').val(trim_subcatid);
+       $('[name=page]').val('');
+       perform_search();
+    });
 
+    $('.select_all_category').click(function () {     
+      fill_all_subcategories();
     });
 
     

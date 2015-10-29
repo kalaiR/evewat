@@ -93,12 +93,12 @@
                                 <div class="header-login">
                                     <a href="#" class=""><i class="fa fa-power-off" action="/login/"></i> Login</a>
                                     <span style="{% if request.REQUEST.lst and not request.path == '/post_event_v2' %} display:block;color:#df0024;font-weight: bold; {%else%} display: none; {% endif %}">
-                                    {%for message in messages%}{{message}}{% endfor %}
+                                    <!-- {%for message in messages%}{{message}}{% endfor %} -->
                                     </span>
                                     <div class="login_holder">
                                         <form method="post" id="login_val" action="/login/" name="sign_in">{% csrf_token %}       
                                             <div class="field_control">        
-                                                <input type="text" class="form-control"  placeholder="Username/Email" id="emailid_signin" name="username" autocomplete="off" >
+                                                <input type="text" class="form-control"  placeholder="Email" id="emailid_signin" name="username" autocomplete="off" >
                                                 <label for="emailid_signup" class="error_message">Enter your Username</label>
                                                 <label for="emailid_signup" class="error_message">Enter Valid Email</label>  
                                             </div>

@@ -134,9 +134,6 @@
                                                     </div> <!-- end .col-sm-4 grid layout -->
                                                 {% endif %}
                                             {% endfor %}
-                                        {% else %}
-                                            <div class="right_align"><span>{% trans "No Results Found" %}</span></div>
-                                        {% endif %}
                                         <div class="pagination-center">
                                             <ul class="pagination">
                                                 <li>
@@ -163,6 +160,9 @@
                                                 </li> 
                                             </ul>
                                         </div>
+                                        {% else %}
+                                            <div class="right_align"><span>{% trans "No Results Found" %}</span></div>
+                                        {% endif %}
                                     </div> <!-- end .row -->                 
                                 </div> <!-- end .tabe-pane -->
                             </div> <!-- end .product-details-->
@@ -201,17 +201,18 @@
                                                     <a class="pointer"  role="tab" data-toggle="tab" title="Please choose any category">{{categories.name}}</a>
                                                     <input type="hidden" class="ajax_catid" value="{{categories.id}}">
                                                     <ul class="subcategory_list">  
-                                                     <li>
-                                                        {% for subcategories in categories.id|get_subcategories %}  
-                                                        <a class="select_category pointer"  role="tab" data-toggle="tab" title="Please choose any category">{{subcategories.name}}</a>
-                                                        <input type="hidden" class="ajax_subcatid" value="{{subcategories.id}}">
-                                                        {% endfor %}
-                                                        </li>
+                                                        {% for subcategories in categories.id|get_subcategories %}
+                                                         <li class="subcategory_list_link">         
+                                                            <a class="select_category pointer"  role="tab" data-toggle="tab" title="Please choose any category">{{subcategories.name}}</a>
+                                                            <input type="hidden" class="ajax_subcatid" value="{{subcategories.id}}">      
+                                                         </li>
+                                                         {% endfor %}
                                                     </ul>                                     
                                                 </li>
                                             {% endfor %}  
                                         </ul>
-                                        <input type="hidden"  id="categoryid"  value="" name="category"/>   
+                                        <input type="hidden"  id="categoryid"  value="" name="category"/> 
+                                        <input type="hidden"  id="eventtypeid"  value="" name="eventtype"/>   
                                     </form>
                                 </div> <!-- end .accordion -->
                             </div> <!-- end #categories -->
