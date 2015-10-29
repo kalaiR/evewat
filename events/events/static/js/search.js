@@ -35,8 +35,8 @@ $(document).ready(function() {
     });
 
     //newly added by kalai
-    if (window.location.pathname == '/')
-      perform_search();
+    // if (window.location.pathname == '/')
+    //   perform_search();
 
     function fill_subcategories(category_id) {     
     // alert("catid"+category_id);
@@ -74,7 +74,7 @@ $(document).ready(function() {
       $('#f_search').submit().val(eventtype);
     });
 
-    $('.select_category').click(function () {   
+    $('.select_category_index').click(function () {   
 
        //old code
        // alert("select_category");

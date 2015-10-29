@@ -205,7 +205,7 @@
                                             {% endfor %}  -->
                                             <!-- new code for index_v2.html updated by kalai -->
                                             {% for categories in initial_load|get_categories %}
-                                                <li class="select_category">
+                                                <li class="select_category_index">
                                                     <a class="pointer"  role="tab" data-toggle="tab" title="Please choose any category">{{categories.name}}</a>
                                                     <input type="hidden" class="ajax_catid" value="{{categories.id}}">
                                                     <ul class="subcategory_list">  
