@@ -5590,14 +5590,15 @@ fieldset[disabled] .btn-default-inverse.active {
   top: 120px;
   width: 160px;
   height: 700px;
-  text-align: center;
+  // text-align: center;
 }
 .product-details-list .advertisement p {
   color: #777777;
   text-transform: uppercase;
   font-size: 11px;
   margin: 0;
-  padding-top: 10px;
+  // padding-top: 10px;
+  padding: 10px 0px 10px 30px;
 }
 .product-details-list .advertisement img {
   height: 600px;
@@ -8900,3 +8901,16 @@ t
   border: none !important;
 }
 
+.subcategory_list{
+  display: none;
+}
+
+.product-details-list-index .advertisement{
+  top: 16px !important;
+  right:-160px !important;
+}
+
+.subcategory_list_link a{
+  font-size:10px !important;
+  padding-left: 58px !important;
+}

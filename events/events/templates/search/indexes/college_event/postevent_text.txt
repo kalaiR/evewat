@@ -1,3 +1,4 @@
+{{object.category}}
 {{object.eventtype}    
 {{object.city}}
 {{object.event_title}}

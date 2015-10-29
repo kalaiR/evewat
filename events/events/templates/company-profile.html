@@ -28,7 +28,7 @@
             {% if message%}
                 <script type="text/javascript">
                     window.onload = function(){ window.location="http://{{request.META.HTTP_HOST}}/post_event"; }
-                </script>
+                </script> 
                 <h4 class="text-center">{{message}}</h4>
             {%endif%}
         <div class="row">
@@ -43,7 +43,7 @@
                             <div class="company-text">
                                 <b><h4>Event Description:</h4></b>
                                 <p><strong>{{events.eventdescription}}</strong></p>
-                                <h4>Event Loaction:</h4>
+                                <h4>Event Location:</h4>
                                 <p>{{events.college}},<span class="city_map">{{events.city}}</span>,{{events.state}}</p>
                                 <h4>Organized by:</h4>
                                 <p>{{events.department}}</p>
@@ -75,7 +75,7 @@
                         </ul>
                     </div><!-- end contact-details -->
                     <div class="opening-hours">
-                        <h2>Important Dates</h2>
+                        <h2>Events Date</h2>
                         <ul class="list-unstyled">
                             <li>
                               <strong>Start date</strong>

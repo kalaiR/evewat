@@ -71,6 +71,12 @@ urlpatterns = patterns('',
 	  #results_per_page=settings.SEARCH_PAGE_NUMBER_OF_LEADS
 	), name='newsearchPageV2'), 
 
+	url(r'^(?i)ajax_search/', EventSearchView(
+	  template='index_v2.html', 
+	  form_class=EventSearchFilter, 
+	  #results_per_page=settings.SEARCH_PAGE_NUMBER_OF_LEADS
+	), name='newsearchPageV2'), 
+
 	# url(r'^blog/', include('blog.urls')),
 
 	url(r'^find_colleges/$', 'college_event.views.find_colleges',name='find_colleges'),
@@ -88,6 +94,6 @@ urlpatterns = patterns('',
 	url(r'^admin/', include(admin.site.urls)),
 	url(r'^import/', 'college_event.views.importcollegedata', name='importcollegedata'),
 	#url('', include('social.apps.django_app.urls', namespace='social')),
-   	#url('', include('django.contrib.auth.urls', namespace='auth')),
-   	url(r'^home_v2/$', 'college_event.views.home_v2', name='home_v2'),
+	#url('', include('django.contrib.auth.urls', namespace='auth')),
+	url(r'^home_v2/$', 'college_event.views.home_v2', name='home_v2'),
 )+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
