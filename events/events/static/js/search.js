@@ -34,8 +34,9 @@ $(document).ready(function() {
     $('.search-btn').click(function() {
         validateSearch();
     });
-
-    perform_search();
+    // alert(window.location.pathname);
+    if (window.location.pathname == '/')
+      perform_search();
     function fill_subcategories(category_id) {     
     // alert("catid"+category_id);
     $.getJSON("/subcategory_for_category/", {category_id: category_id},
@@ -43,7 +44,7 @@ $(document).ready(function() {
          // alert('category_id1'+ret);
         var options = '';       
         for (var i in ret) {
-          options += "<div class='col-md-3 col-sm-4 col-xs-6 '><div class='category-item'><img class='sub_cat_icon' src='../media/" + ret[i].icon + "'><img class='sub_cat_icon_hover' src='../media/" + ret[i].hover_icon + "'><a  class='event_click' href='/search/?q=&eventtype=" + ret[i].id +"'>" + ret[i].name +"</a> </div></div>";
+          options += "<div class='col-md-3 col-sm-4 col-xs-6 '><div class='category-item'><img class='sub_cat_icon' src='../media/" + ret[i].icon + "'><img class='sub_cat_icon_hover' src='../media/" + ret[i].hover_icon + "'><a  class='event_click' id=" + ret[i].id +"'>" + ret[i].name +"</a> </div></div>";
 
           }
              
@@ -54,13 +55,27 @@ $(document).ready(function() {
   $.getJSON("/all_subcategory_for_category/",function(ret) {
         var options = '';       
         for (var i in ret) {
-          options += "<div class='col-md-3 col-sm-4 col-xs-6 '><div class='category-item'><img class='sub_cat_icon' src='../media/" + ret[i].icon + "'><img class='sub_cat_icon_hover' src='../media/" + ret[i].hover_icon + "'><a  class='event_click' href='/search/?q=&eventtype=" + ret[i].id +"'>" + ret[i].name +"</a> </div></div>";
+          options += "<div class='col-md-3 col-sm-4 col-xs-6 '><div class='category-item'><img class='sub_cat_icon' src='../media/" + ret[i].icon + "'><img class='sub_cat_icon_hover' src='../media/" + ret[i].hover_icon + "'><a  class='event_click' id=" + ret[i].id +"'>" + ret[i].name +"</a> </div></div>";
 
           }
              
         $(".subcategories").html(options);
       });
   }
+
+    $(".category-item").bind('click', function (){
+      alert("eventtype");
+      var eventtype= $(this).find('a').attr('id');
+      alert(eventtype);
+    $('input[type="hidden"]#eventtype_id').val(eventtype);
+      // $('[name=eventtype]').val(eventtype);
+  
+     $('#f_search').submit().val(eventtype);
+
+    
+    });
+
+
     $('.select_category').click(function () {   
 
        //old code
@@ -110,10 +125,7 @@ $(document).ready(function() {
     //   perform_search();
     // });  
 
-    // $(".category_choose").change(function () {
-    //   // var selected_category = $( ".category_choose option:selected" ).val();
-    //   alert('selected_category');
-    // });
+   
 
 
 

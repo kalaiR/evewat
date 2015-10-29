@@ -77,7 +77,9 @@
                                                               <img class="sub_cat_icon" src="media/{{subcategory.icon}}">
                                                               <img class="sub_cat_icon_hover" src="media/{{subcategory.hover_icon}}">
                                                         {% endif %}
-                                                        <a href="search/?q=&amp;eventtype={{subcategory.id}}">{{subcategory.name}}</a>
+                                                        <a  class="event_click" id="{{subcategory.id}}">{{subcategory.name}}</a>
+                                                         <!-- <a href="search/?q=&amp;eventtype={{subcategory.id}}">{{subcategory.name}}</a> -->
+                                                         
                                                     </div>
 
                                                 </div>
@@ -95,6 +97,7 @@
                             <div id="categories">
                                 <div class="accordion">
                                     <form id="form_search_filter" class="form_search_filter">
+                                        <input type="hiddden" name="page" value="{{page.number}}">
                                         <input id="search_form" type="hidden" name="{{form.q.html_name}}"  value="{{form.q.value|default:''}}"/>
                                         <ul class="nav nav-tabs home-tab" role="tablist" class="category_click">
                                                 <li class="active">
@@ -110,6 +113,7 @@
                                             {% endfor %}  
                                         </ul>
                                         <input type="hidden"  id="categoryid"  value="" name="categoryid"/>   
+                                       
                                     </form>
                                 </div> <!-- end .accordion -->
                             </div> <!-- end #categories -->

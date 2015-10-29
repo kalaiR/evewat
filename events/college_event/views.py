@@ -254,14 +254,18 @@ def submit_event_v2(request):
                 postevent.poster=photosgroup
             else:
                 postevent.poster='/events/img/logo_150.png'
-	        # if request.POST.get('plan')!='0':
-       		# postevent.payment=request.POST.get('plan')
+            # if request.POST.get('plan')!='0':
+            #     postevent.payment=request.POST.get('plan')
             postevent.save()
             organizer=Organizer()
             post=Postevent.objects.order_by('-pk')[0]
             organizer.postevent=postevent
             organizer.organizer_name=request.POST.get('organizer_name','')
             organizer.organizer_mobile=request.POST.get('organizer_mobile','')
+            print organizer.organizer_mobile,'organizer.organizer_mobile'
+            organizer.organizer_mobile_first=request.POST.get('organizer_mobile_2','')
+            print 'organizer.organizer_mobile_first', organizer.organizer_mobile_first
+            organizer.organizer_mobile_second=request.POST.get('organizer_mobile_3','') 
             organizer.organizer_email=request.POST.get('organizer_email','')
             organizer.save()
             send_templated_mail(
@@ -270,10 +274,11 @@ def submit_event_v2(request):
                   from_email = 'testmail123sample@gmail.com',
                   recipient_list = [postevent.email],
                   context={
-                       'user': postevent.name,
-                               
-             	 },
-               )  
+
+                           'user': postevent.name,
+                                   
+                 	 },
+                   )  
             message="Your data succesfully submitted"
         
         # user_amount=request.POST.get('plan')
