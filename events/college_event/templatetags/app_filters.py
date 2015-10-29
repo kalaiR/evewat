@@ -23,7 +23,9 @@ def get_categories(initial_load):
 
 @register.filter
 def get_subcategories(categoryId):  	
-	subcategories = SubCategory.objects.filter(category_id=categoryId)		
+	print "get_subcategories"
+	subcategories = SubCategory.objects.filter(category__id=categoryId)		
+	print "subcategories", subcategories
 	return subcategories	
 
 @register.filter

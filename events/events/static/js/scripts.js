@@ -211,10 +211,10 @@ var checkout = $('#dpd2').datepicker({
   $( "#amount-search" ).val( $( "#slider-range-search" ).slider( "value" ) +   "km");
 
 
-  $('.select_category').on('change' ,function(){
-    var id = $('.select_category').val();
-    find_subcategory(id);
-  });
+  // $('.select_category').on('change' ,function(){
+  //   var id = $('.select_category').val();
+  //   find_subcategory(id);
+  // });
 
   $( "#slider-range-search-day" ).slider({
     range: "min",

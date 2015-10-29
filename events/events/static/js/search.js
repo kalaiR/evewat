@@ -4,14 +4,13 @@
 
 
 function perform_search(){ 
-           
-            var q = $('#form_search_filter').serialize();
-          
-        
-                    $.get('/search/?'+ q, function(data){                                                                                             
-                    $('#search_result').html(data);
-                    // attach_pagination_events();       
-
+                // alert("perform_search");
+                var q = $('#form_search_filter').serialize();
+                // alert("q===>"+q);
+                $.get('/ajax_search/?'+ q, function(data){  
+                // alert(data);                                                                                           
+                $('#search_result').html(data);
+                attach_pagination_events();       
                 });
             }
 
@@ -19,20 +18,24 @@ function perform_search(){
 function attach_pagination_events(){
     // pagination_filter_align();
             $('[data-ajaxlink=true]').click(function(ele){
+              // alert("yes");
             $("html, body").animate({ scrollTop: 0 }, "slow");
             $('[name=page]').val($(ele.currentTarget).attr('data-ajaxpage'));          
-            // perform_search();
+            perform_search();
             return false;
-            });
-            
+            });      
 }
+
+// $(window).load(function(){
+// perform_search();
+// });
 
 $(document).ready(function() { 
     $('.search-btn').click(function() {
         validateSearch();
-  });
+    });
 
-    
+    perform_search();
     function fill_subcategories(category_id) {     
     // alert("catid"+category_id);
     $.getJSON("/subcategory_for_category/", {category_id: category_id},
@@ -59,16 +62,26 @@ $(document).ready(function() {
       });
   }
     $('.select_category').click(function () {   
-        var category = $(this).text();
-        // alert('category'+ category);
-        var catid =  $(this).next('.ajax_catid').val();
-        // alert('catid'+ catid);
-        fill_subcategories(catid);
-        var trim_catid = $.trim(catid);
-        var ajax_catid = $('input[type="hidden"]#categoryid').val(trim_catid);
-        $('[name=categoryid]').val(trim_catid);        
-        
-      
+
+       //old code
+       // alert("select_category");
+       // var category = $(this).text();
+       // // alert('category'+ category);
+       // var catid =  $(this).next('.ajax_catid').val();
+       // // alert('catid'+ catid);
+       // fill_subcategories(catid);
+       // var trim_catid = $.trim(catid);
+       // var ajax_catid = $('input[type="hidden"]#categoryid').val(trim_catid);
+       // $('[name=categoryid]').val(trim_catid);
+
+       //newly updated by kalai 
+       $(this).children('ul .subcategory_list').show();
+       $(this).siblings('li').children('ul .subcategory_list').hide();
+       var catid =  $(this).children('.ajax_catid').val();
+       var trim_catid = $.trim(catid);
+       $('[name=category]').val(trim_catid);
+       $('[name=page]').val('');
+       perform_search();
     });
 
     $('.select_all_category').click(function () {  

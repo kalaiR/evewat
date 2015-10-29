@@ -32,7 +32,7 @@ class Partial(Clean):
 class EventSearchFilter(FacetedSearchForm):
 	model = None
 
-
+	category = forms.CharField(required=False)
 	eventtype = forms.CharField(required=False)		
 	city = forms.CharField(required=False)		
 	event_title = forms.CharField(required=False)
@@ -76,6 +76,7 @@ class EventSearchFilter(FacetedSearchForm):
 		  default_filters=self.get_default_filters())
 		
 	  _params = [
+	  	'category',
 		'eventtype',
 		'city',
 		'event_title',
@@ -88,7 +89,9 @@ class EventSearchFilter(FacetedSearchForm):
 		else:
 		  params[p] =  None
 
-
+	  if params['category']:
+		params['category'] = params['category']
+		  
 	  if params['eventtype']:
 		params['eventtype'] = params['eventtype']
 

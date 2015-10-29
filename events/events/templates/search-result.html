@@ -92,7 +92,7 @@
                                                 </li>
                                                 {% for p in page.paginator.page_range %}
                                                     {% if p|add:3 >= page.number and p|add:-3 <= page.number %}
-                                                        <li> {% if p == page.number %} class="active"{% endif %}>
+                                                        <li {% if p == page.number %} class="active"{% endif %}>
                                                             <a data-ajaxlink="true" data-ajaxpage="{{ p }}" href="?q={{request.REQUEST.q}}&page={{ p }}">
                                                                 {{ p }}
                                                             </a>

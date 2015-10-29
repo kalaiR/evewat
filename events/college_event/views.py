@@ -32,13 +32,14 @@ import datetime
 import time
 import openpyxl
 
+
 class JSONResponse(HttpResponse):
     def __init__(self, data):
         super(JSONResponse, self).__init__(
                 simplejson.dumps(data), mimetype='application/json')
 
 def home(request):
-    return render_to_response("index.html", context_instance=RequestContext(request))
+    return render_to_response("index_v2.html", context_instance=RequestContext(request))
 
 def about(request):
     return render_to_response("about-us.html", context_instance=RequestContext(request))

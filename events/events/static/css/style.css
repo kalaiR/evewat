@@ -8900,3 +8900,7 @@ t
   border: none !important;
 }
 
+.subcategory_list{
+  display: none;
+}
+
