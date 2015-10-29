@@ -35,8 +35,8 @@ $(document).ready(function() {
     });
 
     //newly added by kalai
-    // if (window.location.pathname == '/')
-    //   perform_search();
+    if (window.location.pathname == '/')
+      perform_search();
 
     function fill_subcategories(category_id) {     
     // alert("catid"+category_id);
