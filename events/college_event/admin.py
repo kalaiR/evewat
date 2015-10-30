@@ -71,9 +71,6 @@ class PosteventAdmin(admin.ModelAdmin):
 				                       'user': i.name,
 				                    },
 				        ) 
-		
-
-         	
 
 	def get_readonly_fields(self, request, obj=None):
 		if obj: # editing an existing object
@@ -118,8 +115,8 @@ class FeedbackAdmin(admin.ModelAdmin):
 	search_fields = ['id', 'name']
 	list_per_page = 50
 
-# class OrganizerAdmin(admin.ModelAdmin):
-# 	list_display = ('organizer_name','organizer_email','organizer_email')
+class OrganizerAdmin(admin.ModelAdmin):
+	list_display = ('organizer_name','organizer_email')
 
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Feedback, FeedbackAdmin)
@@ -129,5 +126,6 @@ admin.site.register(College, CollegeAdmin)
 admin.site.register(Department, DepartmentAdmin)
 admin.site.register(Postevent, PosteventAdmin)    
 admin.site.register(SubCategory, SubCategoryAdmin)   
-admin.site.register(Organizer, OrganizerAdmin)   
+admin.site.register(Organizer,OrganizerAdmin)   
 admin.site.register(CollegeDepartment) 
+

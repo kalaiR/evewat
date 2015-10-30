@@ -43,7 +43,9 @@ INSTALLED_APPS = (
     'search',
     'payu',    
     'banner',
-    # 'social.apps.django_app.default',
+    'social.apps.django_app.default',
+    'tracking',
+    'reviews',
 )
 
 SITE_ID = 1
@@ -65,6 +67,9 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'tracking.middleware.VisitorTrackingMiddleware',
+    'tracking.middleware.VisitorCleanUpMiddleware',
+    'tracking.middleware.BannedIPMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
@@ -132,27 +137,14 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'social_auth.context_processors.social_auth_backends',
     'social_auth.context_processors.social_auth_by_type_backends',
     'social_auth.context_processors.social_auth_login_redirect',
-    # 'social.apps.django_app.context_processors.backends',
-    # 'social.apps.django_app.context_processors.login_redirect',
-
 )
 
-#AUTHENTICATION_BACKENDS = (
-   #'social.backends.facebook.FacebookOAuth2',
-   #'social.backends.google.GoogleOAuth2',
-   #'social_auth.backends.google.GoogleBackend',
-   #'social.backends.twitter.TwitterOAuth',
-   #'django.contrib.auth.backends.ModelBackend',
-#)
-
 LOGIN_REDIRECT_URL = '/'
-
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY ='1080122031533-l55cc0kb6t0hr49ngr8j3t66b65v20s6.apps.googleusercontent.com'
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET ='fSw6UV_COT9_VuAsTVoSuK2F'
-# SOCIAL_AUTH_GOOGLE_SCOPE=['https://www.googleapis.com/auth/userinfo.email']
-
-SOCIAL_AUTH_GOOGLE_OAUTH2_USE_DEPRECATED_API = True
-SOCIAL_AUTH_GOOGLE_PLUS_USE_DEPRECATED_API = True
+SOCIAL_AUTH_FACEBOOK_KEY =' 534214713400291'
+SOCIAL_AUTH_FACEBOOK_SECRET ='0dd34a2b338ae20240a973a832c8ee1c'
+URL_PATH = ''
+SOCIAL_AUTH_STRATEGY = 'social.strategies.django_strategy.DjangoStrategy'
+SOCIAL_AUTH_STORAGE = 'social.apps.django_app.default.models.DjangoStorage'
 
 COMPRESS_ENABLED = True
 
