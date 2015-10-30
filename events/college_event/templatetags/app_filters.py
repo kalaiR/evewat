@@ -4,6 +4,7 @@ from banner.models import *
 from college_event.views import *
 from college_event.models import *
 from events.util import *
+from django.template.defaultfilters import stringfilter
 register = template.Library()
 
 @register.filter
@@ -33,9 +34,14 @@ def get_photos(photo):
 	photo=str(photo).split(',')
 	return photo[0]
 
-@register.filter
-def get_subcategoriesCount(subCategoryId):  
-	subcategoriescounts = Postevent.objects.filter(eventtype=subCategoryId, admin_status=1).count()          		
-	# subcategoriescounts = Product.objects.filter(subcategory_id=subCategoryId).annotate(Count('subcategory'))			
-	return subcategoriescounts
+# @register.filter
+# def get_subcategoriesCount(subCategoryId):  
+# 	subcategoriescounts = Postevent.objects.filter(eventtype=subCategoryId, admin_status=1).count()          		
+# 	# subcategoriescounts = Product.objects.filter(subcategory_id=subCategoryId).annotate(Count('subcategory'))			
+# 	return subcategoriescounts
 
+@register.filter
+@stringfilter
+def get_subcategoriesCount(subCategoryId, categoryId):
+    subcategoriescounts = Postevent.objects.filter(category=categoryId,eventtype=subCategoryId, admin_status=1).count()
+    return subcategoriescounts

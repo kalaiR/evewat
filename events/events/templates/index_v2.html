@@ -213,6 +213,9 @@
                                                          <li class="subcategory_list_link">         
                                                             <a class="select_category pointer"  role="tab" data-toggle="tab" title="Please choose any category">{{subcategories.name}}</a>
                                                             <input type="hidden" class="ajax_subcatid" value="{{subcategories.id}}">  
+                                                            <!-- <span class="event_count">
+                                                            {{subcategories.id|get_subcategoriesCount:categories.id}}
+                                                            </span> -->
                                                          </li>
                                                          {% endfor %}
                                                     </ul>                                     
