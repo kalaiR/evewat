@@ -19,6 +19,7 @@ from django.conf import settings
 from events.models import *
 from events.forms import *
 from college_event.models import *
+from reviews.models import *
 from banner.models import *
 from payu.models import *
 from events.util import format_redirect_url
@@ -61,12 +62,13 @@ def logout_view(request):
     return response
 
 def details(request,id=None):
-    try:
-        postevent=Postevent.objects.get(pk=id)
-        organizer=Organizer.objects.filter(postevent__id=postevent.id)
-        return render_to_response("company-profile.html",{'events':postevent,'organizer':organizer}, context_instance=RequestContext(request))
-    except:
-        return render_to_response("company-profile.html",{'message':'Sorry for inconvenience.Some thing went to wrong'}, context_instance=RequestContext(request))
+    # try:
+    postevent=Postevent.objects.get(pk=id)
+    organizer=Organizer.objects.filter(postevent__id=postevent.id)
+    review=Review.objects.all()
+    return render_to_response("company-profile.html",{'events':postevent,'organizer':organizer,'review':review}, context_instance=RequestContext(request))
+    # except:
+    #     return render_to_response("company-profile.html",{'message':'Sorry for inconvenience.Some thing went to wrong'}, context_instance=RequestContext(request))
 
 
 def banner(request):
@@ -261,7 +263,11 @@ def submit_event_v2(request):
         organizer.postevent=postevent
         organizer.organizer_name=request.POST.get('organizer_name','')
         organizer.organizer_mobile=request.POST.get('organizer_mobile','')
+        organizer.organizer_mobile_first=request.POST.get('organizer_mobile_2','')
+        organizer.organizer_mobile_second=request.POST.get('organizer_mobile_3','')
         organizer.organizer_email=request.POST.get('organizer_email','')
+        print 'organizer.organizer_mobile_first',organizer.organizer_mobile_first
+        print 'organizer.organizer_mobile_second',organizer.organizer_mobile_second
         organizer.save()
         send_templated_mail(
               template_name = 'post_event',

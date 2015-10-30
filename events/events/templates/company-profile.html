@@ -25,12 +25,12 @@
 
 <div id="page-content">
     <div class="container">
-            {% if message%}
+           <!--  {% if message%}
                 <script type="text/javascript">
                     window.onload = function(){ window.location="http://{{request.META.HTTP_HOST}}/post_event"; }
-                </script>
+                </script> 
                 <h4 class="text-center">{{message}}</h4>
-            {%endif%}
+            {%endif%} -->
         <div class="row">
             <div class="col-md-8 col-md-push-4">
                 <div class="page-content company-profile">
@@ -102,5 +102,40 @@
     {% for item in mylist %}
         RENDER MY CONTENT
     {% endfor %}
+</div>
+
+<div class="reviews">
+    <h2>{{review.name}}</h2>
+</div>
+<div class="comments-section">
+    <form class="comment-form" action="{%url "reviews.views.post" %}" method="post" name="form" id="review_form">
+    {% csrf_token %}
+        <div class="row">
+            <div class="col-md-4">
+                <input type="text" required="" placeholder="Name *" name="name">
+            </div>
+
+            <div class="col-md-4">
+                <input type="email" name="email" required="" placeholder="Email *">
+            </div>
+
+            <div class="col-md-4">
+                <!-- <input type="text" placeholder="Ratings" name="rating"> -->
+                <fieldset class="rating" name="rating">
+                    <legend>Please rate:</legend>
+                    <input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="Rocks!">5 stars</label>
+                    <input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="Pretty good">4 stars</label>
+                    <input type="radio" id="star3" name="rating" value="3" /><label for="star3" title="Modrate">3 stars</label>
+                    <input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="Kinda bad">2 stars</label>
+                    <input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="Poor">1 star</label>
+                </fieldset>
+            </div>
+        </div>
+
+        <textarea required="" placeholder="Your Comment ..." name="content"></textarea>
+
+        <button class="btn btn-default" type="submit" id="review_btn" ><i class="fa fa-envelope-o"></i> Send Message</button>
+        <input type="hidden" name="postevent" value="{{events.id}}">
+    </form>
 </div>
 {% endblock %}

@@ -58,19 +58,19 @@ class PosteventAdmin(admin.ModelAdmin):
 
 	def send_EMAIL(self,request, queryset):
 		from templated_email import send_templated_mail
-		if admin_status.boolean == True :
-			for i in queryset:
-				if i.email:
-					send_templated_mail(
-							template_name = 'premium_user',
-				            subject = 'Welcome Evewat',
-				            from_email = 'eventswat@gmail.com',
-				            recipient_list = [i.email],
-				            context={
-				                       'user': i.name,
-				                    },
-				        ) 
 		
+		for i in queryset:
+			if i.email:
+				send_templated_mail(
+						template_name = 'premium_user',
+			            subject = 'Welcome Evewat',
+			            from_email = 'info@eventswat.com',
+			            recipient_list = [i.email],
+			            context={
+			                       'user': i.name,
+			                    },
+			        ) 
+	
 
          	
 
@@ -93,8 +93,8 @@ class FeedbackAdmin(admin.ModelAdmin):
 	search_fields = ['id', 'name']
 	list_per_page = 50
 
-# class OrganizerAdmin(admin.ModelAdmin):
-# 	list_display = ('organizer_name','organizer_email','organizer_email')
+class OrganizerAdmin(admin.ModelAdmin):
+	list_display = ('organizer_name','organizer_email')
 
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Feedback, FeedbackAdmin)
@@ -104,5 +104,5 @@ admin.site.register(College, CollegeAdmin)
 admin.site.register(Department, DepartmentAdmin)
 admin.site.register(Postevent, PosteventAdmin)    
 admin.site.register(SubCategory, SubCategoryAdmin)   
-# admin.site.register(Organizer,OrganizerAdmin)   
+admin.site.register(Organizer,OrganizerAdmin)   
 admin.site.register(CollegeDepartment) 
