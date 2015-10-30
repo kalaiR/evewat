@@ -82,11 +82,10 @@ class Postevent(models.Model):
 class Organizer(models.Model):
 	postevent=models.ForeignKey(Postevent)
 	organizer_name= models.CharField(max_length=50)
-	organizer_mobile= models.CharField(max_length=50)
-	# organizer_mobile_first= models.CharField(null=True, blank=True, max_length=50)
-	# organizer_mobile_second= models.CharField(null=True, blank=True, max_length=50)
+	organizer_mobile= models.BigIntegerField()
+	organizer_mobile_first= models.CharField(max_length=20, null =True, blank=True)
+	organizer_mobile_second= models.CharField(max_length=20, null =True, blank=True)
 	organizer_email=models.EmailField(max_length=50)
-
 	def __unicode__(self):
 		return self.organizer_name
 

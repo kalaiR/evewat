@@ -466,6 +466,19 @@ $('.feedback1').click(function(){
   $('.feedback1').hide();
 });
 
+
+//add aditional mobile  number for organizer in postevent
+var limit = 3;
+var count = 1;
+var add_number = $('.number');
+$('.add_number_act').click(function(){
+if(count < limit){
+  count++;   
+  $(add_number).append("<input type='text' placeholder='Organizer mobile' name='organizer_mobile_"+ count +"' id='organizer_mobile_"+count +"' class='organizer_mobile margintop_2rem' value='' data-number='true' data-required='true'>");
+}
+});
+
+
 $('.close').click(function(){
   $(".feedback_popup").hide();
   $('.feedback1').show();
@@ -793,7 +806,7 @@ $('.events').click(function(){
     }
     
     //Validate the e-mail.
-    if(email_val.indexOf('@') !== -1){
+   
     if (!/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/.test(email_val)) {
       $("#emailid_signin").addClass("error_input_field");
       $("#emailid_signin").next('.error_message').hide();
@@ -804,7 +817,7 @@ $('.events').click(function(){
       $("#emailid_signin").removeClass("error_input_field");
       $("#emailid_signin").next().next('.error_message').hide();
     }
-    }
+  
 
     if ($("#login_val :input").hasClass("error_input_field")){
     return false;
@@ -893,7 +906,7 @@ $('.header-call-to-action input').blur(function(){
         }
 
         id = "#" + $(this).attr('id');
-        if ((id=="#emailid_signup" && $(id).val() != '') || (id=="#emailid_signin" && $(id).val().indexOf('@') !== -1)){
+        if ((id=="#emailid_signup" && $(id).val() != '') || (id=="#emailid_signin")){
            if (!/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/.test($(id).val())) {
               $(id).addClass("error_input_field");
               $(id).next('.error_message').hide();
@@ -1373,5 +1386,6 @@ $('#paid').click(function(){
 var thewidth=$('.advertisement img').width();
 var theheight=$('.advertisement img').height();
 //$('.advertisement img').css({'margin-left':-thewidth/2+'px','margin-top':-theheight/2+'px'});
+
 
 

@@ -58,26 +58,48 @@ class PosteventAdmin(admin.ModelAdmin):
 
 	def send_EMAIL(self,request, queryset):
 		from templated_email import send_templated_mail
-		
-		for i in queryset:
-			if i.email:
-				send_templated_mail(
-						template_name = 'premium_user',
-			            subject = 'Welcome Evewat',
-			            from_email = 'info@eventswat.com',
-			            recipient_list = [i.email],
-			            context={
-			                       'user': i.name,
-			                    },
-			        ) 
-	
-
-         	
+		if self.admin_status.boolean == True :
+			print 'admin_status', admin_status
+			for i in queryset:
+				if i.email:
+					send_templated_mail(
+							template_name = 'premium_user',
+				            subject = 'Welcome Evewat',
+				            from_email = 'eventswat@gmail.com',
+				            recipient_list = [i.email],
+				            context={
+				                       'user': i.name,
+				                    },
+				        ) 
 
 	def get_readonly_fields(self, request, obj=None):
 		if obj: # editing an existing object
 			return self.readonly_fields + ('payment',)
 		return self.readonly_fields
+
+class OrganizerAdmin(admin.ModelAdmin):
+	fields = ['organizer_name','organizer_mobile','organizer_email']
+	list_display = ('organizer_name','organizer_mobile','organizer_email')
+	list_filter = ['organizer_name']
+	search_fields = ['organizer_name']
+	list_per_page = 50
+	actions = ['send_invitations']
+
+	def send_invitations(self, request, queryset):
+		from templated_email import send_templated_mail
+		for i in queryset:
+			if i.organizer_email:
+				send_templated_mail(
+						template_name = 'welcome',
+			            subject = "Invitation",
+			            from_email = 'eventswat@gmail.com',
+			            recipient_list = [i.organizer_email],
+			            context={
+			                       'user': i.organizer_name,
+			                    },
+			        ) 
+
+
 
 class PremiumPriceInfoAdmin(admin.ModelAdmin):
 	fields=['premium_price','currency','purpose','month']
@@ -106,3 +128,4 @@ admin.site.register(Postevent, PosteventAdmin)
 admin.site.register(SubCategory, SubCategoryAdmin)   
 admin.site.register(Organizer,OrganizerAdmin)   
 admin.site.register(CollegeDepartment) 
+

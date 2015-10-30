@@ -33,13 +33,14 @@ import datetime
 import time
 import openpyxl
 
+
 class JSONResponse(HttpResponse):
     def __init__(self, data):
         super(JSONResponse, self).__init__(
                 simplejson.dumps(data), mimetype='application/json')
 
 def home(request):
-    return render_to_response("index.html", context_instance=RequestContext(request))
+    return render_to_response("index_v2.html", context_instance=RequestContext(request))
 
 def about(request):
     return render_to_response("about-us.html", context_instance=RequestContext(request))
@@ -54,7 +55,7 @@ def faqs(request):
     return render_to_response("faqs.html", context_instance=RequestContext(request))
 
 def start(request):
-    return render_to_response('index.html',context_instance=RequestContext(request))
+    return render_to_response('index_v2.html',context_instance=RequestContext(request))
 
 def logout_view(request):
     logout(request)
@@ -84,23 +85,24 @@ def user_login(request):
     if request.POST.get("next") is None:
         return HttpResponseRedirect('/')
     elif request.POST.get("next"):
-        username = request.POST['username']
+        email = request.POST['username']
+        print 'login email', email
         password = request.POST['password']
-        user = authenticate(username=username, password=password)
+        user = authenticate(email=email, password=password)
+        print 'user login', user
         if user is not None:
             if user.is_active:
                 login(request, user)
                 return HttpResponseRedirect(request.POST.get("next"))
         try:
             error={}
-            if '@' in username:
-                if not User.objects.filter(email=username).exists():
-                    error['email_exists'] = ugettext('Email Does not exists')
-                    raise ValidationError(error['email_exists'], 1)
-            else:
-                if not User.objects.filter(username=username).exists():
-                    error['username_exists'] = ugettext('Username Does not exists')
-                    raise ValidationError(error['username_exists'], 2)
+            if not User.objects.filter(email=email).exists():
+                error['email_exists'] = ugettext('Email Does not exists')
+                raise ValidationError(error['email_exists'], 1)
+            # else:
+            #     if not User.objects.filter(username=username).exists():
+            #         error['username_exists'] = ugettext('Username Does not exists')
+            #         raise ValidationError(error['username_exists'], 2)
         except ValidationError as e:
             messages.add_message(request, messages.ERROR, e.messages[-1]) 
             redirect_path = request.POST["next"]
@@ -108,10 +110,10 @@ def user_login(request):
             redirect_url = format_redirect_url(redirect_path, query_string)
             return HttpResponseRedirect(redirect_url)
         if not error:
-            if not '@' in username:
-                user = User.objects.get(username=username)
-            else:
-                user = User.objects.get(email=username)
+            # if not '@' in username:
+            #     user = User.objects.get(username=username)
+            # else:
+            user = User.objects.get(email=email)
             user.backend='django.contrib.auth.backends.ModelBackend'
             try:
                 error={}
@@ -133,9 +135,10 @@ def user_login(request):
                     response=HttpResponseRedirect(request.POST["next"]) 
                     return response               
     else:
-        username = request.POST['username']
+        email = request.POST['username']
         password = request.POST['password']
-        user = authenticate(username=username, password=password)
+        user = authenticate(email=email, password=password)
+        print 'user login else', user
         if user is not None:
             if user.is_active:
                 login(request, user)
@@ -148,14 +151,15 @@ def register(request):
     user=User()
     userprofile=Userprofile()
     if request.method == 'POST': 
-        email=request.POST['email_id']
-        username=request.POST['username']        
+        email=request.POST['email_id']      
+        username=request.POST['username']       
         try:
             error={}
-            if User.objects.filter(username=username).exists():
-                error['username_exists'] = ugettext('Username already exists')
-                raise ValidationError(error['username_exists'], 1)
+            # if User.objects.filter(username=username).exists():
+            #     error['username_exists'] = ugettext('Username already exists')
+            #     raise ValidationError(error['username_exists'], 1)
             if User.objects.filter(email=email).exists():
+                print 'User.objects.filter(email=email).exists()', User.objects.filter(email=email).exists()
                 error['email_exists'] = ugettext('Email already exists')
                 raise ValidationError(error['email_exists'], 2)     
         except ValidationError as e:
@@ -168,8 +172,11 @@ def register(request):
         if not error:
             user.is_active = True
             user.username=request.POST['username']
+            print 'username', user.username
             user.email=request.POST['email_id']
+            print 'email', user.email
             user.password=request.POST['password']
+            print 'pswd', user.password
             user.set_password(user.password)
             user.save()
             userprofile = Userprofile()
@@ -179,14 +186,15 @@ def register(request):
             send_templated_mail(
               template_name = 'welcome',
               subject = 'Welcome Evewat',
-              from_email = 'testmail123sample@gmail.com',
+              from_email = 'eventswat@gmail.com',
               recipient_list = [user.email],
               context={
                        'user': user.username,
               },
             )              
             registered = True
-            user = User.objects.get(username=user.username)
+            user = User.objects.get(email=user.email)
+            print 'user after reg', user
             user.backend='django.contrib.auth.backends.ModelBackend'
             login(request, user)    
             return HttpResponseRedirect('/start/?user_id=' + str(user.id))
@@ -209,77 +217,80 @@ def post_event(request):
         return render_to_response("post_event.html",{'message':'Sorry for inconvenience.Some thing went to wrong'}, context_instance=RequestContext(request))
         
 def submit_event_v2(request):
-    #try:
-    if request.method=="POST":
-        postevent=Postevent()
-        postevent.name=request.POST['name']
-        postevent.email=request.POST['email']
-        postevent.mobile=request.POST.get('mobile','0')
-        postevent.event_title=request.POST.get('eventtitle','')
-        startdate=request.POST.get('startdate','')
-        date,month,year=startdate.split('-')
-        postevent.startdate=year+'-'+month+'-'+date
-        enddate=request.POST.get('enddate','')
-        date,month,year=enddate.split('-')
-        postevent.enddate=year+'-'+month+'-'+date
-        postevent_category=Category.objects.get(id=request.POST.get('category',''))
-        postevent.category=postevent_category
-        postevent_subcategory=SubCategory.objects.get(id=request.POST.get('eventtype',''))
-        postevent.eventtype=postevent_subcategory
-        postevent.eventdescription=request.POST.get('eventdescription','')
-        postevent.address=request.POST.get('address','')
-        postevent.state=request.POST.get('state','')
-        postevent_city=request.POST.get('city','')
-        postevent.city=postevent_city
-        postevent_college=request.POST.get('college','')
-        postevent.college=postevent_college
-        postevent.department=request.POST.get('dept','')
-        postevent_poster=request.FILES.getlist('poster[]')
+    try:
+    	if request.method=="POST":
+            postevent=Postevent()
+            postevent.name=request.POST['name']
+            postevent.email=request.POST['email']
+            postevent.mobile=request.POST.get('mobile','0')
+            postevent.event_title=request.POST.get('eventtitle','')
+            startdate=request.POST.get('startdate','')
+            date,month,year=startdate.split('-')
+            postevent.startdate=year+'-'+month+'-'+date
+            enddate=request.POST.get('enddate','')
+            date,month,year=enddate.split('-')
+            postevent.enddate=year+'-'+month+'-'+date
+            postevent_category=Category.objects.get(id=request.POST.get('category',''))
+            postevent.category=postevent_category
+            postevent_subcategory=SubCategory.objects.get(id=request.POST.get('eventtype',''))
+            postevent.eventtype=postevent_subcategory
+            postevent.eventdescription=request.POST.get('eventdescription','')
+            postevent.address=request.POST.get('address','')
+            postevent.state=request.POST.get('state','')
+            postevent_city=request.POST.get('city','')
+            postevent.city=postevent_city
+            postevent_college=request.POST.get('college','')
+            postevent.college=postevent_college
+            postevent.department=request.POST.get('dept','')
+            postevent_poster=request.FILES.getlist('poster[]')
         
-        def handle_uploaded_file(f):            
-            postevent_poster = open(settings.MEDIA_ROOT+'/events/' + '%s' % f.name, 'wb+')
-            for chunk in f.chunks():
-                postevent_poster.write(chunk)
-            postevent_poster.close()
-        photosgroup = ''         
-        count=len(postevent_poster)
+            def handle_uploaded_file(f):            
+                postevent_poster = open(settings.MEDIA_ROOT+'/events/' + '%s' % f.name, 'wb+')
+                for chunk in f.chunks():
+                    postevent_poster.write(chunk)
+                postevent_poster.close()
+            photosgroup = ''         
+            count=len(postevent_poster)
         
-        if count :
-            for uploaded_file in postevent_poster:
-                count=count-1
-                handle_uploaded_file(uploaded_file)
-                if count==0:
-                    photosgroup=photosgroup  + '/events/' + str(uploaded_file)
-                else:
-                    photosgroup=photosgroup  + '/events/' +str(uploaded_file) + ','
-            postevent.poster=photosgroup
-        else:
-            postevent.poster='/events/img/logo_150.png'
-        # if request.POST.get('plan')!='0':
-        #     postevent.payment=request.POST.get('plan')
-        postevent.save()
-        organizer=Organizer()
-        post=Postevent.objects.order_by('-pk')[0]
-        organizer.postevent=postevent
-        organizer.organizer_name=request.POST.get('organizer_name','')
-        organizer.organizer_mobile=request.POST.get('organizer_mobile','')
-        organizer.organizer_mobile_first=request.POST.get('organizer_mobile_2','')
-        organizer.organizer_mobile_second=request.POST.get('organizer_mobile_3','')
-        organizer.organizer_email=request.POST.get('organizer_email','')
-        print 'organizer.organizer_mobile_first',organizer.organizer_mobile_first
-        print 'organizer.organizer_mobile_second',organizer.organizer_mobile_second
-        organizer.save()
-        send_templated_mail(
-              template_name = 'post_event',
-              subject = 'Post Event',
-              from_email = 'testmail123sample@gmail.com',
-              recipient_list = [postevent.email],
-              context={
-                       'user': postevent.name,
-                                           
-              },
-          )  
-        message="Your data succesfully submitted"
+
+            if count :
+                for uploaded_file in postevent_poster:
+                    count=count-1
+                    handle_uploaded_file(uploaded_file)
+                    if count==0:
+                        photosgroup=photosgroup  + '/events/' + str(uploaded_file)
+                    else:
+                        photosgroup=photosgroup  + '/events/' +str(uploaded_file) + ','
+                postevent.poster=photosgroup
+            else:
+                postevent.poster='/events/img/logo_150.png'
+            # if request.POST.get('plan')!='0':
+            #     postevent.payment=request.POST.get('plan')
+            postevent.save()
+            organizer=Organizer()
+            post=Postevent.objects.order_by('-pk')[0]
+            organizer.postevent=postevent
+            organizer.organizer_name=request.POST.get('organizer_name','')
+            organizer.organizer_mobile=request.POST.get('organizer_mobile','')
+            print organizer.organizer_mobile,'organizer.organizer_mobile'
+            organizer.organizer_mobile_first=request.POST.get('organizer_mobile_2','')
+            print 'organizer.organizer_mobile_first', organizer.organizer_mobile_first
+            organizer.organizer_mobile_second=request.POST.get('organizer_mobile_3','') 
+            organizer.organizer_email=request.POST.get('organizer_email','')
+            organizer.save()
+            send_templated_mail(
+                  template_name = 'post_event',
+                  subject = 'Post Event',
+                  from_email = 'eventswat@gmail.com',
+                  recipient_list = [postevent.email],
+                  context={
+
+                           'user': postevent.name,
+                                   
+                 	 },
+                   )  
+            message="Your data succesfully submitted"
+
         
         # user_amount=request.POST.get('plan')
         # if user_amount!='0':
@@ -287,31 +298,31 @@ def submit_event_v2(request):
         # elif user_amount=='0':
         #     response=render_to_response("post_event.html",{'message':message}, context_instance=RequestContext(request))
         #else:
-        response= render_to_response("post_event.html",{'message':message}, context_instance=RequestContext(request))
+            response= render_to_response("post_event.html",{'message':message}, context_instance=RequestContext(request))
+            response.delete_cookie('eventtitle')
+            response.delete_cookie('startdate')
+            response.delete_cookie('enddate')
+        #response.delete_cookie('plan')
+            response.delete_cookie('category_name')
+            response.delete_cookie('eventtype_name')
+            response.delete_cookie('eventtype')
+            response.delete_cookie('category')
+            response.delete_cookie('eventdescription')
+            return response
+        else:
+            return render_to_response("post_event.html",{'message':'Insufficient data'}, context_instance=RequestContext(request))
+    except:
+        response = render_to_response("post_event.html",{'message':'Something went to wrong'}, context_instance=RequestContext(request))
         response.delete_cookie('eventtitle')
         response.delete_cookie('startdate')
         response.delete_cookie('enddate')
-        #response.delete_cookie('plan')
+        response.delete_cookie('plan')
         response.delete_cookie('category_name')
         response.delete_cookie('eventtype_name')
         response.delete_cookie('eventtype')
         response.delete_cookie('category')
         response.delete_cookie('eventdescription')
         return response
-    else:
-        return render_to_response("post_event.html",{'message':'Insufficient data'}, context_instance=RequestContext(request))
-    # except:
-    #     response = render_to_response("post_event.html",{'message':'Something went to wrong'}, context_instance=RequestContext(request))
-    #     response.delete_cookie('eventtitle')
-    #     response.delete_cookie('startdate')
-    #     response.delete_cookie('enddate')
-    #     response.delete_cookie('plan')
-    #     response.delete_cookie('category_name')
-    #     response.delete_cookie('eventtype_name')
-    #     response.delete_cookie('eventtype')
-    #     response.delete_cookie('category')
-    #     response.delete_cookie('eventdescription')
-    #     return response
 
 @csrf_exempt
 @login_required(login_url='/?lst=2')
@@ -327,7 +338,7 @@ def upload_banner(request):
         send_templated_mail(
               template_name = 'banner',
               subject = 'Uplaod Banner',
-              from_email = 'testmail123sample@gmail.com',
+              from_email = 'eventswat@gmail.com',
               recipient_list = [request.user.email ],
               context={
                        'user': request.user,

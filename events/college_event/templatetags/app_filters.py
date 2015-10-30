@@ -23,11 +23,19 @@ def get_categories(initial_load):
 
 @register.filter
 def get_subcategories(categoryId):  	
-	subcategories = SubCategory.objects.filter(category_id=categoryId)		
+	print "get_subcategories"
+	subcategories = SubCategory.objects.filter(category__id=categoryId)		
+	print "subcategories", subcategories
 	return subcategories	
 
 @register.filter
 def get_photos(photo): 
 	photo=str(photo).split(',')
 	return photo[0]
+
+@register.filter
+def get_subcategoriesCount(subCategoryId):  
+	subcategoriescounts = Postevent.objects.filter(eventtype=subCategoryId, admin_status=1).count()          		
+	# subcategoriescounts = Product.objects.filter(subcategory_id=subCategoryId).annotate(Count('subcategory'))			
+	return subcategoriescounts
 

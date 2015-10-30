@@ -21,6 +21,7 @@ from haystack.forms import ModelSearchForm, FacetedSearchForm
 from haystack.query import EmptySearchQuerySet
 
 RESULTS_PER_PAGE = getattr(settings, 'HAYSTACK_SEARCH_RESULTS_PER_PAGE', 5)
+print 'RESULTS_PER_PAGE', RESULTS_PER_PAGE
 
 class Highlighter(object):
     css_class = 'highlighted'
@@ -300,19 +301,24 @@ class SearchView(object):
     request = None
     form = None
     results_per_page = RESULTS_PER_PAGE
+    print 'results_per_page', results_per_page
 
     def __init__(self, template=None, load_all=True, form_class=None, searchqueryset=None, context_class=RequestContext, results_per_page=None):
-        print 'SearchView in __init__'        
+        print 'SearchView in __init__'
+        print 'results_per_page with __init__', results_per_page        
         self.load_all = load_all
         self.form_class = form_class
         self.context_class = context_class
         self.searchqueryset = searchqueryset
+        print 'self.searchqueryset', self.searchqueryset
 
         if form_class is None:
             self.form_class = ModelSearchForm
 
         if not results_per_page is None:
+            print 'results_per_page with condition', results_per_page
             self.results_per_page = results_per_page
+            print 'self.results_per_page', self.results_per_page
 
         if template:
             self.template = template
@@ -388,9 +394,11 @@ class SearchView(object):
        
        
         if self.request.GET.get('page'):
+            print 'self.request.GET.get(page)', self.request.GET.get('page')
             page_no = self.request.GET.get('page')
             if page_no > 1 :
                 page_no = int(self.request.GET.get('page'))
+                print 'page_no', page_no
             else:
                 page_no = 1
         else:
@@ -398,9 +406,11 @@ class SearchView(object):
             
       
         if self.request.GET.get('result_per_page'):
+            print 'get result per page condition'
             result_display = self.request.GET.get('result_per_page')
             if result_display >  1 :
                 result_display = int(self.request.GET.get('result_per_page'))
+                print 'result_display', result_display
             else:
                 result_display = 5 
         else:
@@ -420,7 +430,7 @@ class SearchView(object):
         return (paginator, page)
 
     def extra_context(self):
-        print 'build_page'
+        print 'build_page in extra_context'
         """
         Allows the addition of more context variables as needed.
 

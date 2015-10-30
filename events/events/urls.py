@@ -71,6 +71,12 @@ urlpatterns = patterns('',
 	  #results_per_page=settings.SEARCH_PAGE_NUMBER_OF_LEADS
 	), name='newsearchPageV2'), 
 
+	url(r'^(?i)ajax_search/', EventSearchView(
+	  template='index_v2.html', 
+	  form_class=EventSearchFilter, 
+	  #results_per_page=settings.SEARCH_PAGE_NUMBER_OF_LEADS
+	), name='newsearchPageV2'), 
+
 	# url(r'^blog/', include('blog.urls')),
 
 	url(r'^find_colleges/$', 'college_event.views.find_colleges',name='find_colleges'),
