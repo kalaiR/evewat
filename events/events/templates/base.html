@@ -144,7 +144,8 @@
             {% if request.path == '/' or request.path == '/start/' %}
                 <div class="header-search slider-home">
                     <div class="header-search-bar">
-                        <form class="form" method="get" action="/search/?q=" id="f_search" name="f_search">
+                        <!-- <form class="form" method="get" action="/search/?q=" id="f_search" name="f_search"> -->
+                        <form class="form" id="f_search" name="f_search">
                             <div class="container">
                                 <div class="search-value">
                                     <div class="keywords">
@@ -165,9 +166,12 @@
                                                 <option  value="{{subcategory.id}}">{{ subcategory.name|capfirst }} </option>
                                             {% endfor%} 
                                         </select>
-                                            <input type="hidden" name="eventtype" value="" id="eventtype_id">
+                                            <!-- <input type="hidden" name="eventtype" value="" id="eventtype_id"> -->
                                     </div>
-                                    <button class="search-btn base_search" type="submit"><i class="fa fa-search"></i></button>
+                                    <!-- old code -->
+                                   <!--  <button class="search-btn base_search" type="submit"><i class="fa fa-search"></i></button> -->
+                                   <!-- newly added by kalai -->
+                                    <a class="search-btn base_search" type="submit"><i class="fa fa-search"></i></a>
                                 </div>
                             </div> 
                         </form>

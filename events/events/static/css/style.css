@@ -8965,3 +8965,8 @@ t
   font-size:10px !important;
   padding-left: 58px !important;
 }
+
+.search-btn{
+  cursor: pointer;
+  border-radius: 3px;
+}

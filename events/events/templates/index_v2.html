@@ -213,9 +213,9 @@
                                                          <li class="subcategory_list_link">         
                                                             <a class="select_category pointer"  role="tab" data-toggle="tab" title="Please choose any category">{{subcategories.name}}</a>
                                                             <input type="hidden" class="ajax_subcatid" value="{{subcategories.id}}">  
-                                                            <!-- <span class="event_count">
+                                                            <span class="event_count">
                                                             {{subcategories.id|get_subcategoriesCount:categories.id}}
-                                                            </span> -->
+                                                            </span>
                                                          </li>
                                                          {% endfor %}
                                                     </ul>                                     
@@ -223,6 +223,8 @@
                                             {% endfor %}  
                                         </ul>
                                         <input type="hidden"  id="categoryid"  value="" name="category"/> 
+                                        <input type="hidden"  id="q"  value="" name="q"/>
+                                        <input type="hidden"  id="city"  value="" name="city"/>
                                         <input type="hidden"  id="eventtypeid"  value="" name="eventtype"/>   
                                     </form>
                                 </div> <!-- end .accordion -->
