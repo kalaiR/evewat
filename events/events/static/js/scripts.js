@@ -211,10 +211,10 @@ var checkout = $('#dpd2').datepicker({
   $( "#amount-search" ).val( $( "#slider-range-search" ).slider( "value" ) +   "km");
 
 
-  // $('.select_category').on('change' ,function(){
-  //   var id = $('.select_category').val();
-  //   find_subcategory(id);
-  // });
+  $('.select_category').on('change' ,function(){
+    var id = $('.select_category').val();
+    find_subcategory(id);
+  });
 
   $( "#slider-range-search-day" ).slider({
     range: "min",
@@ -429,6 +429,34 @@ $( ".keywords input, .select-location input " ).focus(function() {
 
 
 $("document").ready(function($){
+
+$("#review_btn").submit(function(event) {
+        var $form = $(this),
+        $inputs = $form.find("input, select, button, textarea"),
+        serializedData = $form.serialize();
+        alert(serializedData);
+        $.ajax({
+            url: "/review/",
+            type: "post",
+            data: serializeData,
+            success: function(response) {
+                alert(response);
+            }
+        })
+        event.preventDefault();
+    });
+
+
+
+var limit = 3;
+var count = 1;
+var add_number = $('.number');
+$('.add_number_act').click(function(){
+if(count < limit){
+  count++;   
+  $(add_number).append("<input type='text' placeholder='Organizer mobile' name='organizer_mobile_"+ count +"' id='organizer_mobile_"+count +"' class='organizer_mobile margintop_2rem' value='' data-number='true' data-required='true'>");
+}
+});
 
   $(".feedback_popup").hide();
 

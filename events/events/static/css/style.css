@@ -3359,7 +3359,7 @@ fieldset[disabled] .btn-default-inverse.active {
 #header .header-top-bar .header-register,
 #header .header-top-bar .header-social,
 #header .header-top-bar .header-language,
-#header .header-top-bar .header-logout {
+#header .header-top-bar .header-logout,.header-share {
   position: relative;
   float: left;
   z-index: 9999;
@@ -5591,14 +5591,15 @@ fieldset[disabled] .btn-default-inverse.active {
   top: 120px;
   width: 160px;
   height: 700px;
-  text-align: center;
+  // text-align: center;
 }
 .product-details-list .advertisement p {
   color: #777777;
   text-transform: uppercase;
   font-size: 11px;
   margin: 0;
-  padding-top: 10px;
+  // padding-top: 10px;
+  padding: 10px 0px 10px 30px;
 }
 .product-details-list .advertisement img {
   height: 600px;
@@ -9270,6 +9271,57 @@ t
   border: none !important;
 }
 
+.rating {
+    float:left;
+}
+
+.rating:not(:checked) > input {
+    position:absolute;
+    clip:rect(0,0,0,0);
+}
+
+.rating:not(:checked) > label {
+    float:right;
+    width:1em;
+    padding:0 .1em;
+    overflow:hidden;
+    white-space:nowrap;
+    cursor:pointer;
+    font-size:200%;
+    line-height:1.2;
+    color:#ddd;
+    text-shadow:1px 1px #bbb, 2px 2px #666, .1em .1em .2em rgba(0,0,0,.5);
+}
+
+.rating:not(:checked) > label:before {
+    content: '★ ';
+}
+
+.rating > input:checked ~ label {
+    color: #f70;
+    text-shadow:1px 1px #c60, 2px 2px #940, .1em .1em .2em rgba(0,0,0,.5);
+}
+
+.rating:not(:checked) > label:hover,
+.rating:not(:checked) > label:hover ~ label {
+    color: gold;
+    text-shadow:1px 1px goldenrod, 2px 2px #B57340, .1em .1em .2em rgba(0,0,0,.5);
+}
+
+.rating > input:checked + label:hover,
+.rating > input:checked + label:hover ~ label,
+.rating > input:checked ~ label:hover,
+.rating > input:checked ~ label:hover ~ label,
+.rating > label:hover ~ input:checked ~ label {
+    color: #ea0;
+    text-shadow:1px 1px goldenrod, 2px 2px #B57340, .1em .1em .2em rgba(0,0,0,.5);
+}
+
+.rating > label:active {
+    position:relative;
+    top:2px;
+    left:2px;
+}
 .subcategory_list{
   display: none;
 }
@@ -9368,6 +9420,18 @@ t
     position: relative;
     top: 2px;
 }
+.product-details-list-index .advertisement{
+  top: 16px !important;
+  right:-160px !important;
+}
 
+.subcategory_list_link a{
+  font-size:10px !important;
+  padding-left: 58px !important;
+}
 
-/************end*********/
+.search-btn{
+  cursor: pointer;
+  border-radius: 3px;
+}
+
