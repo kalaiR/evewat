@@ -146,11 +146,20 @@
                                 <input type="text" placeholder="Organizer name" name="organizer_name" id="organizer_name" class="organizer_name" value="" data-required="true">
                                 <input type="email" placeholder="Organizer E-mail" name="organizer_email" id="organizer_email" class="organizer_name margintop_2rem" value="" data-email="true" data-required="true">
                                 <input type="text" placeholder="Organizer mobile" name="organizer_mobile" id="organizer_mobile" class="organizer_mobile margintop_2rem" value="" data-number="true" data-required="true" > 
+                              	<img src="media{% static "img/plus.jpg" %}" alt="plus" class="plus" "33px" width="22px">
+                              	<button type="button" class="btn btn-default edit">Edit</button>
                               </div> 
                         </li>
-                         <span class="add_number_act">Add number</span>
-
-                        <li>
+                         	<div class="addnum">
+						 		<div class="block">	
+						 				<img src="media{% static "img/plus.jpg" %}" alt="plus" class="btn_plus1" "33px" width="22px">
+    										<div>
+    											<input type="text" placeholder="Organizer mobile" name="organizer_mobile" id="organizer_mobile" class="organizermobile margintop_2rem" value="" data-number="true" data-required="true" >
+											</div>
+										<button type="button" class="btn btn-default confirm">OK</button>
+			 					</div>
+					 		</div>
+						<li>
                             <div class="sf_columns column_3">
                                 <input type="text" placeholder="State" name="state" id="state" class="state ui-autocomplete-input" value="" data-required="true">
                                 <input type="hidden" name="state" id="statetxt" class="state" value="">

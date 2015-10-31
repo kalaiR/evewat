@@ -1,4 +1,4 @@
-/* --------------------------------------
+LL/* --------------------------------------
 Table Of  Content
 
 1. Bootstrap
@@ -4509,6 +4509,7 @@ fieldset[disabled] .btn-default-inverse.active {
   text-transform: uppercase;
   font-size: 15px;
   font-weight: 700;
+  position:relative;
 }
 #categories .accordion ul li a .fa {
   padding-right: 10px;
@@ -8432,7 +8433,7 @@ ui-autocomplete {
 
 .clear_both { clear:both; }
 /*************************** popup ***************************/
-.popup_fade {
+/*.popup_fade {
     background:#4b576f; 
     filter:0;
     -moz-opacity:0.7;    -khtml-opacity: 0.7;
@@ -8696,7 +8697,376 @@ select{
   margin-left: 20px;
 }
 .logo_blue { color:#0074bd; font-style: normal;}
-.logo_red { color:#e1004a; font-style: normal;}
+.logo_red { color:#e1004a; font-style: normal;}*/
+
+.block1
+{
+	width: 0px;
+	height:0px;
+	float:left;
+}
+.text1,.text2, .text3
+{
+	font-family: Roboto;
+    font-size: 24px;
+    font-weight: lighter;
+	color:white;
+}
+.text4
+{
+	font-size:20px;
+	left: 0px;
+    position: relative;
+    top: 8px;	
+}
+.text5
+{
+	font-size:13px;
+	color: #a9a9a9;
+	left: -4px;
+    top: 6px;
+}
+.text6
+{
+	font-size:13px;
+	color:#a9a9a9;
+	left: -3px;
+    top: 30px;
+}
+.text7
+{
+	font-size:13px;
+	color: #277ec3;
+	right: 0px;
+    top: 14px;
+}
+.button1
+{
+   	background: #2ab558 none repeat scroll 0 0;
+    border-style: solid;
+    color: white !important;
+    display: block;
+    font-family: Helvetica;
+    font-size: 18px;
+    height: 52px;
+    left: 25px;
+    padding: 8px;
+    position: relative;
+    text-align: center;
+    top: 30px;
+    width: 304px;
+    text-decoration: none !important;
+}
+.button2 {
+    background: #3b5998 none repeat scroll 0 0;
+    border-style: solid;
+    color: white !important;
+    display: block;
+    font-family: Helvetica;
+    font-size: 18px;
+    height: 54px;
+    left: 20px;
+    padding: 8px;
+    position: relative;
+    text-align: center;
+    top: 49px;
+    width: 304px;
+    text-decoration: none !important;
+}
+.button3 {
+    display: block;
+    height: 50px;
+    left: 17px;
+    position: relative;
+    top: 65px;
+    width: 304px;
+    padding:8px;
+    background: #dd4b39 none repeat scroll 0 0;
+    border-style: solid;
+    text-align: center;
+    color: white !important;
+    display: block;
+    font-family: Helvetica;
+    font-size: 18px;
+   text-decoration: none !important;
+   
+}
+.text8
+{
+	color: #3c3c3c;
+	font-size: 16px;
+	right: 10px;
+    top: 95px;
+	width: 85%;
+}
+#contactus  {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: transparent;
+    border-color: black;
+    border-image: none;
+    border-style: none none solid;
+    border-width: medium medium 1px;
+    color: #939393;
+    font-family: Roboto;
+    font-size: 14px;
+    line-height: 344%;
+    padding: 3px;
+    width: 335px;
+    margin-top: 15px;
+}
+.voucher_popup {
+    width:352px;   
+    height:557px;
+    padding:10px;
+    position:absolute;
+    background:#fdfdfd;
+    display: block;  z-index:9991;
+    margin:0px 0px 0px -242px;  left:70%; top: 50px;
+   -webkit-box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.08);
+   -moz-box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.08);
+   box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.08);
+ }
+.popup_fade {
+    background:#4b576f; 
+    filter:0;
+    -moz-opacity:0.7;    -khtml-opacity: 0.7;
+    opacity: 0.7;       filter: alpha(opacity=70);  
+    filter: progid:DXImageTransform.Microsoft.Alpha(opacity=70); 
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(opacity=70)"; 
+    zoom: 1;    display: none;
+    width: 100%;    height: 100%;
+    position: absolute;    top: 0;    z-index: 1100;
+   }
+.close_btn {
+    position:absolute;
+    displplay:block;
+    background: url("/static/img/close.png") no-repeat 0px 0px;
+    width:28px;
+    height:29px;
+    top:10px;
+    right:8px;
+    z-index: 99999;
+    border:none;
+    cursor:pointer;
+    padding:0px;
+} 
+mark
+{
+	color: #0075bb !important;
+	background:none !important;
+	
+}
+.img1
+{
+	text-align: none;
+	padding: 0px;
+	display: none;
+}
+.img2
+{
+	text-align: none;
+	padding: 0px;
+	display: none;
+}
+.img3
+{
+	text-align: none;
+	padding: 0px;
+	display: none;
+}
+@media(min-width:768px)
+{
+	.block1
+{
+	background:url("../../static/img/background.png") no-repeat;
+	width: 240px;
+	height: 500px;
+	float:left;
+}	
+.block2
+{
+	left:240px;
+	position:absolute;
+	height: 500px;
+	width: 416px;
+}
+}
+@media(min-width:768px)
+{
+.img1
+{
+	text-align: center;
+	padding: 27px;
+	display: block;
+}
+.img2
+{
+	text-align: center;
+	padding: 33px;
+	display: block;
+}
+.img3
+{
+	text-align: center;
+	padding: 30px;
+	display: block;
+	
+}
+.text8
+{
+	color: #3c3c3c;
+	font-size: 16px;
+	right: 5px;
+    top: 70px;
+
+}
+}
+@media(min-width:768px)
+{
+.text4
+{
+	font-size:25px;
+	left: 11px;
+    position: relative;
+    top: 4px;
+    font-family: Roboto;
+    font-weight: lighter;
+	
+}
+.text7
+{
+	font-size:13px;
+	color: #277ec3;
+	right: 5px;
+    top: 10px;
+}
+}
+@media(min-width:768px)
+{
+.button1
+{
+   	background: #2ab558 none repeat scroll 0 0;
+    border-style: solid;
+    color: white !important;
+    display: block;
+    font-family: Helvetica;
+    font-size: 18px;
+    height: 52px;
+    left: 10px;
+    padding: 8px;
+    position: relative;
+    text-align: center;
+    top: 30px;
+    width: 353px;
+    text-decoration: none !important;
+}
+.button2 {
+    background: #3b5998 none repeat scroll 0 0;
+    border-style: solid;
+    color: white !important;
+    display: block;
+    font-family: Helvetica;
+    font-size: 18px;
+    height: 54px;
+    left: 9px;
+    padding: 8px;
+    position: relative;
+    text-align: center;
+    top: 49px;
+    width: 355px;
+    text-decoration: none !important;
+    
+}
+.button3 {
+    display: block;
+    height: 50px;
+    left: 8px;
+    position: relative;
+    top: 57px;
+    width: 354px;
+    padding:8px;
+    background: #dd4b39 none repeat scroll 0 0;
+    border-style: solid;
+    text-align: center;
+    color: white !important;
+    display: block;
+    font-family: Helvetica;
+    font-size: 18px;
+   text-decoration: none !important;
+   
+}
+#contactus  {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: transparent;
+    border-color: black;
+    border-image: none;
+    border-style: none none solid;
+    border-width: medium medium 1px;
+    color: #939393;
+    font-family: Roboto;
+    font-size: 14px;
+    line-height: 300%;
+    padding: 3px;
+    width: 370px;
+}
+#contactus .error {
+    background-color: #ffff00;
+    color: #900;
+    font-family: Verdana,Arial,sans-serif;
+    font-size: 0.7em;
+}
+.fb {
+    letter-spacing: 3px;
+}
+.google{
+	letter-spacing: 3px;
+}
+.voucher_popup {
+    width:652px;   
+    height:auto;
+    padding:10px;
+    position:absolute;
+    background:#fdfdfd;
+    display: block;  z-index:9991;
+    margin:0px 0px 0px -242px;  left:42%; top: 50px;
+   -webkit-box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.08);
+   -moz-box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.08);
+   box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.08);
+ }
+ .popup_fade {
+    background:#4b576f; 
+    filter:0;
+    -moz-opacity:0.7;    -khtml-opacity: 0.7;
+    opacity: 0.7;       filter: alpha(opacity=70);  
+    filter: progid:DXImageTransform.Microsoft.Alpha(opacity=70); 
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(opacity=70)"; 
+    zoom: 1;    display: none;
+    width: 100%;    height: 100%;
+    position: absolute;    top: 0;    z-index: 1100;
+   }
+   .close_btn {
+    position:absolute;
+    displplay:block;
+    background: url("/static/img/close.png") no-repeat 0px 0px;
+    width:28px;
+    height:29px;
+    top:10px;
+    right:8px;
+    z-index: 99999;
+    border:none;
+    cursor:pointer;
+    padding:0px;
+} 
+}
+
+.clear_both { clear:both; }
+
 
 /* Feel free to change duration  */ 
 .animated  {
@@ -8748,10 +9118,10 @@ select{
  font-size:13px !important;
 }
 .sub_cat_icon, .sub_cat_icon_hover {
+  height: 25px;
+  left: 0px;
   position:absolute;
-  top:32px;
-  left:42px;
-
+  top:4px;
 }
 .sub_cat_icon_hover {
   display:none;
@@ -8903,4 +9273,101 @@ t
 .subcategory_list{
   display: none;
 }
+.subcategory_list li a {
+    color: black;
+    font-size: 9px !important;
+    line-height: 3px;
+    margin: 0px 0px 0px 38px;
+    
+}
+/**************add mobile num************/
+.block {
+    left: 80px;
+    position: relative;
+    top: 20px;
+    width: 50%;
+}
+.organizermobile .margintop_2rem {
+    margin: 0;
+}
+.btn_close1 {
+    float: right;
+    left: 40px;
+    position: relative;
+    top: -40px;
+}
+.btn_plus1 {
+    float: right;
+    left: 32px;
+    position: relative;
+    top: 65px;
+}
+.addnum {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    border-image: none;
+    border-style: solid;
+    border-width: 0.1em;
+    float: right;
+    height: 200px;
+    left: 0;
+    overflow: scroll;
+    position: relative;
+    top: -28px;
+    width: 420px;
+}
+.confirm {
+    float: right;
+    left: 115px;
+    position: relative;
+    top: -44px;
+    width: 62px;
+}
+@media(max-width:768px){
+.addnum {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    border-image: none;
+    border-style: solid;
+    border-width: 1px;
+    height: 200px;
+    width: 288px;
+    position: relative;
+    float: right;
+    top:-19px;
+    left: 0px;
+    overflow: scroll;
+}	
+.block {
+    left: 25px;
+    position: relative;
+    top: 20px;
+    width: 58%;
+}
+.confirm {
+    float: right;
+    left: 82px;
+    position: relative;
+    top: -44px;
+    width: 40px;
+}
+}
+.plus {
+    float: right;
+    left: -8px;
+    position: relative;
+    top: -38px;
+}
+.edit {
+    float: right;
+    left: 22px;
+    position: relative;
+    top: 2px;
+}
 
+
+/************end*********/
