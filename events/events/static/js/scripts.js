@@ -1402,4 +1402,40 @@ var theheight=$('.advertisement img').height();
 //$('.advertisement img').css({'margin-left':-thewidth/2+'px','margin-top':-theheight/2+'px'});
 
 
+$('.addnum').hide();
+    $(".plus").click(function(){
+        $(".addnum").toggle();
+    });
 
+$('.addnum').hide();
+    $(".edit").click(function(){
+        $(".addnum").toggle();
+    });
+    
+$(document).ready(function(){
+    $(".confirm").click(function(){
+        $(".addnum").hide();
+    });
+});
+         
+$(document).ready(function() {
+    var max_fields      = 3; //maximum input boxes allowed
+    var wrapper         = $(".addnum"); //Fields wrapper
+    var add_button      = $(".btn_plus1"); //Add button ID
+   
+    var x = 1; //initlal text box count
+    $(add_button).click(function(e){ //on add input button click
+        e.preventDefault();
+        if(x < max_fields){ //max input box allowed
+            x++; //text box increment
+            $(wrapper).append( '<div class="block"><input type="text" placeholder="Organizer mobile1" name="organizer_mobile" id="organizer_mobile" class="organizermobile1 margintop_2rem" value="" data-number="true" data-required="true" ><img src="media/static/img/close.png" alt="close" class="btn_close1" "33px" width="20px"></div>'); //add input box
+        }
+    });
+   
+    $(wrapper).on("click",".btn_close1", function(e){ //user click on remove text
+        e.preventDefault(); $(this).parent('div').remove(); x--;
+    })
+});
+    
+    
+    
