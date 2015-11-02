@@ -8965,3 +8965,36 @@ t
   font-size:10px !important;
   padding-left: 58px !important;
 }
+
+.visitor_count{
+  bottom:7px;
+  right:65px;
+  position: absolute;
+}
+.comments-section {
+    bottom: 37px;
+    left: 80px;
+    position: relative;
+    width: 88%;
+}
+.reviews {
+    left: 86px;
+    position: relative;
+    top: 0px;
+    width:84%;
+}
+.aum {
+    left: 11px;
+    position: relative;
+    top: -12px;
+}
+.ctx {
+    border:3px solid #dddddd;
+    left: 54px;
+    position: relative;
+    top: -4px;
+    width: 83%;
+}
+.comments {
+    padding: 6px 0 0 9px;
+}

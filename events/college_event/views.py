@@ -66,7 +66,7 @@ def details(request,id=None):
     # try:
     postevent=Postevent.objects.get(pk=id)
     organizer=Organizer.objects.filter(postevent__id=postevent.id)
-    review=Review.objects.all()
+    review=Review.objects.filter(event_id=postevent.id)
     return render_to_response("company-profile.html",{'events':postevent,'organizer':organizer,'review':review}, context_instance=RequestContext(request))
     # except:
     #     return render_to_response("company-profile.html",{'message':'Sorry for inconvenience.Some thing went to wrong'}, context_instance=RequestContext(request))

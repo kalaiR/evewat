@@ -430,23 +430,37 @@ $( ".keywords input, .select-location input " ).focus(function() {
 
 $("document").ready(function($){
 
-$("#review_btn").submit(function(event) {
-        var $form = $(this),
-        $inputs = $form.find("input, select, button, textarea"),
-        serializedData = $form.serialize();
-        alert(serializedData);
-        $.ajax({
-            url: "/review/",
-            type: "post",
-            data: serializeData,
-            success: function(response) {
-                alert(response);
-            }
-        })
-        event.preventDefault();
-    });
+// $("#review_from").submit(function(event) {
+//        $.ajax({ 
+//                 data: $(this).serialize(), 
+//                 type: $(this).attr('method'), 
+//                 url: $(this).attr('action'),
+//                 success: function(response) {
+//                 $('#mgs').show();
+//             }
+//         })
+//         event.preventDefault();
+//     });
 
-
+ $("#review_btn").click(function(event){
+    alert("enter");
+             $.ajax({
+                 type:"POST",
+                 url:"/review/",
+                 data: {
+                        'name': $('#name').val(),
+                        'email': $('#email').val(),
+                        'rating': $('input[name="rating"]').val(),
+                        'content': $('#content').val(),
+                        'postevent': $('#postevent').val(),
+                        },
+                 success: function(){
+                     $('#mgs').show();
+                    }
+            });
+            alert("finish ajax")
+            return false;
+       });
 
 var limit = 3;
 var count = 1;
