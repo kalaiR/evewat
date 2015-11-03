@@ -47,7 +47,7 @@
                     <span>By signing up, you accept our </span>
     
                     <a href="javascript:void(0);" >Terms of service</a>
-                </div><!-- terms_services --> -->
+                </div><!-- terms_services --> 
                 <!-- <input type="submit" name="{%if '/apidocs/' in request.path %}fxapi_registration{% else %}auto_buy_popup_reg{% endif %}"  class="btn signup_btn  banner_signup_form_send_p" data-emailexist ="true" value="Join us"> -->
 
                <!-- <input type="submit" name="home_sign_up"  class="btn signup_btn  banner_signup_form_send_p" data-emailexist ="true" value="Join us"> -->
@@ -76,7 +76,7 @@
                 <!-- <a href="#" class="linkedin_signup"></a> -->
             <!-- </div>  -->
             <!-- <div class="clear_both"></div> -->
-        <!-- </div><!--popup_heading--> -->
+        <!-- </div><!--popup_heading--> 
         <!-- <div class="popup_contents" class="">
             <form method="post" action="/login/">
                 {% csrf_token %}
@@ -106,7 +106,7 @@
     
         <!-- <div class="popup_footers">
             <a href="javascript:void(0);" id="joinus_popup_window1">Join us now for free</a>
-        </div><!--popup_footers--> -->
+        </div><!--popup_footers--> 
         <!-- <div class="clear_both"></div> -->
  <div class="signup_popup popup_pos" id="signin_popup" style="{% if request.REQUEST.lst or  request.REQUEST.lst and request.path == '/post_event' or  request.REQUEST.lst and request.path == '/upload_banner' %} display:block; {%else%} display: none; {% endif %}">    
 	<div class="voucher_popup">
@@ -148,11 +148,76 @@
   						      <a class="button3" href="#"><i class="fa fa-google google"> </i>Sign in with Google</a>
 						</div><!--form-group-->
 					   	<div class="form-group">        
-								<label class="control-label col-md-8 text8">Don't have a account?<mark>Sign up with email</mark></label>						      
+								<label class="control-label col-md-8 text8">Don't have a account?<button type="button" class="btn btn-link signup"><mark>Sign up with email</mark></button></label>						      
 						</div><!--form-group-->
 					</form>
 				</div><!--block2-->				
 			<div class="clear_both"> </div>
 	</div><!--voucher_popup-->
- </div><!--signup_popup--> 
+ </div><!--signup_popup-->
+ 
+ 
+ 
+ 
+
+<div class="signup_popup popup_pos" id="signin_popup">     
+<div class="email">
+		<div class="fr">
+                <span class="close_btn"></span>
+  		</div><!--fr-->
+		<div class="col-md-3 block3">
+					<div class="col-md-12 img4">	
+						<img src="{% static "img/symposium.png" %}" alt="symposium" height="72px" width="72px"><br>
+						<span class="text1">Symposium</span>
+					</div><!--img1-->
+					<div class="col-md-12 img5">
+						<img src="{% static "img/seminar.png" %}" alt="seminar" height="72px" width="72px"><br>
+						<span class="text2">Seminar</span>
+					</div><!--img2-->
+					<div class="col-md-12 img6">
+						<img src="{% static "img/culturals.png" %}" alt="cultural" height="72px" width="72px"><br>
+						<span class="text3">Cultural</span>
+					</div><!--img3-->
+		</div><!--block1-->
+			
+			<div class="col-md-9 block2">
+					<span class="text4">Sign up for free</span>			
+					<form class="form-horizontal" role="form">
+					    <div class="form-group">
+						 	<input id="contactus_signup" type="text" placeholder="ENTER YOUR NAME" maxlength="50" value="" name="email"><br>
+    						<span class="error"></span>
+						</div><!--form-group-->
+						<div class="form-group">
+							<input id="contactus_signup" type="text" placeholder="ENTER YOUR EMAIL" maxlength="50" value="" name="pwd"><br>
+    						<span class="error"></span>
+						</div><!--form-group-->
+						<div class="form-group">
+							<input id="contactus_signup" type="text" placeholder="ENTER YOUR PHONE" maxlength="50" value="" name="pwd"><br>
+    						<span class="error"></span>
+						</div><!--form-group-->
+						<div class="form-group">
+							<input id="contactus_signup" type="text" placeholder="ENTER YOUR PASSWORD" maxlength="50" value="" name="pwd"><br>
+    						<span class="error"></span>
+						</div><!--form-group-->
+						<div class="form-group">
+							<input id="contactus_signup" type="text" placeholder="ENTER YOUR CONFIRM PASSWORD" maxlength="50" value="" name="pwd"><br>
+    						<span class="error"></span>
+						</div><!--form-group-->
+						<div class="form-group">        
+  						      <a class="button1" href="#">Sign up</a>
+  						      <a class="button2" href="#"><i class="fa fa-facebook fb"> </i>Sign up with Facebook</a>
+  						      <a class="button3" href="#"><i class="fa fa-google google"> </i>Sign up with Google</a>
+						</div><!--form-group-->
+					   	<div class="form-group">        
+								<label class="control-label col-md-8 text8">Already have an account?<button type="button" class="btn btn-link signin"><mark>Sign in here</mark></button></label>						      
+						</div><!--form-group-->
+					</form>
+				</div><!--block2-->				
+			<div class="clear_both"> </div>
+	</div><!--email-->
+
+ </div><!--signup_popup-->
+
+
+
 {% endblock %}
