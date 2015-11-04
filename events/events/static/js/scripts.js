@@ -448,15 +448,15 @@ $("#review_btn").submit(function(event) {
 
 
 
-var limit = 3;
-var count = 1;
-var add_number = $('.number');
-$('.add_number_act').click(function(){
-if(count < limit){
-  count++;   
-  $(add_number).append("<input type='text' placeholder='Organizer mobile' name='organizer_mobile_"+ count +"' id='organizer_mobile_"+count +"' class='organizer_mobile margintop_2rem' value='' data-number='true' data-required='true'>");
-}
-});
+// var limit = 3;
+// var count = 1;
+// var add_number = $('.number');
+// $('.add_number_act').click(function(){
+// if(count < limit){
+//   count++;   
+//   $(add_number).append("<input type='text' placeholder='Organizer mobile' name='organizer_mobile_"+ count +"' id='organizer_mobile_"+count +"' class='organizer_mobile margintop_2rem' value='' data-number='true' data-required='true'>");
+// }
+// });
 
   $(".feedback_popup").hide();
 
@@ -1511,7 +1511,7 @@ $(".confirm").click(function(){
 
          
 
-    var max_fields      = 3; //maximum input boxes allowed
+    var max_fields      = 2; //maximum input boxes allowed
     var wrapper         = $(".addnum"); //Fields wrapper
     var add_button      = $(".btn_plus1"); //Add button ID
    
@@ -1520,7 +1520,7 @@ $(".confirm").click(function(){
         e.preventDefault();
         if(x < max_fields){ //max input box allowed
             x++; //text box increment
-            $(wrapper).append( '<div class="block"><input type="text" placeholder="Organizer mobile1" name="organizer_mobile" id="mobile" class="organizermobile1" value="" data-number="true"><img src="media/static/img/close.png" alt="close" class="btn_close1" "33px" width="20px"></div>'); //add input box
+            $(wrapper).append('<div class="block"><input type="text" placeholder="Organizer mobile1" name="organizer_mobile[]"  multiple="multiple"  id="organizer_mobile_" class="organizer_mobile" value="" data-number="true"><img src="media/static/img/close.png" alt="close" class="btn_close1" "33px" width="20px"></div>'); //add input box
         }
     });
    
