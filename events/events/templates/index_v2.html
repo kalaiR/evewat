@@ -190,7 +190,7 @@
                             <div id="categories">
                                 <div class="accordion">
                                     <form id="form_search_filter" class="form_search_filter">
-                                        <input type="hidden" name="page"  value="{{page.number}}"/>
+                                        
                                         <input id="search_form" type="hidden" name="{{form.q.html_name}}"  value="{{form.q.value|default:''}}"/>
                                         <ul class="nav nav-tabs home-tab" role="tablist" class="category_click">
                                                 <li class="active">
@@ -225,8 +225,8 @@
                                                 </li>
                                             {% endfor %} -->
                                             {% for categories in initial_load|get_categories %}
-                                                <li class="select_category_index">
-                                                    <a class="pointer"  role="tab" data-toggle="tab" title="Please choose any category">{{categories.name}}</a>
+                                                <li>
+                                                    <a class="select_category_index pointer"  role="tab" data-toggle="tab" title="Please choose any category">{{categories.name}}</a>
                                                     <input type="hidden" class="ajax_catid" value="{{categories.id}}">
                                                     <ul class="subcategory_list">  
                                                         {% for subcategories in categories.id|get_subcategories %}
@@ -246,8 +246,9 @@
                                             {% endfor %}
                                           
                                         </ul>
-                                        <input type="hidden"  id="categoryid"  value="" name="category"/> 
-                                        <input type="hidden"  id="q"  value="" name="q"/>
+                                        <input type="hidden"  id="search_keyword"  value="" name="q"/>
+                                        <input type="hidden" name="page" id="page" value="{{page.number}}"/>
+                                        <input type="hidden"  id="categoryid"  value="" name="category"/>           
                                         <input type="hidden"  id="city"  value="" name="city"/>
                                         <input type="hidden"  id="eventtypeid"  value="" name="eventtype"/>   
                                     </form>

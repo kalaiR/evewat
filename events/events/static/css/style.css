@@ -8800,7 +8800,7 @@ select{
     top: 95px;
 	width: 85%;
 }
-#contactus  {
+.contactus  {
     -moz-border-bottom-colors: none;
     -moz-border-left-colors: none;
     -moz-border-right-colors: none;
@@ -8999,7 +8999,7 @@ mark
    text-decoration: none !important;
    
 }
-#contactus  {
+.contactus  {
     -moz-border-bottom-colors: none;
     -moz-border-left-colors: none;
     -moz-border-right-colors: none;
@@ -9016,11 +9016,12 @@ mark
     padding: 3px;
     width: 370px;
 }
-#contactus .error {
-    background-color: #ffff00;
+#login_val .error, .email_exists_error, .error_pwd {
+    /*background-color: #ffff00;*/
     color: #900;
     font-family: Verdana,Arial,sans-serif;
-    font-size: 0.7em;
+    font-size: 0.9em;
+    display: none;
 }
 .fb {
     letter-spacing: 3px;
@@ -9107,13 +9108,13 @@ mark
     opacity : 0   ;
   }  
 }
-
-.error_input_field{
+/* comment for updating new login popup */
+/*.error_input_field{
   width: 50% !important;
 }
 .login_holder .error_input_field{
   width: 48% !important;
-}
+}*/
 
 .login_holder input, .register_holder input{
  font-size:13px !important;
@@ -9434,4 +9435,6 @@ t
   cursor: pointer;
   border-radius: 3px;
 }
+
+/* newly added styles for signin popup */
 

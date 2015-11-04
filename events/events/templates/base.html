@@ -29,6 +29,7 @@
           ga('send', 'pageview');
 
         </script>
+        <script src="http://malsup.github.com/jquery.form.js"></script>
         <!-- GOOGLE FONTS -->
         <link href='https://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'>
         <!--[if IE 9]>
@@ -65,7 +66,7 @@
                                             </div>
                                             <div class="field_control">
                                                 <input type="text" class="form-control" name="email_id" placeholder="Email" id="emailid_signup" autocomplete="off">
-                                                <label for="emailid_signin" class="error_message">Please Enter your Email</label>
+                                                <label for="emailid_signup" class="error_message">Please Enter your Email</label>
                                                 <label class="error_message">Please Enter Valid Email</label>
                                             </div>
                                             <div class="field_control">
@@ -103,16 +104,16 @@
                                 </div> <!-- END .HEADER-LOGOUT -->
                             {% else %}       
                                 <div class="header-login">
-                                    <a href="#" class=""><i class="fa fa-power-off" action="/login/"></i> Login</a>
+                                    <a href="#" class="login_button"><i class="fa fa-power-off" action="/login/"></i> Login</a>
                                     <span style="{% if request.REQUEST.lst and not request.path == '/post_event_v2' %} display:block;color:#df0024;font-weight: bold; {%else%} display: none; {% endif %}">
                                     <!-- {%for message in messages%}{{message}}{% endfor %} -->
                                     </span>
-                                    <div class="login_holder">
+                                   <!--  <div class="login_holder">
                                         <form method="post" id="login_val" action="/login/" name="sign_in">{% csrf_token %}       
                                             <div class="field_control">        
                                                 <input type="text" class="form-control"  placeholder="Email" id="emailid_signin" name="username" autocomplete="off" >
-                                                <label for="emailid_signup" class="error_message">Enter your Username</label>
-                                                <label for="emailid_signup" class="error_message">Enter Valid Email</label>  
+                                                <label for="emailid_signin" class="error_message">Enter your Username</label>
+                                                <label for="emailid_signin" class="error_message">Enter Valid Email</label>  
                                             </div>
                                             <div class="field_control">   
                                                 <input type="password" class="form-control" name="password" id="password_signin" placeholder="Password">
@@ -123,12 +124,12 @@
                                             <a href="#" class="btn btn-link fl">Forgot Password?</a>
                                             <div class="clear_both"> </div>
                                         </form>
-                                    </div>
+                                    </div> -->
                                 </div> <!-- END .HEADER-LOGIN -->
                             {% endif %}
-                            <div class="header-share">
+                           <!--  <div class="header-share">
                             <a href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}"><i class="fa fa-facebook"></i></a>
-                            </div>
+                            </div> -->
                         </div>
                             {% if user.is_authenticated %}
                                 <a href="/post_event" class="btn btn-default"><i class="fa fa-plus"></i> Post Event</a>
