@@ -1504,13 +1504,13 @@ $('.addnum').hide();
         $(".addnum").toggle();
     });
     
-$(document).ready(function(){
-    $(".confirm").click(function(){
+
+$(".confirm").click(function(){
         $(".addnum").hide();
     });
-});
+
          
-$(document).ready(function() {
+
     var max_fields      = 3; //maximum input boxes allowed
     var wrapper         = $(".addnum"); //Fields wrapper
     var add_button      = $(".btn_plus1"); //Add button ID
@@ -1520,14 +1520,23 @@ $(document).ready(function() {
         e.preventDefault();
         if(x < max_fields){ //max input box allowed
             x++; //text box increment
-            $(wrapper).append( '<div class="block"><input type="text" placeholder="Organizer mobile1" name="organizer_mobile" id="organizer_mobile" class="organizermobile1 margintop_2rem" value="" data-number="true" data-required="true" ><img src="media/static/img/close.png" alt="close" class="btn_close1" "33px" width="20px"></div>'); //add input box
+            $(wrapper).append( '<div class="block"><input type="text" placeholder="Organizer mobile1" name="organizer_mobile" id="mobile" class="organizermobile1" value="" data-number="true"><img src="media/static/img/close.png" alt="close" class="btn_close1" "33px" width="20px"></div>'); //add input box
         }
     });
    
     $(wrapper).on("click",".btn_close1", function(e){ //user click on remove text
         e.preventDefault(); $(this).parent('div').remove(); x--;
-    })
+    });
+ 
+  
+$('.email').hide();
+$(".signup").click(function(){
+    $(".email").show();
+}); 
+
+
+
+$(".signin").click(function(){
+    $(".email").hide();
 });
-    
-    
-    
+$('.voucher_popup').show(); 

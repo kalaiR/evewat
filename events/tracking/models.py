@@ -2,7 +2,7 @@ from datetime import datetime, timedelta
 import logging
 import traceback
 
-from django.contrib.gis.geoip import GeoIP, GeoIPException
+# from django.contrib.gis.geoip import GeoIP, GeoIPException
 try:
     from django.conf import settings
     User = settings.AUTH_USER_MODEL
