@@ -57,7 +57,7 @@ docs/_build/
 target/
 
 # Static file
-events/static
-events/events/media
+/events/static
+/events/events/media
 
 # Comment Statement
