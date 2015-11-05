@@ -43,8 +43,8 @@ INSTALLED_APPS = (
     'search',
     'payu',    
     'banner',
-    'social.apps.django_app.default',
-    'tracking',
+    # 'social.apps.django_app.default',
+    # 'tracking',
     'reviews',
 )
 
@@ -67,9 +67,9 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'tracking.middleware.VisitorTrackingMiddleware',
-    'tracking.middleware.VisitorCleanUpMiddleware',
-    'tracking.middleware.BannedIPMiddleware',
+    # 'tracking.middleware.VisitorTrackingMiddleware',
+    # 'tracking.middleware.VisitorCleanUpMiddleware',
+    # 'tracking.middleware.BannedIPMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
