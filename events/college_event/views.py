@@ -19,6 +19,7 @@ from django.conf import settings
 from events.models import *
 from events.forms import *
 from college_event.models import *
+from reviews.models import *
 from banner.models import *
 from payu.models import *
 from events.util import format_redirect_url
@@ -62,85 +63,114 @@ def logout_view(request):
     return response
 
 def details(request,id=None):
-    try:
-        postevent=Postevent.objects.get(pk=id)
-        organizer=Organizer.objects.filter(postevent__id=postevent.id)
-        return render_to_response("company-profile.html",{'events':postevent,'organizer':organizer}, context_instance=RequestContext(request))
-    except:
-        return render_to_response("company-profile.html",{'message':'Sorry for inconvenience.Some thing went to wrong'}, context_instance=RequestContext(request))
+    # try:
+    postevent=Postevent.objects.get(pk=id)
+    organizer=Organizer.objects.filter(postevent__id=postevent.id)
+    review=Review.objects.all()
+    return render_to_response("company-profile.html",{'events':postevent,'organizer':organizer,'review':review}, context_instance=RequestContext(request))
+    # except:
+    #     return render_to_response("company-profile.html",{'message':'Sorry for inconvenience.Some thing went to wrong'}, context_instance=RequestContext(request))
 
 
 def banner(request):
     return render_to_response("uploadbanner.html",context_instance=RequestContext(request))
 
-@csrf_protect 
-def user_login(request):
-    """
-    Login User
-    """
+# old login code when not using ajax
+# @csrf_protect 
+# def user_login(request):
+#     """
+#     Login User
+#     """
+#     logout(request)
+#     username = password = ''
+#     if request.POST.get("next") is None:
+#         return HttpResponseRedirect('/')
+#     elif request.POST.get("next"):
+#         email = request.POST['username']
+#         print 'login email', email
+#         password = request.POST['password']
+#         user = authenticate(email=email, password=password)
+#         print 'user login', user
+#         if user is not None:
+#             if user.is_active:
+#                 login(request, user)
+#                 return HttpResponseRedirect(request.POST.get("next"))
+#         try:
+#             error={}
+#             if not User.objects.filter(email=email).exists():
+#                 error['email_exists'] = ugettext('Email Does not exists')
+#                 raise ValidationError(error['email_exists'], 1)
+#             # else:
+#             #     if not User.objects.filter(username=username).exists():
+#             #         error['username_exists'] = ugettext('Username Does not exists')
+#             #         raise ValidationError(error['username_exists'], 2)
+#         except ValidationError as e:
+#             messages.add_message(request, messages.ERROR, e.messages[-1]) 
+#             redirect_path = request.POST["next"]
+#             query_string = 'lst=%d' % e.code
+#             redirect_url = format_redirect_url(redirect_path, query_string)
+#             return HttpResponseRedirect(redirect_url)
+#         if not error:
+#             # if not '@' in username:
+#             #     user = User.objects.get(username=username)
+#             # else:
+#             user = User.objects.get(email=email)
+#             user.backend='django.contrib.auth.backends.ModelBackend'
+#             try:
+#                 error={}
+#                 if user.check_password(password):
+#                     print user
+#                 else:
+#                     error['password'] = ugettext('Invalid password')
+#                     raise ValidationError(error['password'], 3)
+#             except ValidationError as e:
+#                 messages.add_message(request, messages.ERROR, e.messages[-1]) 
+#                 redirect_path = request.POST["next"]
+#                 query_string = 'lst=%d' % e.code
+#                 redirect_url = format_redirect_url(redirect_path, query_string)
+#                 return HttpResponseRedirect(redirect_url) 
+#             if user:           
+#                 if user.is_active:                
+#                     login(request, user)
+#                     user_id=user.id
+#                     response=HttpResponseRedirect(request.POST["next"]) 
+#                     return response               
+#     else:
+#         email = request.POST['username']
+#         password = request.POST['password']
+#         user = authenticate(email=email, password=password)
+#         print 'user login else', user
+#         if user is not None:
+#             if user.is_active:
+#                 login(request, user)
+#                 return HttpResponseRedirect('/')
+
+# new login code when using ajax (updated by kalai)
+@csrf_exempt
+def user_login(request):    
+    import json 
     logout(request)
-    username = password = ''
-    if request.POST.get("next") is None:
-        return HttpResponseRedirect('/')
-    elif request.POST.get("next"):
-        email = request.POST['username']
-        print 'login email', email
-        password = request.POST['password']
-        user = authenticate(email=email, password=password)
-        print 'user login', user
-        if user is not None:
-            if user.is_active:
-                login(request, user)
-                return HttpResponseRedirect(request.POST.get("next"))
-        try:
-            error={}
-            if not User.objects.filter(email=email).exists():
-                error['email_exists'] = ugettext('Email Does not exists')
-                raise ValidationError(error['email_exists'], 1)
-            # else:
-            #     if not User.objects.filter(username=username).exists():
-            #         error['username_exists'] = ugettext('Username Does not exists')
-            #         raise ValidationError(error['username_exists'], 2)
-        except ValidationError as e:
-            messages.add_message(request, messages.ERROR, e.messages[-1]) 
-            redirect_path = request.POST["next"]
-            query_string = 'lst=%d' % e.code
-            redirect_url = format_redirect_url(redirect_path, query_string)
-            return HttpResponseRedirect(redirect_url)
-        if not error:
-            # if not '@' in username:
-            #     user = User.objects.get(username=username)
-            # else:
-            user = User.objects.get(email=email)
-            user.backend='django.contrib.auth.backends.ModelBackend'
-            try:
-                error={}
-                if user.check_password(password):
-                    print user
-                else:
-                    error['password'] = ugettext('Invalid password')
-                    raise ValidationError(error['password'], 3)
-            except ValidationError as e:
-                messages.add_message(request, messages.ERROR, e.messages[-1]) 
-                redirect_path = request.POST["next"]
-                query_string = 'lst=%d' % e.code
-                redirect_url = format_redirect_url(redirect_path, query_string)
-                return HttpResponseRedirect(redirect_url) 
-            if user:           
-                if user.is_active:                
-                    login(request, user)
-                    user_id=user.id
-                    response=HttpResponseRedirect(request.POST["next"]) 
-                    return response               
+    error = {}
+    username = request.POST['username']
+    print "username", username
+    password = request.POST['password']
+    print "password", password
+    context = {}
+    if not User.objects.filter(email=username).exists():
+        error['email_exists'] = True
+        response = HttpResponse(json.dumps(error, ensure_ascii=False),mimetype='application/json')
     else:
-        email = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(email=email, password=password)
-        print 'user login else', user
-        if user is not None:
-            if user.is_active:
-                login(request, user)
-                return HttpResponseRedirect('/')
+        user = User.objects.get(email=username)
+        user.backend='django.contrib.auth.backends.ModelBackend'
+        if user:
+            if user.check_password(password):
+                if user.is_active:
+                    login(request, user)
+                    response = HttpResponseRedirect(request.POST.get('next')) 
+            else:
+                error['password'] = True
+                response = HttpResponse(json.dumps(error, ensure_ascii=False),mimetype='application/json')           
+    return response
 
 @csrf_protect
 def register(request):  
@@ -250,6 +280,7 @@ def submit_event_v2(request):
             photosgroup = ''         
             count=len(postevent_poster)
         
+
             if count :
                 for uploaded_file in postevent_poster:
                     count=count-1
@@ -268,11 +299,17 @@ def submit_event_v2(request):
             post=Postevent.objects.order_by('-pk')[0]
             organizer.postevent=postevent
             organizer.organizer_name=request.POST.get('organizer_name','')
-            organizer.organizer_mobile=request.POST.get('organizer_mobile','')
-            print organizer.organizer_mobile,'organizer.organizer_mobile'
-            organizer.organizer_mobile_first=request.POST.get('organizer_mobile_2','')
-            print 'organizer.organizer_mobile_first', organizer.organizer_mobile_first
-            organizer.organizer_mobile_second=request.POST.get('organizer_mobile_3','') 
+            organizer.organizer_mobile=request.POST.getlist('organizer_mobile[]','')             
+            mobile_number= ''       
+            count=len(organizer.organizer_mobile)
+            if count:
+                for number in organizer.organizer_mobile:
+                    count=count-1
+                    if count==0:
+                        mobile_number= mobile_number + number
+                    else:
+                        mobile_number= mobile_number + number + ','                
+            organizer.organizer_mobile = mobile_number                
             organizer.organizer_email=request.POST.get('organizer_email','')
             organizer.save()
             send_templated_mail(
@@ -287,6 +324,7 @@ def submit_event_v2(request):
                  	 },
                    )  
             message="Your data succesfully submitted"
+
         
         # user_amount=request.POST.get('plan')
         # if user_amount!='0':

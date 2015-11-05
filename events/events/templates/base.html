@@ -5,6 +5,8 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="events,eventswat,evewat,symposium events,technical events,cultural events,online events">
+        <meta name="description" content="Events based details in this site">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>EventsWat</title>        <!-- Stylesheets -->
         <link rel="stylesheet" href="{% static "css/bootstrap-datepicker.css" %}">
@@ -17,6 +19,17 @@
         <link href="{% static "css/datepicker.css" %}" rel="stylesheet">
         <link href="{% static "css/tipsy.css" %}" rel="stylesheet">
         <script type="text/javascript" src="{% static "js/jquery.js" %}"></script>
+                <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-69301615-1', 'auto');
+          ga('send', 'pageview');
+
+        </script>
+        <script src="http://malsup.github.com/jquery.form.js"></script>
         <!-- GOOGLE FONTS -->
         <link href='https://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'>
         <!--[if IE 9]>
@@ -53,7 +66,7 @@
                                             </div>
                                             <div class="field_control">
                                                 <input type="text" class="form-control" name="email_id" placeholder="Email" id="emailid_signup" autocomplete="off">
-                                                <label for="emailid_signin" class="error_message">Please Enter your Email</label>
+                                                <label for="emailid_signup" class="error_message">Please Enter your Email</label>
                                                 <label class="error_message">Please Enter Valid Email</label>
                                             </div>
                                             <div class="field_control">
@@ -91,16 +104,16 @@
                                 </div> <!-- END .HEADER-LOGOUT -->
                             {% else %}       
                                 <div class="header-login">
-                                    <a href="#" class=""><i class="fa fa-power-off" action="/login/"></i> Login</a>
+                                    <a href="#" class="login_button"><i class="fa fa-power-off" action="/login/"></i> Login</a>
                                     <span style="{% if request.REQUEST.lst and not request.path == '/post_event_v2' %} display:block;color:#df0024;font-weight: bold; {%else%} display: none; {% endif %}">
                                     <!-- {%for message in messages%}{{message}}{% endfor %} -->
                                     </span>
-                                    <div class="login_holder">
+                                   <!--  <div class="login_holder">
                                         <form method="post" id="login_val" action="/login/" name="sign_in">{% csrf_token %}       
                                             <div class="field_control">        
                                                 <input type="text" class="form-control"  placeholder="Email" id="emailid_signin" name="username" autocomplete="off" >
-                                                <label for="emailid_signup" class="error_message">Enter your Username</label>
-                                                <label for="emailid_signup" class="error_message">Enter Valid Email</label>  
+                                                <label for="emailid_signin" class="error_message">Enter your Username</label>
+                                                <label for="emailid_signin" class="error_message">Enter Valid Email</label>  
                                             </div>
                                             <div class="field_control">   
                                                 <input type="password" class="form-control" name="password" id="password_signin" placeholder="Password">
@@ -111,9 +124,12 @@
                                             <a href="#" class="btn btn-link fl">Forgot Password?</a>
                                             <div class="clear_both"> </div>
                                         </form>
-                                    </div>
+                                    </div> -->
                                 </div> <!-- END .HEADER-LOGIN -->
                             {% endif %}
+                           <!--  <div class="header-share">
+                            <a href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}"><i class="fa fa-facebook"></i></a>
+                            </div> -->
                         </div>
                             {% if user.is_authenticated %}
                                 <a href="/post_event" class="btn btn-default"><i class="fa fa-plus"></i> Post Event</a>
@@ -129,7 +145,8 @@
             {% if request.path == '/' or request.path == '/start/' %}
                 <div class="header-search slider-home">
                     <div class="header-search-bar">
-                        <form class="form" method="get" action="/search/?q=" id="f_search" name="f_search">
+                        <!-- <form class="form" method="get" action="/search/?q=" id="f_search" name="f_search"> -->
+                        <form class="form" id="f_search" name="f_search">
                             <div class="container">
                                 <div class="search-value">
                                     <div class="keywords">
@@ -150,14 +167,18 @@
                                                 <option  value="{{subcategory.id}}">{{ subcategory.name|capfirst }} </option>
                                             {% endfor%} 
                                         </select>
-                                            <input type="hidden" name="eventtype" value="" id="eventtype_id">
+                                            <!-- <input type="hidden" name="eventtype" value="" id="eventtype_id"> -->
                                     </div>
-                                    <button class="search-btn base_search" type="submit"><i class="fa fa-search"></i></button>
+                                    <!-- old code -->
+                                   <!--  <button class="search-btn base_search" type="submit"><i class="fa fa-search"></i></button> -->
+                                   <!-- newly added by kalai -->
+                                    <a class="search-btn base_search" type="submit"><i class="fa fa-search search"></i></a>
                                 </div>
                             </div> 
                         </form>
                     </div>
                 {% endif %}
+
                 {% block content %}
                 {% endblock %}
                 {%block search_results1%}
@@ -219,9 +240,13 @@
                         </div> <!-- end .container -->
                     </div> <!-- end .main-footer -->
                     <div class="copyright">
-                        <div class="container">
+                        <div class="container fl">
                             <p>Copyright 2014 &copy; <i class="logo_blue">Events</i><i class="logo_red">wat</i>.com. All rights reserved. Powered by  <a href="/"><i class="logo_blue">Events</i><i class="logo_red">wat</i></a></p>
                         </div> <!-- END .container -->
+                        <div class="visitor_count">
+                        <span> Visitor's count: </span>
+                        <span><script type="text/javascript" src="http://services.webestools.com/cpt_visitors/32820-11-5.js"></script></span>
+                        </div>
                     </div> <!-- end .copyright-->
                 </footer> <!-- end #footer -->
             </div> <!-- end #main-wrapper -->

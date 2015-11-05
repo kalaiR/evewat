@@ -86,7 +86,6 @@ class Organizer(models.Model):
 	organizer_mobile_first= models.CharField(max_length=20, null =True, blank=True)
 	organizer_mobile_second= models.CharField(max_length=20, null =True, blank=True)
 	organizer_email=models.EmailField(max_length=50)
-
 	def __unicode__(self):
 		return self.organizer_name
 

@@ -1,112 +1,120 @@
 {% load static from staticfiles %}
 {% block content %}
-<div class="popup_fade" style="{% if request.REQUEST.lst or request.REQUEST.lst and request.path == '/post_event' or  request.REQUEST.lst and request.path == '/upload_banner' %} display:block; {%else%} display: none; {% endif %}"></div><!--popup_fade-->
-
-<div class="signup_popup popup_pos" id="joinus_popup_content">
-        <div class="popup_heading">
-            <a href="#" class="logo"></a>
-            <div class="fr">
+<div class="popup_fade" style="{% if request.REQUEST.lst or request.REQUEST.lst and request.path == '/post_event' or  request.REQUEST.lst and request.path == '/upload_banner' %} display:block; {%else%} display: none; {% endif %}"></div>
+ <div class="signup_popup popup_pos" id="signin_popup" style="{% if request.REQUEST.lst or  request.REQUEST.lst and request.path == '/post_event' or  request.REQUEST.lst and request.path == '/upload_banner' %} display:block; {%else%} display: none; {% endif %}">    
+<!-- <div class="signup_popup popup_pos" id="signin_popup" style="{% if request.REQUEST.lst %} display:block; {%else%} display: none; {% endif %}"> -->
+	<div class="voucher_popup">
+		<div class="fr">
                 <span class="close_btn"></span>
-                <!-- <a href="#" class="linkedin_signup"></a> -->
-            </div>
-            <div class="clear_both"></div>
-        </div><!--popup_heading-->
-        <div class="popup_contents">
-            <form action=""  id="popup_joinus_form" method="post" enctype="multipart/form-data" class="join_form">
-                {% csrf_token %}
-                <div class="label_holder">
-        
-        <label class="infield_p" for="fname_p">Name</label>
-        <div class="clear_both"></div>
-        <input type="text" name="fname" id="fname_p" value="" placeholder="" class="form_inputfileds alph_validation" maxlength='30' />
-                </div>
-    
-                <div class="label_holder">
-                    <label class="infield_p" for="company_name_p">Company</label>
-                    <div class="clear_both"></div>
-                    <input type="text" value="" placeholder="" name="company_name" id="company_name_p" class="form_inputfileds alph_validation" maxlength='256' />
-                </div>
-    
-                <div>
-                    <label class="" id='state_p' style="color:red !important"></label>
-                    <!-- {% if errors.email_exists %}
-                    {{ errors.email_exists }}
-                    {% endif %} -->
-                    <div class="label_holder">
-                        <label class="infield_p" for="email_p">Email</label>
-                        <input type="text" id="email_p" placeholder="" name="email" class="form_inputfileds email_input_act" value="" onchange="sndReq(this.value);" maxlength='75' />
-                    </div>
-                </div>
-    
-                <div class="label_holder">
-                    <label class="infield_p" for="phone_number_p">Phone number</label>
-                    <input type="text" value="" placeholder="" name="phone_number" id="phone_number_p" class="form_inputfileds "  maxlength='32' />
-                </div>
-    
-                <div class="terms_services termsofservice_act" >
-                    <span>By signing up, you accept our </span>
-    
-                    <a href="javascript:void(0);" >Terms of service</a>
-                </div><!-- terms_services -->
-                <!-- <input type="submit" name="{%if '/apidocs/' in request.path %}fxapi_registration{% else %}auto_buy_popup_reg{% endif %}"  class="btn signup_btn  banner_signup_form_send_p" data-emailexist ="true" value="Join us"> -->
-
-               <input type="submit" name="home_sign_up"  class="btn signup_btn  banner_signup_form_send_p" data-emailexist ="true" value="Join us">
-
-                
-                <!-- <input type="hidden" id='register_path_lead' value="{{request.path}}{% if request.GET.urlencode %}?{{ request.GET.urlencode }}{% endif %}" name="next" /> -->
-                <div class="clear_both"></div>
-            </form>
-        </div><!--popup_contents-->
-    
-        <div class="popup_footers">
-            <span>Already registered?</span>
-            <a href="javascript:void(0);" class="signin_alert1">Sign in</a>
-        </div><!--popup_footers-->
-        <div class="clear_both"></div>
-    </div><!--signup_popup-->
-
-
-    <div class="signup_popup popup_pos" id="signin_popup" style="{% if request.REQUEST.lst or  request.REQUEST.lst and request.path == '/post_event' or  request.REQUEST.lst and request.path == '/upload_banner' %} display:block; {%else%} display: none; {% endif %}">
-        <div class="popup_heading">
-            <a href="#" class="logo"></a>
-            <div class="fr">
+  		</div><!--fr-->
+		<div class="col-md-3 block1">
+					<div class="col-md-12 img1">	
+						<img src="{% static "img/symposium.png" %}" alt="symposium" height="72px" width="72px"><br>
+						<span class="text1">Symposium</span>
+					</div><!--img1-->
+					<div class="col-md-12 img2">
+						<img src="{% static "img/seminar.png" %}" alt="seminar" height="72px" width="72px"><br>
+						<span class="text2">Seminar</span>
+					</div><!--img2-->
+					<div class="col-md-12 img3">
+						<img src="{% static "img/culturals.png" %}" alt="cultural" height="72px" width="72px"><br>
+						<span class="text3">Cultural</span>
+					</div><!--img3-->
+		</div><!--block1-->
+			
+			<div class="col-md-9 block2">
+					<span class="text4">Sign in with your account</span>
+                    <span class="error" style="{% if request.REQUEST.lst %} display:block; {%else%} display: none; {% endif %}">{%for message in messages%}{{message}}{% endfor %}</span>	
+                    <!-- <span>{{ request.get_full_path }}</span>		 -->
+					<!-- <form method="post" id="login_val" action="/login/" name="sign_in" class="form-horizontal" role="form"> -->
+                    <form method="post" id="login_val" action="/login/" name="sign_in" class="form-horizontal" role="form">
+                    {% csrf_token %} 
+					    <div class="form-group">
+						 	<input id="emailid_signin" class="contactus" type="text" placeholder="ENTER YOUR EMAIL" maxlength="50" value="" name="username" autocomplete="off">
+    						<span class="error">Enter your Email</span>
+                            <span class="error">Enter Valid Email</span>
+                            <span class="email_exists_error">Email does not exists</span>
+						</div><!--form-group-->
+						<div class="form-group">
+							<input id="password_signin" class="contactus" type="password" placeholder="ENTER YOUR PASSWORD" maxlength="50" value="" name="password">
+    						<span class="error">Enter your Password</span>
+    						<span class="error_pwd">Invalid Password</span>
+						</div><!--form-group-->
+						<div class="form-group">        
+								<label class="control-label text7">FORGET YOUR PASSWORD?</label>						      
+						</div><!--form-group-->
+						<div class="form-group"> 
+                              <input type="hidden" value="{{ request.get_full_path }}" name="next"/>  
+  						      <a id="sign_in" class="button1" href="#">Sign in</a>
+  						    <!--   <a class="button2" href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}"><i class="fa fa-facebook fb"> </i>Sign in with Facebook</a> -->
+  						      <a class="button2" href="#"><i class="fa fa-facebook fb"> </i>Sign in with Facebook</a>
+  						      <a class="button3" href="#"><i class="fa fa-google google"> </i>Sign in with Google</a>
+						</div><!--form-group-->
+					   	<div class="form-group">        
+								<label class="control-label col-md-8 text8">Don't have a account?<button type="button" class="btn btn-link signup"><mark>Sign up with email</mark></button></label>						      
+						</div><!--form-group-->
+					</form>
+				</div><!--block2-->				
+			<div class="clear_both"> </div>
+	</div><!--voucher_popup-->
+ </div><!--signup_popup-->
+ 
+<div class="signup_popup popup_pos" id="signin_popup">     
+<div class="email">
+		<div class="fr">
                 <span class="close_btn"></span>
-                <!-- <a href="#" class="linkedin_signup"></a> -->
-            </div>
-            <div class="clear_both"></div>
-        </div><!--popup_heading-->
-        <div class="popup_contents" class="">
-            <form method="post" action="/login/">
-                {% csrf_token %}
-                <input type="text" class="text_val_act" value="" maxlength='75' id="emailid_signup" name="username" autocomplete="off" placeholder="Email"/>
-                <!-- <span class="error_msg labelError"  id="emailid_required" >Please enter User name</span> -->
-                <input type="password" class="text_val_act" placeholder="Password" value="" name="password"/>
-    
-               
-                {% for message in messages %}
-                <span class="error_msg">{{ message }}</span>
-                {% endfor %}
-                
-               
-                <div class="btns">
-                    <div class="fl">
-                    	<input type="hidden" value="singin" name="signin">
-                        <input type="hidden" value="{{ request.path }}" name="next" />
-                        
-                        <a id="forgotpassword_act" class='forgotpassword'>Forgot your password?</a>
-                    </div>
-                    <input type="submit" name="home_buy_login"class="custom_btn fr" value="Sign in" />
-                    <div class="clear_both"></div>
-    
-                </div>
-            </form>
-        </div><!--popup_contents-->
-    
-        <div class="popup_footers">
-            <a href="javascript:void(0);" id="joinus_popup_window1">Join us now for free</a>
-        </div><!--popup_footers-->
-        <div class="clear_both"></div>
-    </div><!--signup_popup-->
+  		</div><!--fr-->
+		<div class="col-md-3 block3">
+					<div class="col-md-12 img4">	
+						<img src="{% static "img/symposium.png" %}" alt="symposium" height="72px" width="72px"><br>
+						<span class="text1">Symposium</span>
+					</div><!--img1-->
+					<div class="col-md-12 img5">
+						<img src="{% static "img/seminar.png" %}" alt="seminar" height="72px" width="72px"><br>
+						<span class="text2">Seminar</span>
+					</div><!--img2-->
+					<div class="col-md-12 img6">
+						<img src="{% static "img/culturals.png" %}" alt="cultural" height="72px" width="72px"><br>
+						<span class="text3">Cultural</span>
+					</div><!--img3-->
+		</div><!--block1-->
+			
+			<div class="col-md-9 block2">
+					<span class="text4">Sign up for free</span>			
+					<form class="form-horizontal" role="form">
+					    <div class="form-group">
+						 	<input id="contactus_signup" type="text" placeholder="ENTER YOUR NAME" maxlength="50" value="" name="email"><br>
+    						<span class="error"></span>
+						</div><!--form-group-->
+						<div class="form-group">
+							<input id="contactus_signup" type="text" placeholder="ENTER YOUR EMAIL" maxlength="50" value="" name="pwd"><br>
+    						<span class="error"></span>
+						</div><!--form-group-->
+						<div class="form-group">
+							<input id="contactus_signup" type="text" placeholder="ENTER YOUR PHONE" maxlength="50" value="" name="pwd"><br>
+    						<span class="error"></span>
+						</div><!--form-group-->
+						<div class="form-group">
+							<input id="contactus_signup" type="text" placeholder="ENTER YOUR PASSWORD" maxlength="50" value="" name="pwd"><br>
+    						<span class="error"></span>
+						</div><!--form-group-->
+						<div class="form-group">
+							<input id="contactus_signup" type="text" placeholder="ENTER YOUR CONFIRM PASSWORD" maxlength="50" value="" name="pwd"><br>
+    						<span class="error"></span>
+						</div><!--form-group-->
+						<div class="form-group">        
+  						      <a class="button1" href="#">Sign up</a>
+  						      <a class="button2" href="#"><i class="fa fa-facebook fb"> </i>Sign up with Facebook</a>
+  						      <a class="button3" href="#"><i class="fa fa-google google"> </i>Sign up with Google</a>
+						</div><!--form-group-->
+					   	<div class="form-group">        
+								<label class="control-label col-md-8 text8">Already have an account?<button type="button" class="btn btn-link signin"><mark>Sign in here</mark></button></label>						      
+						</div><!--form-group-->
+					</form>
+				</div><!--block2-->				
+			<div class="clear_both"> </div>
+	</div><!--email-->
 
+ </div><!--signup_popup-->
 
 {% endblock %}

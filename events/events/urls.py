@@ -5,7 +5,7 @@ from django.contrib import admin
 from college_event.views import *
 from college_event.models import *
 from django.views.generic import RedirectView
-
+from reviews.views import *
 # Custom Search View
 from search.eventsearch import EventSearchView
 from search.searchform import EventSearchFilter
@@ -93,7 +93,10 @@ urlpatterns = patterns('',
 
 	url(r'^admin/', include(admin.site.urls)),
 	url(r'^import/', 'college_event.views.importcollegedata', name='importcollegedata'),
-	#url('', include('social.apps.django_app.urls', namespace='social')),
-	#url('', include('django.contrib.auth.urls', namespace='auth')),
-	url(r'^home_v2/$', 'college_event.views.home_v2', name='home_v2'),
+	url('', include('social.apps.django_app.urls', namespace='social')),
+   	url('', include('django.contrib.auth.urls', namespace='auth')),
+   	url(r'^home_v2/$', 'college_event.views.home_v2', name='home_v2'),
+   	url(r'^review/',  'reviews.views.post', name='post'),
+   	# url(r'^post/$', 'reviews.views.post_review', name='reviews-post-review'),
+
 )+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

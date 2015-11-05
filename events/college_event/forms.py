@@ -11,4 +11,5 @@ class EventSearchForm(SearchForm):
 
 class UploadFileForm(forms.Form):
     title = forms.CharField(max_length=50, required=False)
-    file  = forms.FileField()        
+    file  = forms.FileField()   
+
