@@ -1511,7 +1511,7 @@ $(".confirm").click(function(){
 
          
 
-    var max_fields      = 2; //maximum input boxes allowed
+    var max_fields      = 3; //maximum input boxes allowed
     var wrapper         = $(".addnum"); //Fields wrapper
     var add_button      = $(".btn_plus1"); //Add button ID
    

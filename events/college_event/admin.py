@@ -78,8 +78,8 @@ class PosteventAdmin(admin.ModelAdmin):
 		return self.readonly_fields
 
 class OrganizerAdmin(admin.ModelAdmin):
-	fields = ['organizer_name','organizer_mobile','organizer_mobile_first','organizer_mobile_second','organizer_email']
-	list_display = ('organizer_name','organizer_mobile','organizer_mobile_first','organizer_mobile_second','organizer_email')
+	fields = ['postevent','organizer_name','organizer_mobile','organizer_email']
+	list_display = ('postevent','organizer_name','organizer_mobile','organizer_email')
 	list_filter = ['organizer_name']
 	search_fields = ['organizer_name']
 	list_per_page = 50

@@ -9120,7 +9120,7 @@ mark
    
 }
 #login_val .error, .email_exists_error, .error_pwd {
-    background-color: #ffff00;
+    /*background-color: #ffff00;*/
     color: #900;
     font-family: Verdana,Arial,sans-serif;
     font-size: 0.9em;
@@ -9487,10 +9487,10 @@ t
     background-color:#e6e6ee;
     border: 1px solid #939394;
     border-width: 0.1em;
-   	left: 798px;
+   	left: 788px;
     min-height: 75px;
     position: absolute;
-    top: 532px;
+    top: 235px;
     width: 290px;
 }
 .confirm {
