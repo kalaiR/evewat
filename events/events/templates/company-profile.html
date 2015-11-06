@@ -2,6 +2,7 @@
 {% load static from staticfiles %}
 {% load i18n %}
 {% block content %}
+
     <div id="main-wrapper">
         <div class="slider-content">
             <div id="home-slider" class="owl-carousel owl-theme">
@@ -103,25 +104,25 @@
         RENDER MY CONTENT
     {% endfor %}
 </div>
-
-<div class="reviews">
-    <h2>{{review.name}}</h2>
+<div id='mgs' style="display:none;">
+    <p>Your comment has been successfully posted</p>
 </div>
+
 <div class="comments-section">
     <form class="comment-form" action="{%url "reviews.views.post" %}" method="post" name="form" id="review_form">
     {% csrf_token %}
         <div class="row">
             <div class="col-md-4">
-                <input type="text" required="" placeholder="Name *" name="name">
+                <input type="text" required="" placeholder="Name *" name="name" id="name">
             </div>
 
             <div class="col-md-4">
-                <input type="email" name="email" required="" placeholder="Email *">
+                <input type="email" name="email" id="email"required="" placeholder="Email *">
             </div>
 
             <div class="col-md-4">
                 <!-- <input type="text" placeholder="Ratings" name="rating"> -->
-                <fieldset class="rating" name="rating">
+                <fieldset class="rating" name="rating" id="rating">
                     <legend>Please rate:</legend>
                     <input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="Rocks!">5 stars</label>
                     <input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="Pretty good">4 stars</label>
@@ -132,10 +133,31 @@
             </div>
         </div>
 
-        <textarea required="" placeholder="Your Comment ..." name="content"></textarea>
+        <textarea required="" placeholder="Your Comment ..." name="content" id="content"></textarea>
 
         <button class="btn btn-default" type="submit" id="review_btn" ><i class="fa fa-envelope-o"></i> Send Message</button>
-        <input type="hidden" name="postevent" value="{{events.id}}">
+        <input type="hidden" name="postevent" value="{{events.id}}" id="postevent">
     </form>
+</div>
+<div class="reviews">
+{% for reviews in review %}
+        <div class="cau clearfix">
+            <img width="38" height="38" class="avatar avatar-loaded fl" src="{{STATIC_URL}}img/user.png">            <div class="aum">
+                <h3>{{reviews.name}}</h3>
+                
+            </div>
+        </div>
+        <div class="ctx">
+            <p class="comments">{{reviews.content}}</p>
+        </div>
+        
+{% endfor %}
+
+   <!--  <span>NAME: 
+    {{reviews.name}}</span><br/>
+    <span>COMMENTS:
+    {{reviews.content}}</span><br/>
+    <br/>
+ -->
 </div>
 {% endblock %}

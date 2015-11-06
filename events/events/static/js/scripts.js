@@ -430,23 +430,35 @@ $( ".keywords input, .select-location input " ).focus(function() {
 
 $("document").ready(function($){
 
-$("#review_btn").submit(function(event) {
-        var $form = $(this),
-        $inputs = $form.find("input, select, button, textarea"),
-        serializedData = $form.serialize();
-        alert(serializedData);
-        $.ajax({
-            url: "/review/",
-            type: "post",
-            data: serializeData,
-            success: function(response) {
-                alert(response);
-            }
-        })
-        event.preventDefault();
-    });
+// $("#review_from").submit(function(event) {
+//        $.ajax({ 
+//                 data: $(this).serialize(), 
+//                 type: $(this).attr('method'), 
+//                 url: $(this).attr('action'),
+//                 success: function(response) {
+//                 $('#mgs').show();
+//             }
+//         })
+//         event.preventDefault();
+//     });
 
-
+ $("#review_btn").click(function(event){
+             $.ajax({
+                 type:"POST",
+                 url:"/review/",
+                 data: {
+                        'name': $('#name').val(),
+                        'email': $('#email').val(),
+                        'rating': $('input[name="rating"]').val(),
+                        'content': $('#content').val(),
+                        'postevent': $('#postevent').val(),
+                        },
+                 success: function(){
+                     $('#mgs').show();
+                    }
+            }); 
+            return false;
+       });
 
 // var limit = 3;
 // var count = 1;
@@ -1509,9 +1521,9 @@ $(".confirm").click(function(){
         $(".addnum").hide();
     });
 
-         
+ // Organizer mobile number add with popup done by Ramya
 
-    var max_fields      = 3; //maximum input boxes allowed
+    var max_fields      = 2; //maximum input boxes allowed
     var wrapper         = $(".addnum"); //Fields wrapper
     var add_button      = $(".btn_plus1"); //Add button ID
    
@@ -1520,23 +1532,56 @@ $(".confirm").click(function(){
         e.preventDefault();
         if(x < max_fields){ //max input box allowed
             x++; //text box increment
-            $(wrapper).append('<div class="block"><input type="text" placeholder="Organizer mobile1" name="organizer_mobile[]"  multiple="multiple"  id="organizer_mobile_" class="organizer_mobile" value="" data-number="true"><img src="media/static/img/close.png" alt="close" class="btn_close1" "33px" width="20px"></div>'); //add input box
+            $(wrapper).append("<div class='block'><input type='text' placeholder='Organizer mobile' name='organizer_mobile[]' id='organizer_mobile_"+ x + "' class='organizermobile' value='' data-number='true'><img src='media/static/img/close.png' alt='close' class='btn_close1' '33px' width='20px'></div>"); //add input box
         }
     });
    
     $(wrapper).on("click",".btn_close1", function(e){ //user click on remove text
         e.preventDefault(); $(this).parent('div').remove(); x--;
     });
- 
+
+    var mobile_number = '';
+    var number = '';
+    $(document).on('click','#number_add_act', function(){
+      length = $('.organizermobile').length;
+      mobile_number = $('.organizer_mobile').val().split(',')[0];
+      $('.organizermobile').each(function(index){
+         if(index == length - 1)
+          number = number + $(this).val()
+         else
+          number = number + $(this).val() + ',';
+      });
+      // alert(number);
+      if($('.organizer_mobile').val() == '')
+        $('.organizer_mobile').val(number);
+      else
+        $('.organizer_mobile').val(mobile_number + ',' + number);
+      number= '';
+    });
   
 $('.email').hide();
 $(".signup").click(function(){
     $(".email").show();
 }); 
 
-
-
 $(".signin").click(function(){
     $(".email").hide();
 });
 $('.voucher_popup').show(); 
+
+$(".upload_image").find('.simpleFilePreview_inputButtonText').text("UPLOAD A IMAGE");
+
+$('.privacy_content').hide();
+$(".privacy").click(function(){
+    $('.privacy_content').show();
+    $(".profile").hide();
+});
+
+$(".info").click(function(){
+    $('.profile').show();
+    $(".privacy_content").hide();
+});
+
+$(".dropdown").click(function(){
+        $(".menulist").toggle();
+});

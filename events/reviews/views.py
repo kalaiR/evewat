@@ -8,6 +8,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render_to_response, redirect, render
 from django.template.response import TemplateResponse
 from django.template import RequestContext
+from django.views.decorators.csrf import csrf_protect, csrf_exempt
 
 
 # class ReviewPostBadRequest(http.HttpResponseBadRequest):
@@ -21,20 +22,28 @@ from django.template import RequestContext
 #         if settings.DEBUG:
 #             self.content = render_to_string("reviews/400-debug.html", {"why": why})
 
-
+@csrf_exempt  
 def post(request):
-    if request.is_ajax() or request.method == 'POST':
-        review=Review()
-        review.name=request.POST.get('name')
-        review.email=request.POST.get('email')
-        review.rating=request.POST.get('rating')
-        review.content=request.POST.get('content')
-        review.event_id=request.POST.get('postevent')
-        review.save()
-       
-        return response
+    if request.is_ajax():
+        if request.method == 'POST':
+            print "enter"
+            review=Review()
+            review.name=request.POST.get('name')
+            print review.name
+            review.email=request.POST.get('email')
+            print review.email
+            review.rating=request.POST.get('rating')
+            print review.rating
+            review.content=request.POST.get('content')
+            print review.content
+            review.event_id=request.POST.get('postevent')
+            print review.event_id
+            review.save()
+            msg = "The operation has been received correctly."
     else:
-        return HttpResponse("Fail")
+        msg = "Fail"
+
+    return HttpResponse(msg)
     
 
 

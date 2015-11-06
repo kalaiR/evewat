@@ -6,6 +6,7 @@ from django.views.decorators.csrf import csrf_exempt
 from PIL import Image
 from haystack.query import SearchQuerySet
 from college_event.extra import ContentTypeRestrictedFileField
+from datetime import datetime
 
 import os
 from django.conf import settings
@@ -58,26 +59,28 @@ class PremiumPriceInfo(models.Model):
         return self.purpose
 
 class Postevent(models.Model):
-	name= models.CharField(max_length=50, )
-	email= models.EmailField(max_length=50,)
-	mobile= models.BigIntegerField()
-	event_title=models.CharField(max_length=50,)
-	startdate= models.DateField(max_length=50,)
-	enddate= models.DateField(max_length=50,)
-	category= models.ForeignKey(Category,)	
+	name= models.CharField(max_length=50)
+	email= models.EmailField(max_length=50)
+	mobile= models.CharField(max_length=50)
+	event_title=models.CharField(max_length=50)
+	startdate= models.DateField(max_length=50)
+	enddate= models.DateField(max_length=50)
+	category= models.ForeignKey(Category)	
 	eventtype= models.ForeignKey(SubCategory,null=True, blank=True)	
 	eventdescription= models.TextField()	
 	address= models.TextField()
-	state= models.CharField(max_length=50,)
+	state= models.CharField(max_length=50)
 	city= models.CharField(max_length=50)
 	college=models.CharField(max_length=50)
 	department=models.CharField(max_length=50)
 	poster = models.ImageField(upload_to='static/img/',null=True, max_length=500,help_text="Please upload the banner Image with 2MB min and jpg, png format only allowed")	
 	admin_status = models.BooleanField(default=False)
 	payment = models.BooleanField(default=False)
-
+	status_isactive=models.BooleanField(default=False)
+		
 	def __unicode__(self):
 		return self.event_title
+
 
 class Organizer(models.Model):
 	postevent=models.ForeignKey(Postevent)

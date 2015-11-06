@@ -6,6 +6,8 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib import messages
+from django.contrib.auth.models import User
+
 
 POSITION = (
     ('bottom', 'Bottom of the page'),
@@ -19,7 +21,8 @@ PAGEURL=(
     ('details/','Details page'),
 )
 
-class SiteBanner( models.Model ):   
+class SiteBanner( models.Model ):
+    user=models.ForeignKey(User) 
     banner = ContentTypeRestrictedFileField(upload_to='static/banners',content_types=['image/jpeg','image/png'],max_upload_size=2097152,help_text="Please upload the banner Image with 2MB min and jpg, png format only allowed")
     link= models.CharField(max_length=200, null=True, blank=True, help_text="Please enter the website link")
     pageurl= models.CharField(max_length=50, choices=PAGEURL, help_text="Please select the page to display the banner")

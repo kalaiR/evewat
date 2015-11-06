@@ -25,7 +25,7 @@ from payu.models import *
 from events.util import format_redirect_url
 from templated_email import send_templated_mail
 from forms import UploadFileForm
-
+from django.utils.timezone import utc
 import simplejson as json
 import random
 import string
@@ -66,7 +66,7 @@ def details(request,id=None):
     # try:
     postevent=Postevent.objects.get(pk=id)
     organizer=Organizer.objects.filter(postevent__id=postevent.id)
-    review=Review.objects.all()
+    review=Review.objects.filter(event_id=postevent.id)
     return render_to_response("company-profile.html",{'events':postevent,'organizer':organizer,'review':review}, context_instance=RequestContext(request))
     # except:
     #     return render_to_response("company-profile.html",{'message':'Sorry for inconvenience.Some thing went to wrong'}, context_instance=RequestContext(request))
@@ -726,3 +726,18 @@ def home_v2(request):
                             'user': request.user})
    return render_to_response('home_v2.html',
                              context_instance=context)
+
+def get_events_for_calendar(request):
+    import datetime
+    events = Postevent.objects.all()
+    time = datetime.time(10, 25)
+    events_list = []
+    for event in events:
+        event_data = {'id':event.id, 'title':event.event_title, 'start':smart_unicode(datetime.datetime.combine(event.startdate,time)),'end':smart_unicode(datetime.datetime.combine(event.enddate,time))}
+        events_list.append(event_data)
+    print "event_list", events_list
+    return HttpResponse(simplejson.dumps(events_list), mimetype='application/json')
+
+def user_profile(request):
+    return render_to_response("user_profile.html", context_instance=RequestContext(request))
+

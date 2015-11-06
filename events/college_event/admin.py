@@ -44,7 +44,7 @@ class OraganizerInLine(admin.TabularInline):
 
 class PosteventAdmin(admin.ModelAdmin):
 
-	filelds=['name','email','eventtype','city','event_title','startdate','admin_status']
+	filelds=['name','email','eventtype','city','event_title','startdate','admin_status','created_date','expired_date']
 	list_display = ('id', 'name','eventtype','city','event_title','startdate','admin_status')
 	list_filter = ['id','event_title','city']	
 	search_fields = ['id', 'event_title']
