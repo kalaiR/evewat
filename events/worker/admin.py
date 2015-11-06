@@ -6,9 +6,9 @@ from django.http import HttpResponse, Http404
 import models
 # from actors.models import Actor
 
-from dateutil import tz
+# from dateutil import tz
 #from_zone = tz.tzutc()
-to_zone = tz.tzlocal()
+# to_zone = tz.tzlocal()
 
 class WorkerAdmin(admin.ModelAdmin):
   list_display = ('id', 'name', 'interval', 'wait_for_approval', 'active')
