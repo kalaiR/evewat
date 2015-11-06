@@ -55,3 +55,9 @@ docs/_build/
 
 # PyBuilder
 target/
+
+# Static file
+events/static
+events/events/media
+
+# Comment Statement

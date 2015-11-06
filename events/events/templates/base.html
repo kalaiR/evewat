@@ -19,7 +19,8 @@
         <link href="{% static "css/datepicker.css" %}" rel="stylesheet">
         <link href="{% static "css/tipsy.css" %}" rel="stylesheet">
         <script type="text/javascript" src="{% static "js/jquery.js" %}"></script>
-                <script>
+        <script type="text/javascript" src="{% static "js/eventcalendar.js" %}"></script>
+        <script>
           (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
           (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
           m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -29,6 +30,8 @@
           ga('send', 'pageview');
 
         </script>
+        <!--<script src="http://malsup.github.com/jquery.form.js"></script> -->
+         
         <!-- GOOGLE FONTS -->
         <link href='https://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'>
         <!--[if IE 9]>
@@ -48,6 +51,7 @@
                         <a href="/"><img src = "{% static "img/logo_text.png" %}" height="27"></a>
                     </div><!-- END HEADER LOGO -->
                     <div class="header-call-to-action">
+                     {% if not request.path == "/user_profile/" %}
                         <div class="fl">
                             {% if not user.is_authenticated %}
                                 <div class="header-register">
@@ -65,7 +69,7 @@
                                             </div>
                                             <div class="field_control">
                                                 <input type="text" class="form-control" name="email_id" placeholder="Email" id="emailid_signup" autocomplete="off">
-                                                <label for="emailid_signin" class="error_message">Please Enter your Email</label>
+                                                <label for="emailid_signup" class="error_message">Please Enter your Email</label>
                                                 <label class="error_message">Please Enter Valid Email</label>
                                             </div>
                                             <div class="field_control">
@@ -103,16 +107,16 @@
                                 </div> <!-- END .HEADER-LOGOUT -->
                             {% else %}       
                                 <div class="header-login">
-                                    <a href="#" class=""><i class="fa fa-power-off" action="/login/"></i> Login</a>
+                                    <a href="#" class="login_button"><i class="fa fa-power-off" action="/login/"></i> Login</a>
                                     <span style="{% if request.REQUEST.lst and not request.path == '/post_event_v2' %} display:block;color:#df0024;font-weight: bold; {%else%} display: none; {% endif %}">
                                     <!-- {%for message in messages%}{{message}}{% endfor %} -->
                                     </span>
-                                    <div class="login_holder">
+                                   <!--  <div class="login_holder">
                                         <form method="post" id="login_val" action="/login/" name="sign_in">{% csrf_token %}       
                                             <div class="field_control">        
                                                 <input type="text" class="form-control"  placeholder="Email" id="emailid_signin" name="username" autocomplete="off" >
-                                                <label for="emailid_signup" class="error_message">Enter your Username</label>
-                                                <label for="emailid_signup" class="error_message">Enter Valid Email</label>  
+                                                <label for="emailid_signin" class="error_message">Enter your Username</label>
+                                                <label for="emailid_signin" class="error_message">Enter Valid Email</label>  
                                             </div>
                                             <div class="field_control">   
                                                 <input type="password" class="form-control" name="password" id="password_signin" placeholder="Password">
@@ -123,12 +127,12 @@
                                             <a href="#" class="btn btn-link fl">Forgot Password?</a>
                                             <div class="clear_both"> </div>
                                         </form>
-                                    </div>
+                                    </div> -->
                                 </div> <!-- END .HEADER-LOGIN -->
                             {% endif %}
-                            <div class="header-share">
-                                 <a href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}"><i class="fa fa-facebook"></i></a>
-                            </div>
+                           <!--  <div class="header-share">
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                            </div> -->
                         </div>
                             {% if user.is_authenticated %}
                                 <a href="/post_event" class="btn btn-default"><i class="fa fa-plus"></i> Post Event</a>
@@ -136,6 +140,7 @@
                             {% else %}
                                 <a class="btn btn-default login_act post_event_btn_act"><i class="fa fa-plus"></i> Post Event</a>
                                 <a class="btn btn-default login_act upload_banner_btn_act"><i class="fa fa-plus"></i> Post Banner</a>
+                            {% endif %}
                             {% endif %}
                     </div><!-- END .HEADER-CALL-TO-ACTION -->
                 </div><!-- END .CONTAINER -->
@@ -171,7 +176,7 @@
                                     <!-- old code -->
                                    <!--  <button class="search-btn base_search" type="submit"><i class="fa fa-search"></i></button> -->
                                    <!-- newly added by kalai -->
-                                    <a class="search-btn base_search" type="submit"><i class="fa fa-search"></i></a>
+                                    <a class="search-btn base_search" type="submit"><i class="fa fa-search search"></i></a>
                                 </div>
                             </div> 
                         </form>
@@ -266,7 +271,48 @@
             <script src="{% static "js/jquery.tipsy.js" %}"></script>
             <script src="{% static "js/scripts.js" %}"></script>
             <script type="text/javascript" src="{% static "js/stepsForm.js" %}"></script>
-            
+            <script type="text/javascript">
+                // var events = [
+                // {"id":"1","title":"11-29-2013","start":"2015-11-06 10:25:28","end":"2013-11-30 10:25:34","url":"","allDay":"1"},
+                // {"id":"2","title":"12-15-2013","start":"2015-11-07 10:25:47","end":"2013-12-16 10:25:39","url":"","allDay":"1"},
+                // {"id":"3","title":"12-26-2013","start":"2013-12-26 10:25:50","end":"2013-12-27 10:25:42","url":"","allDay":"false"},
+                // {"id":"4","title":"11-19-2013","start":"2013-11-19 00:00:00","end":"2013-11-23 00:00:00","url":"","allDay":"false"},
+                // {"id":"5","title":"12-9-2013","start":"2013-12-09 00:00:00","end":"2013-12-11 00:00:00","url":"event","allDay":"false"},
+                // {"id":"6","title":"12-8-2013","start":"2013-12-08 00:00:00","end":"2013-12-10 00:00:00","url":"event","allDay":"false"},
+                // {"id":"7","title":"12-15-2013","start":"2013-12-15 10:25:47","end":"2013-12-18 10:25:39","url":"","allDay":"1"},
+                // {"id":"8","title":"12-10-2013","start":"2013-12-10 10:25:47","end":"2013-12-12 10:26:39","url":"","allDay":"1"}
+                // ];
+
+                var events; 
+                $.ajax({
+                    async: false,
+                    url: "/get_events_for_calendar/",
+                    datatype: "json",
+                    success: function(response) {
+                        events = JSON.stringify(response);
+                    }
+                });
+                console.log("events"+events);
+                
+                var todaydate = new Date();
+                var curmonth = todaydate.getMonth() + 1; //get current month (1-12)
+                var curyear = todaydate.getFullYear(); //get current year
+                var selectedmonth = curmonth;
+                var selectedyear = curyear;
+
+                document.getElementById('cal').innerHTML = buildCal(curmonth ,curyear, "main", "month", "daysofweek", "days", 1);
+
+                function changeMonth(direction) {
+                    if (direction) {
+                        selectedyear =  ((selectedmonth+1) > 12) ? selectedyear+1 : selectedyear;
+                        selectedmonth = ((selectedmonth+1) > 12) ? 1 : selectedmonth+1;
+                    } else {
+                        selectedyear =  ((selectedmonth-1) == 0) ? selectedyear-1 : selectedyear;
+                        selectedmonth = ((selectedmonth-1) == 0) ? 12 : selectedmonth-1;
+                    }
+                    document.getElementById('cal').innerHTML = buildCal(selectedmonth ,selectedyear, "main", "month", "daysofweek", "days", 1);
+                }
+            </script>
             {% if request.path == '/banner' %}
             <script src="{% static "js/select.js" %}"></script>
             {% endif %}

@@ -43,8 +43,8 @@ INSTALLED_APPS = (
     'search',
     'payu',    
     'banner',
-    'social.apps.django_app.default',
-    'tracking',
+    # 'social.apps.django_app.default',
+    # 'tracking',
     'reviews',
     'worker',
 )
@@ -68,9 +68,9 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'tracking.middleware.VisitorTrackingMiddleware',
-    'tracking.middleware.VisitorCleanUpMiddleware',
-    'tracking.middleware.BannedIPMiddleware',
+    # 'tracking.middleware.VisitorTrackingMiddleware',
+    # 'tracking.middleware.VisitorCleanUpMiddleware',
+    # 'tracking.middleware.BannedIPMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
@@ -134,15 +134,15 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.request",
     'college_event.context_processors.globalactivity',
     "django.contrib.messages.context_processors.messages",
-    'social_auth.context_processors.social_auth_by_name_backends',
-    'social_auth.context_processors.social_auth_backends',
-    'social_auth.context_processors.social_auth_by_type_backends',
-    'social_auth.context_processors.social_auth_login_redirect',
+    # 'social_auth.context_processors.social_auth_by_name_backends',
+    # 'social_auth.context_processors.social_auth_backends',
+    # 'social_auth.context_processors.social_auth_by_type_backends',
+    # 'social_auth.context_processors.social_auth_login_redirect',
 )
 
 LOGIN_REDIRECT_URL = '/'
-SOCIAL_AUTH_FACEBOOK_KEY =' 534214713400291'
-SOCIAL_AUTH_FACEBOOK_SECRET ='0dd34a2b338ae20240a973a832c8ee1c'
+SOCIAL_AUTH_FACEBOOK_KEY ='1659129517705839'
+SOCIAL_AUTH_FACEBOOK_SECRET ='8b2ebde6051b128b0f453b8384bc5989'
 URL_PATH = ''
 SOCIAL_AUTH_STRATEGY = 'social.strategies.django_strategy.DjangoStrategy'
 SOCIAL_AUTH_STORAGE = 'social.apps.django_app.default.models.DjangoStorage'

@@ -93,10 +93,13 @@ urlpatterns = patterns('',
 
 	url(r'^admin/', include(admin.site.urls)),
 	url(r'^import/', 'college_event.views.importcollegedata', name='importcollegedata'),
-	url('', include('social.apps.django_app.urls', namespace='social')),
+	# url('', include('social.apps.django_app.urls', namespace='social')),
    	url('', include('django.contrib.auth.urls', namespace='auth')),
    	url(r'^home_v2/$', 'college_event.views.home_v2', name='home_v2'),
    	url(r'^review/',  'reviews.views.post', name='post'),
    	# url(r'^post/$', 'reviews.views.post_review', name='reviews-post-review'),
+
+   	url(r'^get_events_for_calendar/',  'college_event.views.get_events_for_calendar', name='eventcalendar'),
+   	url(r'^user_profile/',  'college_event.views.user_profile', name='user_profile')
 
 )+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -2,7 +2,7 @@
 {%if not request.is_ajax%}
 {% load static from staticfiles %}
 {% load i18n %}
-    {% block content %}
+{% block content %}
             <div class="slider-content">
                 <div id="home-slider" class="owl-carousel owl-theme">
                     {% for banners in banner|get_main_banner %}
@@ -49,7 +49,7 @@
                   </div>
 {% endblock %} 
 {% endif %}                     
-                    <!--search results block--> 
+<!--search results block--> 
 {% block search_results1 %}
     <div class="col-md-7 ">
             <div class="page-content">
@@ -57,8 +57,7 @@
                     <div class="tab-pane active">
                         <div class="change-view">                   
                         </div>
-
-                    <div id="search_result" class="row clearfix">
+                        <div id="search_result" class="row clearfix">
                         {% if page and page.object_list%}
                             {% for events in page.object_list %}
                                 {% if events.object.admin_status == True %}
