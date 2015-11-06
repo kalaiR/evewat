@@ -46,6 +46,7 @@ INSTALLED_APPS = (
     'social.apps.django_app.default',
     'tracking',
     'reviews',
+    'worker',
 )
 
 SITE_ID = 1

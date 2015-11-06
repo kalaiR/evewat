@@ -2,9 +2,7 @@
 {% load static from staticfiles %}
 {% load i18n %}
 {% block content %}
-<div id='mgs' style="display:none;">
-    <p>success</p>
-</div>
+
     <div id="main-wrapper">
         <div class="slider-content">
             <div id="home-slider" class="owl-carousel owl-theme">
@@ -106,7 +104,9 @@
         RENDER MY CONTENT
     {% endfor %}
 </div>
-
+<div id='mgs' style="display:none;">
+    <p>Your comment has been successfully posted</p>
+</div>
 
 <div class="comments-section">
     <form class="comment-form" action="{%url "reviews.views.post" %}" method="post" name="form" id="review_form">

@@ -25,7 +25,7 @@ from payu.models import *
 from events.util import format_redirect_url
 from templated_email import send_templated_mail
 from forms import UploadFileForm
-
+from django.utils.timezone import utc
 import simplejson as json
 import random
 import string
@@ -692,3 +692,4 @@ def home_v2(request):
                             'user': request.user})
    return render_to_response('home_v2.html',
                              context_instance=context)
+

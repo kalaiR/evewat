@@ -23,13 +23,16 @@ class WorkerTaskAdmin(admin.ModelAdmin):
   
   list_per_page = 100
 
+class NoticeEmailConfigAdmin(admin.ModelAdmin):
+  list_display = ('id', 'max_email_per_lead', 'email_per_sale', 'max_iterations', 'max_email_retry', 'email_queue_limit')
+  pass
 
 admin.site.register(models.Worker, WorkerAdmin)
 admin.site.register(models.WorkerTask, WorkerTaskAdmin)
 admin.site.register(models.UserTracking)
-# admin.site.register(models.NoticeEmailConfig)
+admin.site.register(models.NoticeEmailConfig, NoticeEmailConfigAdmin)
 admin.site.register(models.WorkerNoticeEmailTask)
 # admin.site.register(models.ProductEmailTracking)
-admin.site.register(models.ProductExpiredAdTracking)
+admin.site.register(models.BannerExpiredAdTracking)
 
 

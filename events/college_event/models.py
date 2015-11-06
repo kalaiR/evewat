@@ -6,6 +6,7 @@ from django.views.decorators.csrf import csrf_exempt
 from PIL import Image
 from haystack.query import SearchQuerySet
 from college_event.extra import ContentTypeRestrictedFileField
+from datetime import datetime
 
 import os
 from django.conf import settings
@@ -75,9 +76,11 @@ class Postevent(models.Model):
 	poster = models.ImageField(upload_to='static/img/',null=True, max_length=500,help_text="Please upload the banner Image with 2MB min and jpg, png format only allowed")	
 	admin_status = models.BooleanField(default=False)
 	payment = models.BooleanField(default=False)
-
+	status_isactive=models.BooleanField(default=False)
+		
 	def __unicode__(self):
 		return self.event_title
+
 
 class Organizer(models.Model):
 	postevent=models.ForeignKey(Postevent)

@@ -17,10 +17,10 @@ class Command(BaseCommand):
     pass
 
 
-  # def initworker(self):
-  #   from ...models import Worker
+  def initworker(self):
+    from ...models import Worker
 
-  #   workers = Worker(id='freealert_notice_email')
-  #   worker.name = 'Freealert Notice Email'
-  #   worker.cls_path = 'worker.workers.EmailNotificationWorker'
-  #   worker.save()
+    workers = Worker(id='banner_notice_email')
+    worker.name = 'Banner Notice Email'
+    worker.cls_path = 'worker.workers.EmailNotification_ExpiredAds'
+    worker.save()

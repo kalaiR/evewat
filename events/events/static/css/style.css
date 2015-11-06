@@ -9430,7 +9430,7 @@ t
   padding-left: 58px !important;
 }
 
-<<<<<<< HEAD
+
 .visitor_count{
   bottom:7px;
   right:65px;
@@ -9468,5 +9468,10 @@ t
   cursor: pointer;
   border-radius: 3px;
 }
-
+#mgs > p {
+    font-size: 19px;
+    left: 80px;
+    position: relative;
+    top: -36px;
+}
 
