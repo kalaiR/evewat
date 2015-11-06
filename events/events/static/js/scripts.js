@@ -443,7 +443,6 @@ $("document").ready(function($){
 //     });
 
  $("#review_btn").click(function(event){
-    alert("enter");
              $.ajax({
                  type:"POST",
                  url:"/review/",
@@ -457,8 +456,7 @@ $("document").ready(function($){
                  success: function(){
                      $('#mgs').show();
                     }
-            });
-            alert("finish ajax")
+            }); 
             return false;
        });
 
@@ -1553,7 +1551,7 @@ $(".confirm").click(function(){
          else
           number = number + $(this).val() + ',';
       });
-      alert(number);
+      // alert(number);
       if($('.organizer_mobile').val() == '')
         $('.organizer_mobile').val(number);
       else
