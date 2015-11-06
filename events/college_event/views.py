@@ -726,3 +726,14 @@ def home_v2(request):
                             'user': request.user})
    return render_to_response('home_v2.html',
                              context_instance=context)
+
+def get_events_for_calendar(request):
+    import datetime
+    events = Postevent.objects.all()
+    time = datetime.time(10, 25)
+    events_list = []
+    for event in events:
+        event_data = {'id':event.id, 'title':event.event_title, 'start':smart_unicode(datetime.datetime.combine(event.startdate,time)),'end':smart_unicode(datetime.datetime.combine(event.enddate,time))}
+        events_list.append(event_data)
+    print "event_list", events_list
+    return HttpResponse(simplejson.dumps(events_list), mimetype='application/json')
