@@ -6005,7 +6005,7 @@ fieldset[disabled] .btn-default-inverse.active {
 }
 .featured-listing {
   position: relative;
-  margin-top: 40px;
+  margin-top: 163px;
   padding: 50px 0;
   background: url('../img/content/feature-bg.jpg') top center no-repeat;
   background-size: cover;
@@ -9287,15 +9287,15 @@ t
     max-width: 360px !important;
     margin-bottom: 20px;
 }
-
 .feedback_popup{
-  width:400px;
+  width:300px;
   background-color: #f8f8f8;
   border:1px solid;
   position:absolute;
   right:-32px;
   z-index: 999999;
- 
+  box-shadow: 0 5px 15px -10px rgba(0, 0, 0, 0.3) inset;
+  top: 600px;
 }
 .feed{
   margin-bottom: 10px;
@@ -9310,7 +9310,17 @@ t
   position: absolute;
   right:40px;
   top:0;
+  cursor: pointer;
 }
+.feedback_star {
+    color: #0074bd;
+    font-size: 13px;
+}
+.text_rate{
+    color: #0074bd;
+     font-size: 18px;
+    text-align: center;
+  }
 .sf-select select {
   opacity:1;
   background:none;
@@ -9358,8 +9368,9 @@ t
 
 
 .content{
-  margin-left: 73px;
+  margin-left: 10px;
   width: 253px;
+  line-height: 3;
 }
 .right_align span{
   font-size: 30px;
@@ -9588,8 +9599,339 @@ t
     top: 12px;
 }
 
+/**************userprofile************/
+.header_call_events {
+     bottom: 215px;
+    left: 100px;
+    position: relative;
+}
+.upload_image {
+    left: 150px;
+    position: relative;
+    top: -124px;
+}
+.profile{
+  height: 545px;
+  width: auto;
+}
+.personal_nav li{
+  list-style:none;
+  background-color: #f8f8f8;
+  border-left: 3px solid transparent;
+  border-right:1px solid #d0d0d0;
+  border-top: 1px solid #d0d0d0;
+  left: 0px;
+  top: -69px;
+}
+.personal_info ul li{
+  display: block;
+  font-size:22px;
+  padding: 9px 0 15px 18px;
+  position:relative;
+  font-weight:lighter;
+  font-family: Roboto;
+  color: #8c8c8c;
+}
+.info {
+    color: #424242;
+    font-size: 20px;
+    left: 0px;
+    position: relative;
+    font-weight:lighter;
+     font-family: Roboto;
+    top: -80px;
+}
+.post_btn {
+    border: 3px solid;
+    border-bottom-left-radius: 30px;
+    border-top-left-radius: 30px;
+    height: 60px;
+    width: 225px;
+    font-size: 22px;
+    padding-top: 14px;
+}
+.banner_btn {
+    border: 3px solid;
+    border-bottom-right-radius: 30px;
+    border-top-right-radius: 30px;
+    height: 60px;
+    width: 225px;
+    background-color: #e1004a !important;
+    font-size: 22px;
+    padding-top: 14px;
+}
+.personal_form .privacy_form {
+    line-height: 4;
+    position: relative;
+    top: -70px;
+}
+.input_name  {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: transparent;
+    border-color: black;
+    border-image: none;
+    border-style: none none solid;
+    border-width: medium medium 1px;
+    color: #939393;
+    font-family: Roboto;
+    font-size: 14px;
+    line-height: 3;
+    padding: 3px;
+    width: 558px;
+}
+.input_email{
+  -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: transparent;
+    border-color: black;
+    border-image: none;
+    border-style: none none solid;
+    border-width: medium medium 1px;
+    color: #939393;
+    font-family: Roboto;
+    font-size: 14px;
+    line-height: 3;
+    padding: 3px;
+    width: 268px;
+    position: relative;
+    top: 20px;
+}
+.input_mobile{
+  -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: transparent;
+    border-color: black;
+    border-image: none;
+    border-style: none none solid;
+    border-width: medium medium 1px;
+    color: #939393;
+    font-family: Roboto;
+    font-size: 14px;
+    line-height: 3;
+    padding: 3px;
+   position: relative;
+    top: -28px;
+    width: 268px;
+    float: right;
+    left: 58px;
+}
+.input_category  {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: transparent;
+    border-color: black;
+    border-image: none;
+    border-style: none none solid;
+    border-width: medium medium 1px;
+    color: #939393;
+    font-family: Roboto;
+    font-size: 14px;
+    line-height: 3;
+    padding: 3px;
+    width: 270px;
+    position: relative;
+    top: -4px;
+}
+.input_organization{
+  -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: transparent;
+    border-color: black;
+    border-image: none;
+    border-style: none none solid;
+    border-width: medium medium 1px;
+    color: #939393;
+    font-family: Roboto;
+    font-size: 14px;
+    line-height: 3;
+    padding: 3px;
+   position: relative;
+    top: -50px;
+    width: 268px;
+    float: right;
+    left: 62px;
+}
+.input_addr  {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: transparent;
+    border-color: black;
+    border-image: none;
+    border-style: none none solid;
+    border-width: medium medium 1px;
+    color: #939393;
+    font-family: Roboto;
+    font-size: 14px;
+    line-height: 3;
+    padding: 3px;
+    position: relative;
+    top: -28px;
+    width: 569px;
+}
+.input_landmark  {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: transparent;
+    border-color: black;
+    border-image: none;
+    border-style: none none solid;
+    border-width: medium medium 1px;
+    color: #939393;
+    font-family: Roboto;
+    font-size: 14px;
+    line-height: 3;
+    padding: 3px;
+    width: 275px;
+    position: relative;
+    top: -5px;
+}
+.input_zip{
+  -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: transparent;
+    border-color: black;
+    border-image: none;
+    border-style: none none solid;
+    border-width: medium medium 1px;
+    color: #939393;
+    font-family: Roboto;
+    font-size: 14px;
+    line-height: 3;
+    padding: 3px;
+   position: relative;
+    top: -50px;
+    width: 268px;
+    float: right;
+    left: 64px;
+    position: relative;
+    top: -55px;
+}
+.person {
+    color: #2ab558;
+    font-size: 110px;
+    position: relative;
+    right: 0px;
+    top: -61px;
+}
+.save {
+    color: #55a2d3;
+    float: right;
+    font-size: 21px;
+    left: 314px;
+    position: relative;
+}
+.privacy_content {
+    height: 542px;
+}
+.lock {
+    color: #2ab558;
+    font-size: 110px;
+    position: relative;
+    right: 0px;
+    top: -61px;
+}
+.menulist{
+    background-clip: padding-box;
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.176);
+    display: none;
+    float: left;
+    font-size: 17px;
+    left: 0;
+    line-height: 2;
+    list-style: outside none none;
+    margin: 2px 0 0;
+    min-width: 159px;
+    padding: 5px 15px;
+    position: absolute;
+    text-align: left;
+    z-index: 1000;
+}
+.user_menu {
+    float: right;
+    position: relative;
+    right: 140px;
+    top: -30px;
+}
+.personal_info li:hover {
+    border-left-color: #0074bd;
+    color: #0074bd;
+}
+@media (min-width: 768px){
+  .personal_nav li{
+  list-style:none;
+  background-color: #f8f8f8;
+  border-left: 3px solid transparent;
+  border-right:1px solid #d0d0d0;
+  border-top: 1px solid #d0d0d0;
+  left: 85px;
+  top: -69px;
+}
+.personal_info ul li{
+  display: block;
+  font-size:22px;
+  padding: 9px 0 15px 18px;
+  position:relative;
+  font-weight:lighter;
+  font-family: Roboto;
+  color: #8c8c8c;
+}
+.info {
+    color: #424242;
+    font-size: 20px;
+    left: 140px;
+    position: relative;
+    font-weight:lighter;
+     font-family: Roboto;
+    top: -80px;
+}
+.person {
+    color: #2ab558;
+    font-size: 110px;
+    position: relative;
+    right: 425px;
+    top: -61px;
+}
+.personal_form, .privacy_form {
+    line-height: 4;
+    position: relative;
+    right: 385px;
+    top: 65px;
+}
+.lock {
+    color: #2ab558;
+    font-size: 110px;
+    position: relative;
+    right: 425px;
+    top: -61px;
+}
+.header_call_events {
+     bottom: 215px;
+    left: 485px;
+    position: relative;
+}
+}
 
-.main {
+/*.main {
 width:1850px;
 }
 
@@ -9635,7 +9977,7 @@ margin: 10px 0 0 2px;
 position: absolute;
 color:#fff;
 text-align:left;
-}
+}*/
 
 
 

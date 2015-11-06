@@ -1556,3 +1556,20 @@ $(".signin").click(function(){
     $(".email").hide();
 });
 $('.voucher_popup').show(); 
+
+$(".upload_image").find('.simpleFilePreview_inputButtonText').text("UPLOAD A IMAGE");
+
+$('.privacy_content').hide();
+$(".privacy").click(function(){
+    $('.privacy_content').show();
+    $(".profile").hide();
+});
+
+$(".info").click(function(){
+    $('.profile').show();
+    $(".privacy_content").hide();
+});
+
+$(".dropdown").click(function(){
+        $(".menulist").toggle();
+});

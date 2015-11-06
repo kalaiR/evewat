@@ -737,3 +737,6 @@ def get_events_for_calendar(request):
         events_list.append(event_data)
     print "event_list", events_list
     return HttpResponse(simplejson.dumps(events_list), mimetype='application/json')
+
+def user_profile(request):
+    return render_to_response("user_profile.html", context_instance=RequestContext(request))

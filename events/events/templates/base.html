@@ -51,6 +51,7 @@
                         <a href="/"><img src = "{% static "img/logo_text.png" %}" height="27"></a>
                     </div><!-- END HEADER LOGO -->
                     <div class="header-call-to-action">
+                     {% if not request.path == "/user_profile/" %}
                         <div class="fl">
                             {% if not user.is_authenticated %}
                                 <div class="header-register">
@@ -139,6 +140,7 @@
                             {% else %}
                                 <a class="btn btn-default login_act post_event_btn_act"><i class="fa fa-plus"></i> Post Event</a>
                                 <a class="btn btn-default login_act upload_banner_btn_act"><i class="fa fa-plus"></i> Post Banner</a>
+                            {% endif %}
                             {% endif %}
                     </div><!-- END .HEADER-CALL-TO-ACTION -->
                 </div><!-- END .CONTAINER -->
