@@ -1,4 +1,4 @@
-LL/* --------------------------------------
+/* --------------------------------------
 Table Of  Content
 
 1. Bootstrap
@@ -5659,6 +5659,7 @@ fieldset[disabled] .btn-default-inverse.active {
 #page-content {
   position: relative;
   padding: 30px 0 50px 0;
+  top:24px
 }
 .page-content {
   position: relative;
@@ -9475,7 +9476,7 @@ t
     float: right;
     left: 32px;
     position: relative;
-    top: 25px;
+    top: 48px;
 }
 .addnum {
     -moz-border-bottom-colors: none;
@@ -9495,9 +9496,9 @@ t
 }
 .confirm {
     float: right;
-    left: 95px;
+    left: 106px;
     position: relative;
-    top: -30px;
+    top: -33px;
     width: 62px;
 }
 #mobile {
@@ -9586,4 +9587,57 @@ t
     position: relative;
     top: 12px;
 }
+
+
+.main {
+width:1850px;
+}
+
+.month {
+background-color:black;
+font: bold 16px verdana;
+padding: 5px;
+color:white;
+}
+
+.daysofweek {
+background-color:gray;
+font:bold 12px verdana;
+color:white;
+float:left;
+width:49px;
+border-right:1px solid #EEEEEE;
+text-align:center;
+}
+
+.days {
+font-size: 12px;
+font-family:verdana;
+color:black;
+background-color: lightyellow;
+float:left;
+width:49px;
+border-right:1px solid #EEEEEE;
+height:100px;
+text-align:center;
+overflow:visible;
+}
+
+.days #today{
+font-weight: bold;
+color: red;
+}
+
+.eventBar {
+height:18px;
+background-color:#069;
+margin: 10px 0 0 2px;
+position: absolute;
+color:#fff;
+text-align:left;
+}
+
+
+
+
 
