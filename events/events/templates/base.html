@@ -20,7 +20,7 @@
         <link href="{% static "css/tipsy.css" %}" rel="stylesheet">
         <script type="text/javascript" src="{% static "js/jquery.js" %}"></script>
         <script type="text/javascript" src="{% static "js/eventcalendar.js" %}"></script>
-        <script>
+        <!-- <script>
           (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
           (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
           m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -29,7 +29,7 @@
           ga('create', 'UA-69301615-1', 'auto');
           ga('send', 'pageview');
 
-        </script>
+        </script> -->
         <!--<script src="http://malsup.github.com/jquery.form.js"></script> -->
          
         <!-- GOOGLE FONTS -->
@@ -55,13 +55,13 @@
                         <div class="fl">
                             {% if not user.is_authenticated %}
                                 <div class="header-register">
-                                    <a href="#" class="northwest" title="New Register" ><i class="fa fa-plus-square"></i> Register</a>
+                                    <a href="#" class="northwest register_btn" title="New Register" ><i class="fa fa-plus-square"></i> Register</a>
                                     &nbsp;&nbsp;&nbsp;
-                                    <a href="/">{{request.user.email}}</a>
-                                    <span style="{% if request.REQUEST.rst %} display:block;color:#df0024;font-weight: bold; {%else%} display: none; {% endif %}">
+                                    <!-- <a href="/">{{request.user.email}}</a> -->
+                                    <!-- <span style="{% if request.REQUEST.rst %} display:block;color:#df0024;font-weight: bold; {%else%} display: none; {% endif %}">
                                     {%for message in messages%}{{message}}{% endfor %}
-                                    </span>
-                                    <div class="register_holder">        
+                                    </span> -->
+                           <!--          <div class="register_holder">        
                                         <form id="user_form" method="post" action="/register/" name="sign_up">{% csrf_token %}
                                             <div class="field_control">
                                                 <input type="text" class="form-control" name="username" placeholder="Your Name" id="username_signup" autocomplete="off">
@@ -90,14 +90,14 @@
                                             <input type="submit" class="btn btn-default create_user fr" value="Register" name="Create" id="create_user">
                                             <div class="clear_both"> </div>
                                         </form>
-                                    </div>
+                                    </div> -->
                                 </div>
                             {% else %}
                                 <div class="header-register">
                                     <a href="/">{{request.user.email}}</a>
-                                    <span style="{% if request.REQUEST.rst %} display:block;color:#df0024;font-weight: bold; {%else%} display: none; {% endif %}">
+                                    <!-- <span style="{% if request.REQUEST.rst %} display:block;color:#df0024;font-weight: bold; {%else%} display: none; {% endif %}">
                                     {%for message in messages%}{{message}}{% endfor %}
-                                    </span>
+                                    </span> -->
                                 </div>
                             {% endif %} 
                             {% if user.is_authenticated %}
@@ -108,9 +108,9 @@
                             {% else %}       
                                 <div class="header-login">
                                     <a href="#" class="login_button"><i class="fa fa-power-off" action="/login/"></i> Login</a>
-                                    <span style="{% if request.REQUEST.lst and not request.path == '/post_event_v2' %} display:block;color:#df0024;font-weight: bold; {%else%} display: none; {% endif %}">
-                                    <!-- {%for message in messages%}{{message}}{% endfor %} -->
-                                    </span>
+                                    <!-- <span style="{% if request.REQUEST.lst and not request.path == '/post_event_v2' %} display:block;color:#df0024;font-weight: bold; {%else%} display: none; {% endif %}">
+                                    {%for message in messages%}{{message}}{% endfor %}
+                                    </span> -->
                                    <!--  <div class="login_holder">
                                         <form method="post" id="login_val" action="/login/" name="sign_in">{% csrf_token %}       
                                             <div class="field_control">        

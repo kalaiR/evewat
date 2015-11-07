@@ -173,7 +173,8 @@ def user_login(request):
     return response
 
 @csrf_protect
-def register(request):  
+def register(request): 
+    print "register" 
     context = RequestContext(request) 
     registered = False
     user=User()
@@ -207,10 +208,12 @@ def register(request):
             print 'pswd', user.password
             user.set_password(user.password)
             user.save()
+            print "user saved"
             userprofile = Userprofile()
             userprofile.user_id=user.id
             userprofile.mobile=request.POST['mobile'] 
             userprofile.save() 
+            print "userprofile saved"
             send_templated_mail(
               template_name = 'welcome',
               subject = 'Welcome Evewat',
@@ -230,7 +233,59 @@ def register(request):
         return HttpResponseRedirect('/')
     else:    
         user_id = user.id
-        return render_to_response('index.html', {'user_id':user_id} ,context_instance=RequestContext(request))
+        return render_to_response('index_v2.html', {'user_id':user_id} ,context_instance=RequestContext(request))
+
+# @csrf_exempt
+# def register(request): 
+#     print "register" 
+#     context = RequestContext(request) 
+#     registered = False
+#     user=User()
+#     userprofile=Userprofile()
+#     if request.method == 'POST': 
+#         email=request.POST['email_id']      
+#         username=request.POST['username']              
+#         if User.objects.filter(email=email).exists():
+#             error={}
+#             print 'User.objects.filter(email=email).exists()', User.objects.filter(email=email).exists()
+#             error['email_exists'] = True
+#             return HttpResponse(json.dumps(error, ensure_ascii=False),mimetype='application/json')
+#         if not error:
+#             user.is_active = True
+#             user.username=request.POST['username']
+#             print 'username', user.username
+#             user.email=request.POST['email_id']
+#             print 'email', user.email
+#             user.password=request.POST['password']
+#             print 'pswd', user.password
+#             user.set_password(user.password)
+#             user.save()
+#             print "user saved"
+#             userprofile = Userprofile()
+#             userprofile.user_id=user.id
+#             userprofile.mobile=request.POST['mobile'] 
+#             userprofile.save() 
+#             print "userprofile saved"
+#             send_templated_mail(
+#               template_name = 'welcome',
+#               subject = 'Welcome Evewat',
+#               from_email = 'eventswat@gmail.com',
+#               recipient_list = [user.email],
+#               context={
+#                        'user': user.username,
+#               },
+#             )              
+#             registered = True
+#             user = User.objects.get(email=user.email)
+#             print 'user after reg', user
+#             user.backend='django.contrib.auth.backends.ModelBackend'
+#             login(request, user)    
+#             return HttpResponseRedirect('/start/?user_id=' + str(user.id))
+#     elif user.id is None:
+#         return HttpResponseRedirect('/')
+#     else:    
+#         user_id = user.id
+#         return render_to_response('index_v2.html', {'user_id':user_id} ,context_instance=RequestContext(request))
 
 @csrf_exempt
 @login_required(login_url='/?lst=1')
