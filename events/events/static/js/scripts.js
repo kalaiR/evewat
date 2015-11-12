@@ -472,12 +472,19 @@ $("document").ready(function($){
 
   $(".feedback_popup").hide();
 
-$('.feedback1').click(function(){
+$('.feedback1 .feed_back').click(function(){
   
   $(".feedback_popup").show();
   $('.feedback1').hide();
 });
 
+$('.feed_back').click(function(){
+  
+  $(".feedback_popup").show();
+  $('.feedback1').hide();
+  $('body').scrollTop(0);
+
+});
 
 //add aditional mobile  number for organizer in postevent
 var limit = 3;

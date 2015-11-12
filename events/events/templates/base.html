@@ -206,10 +206,10 @@
                                     <div class="popular-categories">
                                         <h3>eventswat.com</h3>
                                         <ul>
-                                            <li><a href="#"><i class="fa fa-info-circle"></i>About us</a></li>
-                                            <li><a href="#"><i class="fa fa-tasks"></i>Privacy policy</a></li>
-                                            <li><a href="#"><i class="fa fa-exclamation-triangle"></i>Terms and Conditions</a></li>
-                                            <li><a href="#"><i class="fa fa-question-circle"></i>FAQs</a></li>
+                                            <li><a href="{% url 'college_event.views.about' %}"><i class="fa fa-info-circle"></i>About us</a></li>
+                                            <li><a href="{% url 'college_event.views.privacy' %}"><i class="fa fa-tasks"></i>Privacy policy</a></li>
+                                            <li><a href="{% url 'college_event.views.terms_and_conditions' %}"><i class="fa fa-exclamation-triangle"></i>Terms and Conditions</a></li>
+                                            <li><a href="{% url 'college_event.views.faqs' %}"><i class="fa fa-question-circle"></i>FAQs</a></li>
                                         </ul>
                                     </div> <!-- end .popular-categories-->
                                 </div> <!-- end Grid layout-->
@@ -217,7 +217,7 @@
                                     <div class="popular-categories">
                                         <h3>Join our hands</h3>
                                         <ul>
-                                            <li><a href="#"><i class="fa fa-comment"></i>Feedback</a></li>
+                                            <li><a href="#"><span class="feed_back"><i class="fa fa-comment"></i>Feedback</span></a></li>
                                             <li><a href="#"><i class="fa fa-briefcase"></i>Careers</a></li>
                                             <li><a href="#"><i class="fa fa-newspaper-o"></i>Advertise with us</a></li>
                                             <li><a href="#"><i class="fa fa-gift"></i>special offers</a></li>
