@@ -289,10 +289,10 @@
                     url: "/get_events_for_calendar/",
                     datatype: "json",
                     success: function(response) {
-                        events = JSON.stringify(response);
+                        events = response;
                     }
                 });
-                console.log("events"+events);
+                // console.log("events"+events);
                 
                 var todaydate = new Date();
                 var curmonth = todaydate.getMonth() + 1; //get current month (1-12)

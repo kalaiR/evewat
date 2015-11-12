@@ -1194,6 +1194,12 @@ $('.events').click(function(){
       }
   });
 
+  //for events_calendar newly updated by kalai
+  $(document).on("mouseenter", ".days", function() {
+    $(this).find('.list_events').show();
+    $(this).siblings().find('.list_events').hide();
+  });
+
   //postevent form validation
   //events
     // var events_required =["festname_required", "festcaption_val"];

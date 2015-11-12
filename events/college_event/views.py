@@ -40,6 +40,9 @@ class JSONResponse(HttpResponse):
                 simplejson.dumps(data), mimetype='application/json')
 
 def home(request):
+    if request.user.is_superuser:
+        logout(request)
+        return HttpResponseRedirect('/')
     return render_to_response("index_v2.html", context_instance=RequestContext(request))
 
 def about(request):
@@ -67,7 +70,8 @@ def details(request,id=None):
     postevent=Postevent.objects.get(pk=id)
     organizer=Organizer.objects.filter(postevent__id=postevent.id)
     review=Review.objects.filter(event_id=postevent.id)
-    return render_to_response("company-profile.html",{'events':postevent,'organizer':organizer,'review':review}, context_instance=RequestContext(request))
+    related_events = Postevent.objects.filter(category = postevent.category, eventtype=postevent.eventtype, city=postevent.city)
+    return render_to_response("company-profile.html",{'events':postevent,'organizer':organizer,'review':review,'related_events':related_events}, context_instance=RequestContext(request))
     # except:
     #     return render_to_response("company-profile.html",{'message':'Sorry for inconvenience.Some thing went to wrong'}, context_instance=RequestContext(request))
 
@@ -149,6 +153,9 @@ def banner(request):
 @csrf_exempt
 def user_login(request):    
     import json 
+    if request.user.is_superuser:
+        logout(request)
+        return HttpResponseRedirect('/')        
     logout(request)
     error = {}
     username = request.POST['username']
@@ -788,7 +795,7 @@ def get_events_for_calendar(request):
     time = datetime.time(10, 25)
     events_list = []
     for event in events:
-        event_data = {'id':event.id, 'title':event.event_title, 'start':smart_unicode(datetime.datetime.combine(event.startdate,time)),'end':smart_unicode(datetime.datetime.combine(event.enddate,time))}
+        event_data = {'id':str(event.id), 'title':event.event_title, 'start':smart_unicode(datetime.datetime.combine(event.startdate,time)),'end':smart_unicode(datetime.datetime.combine(event.enddate,time))}
         events_list.append(event_data)
     print "event_list", events_list
     return HttpResponse(simplejson.dumps(events_list), mimetype='application/json')
