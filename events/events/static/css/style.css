@@ -9672,7 +9672,7 @@ t
   font-family: Roboto;
   color: #8c8c8c;
 }
-.info {
+.personal_information,.privacy_information {
     color: #424242;
     font-size: 20px;
     left: 0px;
@@ -9760,7 +9760,7 @@ t
     top: -28px;
     width: 268px;
     float: right;
-    left: 58px;
+    left: 85px;
 }
 .input_category  {
     -moz-border-bottom-colors: none;
@@ -9797,10 +9797,11 @@ t
     line-height: 3;
     padding: 3px;
    position: relative;
-    top: -50px;
+    top: --30px;
     width: 268px;
     float: right;
-    left: 62px;
+    left: 85px;
+    top: -40px;
 }
 .input_addr  {
     -moz-border-bottom-colors: none;
@@ -9818,7 +9819,7 @@ t
     line-height: 3;
     padding: 3px;
     position: relative;
-    top: -28px;
+    top: 25px;
     width: 569px;
 }
 .input_landmark  {
@@ -9866,16 +9867,24 @@ t
 .person {
     color: #2ab558;
     font-size: 110px;
+    left: 159px;
     position: relative;
-    right: 0px;
-    top: -61px;
+    top: -71px;
 }
-.save {
+.save_personal {
     color: #55a2d3;
     float: right;
     font-size: 21px;
-    left: 314px;
     position: relative;
+    top: 12px;
+}
+.save_privacy {
+    color: #55a2d3;
+    float: right;
+    font-size: 21px;
+    position: relative;
+    top: 12px;
+    left: 300px;
 }
 .privacy_content {
     height: 542px;
@@ -9905,6 +9914,7 @@ t
     position: absolute;
     text-align: left;
     z-index: 1000;
+    top: 58px;
 }
 .user_menu {
     float: right;
@@ -9912,9 +9922,25 @@ t
     right: 140px;
     top: -30px;
 }
+.dropdown{
+  cursor: pointer;
+  float: left;
+  margin: 7px 30px -13px -14px;
+  position: relative;
+}
 .personal_info li:hover {
     border-left-color: #0074bd;
     color: #0074bd;
+}
+.gender_option {
+    position: relative;
+    top: 25px;
+    width: 58%;
+}
+label_gender {
+    color: #939393;
+    position: relative;
+    top: 68px;
 }
 @media (min-width: 768px){
   .personal_nav li{
@@ -9935,10 +9961,10 @@ t
   font-family: Roboto;
   color: #8c8c8c;
 }
-.info {
+.personal_information,.privacy_information{
     color: #424242;
     font-size: 20px;
-    left: 140px;
+    left: 200px;
     position: relative;
     font-weight:lighter;
      font-family: Roboto;
@@ -9948,20 +9974,20 @@ t
     color: #2ab558;
     font-size: 110px;
     position: relative;
-    right: 425px;
+    right: 390px;
     top: -61px;
 }
 .personal_form, .privacy_form {
     line-height: 4;
     position: relative;
-    right: 385px;
-    top: 65px;
+    right: 300px;
+    /*top: 75px;*/
 }
 .lock {
     color: #2ab558;
     font-size: 110px;
     position: relative;
-    right: 425px;
+    right: 355px;
     top: -61px;
 }
 .header_call_events {
@@ -9969,57 +9995,20 @@ t
     left: 485px;
     position: relative;
 }
+.gender_option {
+    position: relative;
+    top: 40px;
+    width: 58%;
 }
-
-/*.main {
-width:1850px;
+.dropdown{
+  cursor: pointer;
+  float: left;
+  margin: 7px 30px -13px 0px;
+  position: relative;
 }
-
-.month {
-background-color:black;
-font: bold 16px verdana;
-padding: 5px;
-color:white;
+.label_gender {
+    color: #939393;
+    position: relative;
+    top: 68px;
 }
-
-.daysofweek {
-background-color:gray;
-font:bold 12px verdana;
-color:white;
-float:left;
-width:49px;
-border-right:1px solid #EEEEEE;
-text-align:center;
 }
-
-.days {
-font-size: 12px;
-font-family:verdana;
-color:black;
-background-color: lightyellow;
-float:left;
-width:49px;
-border-right:1px solid #EEEEEE;
-height:100px;
-text-align:center;
-overflow:visible;
-}
-
-.days #today{
-font-weight: bold;
-color: red;
-}
-
-.eventBar {
-height:18px;
-background-color:#069;
-margin: 10px 0 0 2px;
-position: absolute;
-color:#fff;
-text-align:left;
-}*/
-
-
-
-
-

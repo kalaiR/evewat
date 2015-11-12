@@ -738,6 +738,29 @@ def get_events_for_calendar(request):
     print "event_list", events_list
     return HttpResponse(simplejson.dumps(events_list), mimetype='application/json')
 
+@login_required(login_url='/?lst=1')
 def user_profile(request):
-    return render_to_response("user_profile.html", context_instance=RequestContext(request))
+    # try:
+        if request.method=="POST":
+            user = request.user
+            user_profile=User_profile()   
+            user_profile.user_id =User.objects.get(username=request.user).pk
+            user_profile.user_mobile=request.POST.get('moblie', '')
+            user_profile.gender=request.POST.get('gender', '')
+            user_profile.Date_of_birth=request.POST.get('dob')
+            if not user_profile.Date_of_birth:
+                user_profile.Date_of_birth = None
+            user_profile.user_address=request.POST.get('address','')
+            user_profile.save()
+            user.password=request.POST['newpassword']
+            print 'newpassword', user.password
+            user.set_password(user.password)
+            user.save()
+            message="Your data succesfully submitted"         
+            return render_to_response("user_profile.html",{'user_profile':user_profile, 'message':message}, context_instance=RequestContext(request))
 
+        else:
+            return render_to_response("user_profile.html",{'message':'Insufficient data'}, context_instance=RequestContext(request))    
+
+    # except:
+    #     return render_to_response("user_profile.html", {'message':'Something went to wrong'}, context_instance=RequestContext(request))  

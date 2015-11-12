@@ -51,7 +51,7 @@
                         <a href="/"><img src = "{% static "img/logo_text.png" %}" height="27"></a>
                     </div><!-- END HEADER LOGO -->
                     <div class="header-call-to-action">
-                     {% if not request.path == "/user_profile/" %}
+                     
                         <div class="fl">
                             {% if not user.is_authenticated %}
                                 <div class="header-register">
@@ -100,6 +100,15 @@
                                     </span>
                                 </div>
                             {% endif %} 
+                            <i class="fa fa-caret-down dropdown"></i>
+                                        <div class=" user_menu col-md-2">
+                                            <ul class="menulist">
+                                              <li><a href="{% url "college_event.views.user_profile" %}">Personal Info</a></li>
+                                              <li><a href="{% url "college_event.views.user_profile" %}">Privacy</a></li>
+                                              <li><a href="#">My events</a></li>
+                                            </ul>
+                                        </div><!--user_menu-->     
+
                             {% if user.is_authenticated %}
                                 <div class="header-logout">
                                     <a href="/logout/" class=""><i class="fa fa-power-off"></i> Logout</a>
@@ -130,6 +139,7 @@
                                     </div> -->
                                 </div> <!-- END .HEADER-LOGIN -->
                             {% endif %}
+                            {% if not request.path == "/user_profile/" %}
                            <!--  <div class="header-share">
                             <a href="#"><i class="fa fa-facebook"></i></a>
                             </div> -->
