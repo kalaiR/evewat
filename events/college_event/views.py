@@ -40,6 +40,9 @@ class JSONResponse(HttpResponse):
                 simplejson.dumps(data), mimetype='application/json')
 
 def home(request):
+    if request.user.is_superuser:
+        logout(request)
+        return HttpResponseRedirect('/')
     return render_to_response("index_v2.html", context_instance=RequestContext(request))
 
 def about(request):
@@ -67,7 +70,8 @@ def details(request,id=None):
     postevent=Postevent.objects.get(pk=id)
     organizer=Organizer.objects.filter(postevent__id=postevent.id)
     review=Review.objects.filter(event_id=postevent.id)
-    return render_to_response("company-profile.html",{'events':postevent,'organizer':organizer,'review':review}, context_instance=RequestContext(request))
+    related_events = Postevent.objects.filter(category = postevent.category, eventtype=postevent.eventtype, city=postevent.city)
+    return render_to_response("company-profile.html",{'events':postevent,'organizer':organizer,'review':review,'related_events':related_events}, context_instance=RequestContext(request))
     # except:
     #     return render_to_response("company-profile.html",{'message':'Sorry for inconvenience.Some thing went to wrong'}, context_instance=RequestContext(request))
 
@@ -149,6 +153,9 @@ def banner(request):
 @csrf_exempt
 def user_login(request):    
     import json 
+    if request.user.is_superuser:
+        logout(request)
+        return HttpResponseRedirect('/')        
     logout(request)
     error = {}
     username = request.POST['username']
@@ -173,7 +180,8 @@ def user_login(request):
     return response
 
 @csrf_protect
-def register(request):  
+def register(request): 
+    print "register" 
     context = RequestContext(request) 
     registered = False
     user=User()
@@ -207,10 +215,12 @@ def register(request):
             print 'pswd', user.password
             user.set_password(user.password)
             user.save()
+            print "user saved"
             userprofile = Userprofile()
             userprofile.user_id=user.id
             userprofile.mobile=request.POST['mobile'] 
             userprofile.save() 
+            print "userprofile saved"
             send_templated_mail(
               template_name = 'welcome',
               subject = 'Welcome Evewat',
@@ -230,7 +240,59 @@ def register(request):
         return HttpResponseRedirect('/')
     else:    
         user_id = user.id
-        return render_to_response('index.html', {'user_id':user_id} ,context_instance=RequestContext(request))
+        return render_to_response('index_v2.html', {'user_id':user_id} ,context_instance=RequestContext(request))
+
+# @csrf_exempt
+# def register(request): 
+#     print "register" 
+#     context = RequestContext(request) 
+#     registered = False
+#     user=User()
+#     userprofile=Userprofile()
+#     if request.method == 'POST': 
+#         email=request.POST['email_id']      
+#         username=request.POST['username']              
+#         if User.objects.filter(email=email).exists():
+#             error={}
+#             print 'User.objects.filter(email=email).exists()', User.objects.filter(email=email).exists()
+#             error['email_exists'] = True
+#             return HttpResponse(json.dumps(error, ensure_ascii=False),mimetype='application/json')
+#         if not error:
+#             user.is_active = True
+#             user.username=request.POST['username']
+#             print 'username', user.username
+#             user.email=request.POST['email_id']
+#             print 'email', user.email
+#             user.password=request.POST['password']
+#             print 'pswd', user.password
+#             user.set_password(user.password)
+#             user.save()
+#             print "user saved"
+#             userprofile = Userprofile()
+#             userprofile.user_id=user.id
+#             userprofile.mobile=request.POST['mobile'] 
+#             userprofile.save() 
+#             print "userprofile saved"
+#             send_templated_mail(
+#               template_name = 'welcome',
+#               subject = 'Welcome Evewat',
+#               from_email = 'eventswat@gmail.com',
+#               recipient_list = [user.email],
+#               context={
+#                        'user': user.username,
+#               },
+#             )              
+#             registered = True
+#             user = User.objects.get(email=user.email)
+#             print 'user after reg', user
+#             user.backend='django.contrib.auth.backends.ModelBackend'
+#             login(request, user)    
+#             return HttpResponseRedirect('/start/?user_id=' + str(user.id))
+#     elif user.id is None:
+#         return HttpResponseRedirect('/')
+#     else:    
+#         user_id = user.id
+#         return render_to_response('index_v2.html', {'user_id':user_id} ,context_instance=RequestContext(request))
 
 @csrf_exempt
 @login_required(login_url='/?lst=1')
@@ -733,7 +795,7 @@ def get_events_for_calendar(request):
     time = datetime.time(10, 25)
     events_list = []
     for event in events:
-        event_data = {'id':event.id, 'title':event.event_title, 'start':smart_unicode(datetime.datetime.combine(event.startdate,time)),'end':smart_unicode(datetime.datetime.combine(event.enddate,time))}
+        event_data = {'id':str(event.id), 'title':event.event_title, 'start':smart_unicode(datetime.datetime.combine(event.startdate,time)),'end':smart_unicode(datetime.datetime.combine(event.enddate,time))}
         events_list.append(event_data)
     print "event_list", events_list
     return HttpResponse(simplejson.dumps(events_list), mimetype='application/json')

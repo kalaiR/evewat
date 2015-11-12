@@ -565,19 +565,23 @@ $('.close').click(function(){
 
   $('.cancel_btn, .close_btn').on('click', function (){
     $.removeCookie('plan',{ path: '/' });
-    $('.deposit_popup, .popup_fade, .forgotpassword_popup, .terms_services_popup, #signin_popup, #joinus_popup_content, #signin_popup1, #email_activate, #login_window, #login_window1, .lead_details_popup, #directbuy_signin_popup, #auction_popup, #ask_question_popup, #thank_you_popup').hide();
+    $('.deposit_popup, .popup_fade, .forgotpassword_popup, .terms_services_popup, #signin_popup,#signup_popup, #joinus_popup_content, #signin_popup1, #email_activate, #login_window, #login_window1, .lead_details_popup, #directbuy_signin_popup, #auction_popup, #ask_question_popup, #thank_you_popup').hide();
     $('#plan_change').show();
     $('.header-search-bar').show();
     $('input[name="plan"]').val() == '';
   });
 
-  $('.login_act,.login_button').on('click', function (){
-
-        $('.popup_fade:first').show();
+  $(".login_act, .login_button, .signin").on('click', function (){
+        $('.popup_fade').show();
         $('#signin_popup').show();
-        $('.header-search-bar').hide();
-        
+        $('.header-search-bar').hide();       
   });
+
+  $(".register_btn, .signup").on('click', function (){
+    $('.popup_fade, #signup_popup').show();
+    $('.header-search-bar').hide();     
+  });
+
   $('.post_event_btn_act').click(function(){
     $('input[name="next"]').val('/post_event');
   });
@@ -848,70 +852,70 @@ $('.events').click(function(){
 //   });
 
 //Registration form validation on button click
-   jQuery('#create_user').click(function(){  
-    var sign_up_required =["emailid_signup", "username_signup", "mobile_signup", "password_signup", "confirm_password_signup" ];  
-    for (i=0;i<sign_up_required.length;i++) {
-      var input = jQuery('#'+sign_up_required[i]);
-      if (input.val() == "")  {   
-        input.addClass("error_input_field");
-        input.next().next('.error_message').hide();
-        input.next('.error_message').show();         
-      } else {    
-        input.removeClass("error_input_field");
+//    jQuery('#create_user').click(function(){  
+//     var sign_up_required =["emailid_signup", "username_signup", "mobile_signup", "password_signup", "confirm_password_signup" ];  
+//     for (i=0;i<sign_up_required.length;i++) {
+//       var input = jQuery('#'+sign_up_required[i]);
+//       if (input.val() == "")  {   
+//         input.addClass("error_input_field");
+//         input.next().next('.error_message').hide();
+//         input.next('.error_message').show();         
+//       } else {    
+//         input.removeClass("error_input_field");
 
-        input.next('.error_message').hide();        
-      }
-    }
-    //password
-    if($('#password_signup').val() == ''){   
-        $('#password_signup').addClass("error_input_field");
-        $('#password_signup').next('.error_message').show();         
-      } else {    
-        $('#password_signup').removeClass("error_input_field");
-        $('#password_signup').next('.error_message').hide();       
-      }
-    // confirm password
-    if($('#confirm_password_signup').val() == ''){   
-        $('#confirm_password_signup').addClass("error_input_field");
-        $('#confirm_password_signup').next().next('.error_message').hide(); 
-        $('#confirm_password_signup').next('.error_message').show();             
-      } 
-      else if ($('#confirm_password_signup').val() != $('#password_signup').val()){
-        $('#confirm_password_signup').addClass("error_input_field");
-        $('#confirm_password_signup').next('.error_message').hide();  
-        $('#confirm_password_signup').next().next('.error_message').show(); 
-      }
-      else {    
-        $('#confirm_password_signup').removeClass("error_input_field");
-        $('#confirm_password_signup').next('.error_message').hide();    
-        $('#confirm_password_signup').next().next('.error_message').hide();    
-      }
-    //Validate the e-mail
-    if($('#emailid_signup').val() != ''){
-    if (!/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/.test($('#emailid_signup').val())) {
-      $('#emailid_signup').addClass("error_input_field");
-      $('#emailid_signup').next('.error_message').hide();
-      $('#emailid_signup').next().next('.error_message').show();
-    }
-    else
-    {
-      $('#emailid_signup').removeClass("error_input_field");
-      $('#emailid_signup').next().next('.error_message').hide();
-    }
-    }
-    //Validate the mobile
-    if($('#mobile_signup').val() != ''){
-      mobile_validation('#mobile_signup');
-    }
+//         input.next('.error_message').hide();        
+//       }
+//     }
+//     //password
+//     if($('#password_signup').val() == ''){   
+//         $('#password_signup').addClass("error_input_field");
+//         $('#password_signup').next('.error_message').show();         
+//       } else {    
+//         $('#password_signup').removeClass("error_input_field");
+//         $('#password_signup').next('.error_message').hide();       
+//       }
+//     // confirm password
+//     if($('#confirm_password_signup').val() == ''){   
+//         $('#confirm_password_signup').addClass("error_input_field");
+//         $('#confirm_password_signup').next().next('.error_message').hide(); 
+//         $('#confirm_password_signup').next('.error_message').show();             
+//       } 
+//       else if ($('#confirm_password_signup').val() != $('#password_signup').val()){
+//         $('#confirm_password_signup').addClass("error_input_field");
+//         $('#confirm_password_signup').next('.error_message').hide();  
+//         $('#confirm_password_signup').next().next('.error_message').show(); 
+//       }
+//       else {    
+//         $('#confirm_password_signup').removeClass("error_input_field");
+//         $('#confirm_password_signup').next('.error_message').hide();    
+//         $('#confirm_password_signup').next().next('.error_message').hide();    
+//       }
+//     //Validate the e-mail
+//     if($('#emailid_signup').val() != ''){
+//     if (!/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/.test($('#emailid_signup').val())) {
+//       $('#emailid_signup').addClass("error_input_field");
+//       $('#emailid_signup').next('.error_message').hide();
+//       $('#emailid_signup').next().next('.error_message').show();
+//     }
+//     else
+//     {
+//       $('#emailid_signup').removeClass("error_input_field");
+//       $('#emailid_signup').next().next('.error_message').hide();
+//     }
+//     }
+//     //Validate the mobile
+//     if($('#mobile_signup').val() != ''){
+//       mobile_validation('#mobile_signup');
+//     }
 
-     if ($("#user_form :input").hasClass("error_input_field")){
-    return false;
-    }
-    else{
-      $('form[name="sign_in"]').submit();      
-      return true;
-    }
-});
+//      if ($("#user_form :input").hasClass("error_input_field")){
+//     return false;
+//     }
+//     else{
+//       $('form[name="sign_in"]').submit();      
+//       return true;
+//     }
+// });
 
 // // validation on blur
 // $('.header-call-to-action input').blur(function(){
@@ -959,7 +963,139 @@ $('.events').click(function(){
 //  });
 // //end validation//
 
-  // New validation code for popup design
+  // New Registration form validation code for popup design
+  jQuery('#create_user').click(function(){  
+    // alert("create_user");
+    var sign_up_required =["emailid_signup", "username_signup", "mobile_signup", "password_signup", "confirm_password_signup" ];  
+    for (i=0;i<sign_up_required.length;i++) {
+      var input = jQuery('#'+sign_up_required[i]);
+      if (input.val() == "")  {   
+        input.addClass("error_input_field");
+        input.next().next('.error').hide();
+        input.next('.error').show();         
+      } else {    
+        input.removeClass("error_input_field");
+
+        input.next('.error').hide();        
+      }
+    }
+    //password
+    if($('#password_signup').val() == ''){   
+        $('#password_signup').addClass("error_input_field");
+        $('#password_signup').next('.error').show();         
+      } else {    
+        $('#password_signup').removeClass("error_input_field");
+        $('#password_signup').next('.error').hide();       
+      }
+    // confirm password
+    if($('#confirm_password_signup').val() == ''){   
+        $('#confirm_password_signup').addClass("error_input_field");
+        $('#confirm_password_signup').next().next('.error').hide(); 
+        $('#confirm_password_signup').next('.error').show();             
+      } 
+      else if ($('#confirm_password_signup').val() != $('#password_signup').val()){
+        $('#confirm_password_signup').addClass("error_input_field");
+        $('#confirm_password_signup').next('.error').hide();  
+        $('#confirm_password_signup').next().next('.error').show(); 
+      }
+      else {    
+        $('#confirm_password_signup').removeClass("error_input_field");
+        $('#confirm_password_signup').next('.error').hide();    
+        $('#confirm_password_signup').next().next('.error').hide();    
+      }
+    //Validate the e-mail
+    if($('#emailid_signup').val() != ''){
+    if (!/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/.test($('#emailid_signup').val())) {
+      $('#emailid_signup').addClass("error_input_field");
+      $('#emailid_signup').next('.error').hide();
+      $('#emailid_signup').next().next('.error').show();
+    }
+    else
+    {
+      $('#emailid_signup').removeClass("error_input_field");
+      $('#emailid_signup').next().next('.error').hide();
+    }
+    }
+    //Validate the mobile
+    if($('#mobile_signup').val() != ''){
+      mobile_validation('#mobile_signup');
+    }
+
+     if ($("#user_form :input").hasClass("error_input_field")){
+    return false;
+    }
+    else{
+      $('form[name="sign_up"]').submit();      
+      return true;
+    }
+});
+
+    // validation on blur
+    $('#user_form input').bind('blur keyup', function(){
+        if ($(this).val() == "")  {   
+          $(this).addClass("error_input_field");
+          $(this).siblings('.email_exists_error').hide();
+          $(this).next().next('.error').hide();
+          $(this).next('.error').show();         
+        } else {    
+          $(this).removeClass("error_input_field");
+          $(this).next().next('.error').hide();
+          $(this).next('.error').hide();        
+        }
+
+        id = "#" + $(this).attr('id');
+        if ((id=="#emailid_signup" && $(id).val() != '') || (id=="#emailid_signin")){
+           if (!/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/.test($(id).val())) {
+              $(id).addClass("error_input_field");
+              $(id).siblings('.email_exists_error').hide();
+              $(id).next('.error').hide();
+              $(id).next().next('.error').show();
+            }
+            else
+            {
+              $(id).removeClass("error_input_field");
+              $(id).next('.error').hide();
+              $(id).next().next('.error').hide();
+            } 
+        }
+
+        if(id=="#mobile_signup")
+          mobile_validation(id);
+
+
+        if ((id=="#confirm_password_signup") && ($(id).val()!='')){
+          if($(id).val()!=$('#password_signup').val()){
+            $(id).addClass("error_input_field");
+            $(id).next('.error').hide();  
+            $(id).next().next('.error').show(); 
+          }
+          else {    
+          $(id).removeClass("error_input_field");
+          $(id).next('.error').hide();    
+          $(id).next().next('.error').hide();    
+          }
+        }    
+         // if(($('#emailid_signup').val() != '') && (/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/.test($('#emailid_signup').val()))){
+         //  $.post("/register/", $('#user_form').serialize(),
+         //      function (data) {
+         //          if (data.email_exists){
+         //            $('#emailid_signup').siblings('.error').hide();
+         //            $('#emailid_signup').siblings('.email_exists_error').show();
+         //          }
+         //          if (!data.email_exists && isHTML(data))
+         //            $('#emailid_signup').siblings('.email_exists_error').hide();
+
+         //          // if (isHTML(data))
+         //          //   top.location.href= $('input[name="next"]').val();             
+         //          })
+         //          .fail(function (err) {
+         //          // alert(err);
+         //    });
+         // }
+ });
+//end validation//
+
+  // New login form validation code for popup design
   function isHTML(str) {
     var a = document.createElement('div');
     a.innerHTML = str;
@@ -1063,6 +1199,12 @@ $('.events').click(function(){
          });
       
       }
+  });
+
+  //for events_calendar newly updated by kalai
+  $(document).on("mouseenter", ".days", function() {
+    $(this).find('.list_events').show();
+    $(this).siblings().find('.list_events').hide();
   });
 
   //postevent form validation
@@ -1428,17 +1570,17 @@ $(document).on('change','.banner',function(){
      strength_status = checkStrength($('#password_signup').val());
      // alert(strength_status);
      $('#password_signup').addClass("error_input_field"); 
-     error_message = $(this).next().next('.error_message').text(strength_status);
-     if (error_message.html() == "Too short" || error_message.html() == "Weak")
-      $(this).next().next('.error_message').css({"color":"#df0024"});
-     else if (error_message.html() == "Fair")
-      $(this).next().next('.error_message').css({"color":"yellow"});
-     else if (error_message.html() == "Good")
-      $(this).next().next('.error_message').css({"color":"lightblue"});
-     else if (error_message.html() == "Strong" )
-      $(this).next().next('.error_message').css({"color":"#7CFC00"});
-    $(this).next('.error_message').hide(); 
-    error_message.show();
+     error = $(this).next().next('.error').text(strength_status);
+     if (error.html() == "Too short" || error.html() == "Weak")
+      $(this).next().next('.error').css({"color":"#900"});
+     else if (error.html() == "Fair")
+      $(this).next().next('.error').css({"color":"#e4b200"});
+     else if (error.html() == "Good")
+      $(this).next().next('.error').css({"color":"#3b5998"});
+     else if (error.html() == "Strong" )
+      $(this).next().next('.error').css({"color":"#2ab558"});
+    $(this).next('.error').hide(); 
+    error.show();
   });
 
 });
@@ -1449,58 +1591,58 @@ $(document).on('change','.banner',function(){
         // alert(txtMobile.length);
         if (txtMobile == ""){
           $(id).addClass("error_input_field"); 
-          $(id).next().next('.error_message').hide();
-          $(id).next('.error_message').show();
+          $(id).next().next('.error').hide();
+          $(id).next('.error').show();
         }
         else if (mob.test(txtMobile) == false) {
         $(id).addClass("error_input_field"); 
-        $(id).next('.error_message').hide();
-        $(id).next().next('.error_message').show();
+        $(id).next('.error').hide();
+        $(id).next().next('.error').show();
         // txtMobile.focus();
         } 
         else{
         $(id).removeClass("error_input_field"); 
-        $(id).next('.error_message').hide();   
-        $(id).next().next('.error_message').hide();
+        $(id).next('.error').hide();   
+        $(id).next().next('.error').hide();
         }
       }
 
-     function checkStrength(password){
-    //initial strength
-    var strength = 0
- 
-    //if the password length is less than 6, return message.
-    if (password.length < 6) 
-        return 'Too short'
- 
-    //length is ok, lets continue.
- 
-    //if length is 8 characters or more, increase strength value
-    if (password.length > 7) strength += 1
- 
-    //if password contains both lower and uppercase characters, increase strength value
-    if (password.match(/([a-z].*[A-Z])|([A-Z].*[a-z])/))  strength += 1
- 
-    //if it has numbers and characters, increase strength value
-    if (password.match(/([a-zA-Z])/) && password.match(/([0-9])/))  strength += 1 
- 
-    //if it has one special character, increase strength value
-    if (password.match(/([!,%,&,@,#,$,^,*,?,_,~])/))  strength += 1
- 
-    //if it has two special characters, increase strength value
-    if (password.match(/(.*[!,%,&,@,#,$,^,*,?,_,~].*[!,",%,&,@,#,$,^,*,?,_,~])/)) strength += 1
- 
-    //now we have calculated strength value, we can return messages
- 
-    //if value is less than 2
-    if (strength < 2 ) 
-        return 'Weak'
-    else if (strength == 2 )
-        return 'Fair'
-    else if (strength == 3 ) 
-        return 'Good'
-    else 
-        return 'Strong'
+    function checkStrength(password){
+      //initial strength
+      var strength = 0
+   
+      //if the password length is less than 6, return message.
+      if (password.length < 6) 
+          return 'Too short'
+   
+      //length is ok, lets continue.
+   
+      //if length is 8 characters or more, increase strength value
+      if (password.length > 7) strength += 1
+   
+      //if password contains both lower and uppercase characters, increase strength value
+      if (password.match(/([a-z].*[A-Z])|([A-Z].*[a-z])/))  strength += 1
+   
+      //if it has numbers and characters, increase strength value
+      if (password.match(/([a-zA-Z])/) && password.match(/([0-9])/))  strength += 1 
+   
+      //if it has one special character, increase strength value
+      if (password.match(/([!,%,&,@,#,$,^,*,?,_,~])/))  strength += 1
+   
+      //if it has two special characters, increase strength value
+      if (password.match(/(.*[!,%,&,@,#,$,^,*,?,_,~].*[!,",%,&,@,#,$,^,*,?,_,~])/)) strength += 1
+   
+      //now we have calculated strength value, we can return messages
+   
+      //if value is less than 2
+      if (strength < 2 ) 
+          return 'Weak'
+      else if (strength == 2 )
+          return 'Fair'
+      else if (strength == 3 ) 
+          return 'Good'
+      else 
+          return 'Strong'
 
 }  
 $('.payment').hide();
@@ -1566,15 +1708,13 @@ $(".confirm").click(function(){
       number= '';
     });
   
-$('.email').hide();
-$(".signup").click(function(){
-    $(".email").show();
-}); 
+// $(".signup").click(function(){
+//     $(".email").show();
+// }); 
 
-$(".signin").click(function(){
-    $(".email").hide();
-});
-$('.voucher_popup').show(); 
+// $(".signin").click(function(){
+//     $(".email").hide();
+// });
 
 $(".upload_image").find('.simpleFilePreview_inputButtonText').text("UPLOAD A IMAGE");
 
@@ -1592,3 +1732,4 @@ $(".info").click(function(){
 $(".dropdown").click(function(){
         $(".menulist").toggle();
 });
+

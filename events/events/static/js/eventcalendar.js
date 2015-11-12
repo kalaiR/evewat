@@ -22,7 +22,7 @@
     
     t += '<div style="clear:both"></div>'; //clear the float:left
     
-    console.log("events1"+events);
+    // console.log("events1"+JSON.stringify(events));
     //collect events for this month
     var currentEvents = [], start, end, span;
     for(e = 0; e < events.length; e++) {
@@ -69,6 +69,7 @@
     var overlaps = [];
     for (de = 0; de < sortedEvents.length; de++) {
         var id = sortedEvents[de].id;
+        // alert(id);
         var sDate = sortedEvents[de].startDate.getDate();
         var sYear = sortedEvents[de].startDate.getFullYear();
         var sd = sDate + '-' + sYear; //combine date-year
@@ -98,13 +99,18 @@
                 break; 
             } 
         }
+        // console.log(unique1);
     }
     
     //only unique pairs of overlaps remain in unique1 array
     //now adjust the "top" property so later we can use it to stack events one above the other on calendar days
     for (te = 0; te < unique1.length; te++) {
+        // alert("unique1[te]"+ unique1[te]);
         var ids = unique1[te].split(','), sortkeyA, sortKeyB;
+        // alert("ids"+ids);
         for (be = 0; be < sortedEvents.length; be++) {
+            // alert("sortedEvents[be].id"+ sortedEvents[be].id);
+            // alert("ids[0]"+ ids[0]);
             if (sortedEvents[be].id === ids[0]) sortkeyA = ids[0] + ',' + sortedEvents[be].sortKey;
             if (sortedEvents[be].id === ids[1]) sortkeyB = ids[1] + ',' + sortedEvents[be].sortKey;
         }
@@ -132,12 +138,14 @@
         if (x == scanfortoday) {// find today
             x = '<span id="today">' + x + '</span>'; // highlight today
  }
-         
+        x+= '<div class="eventBar"><ul class="list_events">';
         for(me = 0; me < sortedEvents.length; me++) {
             if ((sortedEvents[me].day + sortedEvents[me].offset) == i) { // add in the current events
-                x += '<div class="eventBar" style="margin-top:' + (sortedEvents[me].top * 20) + 'px;width:' + (((sortedEvents[me].span * 49) - 4) + sortedEvents[me].span) + 'px">' + sortedEvents[me].title + ', ' + sortedEvents[me].span + ' day event</div>';
+                // x += '<div class="eventBar" style="margin-top:' + (sortedEvents[me].top * 20) + 'px;width:' + (((sortedEvents[me].span * 49) - 4) + sortedEvents[me].span) + 'px">' + sortedEvents[me].title + ', ' + sortedEvents[me].span + ' day event</div>';
+                x += '<li><a href="details/'+ sortedEvents[me].id + '">' + sortedEvents[me].title + '</a></li>';
             }
         }
+        x+='</ul></div>';
         t += '<div class="' + cD + '">' + x + '</div>';
     }
     return t += '</div>';
