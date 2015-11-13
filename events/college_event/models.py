@@ -11,6 +11,12 @@ from datetime import datetime
 import os
 from django.conf import settings
 
+SELECT = (
+	('male','Male'),
+	('female','Female'),
+	)
+
+
 class Category(models.Model):
 	name= models.CharField(max_length=150, unique=True)		
 	def __unicode__(self):
@@ -95,5 +101,13 @@ class Feedback(models.Model):
 	email= models.EmailField(max_length=50)
 	comments= models.TextField()
 	rating=models.IntegerField()
+	
+class User_profile(models.Model):
+	user = models.ForeignKey(User)
+	user_mobile= models.CharField(max_length=50, blank=True)
+	gender = models.CharField(max_length=50, null=True, blank=True, choices=SELECT)
+	Date_of_birth = models.DateField(null=True, blank=True) 
+	user_address= models.TextField(null=True, blank=True)
+	profile_pic = models.ImageField(upload_to='static/img/',null=True, blank=True, max_length=500)		
 	
 		
