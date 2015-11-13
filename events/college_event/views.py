@@ -40,7 +40,10 @@ class JSONResponse(HttpResponse):
 				simplejson.dumps(data), mimetype='application/json')
 
 def home(request):
-	return render_to_response("index_v2.html", context_instance=RequestContext(request))
+    if request.user.is_superuser:
+        logout(request)
+        return HttpResponseRedirect('/')
+    return render_to_response("index_v2.html", context_instance=RequestContext(request))
 
 def about(request):
 	return render_to_response("about-us.html", context_instance=RequestContext(request))
@@ -63,14 +66,14 @@ def logout_view(request):
 	return response
 
 def details(request,id=None):
-	# try:
-	postevent=Postevent.objects.get(pk=id)
-	organizer=Organizer.objects.filter(postevent__id=postevent.id)
-	review=Review.objects.filter(event_id=postevent.id)
-	return render_to_response("company-profile.html",{'events':postevent,'organizer':organizer,'review':review}, context_instance=RequestContext(request))
-	# except:
-	#     return render_to_response("company-profile.html",{'message':'Sorry for inconvenience.Some thing went to wrong'}, context_instance=RequestContext(request))
-
+    # try:
+    postevent=Postevent.objects.get(pk=id)
+    organizer=Organizer.objects.filter(postevent__id=postevent.id)
+    review=Review.objects.filter(event_id=postevent.id)
+    related_events = Postevent.objects.filter(category = postevent.category, eventtype=postevent.eventtype, city=postevent.city).exclude(id=postevent.id)
+    return render_to_response("company-profile.html",{'events':postevent,'organizer':organizer,'review':review,'related_events':related_events}, context_instance=RequestContext(request))
+    # except:
+    #     return render_to_response("company-profile.html",{'message':'Sorry for inconvenience.Some thing went to wrong'}, context_instance=RequestContext(request))
 
 def banner(request):
 	return render_to_response("uploadbanner.html",context_instance=RequestContext(request))
@@ -148,29 +151,32 @@ def banner(request):
 # new login code when using ajax (updated by kalai)
 @csrf_exempt
 def user_login(request):    
-	import json 
-	logout(request)
-	error = {}
-	username = request.POST['username']
-	print "username", username
-	password = request.POST['password']
-	print "password", password
-	context = {}
-	if not User.objects.filter(email=username).exists():
-		error['email_exists'] = True
-		response = HttpResponse(json.dumps(error, ensure_ascii=False),mimetype='application/json')
-	else:
-		user = User.objects.get(email=username)
-		user.backend='django.contrib.auth.backends.ModelBackend'
-		if user:
-			if user.check_password(password):
-				if user.is_active:
-					login(request, user)
-					response = HttpResponseRedirect(request.POST.get('next')) 
-			else:
-				error['password'] = True
-				response = HttpResponse(json.dumps(error, ensure_ascii=False),mimetype='application/json')           
-	return response
+    import json 
+    if request.user.is_superuser:
+        logout(request)
+        return HttpResponseRedirect('/')        
+    logout(request)
+    error = {}
+    username = request.POST['username']
+    print "username", username
+    password = request.POST['password']
+    print "password", password
+    context = {}
+    if not User.objects.filter(email=username).exists():
+        error['email_exists'] = True
+        response = HttpResponse(json.dumps(error, ensure_ascii=False),mimetype='application/json')
+    else:
+        user = User.objects.get(email=username)
+        user.backend='django.contrib.auth.backends.ModelBackend'
+        if user:
+            if user.check_password(password):
+                if user.is_active:
+                    login(request, user)
+                    response = HttpResponseRedirect(request.POST.get('next')) 
+            else:
+                error['password'] = True
+                response = HttpResponse(json.dumps(error, ensure_ascii=False),mimetype='application/json')           
+    return response
 
 @csrf_protect
 def register(request): 
@@ -783,18 +789,16 @@ def home_v2(request):
 							 context_instance=context)
 
 def get_events_for_calendar(request):
-	import datetime
-	events = Postevent.objects.all()
-	time = datetime.time(10, 25)
-	events_list = []
-	for event in events:
-		event_data = {'id':str(event.id), 'title':event.event_title, 'start':smart_unicode(datetime.datetime.combine(event.startdate,time)),'end':smart_unicode(datetime.datetime.combine(event.enddate,time))}
-		events_list.append(event_data)
-	print "event_list", events_list
-	return HttpResponse(simplejson.dumps(events_list), mimetype='application/json')
+    import datetime
+    events = Postevent.objects.all()
+    time = datetime.time(10, 25)
+    events_list = []
+    for event in events:
+        event_data = {'id':str(event.id), 'title':event.event_title, 'start':smart_unicode(datetime.datetime.combine(event.startdate,time)),'end':smart_unicode(datetime.datetime.combine(event.enddate,time))}
+        events_list.append(event_data)
+    print "event_list", events_list
+    return HttpResponse(simplejson.dumps(events_list), mimetype='application/json')
 
-
-# @login_required()
 def user_profile(request):
 	requested_user=User.objects.get(email=request.user.email)
 	if request.method == 'POST':

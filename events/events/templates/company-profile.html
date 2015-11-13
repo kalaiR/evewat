@@ -160,4 +160,32 @@
     <br/>
  -->
 </div>
+{% if related_events %}
+<div class="featured-listing" id= "featured-list">
+        <div class="our-partners">
+            <div class="container">
+                <div class="row clearfix">
+                    <h2><strong>Related Events</strong></h2>
+                    {% for related in related_events %}
+                        <div class="col-md-3 col-sm-4 col-xs-6">
+                            <div class="single-product">
+                                <figure>
+                                    <img src="/media/{{related.poster}}" alt="">
+                                    <figcaption>
+                                        <div></div>
+                                        <div class="read-more">
+                                            <a href="/details/{{related.id}}"><i class="fa fa-angle-right"></i> Read More</a>
+                                        </div>
+                                    </figcaption>
+                                </figure>
+                                <h4><a href="/details/{{related.id}}">{{related.event_title}}</a></h4>
+                                <h5><a href="/details/{{related.id}}">{{related.city}}</a></h5>
+                            </div> <!-- end .single-product -->
+                        </div>
+                    {% endfor %}
+                </div>  <!-- end .row -->                 
+            </div>
+        </div><!-- END OUR PARTNER SLIDER -->
+</div>
+{% endif %}
 {% endblock %}

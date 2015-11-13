@@ -284,13 +284,13 @@
             <script src="{% static "js/scripts.js" %}"></script>
             <script type="text/javascript" src="{% static "js/stepsForm.js" %}"></script>
             <script type="text/javascript">
+
                  $('.date_pick').datepicker({
                     format: 'yyyy-mm-dd',
                     startDate: '-3d',
                 });
              </script>
-            <!--<script type="text/javascript">           
-
+           <script type="text/javascript">
                 var events; 
                 $.ajax({
                     async: false,
@@ -300,7 +300,6 @@
                         events = response;
                     }
                 });
-                // console.log("events"+events);
                 
                 var todaydate = new Date();
                 var curmonth = todaydate.getMonth() + 1; //get current month (1-12)
@@ -320,7 +319,7 @@
                     }
                     document.getElementById('cal').innerHTML = buildCal(selectedmonth ,selectedyear, "main", "month", "daysofweek", "days", 1);
                 }
-            </script>-->
+            </script>
             {% if request.path == '/banner' %}
             <script src="{% static "js/select.js" %}"></script>
             {% endif %}

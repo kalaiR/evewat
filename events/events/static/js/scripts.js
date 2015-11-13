@@ -21,6 +21,7 @@
   $(function () {
     $(  "#dpd1" ).datepicker({ format: 'dd-mm-yyyy', minDate: 0});
     $( "#dpd2" ).datepicker({ format: 'dd-mm-yyyy', minDate: 0});
+    $( "#address" ).datepicker({ format: 'dd-mm-yyyy', minDate: 0});
 });
 
   // for date picker
@@ -1192,6 +1193,12 @@ $('.events').click(function(){
          });
       
       }
+  });
+
+  //for events_calendar newly updated by kalai
+  $(document).on("mouseenter", ".days", function() {
+    $(this).find('.list_events').show();
+    $(this).siblings().find('.list_events').hide();
   });
 
   //postevent form validation
