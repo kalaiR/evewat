@@ -100,6 +100,9 @@ urlpatterns = patterns('',
    	# url(r'^post/$', 'reviews.views.post_review', name='reviews-post-review'),
 
    	url(r'^get_events_for_calendar/',  'college_event.views.get_events_for_calendar', name='eventcalendar'),
-   	url(r'^user_profile/',  'college_event.views.user_profile', name='user_profile')
+   	url(r'^user_profile/',  'college_event.views.user_profile', name='user_profile'),
+   	# url(r'^view_user_profile', 'college_event.views.view_user_profile', name='view_user_profile'),
+   	url(r'^privacy/', 'college_event.views.privacy', name='privacy')
+   
 
 )+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

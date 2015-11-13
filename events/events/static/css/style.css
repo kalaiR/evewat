@@ -5832,7 +5832,7 @@ fieldset[disabled] .btn-default-inverse.active {
 }
 /* featured-listing section */
 /* --------------------------------------- */
-.featured-listing {
+/*.featured-listing {
   position: relative;
   margin-top: 40px;
   padding: 0px 0px 50px 0px;
@@ -5840,7 +5840,7 @@ fieldset[disabled] .btn-default-inverse.active {
   background-size: cover;
   background-attachment: fixed;
   text-align: center;
-}
+}*/
 @media (max-width: 1200px) {
   .featured-listing {
     background-attachment: scroll;
@@ -6005,7 +6005,7 @@ fieldset[disabled] .btn-default-inverse.active {
 }
 .featured-listing {
   position: relative;
-  margin-top: 163px;
+  margin-top: 242px;
   padding: 50px 0;
   background: url('../img/content/feature-bg.jpg') top center no-repeat;
   background-size: cover;
@@ -8813,13 +8813,13 @@ select{
     border-width: medium medium 1px;
     color: #939393;
     font-family: Roboto;
-    font-size: 14px;
+    font-size: 14px;    
     line-height: 3;
     padding: 3px;
     width: 335px;
     margin-top: 15px;
 }
-#contactus_signup  {
+.contactus_signup  {
     -moz-border-bottom-colors: none;
     -moz-border-left-colors: none;
     -moz-border-right-colors: none;
@@ -8831,12 +8831,13 @@ select{
     border-width: medium medium 1px;
     color: #939393;
     font-family: Roboto;
-    font-size: 14px;
+    font-size: 13px !important;
     line-height: 2;
     padding: 3px;
     width: 335px;
     margin-top: 15px;
 }
+
 .voucher_popup{
     width:352px;   
     height:557px;
@@ -9006,7 +9007,7 @@ mark
 	color: #3c3c3c;
 	font-size: 16px;
 	right: 5px;
-    top: 70px;
+    top: 28px;
 
 }
 }
@@ -9045,7 +9046,7 @@ mark
     padding: 8px;
     position: relative;
     text-align: center;
-    top: 30px;
+    top: 12px;
     width: 353px;
     text-decoration: none !important;
 }
@@ -9061,7 +9062,7 @@ mark
     padding: 8px;
     position: relative;
     text-align: center;
-    top: 49px;
+    top: 20px;
     width: 355px;
     text-decoration: none !important;
     
@@ -9071,7 +9072,7 @@ mark
     height: 50px;
     left: 8px;
     position: relative;
-    top: 57px;
+    top: 26px;
     width: 354px;
     padding:8px;
     background: #dd4b39 none repeat scroll 0 0;
@@ -9102,7 +9103,7 @@ mark
     width: 370px;
 }
 
-#contactus_signup  {
+.contactus_signup  {
     -moz-border-bottom-colors: none;
     -moz-border-left-colors: none;
     -moz-border-right-colors: none;
@@ -9120,8 +9121,18 @@ mark
     width: 370px;
    
 }
-#login_val .error, .email_exists_error, .error_pwd {
+#login_val .error, .email_exists_error, .error_pwd, #user_form .error, #user_form .strength {
     /*background-color: #ffff00;*/
+    color: #900;
+    font-family: Verdana,Arial,sans-serif;
+    font-size: 0.9em;
+    display: none;
+    position: relative;
+    /*float: right;*/
+    top: -22px;
+    left: 240px;
+}
+.error1{
     color: #900;
     font-family: Verdana,Arial,sans-serif;
     font-size: 0.9em;
@@ -9232,11 +9243,12 @@ mark
     opacity : 0   ;
   }  
 }
-/* comment for updating new login popup */
-/*.error_input_field{
+
+.register_holder .error_input_field{
   width: 50% !important;
-}
-.login_holder .error_input_field{
+} 
+/* comment for updating new login popup */
+/* .login_holder .error_input_field{
   width: 48% !important;
 }*/
 
@@ -10011,4 +10023,7 @@ label_gender {
     position: relative;
     top: 68px;
 }
+}
+#view_profile_form{
+  display: none;
 }

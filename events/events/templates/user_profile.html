@@ -7,28 +7,30 @@
 			<img src = "{% static "img/banner.png"%}" width="1590" height="359px">
 		</div><!--banner_profile-->
 		<div class="header_call_events">
-                {% if user.is_authenticated %}
-                                <a href="/post_event" class="btn btn-default post_btn">Post Event</a>
-                                <a href="/banner" class="btn btn-default banner_btn">Post Banner</a>
-                            {% else %}
-                                <a class="btn btn-default login_act post_event_btn_act post_btn">Post Event</a>
-                                <a class="btn btn-default login_act upload_banner_btn_act banner_btn">Post Banner</a>
-                            {% endif %}
+				{% if user.is_authenticated %}
 
-        </div><!--header_call_events-->
+								<a href="/post_event" class="btn btn-default post_btn"> Post Event</a>
+								<a href="/banner" class="btn btn-default banner_btn"> Post Banner</a>
+
+							{% else %}
+								<a class="btn btn-default login_act post_event_btn_act post_btn">Post Event</a>
+								<a class="btn btn-default login_act upload_banner_btn_act banner_btn">Post Banner</a>
+							{% endif %}
+
+		</div><!--header_call_events-->
 		<div class="upload_image">
-					<input type='file' id='' class="poster" name='poster' />
+					<input type='file' id='' class="poster" name='profile_poster' value="{{requested_user_profile.profile_poster}}" />
 		</div><!--upload_image-->
 			<div class="col-md-3 personal_info">
 				<ul class="personal_nav">
-			        <li class="info">Personal Info</li>
-			        <li class="privacy">Privacy</li>
-			        <li>My events</li>
+					<li class="info">Personal Info</li>
+					<li class="privacy">Privacy</li>
+					<li class="myevents">My events</li>
 				</ul>
 			</div><!--personal_info-->
 							
 		<div class="profile">
-	 		<div class="personal_content">
+			<div class="personal_content">
 				<div class="col-md-4 personal_information">
 						<span>Your Personal Info</span><br><br>
 						<span>Manage this basic information-your name,email</span><br>
@@ -38,34 +40,34 @@
 			<form action="{% url "college_event.views.user_profile" %}" method="POST">
 			{% csrf_token %}
 				<div class="personal_form col-md-4">
-				    <div class="form-group input_name">
-					 	<input type="text" maxlength="50" value="{{request.user}}" name="name"><br>
+					<div class="form-group input_name">
+						<input type="text" maxlength="50" value="{{requested_user.username}}" name="name"><br>
 						<span class="error"></span>
 					</div><!--form-group-->
 					<div class="form-group input_email">
-						<input type="text" maxlength="50" value="{{request.user.email}}" name="email"><br>
+						<input type="text" maxlength="50" value="{{requested_user.email}}" name="email"><br>
 						<span class="error"></span>
 					</div><!--form-group-->
 					<div class="form-group input_mobile">
-						<input type="text" placeholder="MOBILE" maxlength="50" value="" name="moblie"><br>
+						<input type="text" placeholder="MOBILE" maxlength="50" value="{{requested_user_profile.user_mobile}}"  name="moblie"><br>
 						<span class="error"></span>
 					</div><!--form-group-->
 					 <div class="form-group">
 						<label class="label_gender">Gender</label>
-      					<select name="gender" class="gender_option">
+						<select  id="selected_gender" name="gender" class="gender_option" value="{{requested_user_profile.gender}}">
 						  <option value="male">Male</option>
 						  <option value="female">Female</option>
-					</select>
+						</select>
 					 <!-- <div class="form-group input_category"> -->
 						<!-- <input type="text" placeholder="CATEGORY" maxlength="50" value="" name="category"><br>
 						<span class="error"></span> -->
 					</div><!--form-group--> 
 					 <div class="form-group input_organization">
-						<input id="date_pick" type="text" placeholder="DOB" maxlength="50" value="" name="dob"><br>
+						<input class="date_pick" type="text" placeholder="DOB" maxlength="50" value="{{requested_user_profile.Date_of_birth|date:'Y-m-d'}}" name="dob"><br>
 						<span class="error"></span>
 					</div>
 					<div class="form-group input_addr">
-						<input type="text" placeholder="ADDRESS" maxlength="50" value="" name="address"><br>
+						<input type="text" placeholder="ADDRESS" maxlength="50" value="{{requested_user_profile.user_address}}" name="address"><br>
 						<span class="error"></span>
 					</div><!--form-group-->
 					<!-- <div class="form-group input_landmark">
@@ -77,8 +79,9 @@
 						<span class="error"></span>
 					</div>form-group--> 
 					<div class="form-group">        
-						      <!-- <a class="save_personal" href="#">SAVE</a> -->
-						      <button class="save_personal" type="submit">SAVE</button>
+							  <!-- <a class="save_personal" href="#">SAVE</a> -->
+							  <!-- <input type="hidden" name="next" value="{{request.GET.next}}" > -->
+							  <button class="save_personal" type="submit">SAVE</button>
 					</div><!--form-group-->
 				</div><!--personal_form-->
 			</form>			
@@ -86,23 +89,23 @@
 		</div><!--profile-->
 
 		<div class="privacy_content">
- 			<div class="personal_content">
+			<div class="personal_content">
 				<div class="col-md-4 privacy_information">
 					<span>Privacy Settings</span><br><br>
 					<span>Make sure that you choose a strong password</span><br>
 					<span>A strong password contains a mix of numbers,letters</span><br>
 					<span>and symbols.</span>
 				</div><!--info-->
-				<i class="fa fa-lock lock"></i>	 
-				<form action="{% url "college_event.views.user_profile" %}" method="POST">
-					{% csrf_token %}
+				<i class="fa fa-lock lock"></i>	 				
 					<div class="privacy_form col-md-4">
-					    <!-- <div class="form-group input_name">
-						 	<input type="text" placeholder="OLD PASSWORD" maxlength="50" value="" name="oldpwd"><br>
+					<form action="{% url "college_event.views.privacy" %}" method="POST">
+					{% csrf_token %}
+						<!-- <div class="form-group input_name">
+							<input type="text" placeholder="OLD PASSWORD" maxlength="50" value="" name="oldpwd"><br>
 							<span class="error"></span>
 						</div> --><!--form-group-->
 						<div class="form-group input_email">
-							<input type="password" placeholder="NEW PASSWORD" maxlength="50" value="" name="newpassword"><br>
+							<input type="password" id="change_password" placeholder="NEW PASSWORD" maxlength="50" value="" name="newpassword"><br>
 							<span class="error"></span>
 						</div><!--form-group-->
 						<div class="form-group input_mobile">
@@ -110,12 +113,18 @@
 							<span class="error"></span>
 						</div><!--form-group-->
 						<div class="form-group">        
-							    <!--   <a class="save_privacy" href="#">SAVE</a> -->
-							    <button class="save_privacy" type="submit">SAVE</button>
+								<!--   <a class="save_privacy" href="#">SAVE</a> -->
+								<button class="save_privacy" type="submit" id="password_changed">SAVE</button>
 							</div><!--form-group-->
+							</form>
 					</div><!--privacy_form-->
-			</form>
+			<div class="myevents_list">	
+			  <div class="personal_content">my events</div>
+			</div> 
 		</div><!--personal_content-->
 	</div><!--privacy_content-->
+	<!-- <div class="myevents_list">	
+	  <div class="personal_content">my events</div>
+	</div> --><!--myevents_list-->
 
 {% endblock %}

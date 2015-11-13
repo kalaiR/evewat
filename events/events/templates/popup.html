@@ -1,7 +1,7 @@
 {% load static from staticfiles %}
 {% block content %}
-<div class="popup_fade" style="{% if request.REQUEST.lst or request.REQUEST.lst and request.path == '/post_event' or  request.REQUEST.lst and request.path == '/upload_banner' %} display:block; {%else%} display: none; {% endif %}"></div>
- <div class="signup_popup popup_pos" id="signin_popup" style="{% if request.REQUEST.lst or  request.REQUEST.lst and request.path == '/post_event' or  request.REQUEST.lst and request.path == '/upload_banner' %} display:block; {%else%} display: none; {% endif %}">    
+<div class="popup_fade" style="{% if request.REQUEST.lst or request.REQUEST.rst or request.REQUEST.lst and request.path == '/post_event' or  request.REQUEST.lst and request.path == '/upload_banner' %} display:block; {%else%} display: none; {% endif %}"></div>
+ <div class="signin_popup popup_pos" id="signin_popup" style="{% if request.REQUEST.lst or  request.REQUEST.lst and request.path == '/post_event' or  request.REQUEST.lst and request.path == '/upload_banner' %} display:block; {%else%} display: none; {% endif %}">    
 <!-- <div class="signup_popup popup_pos" id="signin_popup" style="{% if request.REQUEST.lst %} display:block; {%else%} display: none; {% endif %}"> -->
 	<div class="voucher_popup">
 		<div class="fr">
@@ -58,8 +58,9 @@
 			<div class="clear_both"> </div>
 	</div><!--voucher_popup-->
  </div><!--signup_popup-->
- 
-<div class="signup_popup popup_pos" id="signin_popup">     
+
+<!-- <div class="signup_popup popup_pos" id="signup_popup" style="{% if request.REQUEST.rst or request.REQUEST.rst and request.path == '/post_event' or  request.REQUEST.rst and request.path == '/upload_banner' %} display:block; {%else%} display: none; {% endif %}"> -->  
+<div class="signup_popup popup_pos" id="signup_popup" style="{% if request.REQUEST.rst %} display:block; {%else%} display: none; {% endif %}">     
 <div class="email">
 		<div class="fr">
                 <span class="close_btn"></span>
@@ -80,41 +81,48 @@
 		</div><!--block1-->
 			
 			<div class="col-md-9 block2">
-					<span class="text4">Sign up for free</span>			
-					<form class="form-horizontal" role="form">
+					<span class="text4">Sign up for free</span>		
+					<span class="error1" style="{% if request.REQUEST.rst %} display:block; {%else%} display: none; {% endif %}">{%for message in messages%}{{message}}{% endfor %}</span>		
+					<!-- <form class="form-horizontal" role="form"> -->		
+					<form class="form-horizontal" id="user_form" role="form" method="post" action="/register/" name="sign_up">
+					{% csrf_token %}
 					    <div class="form-group">
-						 	<input id="contactus_signup" type="text" placeholder="ENTER YOUR NAME" maxlength="50" value="" name="email"><br>
-    						<span class="error"></span>
+						 	<input class="contactus_signup" type="text" placeholder="ENTER YOUR NAME" maxlength="50" value="" name="username" id="username_signup" autocomplete="off">
+    						<span class="error">Please Enter your Name</span>
 						</div><!--form-group-->
 						<div class="form-group">
-							<input id="contactus_signup" type="text" placeholder="ENTER YOUR EMAIL" maxlength="50" value="" name="pwd"><br>
-    						<span class="error"></span>
+							<input class="contactus_signup" type="text" placeholder="ENTER YOUR EMAIL" maxlength="50" value="" name="email_id" id="emailid_signup" autocomplete="off">
+    						 <span class="error">Please Enter your Email</span>
+                             <span class="error">Please Enter Valid Email</span>
+                             <span class="email_exists_error">Email Already Exists</span>
 						</div><!--form-group-->
 						<div class="form-group">
-							<input id="contactus_signup" type="text" placeholder="ENTER YOUR PHONE" maxlength="50" value="" name="pwd"><br>
-    						<span class="error"></span>
+							<input class="contactus_signup" type="text" placeholder="ENTER YOUR PHONE" value="" name="mobile" id="mobile_signup" autocomplete="off">
+    						<span class="error">Please Enter your Mobile</span>
+                            <span class="error">Enter valid mobile number</span>
 						</div><!--form-group-->
 						<div class="form-group">
-							<input id="contactus_signup" type="text" placeholder="ENTER YOUR PASSWORD" maxlength="50" value="" name="pwd"><br>
-    						<span class="error"></span>
+							<input class="contactus_signup" type="password" placeholder="ENTER YOUR PASSWORD" maxlength="50" value="" name="password" id="password_signup" autocomplete="off">
+    						<span class="error">Please Enter Password</span>
+                            <span class="error strength"></span>
 						</div><!--form-group-->
 						<div class="form-group">
-							<input id="contactus_signup" type="text" placeholder="ENTER YOUR CONFIRM PASSWORD" maxlength="50" value="" name="pwd"><br>
-    						<span class="error"></span>
+							<input class="contactus_signup" type="password" placeholder="ENTER YOUR CONFIRM PASSWORD" maxlength="50" value="" name="confirm_password" id="confirm_password_signup" autocomplete="off">
+    						<span class="error">Please Re-enter Password</span>
+                            <span class="error">Password does not match</span>
 						</div><!--form-group-->
 						<div class="form-group">        
-  						      <a class="button1" href="#">Sign up</a>
+  						      <a class="button1" href="#" id="create_user">Sign up</a>
   						      <a class="button2" href="#"><i class="fa fa-facebook fb"> </i>Sign up with Facebook</a>
   						      <a class="button3" href="#"><i class="fa fa-google google"> </i>Sign up with Google</a>
 						</div><!--form-group-->
 					   	<div class="form-group">        
-								<label class="control-label col-md-8 text8">Already have an account?<button type="button" class="btn btn-link signin"><mark>Sign in here</mark></button></label>						      
+								<label class="control-label col-md-8 text8">Already have an account?<button type="button" class="btn-link signin"><mark>Sign in here</mark></button></label>						      
 						</div><!--form-group-->
 					</form>
 				</div><!--block2-->				
 			<div class="clear_both"> </div>
 	</div><!--email-->
-
  </div><!--signup_popup-->
 
 {% endblock %}

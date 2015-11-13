@@ -19,8 +19,8 @@
         <link href="{% static "css/datepicker.css" %}" rel="stylesheet">
         <link href="{% static "css/tipsy.css" %}" rel="stylesheet">
         <script type="text/javascript" src="{% static "js/jquery.js" %}"></script>
-        <script type="text/javascript" src="{% static "js/eventcalendar.js" %}"></script>
-        <script>
+        <!-- // <script type="text/javascript" src="{% static "js/eventcalendar.js" %}"></script> -->
+        <!-- <script>
           (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
           (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
           m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -29,7 +29,7 @@
           ga('create', 'UA-69301615-1', 'auto');
           ga('send', 'pageview');
 
-        </script>
+        </script> -->
         <!--<script src="http://malsup.github.com/jquery.form.js"></script> -->
          
         <!-- GOOGLE FONTS -->
@@ -55,13 +55,13 @@
                         <div class="fl">
                             {% if not user.is_authenticated %}
                                 <div class="header-register">
-                                    <a href="#" class="northwest" title="New Register" ><i class="fa fa-plus-square"></i> Register</a>
+                                    <a href="#" class="northwest register_btn" title="New Register" ><i class="fa fa-plus-square"></i> Register</a>
                                     &nbsp;&nbsp;&nbsp;
-                                    <a href="/">{{request.user.email}}</a>
-                                    <span style="{% if request.REQUEST.rst %} display:block;color:#df0024;font-weight: bold; {%else%} display: none; {% endif %}">
+                                    <!-- <a href="/">{{request.user.email}}</a> -->
+                                    <!-- <span style="{% if request.REQUEST.rst %} display:block;color:#df0024;font-weight: bold; {%else%} display: none; {% endif %}">
                                     {%for message in messages%}{{message}}{% endfor %}
-                                    </span>
-                                    <div class="register_holder">        
+                                    </span> -->
+                           <!--          <div class="register_holder">        
                                         <form id="user_form" method="post" action="/register/" name="sign_up">{% csrf_token %}
                                             <div class="field_control">
                                                 <input type="text" class="form-control" name="username" placeholder="Your Name" id="username_signup" autocomplete="off">
@@ -90,24 +90,26 @@
                                             <input type="submit" class="btn btn-default create_user fr" value="Register" name="Create" id="create_user">
                                             <div class="clear_both"> </div>
                                         </form>
-                                    </div>
+                                    </div> -->
                                 </div>
                             {% else %}
                                 <div class="header-register">
                                     <a href="/">{{request.user.email}}</a>
-                                    <span style="{% if request.REQUEST.rst %} display:block;color:#df0024;font-weight: bold; {%else%} display: none; {% endif %}">
+                                    <!-- <span style="{% if request.REQUEST.rst %} display:block;color:#df0024;font-weight: bold; {%else%} display: none; {% endif %}">
                                     {%for message in messages%}{{message}}{% endfor %}
-                                    </span>
+                                    </span> -->
                                 </div>
-                            {% endif %} 
-                            <i class="fa fa-caret-down dropdown"></i>
+                            {% endif %}
+                            {% if user.is_authenticated %} 
+                                <i class="fa fa-caret-down dropdown"></i>
                                         <div class=" user_menu col-md-2">
                                             <ul class="menulist">
                                               <li><a href="{% url "college_event.views.user_profile" %}">Personal Info</a></li>
-                                              <li><a href="{% url "college_event.views.user_profile" %}">Privacy</a></li>
+                                              <li><a href="{% url "college_event.views.privacy" %}">Privacy</a></li>
                                               <li><a href="#">My events</a></li>
                                             </ul>
-                                        </div><!--user_menu-->     
+                                        </div><!--user_menu-->
+                            {% endif %}     
 
                             {% if user.is_authenticated %}
                                 <div class="header-logout">
@@ -117,9 +119,9 @@
                             {% else %}       
                                 <div class="header-login">
                                     <a href="#" class="login_button"><i class="fa fa-power-off" action="/login/"></i> Login</a>
-                                    <span style="{% if request.REQUEST.lst and not request.path == '/post_event_v2' %} display:block;color:#df0024;font-weight: bold; {%else%} display: none; {% endif %}">
-                                    <!-- {%for message in messages%}{{message}}{% endfor %} -->
-                                    </span>
+                                    <!-- <span style="{% if request.REQUEST.lst and not request.path == '/post_event_v2' %} display:block;color:#df0024;font-weight: bold; {%else%} display: none; {% endif %}">
+                                    {%for message in messages%}{{message}}{% endfor %}
+                                    </span> -->
                                    <!--  <div class="login_holder">
                                         <form method="post" id="login_val" action="/login/" name="sign_in">{% csrf_token %}       
                                             <div class="field_control">        
@@ -282,16 +284,12 @@
             <script src="{% static "js/scripts.js" %}"></script>
             <script type="text/javascript" src="{% static "js/stepsForm.js" %}"></script>
             <script type="text/javascript">
-                // var events = [
-                // {"id":"1","title":"11-29-2013","start":"2015-11-06 10:25:28","end":"2013-11-30 10:25:34","url":"","allDay":"1"},
-                // {"id":"2","title":"12-15-2013","start":"2015-11-07 10:25:47","end":"2013-12-16 10:25:39","url":"","allDay":"1"},
-                // {"id":"3","title":"12-26-2013","start":"2013-12-26 10:25:50","end":"2013-12-27 10:25:42","url":"","allDay":"false"},
-                // {"id":"4","title":"11-19-2013","start":"2013-11-19 00:00:00","end":"2013-11-23 00:00:00","url":"","allDay":"false"},
-                // {"id":"5","title":"12-9-2013","start":"2013-12-09 00:00:00","end":"2013-12-11 00:00:00","url":"event","allDay":"false"},
-                // {"id":"6","title":"12-8-2013","start":"2013-12-08 00:00:00","end":"2013-12-10 00:00:00","url":"event","allDay":"false"},
-                // {"id":"7","title":"12-15-2013","start":"2013-12-15 10:25:47","end":"2013-12-18 10:25:39","url":"","allDay":"1"},
-                // {"id":"8","title":"12-10-2013","start":"2013-12-10 10:25:47","end":"2013-12-12 10:26:39","url":"","allDay":"1"}
-                // ];
+                 $('.date_pick').datepicker({
+                    format: 'yyyy-mm-dd',
+                    startDate: '-3d',
+                });
+             </script>
+            <!--<script type="text/javascript">           
 
                 var events; 
                 $.ajax({
@@ -299,10 +297,10 @@
                     url: "/get_events_for_calendar/",
                     datatype: "json",
                     success: function(response) {
-                        events = JSON.stringify(response);
+                        events = response;
                     }
                 });
-                console.log("events"+events);
+                // console.log("events"+events);
                 
                 var todaydate = new Date();
                 var curmonth = todaydate.getMonth() + 1; //get current month (1-12)
@@ -322,7 +320,7 @@
                     }
                     document.getElementById('cal').innerHTML = buildCal(selectedmonth ,selectedyear, "main", "month", "daysofweek", "days", 1);
                 }
-            </script>
+            </script>-->
             {% if request.path == '/banner' %}
             <script src="{% static "js/select.js" %}"></script>
             {% endif %}
