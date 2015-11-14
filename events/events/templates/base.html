@@ -19,7 +19,7 @@
         <link href="{% static "css/datepicker.css" %}" rel="stylesheet">
         <link href="{% static "css/tipsy.css" %}" rel="stylesheet">
         <script type="text/javascript" src="{% static "js/jquery.js" %}"></script>
-        <!-- // <script type="text/javascript" src="{% static "js/eventcalendar.js" %}"></script> -->
+        <script type="text/javascript" src="{% static "js/eventcalendar.js" %}"></script>
         <!-- <script>
           (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
           (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -104,9 +104,9 @@
                                 <i class="fa fa-caret-down dropdown"></i>
                                         <div class=" user_menu col-md-2">
                                             <ul class="menulist">
-                                              <li><a href="{% url "college_event.views.user_profile" %}">Personal Info</a></li>
-                                              <li><a href="{% url "college_event.views.privacy" %}">Privacy</a></li>
-                                              <li><a href="#">My events</a></li>
+                                              <li><a href="{% url "college_event.views.user_profile" %}" class="info">Personal Info</a></li>
+                                              <li><a href="#" class="privacy">Privacy</a></li>
+                                              <li><a href="#" class="myevents">My events</a></li>
                                             </ul>
                                         </div><!--user_menu-->
                             {% endif %}     

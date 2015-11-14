@@ -41,7 +41,7 @@
     						<span class="error_pwd">Invalid Password</span>
 						</div><!--form-group-->
 						<div class="form-group">        
-								<label class="control-label text7">FORGET YOUR PASSWORD?</label>						      
+								<label class="control-label text7 forget_password">FORGET YOUR PASSWORD?</label>						      
 						</div><!--form-group-->
 						<div class="form-group"> 
                               <input type="hidden" value="{{ request.get_full_path }}" name="next"/>  
@@ -61,7 +61,7 @@
 
 <!-- <div class="signup_popup popup_pos" id="signup_popup" style="{% if request.REQUEST.rst or request.REQUEST.rst and request.path == '/post_event' or  request.REQUEST.rst and request.path == '/upload_banner' %} display:block; {%else%} display: none; {% endif %}"> -->  
 <div class="signup_popup popup_pos" id="signup_popup" style="{% if request.REQUEST.rst %} display:block; {%else%} display: none; {% endif %}">     
-<div class="email">
+<div class="signup_email">
 		<div class="fr">
                 <span class="close_btn"></span>
   		</div><!--fr-->
@@ -78,7 +78,7 @@
 						<img src="{% static "img/culturals.png" %}" alt="cultural" height="72px" width="72px"><br>
 						<span class="text3">Cultural</span>
 					</div><!--img3-->
-		</div><!--block1-->
+		</div><!--block3-->
 			
 			<div class="col-md-9 block2">
 					<span class="text4">Sign up for free</span>		
@@ -124,5 +124,105 @@
 			<div class="clear_both"> </div>
 	</div><!--email-->
  </div><!--signup_popup-->
+
+<div class="forgot_popup popup_pos" id="forgotpassword_popup" style="{% if request.REQUEST.rst %} display:block; {%else%} display: none; {% endif %}">   	
+ 		<div class="voucher_popup">
+ 			<div class="fr">
+                <span class="close_btn"></span>
+  			</div><!--fr-->
+  			<div class="col-md-3 block3">
+					<div class="col-md-12 img4">	
+						<img src="{% static "img/symposium.png" %}" alt="symposium" height="72px" width="72px"><br>
+						<span class="text1">Symposium</span>
+					</div><!--img1-->
+					<div class="col-md-12 img5">
+						<img src="{% static "img/seminar.png" %}" alt="seminar" height="72px" width="72px"><br>
+						<span class="text2">Seminar</span>
+					</div><!--img2-->
+					<div class="col-md-12 img6">
+						<img src="{% static "img/culturals.png" %}" alt="cultural" height="72px" width="72px"><br>
+						<span class="text3">Cultural</span>
+					</div><!--img3-->
+			</div><!--block3-->
+			
+			<div class="col-md-9 block2">
+				<div class="forgot_content">
+						<span class="text4">Forgot Password</span><br><br>
+						<span>Enter your e-mail address below and we'll e-mail instructions for setting a new one.</span>
+				</div><!--forgot_content-->
+				<form method="post" id="login_val" action="/login/" name="sign_in" class="form-horizontal" role="form">
+					<div class="form-group">
+					 	<input class="contactus" type="text" placeholder="ENTER YOUR EMAIL" maxlength="50" value="" name="username" id="username_signup" autocomplete="off">
+						<span class="error">Please enter your email</span>
+					</div><!--form-group-->
+					<button type="button" class="btn-link reset_btn">Reset my password</button>
+ 				</form>
+			</div><!--block2-->
+ 		</div><!--voucher_popup-->
+</div><!--forgot_popup-->
+
+<div class="reset_popup popup_pos" id="resetpassword_popup" style="{% if request.REQUEST.rst %} display:block; {%else%} display: none; {% endif %}">   	
+ 		<div class="voucher_popup">
+ 			<div class="fr">
+                <span class="close_btn"></span>
+  			</div><!--fr-->
+  			<div class="col-md-3 block3">
+					<div class="col-md-12 img4">	
+						<img src="{% static "img/symposium.png" %}" alt="symposium" height="72px" width="72px"><br>
+						<span class="text1">Symposium</span>
+					</div><!--img1-->
+					<div class="col-md-12 img5">
+						<img src="{% static "img/seminar.png" %}" alt="seminar" height="72px" width="72px"><br>
+						<span class="text2">Seminar</span>
+					</div><!--img2-->
+					<div class="col-md-12 img6">
+						<img src="{% static "img/culturals.png" %}" alt="cultural" height="72px" width="72px"><br>
+						<span class="text3">Cultural</span>
+					</div><!--img3-->
+			</div><!--block3-->
+			
+			<div class="col-md-9 block2">
+				<div class="reset_content">
+						<span class="text4">Reset Password</span><br><br>
+						<span>Please enter your new password twice.So we can verify you typed it in correctly.</span>
+				</div><!--reset_content-->
+				<form method="post" id="login_val" action="/login/" name="sign_in" class="form-horizontal" role="form">
+					<div class="form-group">
+					 	<input class="contactus" type="text" placeholder="NEW PASSWORD" maxlength="50" value="" name="pwd" id="username_signup" autocomplete="off">
+						<span class="error">Please enter your new password</span>
+					</div><!--form-group-->
+					<div class="form-group">
+					 	<input class="contactus" type="text" placeholder="CONFIRM PASSWORD" maxlength="50" value="" name="pwd" id="username_signup" autocomplete="off">
+						<span class="error">Please enter your confirm password</span>
+					</div><!--form-group-->
+					<button type="button" class="btn-link reset_btn">Change my password</button>
+ 				</form>
+ 			 <img src="{% static "img/fdsfgd.gif" %}" alt="open"> 
+ 			</div><!--block2-->
+ 		</div><!--voucher_popup-->
+</div><!--reset_popup-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 {% endblock %}

@@ -39,7 +39,7 @@
 					<i class="fa fa-user person col-md-2"></i>	  
 			<form action="{% url "college_event.views.user_profile" %}" method="POST">
 			{% csrf_token %}
-				<div class="personal_form col-md-4">
+				<div class="personal_form col-md-5">
 					<div class="form-group input_name">
 						<input type="text" maxlength="50" value="{{requested_user.username}}" name="name"><br>
 						<span class="error"></span>
@@ -53,8 +53,9 @@
 						<span class="error"></span>
 					</div><!--form-group-->
 					 <div class="form-group">
-						<label class="label_gender">Gender</label>
+						<!-- <label class="label_gender">Gender</label> -->
 						<select  id="selected_gender" name="gender" class="gender_option" value="{{requested_user_profile.gender}}">
+							<option value="" disabled selected>Gender</option>
 						  <option value="male">Male</option>
 						  <option value="female">Female</option>
 						</select>
@@ -96,8 +97,8 @@
 					<span>A strong password contains a mix of numbers,letters</span><br>
 					<span>and symbols.</span>
 				</div><!--info-->
-				<i class="fa fa-lock lock"></i>	 				
-					<div class="privacy_form col-md-4">
+				<i class="fa fa-lock lock col-md-2"></i>	 				
+					<div class="privacy_form col-md-5">
 					<form action="{% url "college_event.views.privacy" %}" method="POST">
 					{% csrf_token %}
 						<!-- <div class="form-group input_name">
@@ -118,13 +119,20 @@
 							</div><!--form-group-->
 							</form>
 					</div><!--privacy_form-->
-			<div class="myevents_list">	
-			  <div class="personal_content">my events</div>
-			</div> 
+			
 		</div><!--personal_content-->
 	</div><!--privacy_content-->
-	<!-- <div class="myevents_list">	
-	  <div class="personal_content">my events</div>
-	</div> --><!--myevents_list-->
+	 
 
-{% endblock %}
+	 <div class="container">	
+	  <div class="myevents_content">
+	  	<img src="{% static "img/symposium.png" %}" alt="symposium" height="72px" width="72px">
+	  	<h4><a href="#">Fiesta de Mercadeo 15 </a></h4>
+	  	<h5><a href="#">Fiesta de Mercadeo 15</a></h5>
+	  	<h5><i class="fa fa-calendar-o"></i></h5>
+	  	<h5><i class="fa fa-map-marker"></i><a href="#"></a></h5>
+	  	<a href="#" class="read-more"><i class="fa fa-angle-right"></i>Read More</a>
+	  </div>
+	</div> <!--myevents_list-->
+
+{% endblock %} 
