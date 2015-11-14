@@ -41,7 +41,7 @@
     						<span class="error_pwd">Invalid Password</span>
 						</div><!--form-group-->
 						<div class="form-group">        
-								<label class="control-label text7">FORGET YOUR PASSWORD?</label>						      
+							<a href="{% url 'django.contrib.auth.views.password_reset' %}">	<label class="control-label text7">FORGOT YOUR PASSWORD?</label></a>						      
 						</div><!--form-group-->
 						<div class="form-group"> 
                               <input type="hidden" value="{{ request.get_full_path }}" name="next"/>  

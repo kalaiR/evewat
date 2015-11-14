@@ -1732,4 +1732,47 @@ $(".info").click(function(){
 $(".dropdown").click(function(){
         $(".menulist").toggle();
 });
+// $(".popup_slider").hide();
+// $(".img_poster").on('click', function () {
+//     $(".popup_slider").show();
+//     $(".popup_slider").hide();
 
+// })
+
+// // Bind Click Handler to Link, then Open Gallery
+// $('.img_poster').on('click', function () {
+//   alert("enter");
+//      $(".popup_slider").magnificPopup('open');
+// });
+
+// Initialize Magnific Popup Gallery + Options
+// $('.img_poster').each(function () {
+//     $(this).magnificPopup({
+//         delegate: 'a',
+//         gallery: {
+//             enabled: true
+//         },
+//         type: 'image'
+//     });
+// });
+
+// $('.img_poster').click(function() {
+//   alert("enter");
+//     $(this).magnificPopup({
+//         delegate: 'a',
+//         gallery: {
+//             enabled: true
+//         },
+//         type: 'image'
+//     });
+// });
+
+$('.popup-gallery').magnificPopup({
+    delegate: 'a',
+    type: 'image',
+    gallery: {
+      enabled: true,
+     },
+   
+    
+  });
