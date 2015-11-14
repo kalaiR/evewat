@@ -68,10 +68,13 @@ def logout_view(request):
 def details(request,id=None):
     # try:
     postevent=Postevent.objects.get(pk=id)
+    img=str(postevent.poster).split(',')
+    photo=img[0]
+    photos=[n for n in str(postevent.poster).split(',')]
     organizer=Organizer.objects.filter(postevent__id=postevent.id)
     review=Review.objects.filter(event_id=postevent.id)
-    related_events = Postevent.objects.filter(category = postevent.category, eventtype=postevent.eventtype, city=postevent.city).exclude(id=postevent.id)
-    return render_to_response("company-profile.html",{'events':postevent,'organizer':organizer,'review':review,'related_events':related_events}, context_instance=RequestContext(request))
+    related_events = Postevent.objects.filter(category = postevent.category, eventtype=postevent.eventtype, city=postevent.city)
+    return render_to_response("company-profile.html",{'events':postevent,'organizer':organizer,'review':review,'related_events':related_events,'photos':photos,'photo':photo}, context_instance=RequestContext(request))
     # except:
     #     return render_to_response("company-profile.html",{'message':'Sorry for inconvenience.Some thing went to wrong'}, context_instance=RequestContext(request))
 

@@ -473,12 +473,19 @@ $("document").ready(function($){
 
   $(".feedback_popup").hide();
 
-$('.feedback1').click(function(){
+$('.feedback1 .feed_back').click(function(){
   
   $(".feedback_popup").show();
   $('.feedback1').hide();
 });
 
+$('.feed_back').click(function(){
+  
+  $(".feedback_popup").show();
+  $('.feedback1').hide();
+  $('body').scrollTop(0);
+
+});
 
 //add aditional mobile  number for organizer in postevent
 var limit = 3;
@@ -1741,4 +1748,47 @@ $(".myevents").click(function(){
 $(".dropdown").click(function(){
         $(".menulist").toggle();
 });
+// $(".popup_slider").hide();
+// $(".img_poster").on('click', function () {
+//     $(".popup_slider").show();
+//     $(".popup_slider").hide();
 
+// })
+
+// // Bind Click Handler to Link, then Open Gallery
+// $('.img_poster').on('click', function () {
+//   alert("enter");
+//      $(".popup_slider").magnificPopup('open');
+// });
+
+// Initialize Magnific Popup Gallery + Options
+// $('.img_poster').each(function () {
+//     $(this).magnificPopup({
+//         delegate: 'a',
+//         gallery: {
+//             enabled: true
+//         },
+//         type: 'image'
+//     });
+// });
+
+// $('.img_poster').click(function() {
+//   alert("enter");
+//     $(this).magnificPopup({
+//         delegate: 'a',
+//         gallery: {
+//             enabled: true
+//         },
+//         type: 'image'
+//     });
+// });
+
+$('.popup-gallery').magnificPopup({
+    delegate: 'a',
+    type: 'image',
+    gallery: {
+      enabled: true,
+     },
+   
+    
+  });
