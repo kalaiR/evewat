@@ -99,8 +99,6 @@ class OrganizerAdmin(admin.ModelAdmin):
 			                    },
 			        ) 
 
-
-
 class PremiumPriceInfoAdmin(admin.ModelAdmin):
 	fields=['premium_price','currency','purpose','month']
 	list_display = ('premium_price','currency','purpose','month')
@@ -115,8 +113,9 @@ class FeedbackAdmin(admin.ModelAdmin):
 	search_fields = ['id', 'name']
 	list_per_page = 50
 
-# class OrganizerAdmin(admin.ModelAdmin):
-# 	list_display = ('organizer_name','organizer_email')
+class User_profileAdmin(admin.ModelAdmin):
+	fields=['user','user_mobile','gender','Date_of_birth','user_address','profile_pic']
+	list_display = ('user','user_mobile','gender','Date_of_birth','user_address','profile_pic')	
 
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Feedback, FeedbackAdmin)
@@ -128,4 +127,5 @@ admin.site.register(Postevent, PosteventAdmin)
 admin.site.register(SubCategory, SubCategoryAdmin)   
 admin.site.register(Organizer,OrganizerAdmin)   
 admin.site.register(CollegeDepartment) 
+admin.site.register(User_profile, User_profileAdmin) 
 

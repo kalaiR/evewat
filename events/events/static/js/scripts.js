@@ -21,6 +21,7 @@
   $(function () {
     $(  "#dpd1" ).datepicker({ format: 'dd-mm-yyyy', minDate: 0});
     $( "#dpd2" ).datepicker({ format: 'dd-mm-yyyy', minDate: 0});
+    $( "#address" ).datepicker({ format: 'dd-mm-yyyy', minDate: 0});
 });
 
   // for date picker
