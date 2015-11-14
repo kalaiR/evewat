@@ -26,6 +26,7 @@ urlpatterns = patterns('',
 	url(r'^register/$', 'college_event.views.register', name='register'),
 	# for registeration confirm
 	# url(r'^confirm/$', 'college_event.views.confirm', name='confirm'),
+	
 	# forget password
 	url(r'^(?i)password_reset/$', 'django.contrib.auth.views.password_reset', {
 	  'template_name':'registration/password_reset_form.html',
@@ -36,11 +37,16 @@ urlpatterns = patterns('',
 		{'post_reset_redirect' : '/user/password/reset/done/'}),
 	url(r'^(?i)user/password/reset/done/$',
 		'django.contrib.auth.views.password_reset_done'),
-	url(r'^(?i)user/password/reset/(?P<uidb36>[0-9A-Za-z]+)-(?P<token>.+)/$', 
+	url(r'^(?i)user/password/reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>.+)/$', 
 		'django.contrib.auth.views.password_reset_confirm', 
 		{'post_reset_redirect' : '/user/password/done/'}),
 	url(r'^(?i)user/password/done/$', 
 		'django.contrib.auth.views.password_reset_complete'),
+	
+	# url(r'^reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>.+)/$',
+ #    'django.contrib.auth.views.password_reset_confirm',
+ #    name='password_reset_confirm'),
+
 	 # getting tarted
 	url(r'^start/$', 'college_event.views.start',name='start'),
 	url(r'^post_event$', 'college_event.views.post_event', name='post_event'),    
@@ -100,6 +106,9 @@ urlpatterns = patterns('',
    	# url(r'^post/$', 'reviews.views.post_review', name='reviews-post-review'),
 
    	url(r'^get_events_for_calendar/',  'college_event.views.get_events_for_calendar', name='eventcalendar'),
-   	url(r'^user_profile/',  'college_event.views.user_profile', name='user_profile')
+   	url(r'^user_profile/',  'college_event.views.user_profile', name='user_profile'),
+   	# url(r'^view_user_profile', 'college_event.views.view_user_profile', name='view_user_profile'),
+   	url(r'^privacy/', 'college_event.views.privacy', name='privacy')
+   
 
 )+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

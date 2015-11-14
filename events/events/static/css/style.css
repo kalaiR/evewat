@@ -4510,6 +4510,7 @@ fieldset[disabled] .btn-default-inverse.active {
   font-size: 15px;
   font-weight: 700;
   position:relative;
+  cursor: pointer;
 }
 #categories .accordion ul li a .fa {
   padding-right: 10px;
@@ -5659,7 +5660,7 @@ fieldset[disabled] .btn-default-inverse.active {
 #page-content {
   position: relative;
   padding: 30px 0 50px 0;
-  top:24px
+  top:22px;
 }
 .page-content {
   position: relative;
@@ -8741,6 +8742,7 @@ select{
 	color: #277ec3;
 	right: 0px;
     top: 14px;
+    cursor: pointer;
 }
 .button1
 {
@@ -8850,7 +8852,7 @@ select{
    -moz-box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.08);
    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.08);
  }
- .email{
+ .signup_email{
     width:352px;   
     height:638px;
     padding:10px;
@@ -9029,6 +9031,7 @@ mark
 	color: #277ec3;
 	right: 5px;
     top: 10px;
+    cursor: pointer;
 }
 }
 @media(min-width:768px)
@@ -9156,7 +9159,7 @@ mark
    -moz-box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.08);
    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.08);
  }
- .email{
+ .signup_email{
  	 width:652px;   
     height:620px;
     padding:10px;
@@ -9587,7 +9590,7 @@ t
   position: absolute;
 }
 .comments-section {
-    bottom: 37px;
+    bottom: -83px;
     left: 80px;
     position: relative;
     width: 88%;
@@ -9624,8 +9627,6 @@ t
     position: relative;
     top: -36px;
 }
-
-
 /* newly added styles for signin popup */
 .event_count{
 	background-color: #0074bd;
@@ -9684,7 +9685,7 @@ t
   font-family: Roboto;
   color: #8c8c8c;
 }
-.info {
+.personal_information,.privacy_information {
     color: #424242;
     font-size: 20px;
     left: 0px;
@@ -9772,7 +9773,7 @@ t
     top: -28px;
     width: 268px;
     float: right;
-    left: 58px;
+    left: 85px;
 }
 .input_category  {
     -moz-border-bottom-colors: none;
@@ -9809,10 +9810,11 @@ t
     line-height: 3;
     padding: 3px;
    position: relative;
-    top: -50px;
+    top: --30px;
     width: 268px;
     float: right;
-    left: 62px;
+    left: 85px;
+    top: -40px;
 }
 .input_addr  {
     -moz-border-bottom-colors: none;
@@ -9830,7 +9832,7 @@ t
     line-height: 3;
     padding: 3px;
     position: relative;
-    top: -28px;
+    top: 25px;
     width: 569px;
 }
 .input_landmark  {
@@ -9878,16 +9880,26 @@ t
 .person {
     color: #2ab558;
     font-size: 110px;
+    left: 159px;
     position: relative;
-    right: 0px;
-    top: -61px;
+    top: -71px;
 }
-.save {
+.save_personal {
     color: #55a2d3;
     float: right;
-    font-size: 21px;
-    left: 314px;
+    font-size: 18px;
     position: relative;
+    top: 12px;
+    background-color: transparent;
+}
+.save_privacy {
+    color: #55a2d3;
+    float: right;
+    font-size: 18px;
+    position: relative;
+    top: 12px;
+    left: 300px;
+    background-color: transparent;
 }
 .privacy_content {
     height: 542px;
@@ -9917,6 +9929,7 @@ t
     position: absolute;
     text-align: left;
     z-index: 1000;
+    top: 58px;
 }
 .user_menu {
     float: right;
@@ -9924,9 +9937,25 @@ t
     right: 140px;
     top: -30px;
 }
+.dropdown{
+  cursor: pointer;
+  float: left;
+  margin: 7px 30px -13px -14px;
+  position: relative;
+}
 .personal_info li:hover {
     border-left-color: #0074bd;
     color: #0074bd;
+}
+.gender_option {
+    position: relative;
+    top: 25px;
+    width: 58%;
+}
+label_gender {
+    color: #939393;
+    position: relative;
+    top: 68px;
 }
 @media (min-width: 768px){
   .personal_nav li{
@@ -9947,10 +9976,10 @@ t
   font-family: Roboto;
   color: #8c8c8c;
 }
-.info {
+.personal_information,.privacy_information{
     color: #424242;
-    font-size: 20px;
-    left: 140px;
+    font-size: 18px;
+    left: 200px;
     position: relative;
     font-weight:lighter;
      font-family: Roboto;
@@ -9960,20 +9989,20 @@ t
     color: #2ab558;
     font-size: 110px;
     position: relative;
-    right: 425px;
+    right: 390px;
     top: -61px;
 }
 .personal_form, .privacy_form {
     line-height: 4;
     position: relative;
-    right: 385px;
-    top: 65px;
+    right: 300px;
+    float: right;
 }
 .lock {
     color: #2ab558;
     font-size: 110px;
+    left: 183px;
     position: relative;
-    right: 425px;
     top: -61px;
 }
 .header_call_events {
@@ -9981,57 +10010,134 @@ t
     left: 485px;
     position: relative;
 }
+.gender_option {
+    position: relative;
+    top: 24px;
+    width: 58%;
+    height: 35px;
 }
-
-/*.main {
+.dropdown{
+  cursor: pointer;
+  float: left;
+  margin: 7px 30px -13px 0px;
+  position: relative;
+}
+.label_gender {
+    color: #939393;
+    position: relative;
+    top: 68px;
+}
+.myevents_list{
+  height: 200px;
+}
+.main {
 width:1850px;
+margin: 0px 0px 0px 186px;
 }
-
+/**********calendar*****/
 .month {
-background-color:black;
+background-color:#0074bd;
 font: bold 16px verdana;
 padding: 5px;
 color:white;
+width: 1257px;
 }
-
 .daysofweek {
 background-color:gray;
 font:bold 12px verdana;
 color:white;
 float:left;
-width:49px;
+width:34px;
 border-right:1px solid #EEEEEE;
 text-align:center;
 }
-
 .days {
 font-size: 12px;
 font-family:verdana;
 color:black;
-background-color: lightyellow;
+/*background: d-color: lightyellow;*/
 float:left;
-width:49px;
+width:34px;
 border-right:1px solid #EEEEEE;
-height:100px;
+/*height:100px;*/
 text-align:center;
 overflow:visible;
+cursor: pointer;
+background-color: #fff;
 }
-
-.days #today{
-font-weight: bold;
-color: red;
-}
-
 .eventBar {
 height:18px;
-background-color:#069;
+/*background-color:#069;*/
 margin: 10px 0 0 2px;
 position: absolute;
-color:#fff;
+/*color:#fff;*/
 text-align:left;
+}
+.action_calendar{
+  margin: 10px 0px 5px 186px;
+}
+.days:hover {
+    background-color: #21c0e8;
+}
+.list_events{
+  list-style-type: none;
+  display: none;
+  padding:0px;
+  width: 190px;
+  background-color: #0074bd;
+  position: relative;
+  z-index: 999999;
+  margin: -10px 0px 0px -2px;
+}
+<<<<<<< HEAD
+.list_events li {
+    border-bottom: 1px solid;
+    padding: 8px;
+}
+.list_events li:hover {
+    background-color: lightblue;
+}
+.days:hover {
+    background-color: #0074bd;
+}
+#prev{
+  background-color:#0074bd;
+  color: white; 
+}
+#next{
+  background-color:#0074bd;
+  color: white; 
+}
+.event_calendar {
+    margin: 0 0 0 -185px;
+    position: relative;
+}
+.reset_btn{
+background: #5a78b7 none repeat scroll 0 0;
+position:relative;
+top:28px;
+height: 35px;
+left: 88px;
+}
+=======
+
+/*.popup_slider {
+    border: 1px solid;
+    height: 400px;
+    left: 140px;
+    overflow: scroll;
+    position: absolute;
+    top: 70px;
+    width: 281%;
+    z-index: 99999;
+    background-color:black;
 }*/
+.btn_img {
+    height: 202px;
+    left: 0;
+    position: absolute;
+    top: 31px;
+    width: 100%;
+}
 
-
-
-
-
+>>>>>>> e7c4de226ef1d8d943028459fecda4e1b1f36a12

@@ -21,6 +21,7 @@
   $(function () {
     $(  "#dpd1" ).datepicker({ format: 'dd-mm-yyyy', minDate: 0});
     $( "#dpd2" ).datepicker({ format: 'dd-mm-yyyy', minDate: 0});
+    $( "#address" ).datepicker({ format: 'dd-mm-yyyy', minDate: 0});
 });
 
   // for date picker
@@ -472,12 +473,19 @@ $("document").ready(function($){
 
   $(".feedback_popup").hide();
 
-$('.feedback1').click(function(){
+$('.feedback1 .feed_back').click(function(){
   
   $(".feedback_popup").show();
   $('.feedback1').hide();
 });
 
+$('.feed_back').click(function(){
+  
+  $(".feedback_popup").show();
+  $('.feedback1').hide();
+  $('body').scrollTop(0);
+
+});
 
 //add aditional mobile  number for organizer in postevent
 var limit = 3;
@@ -558,7 +566,7 @@ $('.close').click(function(){
 
   $('.cancel_btn, .close_btn').on('click', function (){
     $.removeCookie('plan',{ path: '/' });
-    $('.deposit_popup, .popup_fade, .forgotpassword_popup, .terms_services_popup, #signin_popup,#signup_popup, #joinus_popup_content, #signin_popup1, #email_activate, #login_window, #login_window1, .lead_details_popup, #directbuy_signin_popup, #auction_popup, #ask_question_popup, #thank_you_popup').hide();
+    $('.deposit_popup, .popup_fade,#forgotpassword_popup,#resetpassword_popup,.terms_services_popup, #signin_popup,#signup_popup, #joinus_popup_content, #signin_popup1, #email_activate, #login_window, #login_window1, .lead_details_popup, #directbuy_signin_popup, #auction_popup, #ask_question_popup, #thank_you_popup').hide();
     $('#plan_change').show();
     $('.header-search-bar').show();
     $('input[name="plan"]').val() == '';
@@ -574,6 +582,17 @@ $('.close').click(function(){
     $('.popup_fade, #signup_popup').show();
     $('.header-search-bar').hide();     
   });
+
+  $(".forget_password").on('click', function (){
+     $('#signup_popup').hide();
+     $('.popup_fade, #forgotpassword_popup').show();
+  });
+
+  $(".reset_btn").on('click', function (){
+     $('#signup_popup').hide();
+     $('.popup_fade, #resetpassword_popup').show();
+  });
+
 
   $('.post_event_btn_act').click(function(){
     $('input[name="next"]').val('/post_event');
@@ -1194,6 +1213,12 @@ $('.events').click(function(){
       }
   });
 
+  //for events_calendar newly updated by kalai
+  $(document).on("mouseenter", ".days", function() {
+    $(this).find('.list_events').show();
+    $(this).siblings().find('.list_events').hide();
+  });
+
   //postevent form validation
   //events
     // var events_required =["festname_required", "festcaption_val"];
@@ -1715,8 +1740,55 @@ $(".info").click(function(){
     $('.profile').show();
     $(".privacy_content").hide();
 });
+$(".myevents").click(function(){
+    $('.myevents_content').show();
+    $(".profile,.privacy_content").hide();
+});
 
 $(".dropdown").click(function(){
         $(".menulist").toggle();
 });
+// $(".popup_slider").hide();
+// $(".img_poster").on('click', function () {
+//     $(".popup_slider").show();
+//     $(".popup_slider").hide();
 
+// })
+
+// // Bind Click Handler to Link, then Open Gallery
+// $('.img_poster').on('click', function () {
+//   alert("enter");
+//      $(".popup_slider").magnificPopup('open');
+// });
+
+// Initialize Magnific Popup Gallery + Options
+// $('.img_poster').each(function () {
+//     $(this).magnificPopup({
+//         delegate: 'a',
+//         gallery: {
+//             enabled: true
+//         },
+//         type: 'image'
+//     });
+// });
+
+// $('.img_poster').click(function() {
+//   alert("enter");
+//     $(this).magnificPopup({
+//         delegate: 'a',
+//         gallery: {
+//             enabled: true
+//         },
+//         type: 'image'
+//     });
+// });
+
+$('.popup-gallery').magnificPopup({
+    delegate: 'a',
+    type: 'image',
+    gallery: {
+      enabled: true,
+     },
+   
+    
+  });
