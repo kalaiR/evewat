@@ -10089,7 +10089,10 @@ text-align:left;
   z-index: 999999;
   margin: -10px 0px 0px -2px;
 }
+<<<<<<< HEAD
+=======
 
+>>>>>>> b60467635c3b9885b6eaec2f4e8bd9d610df6457
 .list_events li {
     border-bottom: 1px solid;
     padding: 8px;
@@ -10113,11 +10116,13 @@ text-align:left;
     position: relative;
 }
 .reset_btn{
-background: #5a78b7 none repeat scroll 0 0;
+background: #0074bd none repeat scroll 0 0;
 position:relative;
 top:28px;
 height: 35px;
 left: 88px;
+cursor: pointer;
+color: #fff;
 }
 
 .btn_img {
@@ -10127,3 +10132,13 @@ left: 88px;
     top: 31px;
     width: 100%;
 }
+
+.forget_gif {
+    margin: 78px 0 0 50px;
+    position: relative;
+}
+.reset_gif {
+    padding: 52px;
+    position: relative;
+}
+
