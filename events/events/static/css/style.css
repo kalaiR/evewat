@@ -10089,7 +10089,6 @@ text-align:left;
   z-index: 999999;
   margin: -10px 0px 0px -2px;
 }
-<<<<<<< HEAD
 .list_events li {
     border-bottom: 1px solid;
     padding: 8px;
@@ -10113,25 +10112,14 @@ text-align:left;
     position: relative;
 }
 .reset_btn{
-background: #5a78b7 none repeat scroll 0 0;
+background: #0074bd none repeat scroll 0 0;
 position:relative;
 top:28px;
 height: 35px;
 left: 88px;
+cursor: pointer;
+color: #fff;
 }
-=======
-
-/*.popup_slider {
-    border: 1px solid;
-    height: 400px;
-    left: 140px;
-    overflow: scroll;
-    position: absolute;
-    top: 70px;
-    width: 281%;
-    z-index: 99999;
-    background-color:black;
-}*/
 .btn_img {
     height: 202px;
     left: 0;
@@ -10139,5 +10127,11 @@ left: 88px;
     top: 31px;
     width: 100%;
 }
-
->>>>>>> e7c4de226ef1d8d943028459fecda4e1b1f36a12
+.forget_gif {
+    margin: 78px 0 0 50px;
+    position: relative;
+}
+.reset_gif {
+    padding: 52px;
+    position: relative;
+}
