@@ -24,7 +24,7 @@ class BannerPriceAdmin(admin.ModelAdmin):
 
 
 class SiteBannerAdmin(admin.ModelAdmin):
-	fields=['banner','link', 'pageurl', 'position','startdate','enddate','admin_status',]
+	fields=['banner','link', 'pageurl', 'position','startdate','enddate','admin_status','user']
 	list_display = ('id', 'banner','link', 'pageurl', 'position', 'price', 'admin_status')
 	list_filter = ['pageurl', 'position']
 	search_fields = ['id', 'pageurl','position','price']    

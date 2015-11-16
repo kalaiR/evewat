@@ -44,7 +44,7 @@ class OraganizerInLine(admin.TabularInline):
 
 class PosteventAdmin(admin.ModelAdmin):
 
-	filelds=['name','email','eventtype','city','event_title','startdate','admin_status']
+	filelds=['name','email','eventtype','city','event_title','startdate','admin_status','created_date','expired_date']
 	list_display = ('id', 'name','eventtype','city','event_title','startdate','admin_status')
 	list_filter = ['id','event_title','city']	
 	search_fields = ['id', 'event_title']
@@ -99,8 +99,6 @@ class OrganizerAdmin(admin.ModelAdmin):
 			                    },
 			        ) 
 
-
-
 class PremiumPriceInfoAdmin(admin.ModelAdmin):
 	fields=['premium_price','currency','purpose','month']
 	list_display = ('premium_price','currency','purpose','month')
@@ -115,8 +113,9 @@ class FeedbackAdmin(admin.ModelAdmin):
 	search_fields = ['id', 'name']
 	list_per_page = 50
 
-# class OrganizerAdmin(admin.ModelAdmin):
-# 	list_display = ('organizer_name','organizer_email')
+class User_profileAdmin(admin.ModelAdmin):
+	fields=['user','user_mobile','gender','Date_of_birth','user_address','profile_pic']
+	list_display = ('user','user_mobile','gender','Date_of_birth','user_address','profile_pic')	
 
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Feedback, FeedbackAdmin)
@@ -128,4 +127,5 @@ admin.site.register(Postevent, PosteventAdmin)
 admin.site.register(SubCategory, SubCategoryAdmin)   
 admin.site.register(Organizer,OrganizerAdmin)   
 admin.site.register(CollegeDepartment) 
+admin.site.register(User_profile, User_profileAdmin) 
 

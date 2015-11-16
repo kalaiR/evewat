@@ -2,6 +2,7 @@
 {% load static from staticfiles %}
 {% load i18n %}
 {% block content %}
+<script type="text/javascript" src="{% static "js/imagelightbox.js" %}"></script>
     <div id="main-wrapper">
         <div class="slider-content">
             <div id="home-slider" class="owl-carousel owl-theme">
@@ -56,7 +57,19 @@
                 <button><i class="fa fa-briefcase"></i></button>
                 <div class="page-sidebar company-sidebar">
                     <div class="contact-details">
-                        <img src="/media/{{events.poster}}" alt="">
+                     <img id="imagelightbox" src="" alt=""/>
+
+                    <img src="/media/{{photo}}">
+                    
+                    {%for photo in photos %}
+                       
+                       <a class="btn btn_img" data-imagelightbox="a" href="/media/{{photo}}"></a>
+                            <!-- <a href="#" title="The Cleaner"><img src="/media/{{photo}}" style="width:70%;"></a> -->
+                       <a class="btn btn_img" data-imagelightbox="h" href="/media/{{photo}}"></a>
+                        
+                                                  
+                    {%endfor%}
+               
                         <h2>Organizer Details</h2>
                         <ul class="list-unstyled">
                             {% for organizers in organizer %}
@@ -87,12 +100,12 @@
                             </li>
                         </ul>
                     </div><!--end opening-hours-->
-                    <div class="square-button">
+                    <!-- <div class="square-button">
                         <a href="#"><img src="img/content/square-button.png" alt=""></a>
                         <a href="#"><img src="img/content/square-button.png" alt=""></a>
                         <a href="#"><img src="img/content/square-button.png" alt=""></a>
                         <a href="#"><img src="img/content/square-button.png" alt=""></a>
-                    </div> <!-- end .sqare-button -->
+                    </div>  --><!-- end .sqare-button -->
                 </div> <!-- end .page-sidebar -->
             </div> <!-- end .main-grid layout -->
         </div> <!-- end .row -->
@@ -103,25 +116,25 @@
         RENDER MY CONTENT
     {% endfor %}
 </div>
-
-<div class="reviews">
-    <h2>{{review.name}}</h2>
+<div id='mgs' style="display:none;">
+    <p>Your comment has been successfully posted</p>
 </div>
+
 <div class="comments-section">
     <form class="comment-form" action="{%url "reviews.views.post" %}" method="post" name="form" id="review_form">
     {% csrf_token %}
         <div class="row">
             <div class="col-md-4">
-                <input type="text" required="" placeholder="Name *" name="name">
+                <input type="text" required="" placeholder="Name *" name="name" id="name">
             </div>
 
             <div class="col-md-4">
-                <input type="email" name="email" required="" placeholder="Email *">
+                <input type="email" name="email" id="email"required="" placeholder="Email *">
             </div>
 
             <div class="col-md-4">
                 <!-- <input type="text" placeholder="Ratings" name="rating"> -->
-                <fieldset class="rating" name="rating">
+                <fieldset class="rating" name="rating" id="rating">
                     <legend>Please rate:</legend>
                     <input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="Rocks!">5 stars</label>
                     <input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="Pretty good">4 stars</label>
@@ -132,10 +145,209 @@
             </div>
         </div>
 
-        <textarea required="" placeholder="Your Comment ..." name="content"></textarea>
+        <textarea required="" placeholder="Your Comment ..." name="content" id="content"></textarea>
 
         <button class="btn btn-default" type="submit" id="review_btn" ><i class="fa fa-envelope-o"></i> Send Message</button>
-        <input type="hidden" name="postevent" value="{{events.id}}">
+        <input type="hidden" name="postevent" value="{{events.id}}" id="postevent">
     </form>
 </div>
+<div class="reviews">
+{% for reviews in review %}
+        <div class="cau clearfix">
+            <img width="38" height="38" class="avatar avatar-loaded fl" src="{{STATIC_URL}}img/user.png">            <div class="aum">
+                <h3>{{reviews.name}}</h3>
+                
+            </div>
+        </div>
+        <div class="ctx">
+            <p class="comments">{{reviews.content}}</p>
+        </div>
+        
+{% endfor %}
+
+   <!--  <span>NAME: 
+    {{reviews.name}}</span><br/>
+    <span>COMMENTS:
+    {{reviews.content}}</span><br/>
+    <br/>
+ -->
+</div>
+{% if related_events %}
+<div class="featured-listing" id= "featured-list">
+        <div class="our-partners">
+            <div class="container">
+                <div class="row clearfix">
+                    <h2><strong>Related Events</strong></h2>
+                    {% for related in related_events %}
+                        <div class="col-md-3 col-sm-4 col-xs-6">
+                            <div class="single-product">
+                                <figure>
+                                    <img src="/media/{{related.poster}}" alt="">
+                                    <figcaption>
+                                        <div></div>
+                                        <div class="read-more">
+                                            <a href="/details/{{related.id}}"><i class="fa fa-angle-right"></i> Read More</a>
+                                        </div>
+                                    </figcaption>
+                                </figure>
+                                <h4><a href="/details/{{related.id}}">{{related.event_title}}</a></h4>
+                                <h5><a href="/details/{{related.id}}">{{related.city}}</a></h5>
+                            </div> <!-- end .single-product -->
+                        </div>
+                    {% endfor %}
+                </div>  <!-- end .row -->                 
+            </div>
+        </div><!-- END OUR PARTNER SLIDER -->
+</div>
+
+<script type="text/javascript">
+$(function () {
+        var activityIndicatorOn = function () {
+                $('<div id="imagelightbox-loading"><div></div></div>').appendTo('body');
+            },
+            activityIndicatorOff = function () {
+                $('#imagelightbox-loading').remove();
+            },
+
+            overlayOn = function () {
+                alert("overlayOn");
+                $('<div id="imagelightbox-overlay"></div>').appendTo('body');
+            },
+            overlayOff = function () {
+                $('#imagelightbox-overlay').remove();
+            },
+
+            closeButtonOn = function (instance) {
+                $('<a href="#" id="imagelightbox-close"></a>').appendTo('body').on('click', function () {
+                    $(this).remove();
+                    instance.quitImageLightbox();
+                    return false;
+                });
+            },
+            closeButtonOff = function () {
+                $('#imagelightbox-close').remove();
+            },
+
+            captionOn = function () {
+                var description = $('a[href="' + $('#imagelightbox').attr('src') + '"] img').attr('alt');
+                if (description.length > 0)
+                    $('<div id="imagelightbox-caption">' + description + '</div>').appendTo('body');
+            },
+            captionOff = function () {
+                $('#imagelightbox-caption').remove();
+            },
+
+            navigationOn = function (instance, selector) {
+                var images = $(selector);
+                if (images.length) {
+                    var nav = $('<div id="imagelightbox-nav"></div>');
+                    for (var i = 0; i < images.length; i++)
+                        nav.append('<a href="#"></a>');
+
+                    nav.appendTo('body');
+                    nav.on('click touchend', function () {
+                        return false;
+                    });
+
+                    var navItems = nav.find('a');
+                    navItems.on('click touchend', function () {
+                        var $this = $(this);
+                        if (images.eq($this.index()).attr('href') != $('#imagelightbox').attr('src'))
+                            instance.switchImageLightbox($this.index());
+
+                        navItems.removeClass('active');
+                        navItems.eq($this.index()).addClass('active');
+
+                        return false;
+                    })
+                            .on('touchend', function () {
+                                return false;
+                            });
+                }
+            },
+            navigationUpdate = function (selector) {
+                var items = $('#imagelightbox-nav').find('a');
+                items.removeClass('active');
+                items.eq($(selector).filter('[href="' + $('#imagelightbox').attr('src') + '"]').index(selector)).addClass('active');
+            },
+            navigationOff = function () {
+                $('#imagelightbox-nav').remove();
+            },
+            arrowsOn = function( instance, selector ) {
+                alert("enter");
+                var $arrows = $( '<button type="button" class="imagelightbox-arrow imagelightbox-arrow-left"></button>' +
+                                 '<button type="button" class="imagelightbox-arrow imagelightbox-arrow-right"></button>' );
+                $arrows.appendTo( 'body' );
+                $arrows.on( 'click touchend', function( e ) {
+                    e.preventDefault();
+
+                    var $this = $( this );
+
+                    if( $this.hasClass('imagelightbox-arrow-left')) {
+                        instance.loadPreviousImage();
+                    } else {
+                        instance.loadNextImage();
+                    }
+
+                    return false;
+                });
+            },
+            arrowsOff = function() {
+                $('.imagelightbox-arrow').remove();
+            };
+
+        //  WITH ACTIVITY INDICATION
+
+        $('a[data-imagelightbox="a"]').imageLightbox(
+            {
+                onLoadStart: function () {
+                    activityIndicatorOn();
+                },
+                onLoadEnd: function () {
+                    activityIndicatorOff();
+                },
+                onEnd: function () {
+                    activityIndicatorOff();
+                }
+            });
+
+
+        //  WITH ARROWS & ACTIVITY INDICATION
+
+        var selectorG = 'a[data-imagelightbox="h"]';
+        var instanceG = $( selectorG ).imageLightbox(
+            {
+                onStart:        function(){ arrowsOn( instanceG, selectorG ); },
+                onEnd:          function(){ arrowsOff(); activityIndicatorOff(); },
+                onLoadStart:    function(){ activityIndicatorOn(); },
+                onLoadEnd:      function(){ $( '.imagelightbox-arrow' ).css( 'display', 'block' ); activityIndicatorOff(); }
+            });
+        
+        var selectorI = 'a[data-imagelightbox="i"]';
+        var instanceI = $( selectorI ).imageLightbox(
+        {
+                quitOnDocClick: false,
+                onStart: function () {
+                    closeButtonOn(instanceI);
+                },
+                onEnd: function () {
+                    closeButtonOff();
+                    activityIndicatorOff();
+                },
+                onLoadStart: function () {
+                    activityIndicatorOn();
+                },
+                onLoadEnd: function () {
+                    activityIndicatorOff();
+                }
+        });
+
+      
+
+    });
+</script>
+           
+
+{% endif %}
+
 {% endblock %}

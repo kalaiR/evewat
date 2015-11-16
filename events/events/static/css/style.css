@@ -1,4 +1,4 @@
-LL/* --------------------------------------
+/* --------------------------------------
 Table Of  Content
 
 1. Bootstrap
@@ -4510,6 +4510,7 @@ fieldset[disabled] .btn-default-inverse.active {
   font-size: 15px;
   font-weight: 700;
   position:relative;
+  cursor: pointer;
 }
 #categories .accordion ul li a .fa {
   padding-right: 10px;
@@ -5659,6 +5660,7 @@ fieldset[disabled] .btn-default-inverse.active {
 #page-content {
   position: relative;
   padding: 30px 0 50px 0;
+  top:22px;
 }
 .page-content {
   position: relative;
@@ -5831,7 +5833,7 @@ fieldset[disabled] .btn-default-inverse.active {
 }
 /* featured-listing section */
 /* --------------------------------------- */
-.featured-listing {
+/*.featured-listing {
   position: relative;
   margin-top: 40px;
   padding: 0px 0px 50px 0px;
@@ -5839,7 +5841,7 @@ fieldset[disabled] .btn-default-inverse.active {
   background-size: cover;
   background-attachment: fixed;
   text-align: center;
-}
+}*/
 @media (max-width: 1200px) {
   .featured-listing {
     background-attachment: scroll;
@@ -6004,7 +6006,7 @@ fieldset[disabled] .btn-default-inverse.active {
 }
 .featured-listing {
   position: relative;
-  margin-top: 40px;
+  margin-top: 242px;
   padding: 50px 0;
   background: url('../img/content/feature-bg.jpg') top center no-repeat;
   background-size: cover;
@@ -8740,6 +8742,7 @@ select{
 	color: #277ec3;
 	right: 0px;
     top: 14px;
+    cursor: pointer;
 }
 .button1
 {
@@ -8812,13 +8815,13 @@ select{
     border-width: medium medium 1px;
     color: #939393;
     font-family: Roboto;
-    font-size: 14px;
+    font-size: 14px;    
     line-height: 3;
     padding: 3px;
     width: 335px;
     margin-top: 15px;
 }
-#contactus_signup  {
+.contactus_signup  {
     -moz-border-bottom-colors: none;
     -moz-border-left-colors: none;
     -moz-border-right-colors: none;
@@ -8830,12 +8833,13 @@ select{
     border-width: medium medium 1px;
     color: #939393;
     font-family: Roboto;
-    font-size: 14px;
+    font-size: 13px !important;
     line-height: 2;
     padding: 3px;
     width: 335px;
     margin-top: 15px;
 }
+
 .voucher_popup{
     width:352px;   
     height:557px;
@@ -8848,7 +8852,7 @@ select{
    -moz-box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.08);
    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.08);
  }
- .email{
+ .signup_email{
     width:352px;   
     height:638px;
     padding:10px;
@@ -9005,7 +9009,7 @@ mark
 	color: #3c3c3c;
 	font-size: 16px;
 	right: 5px;
-    top: 70px;
+    top: 28px;
 
 }
 }
@@ -9027,6 +9031,7 @@ mark
 	color: #277ec3;
 	right: 5px;
     top: 10px;
+    cursor: pointer;
 }
 }
 @media(min-width:768px)
@@ -9044,7 +9049,7 @@ mark
     padding: 8px;
     position: relative;
     text-align: center;
-    top: 30px;
+    top: 12px;
     width: 353px;
     text-decoration: none !important;
 }
@@ -9060,7 +9065,7 @@ mark
     padding: 8px;
     position: relative;
     text-align: center;
-    top: 49px;
+    top: 20px;
     width: 355px;
     text-decoration: none !important;
     
@@ -9070,7 +9075,7 @@ mark
     height: 50px;
     left: 8px;
     position: relative;
-    top: 57px;
+    top: 26px;
     width: 354px;
     padding:8px;
     background: #dd4b39 none repeat scroll 0 0;
@@ -9101,7 +9106,7 @@ mark
     width: 370px;
 }
 
-#contactus_signup  {
+.contactus_signup  {
     -moz-border-bottom-colors: none;
     -moz-border-left-colors: none;
     -moz-border-right-colors: none;
@@ -9119,8 +9124,18 @@ mark
     width: 370px;
    
 }
-#login_val .error, .email_exists_error, .error_pwd {
+#login_val .error, .email_exists_error, .error_pwd, #user_form .error, #user_form .strength {
     /*background-color: #ffff00;*/
+    color: #900;
+    font-family: Verdana,Arial,sans-serif;
+    font-size: 0.9em;
+    display: none;
+    position: relative;
+    /*float: right;*/
+    top: -22px;
+    left: 240px;
+}
+.error1{
     color: #900;
     font-family: Verdana,Arial,sans-serif;
     font-size: 0.9em;
@@ -9144,7 +9159,7 @@ mark
    -moz-box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.08);
    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.08);
  }
- .email{
+ .signup_email{
  	 width:652px;   
     height:620px;
     padding:10px;
@@ -9231,11 +9246,12 @@ mark
     opacity : 0   ;
   }  
 }
-/* comment for updating new login popup */
-/*.error_input_field{
+
+.register_holder .error_input_field{
   width: 50% !important;
-}
-.login_holder .error_input_field{
+} 
+/* comment for updating new login popup */
+/* .login_holder .error_input_field{
   width: 48% !important;
 }*/
 
@@ -9286,15 +9302,15 @@ t
     max-width: 360px !important;
     margin-bottom: 20px;
 }
-
 .feedback_popup{
-  width:400px;
+  width:300px;
   background-color: #f8f8f8;
   border:1px solid;
   position:absolute;
   right:-32px;
   z-index: 999999;
- 
+  box-shadow: 0 5px 15px -10px rgba(0, 0, 0, 0.3) inset;
+  top: 600px;
 }
 .feed{
   margin-bottom: 10px;
@@ -9309,7 +9325,17 @@ t
   position: absolute;
   right:40px;
   top:0;
+  cursor: pointer;
 }
+.feedback_star {
+    color: #0074bd;
+    font-size: 13px;
+}
+.text_rate{
+    color: #0074bd;
+     font-size: 18px;
+    text-align: center;
+  }
 .sf-select select {
   opacity:1;
   background:none;
@@ -9357,8 +9383,9 @@ t
 
 
 .content{
-  margin-left: 73px;
+  margin-left: 10px;
   width: 253px;
+  line-height: 3;
 }
 .right_align span{
   font-size: 30px;
@@ -9475,7 +9502,7 @@ t
     float: right;
     left: 32px;
     position: relative;
-    top: 25px;
+    top: 48px;
 }
 .addnum {
     -moz-border-bottom-colors: none;
@@ -9495,9 +9522,9 @@ t
 }
 .confirm {
     float: right;
-    left: 95px;
+    left: 106px;
     position: relative;
-    top: -30px;
+    top: -33px;
     width: 62px;
 }
 #mobile {
@@ -9556,12 +9583,50 @@ t
   padding-left: 58px !important;
 }*/
 
+
+.visitor_count{
+  bottom:7px;
+  right:65px;
+  position: absolute;
+}
+.comments-section {
+    bottom: -83px;
+    left: 80px;
+    position: relative;
+    width: 88%;
+}
+.reviews {
+    left: 86px;
+    position: relative;
+    top: 0px;
+    width:84%;
+}
+.aum {
+    left: 11px;
+    position: relative;
+    top: -12px;
+}
+.ctx {
+    border:3px solid #dddddd;
+    left: 54px;
+    position: relative;
+    top: -4px;
+    width: 83%;
+}
+.comments {
+    padding: 6px 0 0 9px;
+}
+
 .search-btn{
   cursor: pointer;
   border-radius: 3px;
 }
-
-
+#mgs > p {
+    font-size: 19px;
+    left: 80px;
+    position: relative;
+    top: -36px;
+}
 /* newly added styles for signin popup */
 .event_count{
 	background-color: #0074bd;
@@ -9585,5 +9650,495 @@ t
 	left: 80px;
     position: relative;
     top: 12px;
+}
+
+/**************userprofile************/
+.header_call_events {
+     bottom: 215px;
+    left: 100px;
+    position: relative;
+}
+.upload_image {
+    left: 150px;
+    position: relative;
+    top: -124px;
+}
+.profile{
+  height: 545px;
+  width: auto;
+}
+.personal_nav li{
+  list-style:none;
+  background-color: #f8f8f8;
+  border-left: 3px solid transparent;
+  border-right:1px solid #d0d0d0;
+  border-top: 1px solid #d0d0d0;
+  left: 0px;
+  top: -69px;
+}
+.personal_info ul li{
+  display: block;
+  font-size:22px;
+  padding: 9px 0 15px 18px;
+  position:relative;
+  font-weight:lighter;
+  font-family: Roboto;
+  color: #8c8c8c;
+}
+.personal_information,.privacy_information {
+    color: #424242;
+    font-size: 20px;
+    left: 0px;
+    position: relative;
+    font-weight:lighter;
+     font-family: Roboto;
+    top: -80px;
+}
+.post_btn {
+    border: 3px solid;
+    border-bottom-left-radius: 30px;
+    border-top-left-radius: 30px;
+    height: 60px;
+    width: 225px;
+    font-size: 22px;
+    padding-top: 14px;
+}
+.banner_btn {
+    border: 3px solid;
+    border-bottom-right-radius: 30px;
+    border-top-right-radius: 30px;
+    height: 60px;
+    width: 225px;
+    background-color: #e1004a !important;
+    font-size: 22px;
+    padding-top: 14px;
+}
+.personal_form .privacy_form {
+    line-height: 4;
+    position: relative;
+    top: -70px;
+}
+.input_name  {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: transparent;
+    border-color: black;
+    border-image: none;
+    border-style: none none solid;
+    border-width: medium medium 1px;
+    color: #939393;
+    font-family: Roboto;
+    font-size: 14px;
+    line-height: 3;
+    padding: 3px;
+    width: 558px;
+}
+.input_email{
+  -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: transparent;
+    border-color: black;
+    border-image: none;
+    border-style: none none solid;
+    border-width: medium medium 1px;
+    color: #939393;
+    font-family: Roboto;
+    font-size: 14px;
+    line-height: 3;
+    padding: 3px;
+    width: 268px;
+    position: relative;
+    top: 20px;
+}
+.input_mobile{
+  -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: transparent;
+    border-color: black;
+    border-image: none;
+    border-style: none none solid;
+    border-width: medium medium 1px;
+    color: #939393;
+    font-family: Roboto;
+    font-size: 14px;
+    line-height: 3;
+    padding: 3px;
+   position: relative;
+    top: -28px;
+    width: 268px;
+    float: right;
+    left: 85px;
+}
+.input_category  {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: transparent;
+    border-color: black;
+    border-image: none;
+    border-style: none none solid;
+    border-width: medium medium 1px;
+    color: #939393;
+    font-family: Roboto;
+    font-size: 14px;
+    line-height: 3;
+    padding: 3px;
+    width: 270px;
+    position: relative;
+    top: -4px;
+}
+.input_organization{
+  -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: transparent;
+    border-color: black;
+    border-image: none;
+    border-style: none none solid;
+    border-width: medium medium 1px;
+    color: #939393;
+    font-family: Roboto;
+    font-size: 14px;
+    line-height: 3;
+    padding: 3px;
+   position: relative;
+    top: --30px;
+    width: 268px;
+    float: right;
+    left: 85px;
+    top: -40px;
+}
+.input_addr  {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: transparent;
+    border-color: black;
+    border-image: none;
+    border-style: none none solid;
+    border-width: medium medium 1px;
+    color: #939393;
+    font-family: Roboto;
+    font-size: 14px;
+    line-height: 3;
+    padding: 3px;
+    position: relative;
+    top: 25px;
+    width: 569px;
+}
+.input_landmark  {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: transparent;
+    border-color: black;
+    border-image: none;
+    border-style: none none solid;
+    border-width: medium medium 1px;
+    color: #939393;
+    font-family: Roboto;
+    font-size: 14px;
+    line-height: 3;
+    padding: 3px;
+    width: 275px;
+    position: relative;
+    top: -5px;
+}
+.input_zip{
+  -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: transparent;
+    border-color: black;
+    border-image: none;
+    border-style: none none solid;
+    border-width: medium medium 1px;
+    color: #939393;
+    font-family: Roboto;
+    font-size: 14px;
+    line-height: 3;
+    padding: 3px;
+   position: relative;
+    top: -50px;
+    width: 268px;
+    float: right;
+    left: 64px;
+    position: relative;
+    top: -55px;
+}
+.person {
+    color: #2ab558;
+    font-size: 110px;
+    left: 159px;
+    position: relative;
+    top: -71px;
+}
+.save_personal {
+    color: #55a2d3;
+    float: right;
+    font-size: 18px;
+    position: relative;
+    top: 12px;
+    background-color: transparent;
+}
+.save_privacy {
+    color: #55a2d3;
+    float: right;
+    font-size: 18px;
+    position: relative;
+    top: 12px;
+    left: 300px;
+    background-color: transparent;
+}
+.privacy_content {
+    height: 542px;
+}
+.lock {
+    color: #2ab558;
+    font-size: 110px;
+    position: relative;
+    right: 0px;
+    top: -61px;
+}
+.menulist{
+    background-clip: padding-box;
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.176);
+    display: none;
+    float: left;
+    font-size: 17px;
+    left: 0;
+    line-height: 2;
+    list-style: outside none none;
+    margin: 2px 0 0;
+    min-width: 159px;
+    padding: 5px 15px;
+    position: absolute;
+    text-align: left;
+    z-index: 1000;
+    top: 58px;
+}
+.user_menu {
+    float: right;
+    position: relative;
+    right: 140px;
+    top: -30px;
+}
+.dropdown{
+  cursor: pointer;
+  float: left;
+  margin: 7px 30px -13px -14px;
+  position: relative;
+}
+.personal_info li:hover {
+    border-left-color: #0074bd;
+    color: #0074bd;
+}
+.gender_option {
+    position: relative;
+    top: 25px;
+    width: 58%;
+}
+label_gender {
+    color: #939393;
+    position: relative;
+    top: 68px;
+}
+@media (min-width: 768px){
+  .personal_nav li{
+  list-style:none;
+  background-color: #f8f8f8;
+  border-left: 3px solid transparent;
+  border-right:1px solid #d0d0d0;
+  border-top: 1px solid #d0d0d0;
+  left: 85px;
+  top: -69px;
+}
+.personal_info ul li{
+  display: block;
+  font-size:22px;
+  padding: 9px 0 15px 18px;
+  position:relative;
+  font-weight:lighter;
+  font-family: Roboto;
+  color: #8c8c8c;
+}
+.personal_information,.privacy_information{
+    color: #424242;
+    font-size: 18px;
+    left: 200px;
+    position: relative;
+    font-weight:lighter;
+     font-family: Roboto;
+    top: -80px;
+}
+.person {
+    color: #2ab558;
+    font-size: 110px;
+    position: relative;
+    right: 390px;
+    top: -61px;
+}
+.personal_form, .privacy_form {
+    line-height: 4;
+    position: relative;
+    right: 300px;
+    float: right;
+}
+.lock {
+    color: #2ab558;
+    font-size: 110px;
+    left: 183px;
+    position: relative;
+    top: -61px;
+}
+.header_call_events {
+     bottom: 215px;
+    left: 485px;
+    position: relative;
+}
+.gender_option {
+    position: relative;
+    top: 24px;
+    width: 58%;
+    height: 35px;
+}
+.dropdown{
+  cursor: pointer;
+  float: left;
+  margin: 7px 30px -13px 0px;
+  position: relative;
+}
+.label_gender {
+    color: #939393;
+    position: relative;
+    top: 68px;
+}
+.myevents_list{
+  height: 200px;
+}
+.main {
+width:1850px;
+margin: 0px 0px 0px 186px;
+}
+/**********calendar*****/
+.month {
+background-color:#0074bd;
+font: bold 16px verdana;
+padding: 5px;
+color:white;
+width: 1257px;
+}
+.daysofweek {
+background-color:gray;
+font:bold 12px verdana;
+color:white;
+float:left;
+width:34px;
+border-right:1px solid #EEEEEE;
+text-align:center;
+}
+.days {
+font-size: 12px;
+font-family:verdana;
+color:black;
+/*background: d-color: lightyellow;*/
+float:left;
+width:34px;
+border-right:1px solid #EEEEEE;
+/*height:100px;*/
+text-align:center;
+overflow:visible;
+cursor: pointer;
+background-color: #fff;
+}
+.eventBar {
+height:18px;
+/*background-color:#069;*/
+margin: 10px 0 0 2px;
+position: absolute;
+/*color:#fff;*/
+text-align:left;
+}
+.action_calendar{
+  margin: 10px 0px 5px 186px;
+}
+.days:hover {
+    background-color: #21c0e8;
+}
+.list_events{
+  list-style-type: none;
+  display: none;
+  padding:0px;
+  width: 190px;
+  background-color: #0074bd;
+  position: relative;
+  z-index: 999999;
+  margin: -10px 0px 0px -2px;
+}
+<<<<<<< HEAD
+=======
+
+>>>>>>> b60467635c3b9885b6eaec2f4e8bd9d610df6457
+.list_events li {
+    border-bottom: 1px solid;
+    padding: 8px;
+}
+.list_events li:hover {
+    background-color: lightblue;
+}
+.days:hover {
+    background-color: #0074bd;
+}
+#prev{
+  background-color:#0074bd;
+  color: white; 
+}
+#next{
+  background-color:#0074bd;
+  color: white; 
+}
+.event_calendar {
+    margin: 0 0 0 7px;
+    position: relative;
+}
+.reset_btn{
+background: #0074bd none repeat scroll 0 0;
+position:relative;
+top:28px;
+height: 35px;
+left: 88px;
+cursor: pointer;
+color: #fff;
+}
+
+.btn_img {
+    height: 202px;
+    left: 0;
+    position: absolute;
+    top: 31px;
+    width: 100%;
+}
+
+.forget_gif {
+    margin: 78px 0 0 50px;
+    position: relative;
+}
+.reset_gif {
+    padding: 52px;
+    position: relative;
 }
 

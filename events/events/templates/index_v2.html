@@ -26,31 +26,39 @@
                 </div>
             </div> <!-- END .slider-content -->
         </div> <!-- END .SEARCH and slide-section -->
+
+        <div class="event_calendar">
+        <div class="action_calendar">
+            <button id="prev" onMouseUp="changeMonth(false)"> Previous </button>
+            <button id="next" onMouseUp="changeMonth(true)"> Next </button>
+        </div>
+        <div id="cal"></div>
+        </div>
     </header> <!-- end #header -->
     <a class="btn btn-default feedback1">FEEDBACK</a>                 
     <div class="feedback_popup">
         <form action="{%url "college_event.views.feedback" %}" id="form" method="post" name="form" class="feedback_form">{% csrf_token %}
             <a class="close"> <i class="fa fa-times"></i></a>
-            <h2 >Rate my website!</h2>
+            <h2 class="text_rate">Rate my website!</h2>
             <div class="content">
-            <label for="text1">Name:
-            <input type="text" name="name" class="feed" placeholder=" name" /></label> 
-            <label for="text1">Email:
-            <input type="text" name="email" class="feed" placeholder=" email" /></label> 
-            <label for="text1">Rating:
-            <select class="feed"name="rating" placeholder="Rating"  >
-                <option value="0">Please select your Rating </option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-            </select>
-            </label><br/>
-            <label for="text1">Comments:
-            <textarea placeholder="comments" name="comments" class="feed" value=""></textarea><br/>
-            </label>
-            <button class="btn btn-default" type="submit" >Submit</button>
+               <div class="form-group">
+                  <input type="name" class="form-control" placeholder="Name" id="name" name="name">
+                </div>
+                <div class="form-group">
+                  <input type="email" class="form-control" placeholder="Email" id="email" name="email">
+                </div>
+                <div class="form-group">
+                   <textarea class="form-control" rows="1" cols="33" placeholder="Comments" id="comment" name="comments"></textarea>
+                </div>
+                <fieldset class="rating" name="rating">
+                    <legend class="feedback_star">How satisfied are you with our services</legend>
+                    <input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="Rocks!">5 stars</label>
+                    <input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="Pretty good">4 stars</label>
+                    <input type="radio" id="star3" name="rating" value="3" /><label for="star3" title="Modrate">3 stars</label>
+                    <input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="Kinda bad">2 stars</label>
+                    <input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="Poor">1 star</label>
+                </fieldset>
+                <button class="btn btn-default" type="submit" >Submit</button>
             </div>
         </form>
     </div>
