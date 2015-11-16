@@ -10089,6 +10089,10 @@ text-align:left;
   z-index: 999999;
   margin: -10px 0px 0px -2px;
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> b60467635c3b9885b6eaec2f4e8bd9d610df6457
 .list_events li {
     border-bottom: 1px solid;
     padding: 8px;
@@ -10108,7 +10112,7 @@ text-align:left;
   color: white; 
 }
 .event_calendar {
-    margin: 0 0 0 -185px;
+    margin: 0 0 0 7px;
     position: relative;
 }
 .reset_btn{
@@ -10120,6 +10124,7 @@ left: 88px;
 cursor: pointer;
 color: #fff;
 }
+
 .btn_img {
     height: 202px;
     left: 0;
@@ -10127,6 +10132,7 @@ color: #fff;
     top: 31px;
     width: 100%;
 }
+
 .forget_gif {
     margin: 78px 0 0 50px;
     position: relative;
@@ -10135,3 +10141,4 @@ color: #fff;
     padding: 52px;
     position: relative;
 }
+
