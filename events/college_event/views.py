@@ -796,41 +796,53 @@ def get_events_for_calendar(request):
     for event in events:
         event_data = {'id':str(event.id), 'title':event.event_title, 'start':smart_unicode(datetime.datetime.combine(event.startdate,time)),'end':smart_unicode(datetime.datetime.combine(event.enddate,time))}
         events_list.append(event_data)
-    print "event_list", events_list
+    # print "event_list", events_list
     return HttpResponse(simplejson.dumps(events_list), mimetype='application/json')
 
 def user_profile(request):
-	requested_user=User.objects.get(email=request.user.email)
-	if request.method == 'POST':
-		user_mobile=request.POST.get('moblie', '')
-		gender=request.POST.get('gender', '')
-		Date_of_birth=request.POST.get('dob', '')
-		user_address=request.POST.get('address', '')
-		profile_pic=request.FILES.get('profile_poster', '')
-		if User_profile.objects.filter(user_id=requested_user.id).exists():
-			user_id=User_profile.objects.get(user_id=requested_user.id)
-			# print 'requested_user_profile.user_id', requested_user_profile.user_id
-			user_id.user_mobile=user_mobile
-			user_id.gender=gender
-			user_id.Date_of_birth=Date_of_birth
-			user_id.user_address=user_address
-			user_id.profile_pic=profile_pic
-			user_id.save()
-		else:
-			userprofile=User_profile()
-			userprofile.user_id=requested_user.id	
-			userprofile.user_mobile=user_mobile
-			userprofile.gender=gender
-			userprofile.Date_of_birth=Date_of_birth
-			userprofile.user_address=user_address
-			userprofile.profile_pic=profile_pic
-			userprofile.save()	
-	try:           
-		requested_user_profile=User_profile.objects.get(user_id=requested_user.id)		
-		events_for_user=Postevent.objects.filter(email=request.user.email)			
-		return render_to_response("user_profile.html", {'requested_user':requested_user, 'requested_user_profile':requested_user_profile}, context_instance=RequestContext(request))        
-	except:		
-		return render_to_response("user_profile.html", {'requested_user':requested_user}, context_instance=RequestContext(request))
+	if request.user.is_authenticated:
+		requested_user=User.objects.get(email=request.user.email)
+		if request.method == 'POST':
+			last_name=request.POST.get('last_name', '')
+			user_mobile=request.POST.get('moblie', '')
+			gender=request.POST.get('gender', '')
+			Date_of_birth=request.POST.get('dob', '')
+			user_address=request.POST.get('address', '')
+			print 'user_address', user_address
+			profile_picture=request.FILES.get('profile_poster')
+			print 'profile_picture', profile_picture
+			def handle_uploaded_file(f):
+				profile_picture = open(settings.MEDIA_ROOT+'/events/' + '%s' % f.name, 'wb+')
+				for chunk in f.chunks():
+					profile_picture.write(chunk)
+				profile_picture.close()
+				handle_uploaded_file(profile_picture)			
+			if User_profile.objects.filter(user_id=requested_user.id).exists():
+				user_id=User_profile.objects.get(user_id=requested_user.id)
+				user_id.last_name=last_name
+				user_id.user_mobile=user_mobile
+				user_id.gender=gender
+				user_id.Date_of_birth=Date_of_birth
+				user_id.user_address=user_address
+				user_id.profile_pic=profile_picture			
+				user_id.save()
+			else:
+				userprofile=User_profile()
+				userprofile.user_id=requested_user.id
+				userprofile.last_name=last_name	
+				userprofile.user_mobile=user_mobile
+				userprofile.gender=gender
+				userprofile.Date_of_birth=Date_of_birth
+				userprofile.user_address=user_address
+				userprofile.profile_pic=profile_picture
+				userprofile.save()	
+		try:           
+			requested_user_profile=User_profile.objects.get(user_id=requested_user.id)		
+			events_for_user=Postevent.objects.filter(email=request.user.email)
+			print 'events_for_user', events_for_user			
+			return render_to_response("user_profile.html", {'requested_user':requested_user, 'requested_user_profile':requested_user_profile, 'events_for_user':events_for_user}, context_instance=RequestContext(request))        
+		except:		
+			return render_to_response("user_profile.html", {'requested_user':requested_user, 'events_for_user':events_for_user}, context_instance=RequestContext(request))
 
 def privacy(request):
 	print 'request.user.email',request.user.email
@@ -839,3 +851,8 @@ def privacy(request):
 	u.set_password(new_password)
 	u.save()
 	return render_to_response("user_profile.html", context_instance=RequestContext(request))
+
+
+
+
+		

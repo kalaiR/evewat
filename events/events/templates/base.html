@@ -105,9 +105,10 @@
                                         <div class=" user_menu col-md-2">
                                             <ul class="menulist">
                                               <li><a href="{% url "college_event.views.user_profile" %}">Personal Info</a></li>
-                                              <li><a href="{% url "college_event.views.privacy" %}">Privacy</a></li>
-                                              <li><a href="#">My events</a></li>
+                                              <li><a  class="privacy" href="{% url "college_event.views.user_profile" %}">Privacy</a></li>
+                                              <li><a href="{% url "college_event.views.user_profile" %}">My events</a></li>
                                             </ul>
+                                            <!-- <input type="hidden" name="choose_settings" id="choose_settings"> -->
                                         </div><!--user_menu-->
                             {% endif %}     
 
@@ -285,10 +286,10 @@
             <script type="text/javascript" src="{% static "js/stepsForm.js" %}"></script>
             <script type="text/javascript">
 
-                 $('.date_pick').datepicker({
+                $('.date_pick').datepicker({
                     format: 'yyyy-mm-dd',
                     startDate: '-3d',
-                });
+                });               
              </script>
            <script type="text/javascript">
                 var events; 

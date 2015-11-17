@@ -1695,8 +1695,8 @@ $(".confirm").click(function(){
           number = number + $(this).val() + ',';
       });
       // alert(number);
-      if($('.organizer_mobile').val() == '')
-        $('.organizer_mobile').val(number);
+      if($('.organizer_mobile, .organizermobile').val() == '')
+        $('.organizer_mobile').val(number);  
       else
         $('.organizer_mobile').val(mobile_number + ',' + number);
       number= '';
@@ -1715,15 +1715,31 @@ $(".upload_image").find('.simpleFilePreview_inputButtonText').text("UPLOAD A IMA
 $('.privacy_content').hide();
 $(".privacy").click(function(){
     $('.privacy_content').show();
-    $(".profile").hide();
+    $(".profile ,.myevents_content").hide();
 });
 
 $(".info").click(function(){
     $('.profile').show();
-    $(".privacy_content").hide();
+    $(".privacy_content ,.myevents_content").hide();
+});
+$('.myevents_content').hide();
+$(".myevents").click(function(){
+    $('.myevents_content').show();
+    $(".profile,.privacy_content").hide();
 });
 
 $(".dropdown").click(function(){
         $(".menulist").toggle();
 });
+
+//profile picture uploading updated by ramya
+ 
+// $('.upload_image_hide').hide();
+// $('.upload_image_act').click(function(e){
+//   e.preventDefault();
+//   $('.popup_fade').show();
+//   $('.upload_image_hide').show();
+// });
+
+
 

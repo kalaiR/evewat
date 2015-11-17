@@ -5485,7 +5485,7 @@ fieldset[disabled] .btn-default-inverse.active {
   border-bottom: 1px solid #dddddd;
   overflow: hidden;
 }
-.product-details-list .tab-pane .single-product figure {
+.product-details-list .tab-pane .single-product figure{
   position: relative;
   width: 145px;
   height: 145px;
@@ -10080,3 +10080,69 @@ text-align:left;
   padding:0px;
 }
 
+
+.upload_image_hide{
+  display: block;
+  position: fixed;
+  top:10%;
+  left:32%;
+  width: 500px;
+  height: 500px;
+  background:white;
+  z-index: 9999;
+  opacity: 1;
+}
+.poster_img{
+  position: absolute;
+}
+.after_save_act{
+  height: 122px !important;
+  left: 10px;
+  border: 1px groove white;
+  border-radius: 5px;
+  position: absolute;
+  top: 0;
+  width: 120px !important;
+}
+.event_lister {
+    left: 55px;
+    position: relative;
+    top: -70px;
+}
+.image_size{
+  position: relative;
+  width: 145px;
+  height: 145px;
+  margin-top: -25px;
+  float: left;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.myevents_content {
+    border-bottom: 1px solid #dddddd;
+    height: auto;
+    left: 100px;
+    position: relative;
+    padding-bottom: 15px;
+    padding-top: 20px;
+}
+.myevents_content figure {
+    float: left;
+    position: relative;
+}
+.myevents_content h4 {
+    margin: 0;
+    padding-bottom: 5px;
+}
+.myevents_content h5 {
+    margin: 0;
+    padding-bottom: 10px;
+    color: #999999;
+}
+.myevents_content h5 a {
+    color: #999999;
+}
+.myevents_content.col-sm-4 {
+    float: none;
+    width: 80%;
+}
