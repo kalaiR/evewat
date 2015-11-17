@@ -8315,6 +8315,7 @@ fieldset[disabled] .btn-default-inverse.active {
 }
 .form-group {
     color: black;
+    position: relative;
 }
 
 #user_form input, #login_val input{
@@ -9130,16 +9131,28 @@ mark
     width: 370px;
    
 }
-#login_val .error, .email_exists_error, .error_pwd, #user_form .error, #user_form .strength {
+.error_pwd, #user_form .error, #user_form .strength {
     /*background-color: #ffff00;*/
     color: #900;
     font-family: Verdana,Arial,sans-serif;
     font-size: 0.9em;
     display: none;
-    position: relative;
+    position: absolute;
     /*float: right;*/
-    top: -22px;
+    top: 35px;
     left: 225px;
+}
+
+#login_val .error, .email_exists_error{
+    /*background-color: #ffff00;*/
+    color: #900;
+    font-family: Verdana,Arial,sans-serif;
+    font-size: 0.9em;
+    display: none;
+    position: absolute;
+    /*float: right;*/
+    top: 46px;
+    left: 257px;
 }
 .error1{
     color: #900;
