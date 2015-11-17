@@ -662,7 +662,7 @@ $('.close').click(function(){
   });
 
 
-
+  // $('#forgotpassword_popup').hide();
   $(".forget_password").on('click', function (){
     alert("enter");
 
