@@ -114,8 +114,8 @@ class FeedbackAdmin(admin.ModelAdmin):
 	list_per_page = 50
 
 class User_profileAdmin(admin.ModelAdmin):
-	fields=['user','user_mobile','gender','Date_of_birth','user_address','profile_pic']
-	list_display = ('user','user_mobile','gender','Date_of_birth','user_address','profile_pic')	
+	fields=['user','last_name','user_mobile','gender','Date_of_birth','user_address','profile_pic']
+	list_display = ('user','last_name','user_mobile','gender','Date_of_birth','user_address','profile_pic')	
 
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Feedback, FeedbackAdmin)

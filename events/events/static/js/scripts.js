@@ -557,21 +557,13 @@ $('.error').hide();
 // }
 // });
 
-  $(".feedback_popup").hide();
 
+$(".feedback_popup").hide();
 $('.feedback1').click(function(){
-  alert("enter");
-  $(".feedback_popup").show();
+ $(".feedback_popup").show();
   $('.feedback1').hide();
 });
 
-$('.feed_back').click(function(){
-  
-  $(".feedback_popup").show();
-  $('.feedback1').hide();
-  $('body').scrollTop(0);
-
-});
 
 //add aditional mobile  number for organizer in postevent
 var limit = 3;
@@ -669,8 +661,10 @@ $('.close').click(function(){
     $('.header-search-bar').hide();     
   });
 
-  $(".forgot_act").on('click', function (){
-    alert("enter");
+
+
+  $(".forget_password").on('click', function (){
+
      $('#signup_popup').hide();
      $('.popup_fade, #forgotpassword_popup').show();
   });
@@ -1808,8 +1802,8 @@ $(".confirm").click(function(){
           number = number + $(this).val() + ',';
       });
       // alert(number);
-      if($('.organizer_mobile').val() == '')
-        $('.organizer_mobile').val(number);
+      if($('.organizer_mobile, .organizermobile').val() == '')
+        $('.organizer_mobile').val(number);  
       else
         $('.organizer_mobile').val(mobile_number + ',' + number);
       number= '';
@@ -1828,13 +1822,14 @@ $(".upload_image").find('.simpleFilePreview_inputButtonText').text("UPLOAD A IMA
 $('.privacy_content').hide();
 $(".privacy").click(function(){
     $('.privacy_content').show();
-    $(".profile").hide();
+    $(".profile ,.myevents_content").hide();
 });
 
 $(".info").click(function(){
     $('.profile').show();
-    $(".privacy_content").hide();
+    $(".privacy_content ,.myevents_content").hide();
 });
+$('.myevents_content').hide();
 $(".myevents").click(function(){
     $('.myevents_content').show();
     $(".profile,.privacy_content").hide();
@@ -1844,26 +1839,7 @@ $(".dropdown").click(function(){
         $(".menulist").toggle();
 });
 
-// $("#review_btn").click(function(){
-//   alert("hai");
-//   if($('input[name="name"]').val() == ''){
-//     alert("enter plz");
-    
+$("#page-content").on('click', function (){
+   $('.select-clone').hide();     
+  });
 
-
-// if($('input[name="email"]').val() == ''){
-//     alert("enter email");
-   
-
-// if($('input[name="rating"]').val() == ''){
-//     alert("enter rating");
-    
-
-// if($('input[name="content"]').val() == ''){
-//     alert("enter content");
-//     return false
-// }}}}
-// else{
-//   return true
-// }
-// });

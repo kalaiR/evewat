@@ -104,10 +104,11 @@ class Feedback(models.Model):
 	
 class User_profile(models.Model):
 	user = models.ForeignKey(User)
-	user_mobile= models.CharField(max_length=50, blank=True)
+	last_name=models.CharField(max_length=50, null=True, blank=True)
+	user_mobile= models.CharField(max_length=50, null=True, blank=True)
 	gender = models.CharField(max_length=50, null=True, blank=True, choices=SELECT)
 	Date_of_birth = models.DateField(null=True, blank=True) 
 	user_address= models.TextField(null=True, blank=True)
-	profile_pic = models.ImageField(upload_to='static/img/',null=True, blank=True, max_length=500)		
+	profile_pic = models.ImageField(upload_to='../media/static/img/',null=True, blank=True, max_length=500)		
 	
 		
