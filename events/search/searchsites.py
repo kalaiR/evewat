@@ -412,9 +412,9 @@ class SearchView(object):
                 result_display = int(self.request.GET.get('result_per_page'))
                 print 'result_display', result_display
             else:
-                result_display = 5 
+                result_display = RESULTS_PER_PAGE 
         else:
-            result_display = 5
+            result_display = RESULTS_PER_PAGE
 
         
         start_offset = (page_no - 1) * result_display
