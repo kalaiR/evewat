@@ -43,7 +43,7 @@ INSTALLED_APPS = (
     'search',
     'payu',    
     'banner',
-    'social.apps.django_app.default',
+    # 'social.apps.django_app.default',
     # 'tracking',
     'reviews',
     'worker',
@@ -135,10 +135,10 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.request",
     'college_event.context_processors.globalactivity',
     "django.contrib.messages.context_processors.messages",
-    'social_auth.context_processors.social_auth_by_name_backends',
-    'social_auth.context_processors.social_auth_backends',
-    'social_auth.context_processors.social_auth_by_type_backends',
-    'social_auth.context_processors.social_auth_login_redirect',
+    # 'social_auth.context_processors.social_auth_by_name_backends',
+    # 'social_auth.context_processors.social_auth_backends',
+    # 'social_auth.context_processors.social_auth_by_type_backends',
+    # 'social_auth.context_processors.social_auth_login_redirect',
 )
 
 LOGIN_REDIRECT_URL = '/'

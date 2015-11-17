@@ -613,16 +613,25 @@ def importcollegedata(request):
 	  
   return render_to_response('import.html', {'form': form, 'saved':saved, 'saved_leads': saved_leads}, 
 	context_instance=RequestContext(request))
-
+  
+@csrf_exempt
 def feedback(request):
-	if request.method=="POST":
-		feedback=Feedback()
-		feedback.name=request.POST.get('name')
-		feedback.email=request.POST.get('email')
-		feedback.comments=request.POST.get('comments')
-		feedback.rating=request.POST.get('rating')
-		feedback.save()
-		return render_to_response("index.html", context_instance=RequestContext(request))
+	if request.is_ajax():
+		if request.method=="POST":
+			print "enter in post"
+			feedback=Feedback()
+			feedback.name=request.POST.get('name')
+			print feedback.name
+			feedback.email=request.POST.get('email')
+			print feedback.email
+			feedback.comments=request.POST.get('comments')
+			print feedback.comments
+			feedback.rating=request.POST.get('rating')
+			feedback.save()
+			msg = "The operation has been received correctly."
+	else:
+		msg = "Fail"
+	return HttpResponse(msg)
 
 def getstate(request):
 	from collections import OrderedDict

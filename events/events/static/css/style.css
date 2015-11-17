@@ -3114,10 +3114,21 @@ button {
   position: relative;
   display: block;
   margin-bottom: 15px;
+  width: 40%;
+  height: 100%;
+  background: #fff;
+   border: 1px solid #ccc;
+}
+@media(min-width: 789px){
+  .uou-custom-select {
+  position: relative;
+  display: block;
+  margin-bottom: 15px;
   width: 100%;
   height: 100%;
   background: #fff;
    border: 1px solid #ccc;
+}
 }
 .uou-custom-select select {
   display: none;
@@ -8315,6 +8326,7 @@ fieldset[disabled] .btn-default-inverse.active {
 }
 .form-group {
     color: black;
+    position: relative;
 }
 
 #user_form input, #login_val input{
@@ -8428,6 +8440,14 @@ fieldset[disabled] .btn-default-inverse.active {
 .link_required ,.price_required{
     padding: 9px 14px;
      border: 1px solid #ccc;
+     width: 40%;
+}
+@media(min-width: 789px){
+  .link_required ,.price_required{
+    padding: 9px 14px;
+     border: 1px solid #ccc;
+     width: 100%;
+}
 }
 #banner_post .row{
   margin-bottom: 15px;
@@ -9130,16 +9150,28 @@ mark
     width: 370px;
    
 }
-#login_val .error, .email_exists_error, .error_pwd, #user_form .error, #user_form .strength {
+.error_pwd, #user_form .error, #user_form .strength {
     /*background-color: #ffff00;*/
     color: #900;
     font-family: Verdana,Arial,sans-serif;
     font-size: 0.9em;
     display: none;
-    position: relative;
+    position: absolute;
     /*float: right;*/
-    top: -22px;
+    top: 35px;
     left: 225px;
+}
+
+#login_val .error, .email_exists_error{
+    /*background-color: #ffff00;*/
+    color: #900;
+    font-family: Verdana,Arial,sans-serif;
+    font-size: 0.9em;
+    display: none;
+    position: absolute;
+    /*float: right;*/
+    top: 46px;
+    left: 257px;
 }
 .error1{
     color: #900;
@@ -9604,7 +9636,7 @@ t
 .reviews {
     left: 86px;
     position: relative;
-    top: 100px;
+    top: 0px;
     width:84%;
 }
 .aum {
@@ -10060,9 +10092,8 @@ label_gender {
 
 
 /**********calendar*****/
-
 .event_calendar {
-    display: none;
+   display: none;
     margin: 0px;
     position: relative;
 }
@@ -10074,6 +10105,7 @@ label_gender {
 }
 .main {
 width:100%;
+
 }
 .month {
 background-color:#0074bd;
@@ -10151,7 +10183,8 @@ text-align:left;
   background-color:#0074bd;
   color: white; 
 }
-}
+
+
 
 
 /****forgot and reset popup****/
@@ -10236,3 +10269,8 @@ color: #fff;
     width: 100%;
 }
 
+#iframe {
+    border: 1px solid transparent;
+    height: 60%;
+    width: 396px;
+}

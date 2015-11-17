@@ -494,6 +494,59 @@ $('.error').hide();
        });
 
 
+/******************feedback form ************************/
+$('.error').hide();
+ $("#feed_btn").click(function(event){
+         $('.error').hide();
+          var name = $('input[name="name"]').val();
+          if (name == "") {
+            $("label#name_error").show();
+            $("input#name").focus();
+            return false;
+          }
+          var email = $('input[name="email"]').val();
+          if (email == "") {
+            $("label#email_error").show();
+            $("input#email").focus();
+            return false;
+          }
+          var rating = $('input[name="rating"]').val();
+          if (rating == "") {
+            $("label#rating_error").show();
+            $("input#rating").focus();
+            return false;
+          }
+          var comments = $('input[name="comments"]').val();
+          if (comments == "") {
+            $("label#comments_error").show();
+            $("input#comments").focus();
+            return false;
+          }
+
+          $.ajax({
+               type:"POST",
+               url:"/feed/",
+               data: {
+                      'name': $('#name').val(),
+                      'email': $('#email').val(),
+                      'rating': $('input[name="rating"]').val(),
+                      'comments': $('#comments').val(),
+                      
+                      },
+               success: function(){
+                   $('#mgs').show();
+                   setTimeout(function() { $("#mgs").hide(); }, 5000);
+                  }
+          });
+          $('#name').val('');
+          $('#email').val('');
+          $('#rating').val('');
+          $('#comments').val('');
+          return false;
+        
+       });
+/**************end******************/
+
 // var limit = 3;
 // var count = 1;
 // var add_number = $('.number');
@@ -503,6 +556,7 @@ $('.error').hide();
 //   $(add_number).append("<input type='text' placeholder='Organizer mobile' name='organizer_mobile_"+ count +"' id='organizer_mobile_"+count +"' class='organizer_mobile margintop_2rem' value='' data-number='true' data-required='true'>");
 // }
 // });
+
 
 $(".feedback_popup").hide();
 $('.feedback1').click(function(){
@@ -607,13 +661,12 @@ $('.close').click(function(){
     $('.header-search-bar').hide();     
   });
 
-  $(".signin").on('click', function (){
-    $('.popup_fade, #signin_popup').show();
-    $('#signup_popup').hide();     
-  });
 
+  // $('#forgotpassword_popup').hide();
   $(".forget_password").on('click', function (){
-     $('#signup_popup').hide();
+    alert("enter");
+
+     $('#signup_popup, #signin_popup').hide();
      $('.popup_fade, #forgotpassword_popup').show();
   });
 
@@ -622,6 +675,14 @@ $('.close').click(function(){
      $('.popup_fade, #resetpassword_popup').show();
   });
 
+// $('.forgot_act').click(function(){
+//   alert("enter");
+//       forgot_center_align();
+//       $('.popup_fade').show();
+//       $('.popup_fade, #forgotpassword_popup').show();
+//       $('.forgot_div, .close_btn').show();       
+//       document.body.style.overflow = 'hidden';
+//       });
 
   $('.post_event_btn_act').click(function(){
     $('input[name="next"]').val('/post_event');
