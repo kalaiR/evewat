@@ -26,7 +26,7 @@
                 </div>
             </div> <!-- END .slider-content -->
         </div> <!-- END .SEARCH and slide-section -->
-        <div class="container">
+        <div class="container event_listing">
         <div class="event_calendar">
         <div class="action_calendar">
             <button id="prev" onMouseUp="changeMonth(false)"> Previous </button>
@@ -240,8 +240,8 @@
                                                         {% for subcategories in categories.id|get_subcategories %}
                                                          <li class="subcategory_list_link">         
                                                             <a class="select_category pointer"  role="tab" data-toggle="tab" title="Please choose any category">
-                                                            <img class="sub_cat_icon" src="../media/{{subcategories.icon}}">{{subcategories.name}}
-                                                            <img class="sub_cat_icon_hover" src="../media/{{subcategories.hover_icon}}">
+                                                            <img class="sub_cat_icon" src="{{subcategories.icon}}">{{subcategories.name}}
+                                                            <img class="sub_cat_icon_hover" src="{{subcategories.hover_icon}}">
                                                        	</a>
                                                             <input type="hidden" class="ajax_subcatid" value="{{subcategories.id}}">  
                                                             <span class="event_count">
