@@ -43,7 +43,7 @@ INSTALLED_APPS = (
     'search',
     'payu',    
     'banner',
-    # 'social.apps.django_app.default',
+    'social.apps.django_app.default',
     # 'tracking',
     'reviews',
     'worker',
@@ -134,10 +134,10 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.request",
     'college_event.context_processors.globalactivity',
     "django.contrib.messages.context_processors.messages",
-    # 'social_auth.context_processors.social_auth_by_name_backends',
-    # 'social_auth.context_processors.social_auth_backends',
-    # 'social_auth.context_processors.social_auth_by_type_backends',
-    # 'social_auth.context_processors.social_auth_login_redirect',
+    'social_auth.context_processors.social_auth_by_name_backends',
+    'social_auth.context_processors.social_auth_backends',
+    'social_auth.context_processors.social_auth_by_type_backends',
+    'social_auth.context_processors.social_auth_login_redirect',
 )
 
 LOGIN_REDIRECT_URL = '/'
@@ -146,6 +146,9 @@ SOCIAL_AUTH_FACEBOOK_SECRET ='8b2ebde6051b128b0f453b8384bc5989'
 URL_PATH = ''
 SOCIAL_AUTH_STRATEGY = 'social.strategies.django_strategy.DjangoStrategy'
 SOCIAL_AUTH_STORAGE = 'social.apps.django_app.default.models.DjangoStorage'
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY ='1080122031533-a8hiac9frtar20hc6clpduj53498o4hn.apps.googleusercontent.com '
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET ='AAUhtKjmWVDYSsBmAGmDDzwO'
 
 COMPRESS_ENABLED = True
 
