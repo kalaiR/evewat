@@ -44,6 +44,10 @@
 						<input type="text" maxlength="50" value="{{requested_user.username}}" name="name"><br>
 						<span class="error"></span>
 					</div><!--form-group-->
+					<div class="form-group input_lastname">
+						<input type="text" maxlength="50" placeholder="LAST NAME" name="name"><br>
+						<span class="error"></span>
+					</div><!--form-group-->
 					<div class="form-group input_email">
 						<input type="text" maxlength="50" value="{{requested_user.email}}" name="email"><br>
 						<span class="error"></span>
@@ -124,15 +128,19 @@
 	</div><!--privacy_content-->
 	 
 
-	 <div class="container">	
-	  <div class="myevents_content">
-	  	<img src="{% static "img/symposium.png" %}" alt="symposium" height="72px" width="72px">
-	  	<h4><a href="#">Fiesta de Mercadeo 15 </a></h4>
-	  	<h5><a href="#">Fiesta de Mercadeo 15</a></h5>
-	  	<h5><i class="fa fa-calendar-o"></i></h5>
-	  	<h5><i class="fa fa-map-marker"></i><a href="#"></a></h5>
-	  	<a href="#" class="read-more"><i class="fa fa-angle-right"></i>Read More</a>
-	  </div>
-	</div> <!--myevents_list-->
+	<div class="container"> 	
+		<div class="col-md-9 event_lister">
+			<div class="myevents_content col-sm-4 col-xs-6 ">
+		  		<figure>
+		  			<a href="#"><img src="{% static "img/user.png" %}" alt="symposium" height="72px" width="72px"></a>
+	  			</figure>
+				  	<h4><a href="#">Fiesta de Mercadeo 15 </a></h4>
+				  	<h5><a href="#">Fiesta de Mercadeo 15</a></h5>
+				  	<h5><i class="fa fa-calendar-o"></i>Oct. 15, 2015</h5>
+				  	<h5><i class="fa fa-map-marker"></i><a href="#">Bengaluru,  Karnataka.</a></h5>
+				  	<h5><a href="#" class="read-more"><i class="fa fa-angle-right"></i>Read More</a></h5>
+	  		</div><!--myevents_content-->
+  		</div>
+	</div><!--container-->
 
 {% endblock %} 
