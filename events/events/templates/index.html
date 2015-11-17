@@ -27,32 +27,35 @@
         </div> <!-- END .SEARCH and slide-section -->
     </header> <!-- end #header -->
     <a class="btn btn-default feedback1">FEEDBACK</a>                 
-    <div class="feedback_popup">
-        <form action="{%url "college_event.views.feedback" %}" id="form" method="post" name="form" class="feedback_form">{% csrf_token %}
+    <!-- <div class="feedback_popup">
+        <form action="{%url 'college_event.views.feedback' %}" id="form" method="post" name="form" class="feedback_form">{% csrf_token %}
             <a class="close"> <i class="fa fa-times"></i></a>
             <h2 >Rate my website!</h2>
             <div class="content">
-            <label for="text1">Name:
-            <input type="text" name="name" class="feed" placeholder=" name" /></label> 
-            <label for="text1">Email:
-            <input type="text" name="email" class="feed" placeholder=" email" /></label> 
-            <label for="text1">Rating:
-            <select class="feed"name="rating" placeholder="Rating"  >
-                <option value="0">Please select your Rating </option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-            </select>
-            </label><br/>
-            <label for="text1">Comments:
-            <textarea placeholder="comments" name="comments" class="feed" value=""></textarea><br/>
-            </label>
-            <button class="btn btn-default" type="submit" >Submit</button>
+                <label for="text1">Name:</label>
+                <input type="text" name="name" class="feed" placeholder=" name" id="name" />
+                <label class="error" for="name" id="name_error">This field is required.</label>
+                <label for="text1">Email:</label>
+                <input type="text" name="email" class="feed" placeholder=" email" id="email"/>
+                <label class="error" for="email" id="email_error">This field is required.</label>
+                <label for="text1">Rating: </label>
+                <select class="feed"name="rating" placeholder="Rating" id="rating" >
+                    <option value="0">Please select your Rating </option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+               <label class="error" for="rating" id="rating_error">This field is required.</label><br/>
+                <label for="text1">Comments:   </label>
+                <textarea placeholder="comments" name="comments" class="feed" value="" id="comments"></textarea>
+                <label class="error" for="comments" id="comments_error">This field is required.</label><br/>
+             
+                <button class="btn btn-default feed_btn" id="feed_btn" type="submit" >Submit</button>
             </div>
         </form>
-    </div>
+    </div> -->
     <div id="page-content" class="home-slider-content">
         <div class="container">
             <div class="home-with-slide">

@@ -122,6 +122,7 @@ STATICFILES_DIRS = (
 TEMPLATE_DIRS = os.path.join((os.path.dirname(__file__)), 'templates')
 
 MEDIA_ROOT = os.path.join((os.path.dirname(__file__)), 'media')
+print 'MEDIA_ROOT', MEDIA_ROOT
 
 MEDIA_URL = '/media/'
 
@@ -146,6 +147,9 @@ SOCIAL_AUTH_FACEBOOK_SECRET ='8b2ebde6051b128b0f453b8384bc5989'
 URL_PATH = ''
 SOCIAL_AUTH_STRATEGY = 'social.strategies.django_strategy.DjangoStrategy'
 SOCIAL_AUTH_STORAGE = 'social.apps.django_app.default.models.DjangoStorage'
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY ='1080122031533-a8hiac9frtar20hc6clpduj53498o4hn.apps.googleusercontent.com '
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET ='AAUhtKjmWVDYSsBmAGmDDzwO'
 
 COMPRESS_ENABLED = True
 

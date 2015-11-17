@@ -613,16 +613,25 @@ def importcollegedata(request):
 	  
   return render_to_response('import.html', {'form': form, 'saved':saved, 'saved_leads': saved_leads}, 
 	context_instance=RequestContext(request))
-
+  
+@csrf_exempt
 def feedback(request):
-	if request.method=="POST":
-		feedback=Feedback()
-		feedback.name=request.POST.get('name')
-		feedback.email=request.POST.get('email')
-		feedback.comments=request.POST.get('comments')
-		feedback.rating=request.POST.get('rating')
-		feedback.save()
-		return render_to_response("index.html", context_instance=RequestContext(request))
+	if request.is_ajax():
+		if request.method=="POST":
+			print "enter in post"
+			feedback=Feedback()
+			feedback.name=request.POST.get('name')
+			print feedback.name
+			feedback.email=request.POST.get('email')
+			print feedback.email
+			feedback.comments=request.POST.get('comments')
+			print feedback.comments
+			feedback.rating=request.POST.get('rating')
+			feedback.save()
+			msg = "The operation has been received correctly."
+	else:
+		msg = "Fail"
+	return HttpResponse(msg)
 
 def getstate(request):
 	from collections import OrderedDict
@@ -799,42 +808,61 @@ def get_events_for_calendar(request):
     for event in events:
         event_data = {'id':str(event.id), 'title':event.event_title, 'start':smart_unicode(datetime.datetime.combine(event.startdate,time)),'end':smart_unicode(datetime.datetime.combine(event.enddate,time))}
         events_list.append(event_data)
-    print "event_list", events_list
+    # print "event_list", events_list
     return HttpResponse(simplejson.dumps(events_list), mimetype='application/json')
 
+@csrf_exempt
 def user_profile(request):
-	requested_user=User.objects.get(email=request.user.email)
-	if request.method == 'POST':
-		user_mobile=request.POST.get('moblie', '')
-		gender=request.POST.get('gender', '')
-		Date_of_birth=request.POST.get('dob', '')
-		user_address=request.POST.get('address', '')
-		profile_pic=request.FILES.get('profile_poster', '')
-		if User_profile.objects.filter(user_id=requested_user.id).exists():
-			user_id=User_profile.objects.get(user_id=requested_user.id)
-			# print 'requested_user_profile.user_id', requested_user_profile.user_id
-			user_id.user_mobile=user_mobile
-			user_id.gender=gender
-			user_id.Date_of_birth=Date_of_birth
-			user_id.user_address=user_address
-			user_id.profile_pic=profile_pic
-			user_id.save()
-		else:
-			userprofile=User_profile()
-			userprofile.user_id=requested_user.id	
-			userprofile.user_mobile=user_mobile
-			userprofile.gender=gender
-			userprofile.Date_of_birth=Date_of_birth
-			userprofile.user_address=user_address
-			userprofile.profile_pic=profile_pic
-			userprofile.save()	
-	try:           
-		requested_user_profile=User_profile.objects.get(user_id=requested_user.id)		
-		events_for_user=Postevent.objects.filter(email=request.user.email)			
-		return render_to_response("user_profile.html", {'requested_user':requested_user, 'requested_user_profile':requested_user_profile}, context_instance=RequestContext(request))        
-	except:		
-		return render_to_response("user_profile.html", {'requested_user':requested_user}, context_instance=RequestContext(request))
-
+	if request.user.is_authenticated:
+		requested_user=User.objects.get(email=request.user.email)
+		if request.method == 'POST':
+			last_name=request.POST.get('last_name', '')			
+			user_mobile=request.POST.get('mobile', '')
+			print 'user_mobile', user_mobile
+			gender=request.POST.get('gender', '')		
+			Date_of_birth=request.POST.get('dob', '')
+			if Date_of_birth=='':
+				Date_of_birth=None
+			user_address=request.POST.get('address', '')			
+			profile_picture = request.FILES.get('profile_poster')
+			print 'profile_picture', profile_picture
+			def handle_uploaded_file(f):
+				print "settings.MEDIA_ROOT", settings.MEDIA_ROOT
+				profile_picture = open(settings.MEDIA_ROOT+'/events/' + '%s' % f.name, 'wb+')
+				for chunk in f.chunks():
+					profile_picture.write(chunk)
+				profile_picture.close()
+			handle_uploaded_file(profile_picture)
+			profile_picture = '/events/' + str(profile_picture)					
+			if Userprofile.objects.filter(user_id=requested_user.id).exists():
+				user_id=Userprofile.objects.get(user_id=requested_user.id)
+				user_id.lastname=last_name
+				user_id.mobile=user_mobile
+				user_id.gender=gender
+				user_id.Date_of_birth=Date_of_birth
+				user_id.user_address=user_address
+				user_id.profile_pic=profile_picture		
+				user_id.save()
+				
+			else:
+				userprofile=Userprofile()
+				userprofile.user_id=requested_user.id
+				userprofile.lastname=last_name	
+				userprofile.mobile=user_mobile
+				userprofile.gender=gender
+				userprofile.Date_of_birth=Date_of_birth
+				userprofile.user_address=user_address
+				userprofile.profile_pic=profile_picture
+				userprofile.save()			
+		try:			     
+			requested_user_profile=Userprofile.objects.get(user_id=requested_user.id)		
+			events_for_user=Postevent.objects.filter(email=request.user.email)
+			print 'events_for_user', events_for_user			
+			return render_to_response("user_profile.html", {'requested_user':requested_user, 'requested_user_profile':requested_user_profile, 'events_for_user':events_for_user}, context_instance=RequestContext(request))        
+		except:			
+			events_for_user=Postevent.objects.filter(email=request.user.email)
+			return render_to_response("user_profile.html", {'requested_user':requested_user, 'events_for_user':events_for_user}, context_instance=RequestContext(request))
+@csrf_exempt
 def privacy(request):
 	print 'request.user.email',request.user.email
 	u = User.objects.get(email=request.user.email)
@@ -842,3 +870,8 @@ def privacy(request):
 	u.set_password(new_password)
 	u.save()
 	return render_to_response("user_profile.html", context_instance=RequestContext(request))
+
+
+
+
+		

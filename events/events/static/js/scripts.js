@@ -21,7 +21,7 @@
   $(function () {
     $(  "#dpd1" ).datepicker({ format: 'dd-mm-yyyy', minDate: 0});
     $( "#dpd2" ).datepicker({ format: 'dd-mm-yyyy', minDate: 0});
-    $( "#address" ).datepicker({ format: 'dd-mm-yyyy', minDate: 0});
+    // $( "#address" ).datepicker({ format: 'dd-mm-yyyy', minDate: 0});
 });
 
   // for date picker
@@ -442,24 +442,110 @@ $("document").ready(function($){
 //         })
 //         event.preventDefault();
 //     });
-
+$('.error').hide();
  $("#review_btn").click(function(event){
-             $.ajax({
-                 type:"POST",
-                 url:"/review/",
-                 data: {
-                        'name': $('#name').val(),
-                        'email': $('#email').val(),
-                        'rating': $('input[name="rating"]').val(),
-                        'content': $('#content').val(),
-                        'postevent': $('#postevent').val(),
-                        },
-                 success: function(){
-                     $('#mgs').show();
-                    }
-            }); 
+         $('.error').hide();
+          var name = $('input[name="name"]').val();
+          if (name == "") {
+            $("label#name_error").show();
+            $("input#name").focus();
             return false;
+          }
+          var email = $('input[name="email"]').val();
+          if (email == "") {
+            $("label#email_error").show();
+            $("input#email").focus();
+            return false;
+          }
+          var rating = $('input[name="rating"]').val();
+          if (rating == "") {
+            $("label#rating_error").show();
+            $("input#rating").focus();
+            return false;
+          }
+          var content = $('input[name="content"]').val();
+          if (content == "") {
+            $("label#content_error").show();
+            $("input#content").focus();
+            return false;
+          }
+
+          $.ajax({
+               type:"POST",
+               url:"/review/",
+               data: {
+                      'name': $('#name').val(),
+                      'email': $('#email').val(),
+                      'rating': $('input[name="rating"]').val(),
+                      'content': $('#content').val(),
+                      'postevent': $('#postevent').val(),
+                      },
+               success: function(){
+                   $('#mgs').show();
+                   setTimeout(function() { $("#mgs").hide(); }, 5000);
+                  }
+          });
+          $('#name').val('');
+          $('#email').val('');
+          $('#rating').val('');
+          $('#content').val('');
+          return false;
+        
        });
+
+
+/******************feedback form ************************/
+$('.error').hide();
+ $("#feed_btn").click(function(event){
+         $('.error').hide();
+          var name = $('input[name="name"]').val();
+          if (name == "") {
+            $("label#name_error").show();
+            $("input#name").focus();
+            return false;
+          }
+          var email = $('input[name="email"]').val();
+          if (email == "") {
+            $("label#email_error").show();
+            $("input#email").focus();
+            return false;
+          }
+          var rating = $('input[name="rating"]').val();
+          if (rating == "") {
+            $("label#rating_error").show();
+            $("input#rating").focus();
+            return false;
+          }
+          var comments = $('input[name="comments"]').val();
+          if (comments == "") {
+            $("label#comments_error").show();
+            $("input#comments").focus();
+            return false;
+          }
+
+          $.ajax({
+               type:"POST",
+               url:"/feed/",
+               data: {
+                      'name': $('#name').val(),
+                      'email': $('#email').val(),
+                      'rating': $('input[name="rating"]').val(),
+                      'comments': $('#comments').val(),
+                      
+                      },
+               success: function(){
+                   $('#mgs').show();
+                   setTimeout(function() { $("#mgs").hide(); }, 5000);
+                  }
+          });
+          $('#name').val('');
+          $('#email').val('');
+          $('#rating').val('');
+          $('#comments').val('');
+          return false;
+        
+       });
+/**************end******************/
 
 // var limit = 3;
 // var count = 1;
@@ -471,21 +557,13 @@ $("document").ready(function($){
 // }
 // });
 
-  $(".feedback_popup").hide();
 
-$('.feedback1 .feed_back').click(function(){
-  
-  $(".feedback_popup").show();
+$(".feedback_popup").hide();
+$('.feedback1').click(function(){
+ $(".feedback_popup").show();
   $('.feedback1').hide();
 });
 
-$('.feed_back').click(function(){
-  
-  $(".feedback_popup").show();
-  $('.feedback1').hide();
-  $('body').scrollTop(0);
-
-});
 
 //add aditional mobile  number for organizer in postevent
 var limit = 3;
@@ -583,8 +661,12 @@ $('.close').click(function(){
     $('.header-search-bar').hide();     
   });
 
+
+  // $('#forgotpassword_popup').hide();
   $(".forget_password").on('click', function (){
-     $('#signup_popup').hide();
+    alert("enter");
+
+     $('#signup_popup, #signin_popup').hide();
      $('.popup_fade, #forgotpassword_popup').show();
   });
 
@@ -593,6 +675,14 @@ $('.close').click(function(){
      $('.popup_fade, #resetpassword_popup').show();
   });
 
+// $('.forgot_act').click(function(){
+//   alert("enter");
+//       forgot_center_align();
+//       $('.popup_fade').show();
+//       $('.popup_fade, #forgotpassword_popup').show();
+//       $('.forgot_div, .close_btn').show();       
+//       document.body.style.overflow = 'hidden';
+//       });
 
   $('.post_event_btn_act').click(function(){
     $('input[name="next"]').val('/post_event');
@@ -1421,6 +1511,7 @@ jQuery('.user_details').click(function(){
       oFReader.onload = function (oFREvent) {
         var image = new Image();
         image.src = oFREvent.target.result;
+        $('#uploaded_img').remove();
         image.onload = function () {
 
           // if (this.width > 1200 ) {
@@ -1713,8 +1804,8 @@ $(".confirm").click(function(){
           number = number + $(this).val() + ',';
       });
       // alert(number);
-      if($('.organizer_mobile').val() == '')
-        $('.organizer_mobile').val(number);
+      if($('.organizer_mobile, .organizermobile').val() == '')
+        $('.organizer_mobile').val(number);  
       else
         $('.organizer_mobile').val(mobile_number + ',' + number);
       number= '';
@@ -1728,18 +1819,19 @@ $(".confirm").click(function(){
 //     $(".email").hide();
 // });
 
-$(".upload_image").find('.simpleFilePreview_inputButtonText').text("UPLOAD A IMAGE");
+// $(".upload_image").find('.simpleFilePreview_inputButtonText').text("UPLOAD A IMAGE");
 
 $('.privacy_content').hide();
 $(".privacy").click(function(){
     $('.privacy_content').show();
-    $(".profile").hide();
+    $(".profile ,.myevents_content").hide();
 });
 
 $(".info").click(function(){
     $('.profile').show();
-    $(".privacy_content").hide();
+    $(".privacy_content ,.myevents_content").hide();
 });
+$('.myevents_content').hide();
 $(".myevents").click(function(){
     $('.myevents_content').show();
     $(".profile,.privacy_content").hide();
@@ -1748,47 +1840,35 @@ $(".myevents").click(function(){
 $(".dropdown").click(function(){
         $(".menulist").toggle();
 });
-// $(".popup_slider").hide();
-// $(".img_poster").on('click', function () {
-//     $(".popup_slider").show();
-//     $(".popup_slider").hide();
 
-// })
-
-// // Bind Click Handler to Link, then Open Gallery
-// $('.img_poster').on('click', function () {
-//   alert("enter");
-//      $(".popup_slider").magnificPopup('open');
-// });
-
-// Initialize Magnific Popup Gallery + Options
-// $('.img_poster').each(function () {
-//     $(this).magnificPopup({
-//         delegate: 'a',
-//         gallery: {
-//             enabled: true
-//         },
-//         type: 'image'
-//     });
-// });
-
-// $('.img_poster').click(function() {
-//   alert("enter");
-//     $(this).magnificPopup({
-//         delegate: 'a',
-//         gallery: {
-//             enabled: true
-//         },
-//         type: 'image'
-//     });
-// });
-
-$('.popup-gallery').magnificPopup({
-    delegate: 'a',
-    type: 'image',
-    gallery: {
-      enabled: true,
-     },
-   
-    
+$("#page-content").on('click', function (){
+   $('.select-clone').hide();     
   });
+
+// $('.save_personal').click(function(){
+//   alert('profile'+$('input[type="file"]#profile_poster').val());
+//   $.post("/user_profile/", $('#userprofile').serialize(),
+//       function (data) {
+//         alert("success");
+//   });
+//   return false;
+// });
+
+$('.save_privacy').click(function(){
+  
+ $.ajax({
+
+               type:"POST",
+               url:"/privacy/",
+               data: {
+                      'newpassword': $('#newpassword').val(),
+                      'confirmpassword': $('#confirmpassword').val(),
+                    },
+               success: function(){
+                  alert('password changed successfully');
+                  }
+          });
+       $('#newpassword').val('');
+       $('#confirmpassword').val('');
+       return false;
+});
