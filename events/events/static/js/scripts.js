@@ -494,6 +494,59 @@ $('.error').hide();
        });
 
 
+/******************feedback form ************************/
+$('.error').hide();
+ $("#feed_btn").click(function(event){
+         $('.error').hide();
+          var name = $('input[name="name"]').val();
+          if (name == "") {
+            $("label#name_error").show();
+            $("input#name").focus();
+            return false;
+          }
+          var email = $('input[name="email"]').val();
+          if (email == "") {
+            $("label#email_error").show();
+            $("input#email").focus();
+            return false;
+          }
+          var rating = $('input[name="rating"]').val();
+          if (rating == "") {
+            $("label#rating_error").show();
+            $("input#rating").focus();
+            return false;
+          }
+          var comments = $('input[name="comments"]').val();
+          if (comments == "") {
+            $("label#comments_error").show();
+            $("input#comments").focus();
+            return false;
+          }
+
+          $.ajax({
+               type:"POST",
+               url:"/feed/",
+               data: {
+                      'name': $('#name').val(),
+                      'email': $('#email').val(),
+                      'rating': $('input[name="rating"]').val(),
+                      'comments': $('#comments').val(),
+                      
+                      },
+               success: function(){
+                   $('#mgs').show();
+                   setTimeout(function() { $("#mgs").hide(); }, 5000);
+                  }
+          });
+          $('#name').val('');
+          $('#email').val('');
+          $('#rating').val('');
+          $('#comments').val('');
+          return false;
+        
+       });
+/**************end******************/
+
 // var limit = 3;
 // var count = 1;
 // var add_number = $('.number');
@@ -506,8 +559,8 @@ $('.error').hide();
 
   $(".feedback_popup").hide();
 
-$('.feedback1 .feed_back').click(function(){
-  
+$('.feedback1').click(function(){
+  alert("enter");
   $(".feedback_popup").show();
   $('.feedback1').hide();
 });
@@ -616,7 +669,8 @@ $('.close').click(function(){
     $('.header-search-bar').hide();     
   });
 
-  $(".forget_password").on('click', function (){
+  $(".forgot_act").on('click', function (){
+    alert("enter");
      $('#signup_popup').hide();
      $('.popup_fade, #forgotpassword_popup').show();
   });
@@ -626,6 +680,14 @@ $('.close').click(function(){
      $('.popup_fade, #resetpassword_popup').show();
   });
 
+// $('.forgot_act').click(function(){
+//   alert("enter");
+//       forgot_center_align();
+//       $('.popup_fade').show();
+//       $('.popup_fade, #forgotpassword_popup').show();
+//       $('.forgot_div, .close_btn').show();       
+//       document.body.style.overflow = 'hidden';
+//       });
 
   $('.post_event_btn_act').click(function(){
     $('input[name="next"]').val('/post_event');

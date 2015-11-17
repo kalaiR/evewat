@@ -126,12 +126,12 @@
         <div class="row">
             <div class="col-md-4">
                 <input type="text"  placeholder="Name *" name="name" id="name">
-                 <label class="error" for="name" id="name_error">This field is required.</label>
+                 <label class="error" for="name" id="name_error" style="color:red;">This field is required.</label>
             </div>
 
             <div class="col-md-4">
                 <input type="email" name="email" id="email" placeholder="Email *">
-                 <label class="error" for="email" id="email_error">This field is required.</label>
+                 <label class="error" for="email" id="email_error" style="color:red;">This field is required.</label>
             </div>
 
             <div class="col-md-4">
@@ -144,12 +144,12 @@
                     <input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="Kinda bad">2 stars</label>
                     <input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="Poor">1 star</label>
                 </fieldset>
-                <label class="error" for="rating" id="rating_error">This field is required.</label>
+                <label class="error" for="rating" id="rating_error" style="color:red;">This field is required.</label>
             </div>
         </div>
 
         <textarea  placeholder="Your Comment ..." name="content" id="content"></textarea>
-        <label class="error" for="content" id="content_error">This field is required.</label>
+        <label class="error" for="content" id="content_error" style="color:red;">This field is required.</label>
         <button class="btn btn-default" type="submit" id="review_btn" ><i class="fa fa-envelope-o"></i> Send Message</button>
         <input type="hidden" name="postevent" value="{{events.id}}" id="postevent">
     </form>
