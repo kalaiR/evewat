@@ -504,21 +504,12 @@ $('.error').hide();
 // }
 // });
 
-  $(".feedback_popup").hide();
-
-$('.feedback1 .feed_back').click(function(){
-  
-  $(".feedback_popup").show();
+$(".feedback_popup").hide();
+$('.feedback1').click(function(){
+ $(".feedback_popup").show();
   $('.feedback1').hide();
 });
 
-$('.feed_back').click(function(){
-  
-  $(".feedback_popup").show();
-  $('.feedback1').hide();
-  $('body').scrollTop(0);
-
-});
 
 //add aditional mobile  number for organizer in postevent
 var limit = 3;
@@ -614,6 +605,11 @@ $('.close').click(function(){
   $(".register_btn, .signup").on('click', function (){
     $('.popup_fade, #signup_popup').show();
     $('.header-search-bar').hide();     
+  });
+
+  $(".signin").on('click', function (){
+    $('.popup_fade, #signin_popup').show();
+    $('#signup_popup').hide();     
   });
 
   $(".forget_password").on('click', function (){
@@ -1778,13 +1774,12 @@ $(".myevents").click(function(){
     $('.myevents_content').show();
     $(".profile,.privacy_content").hide();
 });
-$(".myevents").click(function(){
-    $('.myevents_content').show();
-    $(".profile,.privacy_content").hide();
-});
 
 $(".dropdown").click(function(){
         $(".menulist").toggle();
 });
 
+$("#page-content").on('click', function (){
+   $('.select-clone').hide();     
+  });
 
