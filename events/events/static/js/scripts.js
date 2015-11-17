@@ -664,8 +664,9 @@ $('.close').click(function(){
 
 
   $(".forget_password").on('click', function (){
+    alert("enter");
 
-     $('#signup_popup').hide();
+     $('#signup_popup, #signin_popup').hide();
      $('.popup_fade, #forgotpassword_popup').show();
   });
 

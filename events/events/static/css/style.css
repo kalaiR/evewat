@@ -10236,3 +10236,8 @@ color: #fff;
     width: 100%;
 }
 
+#iframe {
+    border: 1px solid transparent;
+    height: 60%;
+    width: 396px;
+}
