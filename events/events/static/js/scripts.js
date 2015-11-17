@@ -599,7 +599,7 @@ $('.close').click(function(){
 
   $('.cancel_btn, .close_btn').on('click', function (){
     $.removeCookie('plan',{ path: '/' });
-    $('.deposit_popup, .popup_fade, .forgotpassword_popup, .terms_services_popup, #signin_popup,#signup_popup, #joinus_popup_content, #signin_popup1, #email_activate, #login_window, #login_window1, .lead_details_popup, #directbuy_signin_popup, #auction_popup, #ask_question_popup, #thank_you_popup').hide();
+    $('.deposit_popup, .popup_fade,#forgotpassword_popup,#resetpassword_popup,.terms_services_popup, #signin_popup,#signup_popup, #joinus_popup_content, #signin_popup1, #email_activate, #login_window, #login_window1, .lead_details_popup, #directbuy_signin_popup, #auction_popup, #ask_question_popup, #thank_you_popup').hide();
     $('#plan_change').show();
     $('.header-search-bar').show();
     $('input[name="plan"]').val() == '';
@@ -615,6 +615,17 @@ $('.close').click(function(){
     $('.popup_fade, #signup_popup').show();
     $('.header-search-bar').hide();     
   });
+
+  $(".forget_password").on('click', function (){
+     $('#signup_popup').hide();
+     $('.popup_fade, #forgotpassword_popup').show();
+  });
+
+  $(".reset_btn").on('click', function (){
+     $('#signup_popup').hide();
+     $('.popup_fade, #resetpassword_popup').show();
+  });
+
 
   $('.post_event_btn_act').click(function(){
     $('input[name="next"]').val('/post_event');
@@ -1761,6 +1772,10 @@ $(".privacy").click(function(){
 $(".info").click(function(){
     $('.profile').show();
     $(".privacy_content").hide();
+});
+$(".myevents").click(function(){
+    $('.myevents_content').show();
+    $(".profile,.privacy_content").hide();
 });
 
 $(".dropdown").click(function(){
