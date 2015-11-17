@@ -4510,6 +4510,7 @@ fieldset[disabled] .btn-default-inverse.active {
   font-size: 15px;
   font-weight: 700;
   position:relative;
+  cursor: pointer;
 }
 #categories .accordion ul li a .fa {
   padding-right: 10px;
@@ -5659,7 +5660,7 @@ fieldset[disabled] .btn-default-inverse.active {
 #page-content {
   position: relative;
   padding: 30px 0 50px 0;
-  top:135px;
+  top:22px;
 }
 .page-content {
   position: relative;
@@ -8741,6 +8742,7 @@ select{
 	color: #277ec3;
 	right: 0px;
     top: 14px;
+    cursor: pointer;
 }
 .button1
 {
@@ -8850,7 +8852,7 @@ select{
    -moz-box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.08);
    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.08);
  }
- .email{
+ .signup_email{
     width:352px;   
     height:638px;
     padding:10px;
@@ -9029,6 +9031,7 @@ mark
 	color: #277ec3;
 	right: 5px;
     top: 10px;
+    cursor: pointer;
 }
 }
 @media(min-width:768px)
@@ -9156,7 +9159,7 @@ mark
    -moz-box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.08);
    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.08);
  }
- .email{
+ .signup_email{
  	 width:652px;   
     height:620px;
     padding:10px;
@@ -9587,7 +9590,7 @@ t
   position: absolute;
 }
 .comments-section {
-    bottom: 37px;
+    bottom: -83px;
     left: 80px;
     position: relative;
     width: 88%;
@@ -9595,7 +9598,7 @@ t
 .reviews {
     left: 86px;
     position: relative;
-    top: 0px;
+    top: 100px;
     width:84%;
 }
 .aum {
@@ -9624,8 +9627,6 @@ t
     position: relative;
     top: -36px;
 }
-
-
 /* newly added styles for signin popup */
 .event_count{
 	background-color: #0074bd;
@@ -9886,17 +9887,19 @@ t
 .save_personal {
     color: #55a2d3;
     float: right;
-    font-size: 21px;
+    font-size: 18px;
     position: relative;
     top: 12px;
+    background-color: transparent;
 }
 .save_privacy {
     color: #55a2d3;
     float: right;
-    font-size: 21px;
+    font-size: 18px;
     position: relative;
     top: 12px;
     left: 300px;
+    background-color: transparent;
 }
 .privacy_content {
     height: 542px;
@@ -9975,7 +9978,7 @@ label_gender {
 }
 .personal_information,.privacy_information{
     color: #424242;
-    font-size: 20px;
+    font-size: 18px;
     left: 200px;
     position: relative;
     font-weight:lighter;
@@ -9993,13 +9996,13 @@ label_gender {
     line-height: 4;
     position: relative;
     right: 300px;
-    /*top: 75px;*/
+    float: right;
 }
 .lock {
     color: #2ab558;
     font-size: 110px;
+    left: 183px;
     position: relative;
-    right: 355px;
     top: -61px;
 }
 .header_call_events {
@@ -10009,10 +10012,10 @@ label_gender {
 }
 .gender_option {
     position: relative;
-    top: 40px;
+    top: 24px;
     width: 58%;
+    height: 35px;
 }
-
 .dropdown{
   cursor: pointer;
   float: left;
@@ -10024,12 +10027,14 @@ label_gender {
     position: relative;
     top: 68px;
 }
-
+.myevents_list{
+  height: 200px;
+}
 .main {
 width:1850px;
 margin: 0px 0px 0px 186px;
 }
-
+/**********calendar*****/
 .month {
 background-color:#0074bd;
 font: bold 16px verdana;
@@ -10037,7 +10042,6 @@ padding: 5px;
 color:white;
 width: 1257px;
 }
-
 .daysofweek {
 background-color:gray;
 font:bold 12px verdana;
@@ -10047,7 +10051,6 @@ width:34px;
 border-right:1px solid #EEEEEE;
 text-align:center;
 }
-
 .days {
 font-size: 12px;
 font-family:verdana;
@@ -10060,8 +10063,8 @@ border-right:1px solid #EEEEEE;
 text-align:center;
 overflow:visible;
 cursor: pointer;
+background-color: #fff;
 }
-
 .eventBar {
 height:18px;
 /*background-color:#069;*/
@@ -10073,11 +10076,70 @@ text-align:left;
 .action_calendar{
   margin: 10px 0px 5px 186px;
 }
+.days:hover {
+    background-color: #21c0e8;
+}
 .list_events{
   list-style-type: none;
   display: none;
-  /*margin:0px 0px 0px 0px;*/
   padding:0px;
+  width: 190px;
+  background-color: #0074bd;
+  position: relative;
+  z-index: 999999;
+  margin: -10px 0px 0px -2px;
+}
+<<<<<<< HEAD
+=======
+
+>>>>>>> b60467635c3b9885b6eaec2f4e8bd9d610df6457
+.list_events li {
+    border-bottom: 1px solid;
+    padding: 8px;
+}
+.list_events li:hover {
+    background-color: lightblue;
+}
+.days:hover {
+    background-color: #0074bd;
+}
+#prev{
+  background-color:#0074bd;
+  color: white; 
+}
+#next{
+  background-color:#0074bd;
+  color: white; 
+}
+.event_calendar {
+    margin: 0 0 0 7px;
+    position: relative;
+}
+.reset_btn{
+background: #0074bd none repeat scroll 0 0;
+position:relative;
+top:28px;
+height: 35px;
+left: 88px;
+cursor: pointer;
+color: #fff;
+}
+
+.btn_img {
+    height: 202px;
+    left: 0;
+    position: absolute;
+    top: 31px;
+    width: 100%;
+}
+
+.forget_gif {
+    margin: 78px 0 0 50px;
+    position: relative;
+}
+.reset_gif {
+    padding: 52px;
+    position: relative;
 }
 
 

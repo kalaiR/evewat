@@ -442,24 +442,57 @@ $("document").ready(function($){
 //         })
 //         event.preventDefault();
 //     });
-
+$('.error').hide();
  $("#review_btn").click(function(event){
-             $.ajax({
-                 type:"POST",
-                 url:"/review/",
-                 data: {
-                        'name': $('#name').val(),
-                        'email': $('#email').val(),
-                        'rating': $('input[name="rating"]').val(),
-                        'content': $('#content').val(),
-                        'postevent': $('#postevent').val(),
-                        },
-                 success: function(){
-                     $('#mgs').show();
-                    }
-            }); 
+         $('.error').hide();
+          var name = $('input[name="name"]').val();
+          if (name == "") {
+            $("label#name_error").show();
+            $("input#name").focus();
             return false;
+          }
+          var email = $('input[name="email"]').val();
+          if (email == "") {
+            $("label#email_error").show();
+            $("input#email").focus();
+            return false;
+          }
+          var rating = $('input[name="rating"]').val();
+          if (rating == "") {
+            $("label#rating_error").show();
+            $("input#rating").focus();
+            return false;
+          }
+          var content = $('input[name="content"]').val();
+          if (content == "") {
+            $("label#content_error").show();
+            $("input#content").focus();
+            return false;
+          }
+
+          $.ajax({
+               type:"POST",
+               url:"/review/",
+               data: {
+                      'name': $('#name').val(),
+                      'email': $('#email').val(),
+                      'rating': $('input[name="rating"]').val(),
+                      'content': $('#content').val(),
+                      'postevent': $('#postevent').val(),
+                      },
+               success: function(){
+                   $('#mgs').show();
+                   setTimeout(function() { $("#mgs").hide(); }, 5000);
+                  }
+          });
+          $('#name').val('');
+          $('#email').val('');
+          $('#rating').val('');
+          $('#content').val('');
+          return false;
+        
        });
+
 
 // var limit = 3;
 // var count = 1;
@@ -473,12 +506,19 @@ $("document").ready(function($){
 
   $(".feedback_popup").hide();
 
-$('.feedback1').click(function(){
+$('.feedback1 .feed_back').click(function(){
   
   $(".feedback_popup").show();
   $('.feedback1').hide();
 });
 
+$('.feed_back').click(function(){
+  
+  $(".feedback_popup").show();
+  $('.feedback1').hide();
+  $('body').scrollTop(0);
+
+});
 
 //add aditional mobile  number for organizer in postevent
 var limit = 3;
@@ -559,7 +599,7 @@ $('.close').click(function(){
 
   $('.cancel_btn, .close_btn').on('click', function (){
     $.removeCookie('plan',{ path: '/' });
-    $('.deposit_popup, .popup_fade, .forgotpassword_popup, .terms_services_popup, #signin_popup,#signup_popup, #joinus_popup_content, #signin_popup1, #email_activate, #login_window, #login_window1, .lead_details_popup, #directbuy_signin_popup, #auction_popup, #ask_question_popup, #thank_you_popup').hide();
+    $('.deposit_popup, .popup_fade,#forgotpassword_popup,#resetpassword_popup,.terms_services_popup, #signin_popup,#signup_popup, #joinus_popup_content, #signin_popup1, #email_activate, #login_window, #login_window1, .lead_details_popup, #directbuy_signin_popup, #auction_popup, #ask_question_popup, #thank_you_popup').hide();
     $('#plan_change').show();
     $('.header-search-bar').show();
     $('input[name="plan"]').val() == '';
@@ -575,6 +615,17 @@ $('.close').click(function(){
     $('.popup_fade, #signup_popup').show();
     $('.header-search-bar').hide();     
   });
+
+  $(".forget_password").on('click', function (){
+     $('#signup_popup').hide();
+     $('.popup_fade, #forgotpassword_popup').show();
+  });
+
+  $(".reset_btn").on('click', function (){
+     $('#signup_popup').hide();
+     $('.popup_fade, #resetpassword_popup').show();
+  });
+
 
   $('.post_event_btn_act').click(function(){
     $('input[name="next"]').val('/post_event');
@@ -1727,19 +1778,13 @@ $(".myevents").click(function(){
     $('.myevents_content').show();
     $(".profile,.privacy_content").hide();
 });
+$(".myevents").click(function(){
+    $('.myevents_content').show();
+    $(".profile,.privacy_content").hide();
+});
 
 $(".dropdown").click(function(){
         $(".menulist").toggle();
 });
-
-//profile picture uploading updated by ramya
- 
-// $('.upload_image_hide').hide();
-// $('.upload_image_act').click(function(e){
-//   e.preventDefault();
-//   $('.popup_fade').show();
-//   $('.upload_image_hide').show();
-// });
-
 
 
