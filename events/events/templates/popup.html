@@ -1,4 +1,7 @@
 {% load static from staticfiles %}
+
+{% load i18n %}
+
 {% block content %}
 <div class="popup_fade" style="{% if request.REQUEST.lst or request.REQUEST.rst or request.REQUEST.lst and request.path == '/post_event' or  request.REQUEST.lst and request.path == '/upload_banner' %} display:block; {%else%} display: none; {% endif %}"></div>
  <div class="signin_popup popup_pos" id="signin_popup" style="{% if request.REQUEST.lst or  request.REQUEST.lst and request.path == '/post_event' or  request.REQUEST.lst and request.path == '/upload_banner' %} display:block; {%else%} display: none; {% endif %}">    
@@ -40,8 +43,10 @@
     						<span class="error">Enter your Password</span>
     						<span class="error_pwd">Invalid Password</span>
 						</div><!--form-group-->
-						<div class="form-group">        
-								<label class="control-label text7 forget_password">FORGET YOUR PASSWORD?</label>		<!-- <a href="{% url 'django.contrib.auth.views.password_reset' %}">	<label class="control-label text7">FORGOT YOUR PASSWORD?</label></a> -->						</div><!--form-group-->
+						<div class="form-group"> 
+							     
+								<label class="control-label text7 forget_password">FORGET YOUR PASSWORD?</label>		<!-- <a href="{% url 'django.contrib.auth.views.password_reset' %}">	<label class="control-label text7">FORGOT YOUR PASSWORD?</label></a> -->						
+						</div><!--form-group-->
 						<div class="form-group"> 
                               <input type="hidden" value="{{ request.get_full_path }}" name="next"/>  
   						      <a id="sign_in" class="button1" href="#">Sign in</a>
@@ -124,44 +129,9 @@
 	</div><!--email-->
  </div><!--signup_popup-->
 
-<div class="forgot_popup popup_pos" id="forgotpassword_popup" style="{% if request.REQUEST.rst %} display:block; {%else%} display: none; {% endif %}">   	
- 		<div class="voucher_popup">
- 			<div class="fr">
-                <span class="close_btn"></span>
-  			</div><!--fr-->
-  			<div class="col-md-3 block3">
-					<div class="col-md-12 img4">	
-						<img src="{% static "img/symposium.png" %}" alt="symposium" height="72px" width="72px"><br>
-						<span class="text1">Symposium</span>
-					</div><!--img1-->
-					<div class="col-md-12 img5">
-						<img src="{% static "img/seminar.png" %}" alt="seminar" height="72px" width="72px"><br>
-						<span class="text2">Seminar</span>
-					</div><!--img2-->
-					<div class="col-md-12 img6">
-						<img src="{% static "img/culturals.png" %}" alt="cultural" height="72px" width="72px"><br>
-						<span class="text3">Cultural</span>
-					</div><!--img3-->
-			</div><!--block3-->
-			
-			<div class="col-md-9 block2">
-				<div class="forgot_content">
-						<span class="text4">Forgot Password</span><br><br>
-						<span>Enter your e-mail address below and we'll e-mail instructions for setting a new one.</span>
-				</div><!--forgot_content-->
-				<form method="post" id="login_val" action="/login/" name="sign_in" class="form-horizontal" role="form">
-					<div class="form-group">
-					 	<input class="contactus" type="text" placeholder="ENTER YOUR EMAIL" maxlength="50" value="" name="username" id="username_signup" autocomplete="off">
-						<span class="error">Please enter your email</span>
-					</div><!--form-group-->
-					<button type="button" class="btn-link reset_btn">Reset my password</button><br>
-				</form>
-				<img src="{% static "img/forgetpwd.gif" %}" alt="open" class="forget_gif"> 
-			</div><!--block2-->
- 		</div><!--voucher_popup-->
-</div><!--forgot_popup-->
 
-<div class="reset_popup popup_pos" id="resetpassword_popup" style="{% if request.REQUEST.rst %} display:block; {%else%} display: none; {% endif %}">   	
+
+<div class="reset_popup popup_pos" id="resetpassword_popup" style="display:none;">   	
  		<div class="voucher_popup">
  			<div class="fr">
                 <span class="close_btn"></span>
@@ -182,22 +152,29 @@
 			</div><!--block3-->
 			
 			<div class="col-md-9 block2">
-				<div class="reset_content">
+			<div id="iframe">
+		           <form id="forgot_form" method="post" action="/forgot/" name="forgot">  
+		           {% csrf_token %}
+		            <iframe src="{% url 'django.contrib.auth.views.password_reset_confirm'
+					 %}" width="390px" height="298px" scrolling="no" frameBorder="0" style="border:none;"></iframe>
+		           </form>  
+           		</div>
+				<!-- <div class="reset_content">
 						<span class="text4">Reset Password</span><br><br>
 						<span>Please enter your new password twice.So we can verify you typed it in correctly.</span>
-				</div><!--reset_content-->
-				<form method="post" id="login_val" action="/login/" name="sign_in" class="form-horizontal" role="form">
+				</div> --><!--reset_content-->
+				<!-- <form method="post" id="login_val" action="/login/" name="sign_in" class="form-horizontal" role="form">
 					<div class="form-group">
 					 	<input class="contactus" type="text" placeholder="NEW PASSWORD" maxlength="50" value="" name="pwd" id="username_signup" autocomplete="off">
 						<span class="error">Please enter your new password</span>
-					</div><!--form-group-->
+					</div>
 					<div class="form-group">
 					 	<input class="contactus" type="text" placeholder="CONFIRM PASSWORD" maxlength="50" value="" name="pwd" id="username_signup" autocomplete="off">
 						<span class="error">Please enter your confirm password</span>
-					</div><!--form-group-->
+					</div>
 					<button type="button" class="btn-link reset_btn">Change my password</button>
 					<br>
- 				</form>
+ 				</form> -->
  				<img src="{% static "img/resetpwd.gif" %}" alt="open" class="reset_gif"> 
  			 
  			</div><!--block2-->
@@ -205,13 +182,53 @@
 </div><!--reset_popup-->
 
 
+<div class="forgot_popup popup_pos" id="forgotpassword_popup"  style="display:none;">   	
+ 		<div class="voucher_popup">
+ 			<div class="fr">
+                <span class="close_btn"></span>
+  			</div><!--fr-->
+  			<div class="col-md-3 block3">
+					<div class="col-md-12 img4">	
+						<img src="{% static "img/symposium.png" %}" alt="symposium" height="72px" width="72px"><br>
+						<span class="text1">Symposium</span>
+					</div><!--img1-->
+					<div class="col-md-12 img5">
+						<img src="{% static "img/seminar.png" %}" alt="seminar" height="72px" width="72px"><br>
+						<span class="text2">Seminar</span>
+					</div><!--img2-->
+					<div class="col-md-12 img6">
+						<img src="{% static "img/culturals.png" %}" alt="cultural" height="72px" width="72px"><br>
+						<span class="text3">Cultural</span>
+					</div><!--img3-->
+			</div><!--block3-->
+			
+			<div class="col-md-9 block2">
+				<!-- <div class="forgot_content">
+						<span class="text4">Forgot Password</span><br><br>
+						<span>Enter your e-mail address below and we'll e-mail instructions for setting a new one.</span>
+				</div> --><!--forgot_content-->
 
+				<div id="iframe">
+		           <form id="forgot_form" method="post" action="/forgot/" name="forgot">  
+		           {% csrf_token %}
+		            <iframe src="{% url 'django.contrib.auth.views.password_reset' %}" width="390px" height="298px" scrolling="no" frameBorder="0" style="border:none;"></iframe>
+		           </form>  
+           		</div>
+				<!-- <form method="post" id="login_val" action="/login/" name="sign_in" class="form-horizontal" role="form">
+					<div class="form-group">
+					 	<input class="contactus" type="text" placeholder="ENTER YOUR EMAIL" maxlength="50" value="" name="username" id="username_signup" autocomplete="off">
+						<span class="error">Please enter your email</span>
+					</div><!-form-group-->
+					<!-- <button type="button" class="btn-link reset_btn">Reset my password</button><br>
+				</form> --> 
+				<img src="{% static "img/forgetpwd.gif" %}" alt="open" class="forget_gif"> 
+			</div><!--block2-->
+ 		</div><!--voucher_popup-->
+</div><!--forgot_popup-->
 
-
-
-
-
-
+	
+         
+      
 
 
 
