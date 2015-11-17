@@ -55,7 +55,7 @@ urlpatterns = patterns('',
 	url(r'^upload_banner$', 'college_event.views.upload_banner', name='upload_banner'),
 	url(r'^success$', 'college_event.views.success', name='success'),
 	url(r'^about$', 'college_event.views.about', name='about'),
-	url(r'^feed$', 'college_event.views.feedback', name='feedback'),
+	url(r'^feed/$', 'college_event.views.feedback', name='feedback'),
 	url(r'^privacy$', 'college_event.views.privacy', name='privacy'),
 	url(r'^terms_and_conditions$', 'college_event.views.terms_and_conditions', name='terms_and_conditions'),
 	url(r'^faqs$', 'college_event.views.faqs', name='faqs'),
@@ -107,7 +107,7 @@ urlpatterns = patterns('',
 
    	url(r'^get_events_for_calendar/',  'college_event.views.get_events_for_calendar', name='eventcalendar'),
    	url(r'^user_profile/',  'college_event.views.user_profile', name='user_profile'),
-   	# url(r'^view_user_profile', 'college_event.views.view_user_profile', name='view_user_profile'),
+   	# url(r'^profile_picture_upload/', 'college_event.views.profile_picture_upload', name='profile_picture_upload'),
    	url(r'^privacy/', 'college_event.views.privacy', name='privacy')
    
 

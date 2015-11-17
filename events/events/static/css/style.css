@@ -5498,7 +5498,7 @@ fieldset[disabled] .btn-default-inverse.active {
   border-bottom: 1px solid #dddddd;
   overflow: hidden;
 }
-.product-details-list .tab-pane .single-product figure {
+.product-details-list .tab-pane .single-product figure{
   position: relative;
   width: 145px;
   height: 145px;
@@ -10080,6 +10080,12 @@ label_gender {
 
 /**********calendar*****/
 .event_calendar {
+   display: none;
+    margin: 0px;
+    position: relative;
+}
+@media (min-width:789px)  {
+  .event_calendar {
     margin: 0 0 0 7px;
     position: relative;
     display: block;
@@ -10164,19 +10170,8 @@ text-align:left;
   background-color:#0074bd;
   color: white; 
 }
-.event_listing {
-    display: block;
-}
-@media (max-width:789px){
-  .event_listing {
-    display: none;
-}
-}
-@media (max-width:389px){
-  .event_listing {
-    display: none;
-}
-}
+
+
 
 
 /****forgot and reset popup****/
@@ -10197,13 +10192,40 @@ color: #fff;
     padding: 52px;
     position: relative;
 }
+
 /***myevents****/
+
+.after_save_act{
+  height: 122px !important;
+  left: 10px;
+  border: 1px groove white;
+  border-radius: 5px;
+  position: absolute;
+  top: 0;
+  width: 120px !important;
+}
+.event_lister {
+    left: 55px;
+    position: relative;
+    top: -70px;
+}
+.image_size{
+  position: relative;
+  width: 145px;
+  height: 145px;
+  margin-top: -25px;
+  float: left;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
 .myevents_content {
     border-bottom: 1px solid #dddddd;
     height: auto;
     left: 100px;
-    margin: 0 20px 5px 0;
     position: relative;
+    padding-bottom: 15px;
+    padding-top: 20px;
 }
 .myevents_content figure {
     float: left;
@@ -10225,18 +10247,17 @@ color: #fff;
     float: none;
     width: 80%;
 }
-.event_list {
-    margin-top: -70px;
-}
-.event_lister {
-    left: 55px;
-    position: relative;
-    top: -67px;
-}
+
 .btn_img {
     height: 202px;
     left: 0;
     position: absolute;
     top: 31px;
     width: 100%;
+}
+
+#iframe {
+    border: 1px solid transparent;
+    height: 60%;
+    width: 396px;
 }
