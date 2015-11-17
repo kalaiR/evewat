@@ -21,7 +21,7 @@
   $(function () {
     $(  "#dpd1" ).datepicker({ format: 'dd-mm-yyyy', minDate: 0});
     $( "#dpd2" ).datepicker({ format: 'dd-mm-yyyy', minDate: 0});
-    $( "#address" ).datepicker({ format: 'dd-mm-yyyy', minDate: 0});
+    // $( "#address" ).datepicker({ format: 'dd-mm-yyyy', minDate: 0});
 });
 
   // for date picker
@@ -1450,6 +1450,7 @@ jQuery('.user_details').click(function(){
       oFReader.onload = function (oFREvent) {
         var image = new Image();
         image.src = oFREvent.target.result;
+        $('#uploaded_img').remove();
         image.onload = function () {
 
           // if (this.width > 1200 ) {
@@ -1757,7 +1758,7 @@ $(".confirm").click(function(){
 //     $(".email").hide();
 // });
 
-$(".upload_image").find('.simpleFilePreview_inputButtonText').text("UPLOAD A IMAGE");
+// $(".upload_image").find('.simpleFilePreview_inputButtonText').text("UPLOAD A IMAGE");
 
 $('.privacy_content').hide();
 $(".privacy").click(function(){
@@ -1783,3 +1784,30 @@ $("#page-content").on('click', function (){
    $('.select-clone').hide();     
   });
 
+// $('.save_personal').click(function(){
+//   alert('profile'+$('input[type="file"]#profile_poster').val());
+//   $.post("/user_profile/", $('#userprofile').serialize(),
+//       function (data) {
+//         alert("success");
+//   });
+//   return false;
+// });
+
+$('.save_privacy').click(function(){
+  
+ $.ajax({
+
+               type:"POST",
+               url:"/privacy/",
+               data: {
+                      'newpassword': $('#newpassword').val(),
+                      'confirmpassword': $('#confirmpassword').val(),
+                    },
+               success: function(){
+                  alert('password changed successfully');
+                  }
+          });
+       $('#newpassword').val('');
+       $('#confirmpassword').val('');
+       return false;
+});
