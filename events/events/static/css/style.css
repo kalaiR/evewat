@@ -9150,7 +9150,7 @@ mark
     width: 370px;
    
 }
-.error_pwd, #user_form .error, #user_form .strength {
+ #user_form .error, #user_form .strength {
     /*background-color: #ffff00;*/
     color: #900;
     font-family: Verdana,Arial,sans-serif;
@@ -9162,7 +9162,7 @@ mark
     left: 225px;
 }
 
-#login_val .error, .email_exists_error{
+#login_val .error, .email_exists_error, .error_pwd{
     /*background-color: #ffff00;*/
     color: #900;
     font-family: Verdana,Arial,sans-serif;
